@@ -2,7 +2,7 @@
 
 ## Membros
 - Davi Porto Araujo => fullstack, PO,  
-- Cazares(Thiago Roberto) => fullstack, DevOps, Arquiteto 
+- Thiago Roberto => fullstack, DevOps, Arquiteto 
 - Ana Luisa Messisas Ferreira => fullstack, SM
 - Eduardo klausing => fullstack, 
 

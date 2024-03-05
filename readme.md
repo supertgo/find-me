@@ -4,7 +4,7 @@
 - Davi Porto Araujo => fullstack, PO,  
 - Thiago Roberto => fullstack, DevOps, Arquiteto 
 - Ana Luisa Messisas Ferreira => fullstack, SM
-- Eduardo klausing => fullstack, 
+- Eduardo Klausing Gervásio Muniz => fullstack, 
 
 ## Techs 
 - mysql

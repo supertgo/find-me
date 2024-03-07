@@ -1,43 +1,48 @@
 # Me ache
 
-## Membros
-- Davi Porto Araujo => fullstack, PO,  
-- Thiago Roberto => fullstack, DevOps, Arquiteto 
-- Ana Luisa Messisas Ferreira => fullstack, SM
-- Eduardo Klausing Gervásio Muniz => fullstack, 
+## Membros e Papéis
+- Ana Luisa Messisas Ferreira Mendes: Fullstack, Scrum Master (SM)
+- Davi Porto Araujo: Fullstack, Product Owner (PO)
+- Eduardo Klausing Gervásio Muniz: Fullstack
+- Thiago Roberto Magalhães: Fullstack, DevOps, Arquiteto
 
-## Techs 
-- mysql
-- cypress
-- react
-- docker
-- golang
+## Escopo
+O sistema "Me Ache" é uma plataforma que visa facilitar o processo de recrutamento tanto para recrutadores quanto para candidatos. Com um foco em simplicidade e eficiência, a plataforma oferece diversas funcionalidades para atender às necessidades de ambos os públicos.
 
- 
-- figma
-- github
+### Principais Features
+#### Para Recrutadores:
+1. Criar vagas com detalhes específicos.
+2. Buscar candidatos com base em critérios variados.
+3. Estabelecer limitações para cada vaga, como número máximo de candidaturas, período de abertura e fechamento da vaga, e filtros de candidatos.
+4. Gerenciar as vagas, incluindo criar, atualizar, listar e deletar.
+5. Visualizar as candidaturas recebidas.
+6. Enviar e-mails para os candidatos diretamente pela plataforma.
+7. Gerenciar as vagas de forma personalizada, com opções de restrição por características como sexo, cor, deficiência, e modelo de contratação.
 
-## Story
-## Persona: Recrutador
-1. Como recrutador, eu quero criar vagas 
-2. Como recrutador, eu quero buscar candidatos
-3. Como recrutador, eu quero criar limitações por vaga: limite candidaturas, abrir e fechar a vaga, filtros
-4. Como recrutador, eu quero controlar as minhas vagas, criar, atualizar, listar, deletar 
-5. Como recrutador, eu quero ver as candidaturas 
-6. Como recrutador, eu quero enviar um email para um candidato
-7. Como recrutador, eu quero gerenciar minhas vagas, restringir por sexo, cor, pcd... modelo de contratação
-8. 
+#### Para Candidatos:
+1. Aplicar para vagas disponíveis na plataforma.
+2. Buscar vagas, visualizar detalhes e candidaturas.
+3. Criar, editar e deletar seu perfil na plataforma.
+4. Visualizar suas candidaturas realizadas.
+5. Gerenciar seu currículo, incluindo criação, edição e exclusão.
+6. Desistir de uma aplicação para uma vaga.
+7. Controlar suas experiências profissionais.
+8. Gerenciar suas competências.
+9. Controlar sua formação acadêmica.
 
-## Persona: Candidato
-1. Como candidato, eu quero aplicar para vagas
-2. Como candidato, eu quero buscar vagas, ver detalhes, candidaturas...
-3. Como candidato, eu quero criar, editar e deletar meu perfil
-4. Como candidato, eu quero visualizar as minhas candidaturas 
-5. Como candidato, eu quero criar, editar e deletar meu curriculo
-6. Como candidato, eu quero desistir de uma aplicação 
-7. Como candidato, eu quero controlar as minhas experiências
-8. Como candidato, eu quero controlar as minhas competencias
-9. Como candidato, eu quero controlar a minha formação 
+## Tecnologias
+### Linguagens de Programação (LP):
+- React para o frontend
+- Php para o backend
 
-## Persona: Candidato
+### Banco de Dados (BD):
+- MySQL para armazenamento de dados
+
+### Outras Tecnologias:
+- Cypress para testes automatizados
+- Docker para contêineres
+- Figma para design e prototipagem
+- GitHub para controle de versão e colaboração no código
+- Laravel para o framework do back-end
+- Nextjs para framework de front-end
 

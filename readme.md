@@ -10,7 +10,7 @@
 O sistema "Me Ache" é uma plataforma que visa facilitar o processo de recrutamento tanto para recrutadores quanto para candidatos. Com um foco em simplicidade e eficiência, a plataforma oferece diversas funcionalidades para atender às necessidades de ambos os públicos.
 
 ### Principais Features
-#### Para Recrutadores:
+#### Como recrutador, eu quero:
 1. Criar vagas com detalhes específicos.
 2. Buscar candidatos com base em critérios variados.
 3. Estabelecer limitações para cada vaga, como número máximo de candidaturas, período de abertura e fechamento da vaga, e filtros de candidatos.
@@ -19,7 +19,7 @@ O sistema "Me Ache" é uma plataforma que visa facilitar o processo de recrutame
 6. Enviar e-mails para os candidatos diretamente pela plataforma.
 7. Gerenciar as vagas de forma personalizada, com opções de restrição por características como sexo, cor, deficiência, e modelo de contratação.
 
-#### Para Candidatos:
+#### Como candidato, eu quero:
 1. Aplicar para vagas disponíveis na plataforma.
 2. Buscar vagas, visualizar detalhes e candidaturas.
 3. Criar, editar e deletar seu perfil na plataforma.

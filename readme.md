@@ -2,7 +2,7 @@
 
 ## Membros e Papéis
 - Ana Luisa Messisas Ferreira Mendes: Fullstack, Scrum Master (SM)
-- Davi Porto Araujo: Fullstack, Product Owner (PO)
+- Davi Porto Araujo: Fullstack, Product Owner (PO), Devops
 - Eduardo Klausing Gervásio Muniz: Fullstack
 - Thiago Roberto Magalhães: Fullstack, DevOps, Arquiteto
 
@@ -40,7 +40,7 @@ O sistema "Me Ache" é uma plataforma que visa facilitar o processo de recrutame
 
 ### Outras Tecnologias:
 - Cypress para testes automatizados
-- Docker para contêineres
+- Docker e docker-compose para contêineres
 - Figma para design e prototipagem
 - GitHub para controle de versão e colaboração no código
 - Laravel para o framework do back-end

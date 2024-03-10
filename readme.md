@@ -1,10 +1,10 @@
 # Me ache
 
 ## Membros e Papéis
-- Ana Luisa Messisas Ferreira Mendes: Fullstack, Scrum Master (SM)
+- Ana Luisa Messisas Ferreira Mendes: Fullstack, Scrum Master (SM), UX/UI designer
 - Davi Porto Araujo: Fullstack, Product Owner (PO), Devops
 - Eduardo Klausing Gervásio Muniz: Fullstack
-- Thiago Roberto Magalhães: Fullstack, DevOps, Arquiteto
+- Thiago Roberto Magalhães: Fullstack, DevOps, Arquiteto, UX/UI designer
 
 ## Escopo
 O sistema "Me Ache" é uma plataforma que visa facilitar o processo de recrutamento tanto para recrutadores quanto para candidatos. Com um foco em simplicidade e eficiência, a plataforma oferece diversas funcionalidades para atender às necessidades de ambos os públicos.

@@ -1,7 +1,7 @@
 # FindMe
 
 ## Membros e Papéis
-- Ana Luisa Messisas Ferreira Mendes: Fullstack, Scrum Master (SM), UX/UI designer
+- Ana Luisa Messias Ferreira Mendes: Fullstack, Scrum Master (SM), UX/UI designer
 - Davi Porto Araujo: Fullstack, Product Owner (PO), Devops
 - Eduardo Klausing Gervásio Muniz: Fullstack
 - Thiago Roberto Magalhães: Fullstack, DevOps, Arquiteto, UX/UI designer

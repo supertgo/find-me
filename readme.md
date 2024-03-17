@@ -51,17 +51,60 @@ O sistema "FindMe" é uma plataforma que visa facilitar o processo de recrutamen
  - Tarefas e responsáveis:
      - Modelar a vaga no banco de dados
      - Implementar a tela de criação de vagas
-     - Endpoint para o CRUD das vagas
+     -  CRUD criação das vagas
+        - rotas, criar, atualizar, listar, deletar
+        - migrações para criação das tabelas no banco
+        - form request para validação do payload
+        - teste geral 
+        - documentação em openApi das rotas
+        - usar soft delete na deleção 
+        - salvar alterações no histórico
      - Estruturação das chamadas à API pelo front
 
 2. Buscar candidatos com base em critérios variados.
   - Tarefas e responsáveis:
      - Modelar o candidato e critérios no banco de dados
      - Implementar a tela de criação/edição de perfil/competência
-     - Endpoint para o CRUD de novos critérios
-     - Estruturação das chamadas à API pelo front
+    
+     - Crud Relacionada ao usuário/autenticação
+       - rotas, signUp, signIn, deleteAccount, signOff, me, refreshToken
+       - documentação openApi
+       - cirar migração para tabelas no banco
+       - oauth para gerenciar token jtw
+       - criação de middleware para verifica se o usuário está logado
+       - teste geral
+       - salvar alterações no histórico
+     
+     - CRUD de nova competência 
+         - migrações para criação das tabelas no banco
+         - rotas de criação de competência, que já deve vincular esse a um usuário
+         - form request para validação do payload
+         - teste geral
+         - documentação em openApi das rotas
+         - rota de delteção deve usar soft delete
+         - rota de atualização, listagem, detalhes
+         - salvar alterações no histórico
+
+    - CRUD de nova experiência
+      - migrações para criação das tabelas no banco
+      - rotas de criação de experiência, que já deve vincular esse a um usuário
+      - form request para validação do payload
+      - teste geral
+      - documentação em openApi das rotas
+      - usar soft delete na rota de deleção
+      - salvar alterações no histórico
+      - rotas de autualização, detalhes, listage, esta com filtros
+    
+    - Estruturação das chamadas à API pelo front
        
 3. Estabelecer limitações para cada vaga, como número máximo de candidaturas, período de abertura e fechamento da vaga, e filtros de candidatos.
+    - Crud relacionada a vaga/aplicação
+        - Criar tabelas relacionados a aplicação para uma vaga
+        - Adicionar essas verificações quando um usuário tenta aplicar para uma vaga
+        - Rota de listagem de aplicações com filtros 
+        - Documentação openApi
+        - Teste geral 
+        - adicionar rota de revogar candidatura, soft delete
 4. Gerenciar as vagas, incluindo criar, atualizar, listar e deletar.
   - Tarefas e responsáveis:
     - Criação dos endpoints para o CRUD
@@ -72,11 +115,18 @@ O sistema "FindMe" é uma plataforma que visa facilitar o processo de recrutamen
   - Tarefas e responsáveis:
     - Criar tela para visualizar as candidaturas pela parte do recrutador
     - Endpoint para retornar as candidaturas de cada vaga
+        - Deve suportar filtros
+        - deve suportar ordenações
+        - criar tabelas no banco 
+        - documentação openApi da rota 
+        - teste geral 
+    
 
 6. Aplicar para vagas disponíveis na plataforma.
   - Tarefas e responsáveis:
     - Criar tela para visualizar as candidaturas pela parte do candidato
     - Endpoint para retornar as candidaturas de cada vaga. Buscar vagas, visualizar detalhes e candidaturas.
+
 7. Criar, editar e deletar seu perfil na plataforma.
   - Tarefas e responsáveis:
     - Endpoints para o CRUD do perfil

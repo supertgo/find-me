@@ -65,16 +65,7 @@ O sistema "FindMe" é uma plataforma que visa facilitar o processo de recrutamen
   - Tarefas e responsáveis:
      - Modelar o candidato e critérios no banco de dados
      - Implementar a tela de criação/edição de perfil/competência
-    
-     - Crud Relacionada ao usuário/autenticação
-       - rotas, signUp, signIn, deleteAccount, signOff, me, refreshToken
-       - documentação openApi
-       - cirar migração para tabelas no banco
-       - oauth para gerenciar token jtw
-       - criação de middleware para verifica se o usuário está logado
-       - teste geral
-       - salvar alterações no histórico
-     
+
      - CRUD de nova competência 
          - migrações para criação das tabelas no banco
          - rotas de criação de competência, que já deve vincular esse a um usuário
@@ -125,12 +116,31 @@ O sistema "FindMe" é uma plataforma que visa facilitar o processo de recrutamen
 6. Aplicar para vagas disponíveis na plataforma.
   - Tarefas e responsáveis:
     - Criar tela para visualizar as candidaturas pela parte do candidato
-    - Endpoint para retornar as candidaturas de cada vaga. Buscar vagas, visualizar detalhes e candidaturas.
+    - Endpoint para retornar as minhas candidaturas
+      - Deve suportar filtros 
+      - Deve suportar ordenações
+      - documentação openApi
+      - teste geral
+    
+    - Endpoint para buscar vagas
+      - Deve suportar filtros 
+      - Deve suportar ordenações
+      - documentação openApi
+      - teste geral
 
 7. Criar, editar e deletar seu perfil na plataforma.
   - Tarefas e responsáveis:
-    - Endpoints para o CRUD do perfil
-    - Tela para edição do perfil
+    - Crud Relacionada ao usuário/autenticação
+      - rotas, signUp, signIn, deleteAccount, signOff, me, refreshToken
+      - documentação openApi
+      - cirar migração para tabelas no banco
+      - oauth para gerenciar token jtw
+      - criação de middleware para verifica se o usuário está logado
+      - teste geral
+      - salvar alterações no histórico
+      - delete deve ser soft delete
+
+      - Tela para edição do perfil
     
 8. Visualizar suas candidaturas realizadas.
   - Tarefas e responsáveis:

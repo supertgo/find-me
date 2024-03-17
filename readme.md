@@ -84,7 +84,7 @@ O sistema "FindMe" é uma plataforma que visa facilitar o processo de recrutamen
       - documentação em openApi das rotas
       - usar soft delete na rota de deleção
       - salvar alterações no histórico
-      - rotas de autualização, detalhes, listage, esta com filtros
+      - rotas de autualização, detalhes, listagem, esta com filtros
     
     - Estruturação das chamadas à API pelo front
        
@@ -150,7 +150,33 @@ O sistema "FindMe" é uma plataforma que visa facilitar o processo de recrutamen
 
 
 9. Gerenciar seu currículo, incluindo criação, edição e exclusão. (talvez remover)
-
+   - Tarefas e responsáveis:
+       - CRUD de currículo
+         - migrações para criação das tabelas no banco
+         - rotas de criação de currículo, que já deve vincular esse a um usuário
+         - form request para validação do payload
+         - teste geral
+         - documentação em openApi das rotas
+         - usar soft delete na rota de deleção
+         - salvar alterações no histórico
+         - rotas de autualização, detalhes, listagem, esta com filtros
+    
   
 10. Gerenciar as vagas de forma personalizada, com opções de restrição por características como sexo, cor, deficiência, e modelo de contratação. (talvez remover essa)
+- Tarefas e responsáveis:
+    - CRUD de configurações de vaga
+        - migrações para criação das tabelas no banco, rules que ira armazenas essas informações 
+        - form request para validação do payload
+        - teste geral
+        - documentação em openApi das rotas
+        - usar soft delete na rota de deleção
+        - salvar alterações no histórico
+        - rotas de autualização, detalhes, listagem, esta com filtros
+
+    - Rota de canApply 
+        - Está deverá veriicar se um usuário pode aplicar para a vaga
+        - deve validar com base nas rules 
+        - teste geral
+        - documentação em openApi das rotas 
+    
 

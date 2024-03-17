@@ -116,12 +116,6 @@ O sistema "FindMe" é uma plataforma que visa facilitar o processo de recrutamen
 6. Aplicar para vagas disponíveis na plataforma.
   - Tarefas e responsáveis:
     - Criar tela para visualizar as candidaturas pela parte do candidato
-    - Endpoint para retornar as minhas candidaturas
-      - Deve suportar filtros 
-      - Deve suportar ordenações
-      - documentação openApi
-      - teste geral
-    
     - Endpoint para buscar vagas
       - Deve suportar filtros 
       - Deve suportar ordenações
@@ -145,6 +139,15 @@ O sistema "FindMe" é uma plataforma que visa facilitar o processo de recrutamen
 8. Visualizar suas candidaturas realizadas.
   - Tarefas e responsáveis:
     - Tela para a visualização das candidaturas
+    - Crud Relacionada ao usuário/autenticação
+      - rotas, signUp, signIn, deleteAccount, signOff, me, refreshToken
+      - documentação openApi
+      - cirar migração para tabelas no banco
+      - oauth para gerenciar token jtw
+      - criação de middleware para verifica se o usuário está logado
+      - teste geral
+      - salvar alterações no histórico
+
 
 9. Gerenciar seu currículo, incluindo criação, edição e exclusão. (talvez remover)
 

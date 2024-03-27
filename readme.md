@@ -9,6 +9,10 @@
 ## Escopo
 O sistema "FindMe" é uma plataforma que visa facilitar o processo de recrutamento tanto para recrutadores quanto para candidatos. Com um foco em simplicidade e eficiência, a plataforma oferece diversas funcionalidades para atender às necessidades de ambos os públicos.
 
+## Figma
+
+[Link para o figma](https://www.figma.com/file/9E03uUlkhs4tlAyjkWmJHx/FindMe?type=design&node-id=202%3A2&mode=design&t=viZ9WwJ73szRuBgV-1)
+
 ### Principais Features
 #### Como recrutador, eu quero:
 1. Criar vagas com detalhes específicos.

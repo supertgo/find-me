@@ -53,9 +53,9 @@ O sistema "FindMe" é uma plataforma que visa facilitar o processo de recrutamen
 ### Sprint Backlog
 1. Criar vagas com detalhes específicos.
  - Tarefas e responsáveis:
-     - Modelar a vaga no banco de dados
-     - Implementar a tela de criação de vagas
-     -  CRUD criação das vagas
+     - Modelar a vaga no banco de dados [Eduardo]
+     - Implementar a tela de criação de vagas [Ana]
+     -  CRUD criação das vagas [ Davi]
         - rotas, criar, atualizar, listar, deletar
         - migrações para criação das tabelas no banco
         - form request para validação do payload
@@ -63,14 +63,14 @@ O sistema "FindMe" é uma plataforma que visa facilitar o processo de recrutamen
         - documentação em openApi das rotas
         - usar soft delete na deleção 
         - salvar alterações no histórico
-     - Estruturação das chamadas à API pelo front
+     - Estruturação das chamadas à API pelo front [Thiago]
 
 2. Buscar candidatos com base em critérios variados.
   - Tarefas e responsáveis:
-     - Modelar o candidato e critérios no banco de dados
-     - Implementar a tela de criação/edição de perfil/competência
+     - Modelar o candidato e critérios no banco de dados [Eduardo]
+     - Implementar a tela de criação/edição de perfil/competência [Ana]
 
-     - CRUD de nova competência 
+     - CRUD de nova competência  [Davi]
          - migrações para criação das tabelas no banco
          - rotas de criação de competência, que já deve vincular esse a um usuário
          - form request para validação do payload
@@ -80,7 +80,7 @@ O sistema "FindMe" é uma plataforma que visa facilitar o processo de recrutamen
          - rota de atualização, listagem, detalhes
          - salvar alterações no histórico
 
-    - CRUD de nova experiência
+    - CRUD de nova experiência [Thiago]
       - migrações para criação das tabelas no banco
       - rotas de criação de experiência, que já deve vincular esse a um usuário
       - form request para validação do payload
@@ -93,7 +93,7 @@ O sistema "FindMe" é uma plataforma que visa facilitar o processo de recrutamen
     - Estruturação das chamadas à API pelo front
        
 3. Estabelecer limitações para cada vaga, como número máximo de candidaturas, período de abertura e fechamento da vaga, e filtros de candidatos.
-    - Crud relacionada a vaga/aplicação
+    - Crud relacionada a vaga/aplicação [Davi]
         - Criar tabelas relacionados a aplicação para uma vaga
         - Adicionar essas verificações quando um usuário tenta aplicar para uma vaga
         - Rota de listagem de aplicações com filtros 
@@ -101,15 +101,15 @@ O sistema "FindMe" é uma plataforma que visa facilitar o processo de recrutamen
         - Teste geral 
         - adicionar rota de revogar candidatura, soft delete
 4. Gerenciar as vagas, incluindo criar, atualizar, listar e deletar.
-  - Tarefas e responsáveis:
+  - Tarefas e responsáveis: [Ana]
     - Criação dos endpoints para o CRUD
     - Consumir os endpoints no front-end
     - Criar a tela para a manipulação dos dados
       
 5. Visualizar as candidaturas recebidas.
   - Tarefas e responsáveis:
-    - Criar tela para visualizar as candidaturas pela parte do recrutador
-    - Endpoint para retornar as candidaturas de cada vaga
+    - Criar tela para visualizar as candidaturas pela parte do recrutador [Davi]
+    - Endpoint para retornar as candidaturas de cada vaga [Thiago]
         - Deve suportar filtros
         - deve suportar ordenações
         - criar tabelas no banco 
@@ -119,8 +119,8 @@ O sistema "FindMe" é uma plataforma que visa facilitar o processo de recrutamen
 
 6. Aplicar para vagas disponíveis na plataforma.
   - Tarefas e responsáveis:
-    - Criar tela para visualizar as candidaturas pela parte do candidato
-    - Endpoint para buscar vagas
+    - Criar tela para visualizar as candidaturas pela parte do candidato [Ana]
+    - Endpoint para buscar vagas [Eduardo]
       - Deve suportar filtros 
       - Deve suportar ordenações
       - documentação openApi
@@ -128,7 +128,7 @@ O sistema "FindMe" é uma plataforma que visa facilitar o processo de recrutamen
 
 7. Criar, editar e deletar seu perfil na plataforma.
   - Tarefas e responsáveis:
-    - Crud Relacionada ao usuário/autenticação
+    - Crud Relacionada ao usuário/autenticação [Davi]
       - rotas, signUp, signIn, deleteAccount, signOff, me, refreshToken
       - documentação openApi
       - cirar migração para tabelas no banco
@@ -138,49 +138,10 @@ O sistema "FindMe" é uma plataforma que visa facilitar o processo de recrutamen
       - salvar alterações no histórico
       - delete deve ser soft delete
 
-      - Tela para edição do perfil
+      - Tela para edição do perfil [Thiago]
     
 8. Visualizar suas candidaturas realizadas.
-  - Tarefas e responsáveis:
+  - Tarefas e responsáveis: [Ana]
     - Tela para a visualização das candidaturas
-    - Crud Relacionada ao usuário/autenticação
-      - rotas, signUp, signIn, deleteAccount, signOff, me, refreshToken
-      - documentação openApi
-      - cirar migração para tabelas no banco
-      - oauth para gerenciar token jtw
-      - criação de middleware para verifica se o usuário está logado
-      - teste geral
-      - salvar alterações no histórico
-
-
-9. Gerenciar seu currículo, incluindo criação, edição e exclusão. (talvez remover)
-   - Tarefas e responsáveis:
-       - CRUD de currículo
-         - migrações para criação das tabelas no banco
-         - rotas de criação de currículo, que já deve vincular esse a um usuário
-         - form request para validação do payload
-         - teste geral
-         - documentação em openApi das rotas
-         - usar soft delete na rota de deleção
-         - salvar alterações no histórico
-         - rotas de autualização, detalhes, listagem, esta com filtros
-    
-  
-10. Gerenciar as vagas de forma personalizada, com opções de restrição por características como sexo, cor, deficiência, e modelo de contratação. (talvez remover essa)
-- Tarefas e responsáveis:
-    - CRUD de configurações de vaga
-        - migrações para criação das tabelas no banco, rules que ira armazenas essas informações 
-        - form request para validação do payload
-        - teste geral
-        - documentação em openApi das rotas
-        - usar soft delete na rota de deleção
-        - salvar alterações no histórico
-        - rotas de autualização, detalhes, listagem, esta com filtros
-
-    - Rota de canApply 
-        - Está deverá veriicar se um usuário pode aplicar para a vaga
-        - deve validar com base nas rules 
-        - teste geral
-        - documentação em openApi das rotas 
     
 

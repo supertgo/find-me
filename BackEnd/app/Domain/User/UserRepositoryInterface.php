@@ -1,6 +1,6 @@
 <?php
 
-namespace app\domain\user;
+namespace App\Domain\User;
 
 use App\Prototype\RegisterRequestPrototype;
 

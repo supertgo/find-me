@@ -533,7 +533,7 @@ namespace Illuminate\Support\Facades {
                         return $instance->make($abstract, $parameters);
         }
                     /**
-         * Determine if the given abstract type has been bound.
+         * Determine if the given Abstract type has been bound.
          *
          * @param string $abstract
          * @return bool 
@@ -950,7 +950,7 @@ namespace Illuminate\Support\Facades {
                         return $instance->has($id);
         }
                     /**
-         * Determine if the given abstract type has been resolved.
+         * Determine if the given Abstract type has been resolved.
          *
          * @param string $abstract
          * @return bool 
@@ -1106,7 +1106,7 @@ namespace Illuminate\Support\Facades {
                         $instance->scopedIf($abstract, $concrete);
         }
                     /**
-         * "Extend" an abstract type in the container.
+         * "Extend" an Abstract type in the container.
          *
          * @param string $abstract
          * @param \Closure $closure
@@ -1167,7 +1167,7 @@ namespace Illuminate\Support\Facades {
                         $instance->alias($abstract, $alias);
         }
                     /**
-         * Bind a new callback to an abstract's rebind event.
+         * Bind a new callback to an Abstract's rebind event.
          *
          * @param string $abstract
          * @param \Closure $callback
@@ -1315,7 +1315,7 @@ namespace Illuminate\Support\Facades {
                         return $instance->getBindings();
         }
                     /**
-         * Get the alias for an abstract if available.
+         * Get the alias for an Abstract if available.
          *
          * @param string $abstract
          * @return string 
@@ -1642,14 +1642,14 @@ namespace Illuminate\Support\Facades {
      *
      * @method static bool check()
      * @method static bool guest()
-     * @method static \Illuminate\Contracts\Auth\Authenticatable|null user()
+     * @method static \Illuminate\Contracts\Auth\Authenticatable|null User()
      * @method static int|string|null id()
      * @method static bool validate(array $credentials = [])
      * @method static bool hasUser()
-     * @method static void setUser(\Illuminate\Contracts\Auth\Authenticatable $user)
+     * @method static void setUser(\Illuminate\Contracts\Auth\Authenticatable $User)
      * @method static bool attempt(array $credentials = [], bool $remember = false)
      * @method static bool once(array $credentials = [])
-     * @method static void login(\Illuminate\Contracts\Auth\Authenticatable $user, bool $remember = false)
+     * @method static void login(\Illuminate\Contracts\Auth\Authenticatable $User, bool $remember = false)
      * @method static \Illuminate\Contracts\Auth\Authenticatable|bool loginUsingId(mixed $id, bool $remember = false)
      * @method static \Illuminate\Contracts\Auth\Authenticatable|bool onceUsingId(mixed $id)
      * @method static bool viaRemember()
@@ -1764,7 +1764,7 @@ namespace Illuminate\Support\Facades {
                         return $instance->viaRequest($driver, $callback);
         }
                     /**
-         * Get the user resolver callback.
+         * Get the User resolver callback.
          *
          * @return \Closure 
          * @static 
@@ -1840,7 +1840,7 @@ namespace Illuminate\Support\Facades {
                         return $instance->setApplication($app);
         }
                     /**
-         * Create the user provider implementation for the driver.
+         * Create the User provider implementation for the driver.
          *
          * @param string|null $provider
          * @return \Illuminate\Contracts\Auth\UserProvider|null 
@@ -1852,7 +1852,7 @@ namespace Illuminate\Support\Facades {
                         return $instance->createUserProvider($provider);
         }
                     /**
-         * Get the default user provider name.
+         * Get the default User provider name.
          *
          * @return string 
          * @static 
@@ -2347,7 +2347,7 @@ namespace Illuminate\Support\Facades {
                         $instance->routes($attributes);
         }
                     /**
-         * Register the routes for handling broadcast user authentication.
+         * Register the routes for handling broadcast User authentication.
          *
          * @param array|null $attributes
          * @return void 
@@ -3944,7 +3944,7 @@ namespace Illuminate\Support\Facades {
                         $instance->unqueue($name, $path);
         }
                     /**
-         * Set the default path and domain for the jar.
+         * Set the default path and Domain for the jar.
          *
          * @param string $path
          * @param string|null $domain
@@ -6391,7 +6391,7 @@ namespace Illuminate\Support\Facades {
                         return $instance->after($callback);
         }
                     /**
-         * Determine if all of the given abilities should be granted for the current user.
+         * Determine if all of the given abilities should be granted for the current User.
          *
          * @param \Illuminate\Auth\Access\iterable|string $ability
          * @param array|mixed $arguments
@@ -6403,7 +6403,7 @@ namespace Illuminate\Support\Facades {
                         return $instance->allows($ability, $arguments);
         }
                     /**
-         * Determine if any of the given abilities should be denied for the current user.
+         * Determine if any of the given abilities should be denied for the current User.
          *
          * @param \Illuminate\Auth\Access\iterable|string $ability
          * @param array|mixed $arguments
@@ -6415,7 +6415,7 @@ namespace Illuminate\Support\Facades {
                         return $instance->denies($ability, $arguments);
         }
                     /**
-         * Determine if all of the given abilities should be granted for the current user.
+         * Determine if all of the given abilities should be granted for the current User.
          *
          * @param \Illuminate\Auth\Access\iterable|string $abilities
          * @param array|mixed $arguments
@@ -6427,7 +6427,7 @@ namespace Illuminate\Support\Facades {
                         return $instance->check($abilities, $arguments);
         }
                     /**
-         * Determine if any one of the given abilities should be granted for the current user.
+         * Determine if any one of the given abilities should be granted for the current User.
          *
          * @param \Illuminate\Auth\Access\iterable|string $abilities
          * @param array|mixed $arguments
@@ -6439,7 +6439,7 @@ namespace Illuminate\Support\Facades {
                         return $instance->any($abilities, $arguments);
         }
                     /**
-         * Determine if all of the given abilities should be denied for the current user.
+         * Determine if all of the given abilities should be denied for the current User.
          *
          * @param \Illuminate\Auth\Access\iterable|string $abilities
          * @param array|mixed $arguments
@@ -6451,7 +6451,7 @@ namespace Illuminate\Support\Facades {
                         return $instance->none($abilities, $arguments);
         }
                     /**
-         * Determine if the given ability should be granted for the current user.
+         * Determine if the given ability should be granted for the current User.
          *
          * @param string $ability
          * @param array|mixed $arguments
@@ -6464,7 +6464,7 @@ namespace Illuminate\Support\Facades {
                         return $instance->authorize($ability, $arguments);
         }
                     /**
-         * Inspect the user for the given ability.
+         * Inspect the User for the given ability.
          *
          * @param string $ability
          * @param array|mixed $arguments
@@ -6523,7 +6523,7 @@ namespace Illuminate\Support\Facades {
                         return $instance->resolvePolicy($class);
         }
                     /**
-         * Get a gate instance for the given user.
+         * Get a gate instance for the given User.
          *
          * @param \Illuminate\Contracts\Auth\Authenticatable|mixed $user
          * @return static 
@@ -6794,7 +6794,7 @@ namespace Illuminate\Support\Facades {
      * @method static \Illuminate\Http\Client\PendingRequest withToken(string $token, string $type = 'Bearer')
      * @method static \Illuminate\Http\Client\PendingRequest withUserAgent(string|bool $userAgent)
      * @method static \Illuminate\Http\Client\PendingRequest withUrlParameters(array $parameters = [])
-     * @method static \Illuminate\Http\Client\PendingRequest withCookies(array $cookies, string $domain)
+     * @method static \Illuminate\Http\Client\PendingRequest withCookies(array $cookies, string $Domain)
      * @method static \Illuminate\Http\Client\PendingRequest maxRedirects(int $max)
      * @method static \Illuminate\Http\Client\PendingRequest withoutRedirecting()
      * @method static \Illuminate\Http\Client\PendingRequest withoutVerifying()
@@ -8440,9 +8440,9 @@ namespace Illuminate\Support\Facades {
      * @method static string sendResetLink(array $credentials, \Closure|null $callback = null)
      * @method static mixed reset(array $credentials, \Closure $callback)
      * @method static \Illuminate\Contracts\Auth\CanResetPassword|null getUser(array $credentials)
-     * @method static string createToken(\Illuminate\Contracts\Auth\CanResetPassword $user)
-     * @method static void deleteToken(\Illuminate\Contracts\Auth\CanResetPassword $user)
-     * @method static bool tokenExists(\Illuminate\Contracts\Auth\CanResetPassword $user, string $token)
+     * @method static string createToken(\Illuminate\Contracts\Auth\CanResetPassword $User)
+     * @method static void deleteToken(\Illuminate\Contracts\Auth\CanResetPassword $User)
+     * @method static bool tokenExists(\Illuminate\Contracts\Auth\CanResetPassword $User, string $token)
      * @method static \Illuminate\Auth\Passwords\TokenRepositoryInterface getRepository()
      * @see \Illuminate\Auth\Passwords\PasswordBrokerManager
      * @see \Illuminate\Auth\Passwords\PasswordBroker
@@ -9663,7 +9663,7 @@ namespace Illuminate\Support\Facades {
                         return $instance->ips();
         }
                     /**
-         * Get the client user agent.
+         * Get the client User agent.
          *
          * @return string|null 
          * @static 
@@ -9837,7 +9837,7 @@ namespace Illuminate\Support\Facades {
                         $instance->setDefaultRequestLocale($locale);
         }
                     /**
-         * Get the user making the request.
+         * Get the User making the request.
          *
          * @param string|null $guard
          * @return mixed 
@@ -9882,7 +9882,7 @@ namespace Illuminate\Support\Facades {
                         return $instance->setJson($json);
         }
                     /**
-         * Get the user resolver callback.
+         * Get the User resolver callback.
          *
          * @return \Closure 
          * @static 
@@ -9892,7 +9892,7 @@ namespace Illuminate\Support\Facades {
                         return $instance->getUserResolver();
         }
                     /**
-         * Set the user resolver callback.
+         * Set the User resolver callback.
          *
          * @param \Closure $callback
          * @return \Illuminate\Http\Request 
@@ -10290,7 +10290,7 @@ namespace Illuminate\Support\Facades {
                         return $instance->getPort();
         }
                     /**
-         * Returns the user.
+         * Returns the User.
          *
          * @static 
          */        public static function getUser()
@@ -10308,9 +10308,9 @@ namespace Illuminate\Support\Facades {
                         return $instance->getPassword();
         }
                     /**
-         * Gets the user info.
+         * Gets the User info.
          *
-         * @return string|null A user name if any and, optionally, scheme-specific information about how to gain authorization to access the server
+         * @return string|null A User name if any and, optionally, scheme-specific information about how to gain authorization to access the server
          * @static 
          */        public static function getUserInfo()
         {            //Method inherited from \Symfony\Component\HttpFoundation\Request         
@@ -10341,7 +10341,7 @@ namespace Illuminate\Support\Facades {
                     /**
          * Gets the scheme and HTTP host.
          * 
-         * If the URL was called with basic authentication, the user
+         * If the URL was called with basic authentication, the User
          * and the password are not added to the generated string.
          *
          * @static 
@@ -10513,7 +10513,7 @@ namespace Illuminate\Support\Facades {
          * 
          * Here is the process to determine the format:
          * 
-         *  * format defined by the user (with setRequestFormat())
+         *  * format defined by the User (with setRequestFormat())
          *  * _format request attribute
          *  * $default
          *
@@ -10711,7 +10711,7 @@ namespace Illuminate\Support\Facades {
                         return $instance->getPreferredLanguage($locales);
         }
                     /**
-         * Gets a list of languages acceptable by the client browser ordered in the user browser preferences.
+         * Gets a list of languages acceptable by the client browser ordered in the User browser preferences.
          *
          * @return string[] 
          * @static 
@@ -11753,7 +11753,7 @@ namespace Illuminate\Support\Facades {
      * @method static \Illuminate\Routing\RouteRegistrar whereIn(array|string $parameters, array $values)
      * @method static \Illuminate\Routing\RouteRegistrar as(string $value)
      * @method static \Illuminate\Routing\RouteRegistrar controller(string $controller)
-     * @method static \Illuminate\Routing\RouteRegistrar domain(string $value)
+     * @method static \Illuminate\Routing\RouteRegistrar Domain(string $value)
      * @method static \Illuminate\Routing\RouteRegistrar middleware(array|string|null $middleware)
      * @method static \Illuminate\Routing\RouteRegistrar missing(\Closure $missing)
      * @method static \Illuminate\Routing\RouteRegistrar name(string $value)
@@ -12857,7 +12857,7 @@ namespace Illuminate\Support\Facades {
                         return $instance->getTableListing();
         }
                     /**
-         * Get the user-defined types that belong to the database.
+         * Get the User-defined types that belong to the database.
          *
          * @return array 
          * @static 
@@ -13741,7 +13741,7 @@ namespace Illuminate\Support\Facades {
                         $instance->setPreviousUrl($url);
         }
                     /**
-         * Specify that the user has confirmed their password.
+         * Specify that the User has confirmed their password.
          *
          * @return void 
          * @static 
@@ -14717,7 +14717,7 @@ namespace Illuminate\Support\Facades {
                         return $instance->secureAsset($path);
         }
                     /**
-         * Generate the URL to an asset from a custom root domain such as CDN, etc.
+         * Generate the URL to an asset from a custom root Domain such as CDN, etc.
          *
          * @param string $root
          * @param string $path

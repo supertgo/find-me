@@ -2,30 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use app\domain\user\UserService;
+
+use App\Domain\User\UserRepository;
+use App\Domain\User\UserService;
 use App\Http\Requests\ForgotPasswordRequest;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterUserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Prototype\RegisterRequestPrototype;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 
 class JWTController extends Controller
 {
-
     public function register(RegisterUserRequest $request): Response
     {
+        $repository = new UserRepository();
+
         try {
-            DB::beginTransaction();
-            app(UserService::class)->createUser(RegisterRequestPrototype::fromRequest($request->all()));
-            DB::commit();
+            $repository->beginTransaction();
+
+            (new UserService($repository))->createUser(RegisterRequestPrototype::fromRequest($request->all()));
+            $repository->commitTransaction();
             return response()->noContent();
         } catch (\Exception $exception) {
             Log::error($exception);
-            DB::rollBack();
+            $repository->rollbackTransaction();
             return response()->json(['error' => 'Server error'], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
@@ -72,7 +75,7 @@ class JWTController extends Controller
     }
 
     /**
-     * Log the user out (Invalidate the token).
+     * Log the User out (Invalidate the token).
      *
      * @return \Illuminate\Http\JsonResponse
      */

@@ -1,6 +1,7 @@
 <?php
 
-namespace app\domain\user;
+namespace App\Domain\User;
+
 class UserDomain
 {
     private string $name;

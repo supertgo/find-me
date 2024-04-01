@@ -1,13 +1,13 @@
 <?php
 
-namespace app\domain\user;
+namespace App\Domain\User;
 
 
 use App\Prototype\RegisterRequestPrototype;
 
-class UserService
+readonly class UserService
 {
-    public function __construct(private readonly UserRepositoryInterface $userRepository)
+    public function __construct(private UserRepositoryInterface $userRepository)
     {
     }
 

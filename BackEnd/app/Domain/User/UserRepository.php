@@ -1,15 +1,15 @@
 <?php
 
-namespace app\domain\user;
+namespace App\Domain\User;
 
-
+use App\Domain\Abstract\AbstractRepository;
 use App\Mail\UserForgotPassword;
 use App\Models\User;
 use App\Prototype\RegisterRequestPrototype;
 use Illuminate\Support\Facades\Hash;
 use Mail;
 
-class UserRepository implements UserRepositoryInterface
+class UserRepository extends AbstractRepository implements UserRepositoryInterface
 {
     public function createUser(RegisterRequestPrototype $prototype): void
     {

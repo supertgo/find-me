@@ -13,7 +13,7 @@ services:
             MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
             MYSQL_DATABASE: ${DB_DATABASE}
         ports:
-            - "3385:3306"
+            - "3306:3306"
 
     php:
         build: ./docker

@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\auth;
 
+use App\Domain\User\UserTypeEnum;
 use App\Models\User;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
@@ -16,7 +17,7 @@ class RegisterTest extends TestCase
         /** @var User $user */
         $user = User::factory()->create();
         $payload = $this->generatePayload();
-        $payload["email"] = $user->email;
+        $payload['email'] = $user->email;
 
         $this->json('POST', self::ROUTE, $payload)
             ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
@@ -41,7 +42,7 @@ class RegisterTest extends TestCase
         $user = User::factory()->create();
 
         $payload = $this->generatePayload();
-        $payload["phone"] = $user->phone;
+        $payload['phone'] = $user->phone;
 
         $this->json('POST', self::ROUTE, $payload)
             ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
@@ -58,6 +59,50 @@ class RegisterTest extends TestCase
             ]);
 
         $this->assertDatabaseCount('users', 1);
+    }
+
+    public function testInUserTypeValidation()
+    {
+        $payload = $this->generatePayload();
+        $payload['type'] = 'not a valid type';
+
+        $this->json('POST', self::ROUTE, $payload)
+            ->assertJsonStructure([
+                'message',
+                'errors' => ['type']
+            ])
+            ->assertJson([
+                'message' => 'Type must be one of the following: recruiter,employee',
+                'errors' => [
+                    'type' => ['Type must be one of the following: recruiter,employee']
+                ]
+            ]);
+    }
+
+    public function testMissingRequiredFields()
+    {
+        $this->json('POST', self::ROUTE)
+            ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
+            ->assertJsonStructure([
+                'message',
+                'errors' => [
+                    'name',
+                    'password',
+                    'email',
+                    'phone',
+                    'type'
+                ]
+            ])
+            ->assertJson([
+                'message' => 'Name cannot be empty (and 4 more errors)',
+                'errors' => [
+                    'name' => ['Name cannot be empty'],
+                    'password' => ['Password cannot be empty'],
+                    'email' => ['Email cannot be empty'],
+                    'phone' => ['Phone number cannot be empty'],
+                    'type' => ['Type cannot be empty']
+                ]
+            ]);
     }
 
     public function testRegisterUserSuccess()
@@ -89,7 +134,9 @@ class RegisterTest extends TestCase
             'password' => $this->faker->password,
             'email' => $this->faker->unique()->safeEmail,
             'phone' => $this->faker->unique()->e164PhoneNumber,
+            'type' => UserTypeEnum::Recruiter->value
         ];
     }
+
 
 }

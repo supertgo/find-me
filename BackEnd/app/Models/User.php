@@ -20,6 +20,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @property string $name
  * @property string $phone
  * @property string $email
+ * @property string $type
  * @property \Illuminate\Support\Carbon|null $email_verified_at
  * @property string $password
  * @property string|null $remember_token
@@ -60,7 +61,8 @@ class User extends Authenticatable implements JWTSubject
         'name',
         'email',
         'phone',
-        'password'
+        'password',
+        'type'
     ];
     /**
      * The attributes that should be hidden for serialization.

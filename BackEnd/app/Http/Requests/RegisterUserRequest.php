@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Domain\User\UserTypeEnum;
 use Illuminate\Foundation\Http\FormRequest;
 
 class RegisterUserRequest extends FormRequest
@@ -17,24 +18,28 @@ class RegisterUserRequest extends FormRequest
         return [
             'name' => 'required|string',
             'password' => 'required|min:6|string',
-            'email' => 'required|email|unique:users,email,' . $this->user,
-            'phone' => 'required|numeric|unique:users,phone,' . $this->user,
+            'email' => 'required|email|unique:users,email',
+            'phone' => 'required|numeric|unique:users,phone',
+            'type' => 'required|string|in:' . implode(',', array_column(UserTypeEnum::cases(), 'value')),
         ];
     }
 
     public function messages(): array
     {
         return [
-            'name.required' => trans('User.name.required'),
-            'password.required' => trans('User.password.required'),
-            'password.min' => trans('User.password.min'),
-            'email.required' => trans('User.email.required'),
-            'email.email' => trans('User.email.email'),
-            'email.unique' => trans('User.email.unique'),
-            'phone.required' => trans('User.phone.required'),
-            'phone.unique' => trans('User.phone.unique'),
-            'phone.numeric' => trans('User.phone.numeric'),
-            'phone.max' => trans('User.phone.max'),
+            'name.required' => trans('user.name.required'),
+            'password.required' => trans('user.password.required'),
+            'password.min' => trans('user.password.min'),
+            'email.required' => trans('user.email.required'),
+            'email.email' => trans('user.email.email'),
+            'email.unique' => trans('user.email.unique'),
+            'phone.required' => trans('user.phone.required'),
+            'phone.unique' => trans('user.phone.unique'),
+            'phone.numeric' => trans('user.phone.numeric'),
+            'phone.max' => trans('user.phone.max'),
+            'type.required' => trans('user.type.required'),
+            'type.string' => trans('user.type.string'),
+            'type.in' => trans('user.type.in'),
         ];
     }
 }

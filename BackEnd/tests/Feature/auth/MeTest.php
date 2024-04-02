@@ -17,11 +17,9 @@ class MeTest extends TestCase
                 'data' => [
                     'name',
                     'email',
-                    'email_verified_at',
                     'phone',
-                    'updated_at',
-                    'created_at',
                     'id',
+                    'type',
                 ],
             ])
             ->assertJson([
@@ -29,6 +27,7 @@ class MeTest extends TestCase
                     'name' => $this->user->name,
                     'email' => $this->user->email,
                     'phone' => $this->user->phone,
+                    'type' => $this->user->type,
                     'id' => $this->user->id,
                 ],
             ]);

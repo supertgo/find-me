@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PhpTestFrameworkVersionCache">
+    <tools_cache>
+      <tool tool_name="PHPUnit">
+        <cache>
+          <versions>
+            <info id="Local/home/daviaraujo/PhpstormProjects/arquitetura/BackEnd/vendor/autoload.php" version="10.5.13" />
+            <info id="interpreter-61c7a1db-0637-421a-aabb-6ec417d71a22" version="10.5.13" />
+          </versions>
+        </cache>
+      </tool>
+    </tools_cache>
+  </component>
+</project>

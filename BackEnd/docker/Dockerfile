@@ -1,4 +1,4 @@
-FROM phpdockerio/php:8.2-fpm
+FROM daviaraujo1/teste
 WORKDIR "/var/www"
 
 # Fix debconf warnings upon build

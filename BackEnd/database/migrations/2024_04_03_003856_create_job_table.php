@@ -30,7 +30,7 @@ return new class extends Migration
 
             $table->softDeletes();
 
-            $table->foreignId('owner')->constrained('companies');
+            $table->foreignId('owner')->constrained('users');
         });
     }
 

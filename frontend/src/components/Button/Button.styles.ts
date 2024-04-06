@@ -1,0 +1,82 @@
+import styled, { css, DefaultTheme } from 'styled-components';
+
+import { ButtonProps } from './Button';
+
+export type WrapperProps = {
+  $hasIcon: boolean;
+  $size: ButtonProps['size'];
+  $fullWidth: ButtonProps['fullWidth'];
+  $minimal: ButtonProps['minimal'];
+};
+
+const wrapperModifiers = {
+  small: (theme: DefaultTheme) => css`
+    height: 3rem;
+    font-size: ${theme.font.sizes.sm};
+  `,
+
+  medium: (theme: DefaultTheme) => css`
+    height: 4rem;
+    font-size: ${theme.font.sizes.smd};
+    padding: ${theme.space.xxsmall} ${theme.space.medium};
+  `,
+
+  fullWidth: (theme: DefaultTheme) => css`
+    width: 100%;
+    height: 5.6rem;
+    padding: ${theme.space.xxsmall};
+    border-radius: 1.2rem;
+  `,
+
+  withIcon: (theme: DefaultTheme) => css`
+    svg {
+      width: 1.5rem;
+
+      & + span {
+        margin-left: ${theme.space.xxsmall};
+      }
+    }
+  `,
+
+  minimal: (theme: DefaultTheme) => css`
+    background: none;
+    color: ${theme.colors.primary};
+  `,
+
+  disabled: () => css`
+    &:disabled {
+      cursor: not-allowed;
+      filter: saturate(30%);
+    }
+  `,
+};
+
+export const Wrapper = styled.button<WrapperProps>`
+  ${({ theme, $size, $fullWidth, $hasIcon, $minimal, disabled }) => css`
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: ${theme.colors.primary};
+    color: ${theme.colors.white};
+    border: 0;
+    cursor: pointer;
+    border-radius: ${theme.borderRadius.sm};
+    padding: ${theme.space.xxsmall};
+    text-decoration: none;
+    font-weight: ${theme.font.weights.medium};
+
+    &:focus {
+      outline: 1px dashed;
+    }
+
+    span {
+      font-size: ${theme.font.sizes.sm};
+    }
+
+    ${!!$size && wrapperModifiers[$size](theme)};
+    ${!!$hasIcon && wrapperModifiers.withIcon(theme)};
+    ${!!$minimal && wrapperModifiers.minimal(theme)};
+    ${!!$fullWidth && wrapperModifiers.fullWidth(theme)};
+    ${disabled && wrapperModifiers.disabled()};
+  `}
+`;

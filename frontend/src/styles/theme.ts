@@ -1,4 +1,8 @@
 export const theme = {
+   grid: {
+    container: '130rem',
+    gutter: '3.2rem'
+  },
   borderRadius: {
     none: '0',
     xxs: '0.2rem',
@@ -62,6 +66,8 @@ export const theme = {
     large: '3.2rem',
     xxl: '4rem',
     xlarge: '4.8rem',
+    xxlarge: '5.6rem',
+    xxxlarge: '6.4rem',
   },
   layers: {
     base: 10,
@@ -82,6 +88,8 @@ export const theme = {
     fast: '0.1s ease-in-out',
   },
   colors: {
-
+    primary: '#2563EB',
+    white: '#FFF',
+    grey900: '#0F172A'
   }
 } as const;

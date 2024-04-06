@@ -15,6 +15,7 @@ const nextAuthOptions: NextAuthOptions = {
         password: { label: 'password', type: 'password' },
       },
       async authorize(credentials) {
+        console.log(credentials);
         try {
           const response = await fetch(
             `${process.env.NEXT_PUBLIC_BACKEND_URL}/${PostAuthLoginRouteConst}`,

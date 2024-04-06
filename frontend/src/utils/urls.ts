@@ -1,1 +1,2 @@
-export const SignInUrl = '/'
+export const SignInUrl = ''
+

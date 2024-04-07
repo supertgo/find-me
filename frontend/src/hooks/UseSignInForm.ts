@@ -16,7 +16,8 @@ import {
   UseFormHandleSubmit,
   UseFormRegister,
 } from 'react-hook-form';
-import { SignInUrl } from 'utils/urls';
+import { getSession } from 'next-auth/react';
+import { useLoggedUserStore } from 'stores/loggedUserStore';
 
 export interface UseSignInFormProtocols {
   register: UseFormRegister<any>;
@@ -28,9 +29,16 @@ export interface UseSignInFormProtocols {
   isValid: boolean;
 }
 
+const getUserInfo = async () => {
+  return await getSession();
+};
+
 export const UseSignInForm = (): UseSignInFormProtocols => {
   const [isLoading, setIsLoading] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const { setUser } = useLoggedUserStore((state) => ({
+    setUser: state.setUser,
+  }));
 
   const {
     register,
@@ -50,6 +58,12 @@ export const UseSignInForm = (): UseSignInFormProtocols => {
       email: data.email,
       password: data.password,
       redirect: false,
+    });
+
+    const user = await getUserInfo();
+
+    setUser({
+      email: user!.email,
     });
 
     if (result?.error) {

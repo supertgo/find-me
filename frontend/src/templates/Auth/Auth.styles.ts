@@ -44,7 +44,7 @@ export const LeftSideContent = styled.div`
       display: none;
     `}
 
-    ${media.greaterThan('medium')`
+    ${media.greaterThan('huge')`
       height: 50vh;
     `}
   `}

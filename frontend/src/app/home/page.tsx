@@ -1,5 +1,6 @@
-import { Auth } from 'templates/Auth/Auth';
+'use client';
+import { Home } from 'templates/Home/Home';
 
-export default function Home() {
-  return <p>logged</p>;
+export default async function HomePage() {
+  return <Home />;
 }

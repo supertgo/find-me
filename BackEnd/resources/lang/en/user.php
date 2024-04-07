@@ -1,6 +1,6 @@
 <?php
 
-use App\Domain\User\UserTypeEnum;
+use App\Domain\User\SalaryTimeUnitEnum;
 
 return [
     'name.required' => 'Name cannot be empty',
@@ -17,5 +17,5 @@ return [
     'type.required' => 'Type cannot be empty',
     'type.string' => 'Type must be a string',
     'type.in' => 'Type must be one of the following: '
-        . implode(',', array_column(UserTypeEnum::cases(), 'value')),
+        . implode(',', array_column(SalaryTimeUnitEnum::cases(), 'value')),
 ];

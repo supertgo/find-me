@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Domain\User\UserTypeEnum;
+use App\Domain\User\SalaryTimeUnitEnum;
 use Illuminate\Foundation\Http\FormRequest;
 
 class RegisterUserRequest extends FormRequest
@@ -20,7 +20,7 @@ class RegisterUserRequest extends FormRequest
             'password' => 'required|min:6|string',
             'email' => 'required|email|unique:users,email',
             'phone' => 'required|numeric|unique:users,phone',
-            'type' => 'required|string|in:' . implode(',', array_column(UserTypeEnum::cases(), 'value')),
+            'type' => 'required|string|in:' . implode(',', array_column(SalaryTimeUnitEnum::cases(), 'value')),
         ];
     }
 

@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\auth;
 
-use App\Domain\User\UserTypeEnum;
+use App\Domain\User\SalaryTimeUnitEnum;
 use App\Models\User;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
@@ -134,7 +134,7 @@ class RegisterTest extends TestCase
             'password' => $this->faker->password,
             'email' => $this->faker->unique()->safeEmail,
             'phone' => $this->faker->unique()->e164PhoneNumber,
-            'type' => UserTypeEnum::Recruiter->value
+            'type' => SalaryTimeUnitEnum::Recruiter->value
         ];
     }
 

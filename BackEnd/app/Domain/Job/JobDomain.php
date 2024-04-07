@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Domain\User;
+namespace App\Domain\Job;
 
-class UserDomain
+class JobDomain
 {
     private string $name;
     private string $email;

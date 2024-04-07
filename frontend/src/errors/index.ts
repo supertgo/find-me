@@ -11,6 +11,4 @@ export const PASSWORD_CONFIRMATION_REQUIRED = 'A confirmação da senha é obrig
 
 export const PASSWORD_REQUIREMENTS = 'Sua senha precisa ter pelo menos 8 caracteres, 1 letra maiúscula, 1 caractere especial e um número.'
 
-export const ERROR_WHEN_REFUSING_GUARANTEE = 'Ocorreu um erro ao recusar garantia.'
-
 export const UNEXPECTED_ERROR = 'Algo deu errado. Tente mais tarde.'

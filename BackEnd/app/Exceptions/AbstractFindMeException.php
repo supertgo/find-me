@@ -1,16 +1,17 @@
 <?php
 
 namespace App\Exceptions;
-use Symfony\Component\HttpFoundation\Response;
 
 use Exception;
+use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class AbstractFindMeException extends Exception
 {
     protected array $additionalInfo = [];
 
     public function __construct(
-        protected  $message,
+        protected     $message,
         protected int $httpCode = Response::HTTP_UNPROCESSABLE_ENTITY
     )
     {
@@ -24,6 +25,18 @@ class AbstractFindMeException extends Exception
 
     public function getHttpCode(): int
     {
-        return $this->getHttpCode();
+        return $this->httpCode;
     }
+
+    public function render(): JsonResponse
+    {
+        return response()->json(
+            [
+                'message' => $this->message,
+                'additional_info' => $this->getAdditionalInfo(),
+            ],
+            $this->getHttpCode()
+        );
+    }
+
 }

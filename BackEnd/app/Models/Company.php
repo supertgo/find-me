@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 
 /**
@@ -43,6 +44,11 @@ class Company extends Model
     use HasFactory;
 
     protected $table = 'companies';
+
+    public function jobs(): HasMany
+    {
+        return $this->hasMany(Job::class);
+    }
 
     protected $fillable = [
     ];

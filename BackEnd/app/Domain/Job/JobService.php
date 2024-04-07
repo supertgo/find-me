@@ -101,7 +101,8 @@ readonly class JobService implements JobServiceInterface
         $this->applicationsAmount = $job['applications_amount'];
         $this->salary = $job['salary'] ?? null;
         $this->salaryTimeUnit = $job['salary_time_unit'] ?? null;
-        $this->acceptApplicationUntil = isset($job['accept_application_until']) ? new \DateTime($job['accept_application_until']) : null;
+        $this->acceptApplicationUntil = isset($job['accept_application_until'])
+            ? Carbon::createFromTimeString($job['accept_application_until']) : null;
         $this->workModel = $job['work_model'] ?? null;
         $this->employmentType = $job['employment_type'] ?? null;
         $this->weekWorkload = $job['week_workload'] ?? null;

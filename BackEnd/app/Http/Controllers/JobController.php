@@ -22,17 +22,18 @@ class JobController extends Controller
 
         $repository->beginTransaction();
 
+        $service = new JobService($repository);
+        $service->fromArray($request->validated() + ['user_id' => $request->getLoggedUserId()]);
+
+        if (!(new CompanyDomain(new CompanyRepository()))->exists($service->getCompanyId()))
+            throw new CompanyNotFoundException($service->getCompanyId());
+
         try {
-            $service = new JobService($repository);
-            $service->fromArray($request->validated() + ['user_id' => $request->getLoggedUserId()]);
-
-            if (!(new CompanyDomain(new CompanyRepository()))->exists($service->getCompanyId()))
-                throw new CompanyNotFoundException($service->getCompanyId());
-
             $service->save();
+            
+            $repository->commitTransaction();
 
             return response()->noContent();
-
         } catch (Exception $exception) {
             $repository->rollbackTransaction();
 

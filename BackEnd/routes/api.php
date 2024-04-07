@@ -18,7 +18,7 @@ Route::group(
     });
 
 Route::group(
-    ['middleware' => 'auth:recruiter', 'namespace' => 'App\Http\Controllers'],
+    ['middleware' => 'recruiter', 'namespace' => 'App\Http\Controllers'],
     function () {
         Route::resource('/job', JobController::class)
             ->only(['index', 'store', 'destroy', 'update']);

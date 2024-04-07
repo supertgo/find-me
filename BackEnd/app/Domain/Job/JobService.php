@@ -67,10 +67,6 @@ readonly class JobService implements JobServiceInterface
         return $this->location;
     }
 
-    public function getOwner(): int
-    {
-        return $this->owner;
-    }
 
     private ?int $salary;
     private ?string $salaryTimeUnit;
@@ -79,7 +75,18 @@ readonly class JobService implements JobServiceInterface
     private ?string $employmentType;
     private ?int $weekWorkload;
     private ?string $location;
-    private int $owner;
+    private int $userId;
+    private int $companyId;
+
+    public function getUserId(): int
+    {
+        return $this->userId;
+    }
+
+    public function getCompanyId(): int
+    {
+        return $this->companyId;
+    }
 
     public function __construct(private JobRepositoryInterface $jobRepository)
     {
@@ -99,7 +106,8 @@ readonly class JobService implements JobServiceInterface
         $this->employmentType = $job['employment_type'] ?? null;
         $this->weekWorkload = $job['week_workload'] ?? null;
         $this->location = $job['location'] ?? null;
-        $this->owner = $job['owner'];
+        $this->companyId = $job['company_id'];
+        $this->userId = $job['user_id'];
 
         return $this;
     }
@@ -122,7 +130,8 @@ readonly class JobService implements JobServiceInterface
             'employment_type' => $this->employmentType,
             'week_workload' => $this->weekWorkload,
             'location' => $this->location,
-            'owner' => $this->owner,
+            'user_id' => $this->userId,
+            'company_id' => $this->companyId,
         ];
     }
 }

@@ -25,12 +25,13 @@ return new class extends Migration
             $table->enum('employment_type', ['full-time', 'part-time'] )->nullable();
             $table->unsignedMediumInteger('week_workload')->nullable();
             $table->string('location')->nullable();
+            $table->foreignId('company_id')->constrained('companies');
 
             $table->timestamps();
 
             $table->softDeletes();
 
-            $table->foreignId('owner')->constrained('users');
+            $table->foreignId('user_id')->constrained('users');
         });
     }
 

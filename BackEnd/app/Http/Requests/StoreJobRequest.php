@@ -7,13 +7,8 @@ use App\Domain\Job\SalaryTimeUnitEnum;
 use App\Domain\Job\WorkModelEnum;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreJobRequest extends FormRequest
+class StoreJobRequest extends AbstractRequest
 {
-    public function authorize(): bool
-    {
-        return true;
-    }
-
     public function rules(): array
     {
         return [
@@ -31,13 +26,7 @@ class StoreJobRequest extends FormRequest
                 'nullable|in' . implode(',', array_column(EmploymentTypeEnum::cases(), 'value')),
             'week_workload' => 'nullable|integer|min:0',
             'location' => 'nullable|string',
-            'owner' => 'required|exists:users,id',
-        ];
-    }
-
-    public function messages(): array
-    {
-        return [
+            'company_id' => 'required|int|positive',
         ];
     }
 }

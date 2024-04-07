@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Domain\Company\CompanyDomain;
+use App\Domain\Company\CompanyRepository;
 use App\Domain\Job\JobRepository;
 use App\Domain\Job\JobService;
+use App\Exceptions\CompanyNotFoundException;
 use App\Http\Requests\StoreJobRequest;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -21,7 +24,10 @@ class JobController extends Controller
 
         try {
             $service = new JobService($repository);
-            $service->fromArray($request->validated());
+            $service->fromArray($request->validated() + ['user_id' => $request->getLoggedUserId()]);
+
+            if (!(new CompanyDomain(new CompanyRepository()))->exists($service->getCompanyId()))
+                throw new CompanyNotFoundException($service->getCompanyId());
 
             $service->save();
 

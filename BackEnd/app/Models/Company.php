@@ -13,20 +13,10 @@ use Illuminate\Support\Carbon;
  * @property int $id
  * @property string $name
  * @property string $description
- * @property int $is_available
- * @property int $applications_amount
- * @property int|null $salary
- * @property string|null $salary_time_unit
- * @property string|null $accept_application_until
- * @property string|null $work_model
- * @property string|null $employment_type
- * @property int|null $week_workload
  * @property string|null $location
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property string|null $deleted_at
- * @property int $user_id
- * @property int $company_id
  * @method static Builder|Job newModelQuery()
  * @method static Builder|Job newQuery()
  * @method static Builder|Job query()
@@ -48,25 +38,12 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Job whereWorkModel($value)
  * @mixin \Eloquent
  */
-class Job extends Model
+class Company extends Model
 {
     use HasFactory;
 
-    protected $table = 'jobs';
+    protected $table = 'companies';
 
     protected $fillable = [
-        'name',
-        'description',
-        'is_available',
-        'applications_amount',
-        'salary',
-        'salary_time_unit',
-        'accept_application_until',
-        'work_model',
-        'employment_type',
-        'week_workload',
-        'location',
-        'user_id',
-        'company_id',
     ];
 }

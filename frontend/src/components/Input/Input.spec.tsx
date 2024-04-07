@@ -1,12 +1,12 @@
-import { render, screen } from 'utils/test-utils'
-import Input from './Input'
+import { render, screen } from 'utils/test/test-utils'
+import { Input } from './Input'
 
 describe('<Input />', () => {
   it('should render the component', () => {
     render(
-      <Input />
+      <Input onChange={() => ({})} />
     )
 
-    expect(screen.getByText('Input')).toBeInTheDocument()
+    expect(screen.getByPlaceholderText('Digite')).toBeInTheDocument()
   })
 })

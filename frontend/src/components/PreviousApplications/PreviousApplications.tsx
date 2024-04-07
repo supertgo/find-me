@@ -1,19 +1,27 @@
-import { ReactNode } from 'react';
+import { Children } from 'react';
 import * as S from './PreviousApplications.styles';
+import { PreviousApplicationsItem, PreviousApplicationsItemProps } from 'components/PreviousApplicationsItem/PreviousApplicationsItem';
 
 export type PreviousApplicationsProps = {
   title: string;
-  children: ReactNode;
+  applications: PreviousApplicationsItemProps[];
 };
 
 export const PreviousApplications = ({
   title,
-  children,
+  applications,
 }: PreviousApplicationsProps) => {
   return (
     <S.Wrapper>
       <S.Title>{title}</S.Title>
-      <S.Applications>{children}</S.Applications>
+      <S.Applications>
+        {Children.toArray(
+          applications.map((item, key) => {
+            const isEven = (key + 1) % 2 === 0;
+            return <PreviousApplicationsItem white={isEven} {...item} />;
+          }),
+        )}
+      </S.Applications>
     </S.Wrapper>
   );
 };

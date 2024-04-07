@@ -18,7 +18,7 @@ export const Sidebar = ({}: SidebarProps) => {
     <S.Wrapper>
       {/* Colocar componente de logo aqui */}
       <S.Items>
-        <SidebarItem icon={<HomeIcon />} text="Inicio" />
+        <SidebarItem icon={<HomeIcon />} text="Início" />
         <SidebarItem icon={<HomeIcon />} text="Minhas candidaturas" />
         <SidebarItem icon={<HomeIcon />} text="Vagas" />
         <SidebarItem icon={<HomeIcon />} text="Pesquisar Empresas" />

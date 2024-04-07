@@ -5,7 +5,6 @@ import { Input } from 'components/Input/Input';
 import { Heading } from 'components/Heading/Heading';
 import { UseSignInForm } from 'hooks/UseSignInForm';
 import { Controller } from 'react-hook-form';
-import Image  from 'next/image';
 
 type AuthProps = {};
 

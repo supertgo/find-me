@@ -1,12 +1,17 @@
-import { render, screen } from 'utils/test/test-utils'
-import { Home } from './Home'
+import 'components/PreviousApplications/PreviousApplications.mock';
+import { render, screen } from 'utils/test/test-utils';
+import { Home } from './Home';
 
 describe('<Home />', () => {
   it('should render the component', () => {
-    render(
-      <Home />
-    )
+    render(<Home />, {
+      queryProvider: true,
+    });
 
-    expect(screen.getByText('Home')).toBeInTheDocument()
-  })
-})
+    expect(screen.getByTestId('Mock PreviousApplications')).toBeInTheDocument();
+
+    expect(
+      screen.getByText('Visualizar histórico de todas as aplicações'),
+    ).toBeInTheDocument();
+  });
+});

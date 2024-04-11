@@ -6,6 +6,7 @@ interface JobDomainInterface
 {
     public function save(): void;
     public function update(): void;
+    public function delete(): void;
 
     public function toArray(): array;
 

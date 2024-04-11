@@ -2,7 +2,7 @@
 
 namespace App\Exceptions\Job;
 
-use App\Exceptions\AbstractFindMeException;
+use App\Exceptions\Abstract\AbstractFindMeException;
 use App\Exceptions\ExceptionMessagesEnum;
 
 class JobIdMustBeAnIntegerException extends AbstractFindMeException

@@ -21,16 +21,20 @@ class UpdateJobTest extends TestCase
     const ROUTE = self::BASE_ROUTE . 'job/%s';
 
 
-    public function testCreateJobSuccess()
+    public function testUpdateJobSuccess()
     {
-        $originalJob = Job::factory()->create();
+        $owner = $this->generateRecruiterUser();
+
+        $originalJob = Job::factory()->create([
+            'user_id' => $owner->id
+        ]);
 
         $payload = $this->generatePayload() + [
-                'id' => $originalJob->id
+                'id' => $originalJob->id,
             ];
 
         $response = $this
-            ->actingAs($this->generateRecruiterUser())
+            ->actingAs($owner)
             ->json('PUT', sprintf(self::ROUTE, $originalJob->id), $payload);
 
         $response->assertStatus(Response::HTTP_NO_CONTENT);
@@ -155,5 +159,4 @@ class UpdateJobTest extends TestCase
             'type' => UserTypeEnum::Recruiter->value
         ]);
     }
-
 }

@@ -4,6 +4,7 @@ namespace App\Domain\Job;
 
 
 use App\Exceptions\Job\IdRequiredToUpdateException;
+use App\Exceptions\Job\OnlyOwnerCanUpdateJobException;
 use Carbon\Carbon;
 
 readonly class JobDomain implements JobDomainInterface
@@ -39,14 +40,36 @@ readonly class JobDomain implements JobDomainInterface
 
     /**
      * @throws IdRequiredToUpdateException
+     * @throws OnlyOwnerCanUpdateJobException
      */
     public function update(): void
     {
-        if($this->id === null) {
+        if ($this->id === null) {
             throw new IdRequiredToUpdateException();
         }
 
-        $this->jobRepository->updateJob($this);
+        if ($this->jobRepository->getJobOwner($this->id) != $this->userId) {
+            throw new OnlyOwnerCanUpdateJobException();
+        }
+
+        $this->jobRepository->update($this);
+    }
+
+    /**
+     * @throws IdRequiredToUpdateException
+     * @throws OnlyOwnerCanUpdateJobException
+     */
+    public function delete(): void
+    {
+        if ($this->id === null) {
+            throw new IdRequiredToUpdateException();
+        }
+
+        if ($this->jobRepository->getJobOwner($this->id) != $this->userId) {
+            throw new OnlyOwnerCanUpdateJobException();
+        }
+
+        $this->jobRepository->delete($this->id);
     }
 
     public function fromArray(array $job): self
@@ -158,5 +181,19 @@ readonly class JobDomain implements JobDomainInterface
     public function getLocation(): ?string
     {
         return $this->location;
+    }
+
+    public function setId(int $id): self
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    public function setUserId(int $userId): self
+    {
+        $this->userId = $userId;
+
+        return $this;
     }
 }

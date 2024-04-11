@@ -3,12 +3,8 @@
 namespace App\Domain\Job;
 
 use App\Domain\Abstract\AbstractRepository;
-use App\Mail\UserForgotPassword;
 use App\Models\Job;
-use App\Models\User;
-use App\Prototype\RegisterRequestPrototype;
-use Illuminate\Support\Facades\Hash;
-use Mail;
+use DB;
 
 class JobRepository extends AbstractRepository implements JobRepositoryInterface
 {
@@ -22,7 +18,20 @@ class JobRepository extends AbstractRepository implements JobRepositoryInterface
         return Job::where('id', $id)->exists();
     }
 
-    public function updateJob(JobDomainInterface $job): void
+    public function getJobOwner(int $id): int
+    {
+        return DB::table('jobs')
+            ->where('id', $id)
+            ->first('user_id')
+            ->user_id;
+    }
+
+    public function delete(int $id): void
+    {
+        Job::where('id', $id)->delete();
+    }
+
+    public function update(JobDomainInterface $job): void
     {
         Job::where('id', $job->getId())->update($job->toArray());
     }

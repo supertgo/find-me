@@ -12,8 +12,18 @@ use Mail;
 
 class JobRepository extends AbstractRepository implements JobRepositoryInterface
 {
-    public function createJob(JobServiceInterface $job): void
+    public function createJob(JobDomainInterface $job): void
     {
         Job::create($job->toArray());
+    }
+
+    public function jobExists(int $id): bool
+    {
+        return Job::where('id', $id)->exists();
+    }
+
+    public function updateJob(JobDomainInterface $job): void
+    {
+        Job::where('id', $job->getId())->update($job->toArray());
     }
 }

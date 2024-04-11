@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Job;
 
 use App\Domain\Job\EmploymentTypeEnum;
 use App\Domain\Job\SalaryTimeUnitEnum;
 use App\Domain\Job\WorkModelEnum;
+use App\Http\Requests\AbstractRequest;
 
 class StoreJobRequest extends AbstractRequest
 {

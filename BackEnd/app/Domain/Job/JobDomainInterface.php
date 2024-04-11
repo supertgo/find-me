@@ -2,9 +2,10 @@
 
 namespace App\Domain\Job;
 
-interface JobServiceInterface
+interface JobDomainInterface
 {
     public function save(): void;
+    public function update(): void;
 
     public function toArray(): array;
 

@@ -44,7 +44,6 @@ export const useRegisterForm = (): UseRegisterFormProtocols => {
   });
 
   const onSubmit: SubmitHandler<RegisterInputs> = async (data, event) => {
-    console.log(data);
     event?.preventDefault();
 
     setIsLoading(true);

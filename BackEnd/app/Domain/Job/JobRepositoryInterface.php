@@ -13,4 +13,6 @@ interface JobRepositoryInterface
     public function getJobOwner(int $id): int;
 
     public function delete(int $id): void;
+
+    public function getJobs(): array;
 }

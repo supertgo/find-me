@@ -33,11 +33,10 @@ class UpdateJobTest extends TestCase
                 'id' => $originalJob->id,
             ];
 
-        $response = $this
+        $this
             ->actingAs($owner)
-            ->json('PUT', sprintf(self::ROUTE, $originalJob->id), $payload);
-
-        $response->assertStatus(Response::HTTP_NO_CONTENT);
+            ->json('PUT', sprintf(self::ROUTE, $originalJob->id), $payload)
+            ->assertStatus(Response::HTTP_NO_CONTENT);
 
         $this->assertDatabaseHas('jobs', [
             'id' => $originalJob['id'],

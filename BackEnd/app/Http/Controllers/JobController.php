@@ -159,4 +159,21 @@ class JobController extends Controller
 
         Log::error($exception);
     }
+
+    public function index(): JsonResponse|IluminateResponse
+    {
+        $repository = app(JobRepository::class);
+        $service = new JobDomain($repository);
+
+        try {
+            return response()->json($service->jobs());
+        } catch (Exception $exception) {
+            Log::error($exception);
+
+            return response()
+                ->json(
+                    ['error' => 'Server error'],
+                    Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
 }

@@ -196,4 +196,9 @@ readonly class JobDomain implements JobDomainInterface
 
         return $this;
     }
+
+    public function jobs(): array
+    {
+        return $this->jobRepository->getJobs();
+    }
 }

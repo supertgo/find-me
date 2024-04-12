@@ -24,11 +24,10 @@ class CreateJobTest extends TestCase
     {
         $payload = $this->generatePayload();
 
-        $response = $this
+        $this
             ->actingAs($this->generateRecruiterUser())
-            ->json('POST', self::ROUTE, $payload);
-
-        $response->assertStatus(Response::HTTP_CREATED);
+            ->json('POST', self::ROUTE, $payload)
+            ->assertStatus(Response::HTTP_CREATED);
 
         $this->assertDatabaseHas('jobs', [
             'name' => $payload['name'],

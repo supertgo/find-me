@@ -35,4 +35,9 @@ class JobRepository extends AbstractRepository implements JobRepositoryInterface
     {
         Job::where('id', $job->getId())->update($job->toArray());
     }
+
+    public function getJobs(): array
+    {
+        DB::table('jobs')->get()->toArray();
+    }
 }

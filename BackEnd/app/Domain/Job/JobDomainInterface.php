@@ -8,6 +8,8 @@ interface JobDomainInterface
     public function update(): void;
     public function delete(): void;
 
+    public function jobs(): array;
+
     public function toArray(): array;
 
     public function fromArray(array $job): self;

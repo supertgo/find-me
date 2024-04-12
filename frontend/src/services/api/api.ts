@@ -7,7 +7,7 @@ const api = axios.create({
 });
 
 api.interceptors.request.use(async (request) => {
-  const excludedUrls: string[] = [`/${SignInUrl}`];
+  const excludedUrls: string[] = [`/${SignInUrl}`, '/auth/register'];
 
   if (request.url && !excludedUrls.includes(request.url)) {
     const session = await getSession();

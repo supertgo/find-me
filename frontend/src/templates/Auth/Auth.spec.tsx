@@ -1,16 +1,22 @@
-import { render, screen } from 'utils/test/test-utils'
-import { Auth } from './Auth'
+import { render, screen } from 'utils/test/test-utils';
+import { Auth } from './Auth';
 
 describe('<Auth />', () => {
   it('should render the component', () => {
     render(
-      <Auth />
-    )
+      <Auth>
+        <h1>children</h1>
+      </Auth>,
+    );
 
-    expect(screen.getByText('Entre com a sua conta')).toBeInTheDocument()
-    expect(screen.getByText('Faça o seu cadastro')).toBeInTheDocument()
-    expect(screen.getByText('Ainda não tem uma conta?')).toBeInTheDocument()
-    expect(screen.getByText('Esqueci minha senha')).toBeInTheDocument()
-    expect(screen.getByText('Entrar')).toBeInTheDocument()
-  })
-})
+    expect(screen.getByText('FindMe')).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        'A melhor plataforma para você encontrar seu novo trampo',
+      ),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { name: /children/i }),
+    ).toBeInTheDocument();
+  });
+});

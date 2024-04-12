@@ -18,11 +18,11 @@ export const Sidebar = ({}: SidebarProps) => {
     <S.Wrapper>
       {/* Colocar componente de logo aqui */}
       <S.Items>
-        <SidebarItem icon={<HomeIcon />} text="Início" />
-        <SidebarItem icon={<HomeIcon />} text="Minhas candidaturas" />
-        <SidebarItem icon={<HomeIcon />} text="Vagas" />
-        <SidebarItem icon={<HomeIcon />} text="Pesquisar Empresas" />
-        <SidebarItem icon={<HomeIcon />} text="Meu Perfil Público" />
+        <SidebarItem href="/home" icon={<HomeIcon />} text="Início" />
+        <SidebarItem href="/" icon={<HomeIcon />} text="Minhas candidaturas" />
+        <SidebarItem href="/candidates" icon={<HomeIcon />} text="Candidatos" />
+        {/* <SidebarItem icon={<HomeIcon />} text="Pesquisar Empresas" /> */}
+        {/* <SidebarItem icon={<HomeIcon />} text="Meu Perfil Público" /> */}
       </S.Items>
 
       <div>

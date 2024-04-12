@@ -49,19 +49,22 @@ const Input = forwardRef(
     ref?: ForwardedRef<HTMLInputElement>,
   ) => {
     return (
-      <S.Input
-        type={type}
-        ref={ref}
-        data-cy={dataCy}
-        placeholder={placeholder}
-        value={value || ''}
-        onChange={onChange}
-        readOnly={readOnly}
-        tabIndex={readOnly ? -1 : 0}
-        aria-labelledby={label}
-        id={id}
-        {...inputProps}
-      />
+      <S.InputContainer>
+        <S.Input
+          type={type}
+          ref={ref}
+          data-cy={dataCy}
+          placeholder={placeholder}
+          value={value || ''}
+          onChange={onChange}
+          readOnly={readOnly}
+          tabIndex={readOnly ? -1 : 0}
+          aria-labelledby={label}
+          id={id}
+          {...inputProps}
+        />
+        {error && <S.ErrorMessage>{error?.message}</S.ErrorMessage>}
+      </S.InputContainer>
     );
   },
 );

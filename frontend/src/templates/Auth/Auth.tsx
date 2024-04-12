@@ -1,17 +1,11 @@
 'use client';
+import { ReactNode } from 'react';
 import * as S from './Auth.styles';
-import { Button } from 'components/Button/Button';
-import { Input } from 'components/Input/Input';
-import { Heading } from 'components/Heading/Heading';
-import { UseSignInForm } from 'hooks/UseSignInForm';
-import { Controller } from 'react-hook-form';
+type AuthProps = {
+  children: ReactNode;
+};
 
-type AuthProps = {};
-
-export const Auth = ({}: AuthProps) => {
-  const { control, isLoading, onSubmit, handleSubmit, isValid } =
-    UseSignInForm();
-
+export const Auth = ({ children }: AuthProps) => {
   return (
     <S.Wrapper>
       <S.LeftSide>
@@ -26,43 +20,7 @@ export const Auth = ({}: AuthProps) => {
           </S.Description>
         </S.LeftSideContent>
       </S.LeftSide>
-      <S.RightSide>
-        <S.Form autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
-          <Heading variant="h3" text="Entre com a sua conta" />
-          <Controller
-            rules={{
-              required: 'Digite um e-mail válido.',
-            }}
-            control={control}
-            name="email"
-            render={({ field: { ...field } }) => (
-              <Input {...field} placeholder="E-mail" />
-            )}
-          />
-          <Controller
-            rules={{
-              required: 'A senha é obrigatória.',
-            }}
-            control={control}
-            name="password"
-            render={({ field: { ...field } }) => (
-              <Input {...field} type="password" placeholder="Senha" />
-            )}
-          />
-          <S.ForgotPasswordLink href="auth/forgot-password">
-            Esqueci minha senha
-          </S.ForgotPasswordLink>
-          <Button fullWidth type="submit" disabled={!isValid || isLoading}>
-            Entrar
-          </Button>
-          <S.Text>
-            Ainda não tem uma conta?{' '}
-            <S.ForgotPasswordLink href="auth/register">
-              Faça o seu cadastro
-            </S.ForgotPasswordLink>
-          </S.Text>
-        </S.Form>
-      </S.RightSide>
+      <S.RightSide>{children}</S.RightSide>
     </S.Wrapper>
   );
 };

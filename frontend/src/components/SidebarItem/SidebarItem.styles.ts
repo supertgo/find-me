@@ -1,10 +1,11 @@
 import styled, { css } from 'styled-components';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.a`
   ${({ theme }) => css`
     display: flex;
     flex-direction: row;
     align-items: self-end;
+    text-decoration: none;
     padding: ${theme.space.xsmall} ${theme.space.small};
 
     svg {

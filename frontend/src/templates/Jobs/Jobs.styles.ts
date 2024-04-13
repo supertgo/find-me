@@ -29,7 +29,7 @@ export const SearchWrapper = styled.div`
   `}
 `;
 
-export const OpportunittiesWrapper = styled.div`
+export const OpportunitiesWrapper = styled.div`
   ${({ theme }) => css`
     display: flex;
     padding: ${theme.space.large};
@@ -42,7 +42,7 @@ export const OpportunittiesWrapper = styled.div`
   `}
 `;
 
-export const Opportunitties = styled.div`
+export const Opportunities = styled.div`
   ${({ theme }) => css`
     display: flex;
     width: 100%;

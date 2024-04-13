@@ -16,17 +16,17 @@ export const Jobs = ({}: JobsProps) => {
         <Input placeholder="Buscar vaga" />
         <Button>Buscar</Button>
       </S.SearchWrapper>
-      <S.OpportunittiesWrapper>
+      <S.OpportunitiesWrapper>
         <JobFilter />
-        <S.Opportunitties>
+        <S.Opportunities>
           <h5>Todas as Vagas</h5>
           <p>Mostrando todos os 10 resultados</p>
           <JobItem />
           <JobItem />
           <JobItem />
           <JobItem />
-        </S.Opportunitties>
-      </S.OpportunittiesWrapper>
+        </S.Opportunities>
+      </S.OpportunitiesWrapper>
     </Base>
   );
 };

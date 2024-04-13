@@ -1,3 +1,4 @@
 BackEnd/vendor
 BackEnd/storage
 BackEnd/.env
+.idea/sonarlint

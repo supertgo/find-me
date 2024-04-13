@@ -7,14 +7,14 @@ class UserDomain
     private string $name;
     private string $email;
     private string $phone;
-    private UserTypeEnum $type;
+    private SalaryTimeUnitEnum $type;
 
     public function getName(): string
     {
         return $this->name;
     }
 
-    public function setName(string $name): UserDomain
+    public function setName(string $name): JobDomain
     {
         $this->name = $name;
         return $this;
@@ -25,7 +25,7 @@ class UserDomain
         return $this->email;
     }
 
-    public function setEmail(string $email): UserDomain
+    public function setEmail(string $email): JobDomain
     {
         $this->email = $email;
         return $this;
@@ -36,18 +36,18 @@ class UserDomain
         return $this->phone;
     }
 
-    public function setPhone(string $phone): UserDomain
+    public function setPhone(string $phone): JobDomain
     {
         $this->phone = $phone;
         return $this;
     }
 
-    public function getType(): UserTypeEnum
+    public function getType(): SalaryTimeUnitEnum
     {
         return $this->type;
     }
 
-    public function setType(UserTypeEnum $type): UserDomain
+    public function setType(SalaryTimeUnitEnum $type): JobDomain
     {
         $this->type = $type;
         return $this;

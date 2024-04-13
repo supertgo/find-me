@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\JobController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JWTController;
 
@@ -15,3 +16,20 @@ Route::group(
             Route::post('forgot-password/{userEmail}', [JWTController::class, 'forgotPassword']);
         });
     });
+
+Route::group(
+    ['namespace' => 'App\Http\Controllers'],
+    function () {
+        Route::resource('/job', JobController::class)
+            ->only(['store', 'destroy', 'update'])
+            ->middleware('recruiter');
+
+        Route::resource('/job', JobController::class)
+            ->only(['index', 'show'])
+            ->middleware('auth:api');
+    });
+
+
+
+
+

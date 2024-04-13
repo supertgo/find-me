@@ -2,7 +2,8 @@
 
 namespace App\Mail;
 
-use app\domain\user\UserDomain;
+use app\domain\user\JobDomain;
+use App\Domain\User\UserDomain;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;

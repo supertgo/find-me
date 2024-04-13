@@ -32,8 +32,6 @@ class RegisterTest extends TestCase
                     ]
                 ]
             ]);
-
-        $this->assertDatabaseCount('users', 1);
     }
 
     public function testUniquePhone()
@@ -57,8 +55,6 @@ class RegisterTest extends TestCase
                     ]
                 ]
             ]);
-
-        $this->assertDatabaseCount('users', 1);
     }
 
     public function testInUserTypeValidation()

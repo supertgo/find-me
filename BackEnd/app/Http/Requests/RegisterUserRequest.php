@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+
 use App\Domain\User\UserTypeEnum;
 use Illuminate\Foundation\Http\FormRequest;
 

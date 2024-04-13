@@ -3,23 +3,31 @@
 namespace App\Domain\Abstract;
 
 use Illuminate\Support\Facades\DB;
+use Throwable;
 
 class AbstractRepository
 {
-    public function beginTransaction()
+    /**
+     * @throws Throwable
+     */
+    public function beginTransaction(): void
     {
         DB::beginTransaction();
     }
 
-    public function commitTransaction()
+    /**
+     * @throws Throwable
+     */
+    public function commitTransaction(): void
     {
         DB::commit();
     }
 
-    public function rollbackTransaction()
+    /**
+     * @throws Throwable
+     */
+    public function rollbackTransaction(): void
     {
         DB::rollBack();
     }
-
-
 }

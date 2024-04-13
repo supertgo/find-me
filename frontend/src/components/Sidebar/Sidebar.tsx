@@ -19,8 +19,9 @@ export const Sidebar = ({}: SidebarProps) => {
       {/* Colocar componente de logo aqui */}
       <S.Items>
         <SidebarItem href="/home" icon={<HomeIcon />} text="Início" />
-        <SidebarItem href="/" icon={<HomeIcon />} text="Minhas candidaturas" />
-        <SidebarItem href="/candidates" icon={<HomeIcon />} text="Candidatos" />
+        <SidebarItem href="/" icon={<HomeIcon />} text="Candidaturas" />
+        <SidebarItem href="/jobs" icon={<HomeIcon />} text="Vagas" />
+        {/* <SidebarItem href="/candidates" icon={<HomeIcon />} text="Candidatos" /> */}
         {/* <SidebarItem icon={<HomeIcon />} text="Pesquisar Empresas" /> */}
         {/* <SidebarItem icon={<HomeIcon />} text="Meu Perfil Público" /> */}
       </S.Items>

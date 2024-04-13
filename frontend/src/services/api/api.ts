@@ -12,8 +12,6 @@ api.interceptors.request.use(async (request) => {
   if (request.url && !excludedUrls.includes(request.url)) {
     const session = await getSession();
 
-    console.log(session, 'session');
-
     if (session) {
       request.headers.Authorization = `Bearer ${session.access_token}`;
     }

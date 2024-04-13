@@ -1,3 +1,4 @@
+import { DropboxIcon } from 'icons/DropboxIcon/DropboxIcon';
 import * as S from './PreviousApplicationsItem.styles';
 
 export type PreviousApplicationsItemProps = {
@@ -19,10 +20,12 @@ export const PreviousApplicationsItem = ({
   return (
     <S.Wrapper $white={white}>
       <S.JobWrapper>
-        oi
+        <DropboxIcon />
         <div>
           <S.JobTitle>{jobTitle}</S.JobTitle>
-          <S.JobInfo>{`${company} . ${location} . ${workModel}`}</S.JobInfo>
+          <S.JobInfo>
+            {company} &bull; {location} &bull;{workModel}
+          </S.JobInfo>
         </div>
       </S.JobWrapper>
       <S.DateInfo>

@@ -1,5 +1,6 @@
 import * as S from './Home.styles';
 import { Base } from 'components/Base/Base';
+import { LinkText } from 'components/LinkText/LinkText';
 import { PreviousApplications } from 'components/PreviousApplications/PreviousApplications';
 import { Title } from 'components/Title/Title';
 import { useLoggedUserStore } from 'stores/loggedUserStore';
@@ -22,9 +23,10 @@ export const Home = ({}: HomeProps) => {
           title="Histórico de Aplicações Recentes"
         ></PreviousApplications>
         <S.MoreApplicationsWrapper>
-          <S.MoreApplicationsLink>
-            Visualizar histórico de todas as aplicações
-          </S.MoreApplicationsLink>
+          <LinkText
+            href="/jobs"
+            text="Visualizar histórico de todas as aplicações"
+          />
         </S.MoreApplicationsWrapper>
       </S.ApplicationsWrapper>
     </Base>

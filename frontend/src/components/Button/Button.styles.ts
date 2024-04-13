@@ -60,7 +60,6 @@ export const Wrapper = styled.button<WrapperProps>`
     color: ${theme.colors.white};
     border: 0;
     cursor: pointer;
-    border-radius: ${theme.borderRadius.sm};
     padding: ${theme.space.xxsmall};
     text-decoration: none;
     font-weight: ${theme.font.weights.medium};

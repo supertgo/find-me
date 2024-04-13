@@ -2,17 +2,19 @@ import { ForwardedRef, InputHTMLAttributes, forwardRef } from 'react';
 import * as S from './Checkbox.styles';
 
 export type CheckboxProps = {
+  size?: 'small' | 'medium';
   label: string;
-} & InputHTMLAttributes<HTMLInputElement>;
+  name?: string;
+};
 
 const Checkbox = forwardRef(
   (
-    { label, name, ...props }: CheckboxProps,
+    { size = 'medium', label, ...props }: CheckboxProps,
     ref?: ForwardedRef<HTMLInputElement>,
   ) => {
     return (
-      <S.Label>
-        <S.Checkbox {...props} type="checkbox" name={name} ref={ref} />
+      <S.Label $size={size}>
+        <S.Checkbox {...props} type="checkbox" name={props.name} ref={ref} />
         {label}
       </S.Label>
     );

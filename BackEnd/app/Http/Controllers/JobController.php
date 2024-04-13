@@ -179,4 +179,38 @@ class JobController extends Controller
                     Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
+
+    /**
+     * @throws JobNotFoundException
+     * @throws JobIdMustBeAnIntegerException
+     */
+    public function show(JobRequestHavingId $request): JsonResponse|IluminateResponse
+    {
+        $repository = app(JobRepository::class);
+
+        $service = new JobDomain($repository);
+        $service->setId($request->getJobId())
+            ->setUserId($request->getLoggedUserId());
+
+        if (!$service->exists($service->getId())) {
+            throw new JobNotFoundException($service->getId());
+        }
+
+        try {
+            $service->load();
+
+            $repository->commitTransaction();
+
+            return response()->json([
+                'data' => $service->toArray()
+            ]);
+        } catch (Exception $exception) {
+            Log::error($exception);
+
+            return response()
+                ->json(
+                    ['error' => 'Server error'],
+                    Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
 }

@@ -23,6 +23,8 @@ readonly class JobDomain implements JobDomainInterface
     private ?string $location;
     private int $userId;
     private int $companyId;
+    private ?Carbon $createdAt;
+    private ?Carbon $updatedAt;
 
     public function __construct(private JobRepositoryInterface $jobRepository)
     {
@@ -94,9 +96,35 @@ readonly class JobDomain implements JobDomainInterface
         return $this;
     }
 
+    public function load(): void
+    {
+        $job = $this->jobRepository->getJob($this->id);
+
+        $this->name = $job['name'];
+        $this->description = $job['description'];
+        $this->isAvailable = $job['is_available'];
+        $this->applicationsAmount = $job['applications_amount'];
+        $this->salary = $job['salary'];
+        $this->salaryTimeUnit = $job['salary_time_unit'];
+        $this->acceptApplicationUntil = $job['accept_application_until']
+            ? Carbon::createFromTimeString($job['accept_application_until'])
+            : null;
+        $this->workModel = $job['work_model'];
+        $this->employmentType = $job['employment_type'];
+        $this->weekWorkload = $job['week_workload'];
+        $this->location = $job['location'];
+        $this->companyId = $job['company_id'];
+        $this->createdAt = $job['created_at']
+            ? Carbon::createFromTimeString($job['created_at'])
+            : null;
+        $this->updatedAt = $job['updated_at']
+            ? Carbon::createFromTimeString($job['updated_at'])
+            : null;
+    }
+
     public function toArray(): array
     {
-        return [
+        $arr =  [
             'name' => $this->name,
             'description' => $this->description,
             'is_available' => $this->isAvailable,
@@ -111,6 +139,12 @@ readonly class JobDomain implements JobDomainInterface
             'user_id' => $this->userId,
             'company_id' => $this->companyId,
         ];
+
+        !empty($this->id) && $arr['id'] = $this->id;
+        !empty($this->createdAt) && $arr['created_at'] = $this->createdAt->format('Y-m-d H:i:s');
+        !empty($this->updatedAt) && $arr['updated_at'] = $this->updatedAt->format('Y-m-d H:i:s');
+
+        return $arr;
     }
 
     public function getId(): ?int

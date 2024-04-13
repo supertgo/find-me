@@ -38,6 +38,11 @@ class JobRepository extends AbstractRepository implements JobRepositoryInterface
 
     public function getJobs(): array
     {
-        DB::table('jobs')->get()->toArray();
+        return Job::all()->toArray();
+    }
+
+    public function getJob(?int $id): array
+    {
+       return Job::find($id)->toArray();
     }
 }

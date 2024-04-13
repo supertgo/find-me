@@ -18,11 +18,17 @@ Route::group(
     });
 
 Route::group(
-    ['middleware' => 'recruiter', 'namespace' => 'App\Http\Controllers'],
+    ['namespace' => 'App\Http\Controllers'],
     function () {
         Route::resource('/job', JobController::class)
-            ->only(['index', 'store', 'destroy', 'update']);
+            ->only(['store', 'destroy', 'update'])
+            ->middleware('recruiter');
+
+        Route::resource('/job', JobController::class)
+            ->only(['index', 'show'])
+            ->middleware('auth:api');
     });
+
 
 
 

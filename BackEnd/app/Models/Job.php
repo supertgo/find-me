@@ -69,4 +69,8 @@ class Job extends Model
         'user_id',
         'company_id',
     ];
+
+    protected $hidden = [
+        'deleted_at',
+    ];
 }

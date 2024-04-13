@@ -118,7 +118,7 @@ class JobController extends Controller
 
         $service = new JobDomain($repository);
         $service->setId($request->getJobId())
-        ->setUserId($request->getLoggedUserId());
+            ->setUserId($request->getLoggedUserId());
 
         if (!$service->exists($service->getId())) {
             throw new JobNotFoundException($service->getId());
@@ -166,7 +166,10 @@ class JobController extends Controller
         $service = new JobDomain($repository);
 
         try {
-            return response()->json($service->jobs());
+            return response()
+                ->json([
+                    'data' => $service->jobs()
+                ]);
         } catch (Exception $exception) {
             Log::error($exception);
 

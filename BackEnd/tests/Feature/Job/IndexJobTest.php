@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Job;
 
-use App\Domain\User\UserTypeEnum;
 use App\Models\Job;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -15,18 +14,47 @@ class IndexJobTest extends TestCase
 
     const ROUTE = self::BASE_ROUTE . 'job';
 
-    public function testCreateJobSuccess()
+    public function testIndexJobSuccess()
     {
-        $owner = User::factory()->create();
+        Job::truncate();
+        Job::factory(5)->create();
 
-        $originalJob = Job::factory(5)
-            ->create();
-
-       $this
-            ->actingAs($owner)
+        $this
+            ->actingAs(User::factory()->create())
             ->json('GET', self::ROUTE)
-            ->assertStatus(Response::HTTP_OK);
+            ->assertJsonCount(5, 'data')
+            ->assertStatus(Response::HTTP_OK)
+            ->assertJsonStructure([
+                'data' => [
+                    '*' => [
+                        'id',
+                        'name',
+                        'description',
+                        'is_available',
+                        'applications_amount',
+                        'salary',
+                        'salary_time_unit',
+                        'accept_application_until',
+                        'work_model',
+                        'employment_type',
+                        'week_workload',
+                        'location',
+                        'company_id',
+                        'created_at',
+                        'updated_at',
+                    ]
+                ]
+            ]);
+    }
 
-        $this->assertDatabaseMissing('jobs', ['id' => $originalJob->id,]);
+    public function testEmptyJobsSuccess()
+    {
+        Job::truncate();
+
+        $this
+            ->actingAs(User::factory()->create())
+            ->json('GET', self::ROUTE)
+            ->assertStatus(Response::HTTP_OK)
+            ->assertJsonCount(0, 'data');
     }
 }

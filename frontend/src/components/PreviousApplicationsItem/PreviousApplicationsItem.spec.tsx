@@ -17,10 +17,8 @@ describe('<PreviousApplicationsItem />', () => {
     render(<PreviousApplicationsItem {...props} />);
 
     expect(screen.getByText(props.jobTitle)).toBeInTheDocument();
-    expect(
-      screen.getByText(
-        `${props.company} . ${props.location} . ${props.workModel}`,
-      ),
-    ).toBeInTheDocument();
+    expect(screen.getByText(/Nomad/i)).toBeInTheDocument();
+    expect(screen.getByText(/Paris, France/i)).toBeInTheDocument();
+    expect(screen.getByText(/Tempo Integral/i)).toBeInTheDocument();
   });
 });

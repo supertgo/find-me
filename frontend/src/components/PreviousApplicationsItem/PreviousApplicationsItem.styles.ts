@@ -20,6 +20,7 @@ export const Wrapper = styled.div<WrapperProps>`
 export const JobWrapper = styled.div`
   ${({ theme }) => css`
     display: grid;
+    align-items: center;
     grid-template-columns: 0.3fr 1fr;
 
     div {
@@ -47,6 +48,7 @@ export const DateInfo = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
 
     p {
       font-size: ${theme.font.sizes.sm};

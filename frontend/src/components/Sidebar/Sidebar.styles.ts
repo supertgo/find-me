@@ -1,18 +1,35 @@
-import styled, { css } from 'styled-components'
+import styled, { css } from 'styled-components';
+import media from 'styled-media-query';
 
 export const Wrapper = styled.div`
-${({ theme }) => css`
-  height: 100vh; 
-  background: #F8F8FD;
-  width: 27.2rem;
-  padding: ${theme.space.large} 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-`}
-`
+  ${({ theme }) => css`
+    height: 100vh;
+    background: #f8f8fd;
+    width: 24.2rem;
+    padding: ${theme.space.large} 0;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
 
-export const Items = styled.div``
+    ${media.lessThan('large')`
+      display: flex;    
+      flex-direction: row;
+      height: min-content;
+      align-items: center;
+      width: 100%;
+      padding: ${theme.space.small} 0;
+    `}
+  `}
+`;
 
-export const Avatar = styled.div``
+export const Items = styled.div`
+  ${media.lessThan('large')`
+    display: flex;    
+    flex-direction: row;
+    height: min-content;
+    width: 100%;
+    justify-content: space-around;
+  `}
+`;
 
+export const Avatar = styled.div``;

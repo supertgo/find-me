@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import media from 'styled-media-query';
 
 export const Wrapper = styled.a`
   ${({ theme }) => css`
@@ -11,6 +12,12 @@ export const Wrapper = styled.a`
     svg {
       margin-right: ${theme.space.small};
     }
+
+    ${media.lessThan('medium')`
+      display: flex;    
+      flex-direction: column;
+      align-items: center;
+    `}
   `}
 `;
 

@@ -11,7 +11,6 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterUserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
-use App\Prototype\RegisterRequestPrototype;
 use Exception;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,13 +19,12 @@ class JWTController extends Controller
 {
     public function register(RegisterUserRequest $request): Response
     {
-        $repository = new UserRepository();
-
+        $repository = app(UserRepository::class);
         try {
             $repository->beginTransaction();
-
-            (new UserService($repository))->createUser(RegisterRequestPrototype::fromRequest($request->all()));
+            app(UserService::class)->createUser($request->validated());
             $repository->commitTransaction();
+
             return response()->noContent();
         } catch (Exception $exception) {
             Log::error($exception);

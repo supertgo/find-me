@@ -12,9 +12,9 @@ class UserRequestHavingId extends AbstractRequest
      */
     public function getUserId(): int
     {
-        $userId = $this->route('user');
+        $userId = $this->route('user_id');
 
-        if (!is_numeric($userId)) {
+        if ($userId == null || !is_numeric($userId)) {
             throw new UserIdMustBeAnIntegerException($userId);
         }
 

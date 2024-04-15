@@ -3,23 +3,33 @@
 namespace App\Domain\User;
 
 
-use App\Prototype\RegisterRequestPrototype;
+use App\Exceptions\User\UserNotFoundException;
 
 readonly class UserService
 {
-    public function __construct(private UserRepositoryInterface $userRepository)
+    public function createUser(array $user): void
     {
+        (new UserDomain(app(UserRepository::class)))
+            ->fromArray($user)
+            ->createUser();
     }
 
-    public function createUser(RegisterRequestPrototype $prototype): void
+    /**
+     * @throws UserNotFoundException
+     */
+    public function getUser(int $userId): array
     {
-        $this->userRepository->createUser($prototype);
-    }
+        $repository = app(UserRepository::class);
 
-    public function forgotPassword(): void
-    {
-        $domain = new UserDomain(new UserRepository());
-        $this->userRepository->forgotPassword($domain);
-    }
+        $userDomain = new UserDomain($repository);
+        $userDomain->setId($userId);
 
+        if (!$userDomain->exists()) {
+            throw new UserNotFoundException($userId);
+        }
+
+        return $userDomain
+            ->loadUser($userId)
+            ->toArray();
+    }
 }

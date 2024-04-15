@@ -7,18 +7,16 @@ use App\Mail\UserForgotPassword;
 use App\Models\User;
 use App\Prototype\RegisterRequestPrototype;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Testing\Fluent\Concerns\Has;
 use Mail;
 
 class UserRepository extends AbstractRepository implements UserRepositoryInterface
 {
-    public function createUser(RegisterRequestPrototype $prototype): void
+    public function createUser(array $user): void
     {
-        User::create([
-            'name' => $prototype->getName(),
-            'email' => $prototype->getEmail(),
-            'phone' => $prototype->getPhone(),
-            'password' => Hash::make($prototype->getPassword())
-        ]);
+        $user['password'] = Hash::make($user['password']);
+
+        User::create($user);
     }
 
     public function forgotPassword(UserDomain $user): void
@@ -29,5 +27,15 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
     public function getUsers(): array
     {
         return User::all()->toArray();
+    }
+
+    public function exists(int $id): bool
+    {
+        return User::where('id', $id)->exists();
+    }
+
+    public function getUser(int $id): array
+    {
+        return User::find($id)->toArray();
     }
 }

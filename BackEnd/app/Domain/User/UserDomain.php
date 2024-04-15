@@ -4,21 +4,71 @@ namespace App\Domain\User;
 
 class UserDomain
 {
-    public function __construct(private UserRepositoryInterface $userRepository)
+    private ?int $id;
+    private string $name;
+    private string $email;
+    private string $phone;
+    private ?string $password;
+    private UserTypeEnum $type;
+
+
+    public function __construct(private readonly UserRepositoryInterface $userRepository)
     {
+    }
+
+    public function fromArray(array $user): self
+    {
+        $this->setName($user['name']);
+        $this->setEmail($user['email']);
+        $this->setPhone($user['phone']);
+        $this->setType(UserTypeEnum::from($user['type']));
+
+        !empty($user['id']) && $this->setId($user['id']);
+        !empty($user['password']) && $this->setPassword($user['password']);
+
+        return $this;
+    }
+
+    public function createUser(): void
+    {
+        $this->userRepository->createUser($this->toArray());
+    }
+
+    public function loadUser(int $userId): self
+    {
+        $user = $this->userRepository->getUser($userId);
+        $this->name = $user['name'];
+        $this->email = $user['email'];
+        $this->phone = $user['phone'];
+        $this->type = UserTypeEnum::from($user['type']);
+
+        return $this;
+    }
+
+    public function toArray(): array
+    {
+        $user = [
+            'name' => $this->getName(),
+            'email' => $this->getEmail(),
+            'phone' => $this->getPhone(),
+            'type' => $this->getType()->value
+        ];
+
+        !empty($this->id) && $user['id'] = $this->id;
+        !empty($this->password) && $user['password'] = $this->password;
+
+        return $user;
+    }
+
+    public function exists(): bool
+    {
+        return $this->userRepository->exists($this->id);
     }
 
     public function users(): array
     {
         return $this->userRepository->getUsers();
     }
-
-    private ?int $id;
-    private string $name;
-    private string $email;
-    private string $phone;
-    private UserTypeEnum $type;
-
     public function getName(): string
     {
         return $this->name;
@@ -36,7 +86,7 @@ class UserDomain
         return $this->email;
     }
 
-    public function setEmail(string $email): UserDomain
+    public function setEmail(string $email): self
     {
         $this->email = $email;
 
@@ -48,7 +98,7 @@ class UserDomain
         return $this->phone;
     }
 
-    public function setPhone(string $phone): UserDomain
+    public function setPhone(string $phone): self
     {
         $this->phone = $phone;
 
@@ -60,7 +110,7 @@ class UserDomain
         return $this->type;
     }
 
-    public function setType(UserTypeEnum $type): UserDomain
+    public function setType(UserTypeEnum $type): self
     {
         $this->type = $type;
 
@@ -78,4 +128,10 @@ class UserDomain
         return $this;
     }
 
+    private function setPassword(mixed $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
 }

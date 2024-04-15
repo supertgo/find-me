@@ -33,12 +33,7 @@ class JWTController extends Controller
         }
     }
 
-    /**
-     * Get a JWT via given credentials.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function login(LoginRequest $request)
+    public function login(LoginRequest $request): Response
     {
         $credentials = $request->all(['email', 'password']);
         if (!$token = auth()->attempt($credentials)) {
@@ -48,14 +43,8 @@ class JWTController extends Controller
         return $this->respondWithToken($token);
     }
 
-    /**
-     * Get the token array structure.
-     *
-     * @param string $token
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    protected function respondWithToken($token)
+
+    protected function respondWithToken(string $token): Response
     {
         return response()->json([
             'access_token' => $token,
@@ -64,21 +53,11 @@ class JWTController extends Controller
         ]);
     }
 
-    /**
-     * Get the authenticated User.
-     *
-     * @return UserResource
-     */
     public function me(): UserResource
     {
         return new UserResource(auth()->user());
     }
 
-    /**
-     * Log the User out (Invalidate the token).
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function logout(): Response
     {
         auth()->logout();
@@ -86,11 +65,6 @@ class JWTController extends Controller
         return response()->json(['message' => trans('auth.logout')]);
     }
 
-    /**
-     * Refresh a token.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function refresh(): Response
     {
         return $this->respondWithToken(auth()->refresh());
@@ -105,7 +79,7 @@ class JWTController extends Controller
 
     public function forgotPassword(ForgotPasswordRequest $request, User $user): Response
     {
-        app(JobService::class)->forgotPassword($user);
+        app(UserService::class)->forgotPassword($user);
 
         return response()->json([
             'message' => trans('auth.success'),

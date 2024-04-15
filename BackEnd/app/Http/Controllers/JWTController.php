@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 
 use App\Domain\User\UserRepository;
-use App\Domain\User\JobService;
 use App\Domain\User\UserService;
 use App\Http\Requests\ForgotPasswordRequest;
 use App\Http\Requests\LoginRequest;
@@ -13,6 +12,7 @@ use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Prototype\RegisterRequestPrototype;
 use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -38,9 +38,9 @@ class JWTController extends Controller
     /**
      * Get a JWT via given credentials.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
-    public function login(LoginRequest $request)
+    public function login(LoginRequest $request): JsonResponse
     {
         $credentials = $request->all(['email', 'password']);
         if (!$token = auth()->attempt($credentials)) {
@@ -55,14 +55,15 @@ class JWTController extends Controller
      *
      * @param string $token
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
-    protected function respondWithToken($token)
+    protected function respondWithToken(string $token): JsonResponse
     {
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60 * 24
+            'expires_in' => auth()->factory()->getTTL() * 60 * 24,
+            'user' => new UserResource(auth()->user())
         ]);
     }
 
@@ -79,7 +80,7 @@ class JWTController extends Controller
     /**
      * Log the User out (Invalidate the token).
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function logout(): Response
     {
@@ -91,7 +92,7 @@ class JWTController extends Controller
     /**
      * Refresh a token.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function refresh(): Response
     {
@@ -107,7 +108,7 @@ class JWTController extends Controller
 
     public function forgotPassword(ForgotPasswordRequest $request, User $user): Response
     {
-        app(JobService::class)->forgotPassword($user);
+        app(UserService::class)->forgotPassword($user);
 
         return response()->json([
             'message' => trans('auth.success'),

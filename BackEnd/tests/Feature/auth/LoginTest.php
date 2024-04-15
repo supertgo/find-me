@@ -54,12 +54,19 @@ class LoginTest extends TestCase
             'password' => 'password'
         ];
 
-        $this->json('POST', self::ROUTE, $payload)
-            ->assertStatus(Response::HTTP_OK)
+        $response = $this->json('POST', self::ROUTE, $payload);
+          $response   ->assertStatus(Response::HTTP_OK)
             ->assertJsonStructure([
                 'access_token',
                 'token_type',
-                'expires_in'
+                'expires_in',
+                'user' => [
+                    'name',
+                    'email',
+                    'phone',
+                    'id',
+                    'type',
+                ]
             ]);
     }
 }

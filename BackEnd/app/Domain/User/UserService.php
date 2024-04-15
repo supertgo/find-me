@@ -18,7 +18,7 @@ readonly class UserService
 
     public function forgotPassword(): void
     {
-        $domain = new UserDomain();
+        $domain = new UserDomain(new UserRepository());
         $this->userRepository->forgotPassword($domain);
     }
 

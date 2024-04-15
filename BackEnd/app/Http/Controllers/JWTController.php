@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 
-use App\Domain\User\UserRepository;
 use App\Domain\User\JobService;
+use App\Domain\User\UserRepository;
 use App\Domain\User\UserService;
-use App\Http\Requests\ForgotPasswordRequest;
-use App\Http\Requests\LoginRequest;
-use App\Http\Requests\RegisterUserRequest;
+use App\Http\Requests\Auth\ForgotPasswordRequest;
+use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\RegisterUserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Prototype\RegisterRequestPrototype;

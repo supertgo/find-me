@@ -26,4 +26,8 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
         Mail::send(new UserForgotPassword($user));
     }
 
+    public function getUsers(): array
+    {
+        return User::all()->toArray();
+    }
 }

@@ -22,7 +22,7 @@ Route::group(
     ['namespace' => 'App\Http\Controllers'],
     function () {
         Route::get('/user', [UserController::class, 'index'])
-            ->middleware('auth:api');
+            ->middleware('api');
     });
 
 

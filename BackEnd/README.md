@@ -1,8 +1,4 @@
-# Blog api
-
-## This api woks along with this app
-
-[https://gitlab.com/b3176/app](https://gitlab.com/b3176/app)
+# FindMe api
 
 # How to install
 

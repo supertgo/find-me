@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\JobController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JWTController;
 
@@ -16,6 +17,16 @@ Route::group(
             Route::post('forgot-password/{userEmail}', [JWTController::class, 'forgotPassword']);
         });
     });
+
+Route::group(
+    ['namespace' => 'App\Http\Controllers'],
+    function () {
+        Route::get('/user', [UserController::class, 'index']);
+        Route::get('/user/{user_id}', [UserController::class, 'show']);
+
+    })
+    ->middleware('api');;
+
 
 Route::group(
     ['namespace' => 'App\Http\Controllers'],

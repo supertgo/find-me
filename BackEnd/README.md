@@ -7,6 +7,10 @@ docker-compose up
 ```
 
 ```php
+compsoer install
+```
+
+```php
 php artisan key:generate
 ```
 
@@ -17,6 +21,13 @@ php artisan jwt:secret
 ```php
 php artisan migrate
 ```
+
+### to populate the database 
+
+```php
+php artisan db:seed
+```
+
 
 # Testing
 

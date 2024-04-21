@@ -7,7 +7,7 @@ docker-compose up
 ```
 
 ```php
-compsoer install
+composer install
 ```
 
 ```php

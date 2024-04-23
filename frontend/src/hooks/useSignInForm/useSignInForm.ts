@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { redirect } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { signIn } from 'next-auth/react';
@@ -34,7 +34,7 @@ const getUserInfo = async () => {
   return await getSession();
 };
 
-export const UseSignInForm = (): UseSignInFormProtocols => {
+export const useSignInForm = (): UseSignInFormProtocols => {
   const [isLoading, setIsLoading] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const { setUser } = useLoggedUserStore((state) => ({
@@ -64,7 +64,9 @@ export const UseSignInForm = (): UseSignInFormProtocols => {
     const user = await getUserInfo();
 
     setUser({
+      name: user!.name,
       email: user!.email,
+      type: user!.type,
     });
 
     if (result?.error) {

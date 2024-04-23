@@ -1,5 +1,6 @@
 import NextAuth, { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import { UserType } from 'protocols/external/user/user';
 import { PostAuthLoginRouteConst } from 'utils/routes';
 import { SignInUrl } from 'utils/urls';
 
@@ -33,8 +34,10 @@ const nextAuthOptions: NextAuthOptions = {
           if (response.message) throw new Error(response.message);
 
           return {
+            name: response.user.name,
             email: credentials?.email,
             password: credentials?.password,
+            type: response.user.type as UserType,
             access_token: response.access_token,
           };
         } catch (error) {

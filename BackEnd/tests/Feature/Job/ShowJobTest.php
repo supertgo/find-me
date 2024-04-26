@@ -42,5 +42,5 @@ class ShowJobTest extends TestCase
                 ]
             ]);
     }
-    //todo check if user exists exception
+    //todo check if job exists exception
 }

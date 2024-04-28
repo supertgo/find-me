@@ -11,6 +11,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class AbstractRequest extends FormRequest
 {
+    protected array $availableIncludes = [];
     public function authorize(): bool
     {
         return true;
@@ -29,5 +30,10 @@ class AbstractRequest extends FormRequest
     {
         return [
         ];
+    }
+
+    public function getIncludes(): ?array
+    {
+        return $this->validated('includes');
     }
 }

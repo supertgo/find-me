@@ -27,6 +27,7 @@ Route::group(
     function () {
         Route::group(['prefix' => 'competence'], function () {
             Route::post('/', [UserCompetenceController::class, 'addCompetences']);
+            Route::delete('/', [UserCompetenceController::class, 'deleteCompetences']);
         });
 
         Route::get('', [UserController::class, 'index']);

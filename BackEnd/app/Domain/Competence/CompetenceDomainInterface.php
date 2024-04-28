@@ -12,4 +12,6 @@ interface CompetenceDomainInterface
      * @return Collection<static>
      */
     public function createCompetencesIfNotExist(array $competences): Collection;
+
+    public function getId();
 }

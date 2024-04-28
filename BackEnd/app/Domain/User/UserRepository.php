@@ -3,12 +3,11 @@
 namespace App\Domain\User;
 
 use App\Domain\Abstract\AbstractRepository;
+use App\Domain\Competence\CompetenceDomainInterface;
 use App\Mail\UserForgotPassword;
 use App\Models\User;
-use App\Prototype\RegisterRequestPrototype;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Testing\Fluent\Concerns\Has;
 use Mail;
 
 class UserRepository extends AbstractRepository implements UserRepositoryInterface
@@ -71,6 +70,10 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
         User::where('id', $id)
             ->first()
             ->competences()
-            ->attach($competences->pluck('id')->toArray());
+            ->attach(
+                $competences->map(
+                    fn(CompetenceDomainInterface $competence) => $competence->getId()
+                )->toArray()
+            );
     }
 }

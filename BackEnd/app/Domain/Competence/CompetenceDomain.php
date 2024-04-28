@@ -41,4 +41,9 @@ readonly class CompetenceDomain implements CompetenceDomainInterface
 
         return $this;
     }
+
+    public function getId(): int
+    {
+        return $this->id;
+    }
 }

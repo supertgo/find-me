@@ -1,13 +1,13 @@
-# Blog api
-
-## This api woks along with this app
-
-[https://gitlab.com/b3176/app](https://gitlab.com/b3176/app)
+# FindMe api
 
 # How to install
 
 ```php
 docker-compose up
+```
+
+```php
+composer install
 ```
 
 ```php
@@ -21,6 +21,13 @@ php artisan jwt:secret
 ```php
 php artisan migrate
 ```
+
+### to populate the database 
+
+```php
+php artisan db:seed
+```
+
 
 # Testing
 

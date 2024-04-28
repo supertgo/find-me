@@ -4,6 +4,7 @@ namespace App\Domain\User;
 
 use App\Exceptions\User\UserEmailNotAvailableException;
 use App\Exceptions\User\UserPhoneNotAvailableException;
+use Illuminate\Support\Collection;
 
 class UserDomain implements UserDomainInterface
 {
@@ -93,6 +94,13 @@ class UserDomain implements UserDomainInterface
         return $this->userRepository->getUsers();
     }
 
+    public function attachCompetences(Collection $competences): self
+    {
+        $this->userRepository->attachCompetences($this->id, $competences);
+
+        return $this;
+    }
+
     public function getName(): string
     {
         return $this->name;
@@ -149,6 +157,7 @@ class UserDomain implements UserDomainInterface
     public function setId(?int $id): UserDomain
     {
         $this->id = $id;
+
         return $this;
     }
 

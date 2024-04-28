@@ -2,6 +2,9 @@
 
 namespace App\Domain\User;
 
+use App\Domain\Competence\CompetenceDomainInterface;
+use Illuminate\Support\Collection;
+
 interface UserDomainInterface
 {
     public function fromArray(array $user): self;
@@ -11,6 +14,9 @@ interface UserDomainInterface
     public function toArray(): array;
     public function exists(): bool;
     public function users(): array;
+
+    /** @param Collection<CompetenceDomainInterface> $competences */
+    public function attachCompetences(Collection $competences): self;
     public function getName(): string;
     public function setName(string $name): self;
     public function getEmail(): string;

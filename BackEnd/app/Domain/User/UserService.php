@@ -4,6 +4,8 @@ namespace App\Domain\User;
 
 
 use App\Domain\Abstract\AbstractRepository;
+use App\Domain\Competence\CompetenceDomain;
+use App\Domain\Competence\CompetenceRepository;
 use App\Exceptions\Abstract\AbstractDomainException;
 use App\Exceptions\User\UserNotFoundException;
 use Exception;
@@ -67,5 +69,31 @@ readonly class UserService
         $repository->rollbackTransaction();
 
         Log::error($exception);
+    }
+
+    /**
+     * @throws Throwable
+     */
+    public function addCompetencesToUser(int $userId, array $competences): void
+    {
+        $userRepository = new UserRepository();
+
+        try{
+            $userRepository->beginTransaction();
+
+            $competenceDomain = new CompetenceDomain(new CompetenceRepository());
+
+            $competences = $competenceDomain->createCompetencesIfNotExist($competences);
+
+            (new UserDomain($userRepository))
+                ->setId($userId)
+                ->attachCompetences($competences);
+
+            $userRepository->commitTransaction();
+        }catch(Exception $exception){
+            $this->commonLogLogic($userRepository, $exception);
+
+            throw $exception;
+        }
     }
 }

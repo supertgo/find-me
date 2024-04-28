@@ -6,6 +6,7 @@ use App\Domain\Abstract\AbstractRepository;
 use App\Mail\UserForgotPassword;
 use App\Models\User;
 use App\Prototype\RegisterRequestPrototype;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Testing\Fluent\Concerns\Has;
 use Mail;
@@ -63,5 +64,13 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
     public function getUser(int $id): array
     {
         return User::find($id)->toArray();
+    }
+
+    public function attachCompetences(int $id, Collection $competences): void
+    {
+        User::where('id', $id)
+            ->first()
+            ->competences()
+            ->attach($competences->pluck('id')->toArray());
     }
 }

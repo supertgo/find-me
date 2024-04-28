@@ -3,6 +3,7 @@
 namespace App\Http\Requests\UserCompetence;
 
 use App\Http\Requests\AbstractRequest;
+use App\Http\Requests\Rules\UniqueArrayValuesRule;
 
 class DeleteCompetencesRequest extends AbstractRequest
 {
@@ -14,8 +15,8 @@ class DeleteCompetencesRequest extends AbstractRequest
     public function rules(): array
     {
         return [
-            'competences' => 'required|array|min:1',
-            'competences.*.id' => 'required|integer|unique',
+            'competencesId' => 'required|array|min:1',
+            'competencesId.*' => ['required', 'integer', new UniqueArrayValuesRule],
         ];
     }
 }

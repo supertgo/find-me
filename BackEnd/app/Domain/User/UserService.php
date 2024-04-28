@@ -101,7 +101,7 @@ readonly class UserService
     /**
      * @throws Throwable
      */
-    public function removeCompetences(int $userId, array $competences): void
+    public function removeCompetences(int $userId, array $competencesId): void
     {
         $userRepository = new UserRepository();
 
@@ -112,13 +112,13 @@ readonly class UserService
 
             $competenceRepository = new CompetenceRepository();
 
-            foreach ($competences as $competence) {
+            foreach ($competencesId as $competenceId) {
                 $competenceDomain = new CompetenceDomain($competenceRepository);
-                if (!$competenceDomain->exists($competence['id'])) {
-                    throw new CompetenceNotFound($competence['id']);
+                if (!$competenceDomain->exists($competenceId)) {
+                    throw new CompetenceNotFound($competenceId);
                 }
 
-                $userDomain->removeCompetence($competences);
+                $userDomain->removeCompetence($competenceId);
             }
 
             $userRepository->commitTransaction();

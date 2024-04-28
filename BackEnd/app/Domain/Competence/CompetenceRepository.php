@@ -10,7 +10,10 @@ class CompetenceRepository extends AbstractRepository implements CompetenceRepos
     public function createIfNotExists(array $competence): array
     {
         $competence = Competence::firstOrCreate(
-            ['name', 'description'],
+            [
+                'name' => $competence['name'],
+                'description' => $competence['description'] ?? null
+            ],
             $competence
         );
 

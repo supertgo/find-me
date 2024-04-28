@@ -22,11 +22,12 @@ class UserCompetenceController extends Controller
 {
     public function addCompetences(AddCompetencesRequest $request): JsonResponse|IluminateResponse
     {
-
-
         try {
             app(UserService::class)
-                ->addCompetencesToUser($request->getUserId(), $request->validated());
+                ->addCompetencesToUser(
+                    $request->getLoggedUserId(),
+                    $request->validated('competences')
+                );
 
             return response()->noContent();
         } catch (Exception $exception) {

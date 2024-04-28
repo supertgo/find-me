@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests\UserCompetence;
 
-use App\Http\Requests\User\UserRequestHavingId;
+use App\Http\Requests\AbstractRequest;
 
-class AddCompetencesRequest extends UserRequestHavingId
+class AddCompetencesRequest extends AbstractRequest
 {
     public function authorize(): bool
     {

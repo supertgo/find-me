@@ -2,7 +2,10 @@
 
 namespace App\Domain\User;
 
-class UserDomain
+use App\Exceptions\User\UserEmailNotAvailableException;
+use App\Exceptions\User\UserPhoneNotAvailableException;
+
+class UserDomain implements UserDomainInterface
 {
     private ?int $id;
     private string $name;
@@ -10,7 +13,6 @@ class UserDomain
     private string $phone;
     private ?string $password;
     private UserTypeEnum $type;
-
 
     public function __construct(private readonly UserRepositoryInterface $userRepository)
     {
@@ -21,12 +23,31 @@ class UserDomain
         $this->setName($user['name']);
         $this->setEmail($user['email']);
         $this->setPhone($user['phone']);
-        $this->setType(UserTypeEnum::from($user['type']));
 
+        !empty($user['type']) && $this->setType(UserTypeEnum::from($user['type']));
         !empty($user['id']) && $this->setId($user['id']);
         !empty($user['password']) && $this->setPassword($user['password']);
 
         return $this;
+    }
+
+    /**
+     * @throws UserEmailNotAvailableException
+     * @throws UserPhoneNotAvailableException
+     */
+    public function update(): self
+    {
+        if (!$this->userRepository->isEmailAvailableToUpdate($this)) {
+            throw new UserEmailNotAvailableException($this->getEmail());
+        }
+
+        if (!$this->userRepository->isPhoneAvailable($this)) {
+            throw new UserPhoneNotAvailableException($this->getPhone());
+        }
+
+        $this->userRepository->update($this);
+
+        return (new UserDomain($this->getRepository()))->loadUser($this->getId());
     }
 
     public function createUser(): void
@@ -42,6 +63,8 @@ class UserDomain
         $this->phone = $user['phone'];
         $this->type = UserTypeEnum::from($user['type']);
 
+        empty($this->id) && $this->id = $user['id'];
+
         return $this;
     }
 
@@ -51,11 +74,11 @@ class UserDomain
             'name' => $this->getName(),
             'email' => $this->getEmail(),
             'phone' => $this->getPhone(),
-            'type' => $this->getType()->value
         ];
 
         !empty($this->id) && $user['id'] = $this->id;
         !empty($this->password) && $user['password'] = $this->password;
+        !empty($this->type) && $user['type'] = $this->type->value;
 
         return $user;
     }
@@ -69,6 +92,7 @@ class UserDomain
     {
         return $this->userRepository->getUsers();
     }
+
     public function getName(): string
     {
         return $this->name;
@@ -133,5 +157,10 @@ class UserDomain
         $this->password = $password;
 
         return $this;
+    }
+
+    public function getRepository(): UserRepositoryInterface
+    {
+        return $this->userRepository;
     }
 }

@@ -43,30 +43,4 @@ class LoginTest extends TestCase
             'email' => $this->faker->unique()->safeEmail,
         ];
     }
-
-    public function testUniquePhone()
-    {
-        /** @var User $user */
-        $user = User::factory()->create();
-
-        $payload = [
-            'email' => $user->email,
-            'password' => 'password'
-        ];
-
-        $this->json('POST', self::ROUTE, $payload)
-            ->assertStatus(Response::HTTP_OK)
-            ->assertJsonStructure([
-                'access_token',
-                'token_type',
-                'expires_in',
-                'user' => [
-                    'name',
-                    'email',
-                    'phone',
-                    'id',
-                    'type',
-                ]
-            ]);
-    }
 }

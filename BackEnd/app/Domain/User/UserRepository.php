@@ -19,6 +19,32 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
         User::create($user);
     }
 
+    public function isEmailAvailableToUpdate(UserDomainInterface $user): bool
+    {
+        return User::where('id', "!=", $user->getId())
+            ->where('email', $user->getEmail())
+            ->doesntExist();
+    }
+
+    public function isPhoneAvailable(UserDomainInterface $user): bool
+    {
+        return User::where('id', '!=', $user->getId())
+            ->where('phone', $user->getPhone())
+            ->doesntExist();
+    }
+
+    public function update(UserDomainInterface $user): void
+    {
+        $array = $user->toArray();
+
+        if (!empty($array['password'])) {
+            $array['password'] = Hash::make($array['password']);
+        }
+
+        User::where('id', $user->getId())
+            ->update($array);
+    }
+
     public function forgotPassword(UserDomain $user): void
     {
         Mail::send(new UserForgotPassword($user));

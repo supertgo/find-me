@@ -23,7 +23,7 @@ Route::group(
     function () {
         Route::get('/user', [UserController::class, 'index']);
         Route::get('/user/{user_id}', [UserController::class, 'show']);
-
+        Route::put('/user', [UserController::class, 'update']);
     })
     ->middleware('api');;
 

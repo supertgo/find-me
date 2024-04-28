@@ -14,7 +14,6 @@ Route::group(
             Route::get('me', [JWTController::class, 'me'])->middleware('auth:api');
             Route::post('verify', [JWTController::class, 'verify'])->middleware('auth:api');
             Route::post('register', [JWTController::class, 'register']);
-            Route::post('update', [JWTController::class, 'update']);
             Route::post('forgot-password/{userEmail}', [JWTController::class, 'forgotPassword']);
         });
     });
@@ -24,7 +23,7 @@ Route::group(
     function () {
         Route::get('/user', [UserController::class, 'index']);
         Route::get('/user/{user_id}', [UserController::class, 'show']);
-        Route::put('/user/{user_id}', [UserController::class, 'update']);
+        Route::put('/user', [UserController::class, 'update']);
     })
     ->middleware('api');;
 

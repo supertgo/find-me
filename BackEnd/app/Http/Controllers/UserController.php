@@ -9,6 +9,7 @@ use App\Exceptions\Abstract\AbstractDomainException;
 use App\Exceptions\Job\JobNotFoundException;
 use App\Exceptions\User\UserIdMustBeAnIntegerException;
 use App\Http\Requests\Auth\RegisterUserRequest;
+use App\Http\Requests\User\UpdateUserRequest;
 use App\Http\Requests\User\UserRequestHavingId;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -57,10 +58,11 @@ class UserController extends Controller
         }
     }
 
-    public function update(RegisterUserRequest $request): JsonResponse|IluminateResponse
+    public function update(UpdateUserRequest $request): JsonResponse|IluminateResponse
     {
         try {
-            $user = app(UserService::class)->update($request->validated());
+            $user = app(UserService::class)
+                ->update($request->getLoggedUserId() + $request->validated());
 
             return response()->json($user);
         } catch (AbstractDomainException $exception) {

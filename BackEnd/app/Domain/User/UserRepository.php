@@ -56,6 +56,13 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
         return User::all()->toArray();
     }
 
+    public function getUsersWithIncludes($includes): array
+    {
+        return User::with($includes)
+            ->get()
+            ->toArray();
+    }
+
     public function exists(int $id): bool
     {
         return User::where('id', $id)->exists();

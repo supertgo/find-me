@@ -32,8 +32,8 @@ class AbstractRequest extends FormRequest
         ];
     }
 
-    public function getIncludes(): ?array
+    public function getIncludes(): array
     {
-        return $this->validated('includes');
+        return $this->validated('includes') ?? [];
     }
 }

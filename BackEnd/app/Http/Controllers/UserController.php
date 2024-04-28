@@ -20,14 +20,14 @@ use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller
 {
-    public function index(): JsonResponse|IluminateResponse
+    public function index(ShowUserRequest $request): JsonResponse|IluminateResponse
     {
         $service = new UserDomain(app(UserRepository::class));
 
         try {
             return response()
                 ->json([
-                    'data' => $service->users()
+                    'data' => $service->usersWithIncludes($request->getIncludes())
                 ]);
         } catch (Exception $exception) {
             Log::error($exception);

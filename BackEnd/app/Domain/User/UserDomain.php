@@ -193,4 +193,9 @@ class UserDomain implements UserDomainInterface
     {
         return $this->userRepository->getUserWithIncludes($userId, $includes);
     }
+
+    public function usersWithIncludes(array $includes): array
+    {
+        return $this->userRepository->getUsersWithIncludes($includes);
+    }
 }

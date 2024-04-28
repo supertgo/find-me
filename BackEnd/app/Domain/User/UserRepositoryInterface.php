@@ -30,4 +30,6 @@ interface UserRepositoryInterface
     public function userHasCompetence(?int $id, int $competenceId): bool;
 
     public function getUserWithIncludes(int $userId, array $includes): array;
+
+    public function getUsersWithIncludes(array $includes): array;
 }

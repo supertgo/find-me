@@ -30,5 +30,5 @@ interface UserDomainInterface
     public function getRepository(): UserRepositoryInterface;
     public function removeCompetence(int $competenceId): self;
     public function loadUserWithIncludes(int $userId, array $includes): array;
-
+    public function usersWithIncludes(array $includes): array;
 }

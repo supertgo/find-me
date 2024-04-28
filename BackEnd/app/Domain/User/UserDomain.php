@@ -23,8 +23,8 @@ class UserDomain implements UserDomainInterface
         $this->setName($user['name']);
         $this->setEmail($user['email']);
         $this->setPhone($user['phone']);
-        $this->setType(UserTypeEnum::from($user['type']));
 
+        !empty($user['type']) && $this->setType(UserTypeEnum::from($user['type']));
         !empty($user['id']) && $this->setId($user['id']);
         !empty($user['password']) && $this->setPassword($user['password']);
 
@@ -63,6 +63,8 @@ class UserDomain implements UserDomainInterface
         $this->phone = $user['phone'];
         $this->type = UserTypeEnum::from($user['type']);
 
+        empty($this->id) && $this->id = $user['id'];
+
         return $this;
     }
 
@@ -72,11 +74,11 @@ class UserDomain implements UserDomainInterface
             'name' => $this->getName(),
             'email' => $this->getEmail(),
             'phone' => $this->getPhone(),
-            'type' => $this->getType()->value
         ];
 
         !empty($this->id) && $user['id'] = $this->id;
         !empty($this->password) && $user['password'] = $this->password;
+        !empty($this->type) && $user['type'] = $this->type->value;
 
         return $user;
     }

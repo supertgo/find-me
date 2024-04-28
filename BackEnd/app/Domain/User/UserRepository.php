@@ -35,8 +35,14 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
 
     public function update(UserDomainInterface $user): void
     {
+        $array = $user->toArray();
+
+        if (!empty($array['password'])) {
+            $array['password'] = Hash::make($array['password']);
+        }
+
         User::where('id', $user->getId())
-            ->update($user->toArray());
+            ->update($array);
     }
 
     public function forgotPassword(UserDomain $user): void

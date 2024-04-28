@@ -62,9 +62,13 @@ class UserController extends Controller
     {
         try {
             $user = app(UserService::class)
-                ->update($request->getLoggedUserId() + $request->validated());
+                ->update(
+                    ['id' => $request->getLoggedUserId()] + $request->validated()
+                );
 
-            return response()->json($user);
+            return response()->json([
+                'data' => $user
+            ]);
         } catch (AbstractDomainException $exception) {
 
             return response()->json(

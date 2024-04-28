@@ -24,5 +24,4 @@ class CompetenceRepository extends AbstractRepository implements CompetenceRepos
     {
         return Competence::where('id', $id)->exists();
     }
-
 }

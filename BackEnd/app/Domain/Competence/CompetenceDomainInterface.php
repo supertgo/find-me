@@ -14,5 +14,4 @@ interface CompetenceDomainInterface
     public function createCompetencesIfNotExist(array $competences): Collection;
     public function getId();
     public function exists(int $id): bool;
-
 }

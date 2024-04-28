@@ -3,14 +3,14 @@ import { Button } from 'components/Button/Button';
 import { Input } from 'components/Input/Input';
 import { Heading } from 'components/Heading/Heading';
 import { Controller } from 'react-hook-form';
-import { UseSignInForm } from 'hooks/useSignInForm/useSignInForm';
+import { useSignInForm } from 'hooks/useSignInForm/useSignInForm';
 import { LinkText } from 'components/LinkText/LinkText';
 
 export type LoginFormProps = {};
 
 export const LoginForm = ({}: LoginFormProps) => {
   const { control, isLoading, onSubmit, handleSubmit, isValid } =
-    UseSignInForm();
+    useSignInForm();
 
   return (
     <S.Form autoComplete="off" onSubmit={handleSubmit(onSubmit)}>

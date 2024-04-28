@@ -1,15 +1,6 @@
 import { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { toast } from 'react-toastify';
-
-export type RegisterInputs = {
-  name: string;
-  email: string;
-  phone: string;
-  password: string;
-  type: string;
-};
-
 import {
   Control,
   useForm,
@@ -20,6 +11,15 @@ import {
 } from 'react-hook-form';
 import { PostClient } from 'services/httpClient/post';
 import { UserProps, UserType } from 'protocols/external/user/user';
+
+
+export type RegisterInputs = {
+  name: string;
+  email: string;
+  phone: string;
+  password: string;
+  type: string;
+};
 
 export interface UseRegisterFormProtocols {
   register: UseFormRegister<any>;
@@ -48,7 +48,7 @@ export const useRegisterForm = (): UseRegisterFormProtocols => {
 
     setIsLoading(true);
 
-    const postCliente = new PostClient();
+    const postClient = new PostClient();
 
     const registerBody: UserProps = {
       name: data.name,
@@ -59,7 +59,7 @@ export const useRegisterForm = (): UseRegisterFormProtocols => {
     };
 
     try {
-      const response = await postCliente.post({
+      const response = await postClient.post({
         url: '/auth/register',
         body: {
           ...registerBody,

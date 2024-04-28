@@ -4,12 +4,15 @@ import { HomeIcon } from 'icons/HomeIcon/HomeIcon';
 import { useLoggedUserStore } from 'stores/loggedUserStore';
 import { Button } from 'components/Button/Button';
 import { useSignOut } from 'hooks/useSignOut/useSignOut';
+import Link from 'next/link';
 
 export type SidebarProps = {};
 
 export const Sidebar = ({}: SidebarProps) => {
-  const { email } = useLoggedUserStore((state) => ({
+  const { name, email, type } = useLoggedUserStore((state) => ({
+    name: state.name,
     email: state.email,
+    type: state.type,
   }));
 
   const { signOut } = useSignOut();
@@ -18,16 +21,39 @@ export const Sidebar = ({}: SidebarProps) => {
     <S.Wrapper>
       {/* Colocar componente de logo aqui */}
       <S.Items>
-        <SidebarItem href="/home" icon={<HomeIcon />} text="Início" />
-        <SidebarItem href="/" icon={<HomeIcon />} text="Candidaturas" />
-        <SidebarItem href="/jobs" icon={<HomeIcon />} text="Vagas" />
-        {/* <SidebarItem href="/candidates" icon={<HomeIcon />} text="Candidatos" /> */}
-        {/* <SidebarItem icon={<HomeIcon />} text="Pesquisar Empresas" /> */}
-        {/* <SidebarItem icon={<HomeIcon />} text="Meu Perfil Público" /> */}
+        {type === 'recruiter' ? (
+          <>
+            <SidebarItem href="/home" icon={<HomeIcon />} text="Início" />
+            <SidebarItem
+              href="/candidates"
+              icon={<HomeIcon />}
+              text="Candidatos"
+            />
+            <SidebarItem href="/jobs" icon={<HomeIcon />} text="Vagas" />
+          </>
+        ) : (
+          <>
+            <SidebarItem
+              href="/candidates"
+              icon={<HomeIcon />}
+              text="Candidatos"
+            />
+            <SidebarItem href="/" icon={<HomeIcon />} text="Candidaturas" />
+            <SidebarItem href="/jobs" icon={<HomeIcon />} text="Vagas" />
+          </>
+        )}
       </S.Items>
 
       <div>
-        <S.Avatar>{email}</S.Avatar>
+        <Link href="/config">
+          <S.Avatar>
+            <S.AvatarPhoto />
+            <S.AvatarInfo>
+              <p>{name}</p>
+              <span>{email}</span>
+            </S.AvatarInfo>
+          </S.Avatar>
+        </Link>
         <Button onClick={async () => await signOut()}>Sair</Button>
       </div>
     </S.Wrapper>

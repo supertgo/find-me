@@ -24,4 +24,8 @@ interface UserRepositoryInterface
 
     /** @param Collection<CompetenceDomainInterface> $competences */
     public function attachCompetences(int $id, Collection $competences);
+
+    public function removeCompetence(int $id, int $competenceId): void;
+
+    public function userHasCompetence(?int $id, int $competenceId): bool;
 }

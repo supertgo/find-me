@@ -28,4 +28,5 @@ interface UserDomainInterface
     public function getId(): ?int;
     public function setId(?int $id): self;
     public function getRepository(): UserRepositoryInterface;
+    public function removeCompetence(int $competenceId): self;
 }

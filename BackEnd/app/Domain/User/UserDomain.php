@@ -2,6 +2,7 @@
 
 namespace App\Domain\User;
 
+use App\Exceptions\User\UserDoesntHaveCompetenceException;
 use App\Exceptions\User\UserEmailNotAvailableException;
 use App\Exceptions\User\UserPhoneNotAvailableException;
 use Illuminate\Support\Collection;
@@ -171,5 +172,19 @@ class UserDomain implements UserDomainInterface
     public function getRepository(): UserRepositoryInterface
     {
         return $this->userRepository;
+    }
+
+    /**
+     * @throws UserDoesntHaveCompetenceException
+     */
+    public function removeCompetence(int $competenceId): self
+    {
+        if (!$this->userRepository->userHasCompetence($this->id, $competenceId)) {
+            throw new UserDoesntHaveCompetenceException($this->id, $competenceId);
+        }
+
+        $this->userRepository->removeCompetence($this->id, $competenceId);
+
+        return $this;
     }
 }

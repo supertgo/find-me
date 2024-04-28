@@ -22,6 +22,11 @@ readonly class CompetenceDomain implements CompetenceDomainInterface
         return collect(array_map([$this, 'createCompetenceIfNotExists'], $competences));
     }
 
+    public function exists(int $id): bool
+    {
+        return $this->repository->exists($id);
+    }
+
     private function createCompetenceIfNotExists(array $competence): self
     {
         $attributes = $this->repository->createIfNotExists($competence);

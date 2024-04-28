@@ -6,6 +6,7 @@ use App\Domain\Abstract\AbstractRepository;
 use App\Domain\Competence\CompetenceDomainInterface;
 use App\Mail\UserForgotPassword;
 use App\Models\User;
+use DB;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Hash;
 use Mail;
@@ -75,5 +76,21 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
                     fn(CompetenceDomainInterface $competence) => $competence->getId()
                 )->toArray()
             );
+    }
+
+    public function removeCompetence(int $id, int $competenceId): void
+    {
+        DB::table('competence_user')
+            ->where('user_id', $id)
+            ->where('competence_id', $competenceId)
+            ->delete();
+    }
+
+    public function userHasCompetence(?int $id, int $competenceId): bool
+    {
+        return DB::table('competence_user')
+            ->where('user_id', $id)
+            ->where('competence_id', $competenceId)
+            ->exists();
     }
 }

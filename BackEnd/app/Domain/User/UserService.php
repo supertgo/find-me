@@ -7,6 +7,7 @@ use App\Domain\Abstract\AbstractRepository;
 use App\Domain\Competence\CompetenceDomain;
 use App\Domain\Competence\CompetenceRepository;
 use App\Exceptions\Abstract\AbstractDomainException;
+use App\Exceptions\Competence\CompetenceNotFound;
 use App\Exceptions\User\UserNotFoundException;
 use Exception;
 use Illuminate\Support\Facades\Log;
@@ -78,7 +79,7 @@ readonly class UserService
     {
         $userRepository = new UserRepository();
 
-        try{
+        try {
             $userRepository->beginTransaction();
 
             $competenceDomain = new CompetenceDomain(new CompetenceRepository());
@@ -90,7 +91,38 @@ readonly class UserService
                 ->attachCompetences($competences);
 
             $userRepository->commitTransaction();
-        }catch(Exception $exception){
+        } catch (Exception $exception) {
+            $this->commonLogLogic($userRepository, $exception);
+
+            throw $exception;
+        }
+    }
+
+    /**
+     * @throws Throwable
+     */
+    public function removeCompetences(int $userId, array $competences): void
+    {
+        $userRepository = new UserRepository();
+
+        try {
+            $userRepository->beginTransaction();
+            $userDomain = new UserDomain($userRepository);
+            $userDomain->setId($userId);
+
+            $competenceRepository = new CompetenceRepository();
+
+            foreach ($competences as $competence) {
+                $competenceDomain = new CompetenceDomain($competenceRepository);
+                if (!$competenceDomain->exists($competence['id'])) {
+                    throw new CompetenceNotFound($competence['id']);
+                }
+
+                $userDomain->removeCompetence($competences);
+            }
+
+            $userRepository->commitTransaction();
+        } catch (Exception $exception) {
             $this->commonLogLogic($userRepository, $exception);
 
             throw $exception;

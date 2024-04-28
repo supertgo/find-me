@@ -20,4 +20,9 @@ class CompetenceRepository extends AbstractRepository implements CompetenceRepos
         return $competence->toArray();
     }
 
+    public function exists(int $id): bool
+    {
+        return Competence::where('id', $id)->exists();
+    }
+
 }

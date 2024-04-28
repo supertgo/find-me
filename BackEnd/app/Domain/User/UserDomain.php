@@ -187,4 +187,10 @@ class UserDomain implements UserDomainInterface
 
         return $this;
     }
+
+
+    public function loadUserWithIncludes(int $userId, array $includes): array
+    {
+        return $this->userRepository->getUserWithIncludes($userId, $includes);
+    }
 }

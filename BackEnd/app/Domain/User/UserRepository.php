@@ -66,6 +66,14 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
         return User::find($id)->toArray();
     }
 
+    public function getUserWithIncludes(int $userId, $includes): array
+    {
+        return User::where('id', $userId)
+            ->with($includes)
+            ->first()
+            ->toArray();
+    }
+
     public function attachCompetences(int $id, Collection $competences): void
     {
         User::where('id', $id)

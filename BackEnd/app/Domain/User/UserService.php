@@ -46,7 +46,7 @@ readonly class UserService
     /**
      * @throws UserNotFoundException
      */
-    public function getUser(int $userId): array
+    public function getUser(int $userId, array $includes): array
     {
         $repository = app(UserRepository::class);
 
@@ -57,9 +57,7 @@ readonly class UserService
             throw new UserNotFoundException($userId);
         }
 
-        return $userDomain
-            ->loadUser($userId)
-            ->toArray();
+        return $userDomain->loadUserWithIncludes($userId, $includes);
     }
 
     /**

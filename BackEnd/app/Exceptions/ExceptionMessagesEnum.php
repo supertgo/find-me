@@ -13,5 +13,7 @@ enum ExceptionMessagesEnum: string
     case OnlyOwnerCanUpdateJob = 'Only owner can update job';
 
     case UserIdMustBeAnInteger = 'User id must be an integer';
+    case UserEmailNotAvailable = 'User email is not available';
+    case UserPhoneNotAvailable = 'User phone is not available';
     case UserNotFound = 'User not found';
 }

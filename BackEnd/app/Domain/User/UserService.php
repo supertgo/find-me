@@ -3,7 +3,12 @@
 namespace App\Domain\User;
 
 
+use App\Domain\Abstract\AbstractRepository;
+use App\Exceptions\Abstract\AbstractDomainException;
 use App\Exceptions\User\UserNotFoundException;
+use Exception;
+use Illuminate\Support\Facades\Log;
+use Throwable;
 
 readonly class UserService
 {
@@ -12,6 +17,27 @@ readonly class UserService
         (new UserDomain(app(UserRepository::class)))
             ->fromArray($user)
             ->createUser();
+    }
+
+    /**
+     * @throws Throwable
+     * @throws AbstractDomainException
+     */
+    public function update(array $user): array
+    {
+        $repository = app(UserRepository::class);
+
+        try {
+            return (new UserDomain($repository))
+                ->fromArray($user)
+                ->update()
+                ->toArray();
+
+        } catch (Exception $exception) {
+            $this->commonLogLogic($repository, $exception);
+
+            throw $exception;
+        }
     }
 
     /**
@@ -31,5 +57,15 @@ readonly class UserService
         return $userDomain
             ->loadUser($userId)
             ->toArray();
+    }
+
+    /**
+     * @throws Throwable
+     */
+    public function commonLogLogic(AbstractRepository $repository, Exception $exception): void
+    {
+        $repository->rollbackTransaction();
+
+        Log::error($exception);
     }
 }

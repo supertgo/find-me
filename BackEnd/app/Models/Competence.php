@@ -48,4 +48,8 @@ class Competence extends Model
         'name',
         'description'
     ];
+
+    protected $hidden = [
+        'pivot'
+    ];
 }

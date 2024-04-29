@@ -13,7 +13,7 @@ class RemoveAcademicRecordFromUserTest extends TestCase
 
     const ROUTE = self::BASE_ROUTE . 'user/academic-records';
 
-    public function testAddCompetencesToUser()
+    public function testAddAcademicRecordsToUser()
     {
         $this->makeUser();
 

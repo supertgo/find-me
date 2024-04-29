@@ -3,11 +3,12 @@
 namespace App\Domain\User;
 
 use App\Domain\Abstract\AbstractRepository;
+use App\Domain\Competence\CompetenceDomainInterface;
 use App\Mail\UserForgotPassword;
 use App\Models\User;
-use App\Prototype\RegisterRequestPrototype;
+use DB;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Testing\Fluent\Concerns\Has;
 use Mail;
 
 class UserRepository extends AbstractRepository implements UserRepositoryInterface
@@ -55,6 +56,13 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
         return User::all()->toArray();
     }
 
+    public function getUsersWithIncludes($includes): array
+    {
+        return User::with($includes)
+            ->get()
+            ->toArray();
+    }
+
     public function exists(int $id): bool
     {
         return User::where('id', $id)->exists();
@@ -63,5 +71,41 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
     public function getUser(int $id): array
     {
         return User::find($id)->toArray();
+    }
+
+    public function getUserWithIncludes(int $userId, $includes): array
+    {
+        return User::where('id', $userId)
+            ->with($includes)
+            ->first()
+            ->toArray();
+    }
+
+    public function attachCompetences(int $id, Collection $competences): void
+    {
+        User::where('id', $id)
+            ->first()
+            ->competences()
+            ->attach(
+                $competences->map(
+                    fn(CompetenceDomainInterface $competence) => $competence->getId()
+                )->toArray()
+            );
+    }
+
+    public function removeCompetence(int $id, int $competenceId): void
+    {
+        DB::table('competence_user')
+            ->where('user_id', $id)
+            ->where('competence_id', $competenceId)
+            ->delete();
+    }
+
+    public function userHasCompetence(?int $id, int $competenceId): bool
+    {
+        return DB::table('competence_user')
+            ->where('user_id', $id)
+            ->where('competence_id', $competenceId)
+            ->exists();
     }
 }

@@ -12,7 +12,10 @@ class MeTest extends TestCase
     public function testNonexistentEmail()
     {
         $this->makeUser();
-        $this->actingAs($this->user)->json('GET', self::ROUTE)->assertStatus(Response::HTTP_OK)
+
+        $this->actingAs($this->user)
+            ->json('GET', self::ROUTE)
+            ->assertStatus(Response::HTTP_OK)
             ->assertJsonStructure([
                 'data' => [
                     'name',

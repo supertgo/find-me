@@ -2,8 +2,10 @@
 
 namespace App\Domain\User;
 
+use App\Exceptions\User\UserDoesntHaveCompetenceException;
 use App\Exceptions\User\UserEmailNotAvailableException;
 use App\Exceptions\User\UserPhoneNotAvailableException;
+use Illuminate\Support\Collection;
 
 class UserDomain implements UserDomainInterface
 {
@@ -93,6 +95,13 @@ class UserDomain implements UserDomainInterface
         return $this->userRepository->getUsers();
     }
 
+    public function attachCompetences(Collection $competences): self
+    {
+        $this->userRepository->attachCompetences($this->id, $competences);
+
+        return $this;
+    }
+
     public function getName(): string
     {
         return $this->name;
@@ -149,6 +158,7 @@ class UserDomain implements UserDomainInterface
     public function setId(?int $id): UserDomain
     {
         $this->id = $id;
+
         return $this;
     }
 
@@ -162,5 +172,30 @@ class UserDomain implements UserDomainInterface
     public function getRepository(): UserRepositoryInterface
     {
         return $this->userRepository;
+    }
+
+    /**
+     * @throws UserDoesntHaveCompetenceException
+     */
+    public function removeCompetence(int $competenceId): self
+    {
+        if (!$this->userRepository->userHasCompetence($this->id, $competenceId)) {
+            throw new UserDoesntHaveCompetenceException($this->id, $competenceId);
+        }
+
+        $this->userRepository->removeCompetence($this->id, $competenceId);
+
+        return $this;
+    }
+
+
+    public function loadUserWithIncludes(int $userId, array $includes): array
+    {
+        return $this->userRepository->getUserWithIncludes($userId, $includes);
+    }
+
+    public function usersWithIncludes(array $includes): array
+    {
+        return $this->userRepository->getUsersWithIncludes($includes);
     }
 }

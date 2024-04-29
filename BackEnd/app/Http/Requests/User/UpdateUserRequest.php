@@ -3,7 +3,9 @@
 namespace App\Http\Requests\User;
 
 
-class UpdateUserRequest extends UserRequestHavingId
+use App\Http\Requests\AbstractRequest;
+
+class UpdateUserRequest extends AbstractRequest
 {
     public function authorize(): bool
     {
@@ -15,8 +17,8 @@ class UpdateUserRequest extends UserRequestHavingId
         return [
             'name' => 'required|string',
             'password' => 'required|min:6|string',
-            'email' => 'required|email|unique:users,email',
-            'phone' => 'required|numeric|unique:users,phone',
+            'email' => 'required|email',
+            'phone' => 'required|numeric',
         ];
     }
 

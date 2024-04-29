@@ -16,4 +16,7 @@ enum ExceptionMessagesEnum: string
     case UserEmailNotAvailable = 'User email is not available';
     case UserPhoneNotAvailable = 'User phone is not available';
     case UserNotFound = 'User not found';
+    case UserDoesntHaveCompetence = 'User doesn\'t have competence';
+
+    case CompetenceNotFound = 'Competence not found';
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\JobController;
+use App\Http\Controllers\UserCompetenceController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JWTController;
@@ -19,11 +20,19 @@ Route::group(
     });
 
 Route::group(
-    ['namespace' => 'App\Http\Controllers'],
+    [
+        'namespace' => 'App\Http\Controllers',
+        'prefix' => 'user'
+    ],
     function () {
-        Route::get('/user', [UserController::class, 'index']);
-        Route::get('/user/{user_id}', [UserController::class, 'show']);
-        Route::put('/user', [UserController::class, 'update']);
+        Route::group(['prefix' => 'competence'], function () {
+            Route::post('/', [UserCompetenceController::class, 'addCompetences']);
+            Route::delete('/', [UserCompetenceController::class, 'deleteCompetences']);
+        });
+
+        Route::get('', [UserController::class, 'index']);
+        Route::get('/{user_id}', [UserController::class, 'show']);
+        Route::put('', [UserController::class, 'update']);
     })
     ->middleware('api');;
 

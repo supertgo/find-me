@@ -9,6 +9,7 @@ use App\Exceptions\Abstract\AbstractDomainException;
 use App\Exceptions\Job\JobNotFoundException;
 use App\Exceptions\User\UserIdMustBeAnIntegerException;
 use App\Http\Requests\Auth\RegisterUserRequest;
+use App\Http\Requests\User\ShowUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
 use App\Http\Requests\User\UserRequestHavingId;
 use Exception;
@@ -19,14 +20,14 @@ use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller
 {
-    public function index(): JsonResponse|IluminateResponse
+    public function index(ShowUserRequest $request): JsonResponse|IluminateResponse
     {
         $service = new UserDomain(app(UserRepository::class));
 
         try {
             return response()
                 ->json([
-                    'data' => $service->users()
+                    'data' => $service->usersWithIncludes($request->getIncludes())
                 ]);
         } catch (Exception $exception) {
             Log::error($exception);
@@ -42,11 +43,12 @@ class UserController extends Controller
      * @throws JobNotFoundException
      * @throws UserIdMustBeAnIntegerException
      */
-    public function show(UserRequestHavingId $request): JsonResponse|IluminateResponse
+    public function show(ShowUserRequest $request): JsonResponse|IluminateResponse
     {
         try {
             return response()->json([
-                'data' => app(UserService::class)->getUser($request->getUserId())
+                'data' => app(UserService::class)
+                    ->getUser($request->getUserId(), $request->getIncludes())
             ]);
         } catch (Exception $exception) {
             Log::error($exception);

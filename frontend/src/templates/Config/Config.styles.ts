@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import media from 'styled-media-query';
 
-export const Wrapper = styled.div`
+export const Form = styled.form`
   ${({ theme }) => css`
     padding: ${theme.space.medium};
   `}
@@ -20,7 +20,7 @@ export const AvatarCircle = styled.div`
   height: 12.4rem;
   border-radius: 50%;
   background-color: gray;
-`
+`;
 
 export const PersonalDetailsGrid = styled.div`
   ${({ theme }) => css`
@@ -44,6 +44,9 @@ export const ConfigEmailWrapper = styled.div`
 `;
 
 export const ButtonRow = styled.div`
-  display: flex;
-  justify-content: end;
+  ${({ theme }) => css`
+    display: flex;
+    justify-content: end;
+    padding-right: ${theme.space.medium};
+  `}
 `;

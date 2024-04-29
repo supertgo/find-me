@@ -8,17 +8,18 @@ import { Button } from 'components/Button/Button';
 import { useUserConfigForm } from 'hooks/useUserConfigForm/useUserConfigForm';
 
 import * as S from './Config.styles';
+import { UserProps } from 'protocols/external/user/user';
 
-export type ConfigProps = {};
+export type ConfigProps = {} & UserProps;
 
-export const Config = ({}: ConfigProps) => {
+export const Config = ({ name, email, phone, password }: ConfigProps) => {
   const { control, errors, isValid, onSubmit, isLoading, handleSubmit } =
     useUserConfigForm();
 
   return (
     <Base>
       <Title title="Configurações" />
-      <S.Wrapper>
+      <S.Form onSubmit={handleSubmit(onSubmit)}>
         <ConfigInfoWrapper
           title="Foto de Perfil"
           description="Essa imagem será exibida publicamente como sua foto de perfil, e ajudará os recrutadores a reconhecê-lo!"
@@ -33,6 +34,7 @@ export const Config = ({}: ConfigProps) => {
               }}
               control={control}
               name="name"
+              defaultValue={name}
               render={({ field: { ...field } }) => (
                 <Input
                   {...field}
@@ -45,10 +47,11 @@ export const Config = ({}: ConfigProps) => {
             <S.PersonalDetailsGrid>
               <Controller
                 rules={{
-                  required: 'Digite um celular válido',
+                  required: 'Digite um celular válido.',
                 }}
                 control={control}
                 name="phone"
+                defaultValue={phone}
                 render={({ field: { ...field } }) => (
                   <Input
                     {...field}
@@ -60,10 +63,11 @@ export const Config = ({}: ConfigProps) => {
               />
               <Controller
                 rules={{
-                  required: 'Digite um email válido',
+                  required: 'Digite um e-mail válido.',
                 }}
                 control={control}
                 name="email"
+                defaultValue={email}
                 render={({ field: { ...field } }) => (
                   <Input
                     {...field}
@@ -80,42 +84,29 @@ export const Config = ({}: ConfigProps) => {
           <S.ConfigEmailWrapper>
             <Controller
               rules={{
-                required: 'Você deve digitar a sua senha antiga',
-              }}
-              control={control}
-              name="old_password"
-              render={({ field: { ...field } }) => (
-                <Input
-                  {...field}
-                  type="password"
-                  label="Senha Antiga"
-                  placeholder="Digite a sua senha antiga"
-                  error={errors.old_password}
-                />
-              )}
-            />
-            <Controller
-              rules={{
                 required: 'Você deve digitar a sua nova senha',
               }}
               control={control}
-              name="new_password"
+              name="password"
+              defaultValue={password}
               render={({ field: { ...field } }) => (
                 <Input
                   {...field}
                   type="password"
                   label="Nova Senha"
                   placeholder="Digite a sua nova senha"
-                  error={errors.new_password}
+                  error={errors.password}
                 />
               )}
             />
           </S.ConfigEmailWrapper>
         </ConfigInfoWrapper>
         <S.ButtonRow>
-          <Button disabled={!isValid}>Salvar Perfil</Button>
+          <Button type="submit" disabled={!isValid || isLoading}>
+            Salvar Perfil
+          </Button>
         </S.ButtonRow>
-      </S.Wrapper>
+      </S.Form>
     </Base>
   );
 };

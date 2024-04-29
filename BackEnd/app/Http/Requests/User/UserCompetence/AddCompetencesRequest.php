@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\UserCompetence;
+namespace App\Http\Requests\User\UserCompetence;
 
 use App\Http\Requests\AbstractRequest;
 

@@ -6,7 +6,10 @@ use App\Domain\User\UserIncludesEnum;
 
 class ShowUserRequest extends UserRequestHavingId
 {
-    protected array $availableIncludes = [UserIncludesEnum::Competences->value];
+    protected array $availableIncludes = [
+        UserIncludesEnum::Competences->value,
+        UserIncludesEnum::AcademicRecords->value
+    ];
 
     public function rules(): array
     {

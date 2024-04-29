@@ -1,10 +1,11 @@
 <?php
 
 use App\Http\Controllers\JobController;
+use App\Http\Controllers\JWTController;
+use App\Http\Controllers\UserAcademicRecordsController;
 use App\Http\Controllers\UserCompetenceController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\JWTController;
 
 Route::group(
     ['middleware' => 'api', 'namespace' => 'App\Http\Controllers'],
@@ -28,6 +29,11 @@ Route::group(
         Route::group(['prefix' => 'competence'], function () {
             Route::post('/', [UserCompetenceController::class, 'addCompetences']);
             Route::delete('/', [UserCompetenceController::class, 'deleteCompetences']);
+        });
+
+        Route::group(['prefix' => 'academic-records'], function () {
+            Route::post('/', [UserAcademicRecordsController::class, 'addAcademicRecords']);
+            Route::delete('/', [UserAcademicRecordsController::class, 'deleteAcademicRecords']);
         });
 
         Route::get('', [UserController::class, 'index']);

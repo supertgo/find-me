@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->string('field_of_study');
             $table->string('start_date');
             $table->string('end_date')->nullable();
-            $table->boolean('is_on_progress')->default(false);
+            $table->boolean('is_in_progress')->default(false);
             $table->text('description')->nullable();
 
 

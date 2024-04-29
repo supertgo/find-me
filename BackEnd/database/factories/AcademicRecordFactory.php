@@ -17,7 +17,7 @@ class AcademicRecordFactory extends Factory
             'start_date' => $this->faker->date(),
             'end_date' => $this->faker->date(),
             'description' => $this->faker->sentence(),
-            'is_on_progress' => $this->faker->boolean(),
+            'is_in_progress' => $this->faker->boolean(),
         ];
     }
 

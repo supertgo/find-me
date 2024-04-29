@@ -16,7 +16,7 @@ use Illuminate\Support\Carbon;
  * @property string $field_of_study
  * @property string $start_date
  * @property string|null $end_date
- * @property bool $is_on_progress
+ * @property bool $is_in_progress
  * @property string $description
  * @property string|null $location
  * @property Carbon|null $created_at
@@ -55,7 +55,7 @@ class AcademicRecord extends Model
         'field_of_study',
         'start_date',
         'end_date',
-        'is_on_progress',
+        'is_in_progress',
         'description'
     ];
 }

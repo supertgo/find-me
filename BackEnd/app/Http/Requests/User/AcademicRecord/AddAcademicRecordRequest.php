@@ -20,7 +20,7 @@ class AddAcademicRecordRequest extends AbstractRequest
             'academic_records.*.field_of_study' => 'required|string',
             'academic_records.*.start_date' => 'required|date|date_format:Y-m-d',
             'academic_records.*.end_date' => 'date|date_format:Y-m-d',
-            'academic_records.*.is_on_progress' => 'required|boolean',
+            'academic_records.*.is_in_progress' => 'required|boolean',
             'academic_records.*.description' => 'string',
         ];
     }

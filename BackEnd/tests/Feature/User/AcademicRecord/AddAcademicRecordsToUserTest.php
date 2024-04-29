@@ -38,7 +38,7 @@ class AddAcademicRecordsToUserTest extends TestCase
                     ->where('field_of_study', $record['field_of_study'])
                     ->where('start_date', $record['start_date'])
                     ->where('description', $record['description'])
-                    ->where('is_on_progress', $record['is_on_progress'])
+                    ->where('is_in_progress', $record['is_in_progress'])
                     ->exists()
             );
         }
@@ -56,7 +56,7 @@ class AddAcademicRecordsToUserTest extends TestCase
                 'start_date' => Carbon::now()->format('Y-m-d'),
                 'end_date' => Carbon::now()->addYear()->format('Y-m-d'),
                 'description' => $faker->sentence,
-                'is_on_progress' => false
+                'is_in_progress' => false
             ],
             [
                 'institution' => $faker->company,
@@ -64,7 +64,7 @@ class AddAcademicRecordsToUserTest extends TestCase
                 'field_of_study' => $faker->word,
                 'start_date' => Carbon::now()->format('Y-m-d'),
                 'description' => $faker->sentence,
-                'is_on_progress' => true
+                'is_in_progress' => true
             ],
             [
                 'institution' => $faker->company,
@@ -73,7 +73,7 @@ class AddAcademicRecordsToUserTest extends TestCase
                 'start_date' => Carbon::now()->format('Y-m-d'),
                 'end_date' => Carbon::now()->addYear()->format('Y-m-d'),
                 'description' => $faker->sentence,
-                'is_on_progress' => true
+                'is_in_progress' => true
             ],
         ];
     }

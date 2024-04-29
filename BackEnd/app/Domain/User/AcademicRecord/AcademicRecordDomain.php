@@ -45,7 +45,7 @@ class AcademicRecordDomain implements AcademicRecordDomainInterface
         $this->fieldOfStudy = $record['field_of_study'];
         $this->startDate = Carbon::parse($record['start_date']);
         $this->description = $record['description'] ?? null;
-        $this->isOnProgress = $record['is_on_progress'] ?? false;
+        $this->isOnProgress = $record['is_in_progress'] ?? false;
 
         isset($record['end_date']) && $this->setEndDate($record['end_date']);
 
@@ -61,7 +61,7 @@ class AcademicRecordDomain implements AcademicRecordDomainInterface
             'field_of_study' => $this->getFieldOfStudy(),
             'start_date' => $this->getStartDate(),
             'end_date' => $this->getEndDate(),
-            'is_on_progress' => $this->isOnProgress(),
+            'is_in_progress' => $this->isOnProgress(),
             'description' => $this->getDescription(),
         ];
     }

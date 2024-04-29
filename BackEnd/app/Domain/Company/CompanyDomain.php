@@ -2,10 +2,10 @@
 
 namespace App\Domain\Company;
 
-class CompanyDomain implements CompanyDomainInterface
+readonly class CompanyDomain implements CompanyDomainInterface
 {
 
-    public function __construct(private readonly CompanyRepository $repository)
+    public function __construct(private CompanyRepository $repository)
     {
     }
 

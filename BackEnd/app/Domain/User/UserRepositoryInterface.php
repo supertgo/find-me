@@ -2,7 +2,9 @@
 
 namespace App\Domain\User;
 
+use App\Domain\Competence\CompetenceDomainInterface;
 use App\Prototype\RegisterRequestPrototype;
+use Illuminate\Support\Collection;
 
 interface UserRepositoryInterface
 {
@@ -19,4 +21,15 @@ interface UserRepositoryInterface
     public function isPhoneAvailable(UserDomainInterface $user): bool;
 
     public function update(UserDomainInterface $user): void;
+
+    /** @param Collection<CompetenceDomainInterface> $competences */
+    public function attachCompetences(int $id, Collection $competences);
+
+    public function removeCompetence(int $id, int $competenceId): void;
+
+    public function userHasCompetence(?int $id, int $competenceId): bool;
+
+    public function getUserWithIncludes(int $userId, array $includes): array;
+
+    public function getUsersWithIncludes(array $includes): array;
 }

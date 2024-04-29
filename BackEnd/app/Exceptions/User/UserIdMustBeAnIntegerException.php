@@ -7,7 +7,7 @@ use App\Exceptions\ExceptionMessagesEnum;
 
 class UserIdMustBeAnIntegerException extends AbstractFindMeException
 {
-    public function __construct(string $id)
+    public function __construct(?string $id)
     {
         parent::__construct(ExceptionMessagesEnum::UserIdMustBeAnInteger->value);
 

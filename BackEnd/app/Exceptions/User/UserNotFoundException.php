@@ -9,7 +9,7 @@ class UserNotFoundException extends AbstractFindMeException
 {
     public function __construct(string $id)
     {
-        parent::__construct(ExceptionMessagesEnum::CompanyNotFound->value);
+        parent::__construct(ExceptionMessagesEnum::UserNotFound->value);
 
         $this->additionalInfo = [
             'user_id' => $id

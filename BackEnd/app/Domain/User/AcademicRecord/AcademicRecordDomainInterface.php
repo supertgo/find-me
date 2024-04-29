@@ -12,7 +12,13 @@ interface AcademicRecordDomainInterface
 
     public function toArray(): array;
 
+    public function exists(int $recordId): bool;
+
+    public function isOwner(int $recordId, int $userId): bool;
+
     public function getId(): ?int;
+
+    public function setId(int $id): self;
 
     public function getInstitution(): string;
 

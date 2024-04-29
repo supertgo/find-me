@@ -171,4 +171,14 @@ class AcademicRecordDomain implements AcademicRecordDomainInterface
         $this->id = $id;
         return $this;
     }
+
+    public function exists(int $recordId): bool
+    {
+        return $this->repository->exists($recordId);
+    }
+
+    public function isOwner(int $recordId, int $userId): bool
+    {
+        return $this->repository->isOwner($recordId, $userId);
+    }
 }

@@ -10,6 +10,8 @@ use App\Domain\User\AcademicRecord\AcademicRecordDomain;
 use App\Domain\User\AcademicRecord\AcademicRecordRepository;
 use App\Exceptions\Abstract\AbstractDomainException;
 use App\Exceptions\Competence\CompetenceNotFound;
+use App\Exceptions\User\AcademicRecord\AcademicRecordNotFoundException;
+use App\Exceptions\User\AcademicRecord\OnlyOwnerCanDeleteAcademicRecordException;
 use App\Exceptions\User\UserNotFoundException;
 use Exception;
 use Illuminate\Support\Facades\Log;
@@ -101,27 +103,6 @@ readonly class UserService
     /**
      * @throws Throwable
      */
-    public function addAcademicRecords(int $userId, array $records): void
-    {
-        $userRepository = new UserRepository();
-
-        try {
-            $userRepository->beginTransaction();
-
-            $academicRecordDomain = new AcademicRecordDomain(new AcademicRecordRepository());
-
-            $academicRecordDomain->createMany($records, $userId);
-            $userRepository->commitTransaction();
-        } catch (Exception $exception) {
-            $this->commonLogLogic($userRepository, $exception);
-
-            throw $exception;
-        }
-    }
-
-    /**
-     * @throws Throwable
-     */
     public function removeCompetences(int $userId, array $competencesId): void
     {
         $userRepository = new UserRepository();
@@ -145,6 +126,61 @@ readonly class UserService
             $userRepository->commitTransaction();
         } catch (Exception $exception) {
             $this->commonLogLogic($userRepository, $exception);
+
+            throw $exception;
+        }
+    }
+
+
+    /**
+     * @throws Throwable
+     */
+    public function addAcademicRecords(int $userId, array $records): void
+    {
+        $userRepository = new UserRepository();
+
+        try {
+            $userRepository->beginTransaction();
+
+            $academicRecordDomain = new AcademicRecordDomain(new AcademicRecordRepository());
+
+            $academicRecordDomain->createMany($records, $userId);
+            $userRepository->commitTransaction();
+        } catch (Exception $exception) {
+            $this->commonLogLogic($userRepository, $exception);
+
+            throw $exception;
+        }
+    }
+
+    /**
+     * @throws Throwable
+     */
+    public function removeAcademicRecords(int $userId, array $academicRecordsId): void
+    {
+        $academicRecordRepository = new AcademicRecordRepository();
+
+        try {
+            $academicRecordRepository->beginTransaction();
+
+            $academicRecordRepository = new AcademicRecordRepository();
+
+            foreach ($academicRecordsId as $recordId) {
+                $academicRecordsDomain = new AcademicRecordDomain($academicRecordRepository);
+                if (!$academicRecordsDomain->exists($recordId)) {
+                    throw new AcademicRecordNotFoundException($recordId);
+                }
+
+                if (!$academicRecordsDomain->isOwner($recordId, $userId)) {
+                    throw new OnlyOwnerCanDeleteAcademicRecordException($recordId);
+                }
+
+                $academicRecordRepository->delete($recordId);
+            }
+
+            $academicRecordRepository->commitTransaction();
+        } catch (Exception $exception) {
+            $this->commonLogLogic($academicRecordRepository, $exception);
 
             throw $exception;
         }

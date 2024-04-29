@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Domain\User\UserService;
 use App\Exceptions\Abstract\AbstractDomainException;
 use App\Http\Requests\User\AcademicRecord\AddAcademicRecordRequest;
-use App\Http\Requests\User\UserCompetence\DeleteCompetencesRequest;
+use App\Http\Requests\User\AcademicRecord\DeleteAcademicRecordsRequest;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response as IluminateResponse;
@@ -39,13 +39,13 @@ class UserAcademicRecordsController extends Controller
         }
     }
 
-    public function deleteCompetences(DeleteCompetencesRequest $request): JsonResponse|IluminateResponse
+    public function deleteAcademicRecords(DeleteAcademicRecordsRequest $request): JsonResponse|IluminateResponse
     {
         try {
-            app(UserService::class)
-                ->removeCompetences(
+            (new UserService())
+                ->removeAcademicRecords(
                     $request->getLoggedUserId(),
-                    $request->validated('competencesId')
+                    $request->validated('academicRecordsId')
                 );
 
             return response()->noContent();

@@ -37,7 +37,7 @@ class UserCompetenceController extends Controller
     public function deleteCompetences(DeleteCompetencesRequest $request): JsonResponse|IluminateResponse
     {
         try {
-            app(UserService::class)
+            (new UserService())
                 ->removeCompetences(
                     $request->getLoggedUserId(),
                     $request->validated('competencesId')

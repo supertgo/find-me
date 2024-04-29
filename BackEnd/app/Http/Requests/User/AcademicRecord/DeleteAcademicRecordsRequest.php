@@ -5,7 +5,7 @@ namespace App\Http\Requests\User\AcademicRecord;
 use App\Http\Requests\AbstractRequest;
 use App\Http\Requests\Rules\UniqueArrayValuesRule;
 
-class DeleteCompetencesRequest extends AbstractRequest
+class DeleteAcademicRecordsRequest extends AbstractRequest
 {
     public function authorize(): bool
     {
@@ -15,13 +15,13 @@ class DeleteCompetencesRequest extends AbstractRequest
     public function rules(): array
     {
         return [
-            'competencesId' => [
+            'academicRecordsId' => [
                 'required',
                 'array',
                 'min:1',
                 new UniqueArrayValuesRule,
             ],
-            'competencesId.*' => 'required|integer',
+            'academicRecordsId.*' => 'required|integer',
         ];
     }
 }

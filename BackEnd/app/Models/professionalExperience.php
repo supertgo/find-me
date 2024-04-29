@@ -48,7 +48,7 @@ class professionalExperience extends Model
 {
     use HasFactory;
 
-    protected $table = 'professional_experience';
+    protected $table = 'professional_experiences';
 
     protected $fillable = [
         'user_id',

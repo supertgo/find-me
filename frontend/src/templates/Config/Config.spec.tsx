@@ -1,19 +1,41 @@
-import 'components/ConfigInfoWrapper/ConfigInfoWrapper.mock';
 import 'components/Sidebar/Sidebar.mock';
 import { render, screen } from 'utils/test/test-utils';
-import { Config } from './Config';
+import { Config, ConfigProps } from './Config';
+
+const props: ConfigProps = {
+  name: 'test',
+  password: 'testaa',
+  email: 'thiago.teste@gmail.com',
+  phone: '313131',
+  type: 'recruiter',
+};
 
 describe('<Config />', () => {
   it('should render the component', () => {
-    render(<Config />, {
+    render(<Config {...props} />, {
       queryProvider: true,
     });
 
-    expect(screen.getAllByTestId('Mock ConfigInfoWrapper')).toHaveLength(3);
+    const nameField: HTMLInputElement = screen.getByPlaceholderText(
+      'Digite o seu nome completo',
+    );
+    const phoneField: HTMLInputElement = screen.getByPlaceholderText(
+      'Digite o seu celular',
+    );
+    const emailField: HTMLInputElement = screen.getByPlaceholderText(
+      'Digite o seu e-mail',
+    );
+    const passwordField: HTMLInputElement = screen.getByPlaceholderText(
+      'Digite a sua nova senha',
+    );
 
-    expect(screen.getByText('Configurações')).toBeInTheDocument();
-    expect(
-      screen.getByRole('button', { name: 'Salvar Perfil' }),
-    ).toBeInTheDocument();
+    const saveButton = screen.getByRole('button', { name: 'Salvar Perfil' });
+
+    expect(nameField).toHaveValue(props.name);
+    expect(phoneField).toHaveValue(props.phone);
+    expect(emailField).toHaveValue(props.email);
+    expect(passwordField).toHaveValue(props.password);
+
+    expect(saveButton).toBeInTheDocument();
   });
 });

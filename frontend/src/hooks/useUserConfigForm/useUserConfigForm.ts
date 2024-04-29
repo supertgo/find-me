@@ -14,8 +14,7 @@ export type ConfigInputs = {
   name: string;
   email: string;
   phone: string;
-  old_password: string;
-  new_password: string;
+  password: string;
 };
 export interface UseConfigFormProtocols {
   register: UseFormRegister<ConfigInputs>;
@@ -44,19 +43,19 @@ export const useUserConfigForm = (): UseConfigFormProtocols => {
 
     setIsLoading(true);
 
-    const postClient = new PutClient();
+    const putClient = new PutClient();
 
     const body: ConfigInputs = {
       ...data,
     };
 
     try {
-      const response = await postClient.put({
-        url: '/auth/register',
+      await putClient.put({
+        url: '/user',
         body,
       });
 
-      toast.success(response.data.message);
+      toast.success('Informações atualizadas com sucesso!');
     } catch (error) {
       if (error instanceof Error) {
         return toast.error(error.response.data.message);

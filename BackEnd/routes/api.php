@@ -36,6 +36,10 @@ Route::group(
             Route::delete('/', [UserAcademicRecordsController::class, 'deleteAcademicRecords']);
         });
 
+        Route::group(['prefix' => 'academic-records'], function () {
+            Route::post('/', [UserAcademicRecordsController::class, 'professionalExperience']);
+        });
+
         Route::get('', [UserController::class, 'index']);
         Route::get('/{user_id}', [UserController::class, 'show']);
         Route::put('', [UserController::class, 'update']);

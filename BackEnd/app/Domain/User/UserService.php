@@ -6,6 +6,8 @@ namespace App\Domain\User;
 use App\Domain\Abstract\AbstractRepository;
 use App\Domain\Competence\CompetenceDomain;
 use App\Domain\Competence\CompetenceRepository;
+use App\Domain\User\AcademicRecord\AcademicRecordDomain;
+use App\Domain\User\AcademicRecord\AcademicRecordRepository;
 use App\Exceptions\Abstract\AbstractDomainException;
 use App\Exceptions\Competence\CompetenceNotFound;
 use App\Exceptions\User\UserNotFoundException;
@@ -88,6 +90,27 @@ readonly class UserService
                 ->setId($userId)
                 ->attachCompetences($competences);
 
+            $userRepository->commitTransaction();
+        } catch (Exception $exception) {
+            $this->commonLogLogic($userRepository, $exception);
+
+            throw $exception;
+        }
+    }
+
+    /**
+     * @throws Throwable
+     */
+    public function addAcademicRecords(int $userId, array $records): void
+    {
+        $userRepository = new UserRepository();
+
+        try {
+            $userRepository->beginTransaction();
+
+            $academicRecordDomain = new AcademicRecordDomain(new AcademicRecordRepository());
+
+            $academicRecordDomain->createMany($records, $userId);
             $userRepository->commitTransaction();
         } catch (Exception $exception) {
             $this->commonLogLogic($userRepository, $exception);

@@ -19,4 +19,7 @@ enum ExceptionMessagesEnum: string
     case UserDoesntHaveCompetence = 'User doesn\'t have competence';
 
     case CompetenceNotFound = 'Competence not found';
+
+    case AcademicRecordMustHaveEndDateWhenUnfinished = 'Academic record must have end date when unfinished';
+    case AcademicRecordEndDateMustBeAfterStartDate = 'Academic record end date must be after start date';
 }

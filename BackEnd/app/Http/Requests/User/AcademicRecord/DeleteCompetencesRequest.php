@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\UserCompetence;
+namespace App\Http\Requests\User\AcademicRecord;
 
 use App\Http\Requests\AbstractRequest;
 use App\Http\Requests\Rules\UniqueArrayValuesRule;

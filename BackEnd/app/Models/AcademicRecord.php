@@ -49,6 +49,7 @@ class AcademicRecord extends Model
     protected $table = 'academic_records';
 
     protected $fillable = [
+        'user_id',
         'institution',
         'degree',
         'field_of_study',

@@ -11,6 +11,7 @@ import {
   translateWorkModel,
 } from 'utils/job';
 import { formatInputCurrency } from 'utils/money';
+import { JobPill, JobPillProps } from './JobPill';
 
 export type JobItemProps = {} & Job;
 
@@ -26,6 +27,13 @@ export const JobItem = ({
 }: JobItemProps) => {
   const applicants = Math.floor(Math.random() * applications_amount);
 
+  const jobPillProps: JobPillProps = {
+    employment_type,
+    work_model,
+    salary,
+    salary_time_unit,
+  };
+
   return (
     <S.Wrapper>
       <S.JobInfoWrapper>
@@ -35,25 +43,13 @@ export const JobItem = ({
           <S.JobLocationInfo>{filterJobLocation(location)}</S.JobLocationInfo>
           <MediaMatch $greaterThan="large">
             <S.PillWrapper>
-              <Pill text={translateEmploymentType[employment_type]} />
-              <Pill text={translateWorkModel[work_model]} />
-              <Pill
-                text={`${formatInputCurrency(salary)}/${
-                  translateSalaryTimeUnit[salary_time_unit]
-                }`}
-              />
+              <JobPill {...jobPillProps} />
             </S.PillWrapper>
           </MediaMatch>
         </S.JobInfo>
       </S.JobInfoWrapper>
       <S.PillSmallScreen>
-        <Pill text={translateEmploymentType[employment_type]} />
-        <Pill text={translateWorkModel[work_model]} />
-        <Pill
-          text={`${formatInputCurrency(salary)}/${
-            translateSalaryTimeUnit[salary_time_unit]
-          }`}
-        />
+        <JobPill {...jobPillProps} />
       </S.PillSmallScreen>
       <S.JobApplicationInfo>
         <Button disabled={!is_available}>Aplicar</Button>

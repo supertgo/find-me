@@ -15,6 +15,7 @@ class UserDomain implements UserDomainInterface
     private string $phone;
     private ?string $password;
     private UserTypeEnum $type;
+    private ?string $aboutMe;
 
     public function __construct(private readonly UserRepositoryInterface $userRepository)
     {
@@ -29,6 +30,7 @@ class UserDomain implements UserDomainInterface
         !empty($user['type']) && $this->setType(UserTypeEnum::from($user['type']));
         !empty($user['id']) && $this->setId($user['id']);
         !empty($user['password']) && $this->setPassword($user['password']);
+        !empty($user['about_me']) && $this->setAboutMe($user['about_me']);
 
         return $this;
     }
@@ -81,6 +83,7 @@ class UserDomain implements UserDomainInterface
         !empty($this->id) && $user['id'] = $this->id;
         !empty($this->password) && $user['password'] = $this->password;
         !empty($this->type) && $user['type'] = $this->type->value;
+        !empty($this->aboutMe) && $user['about_me'] = $this->aboutMe;
 
         return $user;
     }
@@ -197,5 +200,12 @@ class UserDomain implements UserDomainInterface
     public function usersWithIncludes(array $includes): array
     {
         return $this->userRepository->getUsersWithIncludes($includes);
+    }
+
+    private function setAboutMe(?string $aboutMe): self
+    {
+        $this->aboutMe = $aboutMe;
+
+        return $this;
     }
 }

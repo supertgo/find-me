@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\auth;
+namespace Tests\Feature\Auth;
 
 use App\Domain\User\UserTypeEnum;
 use App\Models\User;
@@ -111,7 +111,10 @@ class RegisterTest extends TestCase
 
         $this->assertDatabaseHas('users', [
             'email' => $payload['email'],
-            'phone' => $payload['phone']
+            'phone' => $payload['phone'],
+            'name' => $payload['name'],
+            'type' => $payload['type'],
+            'about_me' => $payload['about_me']
         ]);
     }
 
@@ -130,7 +133,8 @@ class RegisterTest extends TestCase
             'password' => $this->faker->password,
             'email' => $this->faker->unique()->safeEmail,
             'phone' => $this->faker->unique()->e164PhoneNumber,
-            'type' => UserTypeEnum::Recruiter->value
+            'type' => UserTypeEnum::Recruiter->value,
+            'about_me' => $this->faker->paragraph()
         ];
     }
 

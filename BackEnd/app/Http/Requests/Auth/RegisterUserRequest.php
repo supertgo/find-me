@@ -22,6 +22,7 @@ class RegisterUserRequest extends FormRequest
             'email' => 'required|email|unique:users,email',
             'phone' => 'required|numeric|unique:users,phone',
             'type' => 'required|string|in:' . implode(',', array_column(UserTypeEnum::cases(), 'value')),
+            'about_me' => 'string',
         ];
     }
 

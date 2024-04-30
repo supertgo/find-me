@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\auth;
+namespace Tests\Feature\Auth;
 
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;

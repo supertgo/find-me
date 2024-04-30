@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 
-use App\Domain\User\JobService;
 use App\Domain\User\UserRepository;
 use App\Domain\User\UserService;
 use App\Http\Requests\Auth\ForgotPasswordRequest;
@@ -22,7 +21,7 @@ class JWTController extends Controller
         $repository = app(UserRepository::class);
         try {
             $repository->beginTransaction();
-            app(UserService::class)->createUser($request->validated());
+            (new UserService())->createUser($request->validated());
             $repository->commitTransaction();
 
             return response()->noContent();

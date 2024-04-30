@@ -65,6 +65,7 @@ class UserDomain implements UserDomainInterface
         $this->name = $user['name'];
         $this->email = $user['email'];
         $this->phone = $user['phone'];
+        $this->aboutMe = $user['about_me'];
         $this->type = UserTypeEnum::from($user['type']);
 
         empty($this->id) && $this->id = $user['id'];

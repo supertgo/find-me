@@ -19,6 +19,7 @@ class UpdateUserRequest extends AbstractRequest
             'password' => 'required|min:6|string',
             'email' => 'required|email',
             'phone' => 'required|numeric',
+            'about_me' => 'string',
         ];
     }
 

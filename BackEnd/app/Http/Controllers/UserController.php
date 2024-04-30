@@ -8,10 +8,8 @@ use App\Domain\User\UserService;
 use App\Exceptions\Abstract\AbstractDomainException;
 use App\Exceptions\Job\JobNotFoundException;
 use App\Exceptions\User\UserIdMustBeAnIntegerException;
-use App\Http\Requests\Auth\RegisterUserRequest;
 use App\Http\Requests\User\ShowUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
-use App\Http\Requests\User\UserRequestHavingId;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response as IluminateResponse;
@@ -63,7 +61,7 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request): JsonResponse|IluminateResponse
     {
         try {
-            $user = app(UserService::class)
+            $user = (new UserService())
                 ->update(
                     ['id' => $request->getLoggedUserId()] + $request->validated()
                 );

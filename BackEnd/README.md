@@ -11,6 +11,10 @@ docker-compose up
 ```
 
 ```php
+composer install
+```
+
+```php
 php artisan key:generate
 ```
 

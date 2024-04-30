@@ -39,6 +39,7 @@ Route::group(
 
         Route::group(['prefix' => 'professional-experiences'], function () {
             Route::post('/', [UserProfessionalExperience::class, 'addProfessionalExperiences']);
+            Route::delete('/', [UserProfessionalExperience::class, 'deleteProfessionalExperiences']);
         });
 
         Route::get('', [UserController::class, 'index']);

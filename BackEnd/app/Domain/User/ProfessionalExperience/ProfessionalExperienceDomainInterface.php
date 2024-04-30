@@ -50,4 +50,10 @@ interface ProfessionalExperienceDomainInterface
     public function setWorkModel(WorkModelEnum|string|null $workModel): ProfessionalExperienceDomain;
 
     public function setEmploymentType(EmploymentTypeEnum|string|null $employmentType): ProfessionalExperienceDomain;
+
+    public function exists(int $recordId): bool;
+
+    public function isOwner(mixed $experience, int $userId): bool;
+
+    public function delete(int $experienceId): void;
 }

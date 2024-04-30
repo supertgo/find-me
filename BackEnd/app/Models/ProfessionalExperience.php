@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 
 /**
- * App\Models\Competence
+ * App\Models\ProfessionalExperience
  *
  * @property int $id
  * @property string $company_name
@@ -44,7 +44,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Job whereWorkModel($value)
  * @mixin Eloquent
  */
-class professionalExperience extends Model
+class ProfessionalExperience extends Model
 {
     use HasFactory;
 

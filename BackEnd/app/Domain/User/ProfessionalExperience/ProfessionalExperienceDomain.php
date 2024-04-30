@@ -210,4 +210,19 @@ readonly class ProfessionalExperienceDomain implements ProfessionalExperienceDom
 
         return $this;
     }
+
+    public function exists(int $recordId): bool
+    {
+        return $this->repository->exists($recordId);
+    }
+
+    public function isOwner(mixed $experience, int $userId): bool
+    {
+        return $this->repository->isOwner($experience, $userId);
+    }
+
+    public function delete(int $experienceId): void
+    {
+        $this->repository->delete($experienceId);
+    }
 }

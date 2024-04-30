@@ -5,14 +5,14 @@ namespace App\Exceptions\User\ProfessionalExperience;
 use App\Exceptions\Abstract\AbstractFindMeException;
 use App\Exceptions\ExceptionMessagesEnum;
 
-class AcademicRecordNotFoundException extends AbstractFindMeException
+class OnlyOwnerCanDeleteProfessionalExperienceException extends AbstractFindMeException
 {
     public function __construct(?int $id)
     {
-        parent::__construct(ExceptionMessagesEnum::AcademicRecordNotFound->value);
+        parent::__construct(ExceptionMessagesEnum::OnlyOwnerCanDeleteProfessionalExperience->value);
 
         $this->additionalInfo = [
-            'academic_record_id' => $id
+            'professional_experience_id' => $id
         ];
     }
 }

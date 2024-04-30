@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Domain\User\UserService;
 use App\Exceptions\Abstract\AbstractDomainException;
-use App\Http\Requests\User\AcademicRecord\DeleteAcademicRecordsRequest;
 use App\Http\Requests\User\PrefessionalExperience\AddProfessionalExperienceRequest;
+use App\Http\Requests\User\PrefessionalExperience\DeleteProfessionalExperiencesRequest;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response as IluminateResponse;
@@ -14,7 +14,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 class UserProfessionalExperience extends Controller
 {
-    public function addProfessionalExperiences(AddProfessionalExperienceRequest $request): JsonResponse|IluminateResponse
+    public function addProfessionalExperiences(
+        AddProfessionalExperienceRequest $request
+    ): JsonResponse|IluminateResponse
     {
         try {
             (new UserService())
@@ -39,13 +41,15 @@ class UserProfessionalExperience extends Controller
         }
     }
 
-    public function deleteAcademicRecords(DeleteAcademicRecordsRequest $request): JsonResponse|IluminateResponse
+    public function deleteProfessionalExperiences(
+        DeleteProfessionalExperiencesRequest $request
+    ): JsonResponse|IluminateResponse
     {
         try {
             (new UserService())
-                ->removeAcademicRecords(
+                ->removeProfessionalExperiences(
                     $request->getLoggedUserId(),
-                    $request->validated('academicRecordsId')
+                    $request->validated('professional_experiences')
                 );
 
             return response()->noContent();

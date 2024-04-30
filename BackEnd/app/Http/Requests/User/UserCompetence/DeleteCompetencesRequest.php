@@ -15,13 +15,13 @@ class DeleteCompetencesRequest extends AbstractRequest
     public function rules(): array
     {
         return [
-            'competencesId' => [
+            'competences_id' => [
                 'required',
                 'array',
                 'min:1',
                 new UniqueArrayValuesRule,
             ],
-            'competencesId.*' => 'required|integer',
+            'competences_id.*' => 'required|integer',
         ];
     }
 }

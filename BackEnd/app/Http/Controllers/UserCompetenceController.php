@@ -40,7 +40,7 @@ class UserCompetenceController extends Controller
             (new UserService())
                 ->removeCompetences(
                     $request->getLoggedUserId(),
-                    $request->validated('competencesId')
+                    $request->validated('competences_id')
                 );
 
             return response()->noContent();

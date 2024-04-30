@@ -21,7 +21,7 @@ export type RegisterInputs = {
   type: string;
 };
 
-export interface UseRegisterFormProtocols {
+export type UseRegisterFormProtocols = {
   register: UseFormRegister<any>;
   handleSubmit: UseFormHandleSubmit<any>;
   errors: FieldErrors<RegisterInputs>;

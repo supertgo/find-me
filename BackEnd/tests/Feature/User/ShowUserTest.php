@@ -28,6 +28,7 @@ class ShowUserTest extends TestCase
                     'phone',
                     'id',
                     'type',
+                    'about_me'
                 ]
             ]);
     }

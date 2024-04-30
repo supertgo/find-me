@@ -1,3 +1,4 @@
+import { Skeleton } from 'components/Skeleton/Skeleton';
 import styled, { css } from 'styled-components';
 import media from 'styled-media-query';
 
@@ -14,6 +15,11 @@ export const Wrapper = styled.div`
     grid-template-columns: 1fr;
     `}
   `}
+`;
+
+export const JobInfoLoading = styled(Skeleton)`
+  ${Wrapper};
+  height: 15rem;
 `;
 
 export const JobInfoWrapper = styled.div`

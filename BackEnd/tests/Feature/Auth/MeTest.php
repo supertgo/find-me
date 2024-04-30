@@ -23,6 +23,7 @@ class MeTest extends TestCase
                     'phone',
                     'id',
                     'type',
+                    'about_me'
                 ],
             ])
             ->assertJson([
@@ -32,6 +33,7 @@ class MeTest extends TestCase
                     'phone' => $this->user->phone,
                     'type' => $this->user->type,
                     'id' => $this->user->id,
+                    'about_me' => $this->user->about_me,
                 ],
             ]);
     }

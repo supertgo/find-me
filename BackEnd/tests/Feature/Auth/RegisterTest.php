@@ -4,6 +4,8 @@ namespace Tests\Feature\Auth;
 
 use App\Domain\User\UserTypeEnum;
 use App\Models\User;
+use Illuminate\Http\UploadedFile;
+use Storage;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
@@ -138,5 +140,49 @@ class RegisterTest extends TestCase
         ];
     }
 
+    public function testWithProfilePicture()
+    {
+        Storage::fake('public');
 
+        $file = $this->faker->image(Storage::disk('public')->path(''));
+
+        $uploadedFile = new UploadedFile($file, 'profile_picture.jpg', 'image/jpeg', null, true);
+
+        $payload = $this->generatePayloadWithProfilePicture($uploadedFile);
+
+        $this->json(
+            'POST',
+            self::ROUTE,
+            $payload
+        )->assertStatus(Response::HTTP_NO_CONTENT);
+
+        $this->assertDatabaseHas('users', [
+            'email' => $payload['email'],
+            'phone' => $payload['phone'],
+            'name' => $payload['name'],
+            'type' => $payload['type'],
+            'about_me' => $payload['about_me']
+        ]);
+
+        $user = $this->getUserFromPayload($payload);
+
+        $this->assertNotNull($user->profile_picture_path);
+    }
+
+    private function generatePayloadWithProfilePicture($file): array
+    {
+        return ['profile_picture' => $file] + $this->generatePayload();
+    }
+
+    public function getUserFromPayload(array $payload): User
+    {
+        return User::where('email', $payload['email'])
+            ->where('phone', $payload['phone'])
+            ->where('name', $payload['name'])
+            ->where('type', $payload['type'])
+            ->where('about_me', $payload['about_me'])
+            ->whereNotNull('profile_picture_path')
+            ->latest()
+            ->first();
+    }
 }

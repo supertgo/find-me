@@ -146,7 +146,13 @@ class RegisterTest extends TestCase
 
         $file = $this->faker->image(Storage::disk('public')->path(''));
 
-        $uploadedFile = new UploadedFile($file, 'profile_picture.jpg', 'image/jpeg', null, true);
+        $uploadedFile = new UploadedFile(
+            $file,
+            'profile_picture.jpg',
+            'image/jpeg',
+            null,
+            true
+        );
 
         $payload = $this->generatePayloadWithProfilePicture($uploadedFile);
 

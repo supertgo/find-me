@@ -11,7 +11,7 @@ class LocalFileHelper implements FileHelperInterface
 {
     public function storeRandomInPublicDirectory(UploadedFile $file): string
     {
-        $name = $this->generateRandomName($file->getExtension());
+        $name = $this->generateRandomName($file->getClientOriginalExtension());
 
         $file->move(Storage::disk('public')->path(''), $name);
 

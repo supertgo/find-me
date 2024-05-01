@@ -23,6 +23,13 @@ class LocalFileHelper implements FileHelperInterface
         return Storage::disk('public')->url($path);
     }
 
+    public function deletePublicFile(string $path): void
+    {
+        if (Storage::disk('public')->exists($path)) {
+            Storage::disk('public')->delete($path);
+        }
+    }
+
     private function generateRandomName(string $extension): string
     {
         do {

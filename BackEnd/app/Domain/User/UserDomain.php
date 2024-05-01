@@ -5,6 +5,7 @@ namespace App\Domain\User;
 use App\Exceptions\User\UserDoesntHaveCompetenceException;
 use App\Exceptions\User\UserEmailNotAvailableException;
 use App\Exceptions\User\UserPhoneNotAvailableException;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Collection;
 
 class UserDomain implements UserDomainInterface
@@ -211,5 +212,19 @@ class UserDomain implements UserDomainInterface
         $this->aboutMe = $aboutMe;
 
         return $this;
+    }
+
+    public function createProfilePicture(UploadedFile $file, int $userId): void
+    {
+        $this->userRepository->createProfilePicture($file, $userId);
+    }
+
+    public function updateProfilePicture(UploadedFile $profilePicture, int $userId): string
+    {
+        if (isset($this->profilePicturePath)) {
+            $this->userRepository->deleteProfilePicture($this->profilePicturePath, $userId);
+        }
+
+        return $this->userRepository->createProfilePicture($profilePicture, $userId);
     }
 }

@@ -20,6 +20,7 @@ use App\Exceptions\User\ProfessionalExperience\MustHaveEndDateWhenFinishedExperi
 use App\Exceptions\User\ProfessionalExperience\OnlyOwnerCanDeleteProfessionalExperienceException;
 use App\Exceptions\User\ProfessionalExperience\ProfessionalExperienceNotFoundException;
 use App\Exceptions\User\UserNotFoundException;
+use App\helpers\File\FileHelperInterface;
 use Exception;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Log;
@@ -256,9 +257,33 @@ readonly class UserService
         try {
             $userRepository->beginTransaction();
 
-            $userRepository->createProfilePicture($file, $userId);
+            $domain = new UserDomain($userRepository);
+
+            $domain->createProfilePicture($file, $userId);
 
             $userRepository->commitTransaction();
+        } catch (Exception $exception) {
+            $this->commonLogLogic($userRepository, $exception);
+
+            throw $exception;
+        }
+    }
+
+    public function updateProfilePicture(int $userId, UploadedFile $profilePicture): string
+    {
+        $userRepository = new UserRepository();
+
+        try {
+            $userRepository->beginTransaction();
+
+            $domain = new UserDomain($userRepository);
+            $domain->loadUser($userId);
+
+            $path = $domain->updateProfilePicture($profilePicture, $userId);
+
+            $userRepository->commitTransaction();
+
+            return app(FileHelperInterface::class)->getUrlForPublicFile($path);
         } catch (Exception $exception) {
             $this->commonLogLogic($userRepository, $exception);
 

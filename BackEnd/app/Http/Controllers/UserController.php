@@ -7,6 +7,7 @@ use App\Domain\User\UserRepository;
 use App\Domain\User\UserService;
 use App\Exceptions\Abstract\AbstractDomainException;
 use App\Http\Requests\User\ShowUserRequest;
+use App\Http\Requests\User\UpdateUserProfilePictureRequest;
 use App\Http\Requests\User\UpdateUserRequest;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -70,7 +71,25 @@ class UserController extends Controller
                 status: Response::HTTP_UNPROCESSABLE_ENTITY
             );
         } catch (Exception) {
+            return response()
+                ->json(
+                    ['error' => 'Server error'],
+                    Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
 
+    public function updateProfilePicture(UpdateUserProfilePictureRequest $request): IluminateResponse|JsonResponse
+    {
+        try {
+            $url = (new UserService())
+                ->updateProfilePicture(
+                    $request->getLoggedUserId(), $request->file('profile_picture')
+                );
+
+            return response()->json([
+                'url' => $url
+            ]);
+        } catch (Exception) {
             return response()
                 ->json(
                     ['error' => 'Server error'],

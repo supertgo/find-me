@@ -111,7 +111,7 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
             ->exists();
     }
 
-    public function createProfilePicture(UploadedFile $file, int $userId): void
+    public function createProfilePicture(UploadedFile $file, int $userId): string
     {
         $fileHelper = app(FileHelperInterface::class);
 
@@ -119,5 +119,19 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
 
         User::where('id', $userId)
             ->update(['profile_picture_path' => $path]);
+
+        return $path;
     }
+
+    public function deleteProfilePicture(string $profilePicturePath, int $userId): void
+    {
+        $fileHelper = app(FileHelperInterface::class);
+
+        $fileHelper->deletePublicFile($profilePicturePath);
+
+        DB::table('users')
+            ->where('id', $userId)
+            ->update(['profile_picture_path' => null]);
+    }
+
 }

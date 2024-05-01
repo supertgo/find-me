@@ -20,6 +20,7 @@ class UpdateUserRequest extends AbstractRequest
             'email' => 'required|email',
             'phone' => 'required|numeric',
             'about_me' => 'string',
+            'profile_picture' => 'file|mimes:jpeg,png,jpg|max:2048'
         ];
     }
 

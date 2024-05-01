@@ -10,4 +10,6 @@ interface FileHelperInterface
 
     public function getUrlForPublicFile(string $path): string;
 
+    public function deletePublicFile(string $path): void;
+
 }

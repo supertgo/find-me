@@ -33,6 +33,8 @@ interface UserRepositoryInterface
 
     public function getUsersWithIncludes(array $includes): array;
 
-    public function createProfilePicture(UploadedFile $file, int $userId): void;
+    public function createProfilePicture(UploadedFile $file, int $userId): string;
+
+    public function deleteProfilePicture(string $profilePicturePath, int $userId): void;
 
 }

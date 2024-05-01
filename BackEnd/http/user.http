@@ -1,46 +1,3 @@
-POST http://localhost:80/api/auth/register
-Accept: application/json
-Content-Type: application/json
-
-{
-    "name": "test",
-    "password": "testaa",
-    "email": "davi.teste@gmail.com",
-    "phone": "319747474747",
-  "type": "recruiter"
-}
-
-
-###
-
-
-
-###
-
-
-
-###
-POST http://localhost:80/api/auth/login
-Accept: application/json
-Content-Type: application/json
-
-{
-  "name": "test",
-  "password": "testaa",
-  "email": "davi.teste@gmail.com",
-  "phone": "319747474747",
-  "type": "recruiter"
-}
-
-###
-
-GET http://localhost:80/api/auth/me
-Accept: application/json
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2FwaS9hdXRoL2xvZ2luIiwiaWF0IjoxNzE0MzM1NjI3LCJleHAiOjE3MTQzMzkyMjcsIm5iZiI6MTcxNDMzNTYyNywianRpIjoiZDhZR05jRHNLUXB5eGt6NCIsInN1YiI6IjcyIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.kwYnbaH6ICB1IhHnWDY6AooBowMLpsxp8SMtUfgT_6k
-
-
-
-###
 ###
 POST http://localhost/api/auth/register
 Accept: application/json
@@ -49,19 +6,19 @@ Content-Type: multipart/form-data; boundary=WebAppBoundary
 --WebAppBoundary
 Content-Disposition: form-data; name="name"
 
-asdasd
+Cazares
 --WebAppBoundary
 Content-Disposition: form-data; name="password"
 
-testasdasd
+{{password}}
 --WebAppBoundary
-Content-Disposition: form-data; name="phone "
+Content-Disposition: form-data; name="phone"
 
 319747474747
 --WebAppBoundary
-Content-Disposition: form-data; name=" email"
+Content-Disposition: form-data; name="email"
 
-davi.teste@gmail.com
+{{email}}
 --WebAppBoundary
 Content-Disposition: form-data; name="type"
 
@@ -73,8 +30,33 @@ Content-Disposition: form-data; name="profile_picture"; filename="profilePicture
 --WebAppBoundary--
 
 ###
+POST http://localhost:80/api/auth/login
+Accept: application/json
+Content-Type: application/json
 
-GET localhost:80/api/user
+{
+  "email": "{{email}}",
+  "password": "{{password}}"
+}
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+    client.global.set("bearerToken", response.body.access_token);
+%}
+###
+
+GET http://localhost:80/api/auth/me
+Accept: application/json
+Authorization: Bearer {{bearerToken}}
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+    client.global.set("profilePicture", response.body.data.profile_picture);
+%}
+###
 
 ###
-GET localhost:80/storage/igplqBle7J1bzLTbyZH454NPcb0TvVXqljBU1dJg2jb7AGPnWdoEUKy5MWa4gkQQuRlWKLSm4q25G0MiEa0o9ZftFujLpcXBtASn.
+GET /{{profilePicture}}

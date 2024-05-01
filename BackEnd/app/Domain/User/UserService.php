@@ -320,6 +320,4 @@ readonly class UserService
             throw $exception;
         }
     }
-
-
 }

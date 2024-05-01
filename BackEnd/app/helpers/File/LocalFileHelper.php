@@ -38,6 +38,4 @@ class LocalFileHelper implements FileHelperInterface
 
         return sprintf("%s.%s", $name, $extension);
     }
-
-
 }

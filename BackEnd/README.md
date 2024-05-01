@@ -28,6 +28,12 @@ php artisan migrate
 php artisan db:seed
 ```
 
+### to link the public storage directory
+
+```php
+php artisan storage:link
+```
+
 
 # Testing
 

@@ -10,6 +10,15 @@ Content-Type: application/json
   "type": "recruiter"
 }
 
+
+###
+
+
+
+###
+
+
+
 ###
 POST http://localhost:80/api/auth/login
 Accept: application/json
@@ -28,3 +37,44 @@ Content-Type: application/json
 GET http://localhost:80/api/auth/me
 Accept: application/json
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2FwaS9hdXRoL2xvZ2luIiwiaWF0IjoxNzE0MzM1NjI3LCJleHAiOjE3MTQzMzkyMjcsIm5iZiI6MTcxNDMzNTYyNywianRpIjoiZDhZR05jRHNLUXB5eGt6NCIsInN1YiI6IjcyIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.kwYnbaH6ICB1IhHnWDY6AooBowMLpsxp8SMtUfgT_6k
+
+
+
+###
+###
+POST http://localhost/api/auth/register
+Accept: application/json
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="name"
+
+asdasd
+--WebAppBoundary
+Content-Disposition: form-data; name="password"
+
+testasdasd
+--WebAppBoundary
+Content-Disposition: form-data; name="phone "
+
+319747474747
+--WebAppBoundary
+Content-Disposition: form-data; name=" email"
+
+davi.teste@gmail.com
+--WebAppBoundary
+Content-Disposition: form-data; name="type"
+
+recruiter
+--WebAppBoundary
+Content-Disposition: form-data; name="profile_picture"; filename="profilePicture.png"
+
+< profilePicture.jpeg
+--WebAppBoundary--
+
+###
+
+GET localhost:80/api/user
+
+###
+GET localhost:80/storage/igplqBle7J1bzLTbyZH454NPcb0TvVXqljBU1dJg2jb7AGPnWdoEUKy5MWa4gkQQuRlWKLSm4q25G0MiEa0o9ZftFujLpcXBtASn.

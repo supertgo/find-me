@@ -5,6 +5,7 @@ use App\Http\Controllers\JWTController;
 use App\Http\Controllers\UserAcademicRecordsController;
 use App\Http\Controllers\UserCompetenceController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserProfessionalExperience;
 use Illuminate\Support\Facades\Route;
 
 Route::group(
@@ -34,6 +35,11 @@ Route::group(
         Route::group(['prefix' => 'academic-records'], function () {
             Route::post('/', [UserAcademicRecordsController::class, 'addAcademicRecords']);
             Route::delete('/', [UserAcademicRecordsController::class, 'deleteAcademicRecords']);
+        });
+
+        Route::group(['prefix' => 'professional-experiences'], function () {
+            Route::post('/', [UserProfessionalExperience::class, 'addProfessionalExperiences']);
+            Route::delete('/', [UserProfessionalExperience::class, 'deleteProfessionalExperiences']);
         });
 
         Route::get('', [UserController::class, 'index']);

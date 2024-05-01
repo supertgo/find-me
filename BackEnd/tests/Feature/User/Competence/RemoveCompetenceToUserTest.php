@@ -21,7 +21,7 @@ class RemoveCompetenceToUserTest extends TestCase
 
         $this
             ->actingAs($this->user)
-            ->json('DELETE', self::ROUTE, ['competencesId' => $competenceIds])
+            ->json('DELETE', self::ROUTE, ['competences_id' => $competenceIds])
             ->assertStatus(Response::HTTP_NO_CONTENT);
 
         $this->assertSame(0, $this->user->competences()->count());

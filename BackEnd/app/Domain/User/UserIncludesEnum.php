@@ -6,4 +6,5 @@ enum UserIncludesEnum: string
 {
     case Competences = 'competences';
     case AcademicRecords = 'academicRecords';
+    case ProfessionalExperiences = 'professionalExperiences';
 }

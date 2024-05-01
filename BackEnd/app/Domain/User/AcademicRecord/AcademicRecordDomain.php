@@ -6,7 +6,7 @@ use App\Exceptions\User\AcademicRecord\EndDateMustBeAfterStartDateException;
 use App\Exceptions\User\AcademicRecord\MustHaveEndDateWhenFinishedException;
 use Carbon\Carbon;
 
-class AcademicRecordDomain implements AcademicRecordDomainInterface
+readonly class AcademicRecordDomain implements AcademicRecordDomainInterface
 {
     private ?int $id;
     private string $institution;
@@ -17,7 +17,7 @@ class AcademicRecordDomain implements AcademicRecordDomainInterface
     private bool $isOnProgress;
     private ?string $description;
 
-    public function __construct(private readonly AcademicRecordRepositoryInterface $repository)
+    public function __construct(private AcademicRecordRepositoryInterface $repository)
     {
     }
 

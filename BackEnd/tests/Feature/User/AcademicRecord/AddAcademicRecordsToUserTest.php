@@ -16,7 +16,7 @@ class AddAcademicRecordsToUserTest extends TestCase
 
     const ROUTE = self::BASE_ROUTE . 'user/academic-records';
 
-    public function testAddCompetencesToUser()
+    public function testAddAcademicRecordsToUser()
     {
         /** @var User $user */
         $user = User::factory()->create([

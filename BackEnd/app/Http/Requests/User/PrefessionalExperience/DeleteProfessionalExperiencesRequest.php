@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\User\UserCompetence;
+namespace App\Http\Requests\User\PrefessionalExperience;
 
 use App\Http\Requests\AbstractRequest;
 use App\Http\Requests\Rules\UniqueArrayValuesRule;
 
-class DeleteCompetencesRequest extends AbstractRequest
+class DeleteProfessionalExperiencesRequest extends AbstractRequest
 {
     public function authorize(): bool
     {
@@ -15,13 +15,13 @@ class DeleteCompetencesRequest extends AbstractRequest
     public function rules(): array
     {
         return [
-            'competences_id' => [
+            'professional_experiences' => [
                 'required',
                 'array',
                 'min:1',
                 new UniqueArrayValuesRule,
             ],
-            'competences_id.*' => 'required|integer',
+            'professional_experiences.*' => 'required|integer',
         ];
     }
 }

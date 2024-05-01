@@ -8,10 +8,17 @@ use App\Domain\Competence\CompetenceDomain;
 use App\Domain\Competence\CompetenceRepository;
 use App\Domain\User\AcademicRecord\AcademicRecordDomain;
 use App\Domain\User\AcademicRecord\AcademicRecordRepository;
+use App\Domain\User\ProfessionalExperience\ProfessionalExperienceDomain;
+use App\Domain\User\ProfessionalExperience\ProfessionalExperienceRepository;
 use App\Exceptions\Abstract\AbstractDomainException;
 use App\Exceptions\Competence\CompetenceNotFound;
 use App\Exceptions\User\AcademicRecord\AcademicRecordNotFoundException;
 use App\Exceptions\User\AcademicRecord\OnlyOwnerCanDeleteAcademicRecordException;
+use App\Exceptions\User\ProfessionalExperience\CurrentExperienceEndDateMustBeInTheFutureException;
+use App\Exceptions\User\ProfessionalExperience\EndDateMustBeAfterStartDateException;
+use App\Exceptions\User\ProfessionalExperience\MustHaveEndDateWhenFinishedExperienceException;
+use App\Exceptions\User\ProfessionalExperience\OnlyOwnerCanDeleteProfessionalExperienceException;
+use App\Exceptions\User\ProfessionalExperience\ProfessionalExperienceNotFoundException;
 use App\Exceptions\User\UserNotFoundException;
 use Exception;
 use Illuminate\Support\Facades\Log;
@@ -163,8 +170,6 @@ readonly class UserService
         try {
             $academicRecordRepository->beginTransaction();
 
-            $academicRecordRepository = new AcademicRecordRepository();
-
             foreach ($academicRecordsId as $recordId) {
                 $academicRecordsDomain = new AcademicRecordDomain($academicRecordRepository);
                 if (!$academicRecordsDomain->exists($recordId)) {
@@ -181,6 +186,62 @@ readonly class UserService
             $academicRecordRepository->commitTransaction();
         } catch (Exception $exception) {
             $this->commonLogLogic($academicRecordRepository, $exception);
+
+            throw $exception;
+        }
+    }
+
+    /**
+     * @throws Throwable
+     */
+    public function removeProfessionalExperiences(int $userId, array $experiences): void
+    {
+        $repository = new ProfessionalExperienceRepository();
+
+        try {
+            $repository->beginTransaction();
+
+            foreach ($experiences as $experience) {
+                $domain = new ProfessionalExperienceDomain($repository);
+                if (!$domain->exists($experience)) {
+                    throw new ProfessionalExperienceNotFoundException($experience);
+                }
+
+                if (!$domain->isOwner($experience, $userId)) {
+                    throw new OnlyOwnerCanDeleteProfessionalExperienceException($experience);
+                }
+
+                $domain->delete($experience);
+            }
+
+            $repository->commitTransaction();
+        } catch (Exception $exception) {
+            $this->commonLogLogic($repository, $exception);
+
+            throw $exception;
+        }
+    }
+
+    /**
+     * @throws MustHaveEndDateWhenFinishedExperienceException
+     * @throws Throwable
+     * @throws EndDateMustBeAfterStartDateException
+     * @throws CurrentExperienceEndDateMustBeInTheFutureException
+     */
+    public function addProfessionalExperiences(int $userId, array $experiences): void
+    {
+        $userRepository = new UserRepository();
+
+        try {
+            $userRepository->beginTransaction();
+
+            $experiencesDomain = new ProfessionalExperienceDomain(new ProfessionalExperienceRepository());
+
+            $experiencesDomain->createMany($experiences, $userId);
+
+            $userRepository->commitTransaction();
+        } catch (Exception $exception) {
+            $this->commonLogLogic($userRepository, $exception);
 
             throw $exception;
         }

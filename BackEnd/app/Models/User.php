@@ -29,6 +29,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @property Carbon|null $email_verified_at
  * @property string $password
  * @property string $about_me
+ * @property string $profile_picture_path
  * @property string|null $remember_token
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at

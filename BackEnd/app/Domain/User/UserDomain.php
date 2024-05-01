@@ -16,6 +16,7 @@ class UserDomain implements UserDomainInterface
     private ?string $password;
     private UserTypeEnum $type;
     private ?string $aboutMe;
+    private ?string $profilePicturePath;
 
     public function __construct(private readonly UserRepositoryInterface $userRepository)
     {
@@ -54,9 +55,11 @@ class UserDomain implements UserDomainInterface
         return (new UserDomain($this->getRepository()))->loadUser($this->getId());
     }
 
-    public function createUser(): void
+    public function createUser(): self
     {
-        $this->userRepository->createUser($this->toArray());
+        $created = $this->userRepository->createUser($this->toArray());
+
+        return (new self($this->getRepository()))->fromArray($created);
     }
 
     public function loadUser(int $userId): self

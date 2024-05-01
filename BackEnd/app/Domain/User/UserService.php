@@ -21,16 +21,18 @@ use App\Exceptions\User\ProfessionalExperience\OnlyOwnerCanDeleteProfessionalExp
 use App\Exceptions\User\ProfessionalExperience\ProfessionalExperienceNotFoundException;
 use App\Exceptions\User\UserNotFoundException;
 use Exception;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Log;
 use Throwable;
 
 readonly class UserService
 {
-    public function createUser(array $user): void
+    public function createUser(array $user): int
     {
-        (new UserDomain(app(UserRepository::class)))
+        return (new UserDomain(app(UserRepository::class)))
             ->fromArray($user)
-            ->createUser();
+            ->createUser()
+            ->getId();
     }
 
     /**
@@ -238,6 +240,23 @@ readonly class UserService
             $experiencesDomain = new ProfessionalExperienceDomain(new ProfessionalExperienceRepository());
 
             $experiencesDomain->createMany($experiences, $userId);
+
+            $userRepository->commitTransaction();
+        } catch (Exception $exception) {
+            $this->commonLogLogic($userRepository, $exception);
+
+            throw $exception;
+        }
+    }
+
+    public function setProfilePicture(UploadedFile $file, int $userId): void
+    {
+        $userRepository = new UserRepository();
+
+        try {
+            $userRepository->beginTransaction();
+
+            $userRepository->createProfilePicture($file, $userId);
 
             $userRepository->commitTransaction();
         } catch (Exception $exception) {

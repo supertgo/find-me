@@ -9,7 +9,8 @@ interface UserDomainInterface
 {
     public function fromArray(array $user): self;
     public function update(): self;
-    public function createUser(): void;
+
+    public function createUser(): self;
     public function loadUser(int $userId): self;
     public function toArray(): array;
     public function exists(): bool;

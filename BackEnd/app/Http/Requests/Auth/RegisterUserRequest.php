@@ -23,6 +23,7 @@ class RegisterUserRequest extends FormRequest
             'phone' => 'required|numeric|unique:users,phone',
             'type' => 'required|string|in:' . implode(',', array_column(UserTypeEnum::cases(), 'value')),
             'about_me' => 'string',
+            'profile_picture' => 'file|image|mimes:jpg,png,jpeg|max:2048'
         ];
     }
 

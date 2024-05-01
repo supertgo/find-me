@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\helpers\File\FileHelperInterface;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -73,6 +74,7 @@ class User extends Authenticatable implements JWTSubject
         'password',
         'type',
         'about_me',
+        'profile_picture_path'
     ];
     /**
      * The attributes that should be hidden for serialization.
@@ -130,5 +132,14 @@ class User extends Authenticatable implements JWTSubject
     public function professionalExperiences(): HasMany
     {
         return $this->hasMany(ProfessionalExperience::class);
+    }
+
+    public function getProfilePicturePathAttribute(): ?string
+    {
+        if ($path = $this->attributes['profile_picture_path']) {
+            return app(FileHelperInterface::class)->getUrlForPublicFile($path);
+        } else {
+            return null;
+        }
     }
 }

@@ -8,4 +8,6 @@ interface FileHelperInterface
 {
     public function storeRandomInPublicDirectory(UploadedFile $file): string;
 
+    public function getUrlForPublicFile(string $path): string;
+
 }

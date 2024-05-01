@@ -6,8 +6,6 @@ use App\Domain\User\UserDomain;
 use App\Domain\User\UserRepository;
 use App\Domain\User\UserService;
 use App\Exceptions\Abstract\AbstractDomainException;
-use App\Exceptions\Job\JobNotFoundException;
-use App\Exceptions\User\UserIdMustBeAnIntegerException;
 use App\Http\Requests\User\ShowUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
 use Exception;
@@ -37,15 +35,11 @@ class UserController extends Controller
         }
     }
 
-    /**
-     * @throws JobNotFoundException
-     * @throws UserIdMustBeAnIntegerException
-     */
     public function show(ShowUserRequest $request): JsonResponse|IluminateResponse
     {
         try {
             return response()->json([
-                'data' => app(UserService::class)
+                'data' => (new UserService())
                     ->getUser($request->getUserId(), $request->getIncludes())
             ]);
         } catch (Exception $exception) {

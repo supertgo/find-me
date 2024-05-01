@@ -18,6 +18,11 @@ class LocalFileHelper implements FileHelperInterface
         return $name;
     }
 
+    public function getUrlForPublicFile(string $path): string
+    {
+        return Storage::disk('public')->url($path);
+    }
+
     private function generateRandomName(string $extension): string
     {
         do {

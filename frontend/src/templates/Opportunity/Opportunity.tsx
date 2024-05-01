@@ -47,7 +47,7 @@ export const Opportunity = ({}: OpportunityProps) => {
           <Step
             icon={<HomeIcon />}
             title="Informações do emprego"
-            step={1}
+            itemStep={1}
             currentStep={currentStep}
             maxStep={maxStep}
             onClick={() => setCurrentStep(1)}
@@ -56,7 +56,7 @@ export const Opportunity = ({}: OpportunityProps) => {
           <Step
             icon={<HomeIcon />}
             title="Descrição do emprego"
-            step={2}
+            itemStep={2}
             currentStep={currentStep}
             maxStep={maxStep}
             onClick={() => setCurrentStep(2)}
@@ -99,7 +99,7 @@ export const Opportunity = ({}: OpportunityProps) => {
                 title="Salário"
                 description="Por favor, especifique a faixa salarial estimada para a função. *Você pode deixar isso em branco"
               >
-                <input type="range" />
+                <Input type="range" />
               </ConfigInfoWrapper>
               <ConfigInfoWrapper title="Número máximo de candidatos">
                 <Input type="number" min={1} />
@@ -185,7 +185,9 @@ export const Opportunity = ({}: OpportunityProps) => {
                 />
               </ConfigInfoWrapper>
               <S.BottomRow>
-                <Button onClick={() => setCurrentStep(currentStep - 1)}>Voltar</Button>
+                <Button onClick={() => setCurrentStep(currentStep - 1)}>
+                  Voltar
+                </Button>
                 <Button>Concluir</Button>
               </S.BottomRow>
             </>

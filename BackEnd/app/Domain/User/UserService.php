@@ -250,6 +250,9 @@ readonly class UserService
         }
     }
 
+    /**
+     * @throws Throwable
+     */
     public function setProfilePicture(UploadedFile $file, int $userId): void
     {
         $userRepository = new UserRepository();
@@ -269,6 +272,9 @@ readonly class UserService
         }
     }
 
+    /**
+     * @throws Throwable
+     */
     public function updateProfilePicture(int $userId, UploadedFile $profilePicture): string
     {
         $userRepository = new UserRepository();
@@ -290,4 +296,30 @@ readonly class UserService
             throw $exception;
         }
     }
+
+    /**
+     * @throws Throwable
+     */
+    public function deleteProfilePicture(int $userId): void
+    {
+        $userRepository = new UserRepository();
+
+        try {
+            $userRepository->beginTransaction();
+
+            $domain = new UserDomain($userRepository);
+            $domain->loadUser($userId);
+
+            $domain->deleteProfilePicture();
+
+            $userRepository->commitTransaction();
+
+        } catch (Exception $exception) {
+            $this->commonLogLogic($userRepository, $exception);
+
+            throw $exception;
+        }
+    }
+
+
 }

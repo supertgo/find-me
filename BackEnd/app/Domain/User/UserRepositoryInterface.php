@@ -9,7 +9,9 @@ use Illuminate\Support\Collection;
 interface UserRepositoryInterface
 {
     public function createUser(array $user): array;
+
     public function forgotPassword(UserDomain $user): void;
+
     public function getUsers(): array;
 
     public function exists(int $id): bool;
@@ -36,5 +38,4 @@ interface UserRepositoryInterface
     public function createProfilePicture(UploadedFile $file, int $userId): string;
 
     public function deleteProfilePicture(string $profilePicturePath, int $userId): void;
-
 }

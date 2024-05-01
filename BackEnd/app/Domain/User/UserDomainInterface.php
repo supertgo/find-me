@@ -3,6 +3,7 @@
 namespace App\Domain\User;
 
 use App\Domain\Competence\CompetenceDomainInterface;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Collection;
 
 interface UserDomainInterface
@@ -32,4 +33,10 @@ interface UserDomainInterface
     public function removeCompetence(int $competenceId): self;
     public function loadUserWithIncludes(int $userId, array $includes): array;
     public function usersWithIncludes(array $includes): array;
+
+    public function createProfilePicture(UploadedFile $file, int $userId): void;
+
+    public function updateProfilePicture(UploadedFile $profilePicture, int $userId): string;
+
+    public function deleteProfilePicture(): void;
 }

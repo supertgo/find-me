@@ -48,6 +48,7 @@ Route::group(
 
         Route::group(['prefix' => 'profile-picture'], function () {
             Route::patch('', [UserController::class, 'updateProfilePicture']);
+            Route::delete('', [UserController::class, 'deleteProfilePicture']);
         });
     })
     ->middleware('api');;

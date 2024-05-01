@@ -19,6 +19,7 @@ class UserDomain implements UserDomainInterface
     private ?string $aboutMe;
     private ?string $profilePicturePath;
 
+
     public function __construct(private readonly UserRepositoryInterface $userRepository)
     {
     }
@@ -226,5 +227,27 @@ class UserDomain implements UserDomainInterface
         }
 
         return $this->userRepository->createProfilePicture($profilePicture, $userId);
+    }
+
+    public function deleteProfilePicture(): void
+    {
+        $this->userRepository->deleteProfilePicture($this->getProfilePicturePath(), $this->getId());
+    }
+
+    public function getAboutMe(): ?string
+    {
+        return $this->aboutMe;
+    }
+
+    public function getProfilePicturePath(): ?string
+    {
+        return $this->profilePicturePath;
+    }
+
+    public function setProfilePicturePath(?string $profilePicturePath): UserDomain
+    {
+        $this->profilePicturePath = $profilePicturePath;
+
+        return $this;
     }
 }

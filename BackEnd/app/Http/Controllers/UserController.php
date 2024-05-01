@@ -6,6 +6,7 @@ use App\Domain\User\UserDomain;
 use App\Domain\User\UserRepository;
 use App\Domain\User\UserService;
 use App\Exceptions\Abstract\AbstractDomainException;
+use App\Http\Requests\AbstractRequest;
 use App\Http\Requests\User\ShowUserRequest;
 use App\Http\Requests\User\UpdateUserProfilePictureRequest;
 use App\Http\Requests\User\UpdateUserRequest;
@@ -89,6 +90,21 @@ class UserController extends Controller
             return response()->json([
                 'url' => $url
             ]);
+        } catch (Exception) {
+            return response()
+                ->json(
+                    ['error' => 'Server error'],
+                    Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public function deleteProfilePicture(AbstractRequest $request): IluminateResponse|JsonResponse
+    {
+        try {
+            (new UserService())
+                ->deleteProfilePicture($request->getLoggedUserId());
+
+            return response()->noContent();
         } catch (Exception) {
             return response()
                 ->json(

@@ -13,7 +13,7 @@ class LocalFileHelper implements FileHelperInterface
     {
         $name = $this->generateRandomName($file->getExtension());
 
-        Storage::disk('public')->move($file->path(), Storage::disk('public')->path($name));
+        $file->move(Storage::disk('public')->path(''), $name);
 
         return $name;
     }

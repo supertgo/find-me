@@ -34,6 +34,7 @@ class MeTest extends TestCase
                     'type' => $this->user->type,
                     'id' => $this->user->id,
                     'about_me' => $this->user->about_me,
+                    'profile_picture' => $this->user->profile_picture_path
                 ],
             ]);
     }

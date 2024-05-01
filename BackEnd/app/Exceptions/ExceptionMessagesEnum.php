@@ -24,4 +24,10 @@ enum ExceptionMessagesEnum: string
     case AcademicRecordEndDateMustBeAfterStartDate = 'Academic record end date must be after start date';
     case AcademicRecordNotFound = 'Academic record not found';
     case OnlyOwnerCanDeleteAcademicRecord = 'Only owner can delete academic record';
+
+    case ProfessionalExperienceMustHaveEndDateWhenFinished = 'Professional experience must have end date when finished';
+    case ProfessionalExperienceEndDateMustBeAfterStartDate = 'Professional experience end date must be after start date';
+    case ProfessionalExperienceEndDateWhenCurrentMustBeInTheFuture = 'Professional experience end date when current must be in the future';
+    case ProfessionalExperienceNotFound = 'Professional experience not found';
+    case OnlyOwnerCanDeleteProfessionalExperience = 'Only owner can delete professional experience';
 }

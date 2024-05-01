@@ -4,23 +4,25 @@ namespace App\Http\Controllers;
 
 use App\Domain\User\UserService;
 use App\Exceptions\Abstract\AbstractDomainException;
-use App\Http\Requests\User\AcademicRecord\AddAcademicRecordRequest;
-use App\Http\Requests\User\AcademicRecord\DeleteAcademicRecordsRequest;
+use App\Http\Requests\User\PrefessionalExperience\AddProfessionalExperienceRequest;
+use App\Http\Requests\User\PrefessionalExperience\DeleteProfessionalExperiencesRequest;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response as IluminateResponse;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 
-class UserAcademicRecordsController extends Controller
+class UserProfessionalExperience extends Controller
 {
-    public function addAcademicRecords(AddAcademicRecordRequest $request): JsonResponse|IluminateResponse
+    public function addProfessionalExperiences(
+        AddProfessionalExperienceRequest $request
+    ): JsonResponse|IluminateResponse
     {
         try {
             (new UserService())
-                ->addAcademicRecords(
+                ->addProfessionalExperiences(
                     $request->getLoggedUserId(),
-                    $request->validated('academic_records')
+                    $request->validated('professional_experiences')
                 );
 
             return response()->noContent();
@@ -39,13 +41,15 @@ class UserAcademicRecordsController extends Controller
         }
     }
 
-    public function deleteAcademicRecords(DeleteAcademicRecordsRequest $request): JsonResponse|IluminateResponse
+    public function deleteProfessionalExperiences(
+        DeleteProfessionalExperiencesRequest $request
+    ): JsonResponse|IluminateResponse
     {
         try {
             (new UserService())
-                ->removeAcademicRecords(
+                ->removeProfessionalExperiences(
                     $request->getLoggedUserId(),
-                    $request->validated('academic_records_ids')
+                    $request->validated('professional_experiences')
                 );
 
             return response()->noContent();

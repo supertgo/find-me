@@ -8,7 +8,8 @@ class ShowUserRequest extends UserRequestHavingId
 {
     protected array $availableIncludes = [
         UserIncludesEnum::Competences->value,
-        UserIncludesEnum::AcademicRecords->value
+        UserIncludesEnum::AcademicRecords->value,
+        UserIncludesEnum::ProfessionalExperiences->value,
     ];
 
     public function rules(): array

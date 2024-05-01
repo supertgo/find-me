@@ -10,3 +10,11 @@ export type UserProps = {
 };
 
 export type UserAuthRegister = Omit<UserProps, 'id'>;
+
+export type ShowUsersResponse = {
+  data: UserProps[];
+};
+
+export type GetUserResponse = {
+  data: UserProps;
+};

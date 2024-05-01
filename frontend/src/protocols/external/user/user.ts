@@ -8,3 +8,5 @@ export type UserProps = {
   phone: string;
   type: UserType;
 };
+
+export type UserAuthRegister = Omit<UserProps, 'id'>;

@@ -10,8 +10,11 @@ import {
   UseFormRegister,
 } from 'react-hook-form';
 import { PostClient } from 'services/httpClient/post';
-import { UserProps, UserType } from 'protocols/external/user/user';
-
+import {
+  UserAuthRegister,
+  UserProps,
+  UserType,
+} from 'protocols/external/user/user';
 
 export type RegisterInputs = {
   name: string;
@@ -29,7 +32,7 @@ export type UseRegisterFormProtocols = {
   control: Control<RegisterInputs>;
   isLoading: boolean;
   isValid: boolean;
-}
+};
 
 export const useRegisterForm = (): UseRegisterFormProtocols => {
   const [isLoading, setIsLoading] = useState(false);
@@ -50,7 +53,7 @@ export const useRegisterForm = (): UseRegisterFormProtocols => {
 
     const postClient = new PostClient();
 
-    const registerBody: UserProps = {
+    const registerBody: UserAuthRegister = {
       name: data.name,
       password: data.password,
       email: data.email,
@@ -66,14 +69,13 @@ export const useRegisterForm = (): UseRegisterFormProtocols => {
         },
       });
 
-
       await signIn('credentials', {
         email: data.email,
         password: data.password,
         redirect: true,
         callbackUrl: '/home',
       });
-      
+
       toast.success(response.data.message);
     } catch (error) {
       if (error instanceof Error) {

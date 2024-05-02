@@ -90,6 +90,19 @@ export const theme = {
   colors: {
     primary: '#2563EB',
     white: '#FFF',
-    grey900: '#0F172A'
+    secondWhite: '#F8F8FD',
+    cleanBlue: '#E9EBFD',
+    grey900: '#0F172A',
+    darkGrey: '#202430',
+    darkBlue: '#25324B',
+    darkTitanium: '#515B6F',
+    findBlue: '#4640DE',
+    oficialGrey: '#7C8493',
+    cleanTitanium: '#94A3B8',
+    lightGrey: '#A8ADB7',
+    lightBlue: '#26A4FF',
+    lightGreen: '#56CDAD',
+    lightRed: '#FF6550',
+    mustYellow: '#FFB836'
   }
 } as const;

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\helpers\File\FileHelperInterface;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -28,6 +29,8 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @property string $type
  * @property Carbon|null $email_verified_at
  * @property string $password
+ * @property string $about_me
+ * @property string $profile_picture_path
  * @property string|null $remember_token
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
@@ -69,7 +72,9 @@ class User extends Authenticatable implements JWTSubject
         'email',
         'phone',
         'password',
-        'type'
+        'type',
+        'about_me',
+        'profile_picture_path'
     ];
     /**
      * The attributes that should be hidden for serialization.
@@ -127,5 +132,14 @@ class User extends Authenticatable implements JWTSubject
     public function professionalExperiences(): HasMany
     {
         return $this->hasMany(ProfessionalExperience::class);
+    }
+
+    public function getProfilePicturePathAttribute(): ?string
+    {
+        if ($path = $this->attributes['profile_picture_path']) {
+            return app(FileHelperInterface::class)->getUrlForPublicFile($path);
+        } else {
+            return null;
+        }
     }
 }

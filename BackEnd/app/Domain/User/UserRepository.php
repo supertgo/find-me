@@ -4,20 +4,22 @@ namespace App\Domain\User;
 
 use App\Domain\Abstract\AbstractRepository;
 use App\Domain\Competence\CompetenceDomainInterface;
+use App\helpers\File\FileHelperInterface;
 use App\Mail\UserForgotPassword;
 use App\Models\User;
 use DB;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Hash;
 use Mail;
 
 class UserRepository extends AbstractRepository implements UserRepositoryInterface
 {
-    public function createUser(array $user): void
+    public function createUser(array $user): array
     {
         $user['password'] = Hash::make($user['password']);
 
-        User::create($user);
+        return User::create($user)->toArray();
     }
 
     public function isEmailAvailableToUpdate(UserDomainInterface $user): bool
@@ -108,4 +110,28 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
             ->where('competence_id', $competenceId)
             ->exists();
     }
+
+    public function createProfilePicture(UploadedFile $file, int $userId): string
+    {
+        $fileHelper = app(FileHelperInterface::class);
+
+        $path = $fileHelper->storeRandomInPublicDirectory($file);
+
+        User::where('id', $userId)
+            ->update(['profile_picture_path' => $path]);
+
+        return $path;
+    }
+
+    public function deleteProfilePicture(string $profilePicturePath, int $userId): void
+    {
+        $fileHelper = app(FileHelperInterface::class);
+
+        $fileHelper->deletePublicFile($profilePicturePath);
+
+        DB::table('users')
+            ->where('id', $userId)
+            ->update(['profile_picture_path' => null]);
+    }
+
 }

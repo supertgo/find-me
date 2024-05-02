@@ -5,6 +5,7 @@ namespace App\Domain\User;
 use App\Exceptions\User\UserDoesntHaveCompetenceException;
 use App\Exceptions\User\UserEmailNotAvailableException;
 use App\Exceptions\User\UserPhoneNotAvailableException;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Collection;
 
 class UserDomain implements UserDomainInterface
@@ -15,6 +16,9 @@ class UserDomain implements UserDomainInterface
     private string $phone;
     private ?string $password;
     private UserTypeEnum $type;
+    private ?string $aboutMe;
+    private ?string $profilePicturePath;
+
 
     public function __construct(private readonly UserRepositoryInterface $userRepository)
     {
@@ -29,6 +33,7 @@ class UserDomain implements UserDomainInterface
         !empty($user['type']) && $this->setType(UserTypeEnum::from($user['type']));
         !empty($user['id']) && $this->setId($user['id']);
         !empty($user['password']) && $this->setPassword($user['password']);
+        !empty($user['about_me']) && $this->setAboutMe($user['about_me']);
 
         return $this;
     }
@@ -52,9 +57,11 @@ class UserDomain implements UserDomainInterface
         return (new UserDomain($this->getRepository()))->loadUser($this->getId());
     }
 
-    public function createUser(): void
+    public function createUser(): self
     {
-        $this->userRepository->createUser($this->toArray());
+        $created = $this->userRepository->createUser($this->toArray());
+
+        return (new self($this->getRepository()))->fromArray($created);
     }
 
     public function loadUser(int $userId): self
@@ -63,7 +70,9 @@ class UserDomain implements UserDomainInterface
         $this->name = $user['name'];
         $this->email = $user['email'];
         $this->phone = $user['phone'];
+        $this->aboutMe = $user['about_me'];
         $this->type = UserTypeEnum::from($user['type']);
+        $this->profilePicturePath = $user['profile_picture_path'];
 
         empty($this->id) && $this->id = $user['id'];
 
@@ -81,6 +90,7 @@ class UserDomain implements UserDomainInterface
         !empty($this->id) && $user['id'] = $this->id;
         !empty($this->password) && $user['password'] = $this->password;
         !empty($this->type) && $user['type'] = $this->type->value;
+        !empty($this->aboutMe) && $user['about_me'] = $this->aboutMe;
 
         return $user;
     }
@@ -197,5 +207,48 @@ class UserDomain implements UserDomainInterface
     public function usersWithIncludes(array $includes): array
     {
         return $this->userRepository->getUsersWithIncludes($includes);
+    }
+
+    private function setAboutMe(?string $aboutMe): self
+    {
+        $this->aboutMe = $aboutMe;
+
+        return $this;
+    }
+
+    public function createProfilePicture(UploadedFile $file, int $userId): void
+    {
+        $this->userRepository->createProfilePicture($file, $userId);
+    }
+
+    public function updateProfilePicture(UploadedFile $profilePicture, int $userId): string
+    {
+        if (isset($this->profilePicturePath)) {
+            $this->userRepository->deleteProfilePicture($this->profilePicturePath, $userId);
+        }
+
+        return $this->userRepository->createProfilePicture($profilePicture, $userId);
+    }
+
+    public function deleteProfilePicture(): void
+    {
+        $this->userRepository->deleteProfilePicture($this->getProfilePicturePath(), $this->getId());
+    }
+
+    public function getAboutMe(): ?string
+    {
+        return $this->aboutMe;
+    }
+
+    public function getProfilePicturePath(): ?string
+    {
+        return $this->profilePicturePath;
+    }
+
+    public function setProfilePicturePath(?string $profilePicturePath): UserDomain
+    {
+        $this->profilePicturePath = $profilePicturePath;
+
+        return $this;
     }
 }

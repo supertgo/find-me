@@ -3,13 +3,15 @@
 namespace App\Domain\User;
 
 use App\Domain\Competence\CompetenceDomainInterface;
-use App\Prototype\RegisterRequestPrototype;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Collection;
 
 interface UserRepositoryInterface
 {
-    public function createUser(array $user): void;
+    public function createUser(array $user): array;
+
     public function forgotPassword(UserDomain $user): void;
+
     public function getUsers(): array;
 
     public function exists(int $id): bool;
@@ -32,4 +34,8 @@ interface UserRepositoryInterface
     public function getUserWithIncludes(int $userId, array $includes): array;
 
     public function getUsersWithIncludes(array $includes): array;
+
+    public function createProfilePicture(UploadedFile $file, int $userId): string;
+
+    public function deleteProfilePicture(string $profilePicturePath, int $userId): void;
 }

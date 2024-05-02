@@ -10,7 +10,7 @@ interface JobDomainInterface
 
     public function delete(): void;
 
-    public function jobs(): array;
+    public function jobsWithIncludes(array $includes): array;
 
     public function toArray(): array;
 

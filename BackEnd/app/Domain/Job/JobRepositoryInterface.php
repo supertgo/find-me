@@ -14,7 +14,7 @@ interface JobRepositoryInterface
 
     public function delete(int $id): void;
 
-    public function getJobs(): array;
+    public function getJobs(array $includes = []): array;
 
     public function getJob(?int $id);
 

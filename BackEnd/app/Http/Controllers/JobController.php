@@ -162,7 +162,7 @@ class JobController extends Controller
         Log::error($exception);
     }
 
-    public function index(): JsonResponse|IluminateResponse
+    public function index(IndexJobRequest $request): JsonResponse|IluminateResponse
     {
         $repository = app(JobRepository::class);
         $service = new JobDomain($repository);
@@ -170,7 +170,7 @@ class JobController extends Controller
         try {
             return response()
                 ->json([
-                    'data' => $service->jobs()
+                    'data' => $service->jobsWithIncludes($request->getIncludes())
                 ]);
         } catch (Exception $exception) {
             Log::error($exception);

@@ -29,24 +29,29 @@ export const nextAuthOptions: NextAuthOptions = {
                 password: credentials?.password,
               }),
             },
+          );
+
+          if (!response.ok) {
+            throw new Error('Nâo foi possível logar, tente novamente!');
+          }
+
+          const res = await response.json();
+
+          const authMeResponse = await fetch(
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/me`,
+            {
+              headers: {
+                Authorization: `Bearer ${res.access_token}`,
+              },
+            },
           ).then((res) => res.json());
-
-
-          if (response.message) throw new Error(response.message);
-
-          const authMeResponse = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/me`, {
-            headers: {
-              Authorization: `Bearer ${response.access_token}`
-            }
-          }).then((res) => res.json())
-
 
           return {
             name: authMeResponse.data.name,
             email: credentials?.email,
             password: credentials?.password,
             type: authMeResponse.data.type as UserType,
-            access_token: response.access_token,
+            access_token: res.access_token,
           };
         } catch (error) {
           if (error instanceof Error) {
@@ -78,4 +83,3 @@ export const nextAuthOptions: NextAuthOptions = {
     },
   },
 };
-

@@ -8,6 +8,7 @@ export const Wrapper = styled.div`
     color: #56cdad;
     font-size: ${theme.font.sizes.xs};
     font-weight: ${theme.font.weights.medium};
+    font-family: arial;
     width: min-content;
     text-wrap: nowrap;
   `}

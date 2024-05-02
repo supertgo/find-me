@@ -8,7 +8,6 @@ use Throwable;
 
 class AbstractService
 {
-
     /**
      * @throws Throwable
      */

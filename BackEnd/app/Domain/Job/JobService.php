@@ -98,6 +98,4 @@ class JobService extends AbstractService
             $domain->attachCompetences($competences);
         }
     }
-
-
 }

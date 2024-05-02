@@ -21,7 +21,7 @@ jobs:
         run: cd frontend/ && npm i
 
       - name: Typecheck
-        run: npm run typecheck
+        run: cd frontend/ && npm run typecheck
 
       - name: Run test suite
         run: npm test

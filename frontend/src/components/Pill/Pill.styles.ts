@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
     padding: ${theme.borderRadius.s} 1rem;
     border-radius: 8rem;
     background: #56cdad1a;
-    color: #56cdad;
+    color: ${theme.colors.lightGreen};
     font-size: ${theme.font.sizes.xs};
     font-weight: ${theme.font.weights.medium};
     width: min-content;

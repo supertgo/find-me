@@ -27,7 +27,7 @@ export const JobInfoWrapper = styled.div`
 export const JobInfo = styled.div`
   ${({ theme }) => css`
     p {
-      color: #25324b;
+      color: ${theme.colors.darkBlue};
       font-weight: ${theme.font.weights.medium};
       font-size: ${theme.font.sizes.md};
     }
@@ -36,7 +36,7 @@ export const JobInfo = styled.div`
 
 export const JobLocationInfo = styled.div`
   ${({ theme }) => css`
-    color: #515b6f;
+    color: ${theme.colors.darkTitanium};
     margin: ${theme.space.xxsmall} 0;
   `}
 `;
@@ -101,7 +101,7 @@ type ProgressDivProps = {
 
 export const ProgressDiv = styled.div<ProgressDivProps>`
   ${({ theme, $progress }) => css`
-    background: #56cdad;
+    background: ${theme.colors.lightGreen};
     height: 0.6rem;
     width: ${`${$progress}%`};
   `}

@@ -23,7 +23,7 @@ export const Wrapper = styled.a`
 
 export const Text = styled.p`
   ${({ theme }) => css`
-    color: #7c8493;
+    color: ${theme.colors.oficialGrey};
     font-size: ${theme.font.sizes.sm};
   `}
 `;

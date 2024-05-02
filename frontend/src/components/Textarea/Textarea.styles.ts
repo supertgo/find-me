@@ -13,7 +13,7 @@ export const Textarea = styled.textarea`
     border: 1px solid #d6ddeb;
 
     &::placeholder {
-      color: #a8adb7;
+      color: ${theme.colors.lightGrey};
       font-size: ${theme.font.sizes.sm};
       font-weight: ${theme.font.weights.regular};
     }
@@ -22,7 +22,7 @@ export const Textarea = styled.textarea`
 
 export const LengthInformation = styled.div`
   ${({ theme }) => css`
-    color: #a8adb7;
+    color: ${theme.colors.lightGrey};
     font-size: ${theme.font.sizes.sm};
     font-weight: ${theme.font.weights.regular};
     display: flex;

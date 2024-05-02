@@ -4,7 +4,7 @@ import media from 'styled-media-query';
 export const Wrapper = styled.div`
   ${({ theme }) => css`
     min-height: 100vh;
-    background: #f8f8fd;
+    background: ${theme.colors.secondWhite};
     width: 24.2rem;
     padding: ${theme.space.large} 0;
     display: flex;
@@ -58,13 +58,13 @@ export const AvatarInfo = styled.div`
     p {
       font-weight: ${theme.font.weights.medium};
       font-size: ${theme.font.sizes.smd};
-      color: #25324b;
+      color: ${theme.colors.darkBlue};
     }
 
     span {
       font-weight: ${theme.font.weights.regular};
       font-size: ${theme.font.sizes.xs};
-      color: #515b6f;
+      color: ${theme.colors.darkTitanium};
     }
   `}
 `;

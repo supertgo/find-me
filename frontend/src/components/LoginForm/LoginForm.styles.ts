@@ -28,7 +28,7 @@ export const DialogWrapper = styled.div`
 
 export const Text = styled.p`
   ${({ theme }) => css`
-    color: #0f172a;
+    color: ${theme.colors.grey900};
     font-weight: ${theme.font.weights.regular};
     font-size: ${theme.font.sizes.xs};
     margin-top: ${theme.space.xxxlarge};

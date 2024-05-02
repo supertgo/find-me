@@ -2,9 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Domain\Job\EmploymentTypeEnum;
-use App\Domain\Job\SalaryTimeUnitEnum;
-use App\Domain\Job\WorkModelEnum;
 use Auth;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Foundation\Http\FormRequest;

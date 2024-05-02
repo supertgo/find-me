@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests\Job;
 
-use App\Domain\Job\EmploymentTypeEnum;
-use App\Domain\Job\SalaryTimeUnitEnum;
-use App\Domain\Job\WorkModelEnum;
+use App\Domain\Job\Enum\EmploymentTypeEnum;
+use App\Domain\Job\Enum\SalaryTimeUnitEnum;
+use App\Domain\Job\Enum\WorkModelEnum;
 use App\Http\Requests\AbstractRequest;
 
 class StoreJobRequest extends AbstractRequest

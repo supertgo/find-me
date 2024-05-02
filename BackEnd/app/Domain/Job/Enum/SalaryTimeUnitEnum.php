@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Job;
+namespace App\Domain\Job\Enum;
 
 enum SalaryTimeUnitEnum: string
 {

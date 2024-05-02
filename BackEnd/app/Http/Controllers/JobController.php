@@ -11,7 +11,9 @@ use App\Exceptions\Abstract\AbstractDomainException;
 use App\Exceptions\CompanyNotFoundException;
 use App\Exceptions\Job\JobIdMustBeAnIntegerException;
 use App\Exceptions\Job\JobNotFoundException;
+use App\Http\Requests\Job\IndexJobRequest;
 use App\Http\Requests\Job\JobRequestHavingId;
+use App\Http\Requests\Job\ShowJobRequest;
 use App\Http\Requests\Job\StoreJobRequest;
 use App\Http\Requests\Job\UpdateJobRequest;
 use Exception;
@@ -160,7 +162,7 @@ class JobController extends Controller
         Log::error($exception);
     }
 
-    public function index(): JsonResponse|IluminateResponse
+    public function index(IndexJobRequest $request): JsonResponse|IluminateResponse
     {
         $repository = app(JobRepository::class);
         $service = new JobDomain($repository);
@@ -168,7 +170,7 @@ class JobController extends Controller
         try {
             return response()
                 ->json([
-                    'data' => $service->jobs()
+                    'data' => $service->jobsWithIncludes($request->getIncludes())
                 ]);
         } catch (Exception $exception) {
             Log::error($exception);
@@ -184,25 +186,23 @@ class JobController extends Controller
      * @throws JobNotFoundException
      * @throws JobIdMustBeAnIntegerException
      */
-    public function show(JobRequestHavingId $request): JsonResponse|IluminateResponse
+    public function show(ShowJobRequest $request): JsonResponse|IluminateResponse
     {
         $repository = app(JobRepository::class);
 
-        $service = new JobDomain($repository);
-        $service->setId($request->getJobId())
+        $domain = new JobDomain($repository);
+        $domain->setId($request->getJobId())
             ->setUserId($request->getLoggedUserId());
 
-        if (!$service->exists($service->getId())) {
-            throw new JobNotFoundException($service->getId());
+        if (!$domain->exists($domain->getId())) {
+            throw new JobNotFoundException($domain->getId());
         }
 
         try {
-            $service->load();
-
-            $repository->commitTransaction();
+            $job = $domain->getJobWithIncludes($request->getIncludes());
 
             return response()->json([
-                'data' => $service->toArray()
+                'data' => $job
             ]);
         } catch (Exception $exception) {
             Log::error($exception);

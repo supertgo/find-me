@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests\User\PrefessionalExperience;
 
-use App\Domain\Job\EmploymentTypeEnum;
-use App\Domain\Job\WorkModelEnum;
+use App\Domain\Job\Enum\EmploymentTypeEnum;
+use App\Domain\Job\Enum\WorkModelEnum;
 use App\Http\Requests\AbstractRequest;
 
 class AddProfessionalExperienceRequest extends AbstractRequest

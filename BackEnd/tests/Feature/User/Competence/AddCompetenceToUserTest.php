@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\User\Competence;
 
+use App\Domain\Competence\Enum\CompetenceTypesEnum;
 use App\Domain\User\UserTypeEnum;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -25,6 +26,11 @@ class AddCompetenceToUserTest extends TestCase
             ['name' => 'PHP'],
             ['name' => 'Laravel', 'description' => 'PHP framework'],
             ['name' => 'VueJS', 'description' => 'JavaScript framework'],
+            [
+                'name' => 'VueJS',
+                'description' => 'JavaScript framework',
+                'type' => CompetenceTypesEnum::Framework->value
+            ],
         ];
 
         $this
@@ -37,6 +43,7 @@ class AddCompetenceToUserTest extends TestCase
                 $user->competences()
                     ->where('name', $competence['name'])
                     ->where('description', $competence['description'] ?? null)
+                    ->where('type', $competence['type'] ?? CompetenceTypesEnum::Other->value)
                     ->exists()
             );
         }

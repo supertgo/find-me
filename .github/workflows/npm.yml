@@ -1,0 +1,28 @@
+name: FindMe Front CI/CD
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 20
+
+      - uses: actions/checkout@v2
+
+
+      - name: Install dependencies
+        run: cd frontend/ && npm i
+
+      - name: Typecheck
+        run: cd frontend/ && npm run typecheck
+
+      - name: Run test suite
+        run: cd frontend/ && npm test
+

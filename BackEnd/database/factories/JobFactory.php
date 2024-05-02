@@ -26,5 +26,4 @@ class JobFactory extends Factory
             'user_id' => User::factory(),
         ];
     }
-
 }

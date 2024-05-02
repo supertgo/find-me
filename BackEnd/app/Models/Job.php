@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Carbon;
 
@@ -47,7 +49,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Job whereUpdatedAt($value)
  * @method static Builder|Job whereWeekWorkload($value)
  * @method static Builder|Job whereWorkModel($value)
- * @mixin \Eloquent
+ * @mixin Eloquent
  */
 class Job extends Model
 {
@@ -78,5 +80,15 @@ class Job extends Model
     public function company(): HasOne
     {
         return $this->hasOne(Company::class, 'id', 'company_id');
+    }
+
+    public function competences(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Competence::class,
+            'competence_job',
+            'job_id',
+            'competence_id'
+        );
     }
 }

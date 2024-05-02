@@ -18,4 +18,6 @@ interface JobRepositoryInterface
 
     public function getJob(?int $id);
 
+    public function getJobWithIncludes(?int $id, array $includes): array;
+
 }

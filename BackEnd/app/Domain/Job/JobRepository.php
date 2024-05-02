@@ -45,4 +45,9 @@ class JobRepository extends AbstractRepository implements JobRepositoryInterface
     {
        return Job::find($id)->toArray();
     }
+
+    public function getJobWithIncludes(?int $id, array $includes): array
+    {
+        return Job::with($includes)->find($id)->toArray();
+    }
 }

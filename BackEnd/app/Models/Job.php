@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Carbon;
 
 /**
@@ -73,4 +74,9 @@ class Job extends Model
     protected $hidden = [
         'deleted_at',
     ];
+
+    public function company(): HasOne
+    {
+        return $this->hasOne(Company::class, 'id', 'company_id');
+    }
 }

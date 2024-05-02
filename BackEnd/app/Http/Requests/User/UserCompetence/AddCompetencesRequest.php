@@ -17,6 +17,7 @@ class AddCompetencesRequest extends AbstractRequest
             'competences' => 'required|array|min:1',
             'competences.*.name' => 'required|string',
             'competences.*.description' => 'string',
+            //todo add type as option
         ];
     }
 }

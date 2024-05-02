@@ -7,6 +7,7 @@ use App\Domain\Company\CompanyDomain;
 use App\Domain\Company\CompanyRepository;
 use App\Domain\Job\JobDomain;
 use App\Domain\Job\JobRepository;
+use App\Domain\Job\JobService;
 use App\Exceptions\Abstract\AbstractDomainException;
 use App\Exceptions\CompanyNotFoundException;
 use App\Exceptions\Job\JobIdMustBeAnIntegerException;
@@ -25,32 +26,13 @@ use Throwable;
 
 class JobController extends Controller
 {
-    /**
-     * @throws CompanyNotFoundException
-     */
     public function store(StoreJobRequest $request): JsonResponse|IluminateResponse
     {
-        $repository = app(JobRepository::class);
-
-        $repository->beginTransaction();
-
-        $service = new JobDomain($repository);
-        $service->fromArray($request->validated() + ['user_id' => $request->getLoggedUserId()]);
-
-        if (!(new CompanyDomain(new CompanyRepository()))->exists($service->getCompanyId())) {
-            throw new CompanyNotFoundException($service->getCompanyId());
-        }
-
         try {
-            $service->save();
-
-            $repository->commitTransaction();
+            (new JobService())->store($request->validated(), $request->getLoggedUserId());
 
             return response(status: Response::HTTP_CREATED);
-
-        } catch (Exception $exception) {
-            $this->commonLogLogic($repository, $exception);
-
+        } catch (Throwable) {
             return response()
                 ->json(
                     ['error' => 'Server error'],
@@ -62,6 +44,7 @@ class JobController extends Controller
      * @throws CompanyNotFoundException
      * @throws JobNotFoundException
      * @throws JobIdMustBeAnIntegerException
+     * @throws Throwable
      */
     public function update(UpdateJobRequest $request): JsonResponse|IluminateResponse
     {

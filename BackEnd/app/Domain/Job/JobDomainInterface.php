@@ -2,9 +2,11 @@
 
 namespace App\Domain\Job;
 
+use Illuminate\Support\Collection;
+
 interface JobDomainInterface
 {
-    public function save(): void;
+    public function save(): self;
 
     public function update(): void;
 
@@ -17,5 +19,7 @@ interface JobDomainInterface
     public function fromArray(array $job): self;
 
     public function getJobWithIncludes(array $includes): array;
+
+    public function attachCompetences(Collection $competences): self;
 
 }

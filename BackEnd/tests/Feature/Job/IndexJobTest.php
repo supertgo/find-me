@@ -18,7 +18,6 @@ class IndexJobTest extends TestCase
 
     public function testIndexJobSuccess()
     {
-        Job::truncate();
         Job::factory(5)->create();
 
         $this
@@ -150,8 +149,6 @@ class IndexJobTest extends TestCase
 
     public function testEmptyJobsSuccess()
     {
-        Job::truncate();
-
         $this
             ->actingAs(User::factory()->create())
             ->json('GET', self::ROUTE)

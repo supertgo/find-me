@@ -79,6 +79,7 @@ class JobService extends AbstractService
         } catch (Throwable $exception) {
             $this->commonLogLogic($repository, $exception);
 
+            throw $exception;
         }
     }
 

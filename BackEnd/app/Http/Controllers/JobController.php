@@ -29,6 +29,11 @@ class JobController extends Controller
             (new JobService())->store($request->validated(), $request->getLoggedUserId());
 
             return response(status: Response::HTTP_CREATED);
+        } catch (AbstractDomainException $exception) {
+            return response()->json(
+                $exception->render(),
+                status: Response::HTTP_UNPROCESSABLE_ENTITY
+            );
         } catch (Throwable) {
             return response()
                 ->json(
@@ -52,13 +57,11 @@ class JobController extends Controller
 
             return response(status: Response::HTTP_NO_CONTENT);
         } catch (AbstractDomainException $exception) {
-
             return response()->json(
                 $exception->render(),
                 status: Response::HTTP_UNPROCESSABLE_ENTITY
             );
         } catch (Throwable) {
-
             return response()
                 ->json(
                     ['error' => 'Server error'],
@@ -75,17 +78,16 @@ class JobController extends Controller
     {
         $repository = app(JobRepository::class);
 
-        $repository->beginTransaction();
-
-        $domain = new JobDomain($repository);
-        $domain->setId($request->getJobId())
-            ->setUserId($request->getLoggedUserId());
-
-        if (!$domain->exists($domain->getId())) {
-            throw new JobNotFoundException($domain->getId());
-        }
-
         try {
+            $repository->beginTransaction();
+
+            $domain = new JobDomain($repository);
+            $domain->setId($request->getJobId())
+                ->setUserId($request->getLoggedUserId());
+
+            if (!$domain->exists($domain->getId())) {
+                throw new JobNotFoundException($domain->getId());
+            }
             $domain->delete();
 
             $repository->commitTransaction();

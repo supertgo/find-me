@@ -22,16 +22,7 @@ class AddCompetenceToUserTest extends TestCase
             'type' => UserTypeEnum::Employee->value
         ]);
 
-        $competences = [
-            ['name' => 'PHP'],
-            ['name' => 'Laravel', 'description' => 'PHP framework'],
-            ['name' => 'VueJS', 'description' => 'JavaScript framework'],
-            [
-                'name' => 'VueJS',
-                'description' => 'JavaScript framework',
-                'type' => CompetenceTypesEnum::Framework->value
-            ],
-        ];
+        $competences = $this->getCompetences();
 
         $this
             ->actingAs($user)
@@ -47,5 +38,30 @@ class AddCompetenceToUserTest extends TestCase
                     ->exists()
             );
         }
+    }
+
+    /**
+     * @return array
+     */
+    public function getCompetences(): array
+    {
+        return [
+            [
+                'name' => 'PHP'
+            ],
+            [
+                'name' => 'Laravel',
+                'description' => 'PHP framework'
+            ],
+            [
+                'name' => 'VueJS',
+                'description' => 'JavaScript framework'
+            ],
+            [
+                'name' => 'VueJS',
+                'description' => 'JavaScript framework',
+                'type' => CompetenceTypesEnum::Framework->value
+            ],
+        ];
     }
 }

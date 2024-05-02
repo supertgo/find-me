@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\User\UserCompetence;
 
+use App\Domain\Competence\Enum\CompetenceTypesEnum;
 use App\Http\Requests\AbstractRequest;
 
 class AddCompetencesRequest extends AbstractRequest
@@ -17,7 +18,7 @@ class AddCompetencesRequest extends AbstractRequest
             'competences' => 'required|array|min:1',
             'competences.*.name' => 'required|string',
             'competences.*.description' => 'string',
-            //todo add type as option
+            'competences.*.type' => 'string|in:' . CompetenceTypesEnum::getValuesAsString(),
         ];
     }
 }

@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\User\ProfessionalExperience;
 
-use App\Domain\Job\EmploymentTypeEnum;
-use App\Domain\Job\WorkModelEnum;
+use App\Domain\Job\Enum\EmploymentTypeEnum;
+use App\Domain\Job\Enum\WorkModelEnum;
 use App\Domain\User\UserTypeEnum;
 use App\Models\User;
 use Carbon\Carbon;

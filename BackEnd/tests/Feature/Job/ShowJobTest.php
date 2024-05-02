@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Job;
 
+use App\Domain\Job\Enum\JobIncludesEnum;
 use App\Models\Job;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -39,6 +40,54 @@ class ShowJobTest extends TestCase
                     'company_id',
                     'created_at',
                     'updated_at',
+                ]
+            ]);
+    }
+
+    public function testShowJobWithCompanyInclude()
+    {
+        $job = Job::factory()->create();
+
+        $this
+            ->actingAs(User::factory()->create())
+            ->json(
+                'GET',
+                sprintf(self::ROUTE, $job->id),
+                [
+                    'includes' => [
+                        JobIncludesEnum::Company->value
+                    ]
+                ])
+            ->assertStatus(Response::HTTP_OK)
+            ->assertJsonStructure([
+                'data' => [
+                    'id',
+                    'name',
+                    'description',
+                    'is_available',
+                    'applications_amount',
+                    'salary',
+                    'salary_time_unit',
+                    'accept_application_until',
+                    'work_model',
+                    'employment_type',
+                    'week_workload',
+                    'location',
+                    'company_id',
+                    'created_at',
+                    'updated_at',
+                    'company' => [
+                        'id',
+                        'name',
+                        'description',
+                        'phone',
+                        'email',
+                        'cnpj',
+                        'fantasy_name',
+                        'created_at',
+                        'updated_at',
+                        'deleted_at'
+                    ]
                 ]
             ]);
     }

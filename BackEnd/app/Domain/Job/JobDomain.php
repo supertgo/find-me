@@ -231,8 +231,13 @@ readonly class JobDomain implements JobDomainInterface
         return $this;
     }
 
-    public function jobs(): array
+    public function jobsWithIncludes($includes): array
     {
-        return $this->jobRepository->getJobs();
+        return $this->jobRepository->getJobs($includes);
+    }
+
+    public function getJobWithIncludes(array $includes): array
+    {
+        return $this->jobRepository->getJobWithIncludes($this->id, $includes);
     }
 }

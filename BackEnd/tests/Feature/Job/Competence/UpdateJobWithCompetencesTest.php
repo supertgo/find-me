@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Job;
+namespace Tests\Feature\Job\Competence;
 
 use App\Domain\Job\Enum\EmploymentTypeEnum;
 use App\Domain\Job\Enum\SalaryTimeUnitEnum;
@@ -14,13 +14,13 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
-class UpdateJobTest extends TestCase
+class UpdateJobWithCompetencesTest extends TestCase
 {
     use DatabaseTransactions;
 
     const ROUTE = self::BASE_ROUTE . 'job/%s';
 
-    public function testUpdateJobSuccess()
+    public function testUpdateJobWithCompetences()
     {
         $owner = $this->generateRecruiterUser();
 
@@ -31,6 +31,17 @@ class UpdateJobTest extends TestCase
         $payload = $this->generatePayload() + [
                 'id' => $originalJob->id,
             ];
+
+        $payload['competences'] = [
+            [
+                'name' => 'Competence 1',
+                'description' => 'Description 1',
+            ],
+            [
+                'name' => 'Competence 2',
+                'description' => 'Description 2',
+            ]
+        ];
 
         $this
             ->actingAs($owner)
@@ -52,6 +63,53 @@ class UpdateJobTest extends TestCase
             'location' => $payload['location'],
             'company_id' => $payload['company_id'],
         ]);
+
+        foreach ($payload['competences'] as $competence) {
+            $this->assertDatabaseHas('competences', [
+                'name' => $competence['name'],
+                'description' => $competence['description'],
+            ]);
+        }
+    }
+
+    private function generateRecruiterUser(): User
+    {
+        return User::factory()->create([
+            'type' => UserTypeEnum::Recruiter->value
+        ]);
+    }
+
+    /**
+     * @return array{
+     *      name: string,
+     *      password: string,
+     *      email: string,
+     *      phone: string
+     * }
+     */
+    public function generatePayload(): array
+    {
+        return $this->generatePayloadWithNonexistentCompany() + [
+                'company_id' => Company::factory()->create()->id,
+            ];
+    }
+
+    public function generatePayloadWithNonexistentCompany(): array
+    {
+        return [
+            'name' => $this->faker->name,
+            'description' => $this->faker->text,
+            'is_available' => true,
+            'applications_amount' => $this->faker->numberBetween(5, 100),
+            'salary' => $this->faker->numberBetween(0, 10000),
+            'salary_time_unit' => $this->faker->randomElement(array_column(SalaryTimeUnitEnum::cases(), 'value')),
+            'accept_application_until' => Carbon::now()->addMonth(),
+            'work_model' => $this->faker->randomElement(array_column(WorkModelEnum::cases(), 'value')),
+            'employment_type' => $this->faker->randomElement(array_column(EmploymentTypeEnum::cases(), 'value')),
+            'week_workload' => $this->faker->numberBetween(20, 40),
+            'location' => $this->faker->address,
+            'company_id' => Company::max('id') + 1
+        ];
     }
 
     public function testNonexistentCompany()
@@ -116,45 +174,5 @@ class UpdateJobTest extends TestCase
                     'job_id' => $jobId
                 ]
             ]);
-    }
-
-    /**
-     * @return array{
-     *      name: string,
-     *      password: string,
-     *      email: string,
-     *      phone: string
-     * }
-     */
-    public function generatePayload(): array
-    {
-        return $this->generatePayloadWithNonexistentCompany() + [
-                'company_id' => Company::factory()->create()->id,
-            ];
-    }
-
-    public function generatePayloadWithNonexistentCompany(): array
-    {
-        return [
-            'name' => $this->faker->name,
-            'description' => $this->faker->text,
-            'is_available' => true,
-            'applications_amount' => $this->faker->numberBetween(5, 100),
-            'salary' => $this->faker->numberBetween(0, 10000),
-            'salary_time_unit' => $this->faker->randomElement(array_column(SalaryTimeUnitEnum::cases(), 'value')),
-            'accept_application_until' => Carbon::now()->addMonth(),
-            'work_model' => $this->faker->randomElement(array_column(WorkModelEnum::cases(), 'value')),
-            'employment_type' => $this->faker->randomElement(array_column(EmploymentTypeEnum::cases(), 'value')),
-            'week_workload' => $this->faker->numberBetween(20, 40),
-            'location' => $this->faker->address,
-            'company_id' => Company::max('id') + 1
-        ];
-    }
-
-    private function generateRecruiterUser(): User
-    {
-        return User::factory()->create([
-            'type' => UserTypeEnum::Recruiter->value
-        ]);
     }
 }

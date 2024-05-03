@@ -3,6 +3,7 @@
 namespace Tests\Feature\Job;
 
 use App\Domain\Job\Enum\JobIncludesEnum;
+use App\Models\Competence;
 use App\Models\Job;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -17,7 +18,6 @@ class IndexJobTest extends TestCase
 
     public function testIndexJobSuccess()
     {
-        Job::truncate();
         Job::factory(5)->create();
 
         $this
@@ -98,10 +98,57 @@ class IndexJobTest extends TestCase
             ]);
     }
 
+    public function testShowJobWithCompetencesInclude()
+    {
+        Job::factory(3)
+            ->has(Competence::factory()->count(3))
+            ->create();
+
+        $this
+            ->actingAs(User::factory()->create())
+            ->json(
+                'GET',
+                sprintf(self::ROUTE),
+                [
+                    'includes' => [
+                        JobIncludesEnum::Competences->value
+                    ]
+                ])
+            ->assertStatus(Response::HTTP_OK)
+            ->assertJsonStructure([
+                'data' => [
+                    '*' => [
+                        'id',
+                        'name',
+                        'description',
+                        'is_available',
+                        'applications_amount',
+                        'salary',
+                        'salary_time_unit',
+                        'accept_application_until',
+                        'work_model',
+                        'employment_type',
+                        'week_workload',
+                        'location',
+                        'company_id',
+                        'created_at',
+                        'updated_at',
+                        'competences' => [
+                            '*' => [
+                                'name',
+                                'description',
+                                'created_at',
+                                'updated_at',
+                                'id'
+                            ]
+                        ]
+                    ]
+                ]
+            ]);
+    }
+
     public function testEmptyJobsSuccess()
     {
-        Job::truncate();
-
         $this
             ->actingAs(User::factory()->create())
             ->json('GET', self::ROUTE)

@@ -3,12 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Domain\Abstract\AbstractRepository;
-use App\Domain\Company\CompanyDomain;
-use App\Domain\Company\CompanyRepository;
 use App\Domain\Job\JobDomain;
 use App\Domain\Job\JobRepository;
+use App\Domain\Job\JobService;
 use App\Exceptions\Abstract\AbstractDomainException;
-use App\Exceptions\CompanyNotFoundException;
 use App\Exceptions\Job\JobIdMustBeAnIntegerException;
 use App\Exceptions\Job\JobNotFoundException;
 use App\Http\Requests\Job\IndexJobRequest;
@@ -25,32 +23,18 @@ use Throwable;
 
 class JobController extends Controller
 {
-    /**
-     * @throws CompanyNotFoundException
-     */
     public function store(StoreJobRequest $request): JsonResponse|IluminateResponse
     {
-        $repository = app(JobRepository::class);
-
-        $repository->beginTransaction();
-
-        $service = new JobDomain($repository);
-        $service->fromArray($request->validated() + ['user_id' => $request->getLoggedUserId()]);
-
-        if (!(new CompanyDomain(new CompanyRepository()))->exists($service->getCompanyId())) {
-            throw new CompanyNotFoundException($service->getCompanyId());
-        }
-
         try {
-            $service->save();
-
-            $repository->commitTransaction();
+            (new JobService())->store($request->validated(), $request->getLoggedUserId());
 
             return response(status: Response::HTTP_CREATED);
-
-        } catch (Exception $exception) {
-            $this->commonLogLogic($repository, $exception);
-
+        } catch (AbstractDomainException $exception) {
+            return response()->json(
+                $exception->render(),
+                status: Response::HTTP_UNPROCESSABLE_ENTITY
+            );
+        } catch (Throwable) {
             return response()
                 ->json(
                     ['error' => 'Server error'],
@@ -59,47 +43,25 @@ class JobController extends Controller
     }
 
     /**
-     * @throws CompanyNotFoundException
-     * @throws JobNotFoundException
-     * @throws JobIdMustBeAnIntegerException
+     * @throws Throwable
      */
     public function update(UpdateJobRequest $request): JsonResponse|IluminateResponse
     {
-        $repository = app(JobRepository::class);
-
-        $repository->beginTransaction();
-
-        $service = new JobDomain($repository);
-        $service->fromArray(
-            $request->validated() + [
-                'user_id' => $request->getLoggedUserId(),
-                'id' => $request->getJobId()
-            ]);
-
-        if (!$service->exists($service->getId())) {
-            throw new JobNotFoundException($service->getId());
-        }
-
-        if (!(new CompanyDomain(new CompanyRepository()))->exists($service->getCompanyId())) {
-            throw new CompanyNotFoundException($service->getCompanyId());
-        }
-
         try {
-            $service->update();
+            (new JobService())
+                ->update(
+                    $request->validated(),
+                    $request->getLoggedUserId(),
+                    $request->getJobId()
+                );
 
-            $repository->commitTransaction();
-
-            return response()->noContent();
+            return response(status: Response::HTTP_NO_CONTENT);
         } catch (AbstractDomainException $exception) {
-            $this->commonLogLogic($repository, $exception);
-
             return response()->json(
                 $exception->render(),
                 status: Response::HTTP_UNPROCESSABLE_ENTITY
             );
-        } catch (Exception $exception) {
-            $this->commonLogLogic($repository, $exception);
-
+        } catch (Throwable) {
             return response()
                 ->json(
                     ['error' => 'Server error'],
@@ -116,18 +78,17 @@ class JobController extends Controller
     {
         $repository = app(JobRepository::class);
 
-        $repository->beginTransaction();
-
-        $service = new JobDomain($repository);
-        $service->setId($request->getJobId())
-            ->setUserId($request->getLoggedUserId());
-
-        if (!$service->exists($service->getId())) {
-            throw new JobNotFoundException($service->getId());
-        }
-
         try {
-            $service->delete();
+            $repository->beginTransaction();
+
+            $domain = new JobDomain($repository);
+            $domain->setId($request->getJobId())
+                ->setUserId($request->getLoggedUserId());
+
+            if (!$domain->exists($domain->getId())) {
+                throw new JobNotFoundException($domain->getId());
+            }
+            $domain->delete();
 
             $repository->commitTransaction();
 
@@ -165,12 +126,12 @@ class JobController extends Controller
     public function index(IndexJobRequest $request): JsonResponse|IluminateResponse
     {
         $repository = app(JobRepository::class);
-        $service = new JobDomain($repository);
+        $domain = new JobDomain($repository);
 
         try {
             return response()
                 ->json([
-                    'data' => $service->jobsWithIncludes($request->getIncludes())
+                    'data' => $domain->jobsWithIncludes($request->getIncludes())
                 ]);
         } catch (Exception $exception) {
             Log::error($exception);

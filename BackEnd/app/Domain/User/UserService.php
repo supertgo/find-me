@@ -3,7 +3,7 @@
 namespace App\Domain\User;
 
 
-use App\Domain\Abstract\AbstractRepository;
+use App\Domain\Abstract\AbstractService;
 use App\Domain\Competence\CompetenceDomain;
 use App\Domain\Competence\CompetenceRepository;
 use App\Domain\User\AcademicRecord\AcademicRecordDomain;
@@ -23,10 +23,9 @@ use App\Exceptions\User\UserNotFoundException;
 use App\helpers\File\FileHelperInterface;
 use Exception;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Log;
 use Throwable;
 
-readonly class UserService
+class UserService extends AbstractService
 {
     public function createUser(array $user): int
     {
@@ -72,16 +71,6 @@ readonly class UserService
         }
 
         return $userDomain->loadUserWithIncludes($userId, $includes);
-    }
-
-    /**
-     * @throws Throwable
-     */
-    public function commonLogLogic(AbstractRepository $repository, Exception $exception): void
-    {
-        $repository->rollbackTransaction();
-
-        Log::error($exception);
     }
 
     /**

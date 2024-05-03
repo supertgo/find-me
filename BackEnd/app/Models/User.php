@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\helpers\File\FileHelperInterface;
 use Database\Factories\UserFactory;
+use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -54,7 +55,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @method static Builder|User whereUpdatedAt($value)
  * @property-read int|null $posts_count
  * @method static Builder|User whereType($value)
- * @mixin \Eloquent
+ * @mixin Eloquent
  */
 class User extends Authenticatable implements JWTSubject
 {

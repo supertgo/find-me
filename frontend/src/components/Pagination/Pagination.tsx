@@ -60,7 +60,7 @@ export const Pagination = ({
   return (
     <S.Wrapper>
       {hasDetails && (
-        <S.Details data-testid="pagination-details"> 
+        <S.Details data-testid="pagination-details">
           <strong>{firstRegisterNumberInCurrentPage}</strong>-
           <strong>{lastRegisterNumberInCurrentPage}</strong>de
           <strong>{totalItems}</strong>
@@ -85,14 +85,18 @@ export const Pagination = ({
         {previousPage.length > 0 &&
           Children.toArray(
             previousPage.map((page) => {
-              return <S.Icon onClick={() => onPageChange(page - 1)}>{page}</S.Icon>;
+              return (
+                <S.Icon onClick={() => onPageChange(page - 1)}>{page}</S.Icon>
+              );
             }),
           )}
         <S.Icon $isChecked>{page}</S.Icon>
         {nextPages.length > 0 &&
           Children.toArray(
             nextPages.map((page) => {
-              return <S.Icon onClick={() => onPageChange(page + 1)}>{page}</S.Icon>;
+              return (
+                <S.Icon onClick={() => onPageChange(page - 1)}>{page}</S.Icon>
+              );
             }),
           )}
         {page + siblingsCount < lastPage && (

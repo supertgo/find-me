@@ -16,5 +16,5 @@ export type ShowUsersResponse = {
 };
 
 export type GetUserResponse = {
-  data: UserProps;
+  data: Omit<UserProps, 'password'>;
 };

@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\User;
 
-use App\Models\Job;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,6 +29,7 @@ class IndexUserTest extends TestCase
                         'phone',
                         'id',
                         'type',
+                        'about_me'
                     ]
                 ]
             ]);

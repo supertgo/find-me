@@ -2,7 +2,7 @@
 
 namespace App\Domain\User\ProfessionalExperience;
 
-use App\Domain\Job\WorkModelEnum;
+use App\Domain\Job\Enum\WorkModelEnum;
 use App\Exceptions\User\ProfessionalExperience\CurrentExperienceEndDateMustBeInTheFutureException;
 use App\Exceptions\User\ProfessionalExperience\EndDateMustBeAfterStartDateException;
 use App\Exceptions\User\ProfessionalExperience\MustHaveEndDateWhenFinishedExperienceException;

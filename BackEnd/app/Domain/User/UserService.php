@@ -3,7 +3,7 @@
 namespace App\Domain\User;
 
 
-use App\Domain\Abstract\AbstractRepository;
+use App\Domain\Abstract\AbstractService;
 use App\Domain\Competence\CompetenceDomain;
 use App\Domain\Competence\CompetenceRepository;
 use App\Domain\User\AcademicRecord\AcademicRecordDomain;
@@ -20,17 +20,19 @@ use App\Exceptions\User\ProfessionalExperience\MustHaveEndDateWhenFinishedExperi
 use App\Exceptions\User\ProfessionalExperience\OnlyOwnerCanDeleteProfessionalExperienceException;
 use App\Exceptions\User\ProfessionalExperience\ProfessionalExperienceNotFoundException;
 use App\Exceptions\User\UserNotFoundException;
+use App\helpers\File\FileHelperInterface;
 use Exception;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Http\UploadedFile;
 use Throwable;
 
-readonly class UserService
+class UserService extends AbstractService
 {
-    public function createUser(array $user): void
+    public function createUser(array $user): int
     {
-        (new UserDomain(app(UserRepository::class)))
+        return (new UserDomain(app(UserRepository::class)))
             ->fromArray($user)
-            ->createUser();
+            ->createUser()
+            ->getId();
     }
 
     /**
@@ -69,16 +71,6 @@ readonly class UserService
         }
 
         return $userDomain->loadUserWithIncludes($userId, $includes);
-    }
-
-    /**
-     * @throws Throwable
-     */
-    public function commonLogLogic(AbstractRepository $repository, Exception $exception): void
-    {
-        $repository->rollbackTransaction();
-
-        Log::error($exception);
     }
 
     /**
@@ -240,6 +232,77 @@ readonly class UserService
             $experiencesDomain->createMany($experiences, $userId);
 
             $userRepository->commitTransaction();
+        } catch (Exception $exception) {
+            $this->commonLogLogic($userRepository, $exception);
+
+            throw $exception;
+        }
+    }
+
+    /**
+     * @throws Throwable
+     */
+    public function setProfilePicture(UploadedFile $file, int $userId): void
+    {
+        $userRepository = new UserRepository();
+
+        try {
+            $userRepository->beginTransaction();
+
+            $domain = new UserDomain($userRepository);
+
+            $domain->createProfilePicture($file, $userId);
+
+            $userRepository->commitTransaction();
+        } catch (Exception $exception) {
+            $this->commonLogLogic($userRepository, $exception);
+
+            throw $exception;
+        }
+    }
+
+    /**
+     * @throws Throwable
+     */
+    public function updateProfilePicture(int $userId, UploadedFile $profilePicture): string
+    {
+        $userRepository = new UserRepository();
+
+        try {
+            $userRepository->beginTransaction();
+
+            $domain = new UserDomain($userRepository);
+            $domain->loadUser($userId);
+
+            $path = $domain->updateProfilePicture($profilePicture, $userId);
+
+            $userRepository->commitTransaction();
+
+            return app(FileHelperInterface::class)->getUrlForPublicFile($path);
+        } catch (Exception $exception) {
+            $this->commonLogLogic($userRepository, $exception);
+
+            throw $exception;
+        }
+    }
+
+    /**
+     * @throws Throwable
+     */
+    public function deleteProfilePicture(int $userId): void
+    {
+        $userRepository = new UserRepository();
+
+        try {
+            $userRepository->beginTransaction();
+
+            $domain = new UserDomain($userRepository);
+            $domain->loadUser($userId);
+
+            $domain->deleteProfilePicture();
+
+            $userRepository->commitTransaction();
+
         } catch (Exception $exception) {
             $this->commonLogLogic($userRepository, $exception);
 

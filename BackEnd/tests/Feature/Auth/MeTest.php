@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\auth;
+namespace Tests\Feature\Auth;
 
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
@@ -23,6 +23,7 @@ class MeTest extends TestCase
                     'phone',
                     'id',
                     'type',
+                    'about_me'
                 ],
             ])
             ->assertJson([
@@ -32,6 +33,8 @@ class MeTest extends TestCase
                     'phone' => $this->user->phone,
                     'type' => $this->user->type,
                     'id' => $this->user->id,
+                    'about_me' => $this->user->about_me,
+                    'profile_picture' => $this->user->profile_picture_path
                 ],
             ]);
     }

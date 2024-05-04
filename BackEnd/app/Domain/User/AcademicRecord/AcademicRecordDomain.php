@@ -74,6 +74,7 @@ readonly class AcademicRecordDomain implements AcademicRecordDomainInterface
     public function setInstitution(string $institution): AcademicRecordDomain
     {
         $this->institution = $institution;
+
         return $this;
     }
 
@@ -85,6 +86,7 @@ readonly class AcademicRecordDomain implements AcademicRecordDomainInterface
     public function setDegree(string $degree): AcademicRecordDomain
     {
         $this->degree = $degree;
+
         return $this;
     }
 
@@ -96,6 +98,7 @@ readonly class AcademicRecordDomain implements AcademicRecordDomainInterface
     public function setFieldOfStudy(string $fieldOfStudy): AcademicRecordDomain
     {
         $this->fieldOfStudy = $fieldOfStudy;
+
         return $this;
     }
 
@@ -107,6 +110,7 @@ readonly class AcademicRecordDomain implements AcademicRecordDomainInterface
     public function setStartDate(Carbon $startDate): AcademicRecordDomain
     {
         $this->startDate = $startDate;
+
         return $this;
     }
 
@@ -147,6 +151,7 @@ readonly class AcademicRecordDomain implements AcademicRecordDomainInterface
     public function setIsOnProgress(bool $isOnProgress): AcademicRecordDomain
     {
         $this->isOnProgress = $isOnProgress;
+
         return $this;
     }
 
@@ -158,6 +163,7 @@ readonly class AcademicRecordDomain implements AcademicRecordDomainInterface
     public function setDescription(?string $description): AcademicRecordDomain
     {
         $this->description = $description;
+
         return $this;
     }
 
@@ -169,6 +175,7 @@ readonly class AcademicRecordDomain implements AcademicRecordDomainInterface
     public function setId(?int $id): AcademicRecordDomain
     {
         $this->id = $id;
+
         return $this;
     }
 

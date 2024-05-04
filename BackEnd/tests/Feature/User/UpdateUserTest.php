@@ -22,6 +22,7 @@ class UpdateUserTest extends TestCase
         $user = User::factory()->create();
 
         $payload = $this->getPayload();
+
         $this
             ->actingAs($user)
             ->json('PUT', self::ROUTE, $payload)
@@ -33,6 +34,7 @@ class UpdateUserTest extends TestCase
                     'email',
                     'phone',
                     'type',
+                    'about_me'
                 ]
             ])
             ->assertJson([
@@ -41,6 +43,7 @@ class UpdateUserTest extends TestCase
                     'name' => $payload['name'],
                     'email' => $payload['email'],
                     'phone' => $payload['phone'],
+                    'about_me' => $payload['about_me']
                 ]
             ]);
 
@@ -64,6 +67,7 @@ class UpdateUserTest extends TestCase
             'email' => $faker->email(),
             'phone' => $faker->numerify('###########'),
             'password' => Str::random(10),
+            'about_me' => $this->faker->paragraph()
         ];
     }
 }

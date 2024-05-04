@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Job;
 
-use App\Domain\Job\EmploymentTypeEnum;
-use App\Domain\Job\SalaryTimeUnitEnum;
-use App\Domain\Job\WorkModelEnum;
+use App\Domain\Job\Enum\EmploymentTypeEnum;
+use App\Domain\Job\Enum\SalaryTimeUnitEnum;
+use App\Domain\Job\Enum\WorkModelEnum;
 use App\Domain\User\UserTypeEnum;
 use App\Models\Company;
 use App\Models\Job;
@@ -19,7 +19,6 @@ class UpdateJobTest extends TestCase
     use DatabaseTransactions;
 
     const ROUTE = self::BASE_ROUTE . 'job/%s';
-
 
     public function testUpdateJobSuccess()
     {

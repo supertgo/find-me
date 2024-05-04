@@ -3,6 +3,7 @@
 namespace App\Domain\Competence;
 
 use App\Domain\Abstract\AbstractRepository;
+use App\Domain\Competence\Enum\CompetenceTypesEnum;
 use App\Models\Competence;
 
 class CompetenceRepository extends AbstractRepository implements CompetenceRepositoryInterface
@@ -12,7 +13,8 @@ class CompetenceRepository extends AbstractRepository implements CompetenceRepos
         $competence = Competence::firstOrCreate(
             [
                 'name' => $competence['name'],
-                'description' => $competence['description'] ?? null
+                'description' => $competence['description'] ?? null,
+                'type' => $competence['type'] ?? CompetenceTypesEnum::Other->value,
             ],
             $competence
         );

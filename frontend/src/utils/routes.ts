@@ -1,5 +1,5 @@
 export type GetUserRouteConstProps = {
-  user_id: string;
+  user_id: number;
 };
 
 export const PostAuthLoginRouteConst = 'auth/login';

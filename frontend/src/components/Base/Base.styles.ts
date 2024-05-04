@@ -14,7 +14,7 @@ export const ContentWrapper = styled.div`
 `;
 
 export const ChildrenWrapper = styled.div`
-  width: calc(100% - 27.2rem);
+  width: calc(100% - 24.2rem);
   background: #fff;
 
   ${media.lessThan('large')`

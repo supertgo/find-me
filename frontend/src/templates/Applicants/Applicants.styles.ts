@@ -7,39 +7,6 @@ export const Wrapper = styled.div`
   `}
 `;
 
-export const Header = styled.header`
-  ${({ theme }) => css`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: ${theme.space.small};
-    box-shadow: 0px -1px 0px 0px #d6ddeb inset;
-  `}
-`;
-
-export const CompanyWrapper = styled.div`
-  display: grid;
-  grid-template-columns: 0.3fr 1fr;
-  align-items: center;
-`;
-
-export const CompanyTextsWrapper = styled.div`
-  ${({ theme }) => css`
-    display: flex;
-    flex-direction: column;
-
-    span {
-      color: #515b6f;
-    }
-
-    p {
-      color: #25324b;
-      font-size: ${theme.font.sizes.md};
-      font-weight: ${theme.font.weights.medium};
-    }
-  `}
-`;
-
 export const PaginationWrapper = styled.div`
   ${({ theme }) => css`
     display: flex;

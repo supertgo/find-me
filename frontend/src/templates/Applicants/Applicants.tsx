@@ -1,12 +1,11 @@
 import { Base } from 'components/Base/Base';
 import { TableData } from 'components/Table/TableData/TableData';
 import { Title } from 'components/Title/Title';
-import { Button } from 'components/Button/Button';
-import { DropboxIcon } from 'icons/DropboxIcon/DropboxIcon';
 import { useApplicantsTable } from 'hooks/useApplicantsTable/useApplicantsTable';
 
 import * as S from './Applicants.styles';
 import { Pagination } from 'components/Pagination/Pagination';
+import { ApplicationHeader } from 'components/ApplicationHeader/ApplicationHeader';
 
 export const Applicants = () => {
   const { data, table, isLoading } = useApplicantsTable();
@@ -19,16 +18,7 @@ export const Applicants = () => {
   return (
     <Base>
       <S.Wrapper>
-        <S.Header>
-          <S.CompanyWrapper>
-            <DropboxIcon />
-            <S.CompanyTextsWrapper>
-              <span>Empresa</span>
-              <p>Onfly</p>
-            </S.CompanyTextsWrapper>
-          </S.CompanyWrapper>
-          <Button>Publicar uma vaga</Button>
-        </S.Header>
+        <ApplicationHeader />
         <Title
           title={`Total de Candidatos: ${applicantsData?.length || '...'}`}
         />

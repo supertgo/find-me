@@ -1,4 +1,12 @@
+import { AcademicRecord } from '../academic-record/academic-record';
+import { Competence } from '../competence/competence';
+import { ProfessionalExperience } from '../professional-experience/professional-experience';
+
 export type UserType = 'recruiter' | 'employee';
+export type UserIncludeOption =
+  | 'competences'
+  | 'academicRecords'
+  | 'professionalExperiences';
 
 export type UserProps = {
   id: number;
@@ -7,6 +15,10 @@ export type UserProps = {
   email: string;
   phone: string;
   type: UserType;
+  about_me: string | null;
+  competences?: Competence[];
+  academic_records?: AcademicRecord[];
+  professional_experiences?: ProfessionalExperience[];
 };
 
 export type UserAuthRegister = Omit<UserProps, 'id'>;

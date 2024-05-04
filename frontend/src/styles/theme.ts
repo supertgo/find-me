@@ -90,6 +90,7 @@ export const theme = {
   colors: {
     primary: '#2563EB',
     white: '#FFF',
+    whiteGrey: '#D6DDEB',
     secondWhite: '#F8F8FD',
     cleanBlue: '#E9EBFD',
     grey900: '#0F172A',
@@ -97,7 +98,7 @@ export const theme = {
     darkBlue: '#25324B',
     darkTitanium: '#515B6F',
     findBlue: '#4640DE',
-    oficialGrey: '#7C8493',
+    officialGrey: '#7C8493',
     cleanTitanium: '#94A3B8',
     lightGrey: '#A8ADB7',
     lightBlue: '#26A4FF',

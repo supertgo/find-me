@@ -9,7 +9,7 @@ import { LinkText } from 'components/LinkText/LinkText';
 export type LoginFormProps = {};
 
 export const LoginForm = ({}: LoginFormProps) => {
-  const { control, isLoading, onSubmit, handleSubmit, isValid } =
+  const { control, isLoading, onSubmit, handleSubmit, isValid, errors } =
     useSignInForm();
 
   return (
@@ -22,7 +22,12 @@ export const LoginForm = ({}: LoginFormProps) => {
         control={control}
         name="email"
         render={({ field: { ...field } }) => (
-          <Input {...field} placeholder="E-mail" type="email" />
+          <Input
+            {...field}
+            placeholder="E-mail"
+            type="email"
+            error={errors.email}
+          />
         )}
       />
       <Controller
@@ -32,7 +37,12 @@ export const LoginForm = ({}: LoginFormProps) => {
         control={control}
         name="password"
         render={({ field: { ...field } }) => (
-          <Input {...field} type="password" placeholder="Senha" />
+          <Input
+            {...field}
+            type="password"
+            placeholder="Senha"
+            error={errors.password}
+          />
         )}
       />
       <LinkText text="Esqueci minha senha" href="auth/forgot-password" />

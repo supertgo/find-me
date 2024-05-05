@@ -54,6 +54,13 @@ paths:
           $ref: '#/components/responses/me'
 components:
   schemas:
+    UserType:
+      type: string
+      example: recruiter
+      enum:
+        - recruiter
+        - employee
+      description: User's type
     UserResource:
       type: object
       properties:
@@ -61,18 +68,29 @@ components:
           type: integer
           example: 1
           description: User's id
-        email:
-          type: string
-          example: aa@gmail.com
-          description: User's email
-        phone:
-          type: string
-          example: '31984664949'
-          description: Larinha's password
         name:
           type: string
           example: Larinha
           description: User's name
+        phone:
+          type: string
+          example: '31984664949'
+          description: Larinha's phone
+        email:
+          type: string
+          example: aa@gmail.com
+          description: User's email
+        type:
+          $ref: '#/components/schemas/UserType'
+        about_me:
+          type: string
+          example: 'I am a recruiter'
+          description: User's about me
+        profile_picture:
+          format: binary
+          description: User's profile picture. Must be an image file (jpg, png, jpeg) with a maximum size of 2048KB.
+
+
   requestBodies:
     register:
       description: User register request body
@@ -103,12 +121,7 @@ components:
                 example: Larinha
                 description: User's name
               type:
-                type: string
-                example: recruiter
-                enum:
-                  - recruiter
-                  - employee
-                description: User's type
+                $ref: '#/components/schemas/UserType'
               about_me:
                 type: string
                 example: 'I am a recruiter'

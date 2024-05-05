@@ -51,12 +51,12 @@ export const Opportunities = styled.div`
     & > h5 {
       font-size: ${theme.font.sizes.lg};
       font-weight: ${theme.font.weights.bold};
-      color: #25324b;
+      color: ${theme.colors.darkBlue};
     }
 
     & > p {
       font-size: ${theme.font.sizes.sm};
-      color: #25324b;
+      color: ${theme.colors.darkBlue};
       margin-bottom: ${theme.space.large};
     }
 

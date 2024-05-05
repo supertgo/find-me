@@ -33,11 +33,15 @@ export const CompanyTextsWrapper = styled.div`
     }
 
     p {
-      color: #25324b;
+      color: ${theme.colors.darkBlue};
       font-size: ${theme.font.sizes.md};
       font-weight: ${theme.font.weights.medium};
     }
   `}
+`;
+
+export const TableTopContent = styled.div`
+  ${({ theme }) => css``}
 `;
 
 export const PaginationWrapper = styled.div`

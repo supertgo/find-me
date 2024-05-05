@@ -37,7 +37,7 @@ export const Title = styled.h5`
   ${({ theme }) => css`
     font-weight: ${theme.font.weights.medium};
     font-size: ${theme.font.sizes.smd};
-    color: #25324b;
+    color: ${theme.colors.darkBlue};
   `}
 `;
 

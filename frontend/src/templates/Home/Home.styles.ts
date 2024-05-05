@@ -6,7 +6,7 @@ export const WelcomeMessage = styled.h2`
   ${({ theme }) => css`
     font-weight: ${theme.font.weights.bold};
     font-size: ${theme.font.sizes.lg};
-    color: #25324b;
+    color: ${theme.colors.darkBlue};
     padding: ${theme.space.large} ${theme.space.large} 0 ${theme.space.large};
   `}
 `;

@@ -12,7 +12,7 @@ export const Title = styled.p`
   ${({ theme }) => css`
     font-weight: ${theme.font.weights.medium};
     font-size: ${theme.font.sizes.md};
-    color: #25324b;
+    color: ${theme.colors.darkBlue};
     margin-bottom: ${theme.space.large};
   `}
 `;

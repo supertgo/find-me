@@ -35,7 +35,7 @@ export const JobTitle = styled.p`
   ${({ theme }) => css`
     font-weight: ${theme.font.weights.bold};
     font-size: ${theme.font.sizes.smd};
-    color: #25324b;
+    color: ${theme.colors.darkBlue};
   `}
 `;
 

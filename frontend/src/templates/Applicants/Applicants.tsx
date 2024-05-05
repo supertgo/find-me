@@ -29,6 +29,7 @@ export const Applicants = () => {
           </S.CompanyWrapper>
           <Button>Publicar uma vaga</Button>
         </S.Header>
+
         <Title
           title={`Total de Candidatos: ${applicantsData?.length || '...'}`}
         />

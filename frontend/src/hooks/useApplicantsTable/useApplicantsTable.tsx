@@ -22,12 +22,14 @@ const columnHelper = createColumnHelper<UserProps>();
 
 export const useApplicantsTable = () => {
   const [isSorting, setSorting] = useState<SortingState>([]);
+  const [globalFilter, setGlobalFilter] = useState('');
 
   const { showUsers } = useUser();
   const { data, isLoading } = useQuery({
     queryKey: [`/${GetUsersRouteConst}`],
     queryFn: () => showUsers(),
   });
+
 
   const tableData = useMemo(() => {
     return data?.data.data || [];
@@ -87,7 +89,9 @@ export const useApplicantsTable = () => {
     columns,
     state: {
       sorting: isSorting,
+      globalFilter,
     },
+    onGlobalFilterChange: setGlobalFilter,
     getPaginationRowModel: getPaginationRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     onSortingChange: setSorting,
@@ -99,5 +103,7 @@ export const useApplicantsTable = () => {
     data,
     table,
     isLoading,
+    globalFilter,
+    setGlobalFilter
   };
 };

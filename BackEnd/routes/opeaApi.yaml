@@ -14,8 +14,8 @@ paths:
         $ref: '#/components/requestBodies/register'
       description: register new user
       responses:
-        '200':
-          $ref: '#/components/responses/login'
+        '204':
+          description: No Content
   /auth/login:
     post:
       tags:
@@ -26,6 +26,8 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/login'
+        '401':
+          $ref: '#/components/responses/loginUnauthorized'
   /auth/logout:
     post:
       tags:
@@ -153,6 +155,17 @@ components:
                 type: integer
                 description: Expiry time of the token in seconds
                 example: 86400
+    loginUnauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                description: Unauthorized
+
     logout:
       description: Successfully logged out
       content:

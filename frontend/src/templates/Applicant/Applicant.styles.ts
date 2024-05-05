@@ -72,7 +72,7 @@ export const Contact = styled.div`
     }
 
     & div:not(:last-child) {
-      margin-bottom: ${theme.space.xxsmall};
+      margin-bottom: ${theme.space.small};
     }
   `}
 `;

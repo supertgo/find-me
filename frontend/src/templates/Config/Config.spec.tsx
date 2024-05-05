@@ -9,6 +9,7 @@ const props: ConfigProps = {
   email: 'thiago.teste@gmail.com',
   phone: '313131',
   type: 'recruiter',
+  about_me: 'oi'
 };
 
 describe('<Config />', () => {

@@ -1,4 +1,4 @@
-import { Base } from 'components/Base/Base';
+import { Base } from 'templates/Base/Base';
 import { useQuery } from '@tanstack/react-query';
 import { Title } from 'components/Title/Title';
 import { Input } from 'components/Input/Input';

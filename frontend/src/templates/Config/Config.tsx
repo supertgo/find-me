@@ -1,5 +1,5 @@
 'use client';
-import { Base } from 'components/Base/Base';
+import { Base } from 'templates/Base/Base';
 import { ConfigInfoWrapper } from 'components/ConfigInfoWrapper/ConfigInfoWrapper';
 import { Input } from 'components/Input/Input';
 import { Title } from 'components/Title/Title';

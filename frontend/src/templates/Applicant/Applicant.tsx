@@ -1,6 +1,6 @@
 'use client';
 import Image from 'next/image';
-import { Base } from 'components/Base/Base';
+import { Base } from 'templates/Base/Base';
 import { Title } from 'components/Title/Title';
 import { UserProps } from 'protocols/external/user/user';
 
@@ -8,6 +8,7 @@ import * as S from './Applicant.styles';
 import { EnvelopeClosedIcon } from '@radix-ui/react-icons';
 import { yearsMonthsSinceNow } from 'utils/date';
 import { ApplicationHeader } from 'components/ApplicationHeader/ApplicationHeader';
+import { Fragment } from 'react';
 
 export type ApplicantProps = {
   user: UserProps;
@@ -43,6 +44,7 @@ export const Applicant = ({ user }: ApplicantProps) => {
               <p>Designer de Produtos</p>
             </S.AvatarTextContainer>
           </S.Avatar>
+
           <S.Contact>
             <h5>Contato</h5>
             <S.ContactItem>
@@ -52,6 +54,7 @@ export const Applicant = ({ user }: ApplicantProps) => {
                 <p>{user.email}</p>
               </S.ContactTextContainer>
             </S.ContactItem>
+
             <S.ContactItem>
               <EnvelopeClosedIcon />
               <S.ContactTextContainer>
@@ -80,7 +83,7 @@ export const Applicant = ({ user }: ApplicantProps) => {
                 Idioma
               </S.PersonalInformationItemTitle>
               <S.PersonalInformationItemText>
-                {user.name}
+                Português
               </S.PersonalInformationItemText>
             </S.PersonalInformationItem>
           </S.PersonalInformationContainer>
@@ -110,13 +113,19 @@ export const Applicant = ({ user }: ApplicantProps) => {
                   Tempo de Experiência
                 </S.PersonalInformationItemTitle>
                 <S.PersonalInformationItemText>
-                  {`${yearsMonthsSinceNow(currentJob.start_date).years} ano(s) e ${yearsMonthsSinceNow(currentJob.start_date).months } meses`}
+                  {`${
+                    yearsMonthsSinceNow(currentJob.start_date).years
+                  } ano(s) e ${
+                    yearsMonthsSinceNow(currentJob.start_date).months
+                  } meses`}
                 </S.PersonalInformationItemText>
               </S.PersonalInformationItem>
             )}
+          </S.PersonalInformationContainer>
 
+          <S.PersonalInformationContainer>
             {academicRecords?.map((acad) => (
-              <>
+              <Fragment key={acad.id}>
                 <S.PersonalInformationItem>
                   <S.PersonalInformationItemTitle>
                     Qualificação Acadêmica
@@ -134,7 +143,7 @@ export const Applicant = ({ user }: ApplicantProps) => {
                     {acad.field_of_study}
                   </S.PersonalInformationItemText>
                 </S.PersonalInformationItem>
-              </>
+              </Fragment>
             ))}
           </S.PersonalInformationContainer>
         </S.RightContent>

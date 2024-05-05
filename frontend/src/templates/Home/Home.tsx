@@ -1,5 +1,5 @@
 import * as S from './Home.styles';
-import { Base } from 'components/Base/Base';
+import { Base } from 'templates/Base/Base';
 import { LinkText } from 'components/LinkText/LinkText';
 import { PreviousApplications } from 'components/PreviousApplications/PreviousApplications';
 import { Title } from 'components/Title/Title';

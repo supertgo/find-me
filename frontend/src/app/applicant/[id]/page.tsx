@@ -1,6 +1,6 @@
 import { nextAuthOptions } from 'app/api/auth/[...nextauth]/options';
 import { getServerSession } from 'next-auth';
-import { redirect } from 'next/navigation';
+import { notFound } from 'next/navigation';
 import { UserProps } from 'protocols/external/user/user';
 import { Applicant } from 'templates/Applicant/Applicant';
 import { GetUserRouteConst } from 'utils/routes';
@@ -29,7 +29,7 @@ async function getUserData(user_id: number) {
   );
 
   if (!res.ok) {
-    return redirect('/home');
+    return notFound();
   }
 
   return res.json();

@@ -33,7 +33,7 @@ export const JobInfoWrapper = styled.div`
 export const JobInfo = styled.div`
   ${({ theme }) => css`
     p {
-      color: #25324b;
+      color: ${theme.colors.darkBlue};
       font-weight: ${theme.font.weights.medium};
       font-size: ${theme.font.sizes.md};
     }

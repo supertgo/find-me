@@ -1,10 +1,10 @@
 module.exports = (plop) => {
   function generateTemplateConfig(entityType) {
-    const srcFolder = '../src'
+    const srcFolder = '../src';
     const entityTypeFolder = {
       component: 'components',
       template: 'templates',
-    }
+    };
 
     return {
       description: `Generate a new ${entityType}`,
@@ -22,7 +22,7 @@ module.exports = (plop) => {
         },
       ],
       actions: (data) => {
-        let actions = []
+        let actions = [];
 
         actions = [
           {
@@ -35,49 +35,50 @@ module.exports = (plop) => {
             path: `${srcFolder}/${entityTypeFolder[entityType]}/{{pascalCase name}}/{{pascalCase name}}.styles.ts`,
             templateFile: 'templates/component/component.styles.ts.hbs',
           },
-        ]
+        ];
 
         if (data.generateTest) {
           actions.push({
             type: 'add',
             path: `${srcFolder}/${entityTypeFolder[entityType]}/{{pascalCase name}}/{{pascalCase name}}.spec.tsx`,
             templateFile: 'templates/component/component.spec.tsx.hbs',
-          })
+          });
         }
 
-        return actions
+        return actions;
       },
-    }
+    };
   }
 
-  // function generateIconConfig(entityType) {
-  //   const assetsFolder = '../src/assets/icons'
+  function generateHook() {
+    const hookFolder = '../src/hooks';
 
-  //   return {
-  //     description: `Generate a new ${entityType}`,
-  //     prompts: [
-  //       {
-  //         type: 'input',
-  //         name: 'name',
-  //         message: `Enter ${entityType} name:`,
-  //       },
-  //     ],
-  //     actions: () => {
-  //       let actions = []
+    return {
+      description: `Generate a new hook`,
+      prompts: [
+        {
+          type: 'input',
+          name: 'name',
+          message: `Enter your hook name:`,
+        },
+      ],
+      actions: () => {
+        let actions = [];
 
-  //       actions = [
-  //         {
-  //           type: 'add',
-  //           path: `${assetsFolder}/{{pascalCase name}}.tsx`,
-  //           templateFile: 'templates/icon/icon.tsx.hbs',
-  //         },
-  //       ]
+        actions = [
+          {
+            type: 'add',
+            path: `${hookFolder}/use{{pascalCase name}}/use{{pascalCase name}}.ts`,
+            templateFile: 'templates/hook/hook.ts.hbs',
+          },
+        ];
 
-  //       return actions
-  //     },
-  //   }
-  // }
-  plop.setGenerator('component', generateTemplateConfig('component'))
-  plop.setGenerator('template', generateTemplateConfig('template'))
+        return actions;
+      },
+    };
+  }
+  plop.setGenerator('component', generateTemplateConfig('component'));
+  plop.setGenerator('template', generateTemplateConfig('template'));
+  plop.setGenerator('hook', generateHook());
   //plop.setGenerator('icon', generateIconConfig('icon'))
-}
+};

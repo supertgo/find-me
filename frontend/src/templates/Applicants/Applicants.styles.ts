@@ -40,18 +40,3 @@ export const CompanyTextsWrapper = styled.div`
   `}
 `;
 
-export const TableTopContent = styled.div`
-  ${({ theme }) => css``}
-`;
-
-export const PaginationWrapper = styled.div`
-  ${({ theme }) => css`
-    display: flex;
-    align-items: center;
-    padding: ${theme.space.medium};
-
-    & button:not(:last-child) {
-      margin-right: ${theme.space.xxxsmall};
-    }
-  `}
-`;

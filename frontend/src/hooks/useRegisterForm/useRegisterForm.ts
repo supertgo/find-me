@@ -58,7 +58,7 @@ export const useRegisterForm = (): UseRegisterFormProtocols => {
       password: data.password,
       email: data.email,
       phone: data.phone,
-      type: (data.type as UserType) || 'employee',
+      type: data.type ? 'recruiter' : 'employee',
     };
 
     try {

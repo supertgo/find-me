@@ -34,7 +34,7 @@ export const Sidebar = ({}: SidebarProps) => {
         ) : (
           <>
             <SidebarItem
-              href="/candidates"
+              href="/applicants"
               icon={<HomeIcon />}
               text="Candidatos"
             />

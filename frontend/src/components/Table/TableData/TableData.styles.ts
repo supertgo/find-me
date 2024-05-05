@@ -29,6 +29,7 @@ export const UserWrapperColumn = styled.div`
     max-width: 20rem;
 
     ${UserAvatar}, img {
+      object-fit: cover;
       margin-right: ${theme.space.xxxsmall};
     }
 

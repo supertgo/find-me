@@ -17,6 +17,7 @@ import { Pill } from 'components/Pill/Pill';
 import { Button } from 'components/Button/Button';
 import * as S from 'components/Table/TableData/TableData.styles';
 import { DotsHorizontalIcon } from '@radix-ui/react-icons';
+import Link from 'next/link';
 
 const columnHelper = createColumnHelper<UserProps>();
 
@@ -50,6 +51,7 @@ export const useApplicantsTable = () => {
               borderRadius: '50%',
             }}
             loading="lazy"
+            quality={100}
           />
           <p title={info.getValue()}>{info.getValue()}</p>
         </S.UserWrapperColumn>
@@ -74,7 +76,11 @@ export const useApplicantsTable = () => {
       id: 'applicant_application_button',
       enableSorting: false,
       header: () => null,
-      cell: () => <Button>Currículo</Button>,
+      cell: (info) => (
+        <Link href={`/applicant/${info.getValue().id}`} target="_blank">
+          <Button>Currículo</Button>
+        </Link>
+      ),
     }),
     columnHelper.accessor((row) => row, {
       id: 'applicant_action_column',

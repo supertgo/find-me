@@ -1,11 +1,10 @@
-import { Base } from 'components/Base/Base';
-import { Button } from 'components/Button/Button';
-import { DropboxIcon } from 'icons/DropboxIcon/DropboxIcon';
+import { Base } from 'templates/Base/Base';
 import { useApplicantsTable } from 'hooks/useApplicantsTable/useApplicantsTable';
 import { useEffect } from 'react';
 
 import * as S from './Applicants.styles';
 import { ApplicantsTable } from 'components/ApplicantsTable/ApplicantsTable';
+import { ApplicationHeader } from 'components/ApplicationHeader/ApplicationHeader';
 
 export const Applicants = () => {
   const { data, table, isLoading, globalFilter, setGlobalFilter } =
@@ -25,16 +24,7 @@ export const Applicants = () => {
   return (
     <Base>
       <S.Wrapper>
-        <S.Header>
-          <S.CompanyWrapper>
-            <DropboxIcon />
-            <S.CompanyTextsWrapper>
-              <span>Empresa</span>
-              <p>Onfly</p>
-            </S.CompanyTextsWrapper>
-          </S.CompanyWrapper>
-          <Button>Publicar uma vaga</Button>
-        </S.Header>
+        <ApplicationHeader />
 
         <ApplicantsTable
           table={table}

@@ -1,17 +1,11 @@
+import Image from 'next/image';
 import { Button } from 'components/Button/Button';
-import * as S from './JobItem.styles';
-import { Pill } from 'components/Pill/Pill';
 import { MediaMatch } from 'components/MediaMatch/MediaMatch';
-import { DropboxIcon } from 'icons/DropboxIcon/DropboxIcon';
 import { Job } from 'protocols/external/job/job';
-import {
-  filterJobLocation,
-  translateEmploymentType,
-  translateSalaryTimeUnit,
-  translateWorkModel,
-} from 'utils/job';
-import { formatInputCurrency } from 'utils/money';
+import { filterJobLocation } from 'utils/job';
 import { JobPill, JobPillProps } from './JobPill';
+
+import * as S from './JobItem.styles';
 
 export type JobItemProps = {} & Job;
 
@@ -37,7 +31,17 @@ export const JobItem = ({
   return (
     <S.Wrapper>
       <S.JobInfoWrapper>
-        <DropboxIcon />
+        <Image
+          src={`https://source.unsplash.com/random/?company_logo&${applicants}`}
+          width="64"
+          height="64"
+          alt={`company avatar`}
+          style={{
+            borderRadius: '50%',
+          }}
+          loading="lazy"
+          quality={100}
+        />
         <S.JobInfo>
           <p>{name}</p>
           <S.JobLocationInfo>{filterJobLocation(location)}</S.JobLocationInfo>

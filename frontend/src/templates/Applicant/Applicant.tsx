@@ -77,7 +77,7 @@ export const Applicant = ({ user }: ApplicantProps) => {
 
             <S.PersonalInformationItem>
               <S.PersonalInformationItemTitle>
-                Nome Completo
+                Idioma
               </S.PersonalInformationItemTitle>
               <S.PersonalInformationItemText>
                 {user.name}
@@ -90,7 +90,7 @@ export const Applicant = ({ user }: ApplicantProps) => {
               Sobre mim
             </S.PersonalInformationItemTitle>
             <S.PersonalInformationItemText>
-              {user.about_me && user.about_me}
+              {user.about_me || 'Não informado'}
             </S.PersonalInformationItemText>
           </S.PersonalInformationItem>
 

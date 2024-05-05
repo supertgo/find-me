@@ -49,8 +49,7 @@ type TrProps = {
 
 export const Tr = styled.tr<TrProps>`
   ${({ theme, pointer, $isWhite }) => css`
-    border-left: ${theme.borderWidth.hairline} solid ${theme.colors.whiteGrey};
-    border-right: ${theme.borderWidth.hairline} solid ${theme.colors.whiteGrey};
+    border: ${theme.borderWidth.hairline} solid ${theme.colors.whiteGrey};
     background: ${$isWhite ? theme.colors.white : '#F8f8fD'};
 
     & td:first-child {
@@ -133,11 +132,9 @@ export const Td = styled.td`
 `;
 
 export const Tbody = styled.tbody`
-  ${({ theme }) => css`
-    ${Td} {
-      background: white;
-    }
-  `}
+  ${Td} {
+    background: white;
+  }
 `;
 
 export const LoadingWrapper = styled.div`

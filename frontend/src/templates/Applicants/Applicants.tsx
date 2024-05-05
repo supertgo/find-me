@@ -1,50 +1,40 @@
 import { Base } from 'components/Base/Base';
-import { TableData } from 'components/Table/TableData/TableData';
-import { Title } from 'components/Title/Title';
 import { useApplicantsTable } from 'hooks/useApplicantsTable/useApplicantsTable';
+import { useEffect } from 'react';
 
 import * as S from './Applicants.styles';
-import { Pagination } from 'components/Pagination/Pagination';
+import { ApplicantsTable } from 'components/ApplicantsTable/ApplicantsTable';
 import { ApplicationHeader } from 'components/ApplicationHeader/ApplicationHeader';
 
 export const Applicants = () => {
-  const { data, table, isLoading } = useApplicantsTable();
+  const { data, table, isLoading, globalFilter, setGlobalFilter } =
+    useApplicantsTable();
 
   const applicantsData = data?.data.data;
 
   const currentPage = table.getState().pagination.pageIndex + 1;
   const itemsPerPage = 10;
 
+  useEffect(() => {
+    return () => {
+      setGlobalFilter('');
+    };
+  }, []);
+
   return (
     <Base>
       <S.Wrapper>
         <ApplicationHeader />
-        <Title
-          title={`Total de Candidatos: ${applicantsData?.length || '...'}`}
-        />
 
-        <TableData
-          data={table}
+        <ApplicantsTable
+          table={table}
+          applicantsData={applicantsData}
           isLoading={isLoading}
-          defaultMessage="Não há nada para essa configurações"
+          globalFilter={globalFilter}
+          setGlobalFilter={setGlobalFilter}
+          currentPage={currentPage}
+          itemsPerPage={itemsPerPage}
         />
-
-        {applicantsData && (
-          <S.PaginationWrapper>
-            <Pagination
-              hasNextPage={table.getCanNextPage()}
-              hasPrevPage={table.getCanPreviousPage()}
-              page={currentPage}
-              limit={itemsPerPage}
-              totalItems={applicantsData.length || 0}
-              totalPages={table.getPageCount() || 0}
-              onPageChange={table.setPageIndex}
-              goNextPage={table.nextPage}
-              goPreviousPage={table.previousPage}
-              hasDetails={true}
-            />
-          </S.PaginationWrapper>
-        )}
       </S.Wrapper>
     </Base>
   );

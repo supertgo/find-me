@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
 
 export const Title = styled.h1`
   ${({ theme }) => css`
-    color: #25324b;
+    color: ${theme.colors.darkBlue};
     font-weight: ${theme.font.weights.bold};
     font-size: ${theme.font.sizes.xl};
   `}

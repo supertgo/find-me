@@ -58,7 +58,7 @@ export const AvatarInfo = styled.div`
     p {
       font-weight: ${theme.font.weights.medium};
       font-size: ${theme.font.sizes.smd};
-      color: #25324b;
+      color: ${theme.colors.darkBlue};
     }
 
     span {

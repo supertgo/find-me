@@ -15,7 +15,7 @@ export const Table = styled.table`
 
 export const TableData = styled.p`
   ${({ theme }) => css`
-    color: #25324b;
+    color: ${theme.colors.darkBlue};
     font-size: ${theme.font.sizes.sm};
     font-weight: 500;
     text-wrap: nowrap;
@@ -34,7 +34,7 @@ export const UserWrapperColumn = styled.div`
     }
 
     p {
-      color: #25324b;
+      color: ${theme.colors.darkBlue};
       font-size: ${theme.font.sizes.sm};
       font-weight: 500;
       text-wrap: nowrap;

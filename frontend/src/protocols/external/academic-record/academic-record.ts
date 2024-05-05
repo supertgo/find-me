@@ -4,10 +4,10 @@ export type AcademicRecord = {
     institution:    string;
     degree:         string;
     field_of_study: string;
-    start_date:     Date;
-    end_date:       null;
+    start_date:     string;
+    end_date:       string | null;
     is_in_progress: number;
     description:    string;
-    created_at:     Date;
-    updated_at:     Date;
+    created_at:     string;
+    updated_at:     string;
 }

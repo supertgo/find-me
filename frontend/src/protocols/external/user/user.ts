@@ -11,11 +11,12 @@ export type UserIncludeOption =
 export type UserProps = {
   id: number;
   name: string;
-  password: string;
+  password?: string;
   email: string;
   phone: string;
   type: UserType;
   about_me: string | null;
+  profile_picture_path?: string
   competences?: Competence[];
   academic_records?: AcademicRecord[];
   professional_experiences?: ProfessionalExperience[];

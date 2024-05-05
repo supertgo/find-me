@@ -2,8 +2,8 @@ export type Competence = {
   id: number;
   name: string;
   description: string | null;
-  created_at: Date;
-  updated_at: Date;
+  created_at: string;
+  updated_at: string;
   type: string;
 };
 

@@ -7,11 +7,11 @@ export type ProfessionalExperience = {
     position:        string;
     description:     string;
     start_date:      string;
-    end_date:        Date | null;
+    end_date:        string | null;
     is_current:      number;
     location:        string;
     work_model:      WorkModel;
     employment_type: EmploymentType;
-    created_at:      Date;
-    updated_at:      Date;
+    created_at:      string;
+    updated_at:      string;
 }

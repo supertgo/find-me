@@ -21,7 +21,10 @@ export type UserProps = {
   professional_experiences?: ProfessionalExperience[];
 };
 
-export type UserAuthRegister = Omit<UserProps, 'id'>;
+export type UserAuthRegister = Pick<
+  UserProps,
+  'name' | 'email' | 'password' | 'type' | 'phone'
+>;
 
 export type ShowUsersResponse = {
   data: UserProps[];

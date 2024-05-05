@@ -44,8 +44,8 @@ Content-Type: application/json
     });
     client.global.set("bearerToken", response.body.access_token);
 %}
-###
 
+###
 GET http://localhost:80/api/auth/me
 Accept: application/json
 Authorization: Bearer {{bearerToken}}

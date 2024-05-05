@@ -82,6 +82,7 @@ components:
               - password
               - name
               - phone
+              - type
             properties:
               email:
                 type: string
@@ -99,6 +100,21 @@ components:
                 type: string
                 example: Larinha
                 description: User's name
+              type:
+                type: string
+                example: recruiter
+                enum:
+                  - recruiter
+                  - employee
+                description: User's type
+              about_me:
+                type: string
+                example: 'I am a recruiter'
+                description: User's about me
+              profile_picture:
+                type: string
+                format: binary
+                description: User's profile picture. Must be an image file (jpg, png, jpeg) with a maximum size of 2048KB.
             type: object
     loginRequest:
       required: true

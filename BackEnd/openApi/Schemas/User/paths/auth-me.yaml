@@ -1,0 +1,6 @@
+tags:
+  - Auth
+description: Me
+responses:
+  '200':
+    $ref: '../responses/meSuccessResponse.yaml'

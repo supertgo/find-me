@@ -1,0 +1,6 @@
+tags:
+  - Auth
+description: Logout
+responses:
+  '200':
+    $ref: '../responses/LogoutSuccessResponse.yaml'

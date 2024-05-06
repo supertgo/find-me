@@ -1,0 +1,10 @@
+tags:
+  - User
+description: 'show specific user based on id'
+parameters:
+  - $ref: '../parameters/UserId.yaml'
+  - $ref: '../parameters/UserIncludesParameters.yaml'
+
+responses:
+  '200':
+    $ref: '../responses/LoginSuccessResponse.yaml'

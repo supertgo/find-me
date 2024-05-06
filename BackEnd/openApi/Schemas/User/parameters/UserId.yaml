@@ -1,0 +1,8 @@
+name: user_id
+in: route
+description: user id
+required: true
+schema:
+  type: integer
+  format: int64
+  example: 1

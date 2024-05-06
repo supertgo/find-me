@@ -1,0 +1,6 @@
+type: string
+example: recruiter
+enum:
+  - recruiter
+  - employee
+description: auth's type

@@ -1,0 +1,10 @@
+name: Authorization
+in: header
+description: Bearer token
+required: true
+schema:
+  type: string
+  example: |
+    Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2FwaS9hdXRoL2xvZ2luIiwiaWF0IjoxNzE0OT
+    U3MTE0LCJleHAiOjE3MTQ5NjA3MTQsIm5iZiI6MTcxNDk1NzExNCwianRpIjoiRXI1bmR0RFJOSWNwdmdCQSIsInN1YiI6IjMzMyIsInBydiI6IjIzY
+    mQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.WLUYXnrJkeLl98pWjm4U9ROQhP6WNQEgkyU2LG2SQHE

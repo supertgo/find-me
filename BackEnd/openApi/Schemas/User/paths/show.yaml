@@ -1,6 +1,9 @@
 tags:
   - User
 description: 'show specific user based on id'
+security:
+  - Authorization: [ ]
+
 parameters:
   - $ref: '../parameters/UserId.yaml'
   - $ref: '../parameters/UserIncludesParameters.yaml'

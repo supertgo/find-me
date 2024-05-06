@@ -1,6 +1,8 @@
 tags:
   - Auth
 description: Me
+security:
+  - Authorization: [ ]
 responses:
   '200':
     $ref: '../responses/meSuccessResponse.yaml'

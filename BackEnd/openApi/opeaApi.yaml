@@ -5,6 +5,10 @@ info:
   version: 1.0.0
 servers:
   - url: http://localhost:80/api
+components:
+  headers:
+    Authorization:
+      $ref: 'Schemas/Common/headers/AuthorizationHeader.yaml'
 
 paths:
   /auth/register:

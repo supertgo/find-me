@@ -1,6 +1,8 @@
 tags:
   - Auth
 description: Verify
+security:
+  - Authorization: [ ]
 responses:
   '200':
     $ref: '../responses/VerifyResponse.yaml'

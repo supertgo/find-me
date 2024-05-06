@@ -1,0 +1,8 @@
+tags:
+  - Auth
+requestBody:
+  $ref: '../requestBodies/RegisterUserRequest.yaml'
+description: register new user
+responses:
+  '204':
+    description: No Content

@@ -50,7 +50,7 @@ type TrProps = {
 export const Tr = styled.tr<TrProps>`
   ${({ theme, pointer, $isWhite }) => css`
     border: ${theme.borderWidth.hairline} solid ${theme.colors.whiteGrey};
-    background: ${$isWhite ? theme.colors.white : '#F8f8fD'};
+    background: ${$isWhite ? theme.colors.white : theme.colors.secondWhite};
 
     & td:first-child {
       font-weight: ${theme.font.weights.medium};

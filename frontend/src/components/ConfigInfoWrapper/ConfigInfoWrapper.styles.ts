@@ -35,7 +35,7 @@ export const Description = styled.p`
   ${({ theme }) => css`
     font-size: ${theme.font.sizes.sm};
     font-weight: ${theme.font.weights.regular};
-    color: #515b6f;
+    color: ${theme.colors.darkTitanium};
     margin-top: ${theme.space.xxsmall};
   `}
 `;

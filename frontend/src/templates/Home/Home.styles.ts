@@ -31,7 +31,7 @@ export const MoreApplicationsWrapper = styled.div`
 export const MoreApplicationsLink = styled.a`
   ${({ theme }) => css`
     cursor: pointer;
-    color: #2563eb;
+    color: ${theme.colors.primary};
     text-decoration: none;
     font-weight: ${theme.font.weights.bold};
     font-size: ${theme.font.sizes.sm};

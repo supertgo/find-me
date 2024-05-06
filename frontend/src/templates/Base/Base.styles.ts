@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import media from 'styled-media-query';
+import { theme } from 'styles/theme';
 
 export const Wrapper = styled.div`
-  background: #f8f8fd;
+  background: ${theme.colors.secondWhite};
 `;
 
 export const ContentWrapper = styled.div`
@@ -14,8 +15,8 @@ export const ContentWrapper = styled.div`
 `;
 
 export const ChildrenWrapper = styled.div`
+  background: ${theme.colors.white};
   width: calc(100% - 24.2rem);
-  background: #fff;
 
   ${media.lessThan('large')`
     width: 100%;

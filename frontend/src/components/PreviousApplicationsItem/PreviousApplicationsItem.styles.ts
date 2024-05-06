@@ -11,7 +11,7 @@ export const Wrapper = styled.div<WrapperProps>`
     align-items: center;
     cursor: pointer;
     border-radius: ${theme.borderRadius.sm};
-    background: ${$white ? '#FFF' : '#f8f8fd'};
+    background: ${$white ? theme.colors.white : theme.colors.secondWhite};
     padding: ${theme.space.medium};
     justify-content: space-between;
   `}
@@ -53,12 +53,12 @@ export const DateInfo = styled.div`
     p {
       font-size: ${theme.font.sizes.sm};
       margin-bottom: ${theme.space.xxsmall};
-      color: #25324b;
+      color: ${theme.colors.darkBlue};
       font-weight: 500;
     }
 
     span {
-      color: #7c8493;
+      color: ${theme.colors.officialGrey};
     }
   `}
 `;

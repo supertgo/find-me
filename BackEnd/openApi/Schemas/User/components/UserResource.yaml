@@ -1,0 +1,27 @@
+type: object
+properties:
+  id:
+    type: integer
+    example: 1
+    description: auth's id
+  name:
+    type: string
+    example: Larinha
+    description: auth's name
+  phone:
+    type: string
+    example: '31984664949'
+    description: Larinha's phone
+  email:
+    type: string
+    example: aa@gmail.com
+    description: auth's email
+  type:
+    $ref: './UserType.yaml'
+  about_me:
+    type: string
+    example: 'I am a recruiter'
+    description: auth's about me
+  profile_picture:
+    format: binary
+    description: auth's profile picture. Must be an image file (jpg, png, jpeg) with a maximum size of 2048KB.

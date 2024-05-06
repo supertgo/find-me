@@ -1,0 +1,6 @@
+tags:
+  - Auth
+description: Verify
+responses:
+  '200':
+    $ref: '../responses/VerifyResponse.yaml'

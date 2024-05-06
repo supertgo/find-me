@@ -6,7 +6,7 @@ use App\Exceptions\User\AcademicRecord\EndDateMustBeAfterStartDateException;
 use App\Exceptions\User\AcademicRecord\MustHaveEndDateWhenFinishedException;
 use Carbon\Carbon;
 
-class AcademicRecordDomain implements AcademicRecordDomainInterface
+readonly class AcademicRecordDomain implements AcademicRecordDomainInterface
 {
     private ?int $id;
     private string $institution;
@@ -17,7 +17,7 @@ class AcademicRecordDomain implements AcademicRecordDomainInterface
     private bool $isOnProgress;
     private ?string $description;
 
-    public function __construct(private readonly AcademicRecordRepositoryInterface $repository)
+    public function __construct(private AcademicRecordRepositoryInterface $repository)
     {
     }
 
@@ -74,6 +74,7 @@ class AcademicRecordDomain implements AcademicRecordDomainInterface
     public function setInstitution(string $institution): AcademicRecordDomain
     {
         $this->institution = $institution;
+
         return $this;
     }
 
@@ -85,6 +86,7 @@ class AcademicRecordDomain implements AcademicRecordDomainInterface
     public function setDegree(string $degree): AcademicRecordDomain
     {
         $this->degree = $degree;
+
         return $this;
     }
 
@@ -96,6 +98,7 @@ class AcademicRecordDomain implements AcademicRecordDomainInterface
     public function setFieldOfStudy(string $fieldOfStudy): AcademicRecordDomain
     {
         $this->fieldOfStudy = $fieldOfStudy;
+
         return $this;
     }
 
@@ -107,6 +110,7 @@ class AcademicRecordDomain implements AcademicRecordDomainInterface
     public function setStartDate(Carbon $startDate): AcademicRecordDomain
     {
         $this->startDate = $startDate;
+
         return $this;
     }
 
@@ -147,6 +151,7 @@ class AcademicRecordDomain implements AcademicRecordDomainInterface
     public function setIsOnProgress(bool $isOnProgress): AcademicRecordDomain
     {
         $this->isOnProgress = $isOnProgress;
+
         return $this;
     }
 
@@ -158,6 +163,7 @@ class AcademicRecordDomain implements AcademicRecordDomainInterface
     public function setDescription(?string $description): AcademicRecordDomain
     {
         $this->description = $description;
+
         return $this;
     }
 
@@ -169,6 +175,7 @@ class AcademicRecordDomain implements AcademicRecordDomainInterface
     public function setId(?int $id): AcademicRecordDomain
     {
         $this->id = $id;
+
         return $this;
     }
 

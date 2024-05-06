@@ -1,14 +1,33 @@
-POST http://localhost:80/api/auth/register
+###
+POST http://localhost/api/auth/register
 Accept: application/json
-Content-Type: application/json
+Content-Type: multipart/form-data; boundary=WebAppBoundary
 
-{
-    "name": "test",
-    "password": "testaa",
-    "email": "davi.teste@gmail.com",
-    "phone": "319747474747",
-  "type": "recruiter"
-}
+--WebAppBoundary
+Content-Disposition: form-data; name="name"
+
+Cazares
+--WebAppBoundary
+Content-Disposition: form-data; name="password"
+
+{{password}}
+--WebAppBoundary
+Content-Disposition: form-data; name="phone"
+
+319747474747
+--WebAppBoundary
+Content-Disposition: form-data; name="email"
+
+{{email}}
+--WebAppBoundary
+Content-Disposition: form-data; name="type"
+
+recruiter
+--WebAppBoundary
+Content-Disposition: form-data; name="profile_picture"; filename="profilePicture.png"
+
+< profilePicture.jpeg
+--WebAppBoundary--
 
 ###
 POST http://localhost:80/api/auth/login
@@ -16,15 +35,28 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "name": "test",
-  "password": "testaa",
-  "email": "davi.teste@gmail.com",
-  "phone": "319747474747",
-  "type": "recruiter"
+  "email": "{{email}}",
+  "password": "{{password}}"
 }
-
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+    client.global.set("bearerToken", response.body.access_token);
+%}
 ###
 
 GET http://localhost:80/api/auth/me
 Accept: application/json
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2FwaS9hdXRoL2xvZ2luIiwiaWF0IjoxNzE0MzM1NjI3LCJleHAiOjE3MTQzMzkyMjcsIm5iZiI6MTcxNDMzNTYyNywianRpIjoiZDhZR05jRHNLUXB5eGt6NCIsInN1YiI6IjcyIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.kwYnbaH6ICB1IhHnWDY6AooBowMLpsxp8SMtUfgT_6k
+Authorization: Bearer {{bearerToken}}
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+    client.global.set("profilePicture", response.body.data.profile_picture);
+%}
+###
+
+###
+GET /{{profilePicture}}

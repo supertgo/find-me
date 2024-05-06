@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { Epilogue } from 'next/font/google';
 import { AppProviders } from 'providers/app-providers';
 import { QueryProvider } from 'providers/query-provider';
+import NextTopLoader from 'nextjs-toploader';
 
 const epilogue = Epilogue({
   weight: ['100', '400', '500', '600', '700', '800'],
@@ -24,6 +25,7 @@ export default function RootLayout({
       <body>
         <StyledComponentsRegistry>
           <QueryProvider>
+            <NextTopLoader />
             <AppProviders>{children}</AppProviders>
           </QueryProvider>
         </StyledComponentsRegistry>

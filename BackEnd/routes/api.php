@@ -5,6 +5,7 @@ use App\Http\Controllers\JWTController;
 use App\Http\Controllers\UserAcademicRecordsController;
 use App\Http\Controllers\UserCompetenceController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserProfessionalExperience;
 use Illuminate\Support\Facades\Route;
 
 Route::group(
@@ -36,9 +37,19 @@ Route::group(
             Route::delete('/', [UserAcademicRecordsController::class, 'deleteAcademicRecords']);
         });
 
+        Route::group(['prefix' => 'professional-experiences'], function () {
+            Route::post('/', [UserProfessionalExperience::class, 'addProfessionalExperiences']);
+            Route::delete('/', [UserProfessionalExperience::class, 'deleteProfessionalExperiences']);
+        });
+
         Route::get('', [UserController::class, 'index']);
         Route::get('/{user_id}', [UserController::class, 'show']);
         Route::put('', [UserController::class, 'update']);
+
+        Route::group(['prefix' => 'profile-picture'], function () {
+            Route::patch('', [UserController::class, 'updateProfilePicture']);
+            Route::delete('', [UserController::class, 'deleteProfilePicture']);
+        });
     })
     ->middleware('api');;
 

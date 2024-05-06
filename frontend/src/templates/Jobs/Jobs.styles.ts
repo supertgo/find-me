@@ -65,3 +65,10 @@ export const Opportunities = styled.div`
     }
   `}
 `;
+
+export const NoJobsMessage = styled.p`
+  ${({ theme }) => css`
+    text-align: center;
+    font-size: ${theme.font.sizes.sm};
+  `}
+`;

@@ -13,7 +13,7 @@ class RemoveAcademicRecordFromUserTest extends TestCase
 
     const ROUTE = self::BASE_ROUTE . 'user/academic-records';
 
-    public function testAddCompetencesToUser()
+    public function testAddAcademicRecordsToUser()
     {
         $this->makeUser();
 
@@ -21,7 +21,7 @@ class RemoveAcademicRecordFromUserTest extends TestCase
 
         $this
             ->actingAs($this->user)
-            ->json('DELETE', self::ROUTE, ['academicRecordsId' => $academicRecordIds])
+            ->json('DELETE', self::ROUTE, ['academic_records_ids' => $academicRecordIds])
             ->assertStatus(Response::HTTP_NO_CONTENT);
 
         $this->assertSame(0, $this->user->academicRecords()->count());

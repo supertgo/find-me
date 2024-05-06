@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 
-use App\Domain\User\JobService;
-use App\Domain\User\UserRepository;
 use App\Domain\User\UserService;
 use App\Http\Requests\Auth\ForgotPasswordRequest;
 use App\Http\Requests\Auth\LoginRequest;
@@ -19,16 +17,18 @@ class JWTController extends Controller
 {
     public function register(RegisterUserRequest $request): Response
     {
-        $repository = app(UserRepository::class);
         try {
-            $repository->beginTransaction();
-            app(UserService::class)->createUser($request->validated());
-            $repository->commitTransaction();
+            $userService = new UserService();
+
+            $userId = $userService->createUser($request->validated());
+
+            if ($request->hasFile('profile_picture')) {
+                $userService->setProfilePicture($request->file('profile_picture'), $userId);
+            }
 
             return response()->noContent();
         } catch (Exception $exception) {
             Log::error($exception);
-            $repository->rollbackTransaction();
             return response()->json(['error' => 'Server error'], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }

@@ -2,10 +2,10 @@
 
 namespace App\Exceptions\Job;
 
-use App\Exceptions\Abstract\AbstractFindMeException;
+use App\Exceptions\Abstract\AbstractDomainException;
 use App\Exceptions\ExceptionMessagesEnum;
 
-class JobIdMustBeAnIntegerException extends AbstractFindMeException
+class JobIdMustBeAnIntegerException extends AbstractDomainException
 {
     public function __construct(string $id)
     {

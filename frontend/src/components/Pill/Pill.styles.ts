@@ -8,6 +8,7 @@ export const Wrapper = styled.div`
     color: ${theme.colors.lightGreen};
     font-size: ${theme.font.sizes.xs};
     font-weight: ${theme.font.weights.medium};
+    font-family: arial;
     width: min-content;
     text-wrap: nowrap;
   `}

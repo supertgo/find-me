@@ -15,11 +15,11 @@ class ShowUserTest extends TestCase
 
     public function testShowUserSuccess()
     {
-        $user = User::factory()->create();
+        $this->makeUser();
 
         $this
             ->actingAs(User::factory()->create())
-            ->json('GET', sprintf(self::ROUTE, $user->id))
+            ->json('GET', sprintf(self::ROUTE, $this->user->id))
             ->assertStatus(Response::HTTP_OK)
             ->assertJsonStructure([
                 'data' => [
@@ -28,6 +28,8 @@ class ShowUserTest extends TestCase
                     'phone',
                     'id',
                     'type',
+                    'about_me',
+                    'profile_picture_path'
                 ]
             ]);
     }

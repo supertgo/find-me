@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 
 /**
@@ -15,6 +14,7 @@ use Illuminate\Support\Carbon;
  * @property string $name
  * @property string $description
  * @property string|null $location
+ * @property string type
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @method static Builder|Job newModelQuery()
@@ -46,7 +46,8 @@ class Competence extends Model
 
     protected $fillable = [
         'name',
-        'description'
+        'description',
+        'type'
     ];
 
     protected $hidden = [

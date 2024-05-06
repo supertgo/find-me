@@ -3,14 +3,16 @@
 namespace App\Domain\Job;
 
 use App\Domain\Abstract\AbstractRepository;
+use App\Domain\Competence\CompetenceDomainInterface;
 use App\Models\Job;
 use DB;
+use Illuminate\Support\Collection;
 
 class JobRepository extends AbstractRepository implements JobRepositoryInterface
 {
-    public function createJob(JobDomainInterface $job): void
+    public function createJob(JobDomainInterface $job): array
     {
-        Job::create($job->toArray());
+        return Job::create($job->toArray())->toArray();
     }
 
     public function jobExists(int $id): bool
@@ -36,13 +38,30 @@ class JobRepository extends AbstractRepository implements JobRepositoryInterface
         Job::where('id', $job->getId())->update($job->toArray());
     }
 
-    public function getJobs(): array
+    public function getJobs(array $includes = []): array
     {
-        return Job::all()->toArray();
+        return Job::with($includes)->get()->toArray();
     }
 
     public function getJob(?int $id): array
     {
-       return Job::find($id)->toArray();
+        return Job::find($id)->toArray();
+    }
+
+    public function getJobWithIncludes(?int $id, array $includes): array
+    {
+        return Job::with($includes)->find($id)->toArray();
+    }
+
+    public function attachCompetences(int $id, Collection $competences): void
+    {
+        Job::where('id', $id)
+            ->first()
+            ->competences()
+            ->attach(
+                $competences->map(
+                    fn(CompetenceDomainInterface $competence) => $competence->getId()
+                )->toArray()
+            );
     }
 }

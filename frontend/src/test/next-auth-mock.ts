@@ -2,8 +2,11 @@ import { http, HttpResponse } from 'msw';
 import { setupServer } from 'msw/node';
 
 export const ApiAuthSessionResponseMock = {
-  email: 'tobias',
+  name: 'tobias',
+  email: 'tobias@gmail.com',
   password: '1234',
+  access_token:
+    'token',
 };
 
 export const handlers = [

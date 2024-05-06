@@ -6,6 +6,7 @@ import {
   CaretSortIcon,
   CaretUpIcon,
 } from '@radix-ui/react-icons';
+import { theme } from 'styles/theme';
 
 type TableProposalsHeadersProps<T> = {
   table: Table<T>;
@@ -17,7 +18,7 @@ const renderSortingIcon = <T,>(column: Column<T, unknown>) => {
   const isSorted = column.getIsSorted();
 
   const props = {
-    color: '#7C8493',
+    color: theme.colors.officialGrey,
     width: 20,
     height: 20
   }

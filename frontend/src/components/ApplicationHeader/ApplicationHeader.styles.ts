@@ -29,11 +29,11 @@ export const CompanyTextsWrapper = styled.div`
     flex-direction: column;
 
     span {
-      color: #515b6f;
+      color: ${theme.colors.darkTitanium};
     }
 
     p {
-      color: #25324b;
+      color: ${theme.colors.darkBlue};
       font-size: ${theme.font.sizes.md};
       font-weight: ${theme.font.weights.medium};
     }

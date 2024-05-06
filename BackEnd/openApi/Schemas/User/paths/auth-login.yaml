@@ -1,0 +1,10 @@
+tags:
+  - Auth
+requestBody:
+  $ref: '../requestBodies/LoginRequest.yaml'
+description: register new user
+responses:
+  '200':
+    $ref: '../responses/LoginSuccessResponse.yaml'
+  '401':
+    $ref: '../responses/LoginUnauthorizedResponse.yaml'

@@ -18,16 +18,7 @@ paths:
           description: No Content
   /auth/login:
     post:
-      tags:
-        - Auth
-      description: Login
-      requestBody:
-        $ref: '#/components/requestBodies/loginRequest'
-      responses:
-        '200':
-          $ref: '#/components/responses/login'
-        '401':
-          $ref: '#/components/responses/loginUnauthorized'
+      $ref: './Schemas/User/paths/auth-login.yaml'
   /auth/logout:
     post:
       tags:

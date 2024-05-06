@@ -1,0 +1,17 @@
+description: logged in successful
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        access_token:
+          type: string
+          description: Access Token for authenticated user
+        token_type:
+          type: string
+          description: The type of token used
+          example: bearer
+        expires_in:
+          type: integer
+          description: Expiry time of the token in seconds
+          example: 86400

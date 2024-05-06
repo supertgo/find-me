@@ -22,3 +22,7 @@ paths:
   /auth/verify:
     post:
       $ref: './Schemas/User/paths/auth-verify.yaml'
+
+  /user/{id}:
+    get:
+      $ref: './Schemas/User/paths/show.yaml'

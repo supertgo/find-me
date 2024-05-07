@@ -15,6 +15,7 @@ import {
   UserProps,
   UserType,
 } from 'protocols/external/user/user';
+import { PostAuthRegisterRouteConst } from 'utils/routes';
 
 export type RegisterInputs = {
   name: string;
@@ -63,7 +64,7 @@ export const useRegisterForm = (): UseRegisterFormProtocols => {
 
     try {
       const response = await postClient.post({
-        url: '/auth/register',
+        url: `/${PostAuthRegisterRouteConst}`,
         body: {
           ...registerBody,
         },

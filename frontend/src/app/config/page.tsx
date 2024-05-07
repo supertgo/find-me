@@ -3,6 +3,7 @@ import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
 import { UserProps } from 'protocols/external/user/user';
 import { Config } from 'templates/Config/Config';
+import { GetAuthMeRouteConst } from 'utils/routes';
 
 type GetDataProps = {
   data: UserProps;
@@ -11,7 +12,7 @@ type GetDataProps = {
 async function getData() {
   const token = await getServerSession(nextAuthOptions);
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/me`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/${GetAuthMeRouteConst}`, {
     headers: { Authorization: `Bearer ${token?.access_token}` },
   });
 

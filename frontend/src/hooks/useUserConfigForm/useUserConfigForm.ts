@@ -1,4 +1,4 @@
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 import {
   Control,
   useForm,
@@ -6,10 +6,11 @@ import {
   SubmitHandler,
   UseFormHandleSubmit,
   UseFormRegister,
-} from 'react-hook-form';
-import { useState } from 'react';
-import { PutClient } from 'services/httpClient/put';
-import { PutUserRouteConst } from 'utils/routes';
+} from "react-hook-form";
+import { useState } from "react";
+import { PutClient } from "services/httpClient/put";
+import { PutUserRouteConst } from "utils/routes";
+import { revertFormatCellphone } from "utils/formatCellphone";
 
 export type ConfigInputs = {
   name: string;
@@ -36,7 +37,7 @@ export const useUserConfigForm = (): UseConfigFormProtocols => {
     formState: { errors, isValid },
     control,
   } = useForm<ConfigInputs>({
-    mode: 'onBlur',
+    mode: "onBlur",
   });
 
   const onSubmit: SubmitHandler<ConfigInputs> = async (data, event) => {
@@ -47,7 +48,10 @@ export const useUserConfigForm = (): UseConfigFormProtocols => {
     const putClient = new PutClient();
 
     const body: ConfigInputs = {
-      ...data,
+      name: data.name,
+      password: data.password,
+      email: data.email,
+      phone: revertFormatCellphone(data.phone),
     };
 
     try {
@@ -56,13 +60,13 @@ export const useUserConfigForm = (): UseConfigFormProtocols => {
         body,
       });
 
-      toast.success('Informações atualizadas com sucesso!');
+      toast.success("Informações atualizadas com sucesso!");
     } catch (error) {
       if (error instanceof Error) {
         return toast.error(error.response.data.message);
       }
 
-      return toast.error('Ocorreu um erro, tente novamente!');
+      return toast.error("Ocorreu um erro, tente novamente!");
     }
 
     setIsLoading(false);

@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { signIn } from 'next-auth/react';
-import { toast } from 'react-toastify';
+import { useState } from "react";
+import { signIn } from "next-auth/react";
+import { toast } from "react-toastify";
 import {
   Control,
   useForm,
@@ -8,14 +8,16 @@ import {
   SubmitHandler,
   UseFormHandleSubmit,
   UseFormRegister,
-} from 'react-hook-form';
-import { PostClient } from 'services/httpClient/post';
+} from "react-hook-form";
+import { PostClient } from "services/httpClient/post";
 import {
   UserAuthRegister,
   UserProps,
   UserType,
-} from 'protocols/external/user/user';
-import { PostAuthRegisterRouteConst } from 'utils/routes';
+} from "protocols/external/user/user";
+import { PostAuthRegisterRouteConst } from "utils/routes";
+import { log } from "console";
+import { revertFormatCellphone } from "utils/formatCellphone";
 
 export type RegisterInputs = {
   name: string;
@@ -44,7 +46,7 @@ export const useRegisterForm = (): UseRegisterFormProtocols => {
     formState: { errors, isValid },
     control,
   } = useForm<RegisterInputs>({
-    mode: 'onBlur',
+    mode: "onBlur",
   });
 
   const onSubmit: SubmitHandler<RegisterInputs> = async (data, event) => {
@@ -58,8 +60,8 @@ export const useRegisterForm = (): UseRegisterFormProtocols => {
       name: data.name,
       password: data.password,
       email: data.email,
-      phone: data.phone,
-      type: data.type ? 'recruiter' : 'employee',
+      phone: revertFormatCellphone(data.phone),
+      type: data.type ? "recruiter" : "employee",
     };
 
     try {
@@ -70,11 +72,11 @@ export const useRegisterForm = (): UseRegisterFormProtocols => {
         },
       });
 
-      await signIn('credentials', {
+      await signIn("credentials", {
         email: data.email,
         password: data.password,
         redirect: true,
-        callbackUrl: '/home',
+        callbackUrl: "/home",
       });
 
       toast.success(response.data.message);
@@ -83,7 +85,7 @@ export const useRegisterForm = (): UseRegisterFormProtocols => {
         return toast.error(error.response.data.message);
       }
 
-      return toast.error('Ocorreu um erro, tente novamente!');
+      return toast.error("Ocorreu um erro, tente novamente!");
     }
 
     setIsLoading(false);

@@ -1,8 +1,0 @@
-tags:
-  - Auth
-description: Logout
-security:
-  - Authorization: [ ]
-responses:
-  '200':
-    $ref: '../responses/LogoutSuccessResponse.yaml'

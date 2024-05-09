@@ -6,9 +6,9 @@ info:
 servers:
   - url: http://localhost:80/api
 components:
-  headers:
-    Authorization:
-      $ref: 'Schemas/Common/headers/AuthorizationHeader.yaml'
+  securitySchemes:
+    BearerAuth:
+      $ref: '/Schemas/Common/Headers/AuthorizationHeader.yaml'
 
 paths:
   /auth/register:
@@ -40,7 +40,7 @@ paths:
         - Auth
       description: Logout
       security:
-        - Authorization: [ ]
+        - BearerAuth: [ ]
       responses:
         '200':
           $ref: 'Schemas/User/responses/LogoutSuccessResponse.yaml'
@@ -51,7 +51,8 @@ paths:
         - Auth
       description: Me
       security:
-        - Authorization: [ ]
+        - BearerAuth: [ ]
+
       responses:
         '200':
           $ref: 'Schemas/User/responses/meSuccessResponse.yaml'
@@ -61,7 +62,7 @@ paths:
         - Auth
       description: Verify
       security:
-        - Authorization: [ ]
+        - BearerAuth: [ ]
       responses:
         '200':
           $ref: 'Schemas/User/responses/VerifyResponse.yaml'
@@ -72,8 +73,7 @@ paths:
         - User
       description: 'show specific user based on id'
       security:
-        - Authorization: [ ]
-
+        - BearerAuth: [ ]
       parameters:
         - $ref: 'Schemas/User/parameters/UserId.yaml'
         - $ref: 'Schemas/User/parameters/UserIncludesParameters.yaml'

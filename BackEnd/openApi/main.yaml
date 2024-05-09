@@ -1,0 +1,83 @@
+openapi: 3.0.3
+info:
+  title: Blog
+  description: Blog
+  version: 1.0.0
+servers:
+  - url: http://localhost:80/api
+components:
+  headers:
+    Authorization:
+      $ref: 'Schemas/Common/headers/AuthorizationHeader.yaml'
+
+paths:
+  /auth/register:
+    post:
+      tags:
+        - Auth
+      requestBody:
+        $ref: 'Schemas/User/requestBodies/RegisterUserRequest.yaml'
+      description: register new user
+      responses:
+        '204':
+          description: No Content
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      requestBody:
+        $ref: 'Schemas/User/requestBodies/LoginRequest.yaml'
+      description: register new user
+      responses:
+        '200':
+          $ref: 'Schemas/User/responses/LoginSuccessResponse.yaml'
+        '401':
+          $ref: 'Schemas/User/responses/LoginUnauthorizedResponse.yaml'
+
+  /auth/logout:
+    post:
+      tags:
+        - Auth
+      description: Logout
+      security:
+        - Authorization: [ ]
+      responses:
+        '200':
+          $ref: 'Schemas/User/responses/LogoutSuccessResponse.yaml'
+
+  /auth/me:
+    get:
+      tags:
+        - Auth
+      description: Me
+      security:
+        - Authorization: [ ]
+      responses:
+        '200':
+          $ref: 'Schemas/User/responses/meSuccessResponse.yaml'
+  /auth/verify:
+    post:
+      tags:
+        - Auth
+      description: Verify
+      security:
+        - Authorization: [ ]
+      responses:
+        '200':
+          $ref: 'Schemas/User/responses/VerifyResponse.yaml'
+
+  /user/{id}:
+    get:
+      tags:
+        - User
+      description: 'show specific user based on id'
+      security:
+        - Authorization: [ ]
+
+      parameters:
+        - $ref: 'Schemas/User/parameters/UserId.yaml'
+        - $ref: 'Schemas/User/parameters/UserIncludesParameters.yaml'
+
+      responses:
+        '200':
+          $ref: 'Schemas/User/responses/LoginSuccessResponse.yaml'

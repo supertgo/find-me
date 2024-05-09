@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $users = User::factory(15)->create();
+        $users = User::factory()->count(15)->create();
 
         ProfessionalExperience::factory()->count($users->count())->create()->each(function ($professionalExperience) use ($users) {
             $user = $users->random();
@@ -34,16 +34,13 @@ class DatabaseSeeder extends Seeder
 
         $academicRecords = AcademicRecord::factory()->count($users->count())->create();
 
-        $shuffledUsers = $users->shuffle();
-        $shuffledAcademicRecords = $academicRecords->shuffle();
-
-        $shuffledUsers->each(function ($user) use (&$shuffledAcademicRecords) {
-            $academicRecord = $shuffledAcademicRecords->pop();
+        $users->each(function ($user) use (&$academicRecords) {
+            $academicRecord = $academicRecords->pop();
             $user->academicRecords()->save($academicRecord);
         });
 
-        Company::factory(5)->create()->each(function ($company) use ($users){
-            Job::factory(3)->create([
+        Company::factory()->count(5)->create()->each(function ($company) use ($users){
+            Job::factory()->count(3)->create([
                 'company_id' => $company->id,
                 'user_id' => $users->random(1)->first()->id,
             ]);

@@ -1,10 +1,10 @@
-import { useRouter } from 'next/navigation';
-import { toast } from 'react-toastify';
-import { PostAuthLogOutRouteConst } from 'utils/routes';
-import { useQueryClient } from '@tanstack/react-query';
-import { signOut as NextAuthSignOut } from 'next-auth/react';
-import { ERROR_LOGOUT } from 'errors';
-import { PostClient } from 'services/httpClient/post';
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
+import { PostAuthLogOutRouteConst } from "utils/routes";
+import { useQueryClient } from "@tanstack/react-query";
+import { signOut as NextAuthSignOut } from "next-auth/react";
+import { ERROR_LOGOUT } from "utils/errors";
+import { PostClient } from "services/httpClient/post";
 
 export type UseSignOutProtocols = {
   signOut(): Promise<void>;

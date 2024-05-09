@@ -1,0 +1,375 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Blog",
+    "description": "Blog",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:80/api"
+    }
+  ],
+  "components": {
+    "headers": {
+      "Authorization": {
+        "name": "Authorization",
+        "in": "header",
+        "description": "Bearer token",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2FwaS9hdXRoL2xvZ2luIiwiaWF0IjoxNzE0OT\nU3MTE0LCJleHAiOjE3MTQ5NjA3MTQsIm5iZiI6MTcxNDk1NzExNCwianRpIjoiRXI1bmR0RFJOSWNwdmdCQSIsInN1YiI6IjMzMyIsInBydiI6IjIzY\nmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.WLUYXnrJkeLl98pWjm4U9ROQhP6WNQEgkyU2LG2SQHE\n"
+        }
+      }
+    }
+  },
+  "paths": {
+    "/auth/register": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "description": "auth register request body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "email",
+                  "password",
+                  "name",
+                  "phone",
+                  "type"
+                ],
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "aa@gmail.com",
+                    "description": "auth's email"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "asd34sdd",
+                    "description": "auth's password"
+                  },
+                  "phone": {
+                    "type": "string",
+                    "example": "31984664949",
+                    "description": "Larinha's phone"
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "Larinha",
+                    "description": "auth's name"
+                  },
+                  "type": {
+                    "type": "string",
+                    "example": "recruiter",
+                    "enum": [
+                      "recruiter",
+                      "employee"
+                    ],
+                    "description": "auth's type"
+                  },
+                  "about_me": {
+                    "type": "string",
+                    "example": "I am a recruiter",
+                    "description": "auth's about me"
+                  },
+                  "profile_picture": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "auth's profile picture. Must be an image file (jpg, png, jpeg) with a maximum size of 2048KB."
+                  }
+                },
+                "type": "object"
+              }
+            }
+          }
+        },
+        "description": "register new user",
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "description": "auth register request body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "email",
+                  "password"
+                ],
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "aa@gmail.com",
+                    "description": "auth's email"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "asd34sdd",
+                    "description": "auth's password"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          }
+        },
+        "description": "register new user",
+        "responses": {
+          "200": {
+            "description": "logged in successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "access_token": {
+                      "type": "string",
+                      "description": "Access Token for authenticated user"
+                    },
+                    "token_type": {
+                      "type": "string",
+                      "description": "The type of token used",
+                      "example": "bearer"
+                    },
+                    "expires_in": {
+                      "type": "integer",
+                      "description": "Expiry time of the token in seconds",
+                      "example": 86400
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Unauthorized"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "Logout",
+        "security": [
+          {
+            "Authorization": [ ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully logged out",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Successfully logged out"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/me": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "Me",
+        "security": [
+          {
+            "Authorization": [ ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "user info",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "example": 1,
+                      "description": "auth's id"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Larinha",
+                      "description": "auth's name"
+                    },
+                    "phone": {
+                      "type": "string",
+                      "example": "31984664949",
+                      "description": "Larinha's phone"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "aa@gmail.com",
+                      "description": "auth's email"
+                    },
+                    "type": {
+                      "type": "string",
+                      "example": "recruiter",
+                      "enum": [
+                        "recruiter",
+                        "employee"
+                      ],
+                      "description": "auth's type"
+                    },
+                    "about_me": {
+                      "type": "string",
+                      "example": "I am a recruiter",
+                      "description": "auth's about me"
+                    },
+                    "profile_picture": {
+                      "format": "binary",
+                      "description": "auth's profile picture. Must be an image file (jpg, png, jpeg) with a maximum size of 2048KB."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/verify": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "Verify",
+        "security": [
+          {
+            "Authorization": [ ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User is logged in",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Successful"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/{id}": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "description": "show specific user based on id",
+        "security": [
+          {
+            "Authorization": [ ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "route",
+            "description": "user id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "example": 1
+            }
+          },
+          {
+            "name": "includes",
+            "in": "query",
+            "description": "include related data",
+            "required": false,
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "example": "recruiter",
+              "enum": [
+                "recruiter",
+                "employee"
+              ],
+              "description": "auth's type"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "logged in successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "access_token": {
+                      "type": "string",
+                      "description": "Access Token for authenticated user"
+                    },
+                    "token_type": {
+                      "type": "string",
+                      "description": "The type of token used",
+                      "example": "bearer"
+                    },
+                    "expires_in": {
+                      "type": "integer",
+                      "description": "Expiry time of the token in seconds",
+                      "example": 86400
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

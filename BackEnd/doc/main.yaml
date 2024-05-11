@@ -135,3 +135,19 @@ paths:
           description: No Content
         '422':
           $ref: 'Schemas/Common/response/ValidationErrorsResponse.yaml'
+
+    delete:
+      tags:
+        - User
+        - UserAcademicRecords
+      description: 'delete user academic record(s)'
+      security:
+        - BearerAuth: [ ]
+      requestBody:
+        $ref: 'Schemas/User/AcademicRecords/requestBodies/DeleteUserAcademicRecordsRequest.yaml'
+
+      responses:
+        '200':
+          description: Deleted
+        '422':
+          $ref: 'Schemas/Common/response/ValidationErrorsResponse.yaml'

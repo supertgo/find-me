@@ -95,10 +95,26 @@ paths:
       security:
         - BearerAuth: [ ]
       requestBody:
-        $ref: 'Schemas/User/requestBodies/LoginRequest.yaml'
+        $ref: 'Schemas/User/Competence/requestBodies/CreateUserCompetencesRequest.yaml'
 
       responses:
         '204':
           description: No Content
+        '422':
+          $ref: 'Schemas/Common/response/ValidationErrorsResponse.yaml'
+
+    delete:
+      tags:
+        - User
+        - UserCompetence
+      description: 'delete user competence(s)'
+      security:
+        - BearerAuth: [ ]
+      requestBody:
+        $ref: 'Schemas/User/Competence/requestBodies/DeleteUserCompetencesRequest.yaml'
+
+      responses:
+        '200':
+          description: Deleted
         '422':
           $ref: 'Schemas/Common/response/ValidationErrorsResponse.yaml'

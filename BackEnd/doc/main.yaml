@@ -8,7 +8,7 @@ servers:
 components:
   securitySchemes:
     BearerAuth:
-      $ref: '/Schemas/Common/Headers/AuthorizationHeader.yaml'
+      $ref: 'Schemas/Common/Headers/AuthorizationHeader.yaml'
 
 paths:
   /auth/register:

@@ -11,16 +11,12 @@
     }
   ],
   "components": {
-    "headers": {
-      "Authorization": {
-        "name": "Authorization",
-        "in": "header",
-        "description": "Bearer token",
-        "required": true,
-        "schema": {
-          "type": "string",
-          "example": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2FwaS9hdXRoL2xvZ2luIiwiaWF0IjoxNzE0OT\nU3MTE0LCJleHAiOjE3MTQ5NjA3MTQsIm5iZiI6MTcxNDk1NzExNCwianRpIjoiRXI1bmR0RFJOSWNwdmdCQSIsInN1YiI6IjMzMyIsInBydiI6IjIzY\nmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.WLUYXnrJkeLl98pWjm4U9ROQhP6WNQEgkyU2LG2SQHE\n"
-        }
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "Bearer token necessary to access APIs"
       }
     }
   },
@@ -170,6 +166,32 @@
                 }
               }
             }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Error message"
+                    },
+                    "errors": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "description": "Detailed error messages"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -182,7 +204,7 @@
         "description": "Logout",
         "security": [
           {
-            "Authorization": [ ]
+            "BearerAuth": [ ]
           }
         ],
         "responses": {
@@ -201,6 +223,23 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthenticated response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Error message",
+                      "example": "Unauthenticated"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -213,7 +252,7 @@
         "description": "Me",
         "security": [
           {
-            "Authorization": [ ]
+            "BearerAuth": [ ]
           }
         ],
         "responses": {
@@ -223,44 +262,293 @@
               "application/json": {
                 "schema": {
                   "type": "object",
+                  "required": [
+                    "id",
+                    "name",
+                    "type",
+                    "phone",
+                    "email",
+                    "email_verified_at",
+                    "created_at",
+                    "updated_at"
+                  ],
                   "properties": {
                     "id": {
                       "type": "integer",
-                      "example": 1,
-                      "description": "auth's id"
+                      "description": "The unique identifier for the user",
+                      "example": 1
                     },
                     "name": {
                       "type": "string",
-                      "example": "Larinha",
-                      "description": "auth's name"
-                    },
-                    "phone": {
-                      "type": "string",
-                      "example": "31984664949",
-                      "description": "Larinha's phone"
-                    },
-                    "email": {
-                      "type": "string",
-                      "example": "aa@gmail.com",
-                      "description": "auth's email"
+                      "description": "The name of the user",
+                      "example": "Cazares"
                     },
                     "type": {
                       "type": "string",
-                      "example": "recruiter",
-                      "enum": [
-                        "recruiter",
-                        "employee"
-                      ],
-                      "description": "auth's type"
+                      "description": "The type of user (e.g., recruiter)",
+                      "example": "recruiter"
+                    },
+                    "phone": {
+                      "type": "string",
+                      "description": "The phone number of the user",
+                      "example": "319747474747"
+                    },
+                    "email": {
+                      "type": "string",
+                      "description": "The email address of the user",
+                      "example": "cazares.thiago@gmail.com"
+                    },
+                    "email_verified_at": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "The timestamp when the user's email was verified",
+                      "example": null
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "The timestamp when the user was created",
+                      "example": "2024-05-11T13:20:50.000000Z"
+                    },
+                    "updated_at": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "The timestamp when the user was last updated",
+                      "example": "2024-05-11T13:20:50.000000Z"
                     },
                     "about_me": {
                       "type": "string",
-                      "example": "I am a recruiter",
-                      "description": "auth's about me"
+                      "description": "A brief description about the user",
+                      "example": null
                     },
-                    "profile_picture": {
-                      "format": "binary",
-                      "description": "auth's profile picture. Must be an image file (jpg, png, jpeg) with a maximum size of 2048KB."
+                    "profile_picture_path": {
+                      "type": "string",
+                      "description": "The URL to the user's profile picture",
+                      "example": "\"http://localhost/storage/EY3gleOcfR6cRbnmZ01Ss3FLqMSpKBkEhUrJM\nOcp7hWwkeBQSIw44XwbMNcpFspmTE5RyV90Dr6fvuuT39bOfmnojpqxSpfFuJWp.png\"\n"
+                    },
+                    "professional_experiences": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "company_name",
+                          "position",
+                          "start_date",
+                          "is_current",
+                          "created_at",
+                          "updated_at"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "description": "The unique identifier for the professional experience",
+                            "example": 1
+                          },
+                          "company_name": {
+                            "type": "string",
+                            "description": "The name of the company",
+                            "example": "Company Name"
+                          },
+                          "position": {
+                            "type": "string",
+                            "description": "The position held",
+                            "example": "Position"
+                          },
+                          "description": {
+                            "type": "string",
+                            "description": "The description of the professional experience",
+                            "example": "Description"
+                          },
+                          "start_date": {
+                            "type": "string",
+                            "format": "date",
+                            "description": "The start date of the professional experience",
+                            "example": "2022-01-01"
+                          },
+                          "end_date": {
+                            "type": "string",
+                            "format": "date",
+                            "description": "The end date of the professional experience",
+                            "example": "2022-12-31"
+                          },
+                          "is_current": {
+                            "type": "boolean",
+                            "description": "Whether the professional experience is current",
+                            "example": false
+                          },
+                          "location": {
+                            "type": "string",
+                            "description": "The location of the professional experience",
+                            "example": "Location"
+                          },
+                          "work_model": {
+                            "type": "string",
+                            "description": "The work model of the professional experience",
+                            "example": "hybrid",
+                            "enum": [
+                              "onSite",
+                              "hybrid",
+                              "homeOffice"
+                            ]
+                          },
+                          "employment_type": {
+                            "type": "string",
+                            "description": "The employment type of the professional experience",
+                            "example": "full-time",
+                            "enum": [
+                              "full-time",
+                              "part-time"
+                            ]
+                          },
+                          "created_at": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "The timestamp when the professional experience was created",
+                            "example": "2024-05-11T20:22:32.000000Z"
+                          },
+                          "updated_at": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "The timestamp when the professional experience was last updated",
+                            "example": "2024-05-11T20:22:32.000000Z"
+                          }
+                        }
+                      },
+                      "description": "The professional experiences of the user",
+                      "example": [ ]
+                    },
+                    "academic_records": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "institution",
+                          "degree",
+                          "field_of_study",
+                          "start_date",
+                          "is_in_progress",
+                          "created_at",
+                          "updated_at"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "description": "The unique identifier for the academic record",
+                            "example": 2
+                          },
+                          "institution": {
+                            "type": "string",
+                            "description": "The name of the institution",
+                            "example": "Harvard University"
+                          },
+                          "degree": {
+                            "type": "string",
+                            "description": "The degree obtained",
+                            "example": "Bachelor of Science"
+                          },
+                          "field_of_study": {
+                            "type": "string",
+                            "description": "The field of study",
+                            "example": "Computer Science"
+                          },
+                          "start_date": {
+                            "type": "string",
+                            "format": "date",
+                            "description": "The start date of the academic record",
+                            "example": "2018-09-01"
+                          },
+                          "end_date": {
+                            "type": "string",
+                            "format": "date",
+                            "description": "The end date of the academic record",
+                            "example": "2022-05-31"
+                          },
+                          "is_in_progress": {
+                            "type": "boolean",
+                            "description": "Whether the academic record is in progress",
+                            "example": false
+                          },
+                          "description": {
+                            "type": "string",
+                            "description": "The description of the academic record",
+                            "example": "Focused on software development and data structures"
+                          },
+                          "created_at": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "The timestamp when the academic record was created",
+                            "example": "2024-05-11T20:22:32.000000Z"
+                          },
+                          "updated_at": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "The timestamp when the academic record was last updated",
+                            "example": "2024-05-11T20:22:32.000000Z"
+                          }
+                        }
+                      },
+                      "description": "The academic records of the user",
+                      "example": [ ]
+                    },
+                    "competences": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "name",
+                          "created_at",
+                          "updated_at"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "description": "The unique identifier for the competence",
+                            "example": 1
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "The name of the competence"
+                          },
+                          "description": {
+                            "type": "string",
+                            "description": "The description of the competence"
+                          },
+                          "created_at": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "The timestamp when the competence was created",
+                            "example": "2024-05-11T13:20:50.000000Z"
+                          },
+                          "updated_at": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "The timestamp when the competence was last updated",
+                            "example": "2024-05-11T13:20:50.000000Z"
+                          }
+                        }
+                      },
+                      "description": "The competences of the user",
+                      "example": [ ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthenticated response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Error message",
+                      "example": "Unauthenticated"
                     }
                   }
                 }
@@ -278,7 +566,7 @@
         "description": "Verify",
         "security": [
           {
-            "Authorization": [ ]
+            "BearerAuth": [ ]
           }
         ],
         "responses": {
@@ -309,7 +597,7 @@
         "description": "show specific user based on id",
         "security": [
           {
-            "Authorization": [ ]
+            "BearerAuth": [ ]
           }
         ],
         "parameters": [
@@ -337,36 +625,1416 @@
                 "recruiter",
                 "employee"
               ],
-              "description": "auth's type"
+              "description": "user related data"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "logged in successful",
+            "description": "show user successful",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
+                  "required": [
+                    "id",
+                    "name",
+                    "type",
+                    "phone",
+                    "email",
+                    "email_verified_at",
+                    "created_at",
+                    "updated_at"
+                  ],
                   "properties": {
-                    "access_token": {
-                      "type": "string",
-                      "description": "Access Token for authenticated user"
-                    },
-                    "token_type": {
-                      "type": "string",
-                      "description": "The type of token used",
-                      "example": "bearer"
-                    },
-                    "expires_in": {
+                    "id": {
                       "type": "integer",
-                      "description": "Expiry time of the token in seconds",
-                      "example": 86400
+                      "description": "The unique identifier for the user",
+                      "example": 1
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "The name of the user",
+                      "example": "Cazares"
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "The type of user (e.g., recruiter)",
+                      "example": "recruiter"
+                    },
+                    "phone": {
+                      "type": "string",
+                      "description": "The phone number of the user",
+                      "example": "319747474747"
+                    },
+                    "email": {
+                      "type": "string",
+                      "description": "The email address of the user",
+                      "example": "cazares.thiago@gmail.com"
+                    },
+                    "email_verified_at": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "The timestamp when the user's email was verified",
+                      "example": null
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "The timestamp when the user was created",
+                      "example": "2024-05-11T13:20:50.000000Z"
+                    },
+                    "updated_at": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "The timestamp when the user was last updated",
+                      "example": "2024-05-11T13:20:50.000000Z"
+                    },
+                    "about_me": {
+                      "type": "string",
+                      "description": "A brief description about the user",
+                      "example": null
+                    },
+                    "profile_picture_path": {
+                      "type": "string",
+                      "description": "The URL to the user's profile picture",
+                      "example": "\"http://localhost/storage/EY3gleOcfR6cRbnmZ01Ss3FLqMSpKBkEhUrJM\nOcp7hWwkeBQSIw44XwbMNcpFspmTE5RyV90Dr6fvuuT39bOfmnojpqxSpfFuJWp.png\"\n"
+                    },
+                    "professional_experiences": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "company_name",
+                          "position",
+                          "start_date",
+                          "is_current",
+                          "created_at",
+                          "updated_at"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "description": "The unique identifier for the professional experience",
+                            "example": 1
+                          },
+                          "company_name": {
+                            "type": "string",
+                            "description": "The name of the company",
+                            "example": "Company Name"
+                          },
+                          "position": {
+                            "type": "string",
+                            "description": "The position held",
+                            "example": "Position"
+                          },
+                          "description": {
+                            "type": "string",
+                            "description": "The description of the professional experience",
+                            "example": "Description"
+                          },
+                          "start_date": {
+                            "type": "string",
+                            "format": "date",
+                            "description": "The start date of the professional experience",
+                            "example": "2022-01-01"
+                          },
+                          "end_date": {
+                            "type": "string",
+                            "format": "date",
+                            "description": "The end date of the professional experience",
+                            "example": "2022-12-31"
+                          },
+                          "is_current": {
+                            "type": "boolean",
+                            "description": "Whether the professional experience is current",
+                            "example": false
+                          },
+                          "location": {
+                            "type": "string",
+                            "description": "The location of the professional experience",
+                            "example": "Location"
+                          },
+                          "work_model": {
+                            "type": "string",
+                            "description": "The work model of the professional experience",
+                            "example": "hybrid",
+                            "enum": [
+                              "onSite",
+                              "hybrid",
+                              "homeOffice"
+                            ]
+                          },
+                          "employment_type": {
+                            "type": "string",
+                            "description": "The employment type of the professional experience",
+                            "example": "full-time",
+                            "enum": [
+                              "full-time",
+                              "part-time"
+                            ]
+                          },
+                          "created_at": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "The timestamp when the professional experience was created",
+                            "example": "2024-05-11T20:22:32.000000Z"
+                          },
+                          "updated_at": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "The timestamp when the professional experience was last updated",
+                            "example": "2024-05-11T20:22:32.000000Z"
+                          }
+                        }
+                      },
+                      "description": "The professional experiences of the user",
+                      "example": [ ]
+                    },
+                    "academic_records": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "institution",
+                          "degree",
+                          "field_of_study",
+                          "start_date",
+                          "is_in_progress",
+                          "created_at",
+                          "updated_at"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "description": "The unique identifier for the academic record",
+                            "example": 2
+                          },
+                          "institution": {
+                            "type": "string",
+                            "description": "The name of the institution",
+                            "example": "Harvard University"
+                          },
+                          "degree": {
+                            "type": "string",
+                            "description": "The degree obtained",
+                            "example": "Bachelor of Science"
+                          },
+                          "field_of_study": {
+                            "type": "string",
+                            "description": "The field of study",
+                            "example": "Computer Science"
+                          },
+                          "start_date": {
+                            "type": "string",
+                            "format": "date",
+                            "description": "The start date of the academic record",
+                            "example": "2018-09-01"
+                          },
+                          "end_date": {
+                            "type": "string",
+                            "format": "date",
+                            "description": "The end date of the academic record",
+                            "example": "2022-05-31"
+                          },
+                          "is_in_progress": {
+                            "type": "boolean",
+                            "description": "Whether the academic record is in progress",
+                            "example": false
+                          },
+                          "description": {
+                            "type": "string",
+                            "description": "The description of the academic record",
+                            "example": "Focused on software development and data structures"
+                          },
+                          "created_at": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "The timestamp when the academic record was created",
+                            "example": "2024-05-11T20:22:32.000000Z"
+                          },
+                          "updated_at": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "The timestamp when the academic record was last updated",
+                            "example": "2024-05-11T20:22:32.000000Z"
+                          }
+                        }
+                      },
+                      "description": "The academic records of the user",
+                      "example": [ ]
+                    },
+                    "competences": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "name",
+                          "created_at",
+                          "updated_at"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "description": "The unique identifier for the competence",
+                            "example": 1
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "The name of the competence"
+                          },
+                          "description": {
+                            "type": "string",
+                            "description": "The description of the competence"
+                          },
+                          "created_at": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "The timestamp when the competence was created",
+                            "example": "2024-05-11T13:20:50.000000Z"
+                          },
+                          "updated_at": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "The timestamp when the competence was last updated",
+                            "example": "2024-05-11T13:20:50.000000Z"
+                          }
+                        }
+                      },
+                      "description": "The competences of the user",
+                      "example": [ ]
                     }
                   }
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthenticated response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Error message",
+                      "example": "Unauthenticated"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Error message"
+                    },
+                    "errors": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "description": "Detailed error messages"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "description": "show all users",
+        "security": [
+          {
+            "BearerAuth": [ ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "includes",
+            "in": "query",
+            "description": "include related data",
+            "required": false,
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "example": "recruiter",
+              "enum": [
+                "recruiter",
+                "employee"
+              ],
+              "description": "user related data"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "show user successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "name",
+                      "type",
+                      "phone",
+                      "email",
+                      "email_verified_at",
+                      "created_at",
+                      "updated_at"
+                    ],
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "description": "The unique identifier for the user",
+                        "example": 1
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "The name of the user",
+                        "example": "Cazares"
+                      },
+                      "type": {
+                        "type": "string",
+                        "description": "The type of user (e.g., recruiter)",
+                        "example": "recruiter"
+                      },
+                      "phone": {
+                        "type": "string",
+                        "description": "The phone number of the user",
+                        "example": "319747474747"
+                      },
+                      "email": {
+                        "type": "string",
+                        "description": "The email address of the user",
+                        "example": "cazares.thiago@gmail.com"
+                      },
+                      "email_verified_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "The timestamp when the user's email was verified",
+                        "example": null
+                      },
+                      "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "The timestamp when the user was created",
+                        "example": "2024-05-11T13:20:50.000000Z"
+                      },
+                      "updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "The timestamp when the user was last updated",
+                        "example": "2024-05-11T13:20:50.000000Z"
+                      },
+                      "about_me": {
+                        "type": "string",
+                        "description": "A brief description about the user",
+                        "example": null
+                      },
+                      "profile_picture_path": {
+                        "type": "string",
+                        "description": "The URL to the user's profile picture",
+                        "example": "\"http://localhost/storage/EY3gleOcfR6cRbnmZ01Ss3FLqMSpKBkEhUrJM\nOcp7hWwkeBQSIw44XwbMNcpFspmTE5RyV90Dr6fvuuT39bOfmnojpqxSpfFuJWp.png\"\n"
+                      },
+                      "professional_experiences": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "required": [
+                            "id",
+                            "company_name",
+                            "position",
+                            "start_date",
+                            "is_current",
+                            "created_at",
+                            "updated_at"
+                          ],
+                          "properties": {
+                            "id": {
+                              "type": "integer",
+                              "description": "The unique identifier for the professional experience",
+                              "example": 1
+                            },
+                            "company_name": {
+                              "type": "string",
+                              "description": "The name of the company",
+                              "example": "Company Name"
+                            },
+                            "position": {
+                              "type": "string",
+                              "description": "The position held",
+                              "example": "Position"
+                            },
+                            "description": {
+                              "type": "string",
+                              "description": "The description of the professional experience",
+                              "example": "Description"
+                            },
+                            "start_date": {
+                              "type": "string",
+                              "format": "date",
+                              "description": "The start date of the professional experience",
+                              "example": "2022-01-01"
+                            },
+                            "end_date": {
+                              "type": "string",
+                              "format": "date",
+                              "description": "The end date of the professional experience",
+                              "example": "2022-12-31"
+                            },
+                            "is_current": {
+                              "type": "boolean",
+                              "description": "Whether the professional experience is current",
+                              "example": false
+                            },
+                            "location": {
+                              "type": "string",
+                              "description": "The location of the professional experience",
+                              "example": "Location"
+                            },
+                            "work_model": {
+                              "type": "string",
+                              "description": "The work model of the professional experience",
+                              "example": "hybrid",
+                              "enum": [
+                                "onSite",
+                                "hybrid",
+                                "homeOffice"
+                              ]
+                            },
+                            "employment_type": {
+                              "type": "string",
+                              "description": "The employment type of the professional experience",
+                              "example": "full-time",
+                              "enum": [
+                                "full-time",
+                                "part-time"
+                              ]
+                            },
+                            "created_at": {
+                              "type": "string",
+                              "format": "date-time",
+                              "description": "The timestamp when the professional experience was created",
+                              "example": "2024-05-11T20:22:32.000000Z"
+                            },
+                            "updated_at": {
+                              "type": "string",
+                              "format": "date-time",
+                              "description": "The timestamp when the professional experience was last updated",
+                              "example": "2024-05-11T20:22:32.000000Z"
+                            }
+                          }
+                        },
+                        "description": "The professional experiences of the user",
+                        "example": [ ]
+                      },
+                      "academic_records": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "required": [
+                            "id",
+                            "institution",
+                            "degree",
+                            "field_of_study",
+                            "start_date",
+                            "is_in_progress",
+                            "created_at",
+                            "updated_at"
+                          ],
+                          "properties": {
+                            "id": {
+                              "type": "integer",
+                              "description": "The unique identifier for the academic record",
+                              "example": 2
+                            },
+                            "institution": {
+                              "type": "string",
+                              "description": "The name of the institution",
+                              "example": "Harvard University"
+                            },
+                            "degree": {
+                              "type": "string",
+                              "description": "The degree obtained",
+                              "example": "Bachelor of Science"
+                            },
+                            "field_of_study": {
+                              "type": "string",
+                              "description": "The field of study",
+                              "example": "Computer Science"
+                            },
+                            "start_date": {
+                              "type": "string",
+                              "format": "date",
+                              "description": "The start date of the academic record",
+                              "example": "2018-09-01"
+                            },
+                            "end_date": {
+                              "type": "string",
+                              "format": "date",
+                              "description": "The end date of the academic record",
+                              "example": "2022-05-31"
+                            },
+                            "is_in_progress": {
+                              "type": "boolean",
+                              "description": "Whether the academic record is in progress",
+                              "example": false
+                            },
+                            "description": {
+                              "type": "string",
+                              "description": "The description of the academic record",
+                              "example": "Focused on software development and data structures"
+                            },
+                            "created_at": {
+                              "type": "string",
+                              "format": "date-time",
+                              "description": "The timestamp when the academic record was created",
+                              "example": "2024-05-11T20:22:32.000000Z"
+                            },
+                            "updated_at": {
+                              "type": "string",
+                              "format": "date-time",
+                              "description": "The timestamp when the academic record was last updated",
+                              "example": "2024-05-11T20:22:32.000000Z"
+                            }
+                          }
+                        },
+                        "description": "The academic records of the user",
+                        "example": [ ]
+                      },
+                      "competences": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "required": [
+                            "id",
+                            "name",
+                            "created_at",
+                            "updated_at"
+                          ],
+                          "properties": {
+                            "id": {
+                              "type": "integer",
+                              "description": "The unique identifier for the competence",
+                              "example": 1
+                            },
+                            "name": {
+                              "type": "string",
+                              "description": "The name of the competence"
+                            },
+                            "description": {
+                              "type": "string",
+                              "description": "The description of the competence"
+                            },
+                            "created_at": {
+                              "type": "string",
+                              "format": "date-time",
+                              "description": "The timestamp when the competence was created",
+                              "example": "2024-05-11T13:20:50.000000Z"
+                            },
+                            "updated_at": {
+                              "type": "string",
+                              "format": "date-time",
+                              "description": "The timestamp when the competence was last updated",
+                              "example": "2024-05-11T13:20:50.000000Z"
+                            }
+                          }
+                        },
+                        "description": "The competences of the user",
+                        "example": [ ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthenticated response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Error message",
+                      "example": "Unauthenticated"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Error message"
+                    },
+                    "errors": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "description": "Detailed error messages"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/competence": {
+      "post": {
+        "tags": [
+          "UserCompetence"
+        ],
+        "description": "create user competence",
+        "security": [
+          {
+            "BearerAuth": [ ]
+          }
+        ],
+        "requestBody": {
+          "description": "create user competences requests",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "competences"
+                ],
+                "properties": {
+                  "competences": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "name"
+                      ],
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "description": "The name of the competence"
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "The description of the competence"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthenticated response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Error message",
+                      "example": "Unauthenticated"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Error message"
+                    },
+                    "errors": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "description": "Detailed error messages"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "UserCompetence"
+        ],
+        "description": "delete user competence(s)",
+        "security": [
+          {
+            "BearerAuth": [ ]
+          }
+        ],
+        "requestBody": {
+          "description": "auth register request body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "competences"
+                ],
+                "properties": {
+                  "competences": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "id"
+                      ],
+                      "properties": {
+                        "name": {
+                          "type": "integer",
+                          "description": "the competence id",
+                          "example": 2
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Deleted"
+          },
+          "401": {
+            "description": "Unauthenticated response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Error message",
+                      "example": "Unauthenticated"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Error message"
+                    },
+                    "errors": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "description": "Detailed error messages"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/academic-records": {
+      "post": {
+        "tags": [
+          "UserAcademicRecords"
+        ],
+        "description": "create user academic records",
+        "security": [
+          {
+            "BearerAuth": [ ]
+          }
+        ],
+        "requestBody": {
+          "description": "Create user academic records request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "academic_records"
+                ],
+                "properties": {
+                  "academic_records": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "institution",
+                        "degree",
+                        "field_of_study",
+                        "start_date",
+                        "is_in_progress"
+                      ],
+                      "properties": {
+                        "institution": {
+                          "type": "string",
+                          "description": "The name of the institution",
+                          "example": "Harvard University"
+                        },
+                        "degree": {
+                          "type": "string",
+                          "description": "The degree obtained",
+                          "example": "Bachelor of Science"
+                        },
+                        "field_of_study": {
+                          "type": "string",
+                          "description": "The field of study",
+                          "example": "Computer Science"
+                        },
+                        "start_date": {
+                          "type": "string",
+                          "format": "date",
+                          "description": "The start date of the academic record",
+                          "example": "2018-09-01"
+                        },
+                        "end_date": {
+                          "type": "string",
+                          "format": "date",
+                          "description": "The end date of the academic record",
+                          "example": "2022-05-31"
+                        },
+                        "is_in_progress": {
+                          "type": "boolean",
+                          "description": "Whether the academic record is in progress",
+                          "example": false
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "The description of the academic record",
+                          "example": "Focused on software development and data structures"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthenticated response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Error message",
+                      "example": "Unauthenticated"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Error message"
+                    },
+                    "errors": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "description": "Detailed error messages"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "UserAcademicRecords"
+        ],
+        "description": "delete user academic record(s)",
+        "security": [
+          {
+            "BearerAuth": [ ]
+          }
+        ],
+        "requestBody": {
+          "description": "Delete user academic records request body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "academic_records_id"
+                ],
+                "properties": {
+                  "academic_records_id": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer",
+                      "description": "The ID of the academic record",
+                      "example": 1
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Deleted"
+          },
+          "401": {
+            "description": "Unauthenticated response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Error message",
+                      "example": "Unauthenticated"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Error message"
+                    },
+                    "errors": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "description": "Detailed error messages"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/professinal-experiences": {
+      "post": {
+        "tags": [
+          "UserProfessionalExperiences"
+        ],
+        "description": "create user professional experiences",
+        "security": [
+          {
+            "BearerAuth": [ ]
+          }
+        ],
+        "requestBody": {
+          "description": "Create user professional experiences request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "professional_experiences"
+                ],
+                "properties": {
+                  "professional_experiences": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "company_name",
+                        "position",
+                        "start_date",
+                        "is_current"
+                      ],
+                      "properties": {
+                        "company_name": {
+                          "type": "string",
+                          "description": "The name of the company",
+                          "example": "Company Name"
+                        },
+                        "position": {
+                          "type": "string",
+                          "description": "The position held",
+                          "example": "Position"
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "The description of the professional experience",
+                          "example": "Description"
+                        },
+                        "start_date": {
+                          "type": "string",
+                          "format": "date",
+                          "description": "The start date of the professional experience",
+                          "example": "2022-01-01"
+                        },
+                        "end_date": {
+                          "type": "string",
+                          "format": "date",
+                          "description": "The end date of the professional experience",
+                          "example": "2022-12-31"
+                        },
+                        "is_current": {
+                          "type": "boolean",
+                          "description": "Whether the professional experience is current",
+                          "example": false
+                        },
+                        "location": {
+                          "type": "string",
+                          "description": "The location of the professional experience",
+                          "example": "Location"
+                        },
+                        "work_model": {
+                          "type": "string",
+                          "description": "The work model of the professional experience",
+                          "example": "hybrid",
+                          "enum": [
+                            "onSite",
+                            "hybrid",
+                            "homeOffice"
+                          ]
+                        },
+                        "employment_type": {
+                          "type": "string",
+                          "description": "The employment type of the professional experience",
+                          "example": "full-time",
+                          "enum": [
+                            "full-time",
+                            "part-time"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthenticated response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Error message",
+                      "example": "Unauthenticated"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Error message"
+                    },
+                    "errors": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "description": "Detailed error messages"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "UserProfessionalExperiences"
+        ],
+        "description": "delete user professional experience(s)",
+        "security": [
+          {
+            "BearerAuth": [ ]
+          }
+        ],
+        "requestBody": {
+          "description": "Delete user professional experiences request body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "professional_experiences_id"
+                ],
+                "properties": {
+                  "professional_experiences_id": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer",
+                      "description": "The ID of the professional experience",
+                      "example": 1
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Deleted"
+          },
+          "401": {
+            "description": "Unauthenticated response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Error message",
+                      "example": "Unauthenticated"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Error message"
+                    },
+                    "errors": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "description": "Detailed error messages"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/profile-picture": {
+      "patch": {
+        "tags": [
+          "UserProfilePicture"
+        ],
+        "description": "update user profile picture",
+        "security": [
+          {
+            "BearerAuth": [ ]
+          }
+        ],
+        "requestBody": {
+          "description": "update user profile picture request body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "profile_picture"
+                ],
+                "properties": {
+                  "profile_picture": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "auth's profile picture. Must be an image file (jpg, png, jpeg) with a maximum size of 2048KB."
+                  }
+                },
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthenticated response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Error message",
+                      "example": "Unauthenticated"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Error message"
+                    },
+                    "errors": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "description": "Detailed error messages"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "UserProfilePicture"
+        ],
+        "description": "delete user profile picture",
+        "security": [
+          {
+            "BearerAuth": [ ]
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
           }
         }
       }

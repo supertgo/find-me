@@ -61,3 +61,17 @@ Authorization: Bearer {{bearerToken}}
 
 ###
 GET /{{profilePicture}}
+
+
+###
+GET http://localhost:80/api/user/{{userId}}
+    ?includes[]=academicRecords
+    &includes[]=competences
+    &includes[]=professionalExperiences
+accept: application/json
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+%}

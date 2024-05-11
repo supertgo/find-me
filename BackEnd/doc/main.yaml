@@ -46,6 +46,8 @@ paths:
       responses:
         '200':
           $ref: 'Schemas/User/responses/LogoutSuccessResponse.yaml'
+        401:
+          $ref: 'Schemas/Common/response/UnauthenticatedResponse.yaml'
 
   /auth/me:
     get:
@@ -58,6 +60,9 @@ paths:
       responses:
         '200':
           $ref: 'Schemas/User/responses/meSuccessResponse.yaml'
+        401:
+          $ref: 'Schemas/Common/response/UnauthenticatedResponse.yaml'
+
   /auth/verify:
     post:
       tags:
@@ -85,11 +90,29 @@ paths:
           $ref: 'Schemas/User/responses/ShowSuccessResponse.yaml'
         '422':
           $ref: 'Schemas/Common/response/ValidationErrorsResponse.yaml'
+        401:
+          $ref: 'Schemas/Common/response/UnauthenticatedResponse.yaml'
+  /user:
+    get:
+      tags:
+        - User
+      description: 'show all users'
+      security:
+        - BearerAuth: [ ]
+      parameters:
+        - $ref: 'Schemas/User/parameters/UserIncludesParameters.yaml'
+
+      responses:
+        '200':
+          $ref: 'Schemas/User/responses/IndexSuccessResponse.yaml'
+        '422':
+          $ref: 'Schemas/Common/response/ValidationErrorsResponse.yaml'
+        401:
+          $ref: 'Schemas/Common/response/UnauthenticatedResponse.yaml'
 
   /user/competence:
     post:
       tags:
-        - User
         - UserCompetence
       description: 'create user competence'
       security:
@@ -102,10 +125,11 @@ paths:
           description: No Content
         '422':
           $ref: 'Schemas/Common/response/ValidationErrorsResponse.yaml'
+        401:
+          $ref: 'Schemas/Common/response/UnauthenticatedResponse.yaml'
 
     delete:
       tags:
-        - User
         - UserCompetence
       description: 'delete user competence(s)'
       security:
@@ -118,6 +142,8 @@ paths:
           description: Deleted
         '422':
           $ref: 'Schemas/Common/response/ValidationErrorsResponse.yaml'
+        401:
+          $ref: 'Schemas/Common/response/UnauthenticatedResponse.yaml'
 
   /user/academic-records:
     post:
@@ -134,6 +160,8 @@ paths:
           description: No Content
         '422':
           $ref: 'Schemas/Common/response/ValidationErrorsResponse.yaml'
+        401:
+          $ref: 'Schemas/Common/response/UnauthenticatedResponse.yaml'
 
     delete:
       tags:
@@ -149,6 +177,8 @@ paths:
           description: Deleted
         '422':
           $ref: 'Schemas/Common/response/ValidationErrorsResponse.yaml'
+        401:
+          $ref: 'Schemas/Common/response/UnauthenticatedResponse.yaml'
 
   /user/professinal-experiences:
     post:
@@ -165,6 +195,8 @@ paths:
           description: No Content
         '422':
           $ref: 'Schemas/Common/response/ValidationErrorsResponse.yaml'
+        401:
+          $ref: 'Schemas/Common/response/UnauthenticatedResponse.yaml'
 
     delete:
       tags:
@@ -180,6 +212,8 @@ paths:
           description: Deleted
         '422':
           $ref: 'Schemas/Common/response/ValidationErrorsResponse.yaml'
+        401:
+          $ref: 'Schemas/Common/response/UnauthenticatedResponse.yaml'
 
   /user/profile-picture:
     patch:
@@ -196,6 +230,8 @@ paths:
           description: No Content
         '422':
           $ref: 'Schemas/Common/response/ValidationErrorsResponse.yaml'
+        401:
+          $ref: 'Schemas/Common/response/UnauthenticatedResponse.yaml'
     delete:
       tags:
         - UserProfilePicture

@@ -3,4 +3,4 @@ example: recruiter
 enum:
   - recruiter
   - employee
-description: auth's type
+description: user related data

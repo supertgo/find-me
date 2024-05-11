@@ -33,6 +33,8 @@ paths:
           $ref: 'Schemas/User/responses/LoginSuccessResponse.yaml'
         '401':
           $ref: 'Schemas/User/responses/LoginUnauthorizedResponse.yaml'
+        '422':
+          $ref: 'Schemas/Common/response/ValidationErrorsResponse.yaml'
 
   /auth/logout:
     post:
@@ -81,3 +83,22 @@ paths:
       responses:
         '200':
           $ref: 'Schemas/User/responses/LoginSuccessResponse.yaml'
+        '422':
+          $ref: 'Schemas/Common/response/ValidationErrorsResponse.yaml'
+
+  /user/competence:
+    post:
+      tags:
+        - User
+        - UserCompetence
+      description: 'create user competence'
+      security:
+        - BearerAuth: [ ]
+      requestBody:
+        $ref: 'Schemas/User/requestBodies/LoginRequest.yaml'
+
+      responses:
+        '204':
+          description: No Content
+        '422':
+          $ref: 'Schemas/Common/response/ValidationErrorsResponse.yaml'

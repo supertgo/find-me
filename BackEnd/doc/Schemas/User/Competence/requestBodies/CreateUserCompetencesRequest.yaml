@@ -1,0 +1,21 @@
+description: auth register request body
+content:
+  application/json:
+    schema:
+      type: object
+      required:
+        - competences
+      properties:
+        competences:
+          type: array
+          items:
+            type: object
+            required:
+              - name
+            properties:
+              name:
+                type: string
+                description: The name of the competence
+              description:
+                type: string
+                description: The description of the competence

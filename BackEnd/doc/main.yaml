@@ -118,3 +118,20 @@ paths:
           description: Deleted
         '422':
           $ref: 'Schemas/Common/response/ValidationErrorsResponse.yaml'
+
+  /user/academic-records:
+    post:
+      tags:
+        - User
+        - UserAcademicRecords
+      description: 'create user academic records'
+      security:
+        - BearerAuth: [ ]
+      requestBody:
+        $ref: 'Schemas/User/AcademicRecords/requestBodies/CreateUserAcademicRecordsRequest.yaml'
+
+      responses:
+        '204':
+          description: No Content
+        '422':
+          $ref: 'Schemas/Common/response/ValidationErrorsResponse.yaml'

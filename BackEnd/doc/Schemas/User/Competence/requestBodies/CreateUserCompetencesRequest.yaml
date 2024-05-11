@@ -1,4 +1,4 @@
-description: auth register request body
+description: create user competences requests
 content:
   application/json:
     schema:

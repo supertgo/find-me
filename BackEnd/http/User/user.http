@@ -55,6 +55,7 @@ Authorization: Bearer {{bearerToken}}
         client.assert(response.status === 200, "Response status is not 200");
     });
     client.global.set("profilePicture", response.body.data.profile_picture);
+    client.global.set("userId", response.body.data.id);
 %}
 ###
 

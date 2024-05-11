@@ -4,9 +4,9 @@ content:
     schema:
       type: object
       required:
-        - academic_records_ids
+        - academic_records_id
       properties:
-        academic_records_ids:
+        academic_records_id:
           type: array
           items:
             type: integer

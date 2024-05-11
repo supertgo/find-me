@@ -1,0 +1,14 @@
+description: Delete user professional experiences request body
+content:
+  application/json:
+    schema:
+      type: object
+      required:
+        - professional_experiences_id
+      properties:
+        professional_experiences_id:
+          type: array
+          items:
+            type: integer
+            description: The ID of the professional experience
+            example: 1

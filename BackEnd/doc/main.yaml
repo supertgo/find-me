@@ -122,7 +122,6 @@ paths:
   /user/academic-records:
     post:
       tags:
-        - User
         - UserAcademicRecords
       description: 'create user academic records'
       security:
@@ -138,7 +137,6 @@ paths:
 
     delete:
       tags:
-        - User
         - UserAcademicRecords
       description: 'delete user academic record(s)'
       security:
@@ -155,7 +153,6 @@ paths:
   /user/professinal-experiences:
     post:
       tags:
-        - User
         - UserProfessionalExperiences
       description: 'create user professional experiences'
       security:
@@ -171,7 +168,6 @@ paths:
 
     delete:
       tags:
-        - User
         - UserProfessionalExperiences
       description: 'delete user professional experience(s)'
       security:
@@ -184,3 +180,28 @@ paths:
           description: Deleted
         '422':
           $ref: 'Schemas/Common/response/ValidationErrorsResponse.yaml'
+
+  /user/profile-picture:
+    patch:
+      tags:
+        - UserProfilePicture
+      description: 'update user profile picture'
+      security:
+        - BearerAuth: [ ]
+      requestBody:
+        $ref: 'Schemas/User/ProfilePicture/requestBodies/UpdateUserProfilePictureRequest.yaml'
+
+      responses:
+        '204':
+          description: No Content
+        '422':
+          $ref: 'Schemas/Common/response/ValidationErrorsResponse.yaml'
+    delete:
+      tags:
+        - UserProfilePicture
+      description: 'delete user profile picture'
+      security:
+        - BearerAuth: [ ]
+      responses:
+        '204':
+          description: No Content

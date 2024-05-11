@@ -151,3 +151,36 @@ paths:
           description: Deleted
         '422':
           $ref: 'Schemas/Common/response/ValidationErrorsResponse.yaml'
+
+  /user/professinal-experiences:
+    post:
+      tags:
+        - User
+        - UserProfessionalExperiences
+      description: 'create user professional experiences'
+      security:
+        - BearerAuth: [ ]
+      requestBody:
+        $ref: 'Schemas/User/ProfessionalExperiences/requestBodies/CreateUserProfessionalExperiencesRequest.yaml'
+
+      responses:
+        '204':
+          description: No Content
+        '422':
+          $ref: 'Schemas/Common/response/ValidationErrorsResponse.yaml'
+
+    delete:
+      tags:
+        - User
+        - UserProfessionalExperiences
+      description: 'delete user professional experience(s)'
+      security:
+        - BearerAuth: [ ]
+      requestBody:
+        $ref: 'Schemas/User/ProfessionalExperiences/requestBodies/DeleteUserProfessionalExperiencesRequest.yaml'
+
+      responses:
+        '200':
+          description: Deleted
+        '422':
+          $ref: 'Schemas/Common/response/ValidationErrorsResponse.yaml'

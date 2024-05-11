@@ -82,7 +82,7 @@ paths:
 
       responses:
         '200':
-          $ref: 'Schemas/User/responses/LoginSuccessResponse.yaml'
+          $ref: 'Schemas/User/responses/ShowSuccessResponse.yaml'
         '422':
           $ref: 'Schemas/Common/response/ValidationErrorsResponse.yaml'
 

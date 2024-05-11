@@ -21,7 +21,7 @@ class RemoveProfessionalExperienceFromUserTest extends TestCase
 
         $this
             ->actingAs($this->user)
-            ->json('DELETE', self::ROUTE, ['professional_experiences' => $academicRecordIds])
+            ->json('DELETE', self::ROUTE, ['professional_experiences_id' => $academicRecordIds])
             ->assertStatus(Response::HTTP_NO_CONTENT);
 
         $this->assertSame(0, $this->user->academicRecords()->count());

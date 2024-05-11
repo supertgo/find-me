@@ -51,7 +51,7 @@ Route::group(
             Route::delete('', [UserController::class, 'deleteProfilePicture']);
         });
     })
-    ->middleware('api');;
+    ->middleware('api');
 
 
 Route::group(
@@ -65,8 +65,3 @@ Route::group(
             ->only(['index', 'show'])
             ->middleware('auth:api');
     });
-
-
-
-
-

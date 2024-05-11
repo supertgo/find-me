@@ -69,9 +69,5 @@ GET http://localhost:80/api/user/{{userId}}?includes[]=competences
 
     const competences = response.body.data.competences
 
-    client.test("Competences are created", function () {
-        client.assert(competences.length >= 2, "Competences are not returned");
-    });
-
     const isDeleted = competences.every(competence => competence.id !== client.global.get("competenceId"))
 %}

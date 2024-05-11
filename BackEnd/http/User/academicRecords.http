@@ -1,0 +1,82 @@
+POST http://localhost:80/api/user/academic-records
+Accept: application/json
+Authorization: Bearer {{bearerToken}}
+Content-Type: application/json
+
+{
+  "academic_records": [
+    {
+      "institution": "Institution 1",
+      "degree": "Degree 1",
+      "field_of_study": "Field of Study 1",
+      "start_date": "2022-01-01",
+      "end_date": "2022-12-31",
+      "is_in_progress": false,
+      "description": "Description for academic record 1"
+    },
+    {
+      "institution": "Institution 2",
+      "degree": "Degree 2",
+      "field_of_study": "Field of Study 2",
+      "start_date": "2022-01-01",
+      "is_in_progress": true
+    }
+  ]
+}
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 204, "Response status is not 204");
+    });
+
+%}
+
+###
+GET http://localhost:80/api/user/{{userId}}?includes[]=academicRecords
+accept: application/json
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+    const academicRecords = response.body.data.academic_records
+
+    client.test("Competences are created", function () {
+        client.assert(academicRecords.length >= 2, "Academic records are not returned");
+    });
+
+    client.global.set("academicRecordId", academicRecords[0].id)
+%}
+
+###
+
+DELETE http://localhost:80/api/user/academic-records
+Accept: application/json
+Authorization: Bearer {{bearerToken}}
+Content-Type: application/json
+
+{
+  "academic_records_ids": [
+    {{academicRecordId}}
+  ]
+}
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+
+%}
+
+###
+GET http://localhost:80/api/user/{{userId}}?includes[]=academicRecords
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+
+    const academicRecords = response.body.data.academic_records
+
+    const isDeleted = academicRecords.every(academicRecord => academicRecord.id !== client.global.get("academicRecordId"))
+%}

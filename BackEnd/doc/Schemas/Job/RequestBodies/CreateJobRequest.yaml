@@ -35,9 +35,9 @@ content:
           $ref: '../Components/SalaryTimeUnit.yaml'
         accept_application_until:
           type: string
-          format: date
+          format: date-time
           description: The deadline for accepting applications
-          example: "2024-12-31"
+          example: "2024-12-31T00:00:00"
         work_model:
           $ref: '../Components/WorkModel.yaml'
         employment_type:

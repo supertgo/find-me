@@ -49,7 +49,7 @@ class UserProfessionalExperience extends Controller
             (new UserService())
                 ->removeProfessionalExperiences(
                     $request->getLoggedUserId(),
-                    $request->validated('professional_experiences')
+                    $request->validated('professional_experiences_id')
                 );
 
             return response()->noContent();

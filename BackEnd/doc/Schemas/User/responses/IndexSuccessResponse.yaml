@@ -1,0 +1,7 @@
+description: show user successful
+content:
+  application/json:
+    schema:
+      type: array
+      items:
+        $ref: '../components/UserResource.yaml'

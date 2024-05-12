@@ -15,7 +15,7 @@ class DeleteProfessionalExperiencesRequest extends AbstractRequest
     public function rules(): array
     {
         return [
-            'professional_experiences' => [
+            'professional_experiences_id' => [
                 'required',
                 'array',
                 'min:1',

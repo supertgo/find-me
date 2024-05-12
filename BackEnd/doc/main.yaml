@@ -1,0 +1,243 @@
+openapi: 3.0.3
+info:
+  title: Blog
+  description: Blog
+  version: 1.0.0
+servers:
+  - url: http://localhost:80/api
+components:
+  securitySchemes:
+    BearerAuth:
+      $ref: 'Schemas/Common/Headers/AuthorizationHeader.yaml'
+
+paths:
+  /auth/register:
+    post:
+      tags:
+        - Auth
+      requestBody:
+        $ref: 'Schemas/User/requestBodies/RegisterUserRequest.yaml'
+      description: register new user
+      responses:
+        '204':
+          description: No Content
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      requestBody:
+        $ref: 'Schemas/User/requestBodies/LoginRequest.yaml'
+      description: register new user
+      responses:
+        '200':
+          $ref: 'Schemas/User/responses/LoginSuccessResponse.yaml'
+        '401':
+          $ref: 'Schemas/User/responses/LoginUnauthorizedResponse.yaml'
+        '422':
+          $ref: 'Schemas/Common/response/ValidationErrorsResponse.yaml'
+
+  /auth/logout:
+    post:
+      tags:
+        - Auth
+      description: Logout
+      security:
+        - BearerAuth: [ ]
+      responses:
+        '200':
+          $ref: 'Schemas/User/responses/LogoutSuccessResponse.yaml'
+        401:
+          $ref: 'Schemas/Common/response/UnauthenticatedResponse.yaml'
+
+  /auth/me:
+    get:
+      tags:
+        - Auth
+      description: Me
+      security:
+        - BearerAuth: [ ]
+
+      responses:
+        '200':
+          $ref: 'Schemas/User/responses/meSuccessResponse.yaml'
+        401:
+          $ref: 'Schemas/Common/response/UnauthenticatedResponse.yaml'
+
+  /auth/verify:
+    post:
+      tags:
+        - Auth
+      description: Verify
+      security:
+        - BearerAuth: [ ]
+      responses:
+        '200':
+          $ref: 'Schemas/User/responses/VerifyResponse.yaml'
+
+  /user/{id}:
+    get:
+      tags:
+        - User
+      description: 'show specific user based on id'
+      security:
+        - BearerAuth: [ ]
+      parameters:
+        - $ref: 'Schemas/User/parameters/UserId.yaml'
+        - $ref: 'Schemas/User/parameters/UserIncludesParameters.yaml'
+
+      responses:
+        '200':
+          $ref: 'Schemas/User/responses/ShowSuccessResponse.yaml'
+        '422':
+          $ref: 'Schemas/Common/response/ValidationErrorsResponse.yaml'
+        401:
+          $ref: 'Schemas/Common/response/UnauthenticatedResponse.yaml'
+  /user:
+    get:
+      tags:
+        - User
+      description: 'show all users'
+      security:
+        - BearerAuth: [ ]
+      parameters:
+        - $ref: 'Schemas/User/parameters/UserIncludesParameters.yaml'
+
+      responses:
+        '200':
+          $ref: 'Schemas/User/responses/IndexSuccessResponse.yaml'
+        '422':
+          $ref: 'Schemas/Common/response/ValidationErrorsResponse.yaml'
+        401:
+          $ref: 'Schemas/Common/response/UnauthenticatedResponse.yaml'
+
+  /user/competence:
+    post:
+      tags:
+        - UserCompetence
+      description: 'create user competence'
+      security:
+        - BearerAuth: [ ]
+      requestBody:
+        $ref: 'Schemas/User/Competence/requestBodies/CreateUserCompetencesRequest.yaml'
+
+      responses:
+        '204':
+          description: No Content
+        '422':
+          $ref: 'Schemas/Common/response/ValidationErrorsResponse.yaml'
+        401:
+          $ref: 'Schemas/Common/response/UnauthenticatedResponse.yaml'
+
+    delete:
+      tags:
+        - UserCompetence
+      description: 'delete user competence(s)'
+      security:
+        - BearerAuth: [ ]
+      requestBody:
+        $ref: 'Schemas/User/Competence/requestBodies/DeleteUserCompetencesRequest.yaml'
+
+      responses:
+        '200':
+          description: Deleted
+        '422':
+          $ref: 'Schemas/Common/response/ValidationErrorsResponse.yaml'
+        401:
+          $ref: 'Schemas/Common/response/UnauthenticatedResponse.yaml'
+
+  /user/academic-records:
+    post:
+      tags:
+        - UserAcademicRecords
+      description: 'create user academic records'
+      security:
+        - BearerAuth: [ ]
+      requestBody:
+        $ref: 'Schemas/User/AcademicRecords/requestBodies/CreateUserAcademicRecordsRequest.yaml'
+
+      responses:
+        '204':
+          description: No Content
+        '422':
+          $ref: 'Schemas/Common/response/ValidationErrorsResponse.yaml'
+        401:
+          $ref: 'Schemas/Common/response/UnauthenticatedResponse.yaml'
+
+    delete:
+      tags:
+        - UserAcademicRecords
+      description: 'delete user academic record(s)'
+      security:
+        - BearerAuth: [ ]
+      requestBody:
+        $ref: 'Schemas/User/AcademicRecords/requestBodies/DeleteUserAcademicRecordsRequest.yaml'
+
+      responses:
+        '200':
+          description: Deleted
+        '422':
+          $ref: 'Schemas/Common/response/ValidationErrorsResponse.yaml'
+        401:
+          $ref: 'Schemas/Common/response/UnauthenticatedResponse.yaml'
+
+  /user/professinal-experiences:
+    post:
+      tags:
+        - UserProfessionalExperiences
+      description: 'create user professional experiences'
+      security:
+        - BearerAuth: [ ]
+      requestBody:
+        $ref: 'Schemas/User/ProfessionalExperiences/requestBodies/CreateUserProfessionalExperiencesRequest.yaml'
+
+      responses:
+        '204':
+          description: No Content
+        '422':
+          $ref: 'Schemas/Common/response/ValidationErrorsResponse.yaml'
+        401:
+          $ref: 'Schemas/Common/response/UnauthenticatedResponse.yaml'
+
+    delete:
+      tags:
+        - UserProfessionalExperiences
+      description: 'delete user professional experience(s)'
+      security:
+        - BearerAuth: [ ]
+      requestBody:
+        $ref: 'Schemas/User/ProfessionalExperiences/requestBodies/DeleteUserProfessionalExperiencesRequest.yaml'
+
+      responses:
+        '200':
+          description: Deleted
+        '422':
+          $ref: 'Schemas/Common/response/ValidationErrorsResponse.yaml'
+        401:
+          $ref: 'Schemas/Common/response/UnauthenticatedResponse.yaml'
+
+  /user/profile-picture:
+    patch:
+      tags:
+        - UserProfilePicture
+      description: 'update user profile picture'
+      security:
+        - BearerAuth: [ ]
+      requestBody:
+        $ref: 'Schemas/User/ProfilePicture/requestBodies/UpdateUserProfilePictureRequest.yaml'
+
+      responses:
+        '204':
+          description: No Content
+        '422':
+          $ref: 'Schemas/Common/response/ValidationErrorsResponse.yaml'
+        401:
+          $ref: 'Schemas/Common/response/UnauthenticatedResponse.yaml'
+    delete:
+      tags:
+        - UserProfilePicture
+      description: 'delete user profile picture'
+      security:
+        - BearerAuth: [ ]
+      responses:
+        '204':
+          description: No Content

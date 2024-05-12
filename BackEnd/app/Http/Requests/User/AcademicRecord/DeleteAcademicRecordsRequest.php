@@ -15,13 +15,13 @@ class DeleteAcademicRecordsRequest extends AbstractRequest
     public function rules(): array
     {
         return [
-            'academic_records_ids' => [
+            'academic_records_id' => [
                 'required',
                 'array',
                 'min:1',
                 new UniqueArrayValuesRule,
             ],
-            'academic_records_ids.*' => 'required|integer',
+            'academic_records_id.*' => 'required|integer',
         ];
     }
 }

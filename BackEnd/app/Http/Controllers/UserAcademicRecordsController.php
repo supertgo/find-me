@@ -45,7 +45,7 @@ class UserAcademicRecordsController extends Controller
             (new UserService())
                 ->removeAcademicRecords(
                     $request->getLoggedUserId(),
-                    $request->validated('academic_records_ids')
+                    $request->validated('academic_records_id')
                 );
 
             return response()->noContent();

@@ -1,0 +1,73 @@
+POST http://localhost:80/api/user/competence
+Accept: application/json
+Authorization: Bearer {{bearerToken}}
+Content-Type: application/json
+
+{
+  "competences": [
+    {
+      "name": "Competence 1",
+      "description": "Description for competence 1"
+    },
+    {
+      "name": "Competence 2"
+    }
+  ]
+}
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 204, "Response status is not 204");
+    });
+
+%}
+
+###
+GET http://localhost:80/api/user/{{userId}}?includes[]=competences
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+
+    const competences = response.body.data.competences
+
+    client.test("Competences are created", function () {
+        client.assert(competences.length >= 2, "Competences are not returned");
+    });
+
+    client.global.set("competenceId", competences[0].id)
+%}
+
+###
+
+DELETE http://localhost:80/api/user/competence
+Accept: application/json
+Authorization: Bearer {{bearerToken}}
+Content-Type: application/json
+
+{
+  "competences_id": [
+    {{competenceId}}
+  ]
+}
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 204, "Response status is not 204");
+    });
+
+%}
+
+###
+GET http://localhost:80/api/user/{{userId}}?includes[]=competences
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+
+    const competences = response.body.data.competences
+
+    const isDeleted = competences.every(competence => competence.id !== client.global.get("competenceId"))
+%}

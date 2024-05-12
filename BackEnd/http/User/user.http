@@ -44,8 +44,8 @@ Content-Type: application/json
     });
     client.global.set("bearerToken", response.body.access_token);
 %}
-###
 
+###
 GET http://localhost:80/api/auth/me
 Accept: application/json
 Authorization: Bearer {{bearerToken}}
@@ -55,8 +55,23 @@ Authorization: Bearer {{bearerToken}}
         client.assert(response.status === 200, "Response status is not 200");
     });
     client.global.set("profilePicture", response.body.data.profile_picture);
+    client.global.set("userId", response.body.data.id);
 %}
 ###
 
 ###
 GET /{{profilePicture}}
+
+
+###
+GET http://localhost:80/api/user/{{userId}}
+    ?includes[]=academicRecords
+    &includes[]=competences
+    &includes[]=professionalExperiences
+accept: application/json
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+%}

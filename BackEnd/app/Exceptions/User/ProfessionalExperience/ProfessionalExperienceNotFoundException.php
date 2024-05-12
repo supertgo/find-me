@@ -2,10 +2,10 @@
 
 namespace App\Exceptions\User\ProfessionalExperience;
 
-use App\Exceptions\Abstract\AbstractFindMeException;
+use App\Exceptions\Abstract\AbstractDomainException;
 use App\Exceptions\ExceptionMessagesEnum;
 
-class ProfessionalExperienceNotFoundException extends AbstractFindMeException
+class ProfessionalExperienceNotFoundException extends AbstractDomainException
 {
     public function __construct(?int $id)
     {

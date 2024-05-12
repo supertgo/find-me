@@ -22,7 +22,6 @@ class JobApplicationsController extends Controller
                 ->toResponse($request)
                 ->setStatusCode(Response::HTTP_CREATED);
         } catch (AbstractDomainException $exception) {
-
             return response()->json(
                 $exception->render(),
                 status: Response::HTTP_UNPROCESSABLE_ENTITY

@@ -17,20 +17,20 @@ class DeleteUserProfilePictureTest extends TestCase
     {
         Storage::fake('public');
 
-        $this->makeUser();
+        $this->makeEmployee();
 
-        $this->user->update([
+        $this->employee->update([
             'profilePicturePath' => 'test'
         ]);
 
         $this
-            ->actingAs($this->user)
+            ->actingAs($this->employee)
             ->json('DELETE', self::ROUTE)
             ->assertStatus(Response::HTTP_NO_CONTENT);
 
-        $this->user->refresh();
+        $this->employee->refresh();
 
-        $this->assertNull($this->user->profile_picture_path);
+        $this->assertNull($this->employee->profile_picture_path);
     }
 
 }

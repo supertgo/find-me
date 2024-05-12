@@ -27,6 +27,4 @@ interface JobRepositoryInterface
     public function setNotAvailable(int $id): void;
 
     public function getApplicationAmount(int $id): int;
-
-    public function incrementApplicationsCount(int $id);
 }

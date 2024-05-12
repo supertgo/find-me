@@ -26,6 +26,7 @@ return new class extends Migration {
             ]);
 
             $table->text('cover_letter')->nullable();
+
             $table->timestamps();
         });
     }

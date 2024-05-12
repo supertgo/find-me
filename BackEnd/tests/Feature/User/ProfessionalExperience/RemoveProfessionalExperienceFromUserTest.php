@@ -15,23 +15,23 @@ class RemoveProfessionalExperienceFromUserTest extends TestCase
 
     public function testAddAcademicRecordsToUser()
     {
-        $this->makeUser();
+        $this->makeEmployee();
 
         $academicRecordIds = $this->createProfessionalExperiences();
 
         $this
-            ->actingAs($this->user)
+            ->actingAs($this->employee)
             ->json('DELETE', self::ROUTE, ['professional_experiences_id' => $academicRecordIds])
             ->assertStatus(Response::HTTP_NO_CONTENT);
 
-        $this->assertSame(0, $this->user->academicRecords()->count());
+        $this->assertSame(0, $this->employee->academicRecords()->count());
     }
 
     private function createProfessionalExperiences(): array
     {
         return ProfessionalExperience::factory()
             ->count(3)
-            ->create(['user_id' => $this->user->id])
+            ->create(['user_id' => $this->employee->id])
             ->pluck('id')
             ->toArray();
     }

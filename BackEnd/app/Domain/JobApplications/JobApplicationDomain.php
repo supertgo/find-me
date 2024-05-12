@@ -26,13 +26,14 @@ class JobApplicationDomain
      */
     public function create(array $data): self
     {
+        $data['status'] = JobApplicationsStatusEnum::Pending;
+
         $data = $this
             ->fromArray($data)
-            ->setStatus(JobApplicationsStatusEnum::Pending)
             ->repository
             ->create($this->toArray());
 
-        return app(JobApplicationDomain::class, [$this->repository])->fromArray($data);
+        return (new JobApplicationDomain($this->repository))->fromArray($data);
     }
 
     /**
@@ -62,6 +63,8 @@ class JobApplicationDomain
         $this->setUserId($data['user_id']);
         $this->setStatus($data['status']);
         $this->setCoverLetter($data['cover_letter'] ?? null);
+        $this->setCreatedAt($data['created_at'] ?? null);
+        $this->setUpdatedAt($data['updated_at'] ?? null);
 
         return $this;
     }
@@ -134,9 +137,10 @@ class JobApplicationDomain
         return $this->createdAt;
     }
 
-    public function setCreatedAt(?Carbon $createdAt): JobApplicationDomain
+    public function setCreatedAt(Carbon|string|null $createdAt): JobApplicationDomain
     {
-        $this->createdAt = $createdAt;
+        $this->createdAt = is_string($createdAt) ? Carbon::parse($createdAt) : $createdAt;
+
         return $this;
     }
 
@@ -145,9 +149,10 @@ class JobApplicationDomain
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(?Carbon $updatedAt): JobApplicationDomain
+    public function setUpdatedAt(Carbon|string|null $updatedAt): JobApplicationDomain
     {
-        $this->updatedAt = $updatedAt;
+        $this->updatedAt = is_string($updatedAt) ? Carbon::parse($updatedAt) : $updatedAt;
+
         return $this;
     }
 }

@@ -15,16 +15,16 @@ class RemoveCompetenceToUserTest extends TestCase
 
     public function testAddCompetencesToUser()
     {
-        $this->makeUser();
+        $this->makeEmployee();
 
         $competenceIds = $this->attachCompetencesToUser();
 
         $this
-            ->actingAs($this->user)
+            ->actingAs($this->employee)
             ->json('DELETE', self::ROUTE, ['competences_id' => $competenceIds])
             ->assertStatus(Response::HTTP_NO_CONTENT);
 
-        $this->assertSame(0, $this->user->competences()->count());
+        $this->assertSame(0, $this->employee->competences()->count());
     }
 
     private function attachCompetencesToUser(): array
@@ -32,7 +32,7 @@ class RemoveCompetenceToUserTest extends TestCase
         $competences = Competence::factory(3)->create();
 
         $this
-            ->user
+            ->employee
             ->competences()
             ->attach($competences->pluck('id')->toArray());
 

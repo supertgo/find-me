@@ -17,14 +17,14 @@ class ShowUserWithAcademicRecordsTest extends TestCase
 
     public function testShowUserSuccess()
     {
-        $this->makeUser();
+        $this->makeEmployee();
         $this->makeAcademicRecords();
 
         $this
             ->actingAs(User::factory()->create())
             ->json(
                 'GET',
-                sprintf(self::ROUTE, $this->user->id),
+                sprintf(self::ROUTE, $this->employee->id),
                 [
                     'includes' => [UserIncludesEnum::AcademicRecords->value]
                 ]
@@ -60,6 +60,6 @@ class ShowUserWithAcademicRecordsTest extends TestCase
     {
         AcademicRecord::factory()
             ->count(3)
-            ->create(['user_id' => $this->user->id]);
+            ->create(['user_id' => $this->employee->id]);
     }
 }

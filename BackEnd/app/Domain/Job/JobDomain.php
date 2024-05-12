@@ -138,20 +138,6 @@ readonly class JobDomain implements JobDomainInterface
         return $this->applicationsAmount;
     }
 
-    public function incrementApplicationsCount(): void
-    {
-        if ($this->jobRepository->getApplicationAmount($this->id) >= $this->getApplicationsAmount()) {
-            $this->isAvailable = false;
-            $this->jobRepository->setNotAvailable($this->id);
-
-            throw new JobApplicationsAmountSurpassedException();
-        }
-
-        $this->jobRepository->incrementApplicationsCount($this->id);
-
-        $this->applicationsAmount++;
-    }
-
     public function jobsWithIncludes($includes): array
     {
         return $this->jobRepository->getJobs($includes);

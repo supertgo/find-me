@@ -18,21 +18,20 @@ class JobApplicationService implements JobApplicationServiceInterface
     {
         $dataTransactionService = app(DataTransactionServiceInterface::class);
         $dataTransactionService->begin();
+
         try {
-            $user = app(UserDomain::class, [app(UserRepository::class)])->loadUser($userId);
-            $job = app(JobDomain::class, [app(JobRepository::class)])
+            $user = (new UserDomain(new UserRepository()))->loadUser($userId);
+            $job = (new JobDomain(new JobRepository()))
                 ->setId($jobId)
                 ->load()
                 ->acceptApplication();
 
-            $jobApplication = app(JobApplicationDomain::class, [app(JobApplicationRepository::class)])
+            $jobApplication = (new JobApplicationDomain(new JobApplicationRepository()))
                 ->create([
                     'job_id' => $job->getId(),
                     'user_id' => $user->getId(),
-                    'reason' => $data['reason'] ?? null
+                    'cover_letter' => $data['cover_letter'] ?? null
                 ]);
-
-            $job->incrementApplicationsCount();
 
             $dataTransactionService->commit();
 

@@ -17,14 +17,14 @@ class ShowUserWithProfessionalExperiencesTest extends TestCase
 
     public function testShowUserSuccess()
     {
-        $this->makeUser();
+        $this->makeEmployee();
         $this->makeProfessionalExperiences();
 
         $this
             ->actingAs(User::factory()->create())
             ->json(
                 'GET',
-                sprintf(self::ROUTE, $this->user->id),
+                sprintf(self::ROUTE, $this->employee->id),
                 [
                     'includes' => [UserIncludesEnum::ProfessionalExperiences->value]
                 ]
@@ -62,6 +62,6 @@ class ShowUserWithProfessionalExperiencesTest extends TestCase
     {
         ProfessionalExperience::factory()
             ->count(3)
-            ->create(['user_id' => $this->user->id]);
+            ->create(['user_id' => $this->employee->id]);
     }
 }

@@ -74,9 +74,4 @@ class JobRepository extends AbstractRepository implements JobRepositoryInterface
     {
         return Job::find($id)->applications()->count();
     }
-
-    public function incrementApplicationsCount(int $id): void
-    {
-        Job::where('id', $id)->increment('applications_count');
-    }
 }

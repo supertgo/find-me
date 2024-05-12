@@ -18,25 +18,25 @@ class UpdateUserProfilePictureTest extends TestCase
     {
         Storage::fake('public');
 
-        $this->makeUser();
+        $this->makeEmployee();
 
         $payload = $this->getPayload();
 
-        $this->user->update([
+        $this->employee->update([
             'profilePicturePath' => 'test'
         ]);
 
         $this
-            ->actingAs($this->user)
+            ->actingAs($this->employee)
             ->json('PATCH', self::ROUTE, $payload)
             ->assertStatus(Response::HTTP_OK)
             ->assertJsonStructure(['url']);
 
-        $this->user->refresh();
+        $this->employee->refresh();
 
-        $this->assertNotEquals('test', $this->user->profile_picture_path);
+        $this->assertNotEquals('test', $this->employee->profile_picture_path);
 
-        $explodedUrl = explode('/', $this->user->profile_picture_path);
+        $explodedUrl = explode('/', $this->employee->profile_picture_path);
         $this->assertTrue(
             Storage::disk('public')
                 ->exists(end($explodedUrl))

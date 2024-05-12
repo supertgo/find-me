@@ -296,3 +296,22 @@ paths:
           $ref: 'Schemas/Common/response/ValidationErrorsResponse.yaml'
         401:
           $ref: 'Schemas/Common/response/UnauthenticatedResponse.yaml'
+
+    put:
+      tags:
+        - Job
+      description: 'update job, only for recruiters'
+      security:
+        - BearerAuth: [ ]
+      parameters:
+        - $ref: 'Schemas/Job/Parameters/JobId.yaml'
+      requestBody:
+        $ref: 'Schemas/Job/RequestBodies/UpdateJobRequest.yaml'
+
+      responses:
+        '200':
+          $ref: 'Schemas/Job/Responses/UpdateSuccessResponse.yaml'
+        '422':
+          $ref: 'Schemas/Common/response/ValidationErrorsResponse.yaml'
+        401:
+          $ref: 'Schemas/Common/response/UnauthenticatedResponse.yaml'

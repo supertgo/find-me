@@ -46,7 +46,10 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:80/api/job?includes[]=competences
+GET http://localhost:80/api/job
+    ?includes[]=competences
+    &includes[]=company
+
 Accept: application/json
 Authorization: Bearer {{bearerToken}}
 
@@ -65,7 +68,9 @@ Authorization: Bearer {{bearerToken}}
 %}
 
 ###
-GET http://localhost:80/api/job/{{jobId}}?includes[]=competences
+GET http://localhost:80/api/job/{{jobId}}
+    ?includes[]=competences
+    &includes[]=company
 Accept: application/json
 Authorization: Bearer {{bearerToken}}
 

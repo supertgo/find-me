@@ -16,6 +16,9 @@ enum ExceptionMessagesEnum: string
 
     case JobApplicationStatusNotAllowedException = 'Job application status not allowed';
     case JobApplicationUnknownEnumOptionException = 'Job application unknown enum option';
+    case JobsIdFilterMustBePositiveInteger = 'Jobs id must be positive integers, in job applications';
+    case CandidatesIdFilterMustBePositiveInteger = 'Candidates id must be positive integers, in job applications';
+    case FilterDateFromMustBeDateAfter = 'Filter date from must be date after, in job applications';
 
     case UserIdMustBeAnInteger = 'User id must be an integer';
     case UserEmailNotAvailable = 'User email is not available';

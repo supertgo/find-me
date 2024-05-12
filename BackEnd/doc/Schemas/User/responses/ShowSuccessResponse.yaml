@@ -2,4 +2,9 @@ description: show user successful
 content:
   application/json:
     schema:
-      $ref: '../components/UserResource.yaml'
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          $ref: '../components/UserResource.yaml'

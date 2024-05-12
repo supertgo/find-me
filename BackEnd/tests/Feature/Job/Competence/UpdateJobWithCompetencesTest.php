@@ -24,6 +24,7 @@ class UpdateJobWithCompetencesTest extends TestCase
     {
         $owner = $this->generateRecruiterUser();
 
+        /** @var Job $originalJob */
         $originalJob = Job::factory()->create([
             'user_id' => $owner->id
         ]);
@@ -56,7 +57,7 @@ class UpdateJobWithCompetencesTest extends TestCase
             'applications_amount' => $payload['applications_amount'],
             'salary' => $payload['salary'],
             'salary_time_unit' => $payload['salary_time_unit'],
-            'accept_application_until' => $payload['accept_application_until']->format('Y-m-d H:i:s'),
+            'accept_application_until' => $payload['accept_application_until'],
             'work_model' => $payload['work_model'],
             'employment_type' => $payload['employment_type'],
             'week_workload' => $payload['week_workload'],
@@ -103,7 +104,7 @@ class UpdateJobWithCompetencesTest extends TestCase
             'applications_amount' => $this->faker->numberBetween(5, 100),
             'salary' => $this->faker->numberBetween(0, 10000),
             'salary_time_unit' => $this->faker->randomElement(array_column(SalaryTimeUnitEnum::cases(), 'value')),
-            'accept_application_until' => Carbon::now()->addMonth(),
+            'accept_application_until' => Carbon::now()->addMonth()->format('Y-m-d H:i:s'),
             'work_model' => $this->faker->randomElement(array_column(WorkModelEnum::cases(), 'value')),
             'employment_type' => $this->faker->randomElement(array_column(EmploymentTypeEnum::cases(), 'value')),
             'week_workload' => $this->faker->numberBetween(20, 40),

@@ -18,6 +18,9 @@ class DeleteUserProfilePictureTest extends TestCase
         Storage::fake('public');
 
         $this->makeEmployee();
+        $this->employee->update([
+            'profilePicturePath' => 'test'
+        ]);
 
         $this->employee->update([
             'profilePicturePath' => 'test'

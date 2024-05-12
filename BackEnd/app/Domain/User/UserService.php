@@ -299,6 +299,10 @@ class UserService extends AbstractService
             $domain = new UserDomain($userRepository);
             $domain->loadUser($userId);
 
+            if ($domain->getProfilePicturePath() === null) {
+                return;
+            }
+
             $domain->deleteProfilePicture();
 
             $userRepository->commitTransaction();

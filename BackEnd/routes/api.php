@@ -58,19 +58,19 @@ Route::group(
 Route::group(
     [
         'namespace' => 'App\Http\Controllers',
-        'prefix' => 'job'
     ],
     function () {
-        Route::resource('', JobController::class)
+        Route::resource('/job', JobController::class)
             ->only(['store', 'destroy', 'update'])
             ->middleware('recruiter');
 
-        Route::resource('', JobController::class)
+        Route::resource('/job', JobController::class)
             ->only(['index', 'show'])
             ->middleware('auth:api');
 
-        Route::group(['prefix' => '/{job}/application'], function () {
-            Route::resource('', JobApplicationsController::class)
+        Route::group(['prefix' => 'job/{job}'], function () {
+            Route::resource('/application', JobApplicationsController::class)
                 ->only(['store', 'destroy']);
         })->middleware('auth:api');
+
     });

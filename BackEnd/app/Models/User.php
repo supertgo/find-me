@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\helpers\File\FileHelperInterface;
+use App\Helpers\File\FileHelperInterface;
 use Database\Factories\UserFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;

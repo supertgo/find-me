@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\JobApplicationsController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\JWTController;
 use App\Http\Controllers\UserAcademicRecordsController;
@@ -55,7 +56,9 @@ Route::group(
 
 
 Route::group(
-    ['namespace' => 'App\Http\Controllers'],
+    [
+        'namespace' => 'App\Http\Controllers',
+    ],
     function () {
         Route::resource('/job', JobController::class)
             ->only(['store', 'destroy', 'update'])
@@ -64,4 +67,10 @@ Route::group(
         Route::resource('/job', JobController::class)
             ->only(['index', 'show'])
             ->middleware('auth:api');
+
+        Route::group(['prefix' => 'job/{job}'], function () {
+            Route::resource('/application', JobApplicationsController::class)
+                ->only(['store', 'destroy']);
+        })->middleware('auth:api');
+
     });

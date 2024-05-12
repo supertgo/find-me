@@ -2,4 +2,9 @@ description: update job successful
 content:
   application/json:
     schema:
-      $ref: '../Components/JobResource.yaml'
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          $ref: '../Components/JobResource.yaml'

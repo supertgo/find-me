@@ -20,7 +20,7 @@ use App\Exceptions\User\ProfessionalExperience\MustHaveEndDateWhenFinishedExperi
 use App\Exceptions\User\ProfessionalExperience\OnlyOwnerCanDeleteProfessionalExperienceException;
 use App\Exceptions\User\ProfessionalExperience\ProfessionalExperienceNotFoundException;
 use App\Exceptions\User\UserNotFoundException;
-use App\helpers\File\FileHelperInterface;
+use App\Helpers\File\FileHelperInterface;
 use Exception;
 use Illuminate\Http\UploadedFile;
 use Throwable;
@@ -298,6 +298,10 @@ class UserService extends AbstractService
 
             $domain = new UserDomain($userRepository);
             $domain->loadUser($userId);
+
+            if ($domain->getProfilePicturePath() === null) {
+                return;
+            }
 
             $domain->deleteProfilePicture();
 

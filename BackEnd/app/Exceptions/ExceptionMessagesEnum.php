@@ -11,6 +11,10 @@ enum ExceptionMessagesEnum: string
     case JobIdMustBeAnInteger = 'Job id must be an integer';
     case OnlyOwnerCanDeleteJob = 'Only owner can delete job';
     case OnlyOwnerCanUpdateJob = 'Only owner can update job';
+    case JobAcceptApplicationUntilPassed = 'Job accept application deadline is in the past';
+    case JobApplicationsAmountSurpassedException = 'Job applications amount surpassed';
+
+    case JobApplicationStatusNotAllowedException = 'Job application status not allowed';
 
     case UserIdMustBeAnInteger = 'User id must be an integer';
     case UserEmailNotAvailable = 'User email is not available';

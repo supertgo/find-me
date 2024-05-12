@@ -4,7 +4,7 @@ namespace App\Domain\User;
 
 use App\Domain\Abstract\AbstractRepository;
 use App\Domain\Competence\CompetenceDomainInterface;
-use App\helpers\File\FileHelperInterface;
+use App\Helpers\File\FileHelperInterface;
 use App\Mail\UserForgotPassword;
 use App\Models\User;
 use DB;

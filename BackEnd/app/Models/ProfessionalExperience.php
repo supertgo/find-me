@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Database\Factories\ProfessionalExperienceFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -42,6 +43,14 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Job whereUpdatedAt($value)
  * @method static Builder|Job whereWeekWorkload($value)
  * @method static Builder|Job whereWorkModel($value)
+ * @property int $user_id
+ * @method static ProfessionalExperienceFactory factory($count = null, $state = [])
+ * @method static Builder|ProfessionalExperience whereCompanyName($value)
+ * @method static Builder|ProfessionalExperience whereEndDate($value)
+ * @method static Builder|ProfessionalExperience whereIsCurrent($value)
+ * @method static Builder|ProfessionalExperience wherePosition($value)
+ * @method static Builder|ProfessionalExperience whereStartDate($value)
+ * @method static Builder|ProfessionalExperience whereUserId($value)
  * @mixin Eloquent
  */
 class ProfessionalExperience extends Model

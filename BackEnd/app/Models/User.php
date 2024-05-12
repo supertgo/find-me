@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\helpers\File\FileHelperInterface;
+use App\Helpers\File\FileHelperInterface;
 use Database\Factories\UserFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
@@ -55,6 +55,13 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @method static Builder|User whereUpdatedAt($value)
  * @property-read int|null $posts_count
  * @method static Builder|User whereType($value)
+ * @property-read Collection<int, \App\Models\AcademicRecord> $academicRecords
+ * @property-read int|null $academic_records_count
+ * @property-read int|null $competences_count
+ * @property-read Collection<int, \App\Models\ProfessionalExperience> $professionalExperiences
+ * @property-read int|null $professional_experiences_count
+ * @method static Builder|User whereAboutMe($value)
+ * @method static Builder|User whereProfilePicturePath($value)
  * @mixin Eloquent
  */
 class User extends Authenticatable implements JWTSubject

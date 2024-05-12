@@ -111,7 +111,7 @@ Content-Type: application/json
     {
     "name" : "Java",
     "description" : "Java programming language",
-    "type": "programming_language"
+    "type": "programmingLanguage"
     },
     {
         "name" : "Spring",

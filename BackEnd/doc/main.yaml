@@ -241,3 +241,23 @@ paths:
       responses:
         '204':
           description: No Content
+
+  # Job
+
+  /job:
+    post:
+      tags:
+        - Job
+      description: 'create job, only for recruiters'
+      security:
+        - BearerAuth: [ ]
+      requestBody:
+        $ref: 'Schemas/Job/RequestBodies/CreateJobRequest.yaml'
+
+      responses:
+        '204':
+          description: No Content
+        '422':
+          $ref: 'Schemas/Common/response/ValidationErrorsResponse.yaml'
+        401:
+          $ref: 'Schemas/Common/response/UnauthenticatedResponse.yaml'

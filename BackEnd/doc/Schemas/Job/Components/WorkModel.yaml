@@ -1,0 +1,7 @@
+type: string
+description: The work model for the job
+enum:
+  - hybrid
+  - onSite
+  - homeOffice
+example: hybrid

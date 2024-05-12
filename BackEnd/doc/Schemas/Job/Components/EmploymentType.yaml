@@ -1,0 +1,6 @@
+type: string
+description: The employment type for the job
+enum:
+  - full-time
+  - part-time
+example: full-time

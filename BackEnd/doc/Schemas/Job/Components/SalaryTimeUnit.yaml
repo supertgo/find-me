@@ -1,0 +1,8 @@
+type: string
+description: The time unit for the salary
+enum:
+  - hour
+  - day
+  - week
+  - month
+example: month

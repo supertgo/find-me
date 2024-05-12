@@ -1,0 +1,10 @@
+description: Create job application request body
+content:
+  application/json:
+    schema:
+      properties:
+        cover_letter:
+          type: string
+          description: The cover letter for the application
+          example: "motivation letter"
+      type: object

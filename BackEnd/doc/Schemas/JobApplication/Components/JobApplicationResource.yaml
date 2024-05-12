@@ -1,0 +1,39 @@
+type: object
+required:
+  - id
+  - job_id
+  - user_id
+  - status
+  - created_at
+  - updated_at
+properties:
+  id:
+    type: integer
+    description: The unique identifier for the job application
+    example: 13
+  job_id:
+    type: integer
+    description: The ID of the job for which the application was made
+    example: 45
+  user_id:
+    type: integer
+    description: The ID of the user who made the job application
+    example: 16
+  status:
+    type: string
+    description: The status of the job application
+    example: "pending"
+  cover_letter:
+    type: string
+    description: The cover letter for the job application
+    example: null
+  created_at:
+    type: string
+    format: date-time
+    description: The timestamp when the job application was created
+    example: "2024-05-12T17:36:14.000000Z"
+  updated_at:
+    type: string
+    format: date-time
+    description: The timestamp when the job application was last updated
+    example: "2024-05-12T17:36:14.000000Z"

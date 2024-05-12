@@ -1,0 +1,8 @@
+name: job_id
+in: route
+description: job id
+required: true
+schema:
+  type: integer
+  format: int64
+  example: 1

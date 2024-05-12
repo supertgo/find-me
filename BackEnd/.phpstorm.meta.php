@@ -2390,5 +2390,6 @@ namespace PHPSTORM_META {
     override(\with(0), type(0));
     override(\tap(0), type(0));
     override(\optional(0), type(0));
+    override(   app(0), type(0));
 
 }

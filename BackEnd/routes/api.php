@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\JobApplicationsController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\JWTController;
 use App\Http\Controllers\UserAcademicRecordsController;
@@ -64,4 +65,11 @@ Route::group(
         Route::resource('/job', JobController::class)
             ->only(['index', 'show'])
             ->middleware('auth:api');
+
+        Route::group(['prefix' => '/{job_id}/job-application'], function () {
+            Route::resource('', JobApplicationsController::class)
+                ->only(['store', 'destroy']);
+        })->middleware('auth:api');
+
+
     });

@@ -7,4 +7,4 @@ content:
         - data
       properties:
         data:
-          $ref: '../Components/JobResource.yaml'
+          $ref: '../Components/JobResourceWithIncludes.yaml'

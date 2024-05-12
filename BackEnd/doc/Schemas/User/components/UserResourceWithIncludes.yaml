@@ -54,3 +54,24 @@ properties:
     example: |
       "http://localhost/storage/EY3gleOcfR6cRbnmZ01Ss3FLqMSpKBkEhUrJM
       Ocp7hWwkeBQSIw44XwbMNcpFspmTE5RyV90Dr6fvuuT39bOfmnojpqxSpfFuJWp.png"
+
+  professional_experiences:
+    type: array
+    items:
+      $ref: '../ProfessionalExperiences/components/ProfessionalExperiencesResource.yaml'
+    description: The professional experiences of the user
+    example: [ ]
+
+  academic_records:
+    type: array
+    items:
+      $ref: '../AcademicRecords/components/AcademicRecordsResource.yaml'
+    description: The academic records of the user
+    example: [ ]
+
+  competences:
+    type: array
+    items:
+      $ref: '../Competence/components/UserCompetencesResource.yaml'
+    description: The competences of the user
+    example: [ ]

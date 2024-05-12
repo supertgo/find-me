@@ -72,3 +72,11 @@ properties:
     type: integer
     description: The ID of the user who created the job
     example: 137
+
+  competences:
+    type: array
+    items:
+      $ref: 'JobCompetencesResource.yaml'
+
+  company:
+    $ref: '../../Company/Components/CompanyResource.yaml'

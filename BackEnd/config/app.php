@@ -179,6 +179,7 @@ return [
 
         // Service
         App\Providers\Service\JobApplicationServiceProvider::class,
+        \App\Providers\Service\UserServiceProvider::class,
 
         //JWT
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,

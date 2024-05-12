@@ -35,4 +35,9 @@ class JobApplicationsController extends Controller
                     Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
+
+    public function index(JobApplicationIndexRequests $request): Response
+    {
+
+    }
 }

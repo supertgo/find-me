@@ -2,6 +2,7 @@
 
 namespace App\Domain\JobApplications;
 
+use App\Domain\JobApplications\Enum\JobApplicationsStatusEnum;
 use App\Exceptions\JobApplications\JobApplicationStatusNotAllowedException;
 use Carbon\Carbon;
 

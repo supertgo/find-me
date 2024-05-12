@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\JobApplications;
+namespace App\Domain\JobApplications\Enum;
 
 enum JobApplicationsStatusEnum: string
 {

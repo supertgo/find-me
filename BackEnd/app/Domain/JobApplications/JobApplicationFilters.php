@@ -6,7 +6,6 @@ use App\Domain\JobApplications\Enum\JobApplicationsStatusEnum;
 use App\Exceptions\JobApplications\CandidatesIdFilterMustBePositiveIntegersException;
 use App\Exceptions\JobApplications\FilterDateFromMustBeDateAfterException;
 use App\Exceptions\JobApplications\JobApplicationUnknownEnumOptionException;
-use App\Exceptions\JobApplications\JobIdsFilterMustBePositiveIntegersException;
 use App\Exceptions\JobApplications\JobsIdFilterMustBePositiveIntegersException;
 use Carbon\Carbon;
 

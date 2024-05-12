@@ -8,5 +8,10 @@ enum JobApplicationFiltersEnum: string
     case CandidatesId = 'candidatesId';
     case DateTimeFrom = 'dateTimeFrom';
     case DateTimeTo = 'dateTimeTo';
-    case Status = 'status';
+    case Statuses = 'statuses';
+
+    public static function getValuesAsString(): string
+    {
+        return implode(',', array_column(self::cases(), 'value'));
+    }
 }

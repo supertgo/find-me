@@ -3,11 +3,13 @@ import { render, screen } from 'utils/test/test-utils';
 import { Config, ConfigProps } from './Config';
 
 const props: ConfigProps = {
+  id: 10,
   name: 'test',
   password: 'testaa',
   email: 'thiago.teste@gmail.com',
   phone: '313131',
   type: 'recruiter',
+  about_me: 'oi'
 };
 
 describe('<Config />', () => {

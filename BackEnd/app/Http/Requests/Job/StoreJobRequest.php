@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Job;
 
+use App\Domain\Competence\Enum\CompetenceTypesEnum;
 use App\Domain\Job\Enum\EmploymentTypeEnum;
 use App\Domain\Job\Enum\SalaryTimeUnitEnum;
 use App\Domain\Job\Enum\WorkModelEnum;
@@ -27,6 +28,11 @@ class StoreJobRequest extends AbstractRequest
             'week_workload' => 'nullable|integer|min:0',
             'location' => 'nullable|string',
             'company_id' => 'required|int|min:1',
+
+            'competences' => 'nullable|array',
+            'competences.*.name' => 'required|string',
+            'competences.*.description' => 'string',
+            'competences.*.type' => 'string|in: ' . CompetenceTypesEnum::getValuesAsString()
         ];
     }
 }

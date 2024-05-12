@@ -63,6 +63,7 @@ export const Wrapper = styled.button<WrapperProps>`
     padding: ${theme.space.xxsmall};
     text-decoration: none;
     font-weight: ${theme.font.weights.medium};
+    text-wrap: nowrap;
 
     &:focus {
       outline: 1px dashed;

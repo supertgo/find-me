@@ -1,7 +1,7 @@
 import { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { UserType } from 'protocols/external/user/user';
-import { PostAuthLoginRouteConst } from 'utils/routes';
+import { GetAuthMeRouteConst, PostAuthLoginRouteConst } from 'utils/routes';
 import { SignInUrl } from 'utils/urls';
 
 export const nextAuthOptions: NextAuthOptions = {
@@ -38,7 +38,7 @@ export const nextAuthOptions: NextAuthOptions = {
           const res = await response.json();
 
           const authMeResponse = await fetch(
-            `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/me`,
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}/${GetAuthMeRouteConst}`,
             {
               headers: {
                 Authorization: `Bearer ${res.access_token}`,

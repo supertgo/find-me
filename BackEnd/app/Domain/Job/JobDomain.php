@@ -6,6 +6,7 @@ namespace App\Domain\Job;
 use App\Exceptions\Job\IdRequiredToUpdateException;
 use App\Exceptions\Job\OnlyOwnerCanUpdateJobException;
 use Carbon\Carbon;
+use Illuminate\Support\Collection;
 
 readonly class JobDomain implements JobDomainInterface
 {
@@ -30,9 +31,11 @@ readonly class JobDomain implements JobDomainInterface
     {
     }
 
-    public function save(): void
+    public function save(): self
     {
-        $this->jobRepository->createJob($this);
+        $attributes = $this->jobRepository->createJob($this);
+
+        return (new self($this->jobRepository))->fromArray($attributes);
     }
 
     public function exists(int $id): bool
@@ -239,5 +242,12 @@ readonly class JobDomain implements JobDomainInterface
     public function getJobWithIncludes(array $includes): array
     {
         return $this->jobRepository->getJobWithIncludes($this->id, $includes);
+    }
+
+    public function attachCompetences(Collection $competences): self
+    {
+        $this->jobRepository->attachCompetences($this->id, $competences);
+
+        return $this;
     }
 }

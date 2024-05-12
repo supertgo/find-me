@@ -20,7 +20,6 @@ class UpdateJobTest extends TestCase
 
     const ROUTE = self::BASE_ROUTE . 'job/%s';
 
-
     public function testUpdateJobSuccess()
     {
         $owner = $this->generateRecruiterUser();

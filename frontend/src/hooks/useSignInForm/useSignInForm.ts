@@ -61,14 +61,6 @@ export const useSignInForm = (): UseSignInFormProtocols => {
       redirect: false,
     });
 
-    const user = await getUserInfo();
-
-    setUser({
-      name: user!.name,
-      email: user!.email,
-      type: user!.type,
-    });
-
     if (result?.error) {
       toast.error(result.error);
       setIsLoading(false);
@@ -77,6 +69,13 @@ export const useSignInForm = (): UseSignInFormProtocols => {
 
     if (result?.status === 200) {
       setIsAuthenticated(!isAuthenticated);
+      const user = await getUserInfo();
+
+      setUser({
+        name: user!.name,
+        email: user!.email,
+        type: user!.type,
+      });
     }
 
     setIsLoading(false);

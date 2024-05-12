@@ -31,7 +31,7 @@ export const FilterWrapper = styled.div`
 
 export const Title = styled.p`
   ${({ theme }) => css`
-    color: #25324b;
+    color: ${theme.colors.darkBlue};
     text-wrap: nowrap;
     font-size: ${theme.font.sizes.sm};
     font-weight: ${theme.font.weights.medium};

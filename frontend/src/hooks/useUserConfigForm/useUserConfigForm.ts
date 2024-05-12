@@ -9,6 +9,7 @@ import {
 } from 'react-hook-form';
 import { useState } from 'react';
 import { PutClient } from 'services/httpClient/put';
+import { PutUserRouteConst } from 'utils/routes';
 
 export type ConfigInputs = {
   name: string;
@@ -51,7 +52,7 @@ export const useUserConfigForm = (): UseConfigFormProtocols => {
 
     try {
       await putClient.put({
-        url: '/user',
+        url: `/${PutUserRouteConst}`,
         body,
       });
 

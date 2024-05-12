@@ -1,4 +1,4 @@
-import { Base } from 'components/Base/Base';
+import { Base } from 'templates/Base/Base';
 import * as S from './Opportunity.styles';
 import { Step } from 'components/Step/Step';
 import { HomeIcon } from 'icons/HomeIcon/HomeIcon';

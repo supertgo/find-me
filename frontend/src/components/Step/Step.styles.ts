@@ -12,7 +12,7 @@ export const IconWrapper = styled.div`
     width: 5.6rem;
     height: 5.6rem;
     border-radius: ${theme.borderRadius.full};
-    background: #2563eb;
+    background: ${theme.colors.primary};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -37,7 +37,7 @@ export const Title = styled.h5`
   ${({ theme }) => css`
     font-weight: ${theme.font.weights.medium};
     font-size: ${theme.font.sizes.smd};
-    color: #25324b;
+    color: ${theme.colors.darkBlue};
   `}
 `;
 
@@ -45,6 +45,6 @@ export const StepInfo = styled.div`
   ${({ theme }) => css`
     font-weight: ${theme.font.weights.regular};
     font-size: ${theme.font.sizes.sm};
-    color: #2563EB;
+    color: ${theme.colors.primary};
   `}
 `

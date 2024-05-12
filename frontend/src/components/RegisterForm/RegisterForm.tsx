@@ -1,11 +1,19 @@
-import { Button } from 'components/Button/Button';
-import { Input } from 'components/Input/Input';
-import { Heading } from 'components/Heading/Heading';
-import { Controller } from 'react-hook-form';
-import * as S from './RegisterForm.styles';
-import { useRegisterForm } from 'hooks/useRegisterForm/useRegisterForm';
-import { LinkText } from 'components/LinkText/LinkText';
-import { Checkbox } from 'components/Checkbox/Checkbox';
+import { Button } from "components/Button/Button";
+import { Input } from "components/Input/Input";
+import { Heading } from "components/Heading/Heading";
+import { Controller } from "react-hook-form";
+import * as S from "./RegisterForm.styles";
+import { useRegisterForm } from "hooks/useRegisterForm/useRegisterForm";
+import { LinkText } from "components/LinkText/LinkText";
+import { Checkbox } from "components/Checkbox/Checkbox";
+import { formatCellphone } from "utils/formatCellphone";
+import { validateInputUserEmail } from "utils/email";
+import {
+  INVALID_EMAIL,
+  REQUIRED_CELLPHONE,
+  REQUIRED_PASSWORD,
+  REQUIRED_USER,
+} from "utils/errors";
 
 export type RegisterFormProps = {};
 
@@ -18,7 +26,7 @@ export const RegisterForm = ({}: RegisterFormProps) => {
       <Heading variant="h3" text="Crie a sua conta" />
       <Controller
         rules={{
-          required: 'Digite um usuário válido',
+          required: REQUIRED_USER,
         }}
         control={control}
         name="name"
@@ -28,7 +36,8 @@ export const RegisterForm = ({}: RegisterFormProps) => {
       />
       <Controller
         rules={{
-          required: 'Digite um e-mail válido.',
+          required: INVALID_EMAIL,
+          validate: validateInputUserEmail,
         }}
         control={control}
         name="email"
@@ -43,17 +52,24 @@ export const RegisterForm = ({}: RegisterFormProps) => {
       />
       <Controller
         rules={{
-          required: 'Digite um número de celular válido.',
+          required: REQUIRED_CELLPHONE,
         }}
         control={control}
         name="phone"
         render={({ field: { ...field } }) => (
-          <Input {...field} placeholder="Celular" error={errors.phone} />
+          <Input
+            {...field}
+            onChange={({ target: { value } }) =>
+              field.onChange(formatCellphone(value))
+            }
+            placeholder="Celular"
+            error={errors.phone}
+          />
         )}
       />
       <Controller
         rules={{
-          required: 'A senha é obrigatória.',
+          required: REQUIRED_PASSWORD,
         }}
         control={control}
         name="password"
@@ -77,8 +93,7 @@ export const RegisterForm = ({}: RegisterFormProps) => {
         Cadastrar
       </Button>
       <S.Text>
-        Já tem uma conta?{' '}
-        <LinkText href="/" text="Faça login" />
+        Já tem uma conta? <LinkText href="/" text="Faça login" />
       </S.Text>
     </S.Form>
   );

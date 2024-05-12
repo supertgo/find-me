@@ -10,4 +10,9 @@ class JobApplicationRepository implements JobApplicationRepositoryInterface
     {
         return JobApplication::create($data)->toArray();
     }
+
+    public function get(array $includes): array
+    {
+        return JobApplication::with($includes)->get()->toArray();
+    }
 }

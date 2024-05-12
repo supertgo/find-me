@@ -2,8 +2,10 @@
 
 namespace App\Domain\JobApplications;
 
+use App\Domain\JobApplications\Enum\JobApplicationsIncludesEnum;
 use App\Domain\JobApplications\Enum\JobApplicationsStatusEnum;
 use App\Exceptions\JobApplications\JobApplicationStatusNotAllowedException;
+use App\Exceptions\JobApplications\JobApplicationUnknownEnumOptionException;
 use Carbon\Carbon;
 
 class JobApplicationDomain
@@ -153,6 +155,31 @@ class JobApplicationDomain
     public function setUpdatedAt(Carbon|string|null $updatedAt): JobApplicationDomain
     {
         $this->updatedAt = is_string($updatedAt) ? Carbon::parse($updatedAt) : $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * @throws JobApplicationUnknownEnumOptionException
+     */
+    public function getJobApplications(array $filters, array $includes)
+    {
+        return $this
+            ->validateIncludes($includes)
+            ->repository
+            ->get($includes);
+    }
+
+    /**
+     * @throws JobApplicationUnknownEnumOptionException
+     */
+    private function validateIncludes(array $includes): self
+    {
+        $nonExistentIncludes = array_diff($includes, JobApplicationsIncludesEnum::getValues());
+
+        if ($nonExistentIncludes) {
+            throw new JobApplicationUnknownEnumOptionException($nonExistentIncludes);
+        }
 
         return $this;
     }

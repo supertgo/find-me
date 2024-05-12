@@ -42,4 +42,9 @@ class JobApplicationService implements JobApplicationServiceInterface
             throw $exception;
         }
     }
+
+    public function getJobApplications(array $filters, array $includes): array
+    {
+        return (new JobApplicationDomain(new JobApplicationRepository()))->getJobApplications($filters, $includes);
+    }
 }

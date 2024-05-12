@@ -33,4 +33,9 @@ class AbstractRequest extends FormRequest
     {
         return $this->validated('includes') ?? [];
     }
+
+    public function getFilters(): array
+    {
+        return $this->validated('filters') ?? [];
+    }
 }

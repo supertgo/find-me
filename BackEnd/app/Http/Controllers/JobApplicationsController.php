@@ -40,9 +40,8 @@ class JobApplicationsController extends Controller
     public function index(JobApplicationIndexRequests $request): Response
     {
         $jobApplications = app(JobApplicationServiceInterface::class)
-            ->getJobApplications($request->validated());
+            ->getJobApplications($request->getFilters(), $request->getIncludes());
 
-        return JobApplicationResource::collection($jobApplications)
-            ->toResponse($request);
+        return response(status: Response::HTTP_OK)->json(['data' => $jobApplications]);
     }
 }

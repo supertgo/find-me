@@ -49,6 +49,12 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Job whereUpdatedAt($value)
  * @method static Builder|Job whereWeekWorkload($value)
  * @method static Builder|Job whereWorkModel($value)
+ * @property-read \App\Models\Company|null $company
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Competence> $competences
+ * @property-read int|null $competences_count
+ * @method static \Database\Factories\JobFactory factory($count = null, $state = [])
+ * @method static Builder|Job whereCompanyId($value)
+ * @method static Builder|Job whereUserId($value)
  * @mixin Eloquent
  */
 class Job extends Model

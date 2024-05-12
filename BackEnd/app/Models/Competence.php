@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Database\Factories\CompetenceFactory;
+use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -36,7 +38,9 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Job whereUpdatedAt($value)
  * @method static Builder|Job whereWeekWorkload($value)
  * @method static Builder|Job whereWorkModel($value)
- * @mixin \Eloquent
+ * @method static CompetenceFactory factory($count = null, $state = [])
+ * @method static Builder|Competence whereType($value)
+ * @mixin Eloquent
  */
 class Competence extends Model
 {

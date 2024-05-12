@@ -89,11 +89,7 @@ Content-Type: application/json
 
 > {%
     client.test("Request executed successfully", function () {
-        client.assert(response.status === 200, "Response status is not 200");
-    });
-
-    client.test("Job id and name are coherent", function () {
-        client.assert(response.body.data.name !== client.global.get("jobId"), "Job is not created");
+        client.assert(response.status === 204, "Response status is not 204");
     });
 
 %}
@@ -113,4 +109,30 @@ Authorization: Bearer {{bearerToken}}
         client.assert(response.body.data.name !== client.global.get("jobId"), "Job is not created");
     });
 
+%}
+
+###
+DELETE http://localhost:80/api/job/{{jobId}}
+Accept: application/json
+Authorization: Bearer {{bearerToken}}
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 204, "Response status is not 204");
+    });
+%}
+
+###
+GET http://localhost:80/api/job/{{jobId}}
+Accept: application/json
+Authorization: Bearer {{bearerToken}}
+
+> {%
+
+    client.test("Job was deleted", function () {
+        client.assert(response.status === 422, "Response status is not 422");
+
+        client.assert(response.body.message == 'Job not found', "Job is not deleted");
+
+    });
 %}

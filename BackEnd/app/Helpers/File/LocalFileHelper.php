@@ -1,6 +1,6 @@
 <?php
 
-namespace App\helpers\File;
+namespace App\Helpers\File;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\File;

@@ -2142,6 +2142,37 @@
                     "description": "The ID of the company offering the job",
                     "minimum": 1,
                     "example": 1
+                  },
+                  "competences": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "name"
+                      ],
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "description": "The name of the competence"
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "The description of the competence"
+                        },
+                        "type": {
+                          "type": "string",
+                          "description": "Competence type",
+                          "enum": [
+                            "language",
+                            "framework",
+                            "programmingLanguage",
+                            "technology",
+                            "other"
+                          ],
+                          "example": "other"
+                        }
+                      }
+                    }
                   }
                 },
                 "type": "object"
@@ -2220,7 +2251,8 @@
               "example": "company",
               "description": "job related data",
               "enum": [
-                "company"
+                "company",
+                "competences"
               ]
             }
           }
@@ -2342,6 +2374,108 @@
                         "type": "integer",
                         "description": "The ID of the user who created the job",
                         "example": 137
+                      },
+                      "competences": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "required": [
+                            "id",
+                            "name",
+                            "created_at",
+                            "updated_at"
+                          ],
+                          "properties": {
+                            "id": {
+                              "type": "integer",
+                              "description": "The unique identifier for the competence",
+                              "example": 1
+                            },
+                            "name": {
+                              "type": "string",
+                              "description": "The name of the competence"
+                            },
+                            "description": {
+                              "type": "string",
+                              "description": "The description of the competence"
+                            },
+                            "created_at": {
+                              "type": "string",
+                              "format": "date-time",
+                              "description": "The timestamp when the competence was created",
+                              "example": "2024-05-11T13:20:50.000000Z"
+                            },
+                            "updated_at": {
+                              "type": "string",
+                              "format": "date-time",
+                              "description": "The timestamp when the competence was last updated",
+                              "example": "2024-05-11T13:20:50.000000Z"
+                            }
+                          }
+                        }
+                      },
+                      "company": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "name",
+                          "description",
+                          "phone",
+                          "email",
+                          "cnpj",
+                          "fantasy_name",
+                          "created_at",
+                          "updated_at"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "description": "The unique identifier for the company",
+                            "example": 1
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "The name of the company",
+                            "example": "Fay, Hickle and Rutherford"
+                          },
+                          "description": {
+                            "type": "string",
+                            "description": "The description of the company",
+                            "example": "Qui quam voluptatibus est ut reiciendis voluptatem laudantium fuga."
+                          },
+                          "phone": {
+                            "type": "string",
+                            "description": "The phone number of the company",
+                            "example": "+18389817362"
+                          },
+                          "email": {
+                            "type": "string",
+                            "description": "The email of the company",
+                            "example": "valentine42@wintheiser.info"
+                          },
+                          "cnpj": {
+                            "type": "integer",
+                            "description": "The CNPJ of the company",
+                            "example": 15656973
+                          },
+                          "fantasy_name": {
+                            "type": "string",
+                            "description": "The fantasy name of the company",
+                            "example": "Christophe Veum Ltd"
+                          },
+                          "created_at": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "The timestamp when the company was created",
+                            "example": "2024-05-12T02:00:33.000000Z"
+                          },
+                          "updated_at": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "The timestamp when the company was last updated",
+                            "example": "2024-05-12T02:00:33.000000Z"
+                          }
+                        }
                       }
                     }
                   }
@@ -2429,7 +2563,8 @@
               "example": "company",
               "description": "job related data",
               "enum": [
-                "company"
+                "company",
+                "competences"
               ]
             }
           }
@@ -2549,6 +2684,108 @@
                       "type": "integer",
                       "description": "The ID of the user who created the job",
                       "example": 137
+                    },
+                    "competences": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "name",
+                          "created_at",
+                          "updated_at"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "description": "The unique identifier for the competence",
+                            "example": 1
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "The name of the competence"
+                          },
+                          "description": {
+                            "type": "string",
+                            "description": "The description of the competence"
+                          },
+                          "created_at": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "The timestamp when the competence was created",
+                            "example": "2024-05-11T13:20:50.000000Z"
+                          },
+                          "updated_at": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "The timestamp when the competence was last updated",
+                            "example": "2024-05-11T13:20:50.000000Z"
+                          }
+                        }
+                      }
+                    },
+                    "company": {
+                      "type": "object",
+                      "required": [
+                        "id",
+                        "name",
+                        "description",
+                        "phone",
+                        "email",
+                        "cnpj",
+                        "fantasy_name",
+                        "created_at",
+                        "updated_at"
+                      ],
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "description": "The unique identifier for the company",
+                          "example": 1
+                        },
+                        "name": {
+                          "type": "string",
+                          "description": "The name of the company",
+                          "example": "Fay, Hickle and Rutherford"
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "The description of the company",
+                          "example": "Qui quam voluptatibus est ut reiciendis voluptatem laudantium fuga."
+                        },
+                        "phone": {
+                          "type": "string",
+                          "description": "The phone number of the company",
+                          "example": "+18389817362"
+                        },
+                        "email": {
+                          "type": "string",
+                          "description": "The email of the company",
+                          "example": "valentine42@wintheiser.info"
+                        },
+                        "cnpj": {
+                          "type": "integer",
+                          "description": "The CNPJ of the company",
+                          "example": 15656973
+                        },
+                        "fantasy_name": {
+                          "type": "string",
+                          "description": "The fantasy name of the company",
+                          "example": "Christophe Veum Ltd"
+                        },
+                        "created_at": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "The timestamp when the company was created",
+                          "example": "2024-05-12T02:00:33.000000Z"
+                        },
+                        "updated_at": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "The timestamp when the company was last updated",
+                          "example": "2024-05-12T02:00:33.000000Z"
+                        }
+                      }
                     }
                   }
                 }
@@ -2715,6 +2952,37 @@
                     "description": "The ID of the company offering the job",
                     "minimum": 1,
                     "example": 1
+                  },
+                  "competences": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "name"
+                      ],
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "description": "The name of the competence"
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "The description of the competence"
+                        },
+                        "type": {
+                          "type": "string",
+                          "description": "Competence type",
+                          "enum": [
+                            "language",
+                            "framework",
+                            "programmingLanguage",
+                            "technology",
+                            "other"
+                          ],
+                          "example": "other"
+                        }
+                      }
+                    }
                   }
                 },
                 "type": "object"
@@ -2837,6 +3105,108 @@
                       "type": "integer",
                       "description": "The ID of the user who created the job",
                       "example": 137
+                    },
+                    "competences": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "name",
+                          "created_at",
+                          "updated_at"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "description": "The unique identifier for the competence",
+                            "example": 1
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "The name of the competence"
+                          },
+                          "description": {
+                            "type": "string",
+                            "description": "The description of the competence"
+                          },
+                          "created_at": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "The timestamp when the competence was created",
+                            "example": "2024-05-11T13:20:50.000000Z"
+                          },
+                          "updated_at": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "The timestamp when the competence was last updated",
+                            "example": "2024-05-11T13:20:50.000000Z"
+                          }
+                        }
+                      }
+                    },
+                    "company": {
+                      "type": "object",
+                      "required": [
+                        "id",
+                        "name",
+                        "description",
+                        "phone",
+                        "email",
+                        "cnpj",
+                        "fantasy_name",
+                        "created_at",
+                        "updated_at"
+                      ],
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "description": "The unique identifier for the company",
+                          "example": 1
+                        },
+                        "name": {
+                          "type": "string",
+                          "description": "The name of the company",
+                          "example": "Fay, Hickle and Rutherford"
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "The description of the company",
+                          "example": "Qui quam voluptatibus est ut reiciendis voluptatem laudantium fuga."
+                        },
+                        "phone": {
+                          "type": "string",
+                          "description": "The phone number of the company",
+                          "example": "+18389817362"
+                        },
+                        "email": {
+                          "type": "string",
+                          "description": "The email of the company",
+                          "example": "valentine42@wintheiser.info"
+                        },
+                        "cnpj": {
+                          "type": "integer",
+                          "description": "The CNPJ of the company",
+                          "example": 15656973
+                        },
+                        "fantasy_name": {
+                          "type": "string",
+                          "description": "The fantasy name of the company",
+                          "example": "Christophe Veum Ltd"
+                        },
+                        "created_at": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "The timestamp when the company was created",
+                          "example": "2024-05-12T02:00:33.000000Z"
+                        },
+                        "updated_at": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "The timestamp when the company was last updated",
+                          "example": "2024-05-12T02:00:33.000000Z"
+                        }
+                      }
                     }
                   }
                 }

@@ -1,14 +1,22 @@
-'use client';
-import { Base } from 'templates/Base/Base';
-import { ConfigInfoWrapper } from 'components/ConfigInfoWrapper/ConfigInfoWrapper';
-import { Input } from 'components/Input/Input';
-import { Title } from 'components/Title/Title';
-import { Controller } from 'react-hook-form';
-import { Button } from 'components/Button/Button';
-import { useUserConfigForm } from 'hooks/useUserConfigForm/useUserConfigForm';
+"use client";
+import { Base } from "templates/Base/Base";
+import { ConfigInfoWrapper } from "components/ConfigInfoWrapper/ConfigInfoWrapper";
+import { Input } from "components/Input/Input";
+import { Title } from "components/Title/Title";
+import { Controller } from "react-hook-form";
+import { Button } from "components/Button/Button";
+import { useUserConfigForm } from "hooks/useUserConfigForm/useUserConfigForm";
 
-import * as S from './Config.styles';
-import { UserProps } from 'protocols/external/user/user';
+import * as S from "./Config.styles";
+import { UserProps } from "protocols/external/user/user";
+import { formatCellphone, revertFormatCellphone } from "utils/formatCellphone";
+import { validateInputUserEmail } from "utils/email";
+import {
+  INVALID_EMAIL,
+  REQUIRED_CELLPHONE,
+  REQUIRED_NEW_PASSWORD,
+  REQUIRED_USER,
+} from "utils/errors";
 
 export type ConfigProps = {} & UserProps;
 
@@ -30,7 +38,7 @@ export const Config = ({ name, email, phone, password }: ConfigProps) => {
           <S.PersonalDetails>
             <Controller
               rules={{
-                required: 'Digite um usuário válido',
+                required: REQUIRED_USER,
               }}
               control={control}
               name="name"
@@ -47,14 +55,17 @@ export const Config = ({ name, email, phone, password }: ConfigProps) => {
             <S.PersonalDetailsGrid>
               <Controller
                 rules={{
-                  required: 'Digite um celular válido.',
+                  required: REQUIRED_CELLPHONE,
                 }}
                 control={control}
                 name="phone"
-                defaultValue={phone}
+                defaultValue={formatCellphone(phone)}
                 render={({ field: { ...field } }) => (
                   <Input
                     {...field}
+                    onChange={({ target: { value } }) =>
+                      field.onChange(formatCellphone(value))
+                    }
                     label="Celular*"
                     placeholder="Digite o seu celular"
                     error={errors.phone}
@@ -63,7 +74,8 @@ export const Config = ({ name, email, phone, password }: ConfigProps) => {
               />
               <Controller
                 rules={{
-                  required: 'Digite um e-mail válido.',
+                  required: INVALID_EMAIL,
+                  validate: validateInputUserEmail,
                 }}
                 control={control}
                 name="email"
@@ -74,6 +86,7 @@ export const Config = ({ name, email, phone, password }: ConfigProps) => {
                     label="E-mail*"
                     placeholder="Digite o seu e-mail"
                     error={errors.email}
+                    type="email"
                   />
                 )}
               />
@@ -84,7 +97,7 @@ export const Config = ({ name, email, phone, password }: ConfigProps) => {
           <S.ConfigEmailWrapper>
             <Controller
               rules={{
-                required: 'Você deve digitar a sua nova senha',
+                required: REQUIRED_NEW_PASSWORD,
               }}
               control={control}
               name="password"

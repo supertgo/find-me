@@ -1,10 +1,12 @@
-import * as S from './LoginForm.styles';
-import { Button } from 'components/Button/Button';
-import { Input } from 'components/Input/Input';
-import { Heading } from 'components/Heading/Heading';
-import { Controller } from 'react-hook-form';
-import { useSignInForm } from 'hooks/useSignInForm/useSignInForm';
-import { LinkText } from 'components/LinkText/LinkText';
+import * as S from "./LoginForm.styles";
+import { Button } from "components/Button/Button";
+import { Input } from "components/Input/Input";
+import { Heading } from "components/Heading/Heading";
+import { Controller } from "react-hook-form";
+import { useSignInForm } from "hooks/useSignInForm/useSignInForm";
+import { LinkText } from "components/LinkText/LinkText";
+import { validateInputUserEmail } from "utils/email";
+import { INVALID_EMAIL } from "utils/errors";
 
 export type LoginFormProps = {};
 
@@ -17,7 +19,8 @@ export const LoginForm = ({}: LoginFormProps) => {
       <Heading variant="h3" text="Entre com a sua conta" />
       <Controller
         rules={{
-          required: 'Digite um e-mail válido.',
+          required: INVALID_EMAIL,
+          validate: validateInputUserEmail,
         }}
         control={control}
         name="email"
@@ -32,7 +35,7 @@ export const LoginForm = ({}: LoginFormProps) => {
       />
       <Controller
         rules={{
-          required: 'A senha é obrigatória.',
+          required: "A senha é obrigatória.",
         }}
         control={control}
         name="password"
@@ -50,7 +53,7 @@ export const LoginForm = ({}: LoginFormProps) => {
         Entrar
       </Button>
       <S.Text>
-        Ainda não tem uma conta?{' '}
+        Ainda não tem uma conta?{" "}
         <LinkText text="Faça o seu cadastro" href="auth/register" />
       </S.Text>
     </S.Form>

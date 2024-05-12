@@ -18,7 +18,24 @@ Content-Type: application/json
   "employment_type": "full-time",
   "week_workload": 40,
   "location": "New York, NY",
-  "company_id": 1
+  "company_id": 1,
+  "competences": [
+    {
+    "name" : "Java",
+    "description" : "Java programming language",
+    "type": "programmingLanguage"
+    },
+    {
+        "name" : "Spring",
+        "description" : "Spring framework",
+        "type": "framework"
+    },
+    {
+        "name" : "Hibernate",
+        "description" : "Hibernate ORM",
+        "type": "other"
+    }
+  ]
 }
 
 > {%
@@ -29,7 +46,7 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:80/api/job
+GET http://localhost:80/api/job?includes[]=competences
 Accept: application/json
 Authorization: Bearer {{bearerToken}}
 
@@ -48,7 +65,7 @@ Authorization: Bearer {{bearerToken}}
 %}
 
 ###
-GET http://localhost:80/api/job/{{jobId}}
+GET http://localhost:80/api/job/{{jobId}}?includes[]=competences
 Accept: application/json
 Authorization: Bearer {{bearerToken}}
 
@@ -84,7 +101,24 @@ Content-Type: application/json
   "employment_type": "full-time",
   "week_workload": 40,
   "location": "New York, NY",
-  "company_id": 1
+  "company_id": 1,
+  "competences": [
+    {
+    "name" : "Java",
+    "description" : "Java programming language",
+    "type": "programming_language"
+    },
+    {
+        "name" : "Spring",
+        "description" : "Spring framework",
+        "type": "framework"
+    },
+    {
+        "name" : "Hibernate",
+        "description" : "Hibernate ORM",
+        "type": "other"
+    }
+  ]
 }
 
 > {%

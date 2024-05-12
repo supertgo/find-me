@@ -62,3 +62,55 @@ Authorization: Bearer {{bearerToken}}
     });
 
 %}
+
+###
+< {%
+    client.global.set("jobName", $random.uuid)
+%}
+PUT http://localhost:80/api/job/{{jobId}}
+Accept: application/json
+Authorization: Bearer {{bearerToken}}
+Content-Type: application/json
+
+{
+  "name": "{{jobName}}",
+  "description": "Develop and maintain software applications",
+  "is_available": true,
+  "applications_amount": 10,
+  "salary": 50000,
+  "salary_time_unit": "month",
+  "accept_application_until": "2024-11-11 00:00:00",
+  "work_model": "hybrid",
+  "employment_type": "full-time",
+  "week_workload": 40,
+  "location": "New York, NY",
+  "company_id": 1
+}
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+
+    client.test("Job id and name are coherent", function () {
+        client.assert(response.body.data.name !== client.global.get("jobId"), "Job is not created");
+    });
+
+%}
+
+
+###
+GET http://localhost:80/api/job/{{jobId}}
+Accept: application/json
+Authorization: Bearer {{bearerToken}}
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+
+    client.test("Job id and name are coherent", function () {
+        client.assert(response.body.data.name !== client.global.get("jobId"), "Job is not created");
+    });
+
+%}

@@ -42,6 +42,6 @@ class JobApplicationsController extends Controller
         $jobApplications = app(JobApplicationServiceInterface::class)
             ->getJobApplications($request->getFilters(), $request->getIncludes());
 
-        return response(status: Response::HTTP_OK)->json(['data' => $jobApplications]);
+        return response()->json(['data' => $jobApplications], status: Response::HTTP_OK);
     }
 }

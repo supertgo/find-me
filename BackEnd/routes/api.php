@@ -70,7 +70,9 @@ Route::group(
 
         Route::group(['prefix' => 'job/{job}'], function () {
             Route::resource('/application', JobApplicationsController::class)
-                ->only(['store', 'destroy', 'index']);
+                ->only(['store', 'destroy']);
         })->middleware('auth:api');
-
     });
+
+Route::get('/job-applications', [JobApplicationsController::class, 'index'])
+    ->middleware('auth:api');

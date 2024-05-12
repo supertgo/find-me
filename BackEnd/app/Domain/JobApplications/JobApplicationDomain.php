@@ -4,8 +4,11 @@ namespace App\Domain\JobApplications;
 
 use App\Domain\JobApplications\Enum\JobApplicationsIncludesEnum;
 use App\Domain\JobApplications\Enum\JobApplicationsStatusEnum;
+use App\Exceptions\JobApplications\CandidatesIdFilterMustBePositiveIntegersException;
+use App\Exceptions\JobApplications\FilterDateFromMustBeDateAfterException;
 use App\Exceptions\JobApplications\JobApplicationStatusNotAllowedException;
 use App\Exceptions\JobApplications\JobApplicationUnknownEnumOptionException;
+use App\Exceptions\JobApplications\JobsIdFilterMustBePositiveIntegersException;
 use Carbon\Carbon;
 
 class JobApplicationDomain
@@ -160,12 +163,22 @@ class JobApplicationDomain
     }
 
     /**
+     * @throws FilterDateFromMustBeDateAfterException
+     * @throws JobsIdFilterMustBePositiveIntegersException
      * @throws JobApplicationUnknownEnumOptionException
+     * @throws CandidatesIdFilterMustBePositiveIntegersException
      */
     public function getJobApplications(array $filters, array $includes)
     {
+        $this->validateIncludes($includes);
+
+        if (!empty($filters)) {
+            $filters = (new JobApplicationFilters())->fromArray($filters);
+
+            $this->repository->getWithFilters($filters, $includes);
+        }
+
         return $this
-            ->validateIncludes($includes)
             ->repository
             ->get($includes);
     }

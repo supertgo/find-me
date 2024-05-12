@@ -9,11 +9,11 @@ use App\Exceptions\JobApplications\JobApplicationUnknownEnumOptionException;
 use App\Exceptions\JobApplications\JobsIdFilterMustBePositiveIntegersException;
 use Carbon\Carbon;
 
-class JobApplicationFilters
+class JobApplicationFilters implements JobApplicationFiltersInterface
 {
     private ?array $jobsId = null;
     private ?array $candidatesId = null;
-    private ?JobApplicationsStatusEnum $status = null;
+    private ?array $statuses = null;
     private ?Carbon $dateTimeFrom = null;
     private ?Carbon $dateTimeTo = null;
 
@@ -29,7 +29,7 @@ class JobApplicationFilters
         $this->setCandidatesId($data['candidatesId'] ?? null);
         $this->setDateTimeFrom($data['dateTimeFrom'] ?? null);
         $this->setDateTimeTo($data['dateTimeTo'] ?? null);
-        $this->setStatus($data['status'] ?? null);
+        $this->setStatuses($data['status'] ?? null);
 
         return $this;
     }
@@ -90,19 +90,26 @@ class JobApplicationFilters
     /**
      * @throws JobApplicationUnknownEnumOptionException
      */
-    public function setStatus(JobApplicationsStatusEnum|null|string $status): JobApplicationFilters
+    public function setStatuses(?array $statuses): JobApplicationFilters
     {
-        if (is_string($status)) {
-            $status = JobApplicationsStatusEnum::tryFrom($status);
+        array_walk($statuses, fn($status) => $this->validateStatus($status));
 
-            if (!$status) {
-                throw new JobApplicationUnknownEnumOptionException($status);
-            }
-        }
-
-        $this->status = $status;
+        $this->statuses = $statuses;
 
         return $this;
+    }
+
+    /**
+     * @throws JobApplicationUnknownEnumOptionException
+     */
+    public function validateStatus(?array $statuses): JobApplicationsStatusEnum
+    {
+        $statuses = JobApplicationsStatusEnum::tryFrom($statuses);
+
+        if (!$statuses) {
+            throw new JobApplicationUnknownEnumOptionException($statuses);
+        }
+        return $statuses;
     }
 
     public function toArray(): array
@@ -112,7 +119,7 @@ class JobApplicationFilters
             'candidatesId' => $this->candidatesId,
             'dateTimeFrom' => $this->dateTimeFrom?->toDateTimeString(),
             'dateTimeTo' => $this->dateTimeTo?->toDateTimeString(),
-            'status' => $this->status?->value
+            'status' => $this->getStatuses()
         ];
     }
 
@@ -136,4 +143,8 @@ class JobApplicationFilters
         return $this->dateTimeTo;
     }
 
+    public function getStatuses(): ?array
+    {
+        return $this->statuses;
+    }
 }

@@ -15,4 +15,9 @@ enum JobApplicationsStatusEnum: string
     {
         return array_column(self::cases(), 'value');
     }
+
+    public static function getValuesAsString(): string
+    {
+        return implode(',', self::getValues());
+    }
 }

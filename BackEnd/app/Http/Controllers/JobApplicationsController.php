@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Domain\JobApplications\JobApplicationServiceInterface;
 use App\Exceptions\Abstract\AbstractDomainException;
 use App\Http\Requests\JobApplications\CreateJobApplicationsRequest;
+use App\Http\Requests\JobApplications\JobApplicationIndexRequests;
 use App\Http\Resources\JobApplicationResource;
 use Exception;
 use Log;
@@ -38,6 +39,10 @@ class JobApplicationsController extends Controller
 
     public function index(JobApplicationIndexRequests $request): Response
     {
+        $jobApplications = app(JobApplicationServiceInterface::class)
+            ->getJobApplications($request->validated());
 
+        return JobApplicationResource::collection($jobApplications)
+            ->toResponse($request);
     }
 }

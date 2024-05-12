@@ -26,3 +26,23 @@ Content-Type: application/json
         client.assert(response.status === 201, "Response status is not 201");
     });
 %}
+
+###
+
+GET http://localhost:80/api/job
+Accept: application/json
+Authorization: Bearer {{bearerToken}}
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+
+    const job = response.body.data.find(job => job.name === client.global.get("jobName"));
+
+    client.test("Job was created", function () {
+        client.assert(job !== undefined, "Job is not created");
+    });
+
+    client.global.set("jobId", job.id);
+%}

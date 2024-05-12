@@ -56,4 +56,19 @@ content:
           description: The ID of the company offering the job
           minimum: 1
           example: 1
+        competences:
+          type: array
+          items:
+            type: object
+            required:
+              - name
+            properties:
+              name:
+                type: string
+                description: The name of the competence
+              description:
+                type: string
+                description: The description of the competence
+              type:
+                $ref: '../Components/CompetenceType.yaml'
       type: object

@@ -20,7 +20,7 @@ class StoreJobRequest extends AbstractRequest
             'salary' => 'nullable|integer|min:0',
             'salary_time_unit' =>
                 'required_with:salary|in:' . implode(',', array_column(SalaryTimeUnitEnum::cases(), 'value')),
-            'accept_application_until' => 'nullable|date',
+            'accept_application_until' => 'nullable|date|date_format:Y-m-d H:i:s',
             'work_model' =>
                 'nullable|in:' . implode(',', array_column(WorkModelEnum::cases(), 'value')),
             'employment_type' =>

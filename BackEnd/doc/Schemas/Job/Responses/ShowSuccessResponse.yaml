@@ -1,0 +1,5 @@
+description: show job successful
+content:
+  application/json:
+    schema:
+      $ref: '../Components/JobResource.yaml'

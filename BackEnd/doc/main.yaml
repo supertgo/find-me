@@ -261,3 +261,19 @@ paths:
           $ref: 'Schemas/Common/response/ValidationErrorsResponse.yaml'
         401:
           $ref: 'Schemas/Common/response/UnauthenticatedResponse.yaml'
+    get:
+      tags:
+        - Job
+      description: 'show all jobs'
+      security:
+        - BearerAuth: [ ]
+      parameters:
+        - $ref: 'Schemas/Job/Parameters/JobIncludesParameters.yaml'
+
+      responses:
+        '200':
+          $ref: 'Schemas/Job/Responses/IndexSuccessResponse.yaml'
+        '422':
+          $ref: 'Schemas/Common/response/ValidationErrorsResponse.yaml'
+        401:
+          $ref: 'Schemas/Common/response/UnauthenticatedResponse.yaml'

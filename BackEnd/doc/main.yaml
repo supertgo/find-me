@@ -353,7 +353,7 @@ paths:
         401:
           $ref: 'Schemas/Common/response/UnauthenticatedResponse.yaml'
 
-  /job-applications:
+  /job-application:
     get:
       tags:
         - JobApplication

@@ -6,6 +6,7 @@ use App\Domain\JobApplications\JobApplicationServiceInterface;
 use App\Exceptions\Abstract\AbstractDomainException;
 use App\Http\Requests\JobApplications\CreateJobApplicationsRequest;
 use App\Http\Requests\JobApplications\JobApplicationIndexRequests;
+use App\Http\Requests\JobApplications\JobApplicationUpdateStatusRequest;
 use App\Http\Resources\JobApplicationResource;
 use Exception;
 use Log;
@@ -57,6 +58,29 @@ class JobApplicationsController extends Controller
                     ['error' => 'Server error'],
                     Response::HTTP_INTERNAL_SERVER_ERROR);
         }
+    }
 
+    public function updateStatus(JobApplicationUpdateStatusRequest $request): Response
+    {
+        try {
+            app(JobApplicationServiceInterface::class)->updateStatus(
+                $request->getStatus(),
+                $request->getJobApplicationId()
+            );
+
+            return response()->noContent();
+        } catch (AbstractDomainException $exception) {
+            return response()->json(
+                $exception->render(),
+                status: Response::HTTP_UNPROCESSABLE_ENTITY
+            );
+        } catch (Exception $exception) {
+            Log::error($exception);
+
+            return response()
+                ->json(
+                    ['error' => 'Server error'],
+                    Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 }

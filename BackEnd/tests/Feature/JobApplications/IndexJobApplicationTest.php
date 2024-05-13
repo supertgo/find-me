@@ -13,7 +13,7 @@ class IndexJobApplicationTest extends TestCase
 {
     use DatabaseTransactions;
 
-    const ROUTE = self::BASE_ROUTE . 'job-applications';
+    const ROUTE = self::BASE_ROUTE . 'job-application';
 
 
     public function testCreateApplicationJobSuccess()

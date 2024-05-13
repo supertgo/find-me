@@ -3537,7 +3537,7 @@
         }
       }
     },
-    "/job-applications": {
+    "/job-application": {
       "get": {
         "tags": [
           "JobApplication"

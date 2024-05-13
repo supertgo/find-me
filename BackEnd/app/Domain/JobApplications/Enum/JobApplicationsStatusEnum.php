@@ -20,4 +20,9 @@ enum JobApplicationsStatusEnum: string
     {
         return implode(',', self::getValues());
     }
+
+    public function isFinal(): bool
+    {
+        return in_array($this->value, [self::Canceled, self::Hired]);
+    }
 }

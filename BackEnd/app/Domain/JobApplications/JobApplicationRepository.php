@@ -37,4 +37,19 @@ class JobApplicationRepository implements JobApplicationRepositoryInterface
             ->get()
             ->toArray();
     }
+
+    public function exists(int $jobApplicationId): bool
+    {
+        return JobApplication::where('id', $jobApplicationId)->exists();
+    }
+
+    public function load(int $jobApplicationId): array
+    {
+        return JobApplication::find($jobApplicationId)->toArray();
+    }
+
+    public function updateStatus(int $id, string $status): void
+    {
+        JobApplication::where('id', $id)->update(['status' => $status]);
+    }
 }

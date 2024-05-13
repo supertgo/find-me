@@ -6,6 +6,9 @@ use App\Domain\JobApplications\Enum\JobApplicationsIncludesEnum;
 use App\Domain\JobApplications\Enum\JobApplicationsStatusEnum;
 use App\Exceptions\JobApplications\CandidatesIdFilterMustBePositiveIntegersException;
 use App\Exceptions\JobApplications\FilterDateFromMustBeDateAfterException;
+use App\Exceptions\JobApplications\JobApplicationDoesNotExistException;
+use App\Exceptions\JobApplications\JobApplicationNotFoundException;
+use App\Exceptions\JobApplications\JobApplicationStatusIsFinalException;
 use App\Exceptions\JobApplications\JobApplicationStatusNotAllowedException;
 use App\Exceptions\JobApplications\JobApplicationUnknownEnumOptionException;
 use App\Exceptions\JobApplications\JobsIdFilterMustBePositiveIntegersException;
@@ -195,5 +198,41 @@ class JobApplicationDomain
         }
 
         return $this;
+    }
+
+    /**
+     * @throws JobApplicationStatusNotAllowedException
+     * @throws JobApplicationStatusIsFinalException
+     */
+    public function updateStatus(string $status): void
+    {
+        $status = JobApplicationsStatusEnum::tryFrom($status);
+
+        if (!$status) {
+            throw new JobApplicationStatusNotAllowedException($status);
+        }
+
+        if ($this->status->isFinal()) {
+            throw new JobApplicationStatusIsFinalException($status->value);
+        }
+
+        $this->setStatus($status);
+
+        $this->repository->updateStatus($this->id, $this->getStatus()->value);
+    }
+
+    /**
+     * @throws JobApplicationNotFoundException
+     * @throws JobApplicationStatusNotAllowedException
+     */
+    public function load(int $jobApplicationId): self
+    {
+        if (!$this->repository->exists($jobApplicationId)) {
+            throw new JobApplicationNotFoundException($jobApplicationId);
+        }
+
+        $data = $this->repository->load($jobApplicationId);
+
+        return $this->fromArray($data);
     }
 }

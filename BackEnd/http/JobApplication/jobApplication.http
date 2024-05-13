@@ -67,7 +67,7 @@ Content-Type: application/json
 %}
 
 ###
-GET http://localhost:80/api/job-applications
+GET http://localhost:80/api/job-application
     ?includes[]=job
     &includes[]=candidates
 Accept: application/json

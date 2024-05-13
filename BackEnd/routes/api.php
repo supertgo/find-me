@@ -20,7 +20,8 @@ Route::group(
             Route::post('register', [JWTController::class, 'register']);
             Route::post('forgot-password/{userEmail}', [JWTController::class, 'forgotPassword']);
         });
-    });
+    }
+);
 
 Route::group(
     [
@@ -51,8 +52,8 @@ Route::group(
             Route::patch('', [UserController::class, 'updateProfilePicture']);
             Route::delete('', [UserController::class, 'deleteProfilePicture']);
         });
-    })
-    ->middleware('api');
+    }
+)->middleware('api');
 
 
 Route::group(
@@ -72,7 +73,13 @@ Route::group(
             Route::resource('/application', JobApplicationsController::class)
                 ->only(['store', 'destroy']);
         })->middleware('auth:api');
-    });
+    }
+);
 
-Route::get('/job-applications', [JobApplicationsController::class, 'index'])
-    ->middleware('auth:api');
+Route::group([
+    'namespace' => 'App\Http\Controllers',
+    'prefix' => '/job-application'
+], function () {
+    Route::get('', [JobApplicationsController::class, 'index']);
+    Route::patch('/{job-application}/status', [JobApplicationsController::class, 'updateStatus']);
+})->middleware('auth:api');

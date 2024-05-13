@@ -39,9 +39,24 @@ class JobApplicationsController extends Controller
 
     public function index(JobApplicationIndexRequests $request): Response
     {
-        $jobApplications = app(JobApplicationServiceInterface::class)
-            ->getJobApplications($request->getFilters(), $request->getIncludes());
+        try {
+            $jobApplications = app(JobApplicationServiceInterface::class)
+                ->getJobApplications($request->getFilters(), $request->getIncludes());
 
-        return response()->json(['data' => $jobApplications], status: Response::HTTP_OK);
+            return response()->json(['data' => $jobApplications], status: Response::HTTP_OK);
+        } catch (AbstractDomainException $exception) {
+            return response()->json(
+                $exception->render(),
+                status: Response::HTTP_UNPROCESSABLE_ENTITY
+            );
+        } catch (Exception $exception) {
+            Log::error($exception);
+
+            return response()
+                ->json(
+                    ['error' => 'Server error'],
+                    Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+
     }
 }

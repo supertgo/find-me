@@ -175,7 +175,7 @@ class JobApplicationDomain
         if (!empty($filters)) {
             $filters = (new JobApplicationFilters())->fromArray($filters);
 
-            $this->repository->getWithFilters($filters, $includes);
+            return $this->repository->getWithFilters($filters, $includes);
         }
 
         return $this

@@ -23,7 +23,7 @@ class JobApplicationRepository implements JobApplicationRepositoryInterface
                 $query->whereIn('job_id', $filters->getJobsId());
             })
             ->when($filters->getCandidatesId(), function ($query) use ($filters) {
-                $query->whereIn('candidate_id', $filters->getCandidatesId());
+                $query->whereIn('user_id', $filters->getCandidatesId());
             })
             ->when($filters->getDateTimeFrom(), function ($query) use ($filters) {
                 $query->where('created_at', '>=', $filters->getDateTimeFrom());

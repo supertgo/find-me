@@ -25,11 +25,11 @@ class JobApplicationFilters implements JobApplicationFiltersInterface
      */
     public function fromArray(array $data): self
     {
-        $this->setJobsId($data['jobsId'] ?? null);
-        $this->setCandidatesId($data['candidatesId'] ?? null);
-        $this->setDateTimeFrom($data['dateTimeFrom'] ?? null);
-        $this->setDateTimeTo($data['dateTimeTo'] ?? null);
-        $this->setStatuses($data['status'] ?? null);
+        $this->setJobsId($data['jobs_id'] ?? null);
+        $this->setCandidatesId($data['candidates_id'] ?? null);
+        $this->setDateTimeFrom($data['date_time_from'] ?? null);
+        $this->setDateTimeTo($data['date_time_to'] ?? null);
+        $this->setStatuses($data['statuses'] ?? null);
 
         return $this;
     }
@@ -47,6 +47,8 @@ class JobApplicationFilters implements JobApplicationFiltersInterface
             }
         }
 
+        $this->jobsId = $jobsId;
+
         return $this;
     }
 
@@ -62,6 +64,8 @@ class JobApplicationFilters implements JobApplicationFiltersInterface
                 throw new CandidatesIdFilterMustBePositiveIntegersException($nonIntegerValues);
             }
         }
+
+        $this->candidatesId = $candidatesId;
 
         return $this;
     }
@@ -92,7 +96,9 @@ class JobApplicationFilters implements JobApplicationFiltersInterface
      */
     public function setStatuses(?array $statuses): JobApplicationFilters
     {
-        array_walk($statuses, fn($status) => $this->validateStatus($status));
+        if ($statuses) {
+            array_walk($statuses, fn($status) => $this->validateStatus($status));
+        }
 
         $this->statuses = $statuses;
 
@@ -102,14 +108,13 @@ class JobApplicationFilters implements JobApplicationFiltersInterface
     /**
      * @throws JobApplicationUnknownEnumOptionException
      */
-    public function validateStatus(?array $statuses): JobApplicationsStatusEnum
+    public function validateStatus(string $statuses): void
     {
         $statuses = JobApplicationsStatusEnum::tryFrom($statuses);
 
         if (!$statuses) {
             throw new JobApplicationUnknownEnumOptionException($statuses);
         }
-        return $statuses;
     }
 
     public function toArray(): array

@@ -6,6 +6,10 @@ use App\Domain\Job\JobDomain;
 use App\Domain\Job\JobRepository;
 use App\Domain\User\UserDomain;
 use App\Domain\User\UserRepository;
+use App\Exceptions\JobApplications\CandidatesIdFilterMustBePositiveIntegersException;
+use App\Exceptions\JobApplications\FilterDateFromMustBeDateAfterException;
+use App\Exceptions\JobApplications\JobApplicationUnknownEnumOptionException;
+use App\Exceptions\JobApplications\JobsIdFilterMustBePositiveIntegersException;
 use App\Helpers\DataTransaction\DataTransactionServiceInterface;
 use Exception;
 
@@ -43,6 +47,12 @@ class JobApplicationService implements JobApplicationServiceInterface
         }
     }
 
+    /**
+     * @throws FilterDateFromMustBeDateAfterException
+     * @throws JobsIdFilterMustBePositiveIntegersException
+     * @throws JobApplicationUnknownEnumOptionException
+     * @throws CandidatesIdFilterMustBePositiveIntegersException
+     */
     public function getJobApplications(array $filters, array $includes): array
     {
         return (new JobApplicationDomain(new JobApplicationRepository()))->getJobApplications($filters, $includes);

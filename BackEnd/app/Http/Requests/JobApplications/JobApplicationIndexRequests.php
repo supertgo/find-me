@@ -21,17 +21,17 @@ class JobApplicationIndexRequests extends AbstractRequest
             'includes.*' => 'string',
             'filters' => 'array',
 
-            'filters.jobsId' => ['array', new UniqueArrayValuesRule],
-            'filters.jobsId.*.' => 'integer',
+            'filters.jobs_id' => ['array', new UniqueArrayValuesRule],
+            'filters.jobs_id.*' => 'integer',
 
-            'filters.candidatesId' => ['array', new UniqueArrayValuesRule],
-            'filters.candidatesId.*.' => 'integer',
+            'filters.candidates_id' => ['array', new UniqueArrayValuesRule],
+            'filters.candidates_id.*' => 'integer',
 
             'filters.statuses' => ['array', new UniqueArrayValuesRule],
-            'filters.statuses.*.' => 'string:in:' . JobApplicationsStatusEnum::getValuesAsString(),
+            'filters.statuses.*' => 'string:in:' . JobApplicationsStatusEnum::getValuesAsString(),
 
-            'filters.dateTimeFrom' => ['date', 'date_format:Y-m-d H:i:s'],
-            'filters.dateTimeTo' => ['date', 'date_format:Y-m-d H:i:s'],
+            'filters.date_time_from' => ['date', 'date_format:Y-m-d H:i:s'],
+            'filters.date_time_to' => ['date', 'date_format:Y-m-d H:i:s'],
         ];
     }
 }

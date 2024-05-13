@@ -92,3 +92,39 @@ Content-Type: application/json
         client.assert(jobApplication.candidates !== undefined, "Candidates are not included");
     });
 %}
+
+###
+PATCH http://localhost:80/api/job-application/{{jobApplicationId}}/status
+Accept: application/json
+Authorization: Bearer {{bearerToken}}
+Content-Type: application/json
+
+{
+  "status": "canceled"
+}
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 204, "Response status is not 204");
+    });
+%}
+
+###
+GET http://localhost:80/api/job-application
+Accept: application/json
+Authorization: Bearer {{bearerToken}}
+Content-Type: application/json
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+
+    const jobApplication = response.body.data.find(
+        jobApplication => jobApplication.id == client.global.get("jobApplicationId")
+    );
+
+    client.test("Job status was updated", function () {
+        client.assert(jobApplication.status == 'canceled', "Job application status was not updated");
+    });
+%}

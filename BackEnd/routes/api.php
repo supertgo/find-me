@@ -81,5 +81,5 @@ Route::group([
     'prefix' => '/job-application'
 ], function () {
     Route::get('', [JobApplicationsController::class, 'index']);
-    Route::patch('/{job-application}/status', [JobApplicationsController::class, 'updateStatus']);
+    Route::patch('/{application}/status', [JobApplicationsController::class, 'updateStatus']);
 })->middleware('auth:api');

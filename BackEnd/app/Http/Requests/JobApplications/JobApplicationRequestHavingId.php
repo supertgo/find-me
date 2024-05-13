@@ -12,7 +12,7 @@ class JobApplicationRequestHavingId extends AbstractRequest
      */
     public function getJobApplicationId(): int
     {
-        $jobId = $this->route('job-application');
+        $jobId = $this->route('application');
 
         if (!is_numeric($jobId)) {
             throw new JobApplicationIdMustBeAnIntegerException($jobId);

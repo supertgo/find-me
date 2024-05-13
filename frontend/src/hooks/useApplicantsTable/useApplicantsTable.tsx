@@ -78,7 +78,7 @@ export const useApplicantsTable = () => {
 			header: () => null,
 			cell: (info) => (
 				<Link href={`/${ApplicantUrl(info.getValue().id)}`} target="_blank">
-					<Button>Currículo</Button>
+					<Button variant="secondary">Ver Candidatura</Button>
 				</Link>
 			),
 		}),

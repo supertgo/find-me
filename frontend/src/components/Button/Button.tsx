@@ -12,6 +12,7 @@ export type ButtonProps = {
   minimal?: boolean;
   icon?: JSX.Element;
   as?: React.ElementType;
+  variant?: 'primary' | 'secondary';
 } & ButtonTypes;
 
 const Button = forwardRef(
@@ -22,6 +23,7 @@ const Button = forwardRef(
       size = 'medium',
       fullWidth = false,
       minimal = false,
+      variant = 'primary',
       ...props
     }: ButtonProps,
     ref,
@@ -31,6 +33,7 @@ const Button = forwardRef(
       $fullWidth={fullWidth}
       $hasIcon={!!icon}
       $minimal={minimal}
+      $variant={variant}
       ref={ref}
       {...props}
     >

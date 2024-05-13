@@ -1,0 +1,9 @@
+type: string
+example: "pending"
+enum:
+  - pending
+  - accepted
+  - rejected
+  - canceled
+  - hired
+  - in_progress

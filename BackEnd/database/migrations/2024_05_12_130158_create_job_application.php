@@ -1,6 +1,6 @@
 <?php
 
-use App\Domain\JobApplications\JobApplicationsStatusEnum;
+use App\Domain\JobApplications\Enum\JobApplicationsStatusEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;

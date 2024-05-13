@@ -2,7 +2,7 @@
 
 namespace App\Exceptions\JobApplications;
 
-use App\Domain\JobApplications\JobApplicationsStatusEnum;
+use App\Domain\JobApplications\Enum\JobApplicationsStatusEnum;
 use App\Exceptions\Abstract\AbstractDomainException;
 use App\Exceptions\ExceptionMessagesEnum;
 

@@ -2,4 +2,4 @@ description: user info
 content:
   application/json:
     schema:
-      $ref: '../components/UserResource.yaml'
+      $ref: '../components/UserResourceWithIncludes.yaml'

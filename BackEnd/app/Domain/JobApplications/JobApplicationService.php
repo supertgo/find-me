@@ -6,6 +6,13 @@ use App\Domain\Job\JobDomain;
 use App\Domain\Job\JobRepository;
 use App\Domain\User\UserDomain;
 use App\Domain\User\UserRepository;
+use App\Exceptions\JobApplications\CandidatesIdFilterMustBePositiveIntegersException;
+use App\Exceptions\JobApplications\FilterDateFromMustBeDateAfterException;
+use App\Exceptions\JobApplications\JobApplicationNotFoundException;
+use App\Exceptions\JobApplications\JobApplicationStatusIsFinalException;
+use App\Exceptions\JobApplications\JobApplicationStatusNotAllowedException;
+use App\Exceptions\JobApplications\JobApplicationUnknownEnumOptionException;
+use App\Exceptions\JobApplications\JobsIdFilterMustBePositiveIntegersException;
 use App\Helpers\DataTransaction\DataTransactionServiceInterface;
 use Exception;
 
@@ -41,5 +48,28 @@ class JobApplicationService implements JobApplicationServiceInterface
 
             throw $exception;
         }
+    }
+
+    /**
+     * @throws FilterDateFromMustBeDateAfterException
+     * @throws JobsIdFilterMustBePositiveIntegersException
+     * @throws JobApplicationUnknownEnumOptionException
+     * @throws CandidatesIdFilterMustBePositiveIntegersException
+     */
+    public function getJobApplications(array $filters, array $includes): array
+    {
+        return (new JobApplicationDomain(new JobApplicationRepository()))->getJobApplications($filters, $includes);
+    }
+
+    /**
+     * @throws JobApplicationNotFoundException
+     * @throws JobApplicationStatusIsFinalException
+     * @throws JobApplicationStatusNotAllowedException
+     */
+    public function updateStatus(string $status, int $jobApplicationId): void
+    {
+        (new JobApplicationDomain(new JobApplicationRepository()))
+            ->load($jobApplicationId)
+            ->updateStatus($status);
     }
 }

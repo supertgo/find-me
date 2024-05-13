@@ -2,7 +2,16 @@
 
 namespace App\Domain\JobApplications;
 
+use App\Domain\JobApplications\Enum\JobApplicationsIncludesEnum;
+use App\Domain\JobApplications\Enum\JobApplicationsStatusEnum;
+use App\Exceptions\JobApplications\CandidatesIdFilterMustBePositiveIntegersException;
+use App\Exceptions\JobApplications\FilterDateFromMustBeDateAfterException;
+use App\Exceptions\JobApplications\JobApplicationDoesNotExistException;
+use App\Exceptions\JobApplications\JobApplicationNotFoundException;
+use App\Exceptions\JobApplications\JobApplicationStatusIsFinalException;
 use App\Exceptions\JobApplications\JobApplicationStatusNotAllowedException;
+use App\Exceptions\JobApplications\JobApplicationUnknownEnumOptionException;
+use App\Exceptions\JobApplications\JobsIdFilterMustBePositiveIntegersException;
 use Carbon\Carbon;
 
 class JobApplicationDomain
@@ -154,5 +163,76 @@ class JobApplicationDomain
         $this->updatedAt = is_string($updatedAt) ? Carbon::parse($updatedAt) : $updatedAt;
 
         return $this;
+    }
+
+    /**
+     * @throws FilterDateFromMustBeDateAfterException
+     * @throws JobsIdFilterMustBePositiveIntegersException
+     * @throws JobApplicationUnknownEnumOptionException
+     * @throws CandidatesIdFilterMustBePositiveIntegersException
+     */
+    public function getJobApplications(array $filters, array $includes)
+    {
+        $this->validateIncludes($includes);
+
+        if (!empty($filters)) {
+            $filters = (new JobApplicationFilters())->fromArray($filters);
+
+            return $this->repository->getWithFilters($filters, $includes);
+        }
+
+        return $this
+            ->repository
+            ->get($includes);
+    }
+
+    /**
+     * @throws JobApplicationUnknownEnumOptionException
+     */
+    private function validateIncludes(array $includes): self
+    {
+        $nonExistentIncludes = array_diff($includes, JobApplicationsIncludesEnum::getValues());
+
+        if ($nonExistentIncludes) {
+            throw new JobApplicationUnknownEnumOptionException($nonExistentIncludes);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @throws JobApplicationStatusNotAllowedException
+     * @throws JobApplicationStatusIsFinalException
+     */
+    public function updateStatus(string $status): void
+    {
+        $status = JobApplicationsStatusEnum::tryFrom($status);
+
+        if (!$status) {
+            throw new JobApplicationStatusNotAllowedException($status);
+        }
+
+        if ($this->status->isFinal()) {
+            throw new JobApplicationStatusIsFinalException($status->value);
+        }
+
+        $this->setStatus($status);
+
+        $this->repository->updateStatus($this->id, $this->getStatus()->value);
+    }
+
+    /**
+     * @throws JobApplicationNotFoundException
+     * @throws JobApplicationStatusNotAllowedException
+     */
+    public function load(int $jobApplicationId): self
+    {
+        if (!$this->repository->exists($jobApplicationId)) {
+            throw new JobApplicationNotFoundException($jobApplicationId);
+        }
+
+        $data = $this->repository->load($jobApplicationId);
+
+        return $this->fromArray($data);
     }
 }

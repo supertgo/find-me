@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\JobApplications;
+namespace App\Domain\JobApplications\Enum;
 
 enum JobApplicationsStatusEnum: string
 {
@@ -14,5 +14,15 @@ enum JobApplicationsStatusEnum: string
     public static function getValues(): array
     {
         return array_column(self::cases(), 'value');
+    }
+
+    public static function getValuesAsString(): string
+    {
+        return implode(',', self::getValues());
+    }
+
+    public function isFinal(): bool
+    {
+        return in_array($this->value, [self::Canceled, self::Hired]);
     }
 }

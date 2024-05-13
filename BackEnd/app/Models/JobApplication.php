@@ -6,6 +6,8 @@ use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 
 /**
@@ -47,4 +49,18 @@ class JobApplication extends Model
     protected $hidden = [
         'deleted_at',
     ];
+
+    public function job(): BelongsTo
+    {
+        return $this->belongsTo(Job::class);
+    }
+
+    public function candidates(): HasMany
+    {
+        return $this->hasMany(
+            User::class,
+            'id',
+            'user_id'
+        );
+    }
 }

@@ -22,8 +22,8 @@ class JobFactory extends Factory
             'employment_type' => $this->faker->randomElement(['full-time', 'part-time']),
             'week_workload' => $this->faker->numberBetween(1, 40),
             'location' => $this->faker->address,
-            'company_id' => Company::factory(),
-            'user_id' => User::factory(),
+            'company_id' => fn() => Company::factory(),
+            'user_id' => fn() => User::factory(),
         ];
     }
 }

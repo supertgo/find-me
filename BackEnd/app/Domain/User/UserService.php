@@ -25,7 +25,7 @@ use Exception;
 use Illuminate\Http\UploadedFile;
 use Throwable;
 
-class UserService extends AbstractService
+class UserService extends AbstractService implements UserServiceInterface
 {
     public function createUser(array $user): int
     {

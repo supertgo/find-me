@@ -2,8 +2,7 @@
 
 namespace Tests\Feature\JobApplications;
 
-use App\Domain\JobApplications\JobApplicationsStatusEnum;
-use App\Models\Company;
+use App\Domain\JobApplications\Enum\JobApplicationsStatusEnum;
 use App\Models\Job;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Symfony\Component\HttpFoundation\Response;
@@ -65,9 +64,6 @@ class CreateJobApplicationTest extends TestCase
      */
     public function generatePayload(): array
     {
-        /** @var Company $company */
-        $company = Company::factory()->create();
-
         return [
             'cover_letter' => $this->faker->text()
         ];

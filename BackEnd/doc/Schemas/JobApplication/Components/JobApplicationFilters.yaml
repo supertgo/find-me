@@ -1,0 +1,25 @@
+type: object
+properties:
+  jobs_id:
+    type: array
+    items:
+      type: integer
+    example: [ 1, 2, 3 ]
+  candidates_id:
+    type: array
+    items:
+      type: integer
+    example: [ 4, 5, 6 ]
+  statuses:
+    type: array
+    items:
+      $ref: './JobApplicationStatusEnum.yaml'
+    example: [ "rejected", "canceled" ]
+  date_time_from:
+    type: string
+    format: date-time
+    example: "2024-05-12 17:36:14"
+  date_time_to:
+    type: string
+    format: date-time
+    example: "2024-05-12 17:38:14"

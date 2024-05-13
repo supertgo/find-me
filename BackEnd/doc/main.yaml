@@ -362,6 +362,7 @@ paths:
         - BearerAuth: [ ]
       parameters:
         - $ref: 'Schemas/JobApplication/Parameters/JobApplicationIncludesParameters.yaml'
+        - $ref: 'Schemas/JobApplication/Parameters/JobApplicationFiltersParameters.yaml'
 
       responses:
         '200':

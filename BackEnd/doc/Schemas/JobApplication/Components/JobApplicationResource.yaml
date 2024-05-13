@@ -20,9 +20,7 @@ properties:
     description: The ID of the user who made the job application
     example: 16
   status:
-    type: string
-    description: The status of the job application
-    example: "pending"
+    $ref: './JobApplicationStatusEnum.yaml'
   cover_letter:
     type: string
     description: The cover letter for the job application

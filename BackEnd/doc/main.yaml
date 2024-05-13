@@ -371,3 +371,23 @@ paths:
           $ref: 'Schemas/Common/response/ValidationErrorsResponse.yaml'
         401:
           $ref: 'Schemas/Common/response/UnauthenticatedResponse.yaml'
+
+  /job-application/{job_application_id}/status:
+    patch:
+      tags:
+        - JobApplication
+      description: 'update job application status'
+      security:
+        - BearerAuth: [ ]
+      parameters:
+        - $ref: 'Schemas/JobApplication/Parameters/JobApplicationId.yaml'
+      requestBody:
+        $ref: 'Schemas/JobApplication/RequestBodies/UpdateJobApplicationStatusRequest.yaml'
+
+      responses:
+        '204':
+          description: No Content
+        '422':
+          $ref: 'Schemas/Common/response/ValidationErrorsResponse.yaml'
+        401:
+          $ref: 'Schemas/Common/response/UnauthenticatedResponse.yaml'

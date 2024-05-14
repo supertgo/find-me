@@ -2,8 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use App\Exceptions\Auth\InvalidTokenException;
 use App\Exceptions\Auth\TokenExpiredException;
-use Carbon\Exceptions\InvalidTypeException;
 use Closure;
 use Exception;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
@@ -15,6 +15,7 @@ class Authenticate extends Middleware
 {
     /**
      * @throws TokenExpiredException
+     * @throws InvalidTokenException
      */
     public function handle($request, Closure $next, ...$guards)
     {
@@ -27,7 +28,7 @@ class Authenticate extends Middleware
         } catch (Exception $e) {
             Log::error($e->getMessage());
 
-            throw new InvalidTypeException();
+            throw new InvalidTokenException();
         }
     }
 }

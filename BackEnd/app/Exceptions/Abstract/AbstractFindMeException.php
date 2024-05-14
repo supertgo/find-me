@@ -3,7 +3,6 @@
 namespace App\Exceptions\Abstract;
 
 use Exception;
-use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 class AbstractFindMeException extends Exception
@@ -28,15 +27,12 @@ class AbstractFindMeException extends Exception
         return $this->httpCode;
     }
 
-    public function render(): JsonResponse
+    public function render(): array
     {
-        return response()->json(
-            [
-                'message' => $this->message,
-                'additional_info' => $this->getAdditionalInfo(),
-            ],
-            $this->getHttpCode()
-        );
+        return [
+            'message' => $this->message,
+            'additional_info' => $this->getAdditionalInfo(),
+        ];
     }
 
 }

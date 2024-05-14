@@ -41,4 +41,6 @@ enum ExceptionMessagesEnum: string
     case ProfessionalExperienceEndDateWhenCurrentMustBeInTheFuture = 'Professional experience end date when current must be in the future';
     case ProfessionalExperienceNotFound = 'Professional experience not found';
     case OnlyOwnerCanDeleteProfessionalExperience = 'Only owner can delete professional experience';
+
+    case TokenExpiredException = 'Token expired';
 }

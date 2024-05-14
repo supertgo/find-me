@@ -9,7 +9,7 @@ class InvalidTokenException extends AbstractFindMeException
 {
     public function __construct()
     {
-        parent::__construct(ExceptionMessagesEnum::TokenExpiredException->value);
+        parent::__construct(ExceptionMessagesEnum::TokenInvalidException->value);
 
     }
 }

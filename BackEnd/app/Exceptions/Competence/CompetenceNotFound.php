@@ -2,10 +2,10 @@
 
 namespace App\Exceptions\Competence;
 
-use App\Exceptions\Abstract\AbstractFindMeException;
+use App\Exceptions\Abstract\AbstractDomainException;
 use App\Exceptions\ExceptionMessagesEnum;
 
-class CompetenceNotFound extends AbstractFindMeException
+class CompetenceNotFound extends AbstractDomainException
 {
     public function __construct(?int $id)
     {

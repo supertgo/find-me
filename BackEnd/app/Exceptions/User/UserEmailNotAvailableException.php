@@ -2,10 +2,10 @@
 
 namespace App\Exceptions\User;
 
-use App\Exceptions\Abstract\AbstractFindMeException;
+use App\Exceptions\Abstract\AbstractDomainException;
 use App\Exceptions\ExceptionMessagesEnum;
 
-class UserEmailNotAvailableException extends AbstractFindMeException
+class UserEmailNotAvailableException extends AbstractDomainException
 {
     public function __construct(string $email)
     {

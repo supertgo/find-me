@@ -2,9 +2,9 @@
 
 namespace App\Exceptions;
 
-use App\Exceptions\Abstract\AbstractDomainException;
+use App\Exceptions\Abstract\AbstractFindMeException;
 
-class CompanyNotFoundException extends AbstractDomainException
+class CompanyNotFoundException extends AbstractFindMeException
 {
     public function __construct(string $id)
     {

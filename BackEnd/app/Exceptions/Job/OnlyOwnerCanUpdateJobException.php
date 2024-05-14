@@ -2,10 +2,10 @@
 
 namespace App\Exceptions\Job;
 
-use App\Exceptions\Abstract\AbstractDomainException;
+use App\Exceptions\Abstract\AbstractFindMeException;
 use App\Exceptions\ExceptionMessagesEnum;
 
-class OnlyOwnerCanUpdateJobException extends AbstractDomainException
+class OnlyOwnerCanUpdateJobException extends AbstractFindMeException
 {
     public function __construct()
     {

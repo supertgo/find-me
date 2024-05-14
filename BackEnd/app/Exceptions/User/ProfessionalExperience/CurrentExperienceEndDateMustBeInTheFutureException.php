@@ -2,10 +2,10 @@
 
 namespace App\Exceptions\User\ProfessionalExperience;
 
-use App\Exceptions\Abstract\AbstractDomainException;
+use App\Exceptions\Abstract\AbstractFindMeException;
 use App\Exceptions\ExceptionMessagesEnum;
 
-class CurrentExperienceEndDateMustBeInTheFutureException extends AbstractDomainException
+class CurrentExperienceEndDateMustBeInTheFutureException extends AbstractFindMeException
 {
     public function __construct()
     {

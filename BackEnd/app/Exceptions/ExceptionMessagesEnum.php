@@ -43,4 +43,5 @@ enum ExceptionMessagesEnum: string
     case OnlyOwnerCanDeleteProfessionalExperience = 'Only owner can delete professional experience';
 
     case TokenExpiredException = 'Token expired';
+    case TokenInvalidException = 'Token invalid';
 }

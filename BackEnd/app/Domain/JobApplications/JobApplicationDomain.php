@@ -4,14 +4,16 @@ namespace App\Domain\JobApplications;
 
 use App\Domain\JobApplications\Enum\JobApplicationsIncludesEnum;
 use App\Domain\JobApplications\Enum\JobApplicationsStatusEnum;
+use App\Domain\User\UserTypeEnum;
+use App\Exceptions\JobApplications\CandidateCanOnlyUpdateStatusToCanceled;
 use App\Exceptions\JobApplications\CandidatesIdFilterMustBePositiveIntegersException;
 use App\Exceptions\JobApplications\FilterDateFromMustBeDateAfterException;
-use App\Exceptions\JobApplications\JobApplicationDoesNotExistException;
 use App\Exceptions\JobApplications\JobApplicationNotFoundException;
 use App\Exceptions\JobApplications\JobApplicationStatusIsFinalException;
 use App\Exceptions\JobApplications\JobApplicationStatusNotAllowedException;
 use App\Exceptions\JobApplications\JobApplicationUnknownEnumOptionException;
 use App\Exceptions\JobApplications\JobsIdFilterMustBePositiveIntegersException;
+use App\Exceptions\JobApplications\RecruiterCannotCancelJobApplicationException;
 use Carbon\Carbon;
 
 class JobApplicationDomain
@@ -203,8 +205,10 @@ class JobApplicationDomain
     /**
      * @throws JobApplicationStatusNotAllowedException
      * @throws JobApplicationStatusIsFinalException
+     * @throws RecruiterCannotCancelJobApplicationException
+     * @throws CandidateCanOnlyUpdateStatusToCanceled
      */
-    public function updateStatus(string $status): void
+    public function updateStatus(string $status, UserTypeEnum $requesterType): void
     {
         $status = JobApplicationsStatusEnum::tryFrom($status);
 
@@ -216,7 +220,13 @@ class JobApplicationDomain
             throw new JobApplicationStatusIsFinalException($status->value);
         }
 
+        match ($requesterType->value) {
+            UserTypeEnum::Employee->value => $this->candidateCanUpdateStatus($status),
+            UserTypeEnum::Recruiter->value => $this->recruiterCanUpdateStatus($status),
+        };
+
         $this->setStatus($status);
+
 
         $this->repository->updateStatus($this->id, $this->getStatus()->value);
     }
@@ -234,5 +244,25 @@ class JobApplicationDomain
         $data = $this->repository->load($jobApplicationId);
 
         return $this->fromArray($data);
+    }
+
+    /**
+     * @throws CandidateCanOnlyUpdateStatusToCanceled
+     */
+    private function candidateCanUpdateStatus(JobApplicationsStatusEnum $desiredStatus): void
+    {
+        if (!$desiredStatus->canBeChangedToByEmployee()) {
+            throw new CandidateCanOnlyUpdateStatusToCanceled($desiredStatus->value);
+        }
+    }
+
+    /**
+     * @throws RecruiterCannotCancelJobApplicationException
+     */
+    private function recruiterCanUpdateStatus(JobApplicationsStatusEnum $desiredStatus): void
+    {
+        if (!$desiredStatus->canBeChangedToByRecruiter()) {
+            throw new RecruiterCannotCancelJobApplicationException();
+        }
     }
 }

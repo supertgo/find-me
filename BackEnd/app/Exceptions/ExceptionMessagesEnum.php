@@ -22,6 +22,8 @@ enum ExceptionMessagesEnum: string
     case JobApplicationNotFound = 'Job application not found';
     case JobApplicationStatusIsFinalException = 'Job application status is final, cannot be changed';
     case JobApplicationIdMustBeAnInteger = 'Job application id must be an integer';
+    case CandidateCanOnlyUpdateStatusToCanceled = 'Candidate can only update status to canceled';
+    case RecruiterCannotCancelJobApplication = 'Recruiter cannot cancel job application';
 
     case UserIdMustBeAnInteger = 'User id must be an integer';
     case UserEmailNotAvailable = 'User email is not available';

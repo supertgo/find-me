@@ -65,7 +65,8 @@ class JobApplicationsController extends Controller
         try {
             app(JobApplicationServiceInterface::class)->updateStatus(
                 $request->getStatus(),
-                $request->getJobApplicationId()
+                $request->getJobApplicationId(),
+                $request->getLoggedUserId()
             );
 
             return response()->noContent();

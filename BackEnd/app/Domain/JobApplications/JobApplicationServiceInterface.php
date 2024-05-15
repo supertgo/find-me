@@ -8,5 +8,5 @@ interface JobApplicationServiceInterface
 
     function getJobApplications(array $filters, array $includes): array;
 
-    function updateStatus(string $status, int $jobApplicationId): void;
+    function updateStatus(string $status, int $jobApplicationId, int $requesterId): void;
 }

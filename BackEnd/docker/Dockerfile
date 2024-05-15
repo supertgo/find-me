@@ -29,6 +29,7 @@ RUN apt update \
         php8.2-xml \
         php8.2-zip \
         php8.2-xdebug \
+        php8.2-gd \
     && apt -y php8.2-fpm \
     && apt clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
 

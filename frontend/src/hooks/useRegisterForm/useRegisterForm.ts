@@ -1,103 +1,99 @@
-import { useState } from "react";
-import { signIn } from "next-auth/react";
-import { toast } from "react-toastify";
+import { useState } from 'react';
+import { signIn } from 'next-auth/react';
+import { toast } from 'react-toastify';
 import {
-  Control,
-  useForm,
-  FieldErrors,
-  SubmitHandler,
-  UseFormHandleSubmit,
-  UseFormRegister,
-} from "react-hook-form";
-import { PostClient } from "services/httpClient/post";
-import {
-  UserAuthRegister,
-  UserProps,
-  UserType,
-} from "protocols/external/user/user";
-import { PostAuthRegisterRouteConst } from "utils/routes";
-import { log } from "console";
-import { revertFormatCellphone } from "utils/formatCellphone";
+	Control,
+	useForm,
+	FieldErrors,
+	SubmitHandler,
+	UseFormHandleSubmit,
+	UseFormRegister,
+} from 'react-hook-form';
+import { PostClient } from 'services/httpClient/post';
+import { UserAuthRegister } from 'protocols/external/user/user';
+import { PostAuthRegisterRouteConst } from 'utils/routes';
+import { revertFormatCellphone } from 'utils/formatCellphone';
+import { HomeUrl } from 'utils/urls';
 
 export type RegisterInputs = {
-  name: string;
-  email: string;
-  phone: string;
-  password: string;
-  type: string;
+	name: string;
+	email: string;
+	phone: string;
+	password: string;
+	type: string;
 };
 
 export type UseRegisterFormProtocols = {
-  register: UseFormRegister<any>;
-  handleSubmit: UseFormHandleSubmit<any>;
-  errors: FieldErrors<RegisterInputs>;
-  onSubmit: SubmitHandler<RegisterInputs>;
-  control: Control<RegisterInputs>;
-  isLoading: boolean;
-  isValid: boolean;
+	register: UseFormRegister<any>;
+	handleSubmit: UseFormHandleSubmit<any>;
+	errors: FieldErrors<RegisterInputs>;
+	onSubmit: SubmitHandler<RegisterInputs>;
+	control: Control<RegisterInputs>;
+	isLoading: boolean;
+	isValid: boolean;
 };
 
 export const useRegisterForm = (): UseRegisterFormProtocols => {
-  const [isLoading, setIsLoading] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isValid },
-    control,
-  } = useForm<RegisterInputs>({
-    mode: "onBlur",
-  });
+	const {
+		register,
+		handleSubmit,
+		formState: { errors, isValid },
+		control,
+	} = useForm<RegisterInputs>({
+		mode: 'onBlur',
+	});
 
-  const onSubmit: SubmitHandler<RegisterInputs> = async (data, event) => {
-    event?.preventDefault();
+	const onSubmit: SubmitHandler<RegisterInputs> = async (data, event) => {
+		event?.preventDefault();
 
-    setIsLoading(true);
+		setIsLoading(true);
 
-    const postClient = new PostClient();
+		const postClient = new PostClient();
 
-    const registerBody: UserAuthRegister = {
-      name: data.name,
-      password: data.password,
-      email: data.email,
-      phone: revertFormatCellphone(data.phone),
-      type: data.type ? "recruiter" : "employee",
-    };
+		const registerBody: UserAuthRegister = {
+			name: data.name,
+			password: data.password,
+			email: data.email,
+			phone: revertFormatCellphone(data.phone),
+			type: data.type ? 'recruiter' : 'employee',
+		};
 
-    try {
-      const response = await postClient.post({
-        url: `/${PostAuthRegisterRouteConst}`,
-        body: {
-          ...registerBody,
-        },
-      });
+		try {
+			const response = await postClient.post({
+				url: `/${PostAuthRegisterRouteConst}`,
+				body: {
+					...registerBody,
+				},
+			});
 
-      await signIn("credentials", {
-        email: data.email,
-        password: data.password,
-        redirect: true,
-        callbackUrl: "/home",
-      });
+			await signIn('credentials', {
+				email: data.email,
+				password: data.password,
+				redirect: true,
+				callbackUrl: `/${HomeUrl}`,
+			});
 
-      toast.success(response.data.message);
-    } catch (error) {
-      if (error instanceof Error) {
-        return toast.error(error.response.data.message);
-      }
+			toast.success(response.data.message);
+		} catch (error) {
+			if (error instanceof Error) {
+				return toast.error(error.response.data.message);
+			}
 
-      return toast.error("Ocorreu um erro, tente novamente!");
-    }
+			return toast.error('Ocorreu um erro, tente novamente!');
+		}
 
-    setIsLoading(false);
-  };
+		setIsLoading(false);
+	};
 
-  return {
-    register,
-    handleSubmit,
-    errors,
-    onSubmit,
-    control,
-    isValid,
-    isLoading,
-  };
+	return {
+		register,
+		handleSubmit,
+		errors,
+		onSubmit,
+		control,
+		isValid,
+		isLoading,
+	};
 };

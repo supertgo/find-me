@@ -1,6 +1,5 @@
 import { render, screen } from 'utils/test/test-utils';
 import { recruiterUserMock } from 'test/mocks/external/users';
-import 'components/Button/Button.mock';
 import { Sidebar } from './Sidebar';
 import { vi } from 'vitest';
 
@@ -17,6 +16,6 @@ describe('<Sidebar />', () => {
     });
 
     expect(screen.getByText('Início')).toBeInTheDocument();
-    expect(screen.getByTestId('Mock Button')).toBeInTheDocument();
+    expect(screen.getByTitle('Sair')).toBeInTheDocument()
   });
 });

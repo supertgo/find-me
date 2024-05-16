@@ -2,7 +2,6 @@ import { SidebarItem } from 'components/SidebarItem/SidebarItem';
 import * as S from './Sidebar.styles';
 import { HomeIcon } from 'icons/HomeIcon/HomeIcon';
 import { useLoggedUserStore } from 'stores/loggedUserStore/loggedUserStore';
-import { Button } from 'components/Button/Button';
 import { useSignOut } from 'hooks/useSignOut/useSignOut';
 import Link from 'next/link';
 import { ApplicantsUrl, ConfigUrl, HomeUrl, JobsUrl } from 'utils/urls';
@@ -12,9 +11,8 @@ import { theme } from 'styles/theme';
 export type SidebarProps = {};
 
 export const Sidebar = ({}: SidebarProps) => {
-	const { name, email, type } = useLoggedUserStore((state) => ({
+	const { name, type } = useLoggedUserStore((state) => ({
 		name: state.name,
-		email: state.email,
 		type: state.type,
 	}));
 

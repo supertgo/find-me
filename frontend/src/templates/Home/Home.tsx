@@ -3,7 +3,7 @@ import { Base } from 'templates/Base/Base';
 import { LinkText } from 'components/LinkText/LinkText';
 import { PreviousApplications } from 'components/PreviousApplications/PreviousApplications';
 import { Title } from 'components/Title/Title';
-import { useLoggedUserStore } from 'stores/loggedUserStore';
+import { useLoggedUserStore } from 'stores/loggedUserStore/loggedUserStore';
 import { applications } from 'test/mocks/external/previous-applications';
 import { JobsUrl } from 'utils/urls';
 

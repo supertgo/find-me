@@ -1,11 +1,13 @@
 import { SidebarItem } from 'components/SidebarItem/SidebarItem';
 import * as S from './Sidebar.styles';
 import { HomeIcon } from 'icons/HomeIcon/HomeIcon';
-import { useLoggedUserStore } from 'stores/loggedUserStore';
+import { useLoggedUserStore } from 'stores/loggedUserStore/loggedUserStore';
 import { Button } from 'components/Button/Button';
 import { useSignOut } from 'hooks/useSignOut/useSignOut';
 import Link from 'next/link';
 import { ApplicantsUrl, ConfigUrl, HomeUrl, JobsUrl } from 'utils/urls';
+import { ExitIcon } from '@radix-ui/react-icons';
+import { theme } from 'styles/theme';
 
 export type SidebarProps = {};
 
@@ -57,18 +59,25 @@ export const Sidebar = ({}: SidebarProps) => {
 				)}
 			</S.Items>
 
-			<div>
+			<S.AvatarWrapper>
 				<Link href={`/${ConfigUrl}`}>
 					<S.Avatar>
 						<S.AvatarPhoto />
 						<S.AvatarInfo>
 							<p>{name}</p>
-							<span>{email}</span>
 						</S.AvatarInfo>
 					</S.Avatar>
 				</Link>
-				<Button onClick={async () => await signOut()}>Sair</Button>
-			</div>
+
+				<i title="Sair">
+					<ExitIcon
+						color={theme.colors.lightRed}
+						width={22}
+						height={22}
+						onClick={async () => await signOut()}
+					/>
+				</i>
+			</S.AvatarWrapper>
 		</S.Wrapper>
 	);
 };

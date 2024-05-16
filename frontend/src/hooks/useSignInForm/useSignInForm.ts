@@ -18,8 +18,8 @@ import {
 	UseFormRegister,
 } from 'react-hook-form';
 import { getSession } from 'next-auth/react';
-import { useLoggedUserStore } from 'stores/loggedUserStore';
 import { HomeUrl } from 'utils/urls';
+import { useLoggedUserStore } from 'stores/loggedUserStore/loggedUserStore';
 
 export interface UseSignInFormProtocols {
 	register: UseFormRegister<any>;

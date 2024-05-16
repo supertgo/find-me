@@ -10,8 +10,6 @@ describe('<TableLoader />', () => {
   it('should render the component', () => {
     render(<TableLoader {...props} />);
 
-    screen.debug();
-
     expect(screen.getAllByTestId('loading-td')).toHaveLength(
       props.columns * props.rows,
     );

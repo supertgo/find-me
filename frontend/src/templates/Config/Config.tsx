@@ -6,10 +6,8 @@ import { Title } from "components/Title/Title";
 import { Controller } from "react-hook-form";
 import { Button } from "components/Button/Button";
 import { useUserConfigForm } from "hooks/useUserConfigForm/useUserConfigForm";
-
-import * as S from "./Config.styles";
 import { UserProps } from "protocols/external/user/user";
-import { formatCellphone, revertFormatCellphone } from "utils/formatCellphone";
+import { formatCellphone } from "utils/formatCellphone";
 import { validateInputUserEmail } from "utils/email";
 import {
   INVALID_EMAIL,
@@ -18,6 +16,8 @@ import {
   REQUIRED_USER,
 } from "utils/errors";
 
+import * as S from "./Config.styles";
+
 export type ConfigProps = {} & UserProps;
 
 export const Config = ({ name, email, phone, password }: ConfigProps) => {
@@ -25,7 +25,7 @@ export const Config = ({ name, email, phone, password }: ConfigProps) => {
     useUserConfigForm();
 
   return (
-    <Base>
+   <Base>
       <Title title="Configurações" />
       <S.Form onSubmit={handleSubmit(onSubmit)}>
         <ConfigInfoWrapper

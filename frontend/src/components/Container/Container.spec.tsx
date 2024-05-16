@@ -1,4 +1,3 @@
-import { theme } from 'styles/theme';
 import { render } from 'utils/test/test-utils';
 import { Container } from './Container';
 
@@ -10,15 +9,19 @@ describe('<Container />', () => {
       </Container>,
     );
 
-    // expect(container.firstChild).toHaveStyleRule(
-    //   'max-width',
-    //   theme.grid.container,
-    // );
-
-    expect(container.firstChild).toMatchInlineSnapshot(`
-      <div
-        class="Toastify"
-      />
+    expect(container).toMatchInlineSnapshot(`
+      <div>
+        <div
+          class="Toastify"
+        />
+        <div
+          class="sc-beySPh kmpbji"
+        >
+          <span>
+            Won Games
+          </span>
+        </div>
+      </div>
     `);
   });
 });

@@ -6,7 +6,7 @@ use App\Domain\Abstract\AbstractRepository;
 use App\Domain\Job\JobDomain;
 use App\Domain\Job\JobRepository;
 use App\Domain\Job\JobService;
-use App\Exceptions\Abstract\AbstractDomainException;
+use App\Exceptions\Abstract\AbstractFindMeException;
 use App\Exceptions\Job\JobIdMustBeAnIntegerException;
 use App\Exceptions\Job\JobNotFoundException;
 use App\Http\Requests\Job\IndexJobRequest;
@@ -29,7 +29,7 @@ class JobController extends Controller
             (new JobService())->store($request->validated(), $request->getLoggedUserId());
 
             return response(status: Response::HTTP_CREATED);
-        } catch (AbstractDomainException $exception) {
+        } catch (AbstractFindMeException  $exception) {
             return response()->json(
                 $exception->render(),
                 status: Response::HTTP_UNPROCESSABLE_ENTITY
@@ -56,7 +56,7 @@ class JobController extends Controller
                 );
 
             return response(status: Response::HTTP_NO_CONTENT);
-        } catch (AbstractDomainException $exception) {
+        } catch (AbstractFindMeException  $exception) {
             return response()->json(
                 $exception->render(),
                 status: Response::HTTP_UNPROCESSABLE_ENTITY
@@ -93,7 +93,7 @@ class JobController extends Controller
             $repository->commitTransaction();
 
             return response()->noContent();
-        } catch (AbstractDomainException $exception) {
+        } catch (AbstractFindMeException  $exception) {
             $this->commonLogLogic($repository, $exception);
 
             return response()->json(

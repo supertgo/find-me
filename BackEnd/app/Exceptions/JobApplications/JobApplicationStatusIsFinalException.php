@@ -2,10 +2,10 @@
 
 namespace App\Exceptions\JobApplications;
 
-use App\Exceptions\Abstract\AbstractDomainException;
+use App\Exceptions\Abstract\AbstractFindMeException;
 use App\Exceptions\ExceptionMessagesEnum;
 
-class JobApplicationStatusIsFinalException extends AbstractDomainException
+class JobApplicationStatusIsFinalException extends AbstractFindMeException
 {
     public function __construct(string $status)
     {

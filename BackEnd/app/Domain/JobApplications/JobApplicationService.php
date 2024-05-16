@@ -66,10 +66,12 @@ class JobApplicationService implements JobApplicationServiceInterface
      * @throws JobApplicationStatusIsFinalException
      * @throws JobApplicationStatusNotAllowedException
      */
-    public function updateStatus(string $status, int $jobApplicationId): void
+    public function updateStatus(string $status, int $jobApplicationId, int $requesterId): void
     {
+        $requester = (new UserDomain(new UserRepository()))->loadUser($requesterId);
+
         (new JobApplicationDomain(new JobApplicationRepository()))
             ->load($jobApplicationId)
-            ->updateStatus($status);
+            ->updateStatus($status, $requester->getType());
     }
 }

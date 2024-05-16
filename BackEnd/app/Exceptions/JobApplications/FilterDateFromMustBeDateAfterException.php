@@ -2,11 +2,11 @@
 
 namespace App\Exceptions\JobApplications;
 
-use App\Exceptions\Abstract\AbstractDomainException;
+use App\Exceptions\Abstract\AbstractFindMeException;
 use App\Exceptions\ExceptionMessagesEnum;
 use Carbon\Carbon;
 
-class FilterDateFromMustBeDateAfterException extends AbstractDomainException
+class FilterDateFromMustBeDateAfterException extends AbstractFindMeException
 {
     public function __construct(Carbon $dateFrom, Carbon $dateTo)
     {

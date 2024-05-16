@@ -5,30 +5,31 @@ import { PreviousApplications } from 'components/PreviousApplications/PreviousAp
 import { Title } from 'components/Title/Title';
 import { useLoggedUserStore } from 'stores/loggedUserStore';
 import { applications } from 'test/mocks/external/previous-applications';
+import { JobsUrl } from 'utils/urls';
 
 export type HomeProps = {};
 
 export const Home = ({}: HomeProps) => {
-  const { email } = useLoggedUserStore((state) => ({
-    email: state.email,
-  }));
+	const { email } = useLoggedUserStore((state) => ({
+		email: state.email,
+	}));
 
-  return (
-    <Base>
-      <Title title="Início" />
-      <S.WelcomeMessage>Bem-vindo, {`${email}`}</S.WelcomeMessage>
-      <S.ApplicationsWrapper>
-        <PreviousApplications
-          applications={applications}
-          title="Histórico de Aplicações Recentes"
-        ></PreviousApplications>
-        <S.MoreApplicationsWrapper>
-          <LinkText
-            href="/jobs"
-            text="Visualizar histórico de todas as aplicações"
-          />
-        </S.MoreApplicationsWrapper>
-      </S.ApplicationsWrapper>
-    </Base>
-  );
+	return (
+		<Base>
+			<Title title="Início" />
+			<S.WelcomeMessage>Bem-vindo, {`${email}`}</S.WelcomeMessage>
+			<S.ApplicationsWrapper>
+				<PreviousApplications
+					applications={applications}
+					title="Histórico de Aplicações Recentes"
+				></PreviousApplications>
+				<S.MoreApplicationsWrapper>
+					<LinkText
+						href={`/${JobsUrl}`}
+						text="Visualizar histórico de todas as aplicações"
+					/>
+				</S.MoreApplicationsWrapper>
+			</S.ApplicationsWrapper>
+		</Base>
+	);
 };

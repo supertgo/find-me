@@ -6,6 +6,20 @@ export const ERROR_LOGOUT = "Erro ao efetuar logout";
 
 export const REQUIRED_PASSWORD = "A senha é obrigatória.";
 
+export const REQUIRED_COMPETENCE = "A competência é obrigatória.";
+
+export const REQUIRED_ACADEMIC_RECORD_INSTITUTION = "A instituição é obrigatória.";
+
+export const REQUIRED_ACADEMIC_RECORD_DEGREE = "O degree é obrigatório.";
+
+export const REQUIRED_ACADEMIC_RECORD_FIELD_STUDY = "O campo de estudo é obrigatório.";
+
+export const REQUIRED_ACADEMIC_RECORD_START_DATE = "A data de início é obrigatória.";
+
+export const REQUIRED_ACADEMIC_RECORD_END_DATE = "A data de término é obrigatória.";
+
+export const REQUIRED_ACADEMIC_RECORD_DESCRIPTION = "A descrição é obrigatória.";
+
 export const PASSWORD_CONFIRMATION_REQUIRED =
   "A confirmação da senha é obrigatória.";
 

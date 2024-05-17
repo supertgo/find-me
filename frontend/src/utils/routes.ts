@@ -21,6 +21,8 @@ export const GetUsersRouteConst = 'user';
 
 export const PostUserCompetenceRouteConst = 'user/competence';
 
+export const PostUserAcademicRecordRouteConst = 'user/academic-records';
+
 export const GetUserRouteConst = ({
   user_id,
   includes,

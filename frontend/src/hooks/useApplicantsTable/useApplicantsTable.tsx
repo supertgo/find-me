@@ -60,7 +60,7 @@ export const useApplicantsTable = () => {
 		columnHelper.accessor((row) => row, {
 			id: 'applicant_state',
 			header: () => <S.TableData>Status</S.TableData>,
-			cell: () => <Pill text="Em análise" />,
+			cell: () => <Pill text="Em análise" variant={'info'} />,
 		}),
 		columnHelper.accessor((row) => row, {
 			id: 'applicant_application_date',
@@ -78,7 +78,7 @@ export const useApplicantsTable = () => {
 			header: () => null,
 			cell: (info) => (
 				<Link href={`/${ApplicantUrl(info.getValue().id)}`} target="_blank">
-					<Button>Currículo</Button>
+					<Button variant="secondary">Ver Candidatura</Button>
 				</Link>
 			),
 		}),

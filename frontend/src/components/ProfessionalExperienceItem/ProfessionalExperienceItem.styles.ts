@@ -15,6 +15,7 @@ export const ProfessionalXPInfoTitle = styled.span`
 	${({ theme }) => css`
 		font-size: ${theme.font.sizes.md};
 		font-weight: ${theme.font.weights.medium};
+    margin: ${theme.space.xxxsmall} 0;
 	`}
 `;
 
@@ -22,12 +23,14 @@ export const ProfessionalXPInfoSubtitle = styled.span`
 	${({ theme }) => css`
 		font-size: ${theme.font.sizes.sm};
 		font-weight: 500;
+    margin: ${theme.space.xxxsmall} 0;
 	`}
 `;
 
 export const ProfessionalXPAdditionalInfo = styled.span`
 	${({ theme }) => css`
 		font-size: ${theme.font.sizes.xmd};
+    margin: ${theme.space.xxxsmall} 0;
 	`}
 `;
 

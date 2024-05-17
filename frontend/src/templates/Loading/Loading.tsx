@@ -5,7 +5,7 @@ export type LoadingProps = {}
 export const Loading = ({
 }: LoadingProps) => {
   return (
-    <S.LoadingTemplate aria-label="Carregando...">
+    <S.LoadingTemplate aria-busy="true">
       <S.Spinner />
     </S.LoadingTemplate>
   )

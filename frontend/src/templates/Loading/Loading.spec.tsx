@@ -1,11 +1,9 @@
-import { render, screen } from 'utils/test/test-utils';
+import { render } from 'utils/test/test-utils';
 import { Loading } from './Loading';
 
 describe('<Loading />', () => {
   it('should render the component', () => {
     const { container } = render(<Loading />);
-
-    expect(screen.getByLabelText('Carregando...')).toBeInTheDocument()
 
     expect(container).toMatchInlineSnapshot(`
       <div>
@@ -13,7 +11,7 @@ describe('<Loading />', () => {
           class="Toastify"
         />
         <div
-          aria-label="Carregando..."
+          aria-busy="true"
           class="sc-beySPh khesAl"
         >
           <div

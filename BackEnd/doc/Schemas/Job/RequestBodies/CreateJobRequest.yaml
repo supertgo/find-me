@@ -1,0 +1,75 @@
+description: Create job request body
+content:
+  application/json:
+    schema:
+      required:
+        - name
+        - description
+        - is_available
+        - applications_amount
+        - company_id
+      properties:
+        name:
+          type: string
+          description: The name of the job
+          example: "Software Developer"
+        description:
+          type: string
+          description: The description of the job
+          example: "Develop and maintain software applications"
+        is_available:
+          type: boolean
+          description: Whether the job is available
+          example: true
+        applications_amount:
+          type: integer
+          description: The amount of applications for the job
+          minimum: 0
+          example: 10
+        salary:
+          type: integer
+          description: The salary for the job
+          minimum: 0
+          example: 50000
+        salary_time_unit:
+          $ref: '../Components/SalaryTimeUnit.yaml'
+        accept_application_until:
+          type: string
+          format: date-time
+          description: The deadline for accepting applications
+          example: "2024-12-31T00:00:00"
+        work_model:
+          $ref: '../Components/WorkModel.yaml'
+        employment_type:
+          $ref: '../Components/EmploymentType.yaml'
+        week_workload:
+          type: integer
+          description: The weekly workload for the job
+          minimum: 0
+          example: 40
+        location:
+          type: string
+          description: The location of the job
+          example: "New York, NY"
+        company_id:
+          type: integer
+          description: The ID of the company offering the job
+          minimum: 1
+          example: 1
+
+        competences:
+          type: array
+          items:
+            type: object
+            required:
+              - name
+            properties:
+              name:
+                type: string
+                description: The name of the competence
+              description:
+                type: string
+                description: The description of the competence
+              type:
+                $ref: '../Components/CompetenceType.yaml'
+      type: object

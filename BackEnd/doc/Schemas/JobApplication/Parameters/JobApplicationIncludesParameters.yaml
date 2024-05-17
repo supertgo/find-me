@@ -1,0 +1,7 @@
+in: query
+name: includes
+description: 'include related data'
+required: false
+explode: false
+schema:
+  $ref: '../Components/JobApplicationIncludes.yaml'

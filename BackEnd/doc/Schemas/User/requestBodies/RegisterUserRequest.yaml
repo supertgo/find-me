@@ -1,0 +1,38 @@
+description: auth register request body
+content:
+  application/json:
+    schema:
+      required:
+        - email
+        - password
+        - name
+        - phone
+        - type
+      properties:
+        email:
+          type: string
+          example: aa@gmail.com
+          description: auth's email
+        password:
+          type: string
+          example: asd34sdd
+          description: auth's password
+        phone:
+          type: string
+          example: '31984664949'
+          description: Larinha's phone
+        name:
+          type: string
+          example: Larinha
+          description: auth's name
+        type:
+          $ref: '../components/UserType.yaml'
+        about_me:
+          type: string
+          example: 'I am a recruiter'
+          description: auth's about me
+        profile_picture:
+          type: string
+          format: binary
+          description: auth's profile picture. Must be an image file (jpg, png, jpeg) with a maximum size of 2048KB.
+      type: object

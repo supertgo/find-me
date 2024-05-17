@@ -1,0 +1,8 @@
+type: array
+items:
+  type: string
+  example: "company"
+  description: job related data
+  enum:
+    - company
+    - competences

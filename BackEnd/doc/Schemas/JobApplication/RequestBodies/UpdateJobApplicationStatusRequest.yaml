@@ -1,0 +1,10 @@
+description: Update job application status request body
+content:
+  application/json:
+    schema:
+      type: object
+      required:
+        - status
+      properties:
+        status:
+          $ref: '../Components/JobApplicationStatusEnum.yaml'

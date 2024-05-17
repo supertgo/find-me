@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Domain\User\UserService;
-use App\Exceptions\Abstract\AbstractDomainException;
+use App\Exceptions\Abstract\AbstractFindMeException;
 use App\Http\Requests\User\PrefessionalExperience\AddProfessionalExperienceRequest;
 use App\Http\Requests\User\PrefessionalExperience\DeleteProfessionalExperiencesRequest;
 use Exception;
@@ -26,7 +26,7 @@ class UserProfessionalExperience extends Controller
                 );
 
             return response()->noContent();
-        } catch (AbstractDomainException $exception) {
+        } catch (AbstractFindMeException  $exception) {
             return response()->json(
                 $exception->render(),
                 status: Response::HTTP_UNPROCESSABLE_ENTITY
@@ -49,11 +49,11 @@ class UserProfessionalExperience extends Controller
             (new UserService())
                 ->removeProfessionalExperiences(
                     $request->getLoggedUserId(),
-                    $request->validated('professional_experiences')
+                    $request->validated('professional_experiences_id')
                 );
 
             return response()->noContent();
-        } catch (AbstractDomainException $exception) {
+        } catch (AbstractFindMeException  $exception) {
             return response()->json(
                 $exception->render(),
                 status: Response::HTTP_UNPROCESSABLE_ENTITY

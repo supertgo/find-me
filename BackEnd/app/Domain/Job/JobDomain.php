@@ -4,6 +4,8 @@ namespace App\Domain\Job;
 
 
 use App\Exceptions\Job\IdRequiredToUpdateException;
+use App\Exceptions\Job\JobAcceptApplicationsUntilPassedException;
+use App\Exceptions\Job\JobApplicationsAmountSurpassedException;
 use App\Exceptions\Job\OnlyOwnerCanUpdateJobException;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
@@ -36,6 +38,28 @@ readonly class JobDomain implements JobDomainInterface
         $attributes = $this->jobRepository->createJob($this);
 
         return (new self($this->jobRepository))->fromArray($attributes);
+    }
+
+    public function fromArray(array $job): self
+    {
+        $this->name = $job['name'];
+        $this->description = $job['description'];
+        $this->isAvailable = $job['is_available'];
+        $this->applicationsAmount = $job['applications_amount'];
+        $this->salary = $job['salary'] ?? null;
+        $this->salaryTimeUnit = $job['salary_time_unit'] ?? null;
+        $this->acceptApplicationUntil = isset($job['accept_application_until'])
+            ? Carbon::createFromTimeString($job['accept_application_until']) : null;
+        $this->workModel = $job['work_model'] ?? null;
+        $this->employmentType = $job['employment_type'] ?? null;
+        $this->weekWorkload = $job['week_workload'] ?? null;
+        $this->location = $job['location'] ?? null;
+        $this->companyId = $job['company_id'];
+        $this->userId = $job['user_id'];
+
+        isset($job['id']) && $this->id = $job['id'];
+
+        return $this;
     }
 
     public function exists(int $id): bool
@@ -77,29 +101,61 @@ readonly class JobDomain implements JobDomainInterface
         $this->jobRepository->delete($this->id);
     }
 
-    public function fromArray(array $job): self
+    /**
+     * @throws JobApplicationsAmountSurpassedException
+     * @throws JobAcceptApplicationsUntilPassedException
+     */
+    public function acceptApplication(): self
     {
-        $this->name = $job['name'];
-        $this->description = $job['description'];
-        $this->isAvailable = $job['is_available'];
-        $this->applicationsAmount = $job['applications_amount'];
-        $this->salary = $job['salary'] ?? null;
-        $this->salaryTimeUnit = $job['salary_time_unit'] ?? null;
-        $this->acceptApplicationUntil = isset($job['accept_application_until'])
-            ? Carbon::createFromTimeString($job['accept_application_until']) : null;
-        $this->workModel = $job['work_model'] ?? null;
-        $this->employmentType = $job['employment_type'] ?? null;
-        $this->weekWorkload = $job['week_workload'] ?? null;
-        $this->location = $job['location'] ?? null;
-        $this->companyId = $job['company_id'];
-        $this->userId = $job['user_id'];
 
-        isset($job['id']) && $this->id = $job['id'];
+        if ($this->getAcceptApplicationUntil()->isPast()) {
+            $this->isAvailable = false;
+
+            $this->jobRepository->setNotAvailable($this->id);
+
+            throw new JobAcceptApplicationsUntilPassedException(
+                $this->getAcceptApplicationUntil()->toDateTimeString()
+            );
+        }
+
+        if ($this->jobRepository->getApplicationAmount($this->id) >= $this->getApplicationsAmount()) {
+            $this->isAvailable = false;
+            $this->jobRepository->setNotAvailable($this->id);
+
+            throw new JobApplicationsAmountSurpassedException();
+        }
 
         return $this;
     }
 
-    public function load(): void
+    public function getAcceptApplicationUntil(): ?Carbon
+    {
+        return $this->acceptApplicationUntil;
+    }
+
+    public function getApplicationsAmount(): int
+    {
+        return $this->applicationsAmount;
+    }
+
+    public function jobsWithIncludes($includes): array
+    {
+        return $this->jobRepository->getJobs($includes);
+    }
+
+    public function getJobWithIncludes(array $includes): array
+    {
+        return $this->jobRepository->getJobWithIncludes($this->id, $includes);
+    }
+
+    public function attachCompetences(Collection $competences): self
+    {
+        $this->jobRepository->attachCompetences($this->id, $competences);
+
+        return $this;
+    }
+
+    public function load(): self
     {
         $job = $this->jobRepository->getJob($this->id);
 
@@ -123,11 +179,13 @@ readonly class JobDomain implements JobDomainInterface
         $this->updatedAt = $job['updated_at']
             ? Carbon::createFromTimeString($job['updated_at'])
             : null;
+
+        return $this;
     }
 
     public function toArray(): array
     {
-        $arr =  [
+        $arr = [
             'name' => $this->name,
             'description' => $this->description,
             'is_available' => $this->isAvailable,
@@ -155,9 +213,11 @@ readonly class JobDomain implements JobDomainInterface
         return $this->id;
     }
 
-    public function getUserId(): int
+    public function setId(int $id): self
     {
-        return $this->userId;
+        $this->id = $id;
+
+        return $this;
     }
 
     public function getCompanyId(): int
@@ -180,11 +240,6 @@ readonly class JobDomain implements JobDomainInterface
         return $this->isAvailable;
     }
 
-    public function getApplicationsAmount(): int
-    {
-        return $this->applicationsAmount;
-    }
-
     public function getSalary(): ?int
     {
         return $this->salary;
@@ -193,11 +248,6 @@ readonly class JobDomain implements JobDomainInterface
     public function getSalaryTimeUnit(): ?string
     {
         return $this->salaryTimeUnit;
-    }
-
-    public function getAcceptApplicationUntil(): ?Carbon
-    {
-        return $this->acceptApplicationUntil;
     }
 
     public function getWorkModel(): ?string
@@ -220,33 +270,14 @@ readonly class JobDomain implements JobDomainInterface
         return $this->location;
     }
 
-    public function setId(int $id): self
+    public function getUserId(): int
     {
-        $this->id = $id;
-
-        return $this;
+        return $this->userId;
     }
 
     public function setUserId(int $userId): self
     {
         $this->userId = $userId;
-
-        return $this;
-    }
-
-    public function jobsWithIncludes($includes): array
-    {
-        return $this->jobRepository->getJobs($includes);
-    }
-
-    public function getJobWithIncludes(array $includes): array
-    {
-        return $this->jobRepository->getJobWithIncludes($this->id, $includes);
-    }
-
-    public function attachCompetences(Collection $competences): self
-    {
-        $this->jobRepository->attachCompetences($this->id, $competences);
 
         return $this;
     }

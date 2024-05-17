@@ -1,0 +1,10 @@
+description: Unauthenticated response
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error message
+          example: Unauthenticated

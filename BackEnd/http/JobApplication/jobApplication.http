@@ -1,0 +1,130 @@
+< {%
+    client.global.set("jobName", $random.uuid)
+%}
+POST http://localhost:80/api/job
+Accept: application/json
+Authorization: Bearer {{bearerToken}}
+Content-Type: application/json
+
+{
+  "name": "{{jobName}}",
+  "description": "Develop and maintain software applications",
+  "is_available": true,
+  "applications_amount": 10,
+  "salary": 50000,
+  "salary_time_unit": "month",
+  "accept_application_until": "2024-11-11 00:00:00",
+  "work_model": "hybrid",
+  "employment_type": "full-time",
+  "week_workload": 40,
+  "location": "New York, NY",
+  "company_id": 1
+}
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 201, "Response status is not 201");
+    });
+%}
+
+###
+
+GET http://localhost:80/api/job
+Accept: application/json
+Authorization: Bearer {{bearerToken}}
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+
+    const job = response.body.data.find(job => job.name === client.global.get("jobName"));
+
+    client.test("Job was created", function () {
+        client.assert(job !== undefined, "Job is not created");
+    });
+
+    client.global.set("jobId", job.id);
+%}
+
+###
+
+POST http://localhost:80/api/job/{{jobId}}/application
+Accept: application/json
+Authorization: Bearer {{bearerToken}}
+Content-Type: application/json
+
+{
+  "cover_letter": {{$random.alphanumeric()}}
+}
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 201, "Response status is not 201");
+    });
+
+    client.global.set("jobApplicationId", response.body.data.id);
+%}
+
+###
+GET http://localhost:80/api/job-application
+    ?includes[]=job
+    &includes[]=candidates
+Accept: application/json
+Authorization: Bearer {{bearerToken}}
+Content-Type: application/json
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+
+    const jobApplication = response.body.data.find(
+        jobApplication => jobApplication.id == client.global.get("jobApplicationId")
+    );
+
+    client.test("Job application was created", function () {
+        client.assert(jobApplication !== undefined, "Job application is not created");
+    });
+
+    client.test("includes are included", function () {
+        client.assert(jobApplication.job !== undefined, "Job is not included");
+        client.assert(jobApplication.candidates !== undefined, "Candidates are not included");
+    });
+%}
+
+###
+PATCH http://localhost:80/api/job-application/{{jobApplicationId}}/status
+Accept: application/json
+Authorization: Bearer {{bearerToken}}
+Content-Type: application/json
+
+{
+  "status": "canceled"
+}
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 204, "Response status is not 204");
+    });
+%}
+
+###
+GET http://localhost:80/api/job-application
+Accept: application/json
+Authorization: Bearer {{bearerToken}}
+Content-Type: application/json
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+
+    const jobApplication = response.body.data.find(
+        jobApplication => jobApplication.id == client.global.get("jobApplicationId")
+    );
+
+    client.test("Job status was updated", function () {
+        client.assert(jobApplication.status == 'canceled', "Job application status was not updated");
+    });
+%}

@@ -1,0 +1,7 @@
+in: query
+name: filters
+description: 'filter job applications'
+required: false
+explode: false
+schema:
+  $ref: '../Components/JobApplicationFilters.yaml'

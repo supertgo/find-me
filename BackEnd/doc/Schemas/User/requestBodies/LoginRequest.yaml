@@ -1,0 +1,17 @@
+description: auth register request body
+content:
+  application/json:
+    schema:
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          example: aa@gmail.com
+          description: auth's email
+        password:
+          type: string
+          example: asd34sdd
+          description: auth's password
+      type: object

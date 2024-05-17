@@ -1,0 +1,27 @@
+type: object
+required:
+  - id
+  - name
+  - created_at
+  - updated_at
+properties:
+  id:
+    type: integer
+    description: The unique identifier for the competence
+    example: 1
+  name:
+    type: string
+    description: The name of the competence
+  description:
+    type: string
+    description: The description of the competence
+  created_at:
+    type: string
+    format: date-time
+    description: The timestamp when the competence was created
+    example: "2024-05-11T13:20:50.000000Z"
+  updated_at:
+    type: string
+    format: date-time
+    description: The timestamp when the competence was last updated
+    example: "2024-05-11T13:20:50.000000Z"

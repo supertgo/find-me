@@ -1,0 +1,12 @@
+description: 'jobs index success response'
+content:
+  application/json:
+    schema:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '../Components/JobResourceWithIncludes.yaml'

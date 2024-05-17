@@ -1,0 +1,14 @@
+description: Delete user academic records request body
+content:
+  application/json:
+    schema:
+      type: object
+      required:
+        - academic_records_id
+      properties:
+        academic_records_id:
+          type: array
+          items:
+            type: integer
+            description: The ID of the academic record
+            example: 1

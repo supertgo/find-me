@@ -64,4 +64,14 @@ class JobRepository extends AbstractRepository implements JobRepositoryInterface
                 )->toArray()
             );
     }
+
+    public function setNotAvailable(int $id): void
+    {
+        Job::where('id', $id)->update(['is_available' => false]);
+    }
+
+    public function getApplicationAmount(int $id): int
+    {
+        return Job::find($id)->applications()->count();
+    }
 }

@@ -1,0 +1,10 @@
+description: update job successful
+content:
+  application/json:
+    schema:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          $ref: '../Components/JobResourceWithIncludes.yaml'

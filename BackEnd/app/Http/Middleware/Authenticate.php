@@ -2,20 +2,33 @@
 
 namespace App\Http\Middleware;
 
+use App\Exceptions\Auth\InvalidTokenException;
+use App\Exceptions\Auth\TokenExpiredException;
+use Closure;
+use Exception;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
+use Log;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException as JwtTokenExpiredException;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class Authenticate extends Middleware
 {
     /**
-     * Get the path the User should be redirected to when they are not authenticated.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return string|null
+     * @throws TokenExpiredException
+     * @throws InvalidTokenException
      */
-    protected function redirectTo($request)
+    public function handle($request, Closure $next, ...$guards)
     {
-        if (! $request->expectsJson()) {
-            return route('login');
+        try {
+            JWTAuth::parseToken()->authenticate();
+
+            return $next($request);
+        } catch (JwtTokenExpiredException $e) {
+            throw new TokenExpiredException();
+        } catch (Exception $e) {
+            Log::error($e->getMessage());
+
+            throw new InvalidTokenException();
         }
     }
 }

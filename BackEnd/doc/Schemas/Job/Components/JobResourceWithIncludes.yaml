@@ -1,0 +1,82 @@
+type: object
+required:
+  - id
+  - name
+  - description
+  - is_available
+  - applications_amount
+  - company_id
+  - created_at
+  - updated_at
+properties:
+  id:
+    type: integer
+    description: The unique identifier for the job
+    example: 19
+  name:
+    type: string
+    description: The name of the job
+    example: "Motor Vehicle Inspector"
+  description:
+    type: string
+    description: The description of the job
+    example: |
+      "Et fugiat voluptatem quo eligendi minima omnis maiores asperiores. Qui aspernatur officiis et rerum. Quam et
+      eos ullam est delectus iusto odit inventore. In itaque commodi cumque rerum eius."
+  is_available:
+    type: boolean
+    description: Whether the job is available
+    example: true
+  applications_amount:
+    type: integer
+    description: The amount of applications for the job
+    example: 661
+  salary:
+    type: integer
+    description: The salary for the job
+    example: 9245
+  salary_time_unit:
+    $ref: 'SalaryTimeUnit.yaml'
+  accept_application_until:
+    type: string
+    format: date-time
+    description: The deadline for accepting applications
+    example: "2025-02-25T05:05:55"
+  work_model:
+    $ref: 'WorkModel.yaml'
+  employment_type:
+    $ref: 'EmploymentType.yaml'
+  week_workload:
+    type: integer
+    description: The weekly workload for the job
+    example: 23
+  location:
+    type: string
+    description: The location of the job
+    example: "188 Ernser Pass Apt. 418\nNorth Trent, AK 13300"
+  company_id:
+    type: integer
+    description: The ID of the company offering the job
+    example: 44
+  created_at:
+    type: string
+    format: date-time
+    description: The timestamp when the job was created
+    example: "2024-05-12T00:18:31.000000Z"
+  updated_at:
+    type: string
+    format: date-time
+    description: The timestamp when the job was last updated
+    example: "2024-05-12T00:18:31.000000Z"
+  user_id:
+    type: integer
+    description: The ID of the user who created the job
+    example: 137
+
+  competences:
+    type: array
+    items:
+      $ref: 'JobCompetencesResource.yaml'
+
+  company:
+    $ref: '../../Company/Components/CompanyResource.yaml'

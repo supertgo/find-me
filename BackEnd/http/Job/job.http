@@ -1,0 +1,177 @@
+< {%
+    client.global.set("jobName", $random.uuid)
+%}
+POST http://localhost:80/api/job
+Accept: application/json
+Authorization: Bearer {{bearerToken}}
+Content-Type: application/json
+
+{
+  "name": "{{jobName}}",
+  "description": "Develop and maintain software applications",
+  "is_available": true,
+  "applications_amount": 10,
+  "salary": 50000,
+  "salary_time_unit": "month",
+  "accept_application_until": "2024-11-11 00:00:00",
+  "work_model": "hybrid",
+  "employment_type": "full-time",
+  "week_workload": 40,
+  "location": "New York, NY",
+  "company_id": 1,
+  "competences": [
+    {
+    "name" : "Java",
+    "description" : "Java programming language",
+    "type": "programmingLanguage"
+    },
+    {
+        "name" : "Spring",
+        "description" : "Spring framework",
+        "type": "framework"
+    },
+    {
+        "name" : "Hibernate",
+        "description" : "Hibernate ORM",
+        "type": "other"
+    }
+  ]
+}
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 201, "Response status is not 201");
+    });
+%}
+
+###
+
+GET http://localhost:80/api/job
+    ?includes[]=competences
+    &includes[]=company
+
+Accept: application/json
+Authorization: Bearer {{bearerToken}}
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+
+    const job = response.body.data.find(job => job.name === client.global.get("jobName"));
+
+    client.test("Job was created", function () {
+        client.assert(job !== undefined, "Job is not created");
+    });
+
+    client.global.set("jobId", job.id);
+%}
+
+###
+GET http://localhost:80/api/job/{{jobId}}
+    ?includes[]=competences
+    &includes[]=company
+Accept: application/json
+Authorization: Bearer {{bearerToken}}
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+
+    client.test("Job id and name are coherent", function () {
+        client.assert(response.body.data.name !== client.global.get("jobId"), "Job is not created");
+    });
+
+%}
+
+###
+< {%
+    client.global.set("jobName", $random.uuid)
+%}
+PUT http://localhost:80/api/job/{{jobId}}
+Accept: application/json
+Authorization: Bearer {{bearerToken}}
+Content-Type: application/json
+
+{
+  "name": "{{jobName}}",
+  "description": "Develop and maintain software applications",
+  "is_available": true,
+  "applications_amount": 10,
+  "salary": 50000,
+  "salary_time_unit": "month",
+  "accept_application_until": "2024-11-11 00:00:00",
+  "work_model": "hybrid",
+  "employment_type": "full-time",
+  "week_workload": 40,
+  "location": "New York, NY",
+  "company_id": 1,
+  "competences": [
+    {
+    "name" : "Java",
+    "description" : "Java programming language",
+    "type": "programmingLanguage"
+    },
+    {
+        "name" : "Spring",
+        "description" : "Spring framework",
+        "type": "framework"
+    },
+    {
+        "name" : "Hibernate",
+        "description" : "Hibernate ORM",
+        "type": "other"
+    }
+  ]
+}
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 204, "Response status is not 204");
+    });
+
+%}
+
+
+###
+GET http://localhost:80/api/job/{{jobId}}
+Accept: application/json
+Authorization: Bearer {{bearerToken}}
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+
+    client.test("Job id and name are coherent", function () {
+        client.assert(response.body.data.name !== client.global.get("jobId"), "Job is not created");
+    });
+
+%}
+
+###
+DELETE http://localhost:80/api/job/{{jobId}}
+Accept: application/json
+Authorization: Bearer {{bearerToken}}
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 204, "Response status is not 204");
+    });
+%}
+
+###
+GET http://localhost:80/api/job/{{jobId}}
+Accept: application/json
+Authorization: Bearer {{bearerToken}}
+
+> {%
+
+    client.test("Job was deleted", function () {
+        client.assert(response.status === 422, "Response status is not 422");
+
+        client.assert(response.body.message == 'Job not found', "Job is not deleted");
+
+    });
+%}

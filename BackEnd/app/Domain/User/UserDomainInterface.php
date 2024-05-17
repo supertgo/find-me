@@ -8,35 +8,54 @@ use Illuminate\Support\Collection;
 
 interface UserDomainInterface
 {
-    public function fromArray(array $user): self;
-    public function update(): self;
+    function fromArray(array $user): self;
 
-    public function createUser(): self;
-    public function loadUser(int $userId): self;
-    public function toArray(): array;
-    public function exists(): bool;
-    public function users(): array;
+    function update(): self;
+
+    function createUser(): self;
+
+    function loadUser(int $userId): self;
+
+    function toArray(): array;
+
+    function exists(): bool;
+
+    function users(): array;
 
     /** @param Collection<CompetenceDomainInterface> $competences */
-    public function attachCompetences(Collection $competences): self;
-    public function getName(): string;
-    public function setName(string $name): self;
-    public function getEmail(): string;
-    public function setEmail(string $email): self;
-    public function getPhone(): string;
-    public function setPhone(string $phone): self;
-    public function getType(): UserTypeEnum;
-    public function setType(UserTypeEnum $type): self;
-    public function getId(): ?int;
-    public function setId(?int $id): self;
-    public function getRepository(): UserRepositoryInterface;
-    public function removeCompetence(int $competenceId): self;
-    public function loadUserWithIncludes(int $userId, array $includes): array;
-    public function usersWithIncludes(array $includes): array;
+    function attachCompetences(Collection $competences): self;
 
-    public function createProfilePicture(UploadedFile $file, int $userId): void;
+    function getName(): string;
 
-    public function updateProfilePicture(UploadedFile $profilePicture, int $userId): string;
+    function setName(string $name): self;
 
-    public function deleteProfilePicture(): void;
+    function getEmail(): string;
+
+    function setEmail(string $email): self;
+
+    function getPhone(): string;
+
+    function setPhone(string $phone): self;
+
+    function getType(): UserTypeEnum;
+
+    function setType(UserTypeEnum $type): self;
+
+    function getId(): ?int;
+
+    function setId(?int $id): self;
+
+    function getRepository(): UserRepositoryInterface;
+
+    function removeCompetence(int $competenceId): self;
+
+    function loadUserWithIncludes(int $userId, array $includes): array;
+
+    function usersWithIncludes(array $includes): array;
+
+    function createProfilePicture(UploadedFile $file, int $userId): void;
+
+    function updateProfilePicture(UploadedFile $profilePicture, int $userId): string;
+
+    function deleteProfilePicture(): void;
 }

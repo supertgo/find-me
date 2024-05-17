@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\JobApplicationsController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\JWTController;
 use App\Http\Controllers\UserAcademicRecordsController;
@@ -19,7 +20,8 @@ Route::group(
             Route::post('register', [JWTController::class, 'register']);
             Route::post('forgot-password/{userEmail}', [JWTController::class, 'forgotPassword']);
         });
-    });
+    }
+);
 
 Route::group(
     [
@@ -50,12 +52,14 @@ Route::group(
             Route::patch('', [UserController::class, 'updateProfilePicture']);
             Route::delete('', [UserController::class, 'deleteProfilePicture']);
         });
-    })
-    ->middleware('api');;
+    }
+)->middleware('api');
 
 
 Route::group(
-    ['namespace' => 'App\Http\Controllers'],
+    [
+        'namespace' => 'App\Http\Controllers',
+    ],
     function () {
         Route::resource('/job', JobController::class)
             ->only(['store', 'destroy', 'update'])
@@ -64,9 +68,18 @@ Route::group(
         Route::resource('/job', JobController::class)
             ->only(['index', 'show'])
             ->middleware('auth:api');
-    });
 
+        Route::group(['prefix' => 'job/{job}'], function () {
+            Route::resource('/application', JobApplicationsController::class)
+                ->only(['store', 'destroy']);
+        })->middleware('auth:api');
+    }
+);
 
-
-
-
+Route::group([
+    'namespace' => 'App\Http\Controllers',
+    'prefix' => '/job-application'
+], function () {
+    Route::get('', [JobApplicationsController::class, 'index']);
+    Route::patch('/{application}/status', [JobApplicationsController::class, 'updateStatus']);
+})->middleware('auth:api');

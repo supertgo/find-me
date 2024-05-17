@@ -1,0 +1,10 @@
+description: show user successful
+content:
+  application/json:
+    schema:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          $ref: '../components/UserResourceWithIncludes.yaml'

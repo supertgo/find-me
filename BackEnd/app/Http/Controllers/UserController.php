@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Domain\User\UserDomain;
 use App\Domain\User\UserRepository;
 use App\Domain\User\UserService;
-use App\Exceptions\Abstract\AbstractDomainException;
+use App\Exceptions\Abstract\AbstractFindMeException;
 use App\Http\Requests\AbstractRequest;
 use App\Http\Requests\User\ShowUserRequest;
 use App\Http\Requests\User\UpdateUserProfilePictureRequest;
@@ -65,7 +65,7 @@ class UserController extends Controller
             return response()->json([
                 'data' => $user
             ]);
-        } catch (AbstractDomainException $exception) {
+        } catch (AbstractFindMeException  $exception) {
 
             return response()->json(
                 $exception->render(),

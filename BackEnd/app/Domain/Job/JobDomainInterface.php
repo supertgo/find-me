@@ -22,4 +22,6 @@ interface JobDomainInterface
 
     public function attachCompetences(Collection $competences): self;
 
+    function acceptApplication(): self;
+
 }

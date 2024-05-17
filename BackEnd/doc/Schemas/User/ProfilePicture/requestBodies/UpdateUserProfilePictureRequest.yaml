@@ -1,0 +1,12 @@
+description: update user profile picture request body
+content:
+  application/json:
+    schema:
+      required:
+        - profile_picture
+      properties:
+        profile_picture:
+          type: string
+          format: binary
+          description: auth's profile picture. Must be an image file (jpg, png, jpeg) with a maximum size of 2048KB.
+      type: object

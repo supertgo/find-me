@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Database\Factories\AcademicRecordFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -40,6 +41,15 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Job whereUpdatedAt($value)
  * @method static Builder|Job whereWeekWorkload($value)
  * @method static Builder|Job whereWorkModel($value)
+ * @property int $user_id
+ * @method static AcademicRecordFactory factory($count = null, $state = [])
+ * @method static Builder|AcademicRecord whereDegree($value)
+ * @method static Builder|AcademicRecord whereEndDate($value)
+ * @method static Builder|AcademicRecord whereFieldOfStudy($value)
+ * @method static Builder|AcademicRecord whereInstitution($value)
+ * @method static Builder|AcademicRecord whereIsInProgress($value)
+ * @method static Builder|AcademicRecord whereStartDate($value)
+ * @method static Builder|AcademicRecord whereUserId($value)
  * @mixin \Eloquent
  */
 class AcademicRecord extends Model

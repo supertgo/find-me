@@ -1,0 +1,85 @@
+POST http://localhost:80/api/user/professional-experiences
+Accept: application/json
+Authorization: Bearer {{bearerToken}}
+Content-Type: application/json
+
+{
+  "professional_experiences": [
+    {
+      "company_name": "Company 1",
+      "position": "Position 1",
+      "description": "Description for professional experience 1",
+      "start_date": "2022-01-01",
+      "end_date": "2022-12-31",
+      "is_current": false,
+      "location": "Location 1",
+      "work_model": "hybrid",
+      "employment_type": "full-time"
+    },
+    {
+      "company_name": "Company 2",
+      "position": "Position 2",
+      "start_date": "2022-01-01",
+      "is_current": true
+    }
+  ]
+}
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 204, "Response status is not 204");
+    });
+
+%}
+
+###
+GET http://localhost:80/api/user/{{userId}}?includes[]=professionalExperiences
+accept: application/json
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+    const professionalExperiences = response.body.data.professional_experiences
+
+    client.test("Competences are created", function () {
+        client.assert(professionalExperiences.length >= 2, "Professional Experiences are not returned");
+    });
+
+    client.global.set("professionalExperienceId", professionalExperiences[0].id)
+%}
+
+###
+
+DELETE http://localhost:80/api/user/professional-experiences
+Accept: application/json
+Authorization: Bearer {{bearerToken}}
+Content-Type: application/json
+
+{
+  "professional_experiences_id": [
+    {{academicRecordId}}
+  ]
+}
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 204, "Response status is not 204");
+    });
+
+%}
+
+###
+GET http://localhost:80/api/user/{{userId}}?includes[]=professionalExperiences
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+
+    const professionalExperiences = response.body.data.professional_experiences
+
+    const isDeleted = professionalExperiences.every(
+        professionalExperience => professionalExperience.id !== client.global.get("professionalExperienceId")
+    )
+%}

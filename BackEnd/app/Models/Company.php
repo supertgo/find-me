@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Database\Factories\CompanyFactory;
+use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -37,7 +39,18 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Job whereUpdatedAt($value)
  * @method static Builder|Job whereWeekWorkload($value)
  * @method static Builder|Job whereWorkModel($value)
- * @mixin \Eloquent
+ * @property string $phone
+ * @property string $email
+ * @property int $cnpj
+ * @property string|null $fantasy_name
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Job> $jobs
+ * @property-read int|null $jobs_count
+ * @method static CompanyFactory factory($count = null, $state = [])
+ * @method static Builder|Company whereCnpj($value)
+ * @method static Builder|Company whereEmail($value)
+ * @method static Builder|Company whereFantasyName($value)
+ * @method static Builder|Company wherePhone($value)
+ * @mixin Eloquent
  */
 class Company extends Model
 {
@@ -51,5 +64,9 @@ class Company extends Model
     }
 
     protected $fillable = [
+    ];
+
+    protected $hidden = [
+        'deleted_at',
     ];
 }

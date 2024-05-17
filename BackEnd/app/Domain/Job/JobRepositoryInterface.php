@@ -23,4 +23,8 @@ interface JobRepositoryInterface
     public function getJobWithIncludes(?int $id, array $includes): array;
 
     public function attachCompetences(int $id, Collection $competences);
+
+    public function setNotAvailable(int $id): void;
+
+    public function getApplicationAmount(int $id): int;
 }

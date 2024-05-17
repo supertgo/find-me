@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Carbon;
 
@@ -49,6 +50,12 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Job whereUpdatedAt($value)
  * @method static Builder|Job whereWeekWorkload($value)
  * @method static Builder|Job whereWorkModel($value)
+ * @property-read \App\Models\Company|null $company
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Competence> $competences
+ * @property-read int|null $competences_count
+ * @method static \Database\Factories\JobFactory factory($count = null, $state = [])
+ * @method static Builder|Job whereCompanyId($value)
+ * @method static Builder|Job whereUserId($value)
  * @mixin Eloquent
  */
 class Job extends Model
@@ -90,5 +97,10 @@ class Job extends Model
             'job_id',
             'competence_id'
         );
+    }
+
+    public function applications(): HasMany
+    {
+        return $this->hasMany(JobApplication::class, 'job_id', 'id');
     }
 }

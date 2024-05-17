@@ -1,0 +1,63 @@
+description: Create user professional experiences request
+content:
+  application/json:
+    schema:
+      type: object
+      required:
+        - professional_experiences
+      properties:
+        professional_experiences:
+          type: array
+          items:
+            type: object
+            required:
+              - company_name
+              - position
+              - start_date
+              - is_current
+            properties:
+              company_name:
+                type: string
+                description: The name of the company
+                example: "Company Name"
+              position:
+                type: string
+                description: The position held
+                example: "Position"
+              description:
+                type: string
+                description: The description of the professional experience
+                example: "Description"
+              start_date:
+                type: string
+                format: date
+                description: The start date of the professional experience
+                example: "2022-01-01"
+              end_date:
+                type: string
+                format: date
+                description: The end date of the professional experience
+                example: "2022-12-31"
+              is_current:
+                type: boolean
+                description: Whether the professional experience is current
+                example: false
+              location:
+                type: string
+                description: The location of the professional experience
+                example: "Location"
+              work_model:
+                type: string
+                description: The work model of the professional experience
+                example: "hybrid"
+                enum:
+                  - onSite
+                  - hybrid
+                  - homeOffice
+              employment_type:
+                type: string
+                description: The employment type of the professional experience
+                example: "full-time"
+                enum:
+                  - full-time
+                  - part-time

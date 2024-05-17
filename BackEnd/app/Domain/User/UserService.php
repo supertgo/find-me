@@ -10,7 +10,7 @@ use App\Domain\User\AcademicRecord\AcademicRecordDomain;
 use App\Domain\User\AcademicRecord\AcademicRecordRepository;
 use App\Domain\User\ProfessionalExperience\ProfessionalExperienceDomain;
 use App\Domain\User\ProfessionalExperience\ProfessionalExperienceRepository;
-use App\Exceptions\Abstract\AbstractDomainException;
+use App\Exceptions\Abstract\AbstractFindMeException;
 use App\Exceptions\Competence\CompetenceNotFound;
 use App\Exceptions\User\AcademicRecord\AcademicRecordNotFoundException;
 use App\Exceptions\User\AcademicRecord\OnlyOwnerCanDeleteAcademicRecordException;
@@ -20,12 +20,12 @@ use App\Exceptions\User\ProfessionalExperience\MustHaveEndDateWhenFinishedExperi
 use App\Exceptions\User\ProfessionalExperience\OnlyOwnerCanDeleteProfessionalExperienceException;
 use App\Exceptions\User\ProfessionalExperience\ProfessionalExperienceNotFoundException;
 use App\Exceptions\User\UserNotFoundException;
-use App\helpers\File\FileHelperInterface;
+use App\Helpers\File\FileHelperInterface;
 use Exception;
 use Illuminate\Http\UploadedFile;
 use Throwable;
 
-class UserService extends AbstractService
+class UserService extends AbstractService implements UserServiceInterface
 {
     public function createUser(array $user): int
     {
@@ -37,7 +37,7 @@ class UserService extends AbstractService
 
     /**
      * @throws Throwable
-     * @throws AbstractDomainException
+     * @throws AbstractFindMeException
      */
     public function update(array $user): array
     {
@@ -298,6 +298,10 @@ class UserService extends AbstractService
 
             $domain = new UserDomain($userRepository);
             $domain->loadUser($userId);
+
+            if ($domain->getProfilePicturePath() === null) {
+                return;
+            }
 
             $domain->deleteProfilePicture();
 

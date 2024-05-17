@@ -2,10 +2,10 @@
 
 namespace App\Exceptions\User;
 
-use App\Exceptions\Abstract\AbstractDomainException;
+use App\Exceptions\Abstract\AbstractFindMeException;
 use App\Exceptions\ExceptionMessagesEnum;
 
-class UserDoesntHaveCompetenceException extends AbstractDomainException
+class UserDoesntHaveCompetenceException extends AbstractFindMeException
 {
     public function __construct(?int $userId, ?int $competenceId)
     {

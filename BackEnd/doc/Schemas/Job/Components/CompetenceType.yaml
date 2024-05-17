@@ -1,0 +1,9 @@
+type: string
+description: Competence type
+enum:
+  - language
+  - framework
+  - programmingLanguage
+  - technology
+  - other
+example: other

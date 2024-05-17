@@ -15,11 +15,11 @@ class ShowUserTest extends TestCase
 
     public function testShowUserSuccess()
     {
-        $this->makeUser();
+        $this->makeEmployee();
 
         $this
             ->actingAs(User::factory()->create())
-            ->json('GET', sprintf(self::ROUTE, $this->user->id))
+            ->json('GET', sprintf(self::ROUTE, $this->employee->id))
             ->assertStatus(Response::HTTP_OK)
             ->assertJsonStructure([
                 'data' => [

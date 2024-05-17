@@ -1,0 +1,49 @@
+description: Create user academic records request
+content:
+  application/json:
+    schema:
+      type: object
+      required:
+        - academic_records
+      properties:
+        academic_records:
+          type: array
+          items:
+            type: object
+            required:
+              - institution
+              - degree
+              - field_of_study
+              - start_date
+              - is_in_progress
+            properties:
+              institution:
+                type: string
+                description: The name of the institution
+                example: "Harvard University"
+              degree:
+                type: string
+                description: The degree obtained
+                example: "Bachelor of Science"
+              field_of_study:
+                type: string
+                description: The field of study
+                example: "Computer Science"
+              start_date:
+                type: string
+                format: date
+                description: The start date of the academic record
+                example: "2018-09-01"
+              end_date:
+                type: string
+                format: date
+                description: The end date of the academic record
+                example: "2022-05-31"
+              is_in_progress:
+                type: boolean
+                description: Whether the academic record is in progress
+                example: false
+              description:
+                type: string
+                description: The description of the academic record
+                example: "Focused on software development and data structures"

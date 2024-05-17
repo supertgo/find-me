@@ -7,3 +7,7 @@ export type Competence = {
   type: string;
 };
 
+export type PostAddCompetenceBody = {
+  competences: { name: string}[]
+}
+

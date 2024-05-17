@@ -53,3 +53,9 @@ export const Secondary: StoryObj<ButtonProps> = {
 		variant: 'secondary',
 	},
 };
+
+export const isLoading: StoryObj<ButtonProps> = {
+	args: {
+		isLoading: true,
+	},
+};

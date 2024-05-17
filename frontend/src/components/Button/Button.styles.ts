@@ -7,6 +7,7 @@ export type WrapperProps = {
 	$fullWidth: ButtonProps['fullWidth'];
 	$minimal: ButtonProps['minimal'];
 	$variant: ButtonProps['variant'];
+	$isLoading: boolean;
 };
 
 const wrapperModifiers = {
@@ -95,6 +96,10 @@ export const Wrapper = styled.button<WrapperProps>`
 
 		span {
 			font-size: ${theme.font.sizes.sm};
+		}
+
+		l-ring {
+			color: ${theme.colors.white};
 		}
 
 		${!!$size && wrapperModifiers[$size](theme)};

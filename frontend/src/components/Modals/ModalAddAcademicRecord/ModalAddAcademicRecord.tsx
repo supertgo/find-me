@@ -1,5 +1,5 @@
 import { useModalAddAcademicRecord } from 'hooks/useModalAddAcademicRecord/useModalAddAcademicRecord';
-import { BaseModal } from 'components/BaseModal/BaseModal';
+import { BaseModal } from 'components/Modals/BaseModal/BaseModal';
 import { PlusIcon } from '@radix-ui/react-icons';
 import { Controller } from 'react-hook-form';
 import {

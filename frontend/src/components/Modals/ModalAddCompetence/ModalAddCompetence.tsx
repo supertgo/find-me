@@ -3,7 +3,7 @@ import { Input } from 'components/Input/Input';
 import { useModalAddCompetence } from 'hooks/useModalAddCompetence/useModalAddCompetence';
 import { REQUIRED_COMPETENCE } from 'utils/errors';
 import { PlusIcon } from '@radix-ui/react-icons';
-import { BaseModal } from 'components/BaseModal/BaseModal';
+import { BaseModal } from 'components/Modals/BaseModal/BaseModal';
 import * as S from './ModalAddCompetence.styles';
 
 export type ModalAddCompetenceProps = {

@@ -1,6 +1,6 @@
 import { useModalAddProfessionalExperience } from 'hooks/useModalAddProfessionalExperience/useModalAddProfessionalExperience';
 import * as S from './ModalAddProfessionalExperience.styles';
-import { BaseModal } from 'components/BaseModal/BaseModal';
+import { BaseModal } from 'components/Modals/BaseModal/BaseModal';
 import { PlusIcon } from '@radix-ui/react-icons';
 import { Controller } from 'react-hook-form';
 import { Input } from 'components/Input/Input';

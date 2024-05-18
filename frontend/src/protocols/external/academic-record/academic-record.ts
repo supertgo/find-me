@@ -12,9 +12,13 @@ export type AcademicRecord = {
 	updated_at: string;
 };
 
-export type PostAcademicRecordBody = {
+export type PostAcademicRecordObj = {
 	is_in_progress: boolean;
 } & Omit<
 	AcademicRecord,
 	'id' | 'user_id' | 'created_at' | 'updated_at' | 'is_in_progress'
 >;
+
+export type PostAcademicRecordsBody = {
+	academic_records: [academic_record: PostAcademicRecordObj];
+};

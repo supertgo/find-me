@@ -5,8 +5,8 @@ import { GetUserResponse, UserProps } from 'protocols/external/user/user';
 import { Children } from 'react';
 import { AcademicRecordItem } from 'components/AcademicRecordItem/AcademicRecordItem';
 import { ProfessionalExperienceItem } from 'components/ProfessionalExperienceItem/ProfessionalExperienceItem';
-import { ModalAddCompetence } from 'components/ModalAddCompetence/ModalAddCompetence';
-import { ModalAddAcademicRecord } from 'components/ModalAddAcademicRecord/ModalAddAcademicRecord';
+import { ModalAddCompetence } from 'components/Modals/ModalAddCompetence/ModalAddCompetence';
+import { ModalAddAcademicRecord } from 'components/Modals/ModalAddAcademicRecord/ModalAddAcademicRecord';
 import { CompetenceItem } from 'components/CompetenceItem/CompetenceItem';
 
 import { ResumeCard } from 'components/ResumeCard/ResumeCard';
@@ -15,7 +15,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useUser } from 'hooks/useUser/useUser';
 import { GetUserRouteConst } from 'utils/routes';
 import { AxiosResponse, InternalAxiosRequestConfig } from 'axios';
-import { ModalAddProfessionalExperience } from 'components/ModalAddProfessionalExperience/ModalAddProfessionalExperience';
+import { ModalAddProfessionalExperience } from 'components/Modals/ModalAddProfessionalExperience/ModalAddProfessionalExperience';
 
 export type ConfigProps = {} & UserProps;
 

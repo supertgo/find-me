@@ -47,6 +47,7 @@ export const nextAuthOptions: NextAuthOptions = {
           ).then((res) => res.json());
 
           return {
+            id: authMeResponse.data.id,
             name: authMeResponse.data.name,
             email: credentials?.email,
             password: credentials?.password,

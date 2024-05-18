@@ -3,12 +3,14 @@ import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
 export type User = {
+  id: number;
 	name: string;
 	email: string;
 	type: UserType;
 };
 
 export type LoggedUserProps = {
+	id: number;
 	name: string;
 	email: string;
 	type: UserType;
@@ -18,6 +20,7 @@ export type LoggedUserProps = {
 export const useLoggedUserStore = create<LoggedUserProps>()(
 	persist(
 		(set, get) => ({
+			id: Infinity,
 			name: '',
 			email: '',
 			type: 'recruiter',

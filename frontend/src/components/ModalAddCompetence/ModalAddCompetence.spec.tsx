@@ -3,12 +3,15 @@ import { ModalAddCompetence } from './ModalAddCompetence';
 
 describe('<ModalAddCompetence />', () => {
 	it('should render the component', async () => {
-		render(<ModalAddCompetence />);
-		const addcompetenceTrigger = screen.getByLabelText('adicionar-competencia');
+		render(<ModalAddCompetence user_id={1} />, {
+			queryProvider: true,
+		});
+
+		const addcompetenceTrigger = screen.getByLabelText('Adicionar Competencia');
 
 		expect(addcompetenceTrigger).toBeInTheDocument();
 
-		act(() => fireEvent.click(addcompetenceTrigger));
+		await act(async () => fireEvent.click(addcompetenceTrigger));
 
 		await waitFor(() =>
 			expect(

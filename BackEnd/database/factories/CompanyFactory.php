@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CompanyFactory extends Factory
@@ -13,8 +14,14 @@ class CompanyFactory extends Factory
             'description' => $this->faker->sentence(),
             'phone' => $this->faker->unique()->e164PhoneNumber,
             'email' => $this->faker->unique()->companyEmail(),
-            'cnpj' => $this->faker->unique()->numberBetween(0, 16777215),
+            'cnpj' => $this->faker->numerify('############'),
             'fantasy_name' => $this->faker->name . ' ' . $this->faker->unique()->companySuffix(),
+            'responsible_id' => function () {
+                /** @var User $user */
+                $user = User::factory()->create();
+
+                return $user->id;
+            },
         ];
     }
 

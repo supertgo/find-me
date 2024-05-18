@@ -185,4 +185,14 @@ class CompanyDomain implements CompanyDomainInterface
         return $this;
     }
 
+    /**
+     * @throws CnpjMustHaveTwelveDigitsException
+     */
+    public function load(int $companyId): self
+    {
+        $data = $this->repository->load($companyId);
+
+        return $this->fromArray($data);
+    }
+
 }

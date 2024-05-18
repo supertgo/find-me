@@ -5,7 +5,7 @@ namespace App\Exceptions;
 enum ExceptionMessagesEnum: string
 {
     case CompanyNotFound = 'Company not found';
-    case CnpjMustHaveFourteenDigits = 'Cnpj must have fourteen digits';
+    case CnpjMustHaveFourteenDigits = 'Cnpj must have twelve digits';
     case CompanyIdMustBeAnInteger = 'Company id must be an integer';
 
     case JobNotFound = 'Job not found';

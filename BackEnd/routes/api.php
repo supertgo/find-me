@@ -91,5 +91,5 @@ Route::group([
     'middleware' => 'auth:api'
 ], function () {
     Route::resource('/company', CompanyController::class)
-        ->only(['store', 'destroy', 'update']);
+        ->only(['store', 'show', 'index', 'update']);
 });

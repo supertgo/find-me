@@ -30,4 +30,14 @@ class CompanyService implements CompanyServiceInterface
             ->setId($companyId)
             ->update();
     }
+
+    /**
+     * @throws CnpjMustHaveTwelveDigitsException
+     */
+    public function show(int $companyId): CompanyDomain
+    {
+        $domain = new CompanyDomain(new CompanyRepository());
+
+        return $domain->load($companyId);
+    }
 }

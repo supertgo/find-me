@@ -28,8 +28,7 @@ class UpdateCompanyTest extends TestCase
 
         $this
             ->actingAs($this->employee)
-            ->json(
-                'PUT',
+            ->put(
                 sprintf(self::ROUTE, $originalCompany->id),
                 $payload
             )

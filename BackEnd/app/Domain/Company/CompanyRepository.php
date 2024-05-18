@@ -23,4 +23,9 @@ class CompanyRepository implements CompanyRepositoryInterface
 
         return $company->toArray();
     }
+
+    public function load(int $companyId): array
+    {
+        return Company::find($companyId)->toArray();
+    }
 }

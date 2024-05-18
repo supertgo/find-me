@@ -9,4 +9,6 @@ interface CompanyRepositoryInterface
     public function save(array $data): array;
 
     public function update(array $data);
+
+    public function load(int $companyId);
 }

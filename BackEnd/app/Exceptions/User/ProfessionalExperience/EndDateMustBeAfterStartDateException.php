@@ -2,11 +2,11 @@
 
 namespace App\Exceptions\User\ProfessionalExperience;
 
-use App\Exceptions\Abstract\AbstractDomainException;
+use App\Exceptions\Abstract\AbstractFindMeException;
 use App\Exceptions\ExceptionMessagesEnum;
 use Carbon\Carbon;
 
-class EndDateMustBeAfterStartDateException extends AbstractDomainException
+class EndDateMustBeAfterStartDateException extends AbstractFindMeException
 {
     public function __construct(Carbon $startDate, Carbon $endDate)
 

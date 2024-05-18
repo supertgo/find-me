@@ -25,4 +25,14 @@ enum JobApplicationsStatusEnum: string
     {
         return in_array($this->value, [self::Canceled, self::Hired]);
     }
+
+    public function canBeChangedToByEmployee(): bool
+    {
+        return $this->value == self::Canceled->value;
+    }
+
+    public function canBeChangedToByRecruiter(): bool
+    {
+        return $this->value != self::Canceled->value;
+    }
 }

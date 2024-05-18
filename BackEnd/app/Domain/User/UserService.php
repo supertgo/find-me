@@ -10,7 +10,7 @@ use App\Domain\User\AcademicRecord\AcademicRecordDomain;
 use App\Domain\User\AcademicRecord\AcademicRecordRepository;
 use App\Domain\User\ProfessionalExperience\ProfessionalExperienceDomain;
 use App\Domain\User\ProfessionalExperience\ProfessionalExperienceRepository;
-use App\Exceptions\Abstract\AbstractDomainException;
+use App\Exceptions\Abstract\AbstractFindMeException;
 use App\Exceptions\Competence\CompetenceNotFound;
 use App\Exceptions\User\AcademicRecord\AcademicRecordNotFoundException;
 use App\Exceptions\User\AcademicRecord\OnlyOwnerCanDeleteAcademicRecordException;
@@ -37,7 +37,7 @@ class UserService extends AbstractService implements UserServiceInterface
 
     /**
      * @throws Throwable
-     * @throws AbstractDomainException
+     * @throws AbstractFindMeException
      */
     public function update(array $user): array
     {

@@ -2,10 +2,10 @@
 
 namespace App\Exceptions\JobApplications;
 
-use App\Exceptions\Abstract\AbstractDomainException;
+use App\Exceptions\Abstract\AbstractFindMeException;
 use App\Exceptions\ExceptionMessagesEnum;
 
-class CandidatesIdFilterMustBePositiveIntegersException extends AbstractDomainException
+class CandidatesIdFilterMustBePositiveIntegersException extends AbstractFindMeException
 {
     public function __construct(array $values)
     {

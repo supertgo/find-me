@@ -3,10 +3,10 @@
 namespace App\Exceptions\JobApplications;
 
 use App\Domain\JobApplications\Enum\JobApplicationsIncludesEnum;
-use App\Exceptions\Abstract\AbstractDomainException;
+use App\Exceptions\Abstract\AbstractFindMeException;
 use App\Exceptions\ExceptionMessagesEnum;
 
-class JobApplicationUnknownEnumOptionException extends AbstractDomainException
+class JobApplicationUnknownEnumOptionException extends AbstractFindMeException
 {
     public function __construct(string|array $unknownOption)
     {

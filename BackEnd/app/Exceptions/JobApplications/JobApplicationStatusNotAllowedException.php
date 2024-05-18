@@ -3,10 +3,10 @@
 namespace App\Exceptions\JobApplications;
 
 use App\Domain\JobApplications\Enum\JobApplicationsStatusEnum;
-use App\Exceptions\Abstract\AbstractDomainException;
+use App\Exceptions\Abstract\AbstractFindMeException;
 use App\Exceptions\ExceptionMessagesEnum;
 
-class JobApplicationStatusNotAllowedException extends AbstractDomainException
+class JobApplicationStatusNotAllowedException extends AbstractFindMeException
 {
     public function __construct(string $status)
     {

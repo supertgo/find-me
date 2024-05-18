@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Domain\JobApplications\JobApplicationServiceInterface;
-use App\Exceptions\Abstract\AbstractDomainException;
+use App\Exceptions\Abstract\AbstractFindMeException;
 use App\Http\Requests\JobApplications\CreateJobApplicationsRequest;
 use App\Http\Requests\JobApplications\JobApplicationIndexRequests;
 use App\Http\Requests\JobApplications\JobApplicationUpdateStatusRequest;
@@ -23,7 +23,7 @@ class JobApplicationsController extends Controller
             return JobApplicationResource::make($jobApplication)
                 ->toResponse($request)
                 ->setStatusCode(Response::HTTP_CREATED);
-        } catch (AbstractDomainException $exception) {
+        } catch (AbstractFindMeException  $exception) {
             return response()->json(
                 $exception->render(),
                 status: Response::HTTP_UNPROCESSABLE_ENTITY
@@ -45,7 +45,7 @@ class JobApplicationsController extends Controller
                 ->getJobApplications($request->getFilters(), $request->getIncludes());
 
             return response()->json(['data' => $jobApplications], status: Response::HTTP_OK);
-        } catch (AbstractDomainException $exception) {
+        } catch (AbstractFindMeException  $exception) {
             return response()->json(
                 $exception->render(),
                 status: Response::HTTP_UNPROCESSABLE_ENTITY
@@ -65,11 +65,12 @@ class JobApplicationsController extends Controller
         try {
             app(JobApplicationServiceInterface::class)->updateStatus(
                 $request->getStatus(),
-                $request->getJobApplicationId()
+                $request->getJobApplicationId(),
+                $request->getLoggedUserId()
             );
 
             return response()->noContent();
-        } catch (AbstractDomainException $exception) {
+        } catch (AbstractFindMeException  $exception) {
             return response()->json(
                 $exception->render(),
                 status: Response::HTTP_UNPROCESSABLE_ENTITY

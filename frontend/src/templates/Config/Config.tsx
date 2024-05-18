@@ -164,7 +164,11 @@ export const Config = ({
 					</S.ConfigEmailWrapper>
 				</ConfigInfoWrapper>
 				<S.ButtonRow>
-					<Button type="submit" disabled={!isValid || isLoading}>
+					<Button
+						type="submit"
+						disabled={!isValid || isLoading}
+						isLoading={isLoading}
+					>
 						Salvar Perfil
 					</Button>
 				</S.ButtonRow>

@@ -2,10 +2,10 @@
 
 namespace App\Exceptions\Job;
 
-use App\Exceptions\Abstract\AbstractDomainException;
+use App\Exceptions\Abstract\AbstractFindMeException;
 use App\Exceptions\ExceptionMessagesEnum;
 
-class JobApplicationsAmountSurpassedException extends AbstractDomainException
+class JobApplicationsAmountSurpassedException extends AbstractFindMeException
 {
     public function __construct()
     {

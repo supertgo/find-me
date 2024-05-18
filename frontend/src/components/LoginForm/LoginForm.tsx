@@ -50,7 +50,12 @@ export const LoginForm = ({}: LoginFormProps) => {
 				)}
 			/>
 			<LinkText text="Esqueci minha senha" href={`/${ForgotPasswordUrl}`} />
-			<Button fullWidth type="submit" disabled={!isValid || isLoading}>
+			<Button
+				fullWidth
+				type="submit"
+				disabled={!isValid || isLoading}
+				isLoading={isLoading}
+			>
 				Entrar
 			</Button>
 			<S.Text>

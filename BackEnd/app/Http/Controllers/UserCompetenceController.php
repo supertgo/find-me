@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Domain\User\UserService;
-use App\Exceptions\Abstract\AbstractDomainException;
+use App\Exceptions\Abstract\AbstractFindMeException;
 use App\Http\Requests\User\UserCompetence\AddCompetencesRequest;
 use App\Http\Requests\User\UserCompetence\DeleteCompetencesRequest;
 use Exception;
@@ -44,7 +44,7 @@ class UserCompetenceController extends Controller
                 );
 
             return response()->noContent();
-        } catch (AbstractDomainException $exception) {
+        } catch (AbstractFindMeException  $exception) {
             return response()->json(
                 $exception->render(),
                 status: Response::HTTP_UNPROCESSABLE_ENTITY

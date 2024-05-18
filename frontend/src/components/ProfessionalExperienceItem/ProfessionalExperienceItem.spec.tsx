@@ -3,6 +3,7 @@ import {
 	ProfessionalExperienceItem,
 	ProfessionalExperienceItemProps,
 } from './ProfessionalExperienceItem';
+import { translateEmploymentType } from 'utils/job';
 
 const props: ProfessionalExperienceItemProps = {
 	id: 46,
@@ -22,9 +23,13 @@ describe('<ProfessionalExperienceItem />', () => {
 	it('should render the component', () => {
 		render(<ProfessionalExperienceItem {...props} />);
 
-    expect(screen.getByText(props.position)).toBeInTheDocument()
-    expect(screen.getByText(`${props.company_name}, ${props.employment_type}`)).toBeInTheDocument()
-    expect(screen.getByText(props.location)).toBeInTheDocument()
-    expect(screen.getByText(props.description)).toBeInTheDocument()
+		expect(screen.getByText(props.position)).toBeInTheDocument();
+		expect(
+			screen.getByText(
+				`${props.company_name}, ${translateEmploymentType[props.employment_type]}`,
+			),
+		).toBeInTheDocument();
+		expect(screen.getByText(props.location)).toBeInTheDocument();
+		expect(screen.getByText(props.description)).toBeInTheDocument();
 	});
 });

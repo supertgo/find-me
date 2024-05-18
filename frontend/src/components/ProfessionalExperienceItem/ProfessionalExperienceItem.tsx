@@ -1,5 +1,6 @@
 import { ProfessionalExperience } from 'protocols/external/professional-experience/professional-experience';
 import * as S from './ProfessionalExperienceItem.styles';
+import { translateEmploymentType } from 'utils/job';
 
 export type ProfessionalExperienceItemProps = {} & Omit<
 	ProfessionalExperience,
@@ -18,7 +19,7 @@ export const ProfessionalExperienceItem = ({
 }: ProfessionalExperienceItemProps) => {
 	const subtitle =
 		`${company_name}` +
-		`${employment_type !== null ? `, ${employment_type}` : ''}`;
+		`${employment_type !== null ? `, ${translateEmploymentType[employment_type]}` : ''}`;
 
 	return (
 		<S.Wrapper>

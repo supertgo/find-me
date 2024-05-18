@@ -47,7 +47,7 @@ class UserCompetenceController extends Controller
         } catch (AbstractFindMeException  $exception) {
             return response()->json(
                 $exception->render(),
-                status: $exception->getCode()
+                status: $exception->getHttpCode()
             );
         } catch (Exception $exception) {
             Log::error($exception);

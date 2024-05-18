@@ -13,7 +13,7 @@ class StoreCompanyRequest extends AbstractRequest
             'description' => 'required|string',
             'phone' => 'required|string',
             'email' => 'required|email',
-            'cnpj' => 'required|integer',
+            'cnpj' => 'required',
             'fantasy_name' => 'string',
             'location' => 'string',
         ];

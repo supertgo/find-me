@@ -22,7 +22,26 @@ class CreateCompanyTest extends TestCase
         $this
             ->actingAs($this->generateRecruiterUser())
             ->json('POST', self::ROUTE, $payload)
-            ->assertStatus(Response::HTTP_CREATED);
+            ->assertStatus(Response::HTTP_CREATED)
+            ->assertJsonStructure([
+                'data' => [
+                    'id',
+                    'name',
+                    'description',
+                    'phone',
+                    'email',
+                    'fantasy_name',
+                ]
+            ])
+            ->assertJson([
+                'data' => [
+                    'name' => $payload['name'],
+                    'description' => $payload['description'],
+                    'phone' => $payload['phone'],
+                    'email' => $payload['email'],
+                    'fantasy_name' => $payload['fantasy_name'],
+                ]
+            ]);
 
         $this->assertDatabaseHas('companies', [
             'name' => $payload['name'],
@@ -51,7 +70,7 @@ class CreateCompanyTest extends TestCase
             'phone' => $this->faker->phoneNumber,
             'email' => $this->faker->email,
             // todo set provider pt-br in faker in order to support cpf anc cnpj
-            'cnpj' => $this->faker->randomNumber(9),
+            'cnpj' => $this->faker->numerify('############'),
             'fantasy_name' => $this->faker->name,
         ];
     }

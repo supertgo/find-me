@@ -4,7 +4,6 @@ namespace App\Exceptions\Company;
 
 use App\Exceptions\Abstract\AbstractFindMeException;
 use App\Exceptions\ExceptionMessagesEnum;
-use Symfony\Component\HttpFoundation\Response;
 
 class CnpjMustHaveTwelveDigitsException extends AbstractFindMeException
 {
@@ -12,7 +11,6 @@ class CnpjMustHaveTwelveDigitsException extends AbstractFindMeException
     {
         parent::__construct(
             ExceptionMessagesEnum::CnpjMustHaveFourteenDigits->value,
-            Response::HTTP_UNPROCESSABLE_ENTITY
         );
 
         $this->additionalInfo = [

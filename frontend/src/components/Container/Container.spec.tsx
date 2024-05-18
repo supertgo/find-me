@@ -10,12 +10,21 @@ describe('<Container />', () => {
     );
 
     expect(container).toMatchInlineSnapshot(`
+      .c0 {
+        width: 100%;
+        max-width: 130rem;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: calc(3.2rem / 2);
+        padding-right: calc(3.2rem / 2);
+      }
+
       <div>
         <div
           class="Toastify"
         />
         <div
-          class="sc-beySPh kmpbji"
+          class="c0"
         >
           <span>
             Won Games

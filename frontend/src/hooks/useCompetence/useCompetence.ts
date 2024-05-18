@@ -27,8 +27,14 @@ export const useCompetence = () => {
 			});
 
 			toast.success('Competência criada com sucesso!');
-		} catch (e) {
+		} catch (error) {
+			if (error instanceof Error) {
+				toast.error(error.response.data.message);
+				return { error: error.response.data.message };
+			}
+
 			toast.error(UNEXPECTED_ERROR);
+			return { error: UNEXPECTED_ERROR };
 		}
 	};
 	return {

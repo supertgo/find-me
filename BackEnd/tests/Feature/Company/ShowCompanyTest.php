@@ -13,7 +13,7 @@ class ShowCompanyTest extends TestCase
 
     const ROUTE = self::BASE_ROUTE . 'company/%s';
 
-    public function testUpdateJob()
+    public function testShow()
     {
         $this->makeEmployee();
 

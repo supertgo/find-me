@@ -9,4 +9,6 @@ interface CompanyServiceInterface
     function update(int $responsibleId, array $data, int $companyId): CompanyDomain;
 
     function show(int $companyId): CompanyDomain;
+
+    function list(): array;
 }

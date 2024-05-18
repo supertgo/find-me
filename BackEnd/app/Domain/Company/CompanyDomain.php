@@ -78,6 +78,28 @@ class CompanyDomain implements CompanyDomainInterface
         return $this;
     }
 
+
+    /**
+     * @throws CnpjMustHaveTwelveDigitsException
+     */
+    public function load(int $companyId): self
+    {
+        $data = $this->repository->load($companyId);
+
+        return $this->fromArray($data);
+    }
+
+    public function list(): array
+    {
+        $companies = $this->repository->list();
+
+        return array_map(/**
+         * @throws CnpjMustHaveTwelveDigitsException
+         */ function ($company) {
+            return (new self($this->repository))->fromArray($company);
+        }, $companies);
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -184,15 +206,4 @@ class CompanyDomain implements CompanyDomainInterface
         $this->location = $location;
         return $this;
     }
-
-    /**
-     * @throws CnpjMustHaveTwelveDigitsException
-     */
-    public function load(int $companyId): self
-    {
-        $data = $this->repository->load($companyId);
-
-        return $this->fromArray($data);
-    }
-
 }

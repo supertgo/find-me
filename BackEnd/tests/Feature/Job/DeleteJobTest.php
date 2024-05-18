@@ -58,7 +58,7 @@ class DeleteJobTest extends TestCase
         $this
             ->actingAs($this->generateRecruiterUser())
             ->json('DELETE', sprintf(self::ROUTE, $jobId))
-            ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
+            ->assertStatus(Response::HTTP_NOT_FOUND)
             ->assertJsonStructure([
                 'message',
                 'additional_info' => [

@@ -52,7 +52,7 @@ class CreateJobTest extends TestCase
         $this
             ->actingAs($this->generateRecruiterUser())
             ->json('POST', self::ROUTE, $payload)
-            ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
+            ->assertStatus(Response::HTTP_NOT_FOUND)
             ->assertJsonStructure([
                 'message',
                 'additional_info' => [

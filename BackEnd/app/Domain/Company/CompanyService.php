@@ -40,4 +40,11 @@ class CompanyService implements CompanyServiceInterface
 
         return $domain->load($companyId);
     }
+
+    public function list(): array
+    {
+        $domain = new CompanyDomain(new CompanyRepository());
+
+        return $domain->list();
+    }
 }

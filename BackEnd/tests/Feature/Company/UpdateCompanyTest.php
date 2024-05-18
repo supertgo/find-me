@@ -13,7 +13,7 @@ class UpdateCompanyTest extends TestCase
 
     const ROUTE = self::BASE_ROUTE . 'company/%s';
 
-    public function testUpdateJob()
+    public function testUpdateCompany()
     {
         $this->makeEmployee();
 
@@ -64,7 +64,7 @@ class UpdateCompanyTest extends TestCase
         ]);
     }
 
-    private function generatePayload()
+    private function generatePayload(): array
     {
         return [
             'name' => $this->faker->name,

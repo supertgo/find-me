@@ -1,0 +1,99 @@
+< {%
+    client.global.set("companyName", $random.uuid)
+%}
+POST http://localhost:80/api/company
+Accept: application/json
+Authorization: Bearer {{bearerToken}}
+Content-Type: application/json
+
+{
+  "name": "{{companyName}}",
+  "description": "Autem ut nostrum eligendi molestias. Eum rerum necessitatibus soluta modi modi exercitationem. In magnam officia repudiandae eaque culpa aspernatur.",
+  "phone": "+1-925-546-6734",
+  "email": "pacocha.stefan@torphy.com",
+  "cnpj": "621087211134",
+  "fantasy_name": "Flavio Prosacco"
+}
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 201, "Response status is not 201");
+    });
+
+    const company = response.body.data;
+
+    client.test("company was created", function () {
+        client.assert(company !== undefined, "company is not created");
+    });
+
+    client.global.set("companyId", company.id);
+%}
+
+###
+GET localhost:80/api/company/{{companyId}}
+Accept: application/json
+Authorization: Bearer {{bearerToken}}
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+
+    const company = response.body.data;
+
+    client.test("Return right company", function () {
+        client.assert(company.id === client.global.get('companyId'), "Wrong company");
+    });
+
+%}
+
+###
+GET localhost:80/api/company
+Accept: application/json
+Authorization: Bearer {{bearerToken}}
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+
+    client.log(client.global.get('companyId'))
+
+    const company = response.body.data.find(c => c.id == client.global.get('companyId'));
+
+    client.test("Return company", function () {
+        client.assert(company, "Company not found");
+    });
+
+%}
+
+###
+< {%
+    client.global.set("companyNewName", $random.uuid)
+%}
+PUT http://localhost:80/api/company/{{companyId}}
+Accept: application/json
+Authorization: Bearer {{bearerToken}}
+Content-Type: application/json
+
+{
+  "name": "{{companyNewName}}",
+  "description": "Autem ut nostrum eligendi molestias. Eum rerum necessitatibus soluta modi modi exercitationem. In magnam officia repudiandae eaque culpa aspernatur.",
+  "phone": "+1-925-546-6734",
+  "email": "pacocha.stefan@torphy.com",
+  "cnpj": "621087211134",
+  "fantasy_name": "Flavio Prosacco"
+}
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+
+    const company = response.body.data;
+
+    client.test("company updated", function () {
+        client.assert(company.name === client.global.get("companyNewName"), "company wasn't updated");
+    });
+
+%}
+
+###

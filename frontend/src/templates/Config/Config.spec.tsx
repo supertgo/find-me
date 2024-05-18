@@ -6,7 +6,6 @@ import { formatCellphone } from "utils/formatCellphone";
 const props: ConfigProps = {
   id: 10,
   name: "test",
-  password: "testaa",
   email: "thiago.teste@gmail.com",
   phone: "3131313131",
   type: "recruiter",
@@ -28,16 +27,12 @@ describe("<Config />", () => {
     const emailField: HTMLInputElement = screen.getByPlaceholderText(
       "Digite o seu e-mail"
     );
-    const passwordField: HTMLInputElement = screen.getByPlaceholderText(
-      "Digite a sua nova senha"
-    );
 
     const saveButton = screen.getByRole("button", { name: "Salvar Perfil" });
 
     expect(nameField).toHaveValue(props.name);
     expect(phoneField).toHaveValue(formatCellphone(props.phone));
     expect(emailField).toHaveValue(props.email);
-    expect(passwordField).toHaveValue(props.password);
 
     expect(saveButton).toBeInTheDocument();
   });

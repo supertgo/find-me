@@ -141,13 +141,15 @@
       <path value="$PROJECT_DIR$/BackEnd/vendor/egulias/email-validator" />
       <path value="$PROJECT_DIR$/BackEnd/vendor/laravel/framework" />
       <path value="$PROJECT_DIR$/BackEnd/vendor/laravel/serializable-closure" />
+      <path value="$PROJECT_DIR$/BackEnd/vendor/intervention/image" />
+      <path value="$PROJECT_DIR$/BackEnd/vendor/intervention/gif" />
     </include_path>
   </component>
   <component name="PhpInterpreters">
     <interpreters>
       <interpreter id="61c7a1db-0637-421a-aabb-6ec417d71a22" name="php" home="docker-compose://DATA" auto="false" debugger_id="php.debugger.XDebug">
         <remote_data INTERPRETER_PATH="php" HELPERS_PATH="/opt/.phpstorm_helpers" VALID="true" RUN_AS_ROOT_VIA_SUDO="false" DOCKER_ACCOUNT_NAME="Docker" DOCKER_COMPOSE_SERVICE_NAME="php" DOCKER_REMOTE_PROJECT_PATH="/opt/project">
-          <type_data command="RUN" />
+          <type_data command="EXEC" />
           <dockerComposeConfigurationPaths>
             <item value="$PROJECT_DIR$/BackEnd/docker-compose.yml" />
           </dockerComposeConfigurationPaths>

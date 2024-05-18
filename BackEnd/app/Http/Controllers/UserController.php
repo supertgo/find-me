@@ -69,7 +69,7 @@ class UserController extends Controller
 
             return response()->json(
                 $exception->render(),
-                status: Response::HTTP_UNPROCESSABLE_ENTITY
+                status: $exception->getHttpCode()
             );
         } catch (Exception) {
             return response()

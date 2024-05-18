@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\JobApplicationsController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\JWTController;
@@ -83,3 +84,12 @@ Route::group([
     Route::get('', [JobApplicationsController::class, 'index']);
     Route::patch('/{application}/status', [JobApplicationsController::class, 'updateStatus']);
 })->middleware('auth:api');
+
+
+Route::group([
+    'namespace' => 'App\Http\Controllers',
+    'middleware' => 'auth:api'
+], function () {
+    Route::resource('/company', CompanyController::class)
+        ->only(['store', 'show', 'index', 'update']);
+});

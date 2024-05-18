@@ -180,6 +180,7 @@ return [
         // Service
         App\Providers\Service\JobApplicationServiceProvider::class,
         \App\Providers\Service\UserServiceProvider::class,
+        \App\Providers\Service\CompanyServiceProvider::class,
         \App\Providers\Service\JobApplicationsServiceProvider::class,
 
         //JWT

@@ -26,7 +26,7 @@ class JobApplicationsController extends Controller
         } catch (AbstractFindMeException  $exception) {
             return response()->json(
                 $exception->render(),
-                status: Response::HTTP_UNPROCESSABLE_ENTITY
+                status: $exception->getHttpCode()
             );
         } catch (Exception $exception) {
             Log::error($exception);
@@ -48,7 +48,7 @@ class JobApplicationsController extends Controller
         } catch (AbstractFindMeException  $exception) {
             return response()->json(
                 $exception->render(),
-                status: Response::HTTP_UNPROCESSABLE_ENTITY
+                status: $exception->getHttpCode()
             );
         } catch (Exception $exception) {
             Log::error($exception);
@@ -73,7 +73,7 @@ class JobApplicationsController extends Controller
         } catch (AbstractFindMeException  $exception) {
             return response()->json(
                 $exception->render(),
-                status: Response::HTTP_UNPROCESSABLE_ENTITY
+                status: $exception->getHttpCode()
             );
         } catch (Exception $exception) {
             Log::error($exception);

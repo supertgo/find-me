@@ -121,7 +121,7 @@ class UpdateJobWithCompetencesTest extends TestCase
         $this
             ->actingAs($this->generateRecruiterUser())
             ->json('PUT', sprintf(self::ROUTE, $job->id), $payload)
-            ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
+            ->assertStatus(Response::HTTP_NOT_FOUND)
             ->assertJsonStructure([
                 'message',
                 'additional_info' => [
@@ -163,7 +163,7 @@ class UpdateJobWithCompetencesTest extends TestCase
         $this
             ->actingAs($this->generateRecruiterUser())
             ->json('PUT', sprintf(self::ROUTE, $jobId), $payload)
-            ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
+            ->assertStatus(Response::HTTP_NOT_FOUND)
             ->assertJsonStructure([
                 'message',
                 'additional_info' => [

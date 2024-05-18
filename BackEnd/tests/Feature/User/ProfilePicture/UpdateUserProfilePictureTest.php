@@ -45,17 +45,6 @@ class UpdateUserProfilePictureTest extends TestCase
 
     private function getPayload(): array
     {
-
-        $file = $this->faker->image(Storage::disk('public')->path(''));
-
-        $uploadedFile = new UploadedFile(
-            $file,
-            'profile_picture.jpg',
-            'image/jpeg',
-            null,
-            true
-        );
-
-        return ['profile_picture' => $uploadedFile];
+        return ['profile_picture' => UploadedFile::fake()->image('profile_picture.jpg')];
     }
 }

@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Exceptions;
+namespace App\Exceptions\Company;
 
 use App\Exceptions\Abstract\AbstractFindMeException;
+use App\Exceptions\ExceptionMessagesEnum;
 use Symfony\Component\HttpFoundation\Response;
 
 class CompanyNotFoundException extends AbstractFindMeException

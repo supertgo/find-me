@@ -4,10 +4,15 @@ namespace App\Domain\Company;
 
 use App\Models\Company;
 
-class CompanyRepository implements CompanyDomainInterface
+class CompanyRepository implements CompanyRepositoryInterface
 {
     public function exists(int $id): bool
     {
         return Company::whereId($id)->exists();
+    }
+
+    public function save(array $data): array
+    {
+        return Company::create($data)->toArray();
     }
 }

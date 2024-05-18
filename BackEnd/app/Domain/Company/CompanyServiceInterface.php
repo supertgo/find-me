@@ -1,0 +1,8 @@
+<?php
+
+namespace App\Domain\Company;
+
+interface CompanyServiceInterface
+{
+    function create(int $responsibleId, array $data): CompanyDomain;
+}

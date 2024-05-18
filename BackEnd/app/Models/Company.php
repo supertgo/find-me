@@ -14,6 +14,7 @@ use Illuminate\Support\Carbon;
  * App\Models\Job
  *
  * @property int $id
+ * @property int $responsibleId
  * @property string $name
  * @property string $description
  * @property string|null $location
@@ -64,6 +65,14 @@ class Company extends Model
     }
 
     protected $fillable = [
+        'name',
+        'description',
+        'phone',
+        'email',
+        'cnpj',
+        'fantasy_name',
+        'location',
+        'responsible_id'
     ];
 
     protected $hidden = [

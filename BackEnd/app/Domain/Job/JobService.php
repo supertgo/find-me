@@ -7,7 +7,7 @@ use App\Domain\Company\CompanyDomain;
 use App\Domain\Company\CompanyRepository;
 use App\Domain\Competence\CompetenceDomain;
 use App\Domain\Competence\CompetenceRepository;
-use App\Exceptions\CompanyNotFoundException;
+use App\Exceptions\Company\CompanyNotFoundException;
 use App\Exceptions\Job\JobNotFoundException;
 use Exception;
 use Throwable;

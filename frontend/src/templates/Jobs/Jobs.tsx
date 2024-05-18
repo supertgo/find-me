@@ -11,35 +11,36 @@ import { LoadingJobs } from './LoadingJobs';
 import { NoJobs } from './NoJobs';
 
 import * as S from './Jobs.styles';
+import { JobsUrl } from 'utils/urls';
 
 export const Jobs = () => {
-  const { findJobs } = useJobs();
+	const { findJobs } = useJobs();
 
-  const { data: jobsData, isLoading } = useQuery({
-    queryKey: [`/jobs`],
-    queryFn: () => findJobs(),
-  });
+	const { data: jobsData, isLoading } = useQuery({
+		queryKey: [`/${JobsUrl}`],
+		queryFn: () => findJobs(),
+	});
 
-  const noJobs = !jobsData && !isLoading;
-  const jobs = jobsData?.data.data;
+	const noJobs = !jobsData && !isLoading;
+	const jobs = jobsData?.data.data;
 
-  return (
-    <Base>
-      <Title title="Vagas" />
-      <S.SearchWrapper>
-        <Input placeholder="Buscar vaga" />
-        <Button>Buscar</Button>
-      </S.SearchWrapper>
-      <S.OpportunitiesWrapper>
-        <JobFilter />
-        <S.Opportunities>
-          <h5>Todas as Vagas</h5>
-          {isLoading && <LoadingJobs />}
-          {noJobs && <NoJobs />}
-          {jobs && <p>{`Mostrando todos os ${jobs.length} resultados`}</p>}
-          {Children.toArray(jobs?.map((job) => <JobItem {...job} />))}
-        </S.Opportunities>
-      </S.OpportunitiesWrapper>
-    </Base>
-  );
+	return (
+		<Base>
+			<Title title="Vagas" />
+			<S.SearchWrapper>
+				<Input placeholder="Buscar vaga" />
+				<Button>Buscar</Button>
+			</S.SearchWrapper>
+			<S.OpportunitiesWrapper>
+				<JobFilter />
+				<S.Opportunities>
+					<h5>Todas as Vagas</h5>
+					{isLoading && <LoadingJobs />}
+					{noJobs && <NoJobs />}
+					{jobs && <p>{`Mostrando todos os ${jobs.length} resultados`}</p>}
+					{Children.toArray(jobs?.map((job) => <JobItem {...job} />))}
+				</S.Opportunities>
+			</S.OpportunitiesWrapper>
+		</Base>
+	);
 };

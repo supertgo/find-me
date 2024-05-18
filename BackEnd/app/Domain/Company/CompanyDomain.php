@@ -2,6 +2,8 @@
 
 namespace App\Domain\Company;
 
+use App\Exceptions\Company\CnpjMustHaveTwelveDigitsException;
+
 class CompanyDomain implements CompanyDomainInterface
 {
     private ?int $id;
@@ -45,6 +47,9 @@ class CompanyDomain implements CompanyDomainInterface
         ];
     }
 
+    /**
+     * @throws CnpjMustHaveTwelveDigitsException
+     */
     public function fromArray(array $data): self
     {
         $this->setId($data['id'] ?? null);
@@ -131,10 +136,13 @@ class CompanyDomain implements CompanyDomainInterface
         return $this->cnpj;
     }
 
+    /**
+     * @throws CnpjMustHaveTwelveDigitsException
+     */
     public function setCnpj(int $cnpj): CompanyDomain
     {
         if (strlen($cnpj) !== 12) {
-            throw new \InvalidArgumentException('CNPJ must have 14 characters');
+            throw new CnpjMustHaveTwelveDigitsException($cnpj);
         }
 
         $this->cnpj = $cnpj;

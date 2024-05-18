@@ -15,4 +15,12 @@ class CompanyRepository implements CompanyRepositoryInterface
     {
         return Company::create($data)->toArray();
     }
+
+    public function update(array $data): array
+    {
+        $company = Company::find($data['id']);
+        $company->update($data);
+
+        return $company->toArray();
+    }
 }

@@ -17,4 +17,17 @@ class CompanyService implements CompanyServiceInterface
             ->fromArray(['responsible_id' => $responsibleId] + $data)
             ->save();
     }
+
+    /**
+     * @throws CnpjMustHaveTwelveDigitsException
+     */
+    public function update(int $responsibleId, array $data, int $companyId): CompanyDomain
+    {
+        $domain = new CompanyDomain(new CompanyRepository());
+
+        return $domain
+            ->fromArray($data + ['responsible_id' => $responsibleId])
+            ->setId($companyId)
+            ->update();
+    }
 }

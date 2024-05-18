@@ -6,6 +6,7 @@ enum ExceptionMessagesEnum: string
 {
     case CompanyNotFound = 'Company not found';
     case CnpjMustHaveFourteenDigits = 'Cnpj must have fourteen digits';
+    case CompanyIdMustBeAnInteger = 'Company id must be an integer';
 
     case JobNotFound = 'Job not found';
     case IdRequiredToUpdateJob = 'Job id is required to update job';

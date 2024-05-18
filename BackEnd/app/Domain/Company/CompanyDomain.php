@@ -25,11 +25,24 @@ class CompanyDomain implements CompanyDomainInterface
         return $this->repository->exists($id);
     }
 
+    /**
+     * @throws CnpjMustHaveTwelveDigitsException
+     */
     public function save(): self
     {
         $createdData = $this->repository->save($this->toArray());
 
         return $this->fromArray($createdData);
+    }
+
+    /**
+     * @throws CnpjMustHaveTwelveDigitsException
+     */
+    public function update(): self
+    {
+        $updatedData = $this->repository->update($this->toArray());
+
+        return $this->fromArray($updatedData);
     }
 
     public function toArray(): array

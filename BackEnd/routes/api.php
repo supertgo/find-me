@@ -92,5 +92,4 @@ Route::group([
 ], function () {
     Route::resource('/company', CompanyController::class)
         ->only(['store', 'destroy', 'update']);
-
 });

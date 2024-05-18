@@ -18,13 +18,14 @@ import { UserProps } from 'protocols/external/user/user';
 
 export type AccountConfigProps = {} & Pick<
 	UserProps,
-	'name' | 'email' | 'phone'
+	'name' | 'email' | 'phone' | 'about_me'
 >;
 
 export const AccountConfig = ({
 	name,
 	email,
 	phone,
+  about_me
 }: AccountConfigProps) => {
 	const { control, errors, isValid, onSubmit, isLoading, handleSubmit } =
 		useUserConfigForm();
@@ -112,6 +113,22 @@ export const AccountConfig = ({
 									type="password"
 									label="Nova Senha"
 									placeholder="Digite a sua nova senha"
+									error={errors.password}
+								/>
+							)}
+						/>
+					</S.ConfigEmailWrapper>
+				</ConfigInfoWrapper>
+				<ConfigInfoWrapper title="Sobre">
+					<S.ConfigEmailWrapper>
+						<Controller
+							control={control}
+              defaultValue={about_me || ''}
+							name="about_me"
+							render={({ field: { ...field } }) => (
+								<Input
+									{...field}
+									placeholder="Descreva um pouco sobre você"
 									error={errors.password}
 								/>
 							)}

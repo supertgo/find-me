@@ -19,7 +19,9 @@ export type ConfigInputs = {
 	email: string;
 	phone: string;
 	password: string;
+  about_me: string
 };
+
 export interface UseConfigFormProtocols {
 	register: UseFormRegister<ConfigInputs>;
 	handleSubmit: UseFormHandleSubmit<any>;
@@ -58,6 +60,7 @@ export const useUserConfigForm = (): UseConfigFormProtocols => {
 			password: data.password,
 			email: data.email,
 			phone: revertFormatCellphone(data.phone),
+      about_me: data.about_me
 		};
 
 		try {

@@ -81,7 +81,12 @@ export const Config = ({
 
 	return (
 		<Base>
-			<AccountConfig name={user.name} email={user.email} phone={user.phone} />
+			<AccountConfig
+				about_me={user.about_me}
+				name={user.name}
+				email={user.email}
+				phone={user.phone}
+			/>
 			<>
 				<Title title="Informações" />
 				<ResumeCard

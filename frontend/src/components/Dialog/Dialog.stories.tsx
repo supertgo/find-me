@@ -1,8 +1,6 @@
 import type { Meta, StoryFn } from '@storybook/react';
-import { useState } from 'react';
 
 import { Dialog } from './Dialog';
-import { theme } from 'styles/theme';
 import { Button } from 'components/Button/Button';
 import { Input } from 'components/Input/Input';
 
@@ -27,11 +25,11 @@ export const Default: StoryFn = () => {
 						</Dialog.Header>
 
 						<Dialog.Description>
-              <Input placeholder="Nome da empresa" />
-              <Input placeholder="Nome da empresa" />
-              <Input placeholder="Nome da empresa" />
-              <Input placeholder="Nome da empresa" />
-              <Input placeholder="Nome da empresa" />
+							<Input placeholder="Nome da empresa" />
+							<Input placeholder="Nome da empresa" />
+							<Input placeholder="Nome da empresa" />
+							<Input placeholder="Nome da empresa" />
+							<Input placeholder="Nome da empresa" />
 						</Dialog.Description>
 
 						<Dialog.Footer>

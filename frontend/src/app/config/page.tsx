@@ -40,11 +40,11 @@ async function getData() {
 		},
 	);
 
-  if (!userRouteConst.ok) {
+	if (!userRouteConst.ok) {
 		return redirect(`/${HomeUrl}`);
-  }
+	}
 
-  return userRouteConst.json()
+	return userRouteConst.json();
 }
 
 export default async function ConfigPage() {

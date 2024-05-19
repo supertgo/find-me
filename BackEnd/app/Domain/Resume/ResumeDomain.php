@@ -2,6 +2,7 @@
 
 namespace App\Domain\Resume;
 
+use App\Exceptions\Resume\ResumeTypeNotAllowedException;
 use Carbon\Carbon;
 
 class ResumeDomain implements ResumeDomainInterface
@@ -16,6 +17,21 @@ class ResumeDomain implements ResumeDomainInterface
 
     public function __construct(private ResumeRepositoryInterface $repository)
     {
+    }
+
+    /**
+     * @throws ResumeTypeNotAllowedException
+     */
+    public function fromArray(array $data): static
+    {
+        $this->setId($data['id'] ?? null);
+        $this->setOwnerId($data['owner_id'] ?? null);
+        $this->setAlias($data['alias']);
+        $this->setType($data['type']);
+        $this->setCreatedAt($data['created_at']);
+        $this->setUpdatedAt($data['updated_at']);
+
+        return $this;
     }
 
     public function getId(): ?int
@@ -56,9 +72,19 @@ class ResumeDomain implements ResumeDomainInterface
         return $this->type;
     }
 
-    public function setType(ResumeTypeEnum $type): ResumeDomain
+    /**
+     * @throws ResumeTypeNotAllowedException
+     */
+    public function setType(ResumeTypeEnum|string $type): ResumeDomain
     {
+        $type = $type instanceof ResumeTypeEnum ? $type : ResumeTypeEnum::tryFrom($type);
+
+        if (!$type) {
+            throw new ResumeTypeNotAllowedException($type);
+        }
+
         $this->type = $type;
+
         return $this;
     }
 
@@ -67,9 +93,10 @@ class ResumeDomain implements ResumeDomainInterface
         return $this->createdAt;
     }
 
-    public function setCreatedAt(?Carbon $createdAt): ResumeDomain
+    public function setCreatedAt(Carbon|string|null $createdAt): ResumeDomain
     {
-        $this->createdAt = $createdAt;
+        $this->createdAt = is_string($createdAt) ? Carbon::parse($createdAt) : $createdAt;
+
         return $this;
     }
 
@@ -78,9 +105,10 @@ class ResumeDomain implements ResumeDomainInterface
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(?Carbon $updatedAt): ResumeDomain
+    public function setUpdatedAt(Carbon|string|null $updatedAt): ResumeDomain
     {
-        $this->updatedAt = $updatedAt;
+        $this->updatedAt = is_string($updatedAt) ? Carbon::parse($updatedAt) : $updatedAt;
+
         return $this;
     }
 }

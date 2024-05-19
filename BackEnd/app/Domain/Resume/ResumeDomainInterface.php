@@ -6,6 +6,7 @@ use Carbon\Carbon;
 
 interface ResumeDomainInterface
 {
+    function fromArray(array $data): static;
     function getId(): ?int;
 
     function setId(?int $id): self;
@@ -20,13 +21,13 @@ interface ResumeDomainInterface
 
     function getType(): ResumeTypeEnum;
 
-    function setType(ResumeTypeEnum $type): self;
+    function setType(ResumeTypeEnum|string $type): self;
 
     function getCreatedAt(): ?Carbon;
 
-    function setCreatedAt(?Carbon $createdAt): self;
+    function setCreatedAt(Carbon|string|null $createdAt): self;
 
     function getUpdatedAt(): ?Carbon;
 
-    function setUpdatedAt(?Carbon $updatedAt): self;
+    function setUpdatedAt(Carbon|string|null $updatedAt): self;
 }

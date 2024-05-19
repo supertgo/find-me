@@ -20,4 +20,13 @@ class FileResume extends ResumeDomain implements FileResumeInterface
 
         return $this;
     }
+
+    public function fromArray(array $data): static
+    {
+        parent::fromArray($data);
+
+        $this->setFilePath($data['file_path']);
+
+        return $this;
+    }
 }

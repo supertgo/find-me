@@ -4,21 +4,23 @@ namespace App\Domain\Resume;
 
 use App\Domain\Resume\File\FileResume;
 use App\Domain\Resume\File\FileResumeInterface;
+use App\Exceptions\Resume\ResumeTypeNotAllowedException;
 use App\Helpers\DataTransaction\DataTransactionServiceInterface;
 use Exception;
+use Illuminate\Http\UploadedFile;
 
 class ResumeService implements ResumeServiceInterface
 {
     /**
      * @throws Exception
      */
-    public function create(array $data, int $ownerId): ResumeDomainInterface
+    public function create(array $data, int $ownerId, UploadedFile $resume): ResumeDomainInterface
     {
         $transaction = app(DataTransactionServiceInterface::class);
         $transaction->begin();
         try {
             $resume = match ($data['type']) {
-                ResumeTypeEnum::File->value => $this->createFileResume($data, $ownerId),
+                ResumeTypeEnum::File->value => $this->createFileResume($data, $ownerId, $resume),
             };
             $transaction->commit();
 
@@ -31,13 +33,16 @@ class ResumeService implements ResumeServiceInterface
 
     }
 
-    private function createFileResume(array $data, int $ownerId): FileResumeInterface
+    /**
+     * @throws ResumeTypeNotAllowedException
+     */
+    private function createFileResume(array $data, int $ownerId, UploadedFile $resumeFile): FileResumeInterface
     {
         $resume = new FileResume(new ResumeRepository());
 
         $resume
             ->fromArray(['owner_id' => $ownerId] + $data)
-            ->store;
+            ->save($resumeFile);
 
         return $resume;
     }

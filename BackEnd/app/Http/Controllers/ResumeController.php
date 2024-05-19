@@ -17,7 +17,11 @@ class ResumeController extends Controller
     {
         try {
             $resume = app(ResumeServiceInterface::class)
-                ->create($request->validated(), $request->getLoggedUserId());
+                ->create(
+                    $request->validated(),
+                    $request->getLoggedUserId(),
+                    $request->file('resume_file')
+                );
 
             return ResumeResource::make($resume)
                 ->toResponse($request)

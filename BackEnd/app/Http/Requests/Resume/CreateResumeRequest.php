@@ -13,7 +13,7 @@ class CreateResumeRequest extends AbstractRequest
         return [
             'alias' => 'required|string',
             'type' => 'required|string|in:' . ResumeTypeEnum::valuesAsString(),
-            'file' => [
+            'resume_file' => [
                 'requiredIf:type,' . ResumeTypeEnum::File->value,
                 'file',
                 'mimes:pdf',

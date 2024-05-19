@@ -4,6 +4,9 @@ namespace App\Domain\Resume\File;
 
 
 use App\Domain\Resume\ResumeDomain;
+use App\Exceptions\Resume\ResumeTypeNotAllowedException;
+use App\Helpers\File\FileHelperInterface;
+use Illuminate\Http\UploadedFile;
 
 class FileResume extends ResumeDomain implements FileResumeInterface
 {
@@ -29,4 +32,22 @@ class FileResume extends ResumeDomain implements FileResumeInterface
 
         return $this;
     }
+
+    /**
+     * @throws ResumeTypeNotAllowedException
+     */
+    public function save(UploadedFile $resumeFile): static
+    {
+        $fileHelper = app(FileHelperInterface::class);
+
+        $path = $fileHelper->storeRandomInPrivateDirectory($resumeFile);
+
+        $data = $this->setFilePath($path)
+            ->repository
+            ->save($this->toArray());
+
+        return (new FileResume($this->repository))
+            ->fromArray($data);
+    }
+
 }

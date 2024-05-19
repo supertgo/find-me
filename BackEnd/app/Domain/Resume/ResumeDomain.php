@@ -15,7 +15,7 @@ class ResumeDomain implements ResumeDomainInterface
     private ?Carbon $createdAt;
     private ?Carbon $updatedAt;
 
-    public function __construct(private ResumeRepositoryInterface $repository)
+    public function __construct(protected ResumeRepositoryInterface $repository)
     {
     }
 
@@ -32,6 +32,18 @@ class ResumeDomain implements ResumeDomainInterface
         $this->setUpdatedAt($data['updated_at']);
 
         return $this;
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->getId(),
+            'owner_id' => $this->getOwnerId(),
+            'alias' => $this->getAlias(),
+            'type' => $this->getType()->value,
+            'created_at' => $this->getCreatedAt(),
+            'updated_at' => $this->getUpdatedAt(),
+        ];
     }
 
     public function getId(): ?int

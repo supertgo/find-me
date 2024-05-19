@@ -7,6 +7,9 @@ use Carbon\Carbon;
 interface ResumeDomainInterface
 {
     function fromArray(array $data): static;
+
+    function toArray(): array;
+
     function getId(): ?int;
 
     function setId(?int $id): self;

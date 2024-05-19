@@ -2,7 +2,10 @@
 
 namespace App\Domain\Resume;
 
+
+use Illuminate\Http\UploadedFile;
+
 interface ResumeServiceInterface
 {
-    function create(array $data, int $ownerId): ResumeDomainInterface;
+    function create(array $data, int $ownerId, UploadedFile $resume): ResumeDomainInterface;
 }

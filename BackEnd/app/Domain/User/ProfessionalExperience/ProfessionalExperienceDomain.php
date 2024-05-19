@@ -19,6 +19,7 @@ readonly class ProfessionalExperienceDomain implements ProfessionalExperienceDom
     private bool $isCurrent;
     private ?WorkModelEnum $workModel;
     private ?EmploymentTypeEnum $employmentType;
+    private ?int $companyId;
 
     public function __construct(private ProfessionalExperienceRepositoryInterface $repository)
     {
@@ -224,5 +225,17 @@ readonly class ProfessionalExperienceDomain implements ProfessionalExperienceDom
     public function delete(int $experienceId): void
     {
         $this->repository->delete($experienceId);
+    }
+
+    public function getCompanyId(): ?int
+    {
+        return $this->companyId;
+    }
+
+    public function setCompanyId(?int $companyId): self
+    {
+        $this->companyId = $companyId;
+
+        return $this;
     }
 }

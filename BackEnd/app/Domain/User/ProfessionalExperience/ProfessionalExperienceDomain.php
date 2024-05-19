@@ -55,7 +55,7 @@ readonly class ProfessionalExperienceDomain implements ProfessionalExperienceDom
         $this->setEndDate($experience['end_date'] ?? null);
         $this->setWorkModel($experience['work_model'] ?? null);
         $this->setEmploymentType($experience['employment_type'] ?? null);
-
+        $this->setCompanyId($experience['company_id'] ?? null);
 
         return $this;
     }
@@ -72,6 +72,7 @@ readonly class ProfessionalExperienceDomain implements ProfessionalExperienceDom
             'is_current' => $this->isCurrent(),
             'work_model' => $this->getWorkModel()?->value,
             'employment_type' => $this->getEmploymentType()?->value,
+            'company_id' => $this->getCompanyId(),
         ];
     }
 

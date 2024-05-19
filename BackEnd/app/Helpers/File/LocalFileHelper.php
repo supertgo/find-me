@@ -18,6 +18,15 @@ class LocalFileHelper implements FileHelperInterface
         return $name;
     }
 
+    public function storeRandomInPrivateDirectory(UploadedFile $file): string
+    {
+        $name = $this->generateRandomName($file->getClientOriginalExtension());
+
+        $file->move(Storage::disk('local')->path(''), $name);
+
+        return $name;
+    }
+
     public function getUrlForPublicFile(string $path): string
     {
         return Storage::disk('public')->url($path);

@@ -12,15 +12,16 @@ return new class extends Migration {
             $table->id();
 
             $table->foreignId('owner_id')->constrained('users');
+
             $table->string('alias');
             $table->enum('type', [
                 ResumeTypeEnum::File->value,
                 ResumeTypeEnum::Form->value,
             ]);
-
             $table->string('file_path')->nullable();
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

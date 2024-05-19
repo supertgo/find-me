@@ -141,8 +141,6 @@
       <path value="$PROJECT_DIR$/BackEnd/vendor/egulias/email-validator" />
       <path value="$PROJECT_DIR$/BackEnd/vendor/laravel/framework" />
       <path value="$PROJECT_DIR$/BackEnd/vendor/laravel/serializable-closure" />
-      <path value="$PROJECT_DIR$/BackEnd/vendor/intervention/image" />
-      <path value="$PROJECT_DIR$/BackEnd/vendor/intervention/gif" />
     </include_path>
   </component>
   <component name="PhpInterpreters">

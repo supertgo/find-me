@@ -3,7 +3,7 @@
 namespace Tests\Feature\User\ProfessionalExperience;
 
 use App\Domain\User\UserIncludesEnum;
-use App\Models\AcademicRecord;
+use App\Models\ProfessionalExperience;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Symfony\Component\HttpFoundation\Response;
@@ -46,6 +46,7 @@ class IndexUserWithProfessionalExperiencesTest extends TestCase
                                 'id',
                                 'company_name',
                                 'position',
+                                'company_id',
                                 'start_date',
                                 'end_date',
                                 'is_current',
@@ -64,7 +65,7 @@ class IndexUserWithProfessionalExperiencesTest extends TestCase
 
     private function makeProfessionalExperiences(User $user): void
     {
-        AcademicRecord::factory()
+        ProfessionalExperience::factory()
             ->count(3)
             ->create(['user_id' => $user->id]);
     }

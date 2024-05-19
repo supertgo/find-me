@@ -18,6 +18,7 @@ class AddProfessionalExperienceRequest extends AbstractRequest
         return [
             'professional_experiences' => 'required|array|min:1',
             'professional_experiences.*.company_name' => 'required|string',
+            'professional_experiences.*.company_id' => 'integer',
             'professional_experiences.*.position' => 'required|string',
             'professional_experiences.*.description' => 'string',
             'professional_experiences.*.start_date' => 'required|date|date_format:Y-m-d',

@@ -43,6 +43,7 @@ class ShowUserWithProfessionalExperiencesTest extends TestCase
                             'id',
                             'company_name',
                             'position',
+                            'company_id',
                             'start_date',
                             'end_date',
                             'is_current',

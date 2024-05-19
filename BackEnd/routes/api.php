@@ -54,7 +54,7 @@ Route::group(
             Route::delete('', [UserController::class, 'deleteProfilePicture']);
         });
 
-        Route::resource('/{user_id}/resume', ResumeController::class)
+        Route::resource('/resume', ResumeController::class)
             ->only(['store'])
             ->middleware('auth:api');
     }

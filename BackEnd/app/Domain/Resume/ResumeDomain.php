@@ -28,8 +28,8 @@ class ResumeDomain implements ResumeDomainInterface
         $this->setOwnerId($data['owner_id'] ?? null);
         $this->setAlias($data['alias']);
         $this->setType($data['type']);
-        $this->setCreatedAt($data['created_at']);
-        $this->setUpdatedAt($data['updated_at']);
+        $this->setCreatedAt($data['created_at'] ?? null);
+        $this->setUpdatedAt($data['updated_at'] ?? null);
 
         return $this;
     }

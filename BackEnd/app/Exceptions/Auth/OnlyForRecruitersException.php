@@ -6,13 +6,14 @@ use App\Exceptions\Abstract\AbstractFindMeException;
 use App\Exceptions\ExceptionMessagesEnum;
 use Symfony\Component\HttpFoundation\Response;
 
-class TokenExpiredException extends AbstractFindMeException
+class OnlyForRecruitersException extends AbstractFindMeException
 {
     public function __construct()
     {
         parent::__construct(
-            ExceptionMessagesEnum::TokenExpiredException->value,
+            ExceptionMessagesEnum::OnlyForRecruitersException->value,
             Response::HTTP_UNAUTHORIZED
         );
+
     }
 }

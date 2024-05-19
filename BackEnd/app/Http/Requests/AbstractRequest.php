@@ -9,6 +9,7 @@ use Illuminate\Foundation\Http\FormRequest;
 class AbstractRequest extends FormRequest
 {
     protected array $availableIncludes = [];
+
     public function authorize(): bool
     {
         return true;
@@ -16,13 +17,14 @@ class AbstractRequest extends FormRequest
 
     public function getLoggedUser(): Authenticatable
     {
-       return Auth::User();
+        return Auth::User();
     }
+
     public function getLoggedUserId(): int
     {
         return Auth::id();
     }
-   
+
     public function messages(): array
     {
         return [
@@ -37,5 +39,10 @@ class AbstractRequest extends FormRequest
     public function getFilters(): array
     {
         return $this->validated('filters') ?? [];
+    }
+
+    public function expectsJson(): bool
+    {
+        return true;
     }
 }

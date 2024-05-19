@@ -53,6 +53,10 @@ Route::group(
             Route::patch('', [UserController::class, 'updateProfilePicture']);
             Route::delete('', [UserController::class, 'deleteProfilePicture']);
         });
+
+        Route::resource('/{user_id}/resume', ResumeController::class)
+            ->only(['store'])
+            ->middleware('auth:api');
     }
 )->middleware('api');
 

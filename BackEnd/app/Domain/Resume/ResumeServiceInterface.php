@@ -4,5 +4,5 @@ namespace App\Domain\Resume;
 
 interface ResumeServiceInterface
 {
-    function create(): ResumeDomainInterface;
+    function create(array $data, int $ownerId): ResumeDomainInterface;
 }

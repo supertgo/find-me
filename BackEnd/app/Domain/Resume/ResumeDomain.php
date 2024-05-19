@@ -6,6 +6,7 @@ use Carbon\Carbon;
 
 class ResumeDomain implements ResumeDomainInterface
 {
+    const MAX_FILE_SIZE = 1024 * 5;
     private ?int $id;
     private ?int $ownerId;
     private string $alias;

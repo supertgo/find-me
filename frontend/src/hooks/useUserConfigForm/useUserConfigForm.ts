@@ -1,84 +1,98 @@
-import { toast } from "react-toastify";
+import { toast } from 'react-toastify';
 import {
-  Control,
-  useForm,
-  FieldErrors,
-  SubmitHandler,
-  UseFormHandleSubmit,
-  UseFormRegister,
-} from "react-hook-form";
-import { useState } from "react";
-import { PutClient } from "services/httpClient/put";
-import { PutUserRouteConst } from "utils/routes";
-import { revertFormatCellphone } from "utils/formatCellphone";
+	Control,
+	useForm,
+	FieldErrors,
+	SubmitHandler,
+	UseFormHandleSubmit,
+	UseFormRegister,
+} from 'react-hook-form';
+import { useState } from 'react';
+import { PutClient } from 'services/httpClient/put';
+import { PutUserRouteConst } from 'utils/routes';
+import { revertFormatCellphone } from 'utils/formatCellphone';
+import { useLoggedUserStore } from 'stores/loggedUserStore/loggedUserStore';
+import { UNEXPECTED_ERROR } from 'utils/errors';
 
 export type ConfigInputs = {
-  name: string;
-  email: string;
-  phone: string;
-  password: string;
+	name: string;
+	email: string;
+	phone: string;
+	password: string;
+  about_me: string
 };
+
 export interface UseConfigFormProtocols {
-  register: UseFormRegister<ConfigInputs>;
-  handleSubmit: UseFormHandleSubmit<any>;
-  errors: FieldErrors<ConfigInputs>;
-  onSubmit: SubmitHandler<ConfigInputs>;
-  control: Control<ConfigInputs>;
-  isLoading: boolean;
-  isValid: boolean;
+	register: UseFormRegister<ConfigInputs>;
+	handleSubmit: UseFormHandleSubmit<any>;
+	errors: FieldErrors<ConfigInputs>;
+	onSubmit: SubmitHandler<ConfigInputs>;
+	control: Control<ConfigInputs>;
+	isLoading: boolean;
+	isValid: boolean;
 }
 
 export const useUserConfigForm = (): UseConfigFormProtocols => {
-  const [isLoading, setIsLoading] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isValid },
-    control,
-  } = useForm<ConfigInputs>({
-    mode: "onBlur",
-  });
+	const {
+		register,
+		handleSubmit,
+		formState: { errors, isValid },
+		control,
+	} = useForm<ConfigInputs>({
+		mode: 'onBlur',
+	});
 
-  const onSubmit: SubmitHandler<ConfigInputs> = async (data, event) => {
-    event?.preventDefault();
+	const { setUser } = useLoggedUserStore((state) => ({
+		setUser: state.setUser,
+	}));
 
-    setIsLoading(true);
+	const onSubmit: SubmitHandler<ConfigInputs> = async (data, event) => {
+		event?.preventDefault();
 
-    const putClient = new PutClient();
+		setIsLoading(true);
 
-    const body: ConfigInputs = {
-      name: data.name,
-      password: data.password,
-      email: data.email,
-      phone: revertFormatCellphone(data.phone),
-    };
+		const putClient = new PutClient();
 
-    try {
-      await putClient.put({
-        url: `/${PutUserRouteConst}`,
-        body,
-      });
+		const body: ConfigInputs = {
+			name: data.name,
+			password: data.password,
+			email: data.email,
+			phone: revertFormatCellphone(data.phone),
+      about_me: data.about_me
+		};
 
-      toast.success("Informações atualizadas com sucesso!");
-    } catch (error) {
-      if (error instanceof Error) {
-        return toast.error(error.response.data.message);
-      }
+		try {
+			await putClient.put({
+				url: `/${PutUserRouteConst}`,
+				body,
+			});
 
-      return toast.error("Ocorreu um erro, tente novamente!");
-    }
+			setUser({
+				name: data.name,
+				email: data.email,
+			});
 
-    setIsLoading(false);
-  };
+			toast.success('Informações atualizadas com sucesso!');
+		} catch (error) {
+			if (error instanceof Error) {
+				return toast.error(error.response.data.message);
+			}
 
-  return {
-    register,
-    handleSubmit,
-    errors,
-    onSubmit,
-    control,
-    isValid,
-    isLoading,
-  };
+			return toast.error(UNEXPECTED_ERROR);
+		}
+
+		setIsLoading(false);
+	};
+
+	return {
+		register,
+		handleSubmit,
+		errors,
+		onSubmit,
+		control,
+		isValid,
+		isLoading,
+	};
 };

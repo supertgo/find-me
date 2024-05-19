@@ -39,8 +39,6 @@ describe('<Opportunity />', () => {
       screen.getByText('Descrição do emprego')
     )
 
-    screen.debug()
-
     textsToMatchNextSection.forEach((text) =>
       expect(screen.getByText(text)).toBeInTheDocument()
     );

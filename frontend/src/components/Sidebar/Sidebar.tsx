@@ -1,18 +1,19 @@
-import { SidebarItem } from 'components/SidebarItem/SidebarItem';
-import * as S from './Sidebar.styles';
-import { HomeIcon } from 'icons/HomeIcon/HomeIcon';
-import { useLoggedUserStore } from 'stores/loggedUserStore';
-import { Button } from 'components/Button/Button';
+import { useLoggedUserStore } from 'stores/loggedUserStore/loggedUserStore';
 import { useSignOut } from 'hooks/useSignOut/useSignOut';
 import Link from 'next/link';
-import { ApplicantsUrl, ConfigUrl, HomeUrl, JobsUrl } from 'utils/urls';
+import { ConfigUrl } from 'utils/urls';
+import { ExitIcon } from '@radix-ui/react-icons';
+import { theme } from 'styles/theme';
+import { RecruiterSidebarItems } from 'components/RecruiterSidebarItems/RecruiterSidebarItems';
+import { ApplicantSidebarItems } from 'components/ApplicantSidebarItems/ApplicantSidebarItems';
+
+import * as S from './Sidebar.styles';
 
 export type SidebarProps = {};
 
 export const Sidebar = ({}: SidebarProps) => {
-	const { name, email, type } = useLoggedUserStore((state) => ({
+	const { name, type } = useLoggedUserStore((state) => ({
 		name: state.name,
-		email: state.email,
 		type: state.type,
 	}));
 
@@ -23,52 +24,31 @@ export const Sidebar = ({}: SidebarProps) => {
 			{/* Colocar componente de logo aqui */}
 			<S.Items>
 				{type === 'recruiter' ? (
-					<>
-						<SidebarItem
-							href={`/${HomeUrl}`}
-							icon={<HomeIcon />}
-							text="Início"
-						/>
-						<SidebarItem
-							href={`/${ApplicantsUrl}`}
-							icon={<HomeIcon />}
-							text="Candidatos"
-						/>
-						<SidebarItem
-							href={`/${JobsUrl}`}
-							icon={<HomeIcon />}
-							text="Vagas"
-						/>
-					</>
+					<RecruiterSidebarItems />
 				) : (
-					<>
-						<SidebarItem
-							href={`/${ApplicantsUrl}`}
-							icon={<HomeIcon />}
-							text="Candidatos"
-						/>
-						<SidebarItem href="/" icon={<HomeIcon />} text="Candidaturas" />
-						<SidebarItem
-							href={`/${JobsUrl}`}
-							icon={<HomeIcon />}
-							text="Vagas"
-						/>
-					</>
+					<ApplicantSidebarItems />
 				)}
 			</S.Items>
 
-			<div>
+			<S.AvatarWrapper>
 				<Link href={`/${ConfigUrl}`}>
 					<S.Avatar>
 						<S.AvatarPhoto />
 						<S.AvatarInfo>
 							<p>{name}</p>
-							<span>{email}</span>
 						</S.AvatarInfo>
 					</S.Avatar>
 				</Link>
-				<Button onClick={async () => await signOut()}>Sair</Button>
-			</div>
+
+				<i title="Sair">
+					<ExitIcon
+						color={theme.colors.lightRed}
+						width={22}
+						height={22}
+						onClick={async () => await signOut()}
+					/>
+				</i>
+			</S.AvatarWrapper>
 		</S.Wrapper>
 	);
 };

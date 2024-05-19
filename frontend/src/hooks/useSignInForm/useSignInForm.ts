@@ -18,8 +18,8 @@ import {
 	UseFormRegister,
 } from 'react-hook-form';
 import { getSession } from 'next-auth/react';
-import { useLoggedUserStore } from 'stores/loggedUserStore';
 import { HomeUrl } from 'utils/urls';
+import { useLoggedUserStore } from 'stores/loggedUserStore/loggedUserStore';
 
 export interface UseSignInFormProtocols {
 	register: UseFormRegister<any>;
@@ -72,7 +72,9 @@ export const useSignInForm = (): UseSignInFormProtocols => {
 			setIsAuthenticated(!isAuthenticated);
 			const user = await getUserInfo();
 
+
 			setUser({
+        id: user!.id,
 				name: user!.name,
 				email: user!.email,
 				type: user!.type,

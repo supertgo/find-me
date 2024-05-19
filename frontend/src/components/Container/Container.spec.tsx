@@ -1,4 +1,3 @@
-import { theme } from 'styles/theme';
 import { render } from 'utils/test/test-utils';
 import { Container } from './Container';
 
@@ -10,15 +9,28 @@ describe('<Container />', () => {
       </Container>,
     );
 
-    // expect(container.firstChild).toHaveStyleRule(
-    //   'max-width',
-    //   theme.grid.container,
-    // );
+    expect(container).toMatchInlineSnapshot(`
+      .c0 {
+        width: 100%;
+        max-width: 130rem;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: calc(3.2rem / 2);
+        padding-right: calc(3.2rem / 2);
+      }
 
-    expect(container.firstChild).toMatchInlineSnapshot(`
-      <div
-        class="Toastify"
-      />
+      <div>
+        <div
+          class="Toastify"
+        />
+        <div
+          class="c0"
+        >
+          <span>
+            Won Games
+          </span>
+        </div>
+      </div>
     `);
   });
 });

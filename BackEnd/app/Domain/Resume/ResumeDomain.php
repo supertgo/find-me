@@ -17,7 +17,6 @@ class ResumeDomain implements ResumeDomainInterface
     {
     }
 
-
     public function getId(): ?int
     {
         return $this->id;
@@ -83,5 +82,4 @@ class ResumeDomain implements ResumeDomainInterface
         $this->updatedAt = $updatedAt;
         return $this;
     }
-
 }

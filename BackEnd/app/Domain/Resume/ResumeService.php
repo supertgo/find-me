@@ -22,6 +22,7 @@ class ResumeService implements ResumeServiceInterface
             $resume = match ($data['type']) {
                 ResumeTypeEnum::File->value => $this->createFileResume($data, $ownerId, $resume),
             };
+
             $transaction->commit();
 
             return $resume;
@@ -40,11 +41,9 @@ class ResumeService implements ResumeServiceInterface
     {
         $resume = new FileResume(new ResumeRepository());
 
-        $resume
+        return $resume
             ->fromArray(['owner_id' => $ownerId] + $data)
             ->save($resumeFile);
-
-        return $resume;
     }
 
 }

@@ -12,6 +12,7 @@ import { NoJobs } from './NoJobs';
 
 import * as S from './Jobs.styles';
 import { JobsUrl } from 'utils/urls';
+import { CreateJobHeader } from 'components/CreateJobHeader/CreateJobHeader';
 
 export const Jobs = () => {
 	const { findJobs } = useJobs();
@@ -26,7 +27,7 @@ export const Jobs = () => {
 
 	return (
 		<Base>
-			<Title title="Vagas" />
+      <CreateJobHeader title="Vagas" />
 			<S.SearchWrapper>
 				<Input placeholder="Buscar vaga" />
 				<Button>Buscar</Button>

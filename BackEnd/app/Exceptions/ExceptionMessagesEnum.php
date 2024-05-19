@@ -49,4 +49,6 @@ enum ExceptionMessagesEnum: string
     case TokenExpiredException = 'Token expired';
     case TokenInvalidException = 'Token invalid';
     case OnlyForRecruitersException = 'Only for recruiters';
+
+    case ResumeTypeNotAllowedException = 'Resume type not allowed';
 }

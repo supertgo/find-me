@@ -8,6 +8,8 @@ export const HomeUrl = 'home';
 
 export const JobsUrl = 'jobs';
 
+export const CreateJobUrl = 'job/create'
+
 export const OpportunityUrl = 'opportunity';
 
 export const ApplicantsUrl = 'applicants';

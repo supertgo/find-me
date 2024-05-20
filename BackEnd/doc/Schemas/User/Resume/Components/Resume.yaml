@@ -1,0 +1,37 @@
+type: object
+required:
+  - id
+  - owner_id
+  - alias
+  - type
+  - created_at
+properties:
+  id:
+    type: integer
+    description: The unique identifier of the resume
+    example: 1
+  owner_id:
+    type: integer
+    description: The unique identifier of the owner
+    example: 42
+  alias:
+    type: string
+    description: Alias for the resume
+    example: "john_doe_resume"
+  type:
+    type: string
+    description: Type of the resume
+    example: "File"
+    enum:
+      - File
+      - Form
+  created_at:
+    type: string
+    format: date-time
+    description: The creation timestamp of the resume
+    example: "2023-01-01 12:00:00"
+  updated_at:
+    type: string
+    format: date-time
+    description: The last update timestamp of the resume
+    example: "2023-01-02 12:00:00"

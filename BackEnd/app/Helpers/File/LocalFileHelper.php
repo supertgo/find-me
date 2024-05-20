@@ -6,6 +6,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Str;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class LocalFileHelper implements FileHelperInterface
 {
@@ -37,6 +38,11 @@ class LocalFileHelper implements FileHelperInterface
         if (Storage::disk('public')->exists($path)) {
             Storage::disk('public')->delete($path);
         }
+    }
+
+    public function downloadPrivateFile(string $path): StreamedResponse
+    {
+        return Storage::disk('local')->download($path);
     }
 
     private function generateRandomName(string $extension): string

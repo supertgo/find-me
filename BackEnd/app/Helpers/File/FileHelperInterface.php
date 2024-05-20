@@ -3,6 +3,7 @@
 namespace App\Helpers\File;
 
 use Illuminate\Http\UploadedFile;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 interface FileHelperInterface
 {
@@ -13,4 +14,6 @@ interface FileHelperInterface
     function getUrlForPublicFile(string $path): string;
 
     function deletePublicFile(string $path): void;
+
+    function downloadPrivateFile(string $path): StreamedResponse;
 }

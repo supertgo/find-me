@@ -24,8 +24,6 @@ export const REQUIRED_USER = "O usuário é obrigatório";
 
 
 
-
-
 export const REQUIRED_ACADEMIC_RECORD_INSTITUTION = "A instituição é obrigatória.";
 
 export const REQUIRED_ACADEMIC_RECORD_DEGREE = "O degree é obrigatório.";
@@ -37,8 +35,6 @@ export const REQUIRED_ACADEMIC_RECORD_START_DATE = "A data de início é obrigat
 export const REQUIRED_ACADEMIC_RECORD_END_DATE = "A data de término é obrigatória.";
 
 export const REQUIRED_ACADEMIC_RECORD_DESCRIPTION = "A descrição é obrigatória.";
-
-
 
 
 export const REQUIRED_PROFESSIONAL_EXPERIENCE_COMPANY = 'O nome da empresa é obrigatório.'
@@ -53,3 +49,20 @@ export const REQUIRED_PROFESSIONAL_EXPERIENCE_START_DATE = 'A data de início é
 
 export const REQUIRED_PROFESSIONAL_EXPERIENCE = 'O nome da empresa é obrigatório.'
 
+
+
+export const REQUIRED_JOB_NAME = 'O título do emprego é obrigatório.'
+
+export const REQUIRED_JOB_EMPLOYMENT_TYPE = 'O tipo de contratação é obrigatório.'
+
+export const REQUIRED_JOB_SALARY = 'O salário é obrigatório.'
+
+export const REQUIRED_JOB_APPLICATIONS_AMOUNT = 'O número máximo de candidatos é obrigatório.'
+
+export const REQUIRED_JOB_DESCRIPTION = 'A descrição é obrigatória.'
+
+export const REQUIRED_JOB_ACCEPT_APPLICATION = 'O prazo de submissão é obrigatório.'
+
+export const REQUIRED_JOB_SALARY_TIME_UNIT = 'O período de pagamento é obrigatório.'
+
+export const REQUIRED_JOB_WORK_MODEL = 'O modelo de trabalho é obrigatório.'

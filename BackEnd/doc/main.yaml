@@ -242,6 +242,24 @@ paths:
         '204':
           description: No Content
 
+  /user/resume:
+    post:
+      tags:
+        - UserResume
+      description: 'Create user resume'
+      security:
+        - BearerAuth: [ ]
+      requestBody:
+        $ref: 'Schemas/User/Resume/RequestBodies/CreateResumeRequest.yaml'
+
+      responses:
+        '201':
+          $ref: 'Schemas/User/Resume/Responses/StoreResumeSuccessResponse.yaml'
+        '422':
+          $ref: 'Schemas/Common/response/ValidationErrorsResponse.yaml'
+        401:
+          $ref: 'Schemas/Common/response/UnauthenticatedResponse.yaml'
+
   # Job
 
   /job:

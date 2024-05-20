@@ -40,4 +40,7 @@ export const GetUserRouteConst = ({
 	return userRoute;
 };
 
-export const GetJobRouteConst = 'job';
+export const GetJobsRouteConst = 'job';
+
+export const PostJobRouteConst = 'job';
+

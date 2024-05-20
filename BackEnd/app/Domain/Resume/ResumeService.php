@@ -4,6 +4,10 @@ namespace App\Domain\Resume;
 
 use App\Domain\Resume\File\FileResume;
 use App\Domain\Resume\File\FileResumeInterface;
+use App\Domain\User\UserDomain;
+use App\Domain\User\UserRepository;
+use App\Exceptions\Resume\OnlyOwnerCanPatchResumeAliasException;
+use App\Exceptions\Resume\ResumeNotFoundException;
 use App\Exceptions\Resume\ResumeTypeNotAllowedException;
 use App\Helpers\DataTransaction\DataTransactionServiceInterface;
 use Exception;
@@ -32,6 +36,20 @@ class ResumeService implements ResumeServiceInterface
             throw $exception;
         }
 
+    }
+
+    /**
+     * @throws ResumeNotFoundException
+     * @throws ResumeTypeNotAllowedException
+     * @throws OnlyOwnerCanPatchResumeAliasException
+     */
+    public function patchAlias(int $resumeId, int $ownerId, string $alias): ResumeDomainInterface
+    {
+        $owner = (new UserDomain(new UserRepository()))->loadUser($ownerId);
+
+        return (new FileResume(new ResumeRepository()))
+            ->load($resumeId)
+            ->updateAlias($owner->getId(), $alias);
     }
 
     /**

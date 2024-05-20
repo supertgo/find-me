@@ -2,6 +2,7 @@
 
 namespace App\Domain\Resume;
 
+use App\Exceptions\Resume\OnlyOwnerCanPatchResumeAliasException;
 use App\Exceptions\Resume\ResumeNotFoundException;
 use App\Exceptions\Resume\ResumeTypeNotAllowedException;
 use Carbon\Carbon;
@@ -61,6 +62,21 @@ class ResumeDomain implements ResumeDomainInterface
 
         return $this->fromArray($data);
     }
+
+    /**
+     * @throws OnlyOwnerCanPatchResumeAliasException
+     */
+    public function updateAlias(int $ownerId, string $alias): static
+    {
+        if ($this->getOwnerId() !== $ownerId) {
+            throw new OnlyOwnerCanPatchResumeAliasException();
+        }
+
+        $this->repository->updateAlias($this->getId(), $alias);
+
+        return $this;
+    }
+
 
     public function getId(): ?int
     {

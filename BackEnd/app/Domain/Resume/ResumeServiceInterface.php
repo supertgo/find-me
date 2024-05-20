@@ -4,7 +4,6 @@ namespace App\Domain\Resume;
 
 
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\File;
 
 interface ResumeServiceInterface
 {
@@ -12,5 +11,5 @@ interface ResumeServiceInterface
 
     function patchAlias(int $resumeId, int $solicitorId, string $alias): ResumeDomainInterface;
 
-    function getFilePath(int $resumeId, int $solicitorId): File;
+    function getFilePath(int $resumeId, int $solicitorId): string;
 }

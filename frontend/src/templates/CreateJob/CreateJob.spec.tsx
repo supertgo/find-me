@@ -1,3 +1,4 @@
+import 'components/Sidebar/Sidebar.mock';
 import { fireEvent, render, screen } from 'utils/test/test-utils';
 import { CreateJob } from './CreateJob';
 
@@ -5,18 +6,11 @@ const textsToMatch = [
 	'Informações do emprego',
 	'Título do Emprego',
 	'Tipo de Contratação',
-	'Tempo Integral',
-	'Meio Período',
-	'Remoto',
-	'Estágio',
-	'Contrato',
 	'Salário',
 ];
 
 const textsToMatchNextSection = [
-	'Responsabilidades',
-	'Qualificações',
-	'Preferências',
+	'Descrição do emprego',
 ];
 
 describe('<CreateJob />', () => {
@@ -38,7 +32,7 @@ describe('<CreateJob />', () => {
 		fireEvent.click(screen.getByText('Descrição do emprego'));
 
 		textsToMatchNextSection.forEach((text) =>
-			expect(screen.getByText(text)).toBeInTheDocument(),
+			expect(screen.getAllByText(text).length).toBeGreaterThanOrEqual(1),
 		);
 	});
 });

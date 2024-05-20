@@ -112,7 +112,7 @@ export const CreateJob = ({}: CreateJobProps) => {
 									})}
 								>
 									<option value="" disabled>
-										Tipo de Contratação
+										Selection o tipo de Contratação
 									</option>
 									{employmentTypeOptions.map((employmentType) => (
 										<option key={employmentType} value={employmentType}>

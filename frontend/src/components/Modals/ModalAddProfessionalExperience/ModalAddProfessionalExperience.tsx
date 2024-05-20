@@ -13,7 +13,10 @@ import {
 } from 'utils/errors';
 import { Textarea } from 'components/Textarea/Textarea';
 import { Checkbox } from 'components/Checkbox/Checkbox';
-import { EmploymentType, WorkModel } from 'protocols/external/job/job';
+import {
+	employmentTypeOptions,
+	workModelOptions,
+} from 'protocols/external/job/job';
 import { translateEmploymentType, translateWorkModel } from 'utils/job';
 
 export type ModalAddProfessionalExperienceProps = {
@@ -38,8 +41,6 @@ export const ModalAddProfessionalExperience = ({
 	});
 
 	const isCurrentValue = watch('is_current');
-	const workModelOptions: WorkModel[] = ['onSite', 'hybrid', 'homeOffice'];
-	const employementTypeOptions: EmploymentType[] = ['part-time', 'full-time'];
 
 	return (
 		<BaseModal
@@ -116,9 +117,9 @@ export const ModalAddProfessionalExperience = ({
 					})}
 				>
 					<option value="" disabled>
-            Tipo de Contratação
+						Tipo de Contratação
 					</option>
-					{employementTypeOptions.map((employmentType) => (
+					{employmentTypeOptions.map((employmentType) => (
 						<option key={employmentType} value={employmentType}>
 							{translateEmploymentType[employmentType]}
 						</option>

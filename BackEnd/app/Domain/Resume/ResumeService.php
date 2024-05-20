@@ -64,4 +64,20 @@ class ResumeService implements ResumeServiceInterface
             ->save($resumeFile);
     }
 
+    /**
+     * @throws ResumeNotFoundException
+     * @throws ResumeTypeNotAllowedException
+     * @throws Exception
+     */
+    public function getFilePath(int $resumeId, int $solicitorId): string
+    {
+        $solicitor = (new UserDomain(new UserRepository()))->loadUser($solicitorId);
+        /** @var FileResume $resume */
+        $resume = (new FileResume(new ResumeRepository()))->load($resumeId);
+
+        return $resume
+            ->canDownload($solicitor->getId())
+            ->getFilePath();
+    }
+
 }

@@ -45,11 +45,11 @@ class ResumeService implements ResumeServiceInterface
      */
     public function patchAlias(int $resumeId, int $solicitorId, string $alias): ResumeDomainInterface
     {
-        $owner = (new UserDomain(new UserRepository()))->loadUser($solicitorId);
+        $solicitor = (new UserDomain(new UserRepository()))->loadUser($solicitorId);
 
         return (new FileResume(new ResumeRepository()))
             ->load($resumeId)
-            ->updateAlias($owner->getId(), $alias);
+            ->updateAlias($solicitor->getId(), $alias);
     }
 
     /**

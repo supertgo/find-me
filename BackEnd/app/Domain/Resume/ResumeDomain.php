@@ -76,9 +76,9 @@ class ResumeDomain implements ResumeDomainInterface
     /**
      * @throws OnlyOwnerCanPatchResumeAliasException
      */
-    public function updateAlias(int $ownerId, string $alias): static
+    public function updateAlias(int $solicitorId, string $alias): static
     {
-        if ($this->getOwnerId() !== $ownerId) {
+        if ($this->getOwnerId() !== $solicitorId) {
             throw new OnlyOwnerCanPatchResumeAliasException();
         }
 

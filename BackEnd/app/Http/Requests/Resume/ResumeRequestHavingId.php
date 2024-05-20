@@ -14,16 +14,16 @@ abstract class ResumeRequestHavingId extends AbstractRequest
      */
     public function getResumeId(): int
     {
-        $jobId = $this->route('resume');
+        $resumeId = $this->route('resume');
 
-        if (!is_int($jobId)) {
-            throw new ResumeIdMustBeAnIntegerException($jobId);
+        if (!is_numeric($resumeId)) {
+            throw new ResumeIdMustBeAnIntegerException($resumeId);
         }
 
-        if ($jobId <= 0) {
-            throw new ResumeIdMustBePositiveException($jobId);
+        if ($resumeId <= 0) {
+            throw new ResumeIdMustBePositiveException($resumeId);
         }
 
-        return $jobId;
+        return $resumeId;
     }
 }

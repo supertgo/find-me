@@ -4,7 +4,7 @@ export type SalaryTimeUnit = 'month' | 'hour' | 'week' | 'day';
 
 export type WorkModel = 'onSite' | 'hybrid' | 'homeOffice';
 
-export type Competence = {
+export type JobCompetence = {
 	name: string;
 	description: string;
 	type: string;
@@ -25,7 +25,7 @@ export type Job = {
 	location: string;
 	company_id: number;
 	user_id: number;
-	competences?: Competence[];
+	competences?: JobCompetence[];
 };
 
 export type JobsResponse = {
@@ -39,5 +39,14 @@ export type PostJobBody = Omit<
 
 export const workModelOptions: WorkModel[] = ['onSite', 'hybrid', 'homeOffice'];
 
-export const employmentTypeOptions: EmploymentType[] = ['part-time', 'full-time'];
+export const employmentTypeOptions: EmploymentType[] = [
+	'part-time',
+	'full-time',
+];
 
+export const salaryTimeUnitOptions: SalaryTimeUnit[] = [
+	'day',
+	'hour',
+	'week',
+	'month',
+];

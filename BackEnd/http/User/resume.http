@@ -1,0 +1,19 @@
+###
+POST http://localhost/api/user/resume
+Accept: application/json
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+Authorization: Bearer {{bearerToken}}
+
+--WebAppBoundary
+Content-Disposition: form-data; name="alias"
+
+Test resume
+--WebAppBoundary
+Content-Disposition: form-data; name="type"
+
+file
+--WebAppBoundary
+Content-Disposition: form-data; name="resume_file"; filename="resume_file.pdf"
+
+< resume_file.pdf
+--WebAppBoundary--

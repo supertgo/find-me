@@ -55,7 +55,7 @@ class ResumeController extends Controller
             return ResumeResource::make($resume)
                 ->toResponse($request)
                 ->setStatusCode(Response::HTTP_OK);
-        } catch (AbstractFindMeException  $exception) {
+        } catch (AbstractFindMeException $exception) {
             return response()->json(
                 $exception->render(),
                 status: $exception->getHttpCode()

@@ -4,6 +4,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\JobApplicationsController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\JWTController;
+use App\Http\Controllers\ResumeController;
 use App\Http\Controllers\UserAcademicRecordsController;
 use App\Http\Controllers\UserCompetenceController;
 use App\Http\Controllers\UserController;
@@ -55,8 +56,14 @@ Route::group(
         });
 
         Route::resource('/resume', ResumeController::class)
-            ->only(['store'])
+            ->only(['store',])
             ->middleware('auth:api');
+
+        Route::group('/resume', function () {
+            Route::group('/{resume}', function () {
+                Route::patch('/alias', [ResumeController::class, 'patchAlias']);
+            });
+        });
     }
 )->middleware('api');
 

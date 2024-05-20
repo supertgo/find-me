@@ -23,8 +23,8 @@ properties:
     description: Type of the resume
     example: "File"
     enum:
-      - File
-      - Form
+      - file
+      - form
   created_at:
     type: string
     format: date-time

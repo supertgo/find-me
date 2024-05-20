@@ -12,8 +12,8 @@ content:
           type: string
           description: Type of the resume
           enum:
-            - File
-            - Form
+            - file
+            - form
         resume_file:
           type: string
           format: binary

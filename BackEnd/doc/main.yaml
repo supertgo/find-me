@@ -260,6 +260,26 @@ paths:
         401:
           $ref: 'Schemas/Common/response/UnauthenticatedResponse.yaml'
 
+  /user/resume/{resume_id}/alias:
+    patch:
+      tags:
+        - UserResume
+      description: 'Update resume alias'
+      security:
+        - BearerAuth: [ ]
+      parameters:
+        - $ref: 'Schemas/User/Resume/Parameters/ResumeId.yaml'
+      requestBody:
+        $ref: 'Schemas/User/Resume/RequestBodies/UpdateResumeAliasRequest.yaml'
+
+      responses:
+        '200':
+          $ref: 'Schemas/User/Resume/Responses/UpdateResumeAliasSuccessResponse.yaml'
+        '422':
+          $ref: 'Schemas/Common/response/ValidationErrorsResponse.yaml'
+        401:
+          $ref: 'Schemas/Common/response/UnauthenticatedResponse.yaml'
+
   # Job
 
   /job:

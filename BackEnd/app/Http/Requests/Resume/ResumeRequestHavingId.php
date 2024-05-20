@@ -12,7 +12,7 @@ class ResumeRequestHavingId extends AbstractRequest
      * @throws ResumeIdMustBeAnIntegerException
      * @throws ResumeIdMustBePositiveException
      */
-    public function getJobId(): int
+    public function getResumeId(): int
     {
         $jobId = $this->route('resume');
 

@@ -166,4 +166,12 @@ class ResumeDomain implements ResumeDomainInterface
 
         return $this;
     }
+
+    /**
+     * @throws Exception
+     */
+    public function canDownload(int $solicitorId): static
+    {
+        throw new Exception('resume not loaded');
+    }
 }

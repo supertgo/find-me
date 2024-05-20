@@ -33,4 +33,6 @@ interface ResumeDomainInterface
     function getUpdatedAt(): ?Carbon;
 
     function setUpdatedAt(Carbon|string|null $updatedAt): self;
+
+    public function canDownload(int $solicitorId): static;
 }

@@ -21,7 +21,7 @@ export const Sidebar = ({}: SidebarProps) => {
 
 	return (
 		<S.Wrapper>
-			{/* Colocar componente de logo aqui */}
+			{/* TODO Ana/Eduardo -> Colocar componente de logo aqui */}
 			<S.Items>
 				{type === 'recruiter' ? (
 					<RecruiterSidebarItems />
@@ -32,7 +32,7 @@ export const Sidebar = ({}: SidebarProps) => {
 
 			<S.AvatarWrapper>
 				<Link href={`/${ConfigUrl}`}>
-					<S.Avatar>
+					<S.Avatar title="Ir para as configurações">
 						<S.AvatarPhoto />
 						<S.AvatarInfo>
 							<p>{name}</p>

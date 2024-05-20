@@ -53,4 +53,5 @@ enum ExceptionMessagesEnum: string
     case ResumeTypeNotAllowedException = 'Resume type not allowed';
     case ResumeIdMustBeAnInteger = 'Resume id must be an integer';
     case ResumeIdMustBePositive = 'Resume id must be positive';
+    case ResumeNotFound = 'Resume not found';
 }

@@ -2,6 +2,7 @@
 
 namespace App\Domain\Resume;
 
+use App\Exceptions\Resume\ResumeNotFoundException;
 use App\Exceptions\Resume\ResumeTypeNotAllowedException;
 use Carbon\Carbon;
 
@@ -44,6 +45,21 @@ class ResumeDomain implements ResumeDomainInterface
             'created_at' => $this->getCreatedAt(),
             'updated_at' => $this->getUpdatedAt(),
         ];
+    }
+
+    /**
+     * @throws ResumeNotFoundException
+     * @throws ResumeTypeNotAllowedException
+     */
+    public function load(int $resumeId): self
+    {
+        if (!$this->repository->exists($resumeId)) {
+            throw new ResumeNotFoundException($resumeId);
+        }
+
+        $data = $this->repository->get($resumeId);
+
+        return $this->fromArray($data);
     }
 
     public function getId(): ?int

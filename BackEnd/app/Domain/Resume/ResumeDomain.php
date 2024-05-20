@@ -82,7 +82,8 @@ class ResumeDomain implements ResumeDomainInterface
             throw new OnlyOwnerCanPatchResumeAliasException();
         }
 
-        $this->repository->updateAlias($this->getId(), $alias);
+        $this->setAlias($alias);
+        $this->repository->updateAlias($this->getId(), $this->getAlias());
 
         return $this;
     }

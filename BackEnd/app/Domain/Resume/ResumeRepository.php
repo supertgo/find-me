@@ -20,4 +20,9 @@ class ResumeRepository implements ResumeRepositoryInterface
     {
         return Resume::find($resumeId)->toArray();
     }
+
+    public function updateAlias(int $getId, string $alias): void
+    {
+        Resume::where('id', $getId)->update(['alias' => $alias]);
+    }
 }

@@ -9,4 +9,6 @@ interface ResumeRepositoryInterface
     public function exists(int $resumeId): bool;
 
     public function get(int $resumeId): array;
+
+    public function updateAlias(int $getId, string $alias);
 }

@@ -10,14 +10,12 @@ const props: JobItemProps = {
   applications_amount: 762,
   salary: 19473,
   salary_time_unit: 'hour',
-  accept_application_until: new Date('2024-05-10 05:21:46'),
+  accept_application_until: '2024-05-10 05:21:46',
   work_model: 'hybrid',
   employment_type: 'part-time',
   week_workload: 33,
   location: '96765 Candelario Forges\nWardberg, IL 77290',
   company_id: 58,
-  created_at: new Date('2024-04-29T21:44:25.000000Z'),
-  updated_at: new Date('2024-04-29T21:44:25.000000Z'),
   user_id: 174,
 };
 

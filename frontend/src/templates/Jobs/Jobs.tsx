@@ -1,11 +1,10 @@
 import { Base } from 'templates/Base/Base';
 import { useQuery } from '@tanstack/react-query';
-import { Title } from 'components/Title/Title';
 import { Input } from 'components/Input/Input';
 import { Button } from 'components/Button/Button';
 import { JobItem } from 'components/JobItem/JobItem';
 import { JobFilter } from 'components/JobFilter/JobFilter';
-import { useJobs } from 'hooks/useJob/useJobs';
+import { useJob } from 'hooks/useJob/useJob';
 import { Children } from 'react';
 import { LoadingJobs } from './LoadingJobs';
 import { NoJobs } from './NoJobs';
@@ -15,7 +14,7 @@ import { JobsUrl } from 'utils/urls';
 import { CreateJobHeader } from 'components/CreateJobHeader/CreateJobHeader';
 
 export const Jobs = () => {
-	const { findJobs } = useJobs();
+	const { findJobs } = useJob();
 
 	const { data: jobsData, isLoading } = useQuery({
 		queryKey: [`/${JobsUrl}`],

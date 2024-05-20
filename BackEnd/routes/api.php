@@ -59,8 +59,8 @@ Route::group(
             ->only(['store',])
             ->middleware('auth:api');
 
-        Route::group('/resume', function () {
-            Route::group('/{resume}', function () {
+        Route::group(['prefix' => '/resume'], function () {
+            Route::group(['prefix' => '/{resume}'], function () {
                 Route::patch('/alias', [ResumeController::class, 'patchAlias']);
             });
         });

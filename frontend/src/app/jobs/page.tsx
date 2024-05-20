@@ -1,6 +1,6 @@
 'use client'
 import { Jobs } from 'templates/Jobs/Jobs';
 
-export default async function JobsPage() {
+export default function JobsPage() {
   return <Jobs />;
 }

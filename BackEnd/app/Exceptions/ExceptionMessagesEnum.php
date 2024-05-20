@@ -51,4 +51,6 @@ enum ExceptionMessagesEnum: string
     case OnlyForRecruitersException = 'Only for recruiters';
 
     case ResumeTypeNotAllowedException = 'Resume type not allowed';
+    case ResumeIdMustBeAnInteger = 'Resume id must be an integer';
+    case ResumeIdMustBePositive = 'Resume id must be positive';
 }

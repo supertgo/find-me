@@ -10,4 +10,14 @@ class ResumeRepository implements ResumeRepositoryInterface
     {
         return Resume::create($data)->toArray();
     }
+
+    public function exists(int $resumeId): bool
+    {
+        return Resume::where('id', $resumeId)->exists();
+    }
+
+    public function get(int $resumeId): array
+    {
+        return Resume::find($resumeId)->toArray();
+    }
 }

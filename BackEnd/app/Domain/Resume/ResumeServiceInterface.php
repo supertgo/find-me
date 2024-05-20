@@ -9,5 +9,6 @@ interface ResumeServiceInterface
 {
     function create(array $data, int $ownerId, UploadedFile $resume): ResumeDomainInterface;
 
-    function patchAlias(int $resumeId, int $ownerId, string $alias): ResumeDomainInterface;
+    function patchAlias(int $resumeId, int $solicitorId, string $alias): ResumeDomainInterface;
+
 }

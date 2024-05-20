@@ -43,9 +43,9 @@ class ResumeService implements ResumeServiceInterface
      * @throws ResumeTypeNotAllowedException
      * @throws OnlyOwnerCanPatchResumeAliasException
      */
-    public function patchAlias(int $resumeId, int $ownerId, string $alias): ResumeDomainInterface
+    public function patchAlias(int $resumeId, int $solicitorId, string $alias): ResumeDomainInterface
     {
-        $owner = (new UserDomain(new UserRepository()))->loadUser($ownerId);
+        $owner = (new UserDomain(new UserRepository()))->loadUser($solicitorId);
 
         return (new FileResume(new ResumeRepository()))
             ->load($resumeId)

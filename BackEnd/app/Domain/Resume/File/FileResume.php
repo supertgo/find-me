@@ -4,6 +4,7 @@ namespace App\Domain\Resume\File;
 
 
 use App\Domain\Resume\ResumeDomain;
+use App\Exceptions\Resume\OnlyOwnerCanDownloadResumeException;
 use App\Exceptions\Resume\ResumeTypeNotAllowedException;
 use App\Helpers\File\FileHelperInterface;
 use Illuminate\Http\UploadedFile;
@@ -50,4 +51,12 @@ class FileResume extends ResumeDomain implements FileResumeInterface
             ->fromArray($data);
     }
 
+    public function canDownload(int $solicitorId): static
+    {
+        if ($this->getOwnerId() !== $solicitorId) {
+            throw new OnlyOwnerCanDownloadResumeException();
+        }
+
+        return $this;
+    }
 }

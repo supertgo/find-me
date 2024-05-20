@@ -6,7 +6,7 @@ use App\Exceptions\Resume\ResumeIdMustBeAnIntegerException;
 use App\Exceptions\Resume\ResumeIdMustBePositiveException;
 use App\Http\Requests\AbstractRequest;
 
-class ResumeRequestHavingId extends AbstractRequest
+abstract class ResumeRequestHavingId extends AbstractRequest
 {
     /**
      * @throws ResumeIdMustBeAnIntegerException

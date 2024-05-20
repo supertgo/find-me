@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Domain\Resume\ResumeServiceInterface;
 use App\Exceptions\Abstract\AbstractFindMeException;
 use App\Http\Requests\Resume\CreateResumeRequest;
-use App\Http\Requests\Resume\ResumeRequestHavingId;
+use App\Http\Requests\Resume\PatchResumeStatusRequest;
 use App\Http\Resources\ResumeResource;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -42,13 +42,14 @@ class ResumeController extends Controller
         }
     }
 
-    public function patchAlias(ResumeRequestHavingId $request): Response
+    public function patchAlias(PatchResumeStatusRequest $request): Response
     {
         try {
             $resume = app(ResumeServiceInterface::class)
                 ->patchAlias(
-                    $request->validated(),
-                    $request->getLoggedUserId()
+                    $request->getResumeId(),
+                    $request->getLoggedUserId(),
+                    $request->getAlias()
                 );
 
             return ResumeResource::make($resume)

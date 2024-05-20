@@ -6,6 +6,7 @@ use App\Exceptions\Resume\OnlyOwnerCanPatchResumeAliasException;
 use App\Exceptions\Resume\ResumeNotFoundException;
 use App\Exceptions\Resume\ResumeTypeNotAllowedException;
 use Carbon\Carbon;
+use Exception;
 
 class ResumeDomain implements ResumeDomainInterface
 {
@@ -51,8 +52,9 @@ class ResumeDomain implements ResumeDomainInterface
     /**
      * @throws ResumeNotFoundException
      * @throws ResumeTypeNotAllowedException
+     * @throws Exception
      */
-    public function load(int $resumeId): self
+    public function load(int $resumeId): ResumeDomainInterface
     {
         if (!$this->repository->exists($resumeId)) {
             throw new ResumeNotFoundException($resumeId);
@@ -60,7 +62,9 @@ class ResumeDomain implements ResumeDomainInterface
 
         $data = $this->repository->get($resumeId);
 
-        return $this->fromArray($data);
+        $resume = ResumeFactory::create($data['type'], $this->repository);
+
+        return $resume->fromArray($data);
     }
 
     /**

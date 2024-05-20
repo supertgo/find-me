@@ -62,6 +62,7 @@ Route::group(
         Route::group(['prefix' => '/resume'], function () {
             Route::group(['prefix' => '/{resume}'], function () {
                 Route::patch('/alias', [ResumeController::class, 'patchAlias']);
+                Route::get('/download', [ResumeController::class, 'download']);
             });
         });
     }

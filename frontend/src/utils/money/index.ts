@@ -1,4 +1,4 @@
-export const formatInputCurrency = (value: string | number) => {
+export function formatToCurrency(value: string | number) {
   if (value === null || value === undefined) {
     return '';
   }
@@ -16,3 +16,14 @@ export const formatInputCurrency = (value: string | number) => {
     currency: 'BRL',
   }).format(number);
 };
+
+export function formatCurrencyToNumber(value: string): number {
+  const floatValue = value
+    .replace('R$', '')
+    .replaceAll('.', '')
+    .replace(',', '.')
+    .trim()
+
+  return parseFloat(floatValue)
+}
+

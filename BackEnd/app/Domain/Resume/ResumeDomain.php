@@ -62,7 +62,13 @@ class ResumeDomain implements ResumeDomainInterface
 
         $data = $this->repository->get($resumeId);
 
-        $resume = ResumeFactory::create($data['type'], $this->repository);
+        $type = ResumeTypeEnum::tryFrom($data['type']);
+
+        if (!$type) {
+            throw new ResumeTypeNotAllowedException($data['type']);
+        }
+
+        $resume = ResumeFactory::create($type, $this->repository);
 
         return $resume->fromArray($data);
     }

@@ -17,3 +17,43 @@ Content-Disposition: form-data; name="resume_file"; filename="resume_file.pdf"
 
 < resume_file.pdf
 --WebAppBoundary--
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 201, "Response status is not 201");
+    });
+
+    const resume = response.body.data;
+
+    client.test("resume was created", function () {
+        client.assert(resume !== undefined, "resume is not created");
+    });
+
+    client.global.set("resumeId", resume.id);
+
+%}
+
+### update alias
+< {%
+    request.variables.set('alias', $random.alphabetic(10))
+%}
+PATCH http://localhost/api/user/resume/{{resumeId}}/alias
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{bearerToken}}
+
+{
+      "alias": "{{alias}}"
+}
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+
+    const resume = response.body.data;
+    client.test("resume alias wasn't updated", function () {
+        client.assert(resume !== undefined, "resume wasn't updated");
+        client.assert(resume.alias === request.variables.get('alias'), "resume alias wasn't updated");
+    });
+%}

@@ -43,7 +43,7 @@ class ResumeService implements ResumeServiceInterface
      * @throws ResumeTypeNotAllowedException
      * @throws OnlyOwnerCanPatchResumeAliasException
      */
-    public function patchAlias(int $resumeId, int $solicitorId, string $alias): ResumeDomainInterface
+    public function updateAlias(int $resumeId, int $solicitorId, string $alias): ResumeDomainInterface
     {
         $solicitor = (new UserDomain(new UserRepository()))->loadUser($solicitorId);
 
@@ -80,4 +80,15 @@ class ResumeService implements ResumeServiceInterface
             ->getFilePath();
     }
 
+    /**
+     * @throws ResumeTypeNotAllowedException
+     * @throws ResumeNotFoundException
+     */
+    public function updateFile(int $resumeId, int $solicitorId, UploadedFile $resume): ResumeDomainInterface
+    {
+        $solicitor = (new UserDomain(new UserRepository()))->loadUser($solicitorId);
+        return (new FileResume(new ResumeRepository()))
+            ->load($resumeId)
+            ->updateFile($solicitor->getId(), $resume);
+    }
 }

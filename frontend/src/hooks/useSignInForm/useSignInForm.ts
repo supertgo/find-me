@@ -72,7 +72,6 @@ export const useSignInForm = (): UseSignInFormProtocols => {
 			setIsAuthenticated(!isAuthenticated);
 			const user = await getUserInfo();
 
-
 			setUser({
         id: user!.id,
 				name: user!.name,

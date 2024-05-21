@@ -66,3 +66,4 @@ export const REQUIRED_JOB_ACCEPT_APPLICATION = 'O prazo de submissão é obrigat
 export const REQUIRED_JOB_SALARY_TIME_UNIT = 'O período de pagamento é obrigatório.'
 
 export const REQUIRED_JOB_WORK_MODEL = 'O modelo de trabalho é obrigatório.'
+

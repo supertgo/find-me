@@ -12,7 +12,6 @@ export default {
 export const Default: StoryObj<ResumeCardProps> = {
   args: {
     text: 'Competências',
-    children: <CompetenceItem name="PHP" />,
-    modalTitle: 'Adicionar Competência'
+    children: <CompetenceItem id={10} name="PHP" />,
   }
 };

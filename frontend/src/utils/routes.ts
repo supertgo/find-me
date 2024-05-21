@@ -32,6 +32,8 @@ export const DeleteUserProfessionalExperiencesRouteConst =
 export const DeleteUserAcademicRecordRouteConst =
 	'user/academic-records';
 
+export const DeleteUserCompetenceRouteConst =
+	'user/competence';
 
 export const GetUserRouteConst = ({
 	user_id,

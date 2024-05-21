@@ -1,25 +1,26 @@
 'use client';
+import { useQuery } from '@tanstack/react-query';
+import { AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import { AcademicRecordItem } from 'components/AcademicRecordItem/AcademicRecordItem';
+import { AccountConfig } from 'components/AccountConfig/AccountConfig';
 import { CompetenceItem } from 'components/CompetenceItem/CompetenceItem';
+import { ModalRemoveAcademicRecord } from 'components/ModalRemoveAcademicRecord/ModalRemoveAcademicRecord';
+import { ModalRemoveCompetence } from 'components/ModalRemoveCompetence/ModalRemoveCompetence';
+import { ModalRemoveProfessionalExperience } from 'components/ModalRemoveProfessionalExperience/ModalRemoveProfessionalExperience';
 import { ModalAddAcademicRecord } from 'components/Modals/ModalAddAcademicRecord/ModalAddAcademicRecord';
 import { ModalAddCompetence } from 'components/Modals/ModalAddCompetence/ModalAddCompetence';
+import { ModalAddProfessionalExperience } from 'components/Modals/ModalAddProfessionalExperience/ModalAddProfessionalExperience';
 import { ProfessionalExperienceItem } from 'components/ProfessionalExperienceItem/ProfessionalExperienceItem';
+import { ResumeCard } from 'components/ResumeCard/ResumeCard';
 import { Title } from 'components/Title/Title';
+import { RemoveAcademicRecordProvider } from 'hooks/contexts/RemoveAcademicRecord/RemoveAcademicRecord';
+import { RemoveCompetenceContext, RemoveCompetenceProvider } from 'hooks/contexts/RemoveCompetence/RemoveCompetence';
+import { RemoveProfessionalExperienceProvider } from 'hooks/contexts/RemoveProfessionalExperience/RemoveProfessionalExperience';
+import { useUser } from 'hooks/useUser/useUser';
 import { GetUserResponse, UserProps } from 'protocols/external/user/user';
 import { Children } from 'react';
 import { Base } from 'templates/Base/Base';
-
-import { useQuery } from '@tanstack/react-query';
-import { AxiosResponse, InternalAxiosRequestConfig } from 'axios';
-import { AccountConfig } from 'components/AccountConfig/AccountConfig';
-import { ModalAddProfessionalExperience } from 'components/Modals/ModalAddProfessionalExperience/ModalAddProfessionalExperience';
-import { ResumeCard } from 'components/ResumeCard/ResumeCard';
-import { useUser } from 'hooks/useUser/useUser';
 import { GetUserRouteConst } from 'utils/routes';
-import { ModalRemoveProfessionalExperience } from 'components/ModalRemoveProfessionalExperience/ModalRemoveProfessionalExperience';
-import { RemoveProfessionalExperienceProvider } from 'hooks/contexts/RemoveProfessionalExperience/RemoveProfessionalExperience';
-import { RemoveAcademicRecordProvider } from 'hooks/contexts/RemoveAcademicRecord/RemoveAcademicRecord';
-import { ModalRemoveAcademicRecord } from 'components/ModalRemoveAcademicRecord/ModalRemoveAcademicRecord';
 
 export type ConfigProps = {} & UserProps;
 
@@ -108,7 +109,7 @@ export const Config = ({
 				</RemoveProfessionalExperienceProvider>
 
 				<RemoveAcademicRecordProvider>
-          <ModalRemoveAcademicRecord />
+					<ModalRemoveAcademicRecord />
 					<ResumeCard
 						text="Formação Acadêmica"
 						addModal={<ModalAddAcademicRecord user_id={user.id} />}
@@ -121,14 +122,19 @@ export const Config = ({
 					</ResumeCard>
 				</RemoveAcademicRecordProvider>
 
-				<ResumeCard
-					text="Competências"
-					addModal={<ModalAddCompetence user_id={user.id} />}
-				>
-					{Children.toArray(
-						user.competences?.map(({ name }) => <CompetenceItem name={name} />),
-					)}
-				</ResumeCard>
+				<RemoveCompetenceProvider>
+          <ModalRemoveCompetence />
+					<ResumeCard
+						text="Competências"
+						addModal={<ModalAddCompetence user_id={user.id} />}
+					>
+						{Children.toArray(
+							user.competences?.map(({ name, id }) => (
+								<CompetenceItem id={id} name={name} />
+							)),
+						)}
+					</ResumeCard>
+				</RemoveCompetenceProvider>
 			</>
 		</Base>
 	);

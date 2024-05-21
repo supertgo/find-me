@@ -1,3 +1,4 @@
+'use client'
 import { BackpackIcon, ReaderIcon } from '@radix-ui/react-icons';
 import { AddSkills } from 'components/AddSkills/AddSkills';
 import { Button } from 'components/Button/Button';

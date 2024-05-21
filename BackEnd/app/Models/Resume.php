@@ -6,6 +6,7 @@ use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 
 /**
@@ -18,6 +19,7 @@ use Illuminate\Support\Carbon;
  * @property string|null $file_path
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ * @property Carbon|null $deleted_at
  * @method static Builder|Resume newModelQuery()
  * @method static Builder|Resume newQuery()
  * @method static Builder|Resume query()
@@ -33,6 +35,7 @@ use Illuminate\Support\Carbon;
 class Resume extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $table = 'resumes';
 

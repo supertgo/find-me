@@ -70,6 +70,7 @@ export const AddSkills = ({ maxSkillPerJob, setValue }: AddSkillsProps) => {
 					onChange={onChange}
 				/>
 				<Button
+          type="button"
 					onClick={() => inputValue && appendNewSkill(inputValue)}
 					disabled={shouldButtonBeDisabled}
 				>

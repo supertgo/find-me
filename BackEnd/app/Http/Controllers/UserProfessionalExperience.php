@@ -11,9 +11,13 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response as IluminateResponse;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
+use Throwable;
 
 class UserProfessionalExperience extends Controller
 {
+    /**
+     * @throws Throwable
+     */
     public function addProfessionalExperiences(
         AddProfessionalExperienceRequest $request
     ): JsonResponse|IluminateResponse

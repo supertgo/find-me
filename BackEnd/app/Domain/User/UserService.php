@@ -4,6 +4,8 @@ namespace App\Domain\User;
 
 
 use App\Domain\Abstract\AbstractService;
+use App\Domain\Company\CompanyDomain;
+use App\Domain\Company\CompanyRepository;
 use App\Domain\Competence\CompetenceDomain;
 use App\Domain\Competence\CompetenceRepository;
 use App\Domain\User\AcademicRecord\AcademicRecordDomain;
@@ -11,6 +13,7 @@ use App\Domain\User\AcademicRecord\AcademicRecordRepository;
 use App\Domain\User\ProfessionalExperience\ProfessionalExperienceDomain;
 use App\Domain\User\ProfessionalExperience\ProfessionalExperienceRepository;
 use App\Exceptions\Abstract\AbstractFindMeException;
+use App\Exceptions\Company\CompanyNotFoundException;
 use App\Exceptions\Competence\CompetenceNotFound;
 use App\Exceptions\User\AcademicRecord\AcademicRecordNotFoundException;
 use App\Exceptions\User\AcademicRecord\OnlyOwnerCanDeleteAcademicRecordException;
@@ -219,6 +222,7 @@ class UserService extends AbstractService implements UserServiceInterface
      * @throws Throwable
      * @throws EndDateMustBeAfterStartDateException
      * @throws CurrentExperienceEndDateMustBeInTheFutureException
+     * @throws CompanyNotFoundException
      */
     public function addProfessionalExperiences(int $userId, array $experiences): void
     {
@@ -228,6 +232,8 @@ class UserService extends AbstractService implements UserServiceInterface
             $userRepository->beginTransaction();
 
             $experiencesDomain = new ProfessionalExperienceDomain(new ProfessionalExperienceRepository());
+
+            $this->assureCompaniesExist($experiences);
 
             $experiencesDomain->createMany($experiences, $userId);
 
@@ -312,5 +318,19 @@ class UserService extends AbstractService implements UserServiceInterface
 
             throw $exception;
         }
+    }
+
+    /**
+     * @throws CompanyNotFoundException
+     */
+    private function assureCompaniesExist(array $experiences): void
+    {
+        $companyDomain = new CompanyDomain(new CompanyRepository());
+
+        array_walk($experiences, function ($experience) use ($companyDomain) {
+            if (isset($experience['company_id']) && !$companyDomain->exists($experience['company_id'])) {
+                throw new CompanyNotFoundException($experience['company_id']);
+            }
+        });
     }
 }

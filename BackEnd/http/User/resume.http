@@ -1,4 +1,4 @@
-###
+### Create
 POST http://localhost/api/user/resume
 Accept: application/json
 Content-Type: multipart/form-data; boundary=WebAppBoundary
@@ -34,7 +34,7 @@ Content-Disposition: form-data; name="resume_file"; filename="resume_file.pdf"
 %}
 
 
-### show
+### Show
 GET http://localhost/api/user/resume/{{resumeId}}
 Accept: application/json
 Authorization: Bearer {{bearerToken}}
@@ -51,7 +51,7 @@ Authorization: Bearer {{bearerToken}}
     });
 %}
 
-### index
+### Index
 GET http://localhost/api/user/resume
 Accept: application/json
 Authorization: Bearer {{bearerToken}}
@@ -71,7 +71,7 @@ Authorization: Bearer {{bearerToken}}
     });
 %}
 
-### update alias
+### Update alias
 < {%
     request.variables.set('alias', $random.alphabetic(10))
 %}
@@ -97,6 +97,37 @@ Authorization: Bearer {{bearerToken}}
 %}
 
 ### Download
-
 GET http://localhost/api/user/resume/{{resumeId}}/download
 Authorization: Bearer {{bearerToken}}
+
+
+### Delete
+DELETE http://localhost/api/user/resume/{{resumeId}}
+Accept: application/json
+Authorization: Bearer {{bearerToken}}
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 204, "Response status is not 204");
+    });
+%}
+
+
+### Mot found after delete
+GET http://localhost/api/user/resume
+Accept: application/json
+Authorization: Bearer {{bearerToken}}
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+
+    const resume = response.body.data.find(
+        (resume) => resume.id == client.global.get('resumeId')
+    );
+
+    client.test("Resume found", function () {
+        client.assert(resume == undefined, "resume wasn't deleted");
+    });
+%}

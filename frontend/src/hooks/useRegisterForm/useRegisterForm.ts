@@ -1,18 +1,20 @@
-import { useState } from 'react';
 import { signIn } from 'next-auth/react';
-import { toast } from 'react-toastify';
-import {
-	Control,
-	useForm,
-	FieldErrors,
-	SubmitHandler,
-	UseFormHandleSubmit,
-	UseFormRegister,
-} from 'react-hook-form';
-import { PostClient } from 'services/httpClient/post';
 import { UserAuthRegister } from 'protocols/external/user/user';
-import { PostAuthRegisterRouteConst } from 'utils/routes';
+import { useState } from 'react';
+import {
+  Control,
+  FieldErrors,
+  SubmitHandler,
+  UseFormHandleSubmit,
+  UseFormRegister,
+  useForm,
+} from 'react-hook-form';
+import { toast } from 'react-toastify';
+import { PostClient } from 'services/httpClient/post';
+import { useLoggedUserStore } from 'stores/loggedUserStore/loggedUserStore';
 import { revertFormatCellphone } from 'utils/formatCellphone';
+import { PostAuthRegisterRouteConst } from 'utils/routes';
+import { getUserInfo } from 'utils/session';
 import { HomeUrl } from 'utils/urls';
 
 export type RegisterInputs = {
@@ -45,6 +47,10 @@ export const useRegisterForm = (): UseRegisterFormProtocols => {
 		mode: 'onBlur',
 	});
 
+	const { setUser } = useLoggedUserStore((state) => ({
+		setUser: state.setUser,
+	}));
+
 	const onSubmit: SubmitHandler<RegisterInputs> = async (data, event) => {
 		event?.preventDefault();
 
@@ -68,12 +74,23 @@ export const useRegisterForm = (): UseRegisterFormProtocols => {
 				},
 			});
 
-			await signIn('credentials', {
+			const result = await signIn('credentials', {
 				email: data.email,
 				password: data.password,
 				redirect: true,
 				callbackUrl: `/${HomeUrl}`,
 			});
+
+			if (result?.status === 200) {
+				const user = await getUserInfo();
+
+				setUser({
+					id: user!.id,
+					name: user!.name,
+					email: user!.email,
+					type: user!.type,
+				});
+			}
 
 			toast.success(response.data.message);
 		} catch (error) {

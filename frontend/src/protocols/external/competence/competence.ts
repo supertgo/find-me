@@ -11,3 +11,8 @@ export type PostAddCompetenceBody = {
   competences: { name: string}[]
 }
 
+export type DeleteCompetenceBody = {
+	competences_id: number[];
+};
+
+

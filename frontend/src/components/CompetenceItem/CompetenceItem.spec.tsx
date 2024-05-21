@@ -2,7 +2,8 @@ import { render, screen } from 'utils/test/test-utils'
 import { CompetenceItem, CompetenceItemProps } from './CompetenceItem'
 
 const props: CompetenceItemProps = {
-  name: 'PHP'
+  name: 'PHP',
+  id: 10
 }
 
 describe('<CompetenceItem />', () => {

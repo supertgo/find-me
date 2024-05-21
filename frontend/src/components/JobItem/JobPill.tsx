@@ -5,7 +5,7 @@ import {
 	translateSalaryTimeUnit,
 	translateWorkModel,
 } from 'utils/job';
-import { formatInputCurrency } from 'utils/money';
+import { formatToCurrency } from 'utils/money';
 
 export type JobPillProps = Pick<
 	JobItemProps,
@@ -26,7 +26,7 @@ export const JobPill = ({
 			/>
 			<Pill text={translateWorkModel[work_model]} variant={'warning'} />
 			<Pill
-				text={`${formatInputCurrency(salary)}/${
+				text={`${formatToCurrency(salary)}/${
 					translateSalaryTimeUnit[salary_time_unit]
 				}`}
 				variant={'info'}

@@ -26,3 +26,8 @@ export type PostAddProfessionalExperienceObj = {
 export type PostAddProfessionalExperiencesBody = {
 	professional_experiences: PostAddProfessionalExperienceObj[];
 };
+
+export type DeleteProfessionalExperiencesBody = {
+	professional_experiences_id: number[];
+};
+

@@ -3,7 +3,7 @@ import media from 'styled-media-query';
 
 export const Wrapper = styled.div`
 	${({ theme }) => css`
-		min-height: 100vh;
+		height: 100vh;
 		background: ${theme.colors.secondWhite};
 		width: 24.2rem;
 		padding: ${theme.space.large} 0;
@@ -44,6 +44,10 @@ export const AvatarWrapper = styled.div`
 
     svg {
       cursor: pointer;
+    }
+
+    i {
+      margin-right: ${theme.space.small};
     }
 	`}
 `;

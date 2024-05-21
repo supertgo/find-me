@@ -1,6 +1,7 @@
 import { describe, expect } from 'vitest';
 import {
 	filterJobLocation,
+	parseSkillsIntoCompetences,
 	translateEmploymentType,
 	translateSalaryTimeUnit,
 } from '.';
@@ -42,5 +43,22 @@ describe('filterJobLocation()', () => {
 		expect(filterJobLocation('96765 Candelario Forges')).toStrictEqual(
 			'96765 Candelario Forges',
 		);
+	});
+});
+
+describe('parseSkillsIntoCompetences()', () => {
+	it('should parse correctly', () => {
+		expect(parseSkillsIntoCompetences(['PHP', 'Ruby'])).toStrictEqual([
+			{
+				name: 'PHP',
+				description: 'Experiência em PHP',
+				type: 'other',
+			},
+			{
+				name: 'Ruby',
+				description: 'Experiência em Ruby',
+				type: 'other',
+			},
+		]);
 	});
 });

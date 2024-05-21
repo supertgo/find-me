@@ -1,4 +1,4 @@
-import { render, screen } from 'utils/test/test-utils'
+import { render } from 'utils/test/test-utils'
 import { MediaMatch } from './MediaMatch'
 
 describe('<MediaMatch />', () => {
@@ -7,10 +7,19 @@ describe('<MediaMatch />', () => {
       <MediaMatch />
     )
 
-    expect(container.firstChild).toMatchInlineSnapshot(`
-      <div
-        class="Toastify"
-      />
+    expect(container).toMatchInlineSnapshot(`
+      .c0 {
+        display: none;
+      }
+
+      <div>
+        <div
+          class="Toastify"
+        />
+        <div
+          class="c0"
+        />
+      </div>
     `)
   })
 })

@@ -4,7 +4,6 @@ import { Pencil1Icon } from '@radix-ui/react-icons';
 
 export type ResumeCardProps = {
 	text: string;
-	modalTitle: string;
 	children: ReactNode;
 	addModal?: ReactNode;
 };

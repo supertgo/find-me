@@ -4,8 +4,7 @@ import { CompetenceItem } from 'components/CompetenceItem/CompetenceItem';
 
 const props: ResumeCardProps = {
 	text: 'Competências',
-	modalTitle: 'Adicionar Competência',
-	children: <CompetenceItem name="PHP" />,
+	children: <CompetenceItem id={10} name="PHP" />,
 };
 
 describe('<ResumeCard />', () => {

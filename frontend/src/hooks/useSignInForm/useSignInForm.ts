@@ -1,25 +1,24 @@
 'use client';
+import { signIn } from 'next-auth/react';
 import { redirect } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { signIn } from 'next-auth/react';
+import {
+  Control,
+  FieldErrors,
+  SubmitHandler,
+  UseFormHandleSubmit,
+  UseFormRegister,
+  useForm,
+} from 'react-hook-form';
 import { toast } from 'react-toastify';
+import { useLoggedUserStore } from 'stores/loggedUserStore/loggedUserStore';
+import { getUserInfo } from 'utils/session';
+import { HomeUrl } from 'utils/urls';
 
 export type SignInInputs = {
 	email: string;
 	password: string;
 };
-
-import {
-	Control,
-	useForm,
-	FieldErrors,
-	SubmitHandler,
-	UseFormHandleSubmit,
-	UseFormRegister,
-} from 'react-hook-form';
-import { getSession } from 'next-auth/react';
-import { HomeUrl } from 'utils/urls';
-import { useLoggedUserStore } from 'stores/loggedUserStore/loggedUserStore';
 
 export interface UseSignInFormProtocols {
 	register: UseFormRegister<any>;
@@ -30,10 +29,6 @@ export interface UseSignInFormProtocols {
 	isLoading: boolean;
 	isValid: boolean;
 }
-
-const getUserInfo = async () => {
-	return await getSession();
-};
 
 export const useSignInForm = (): UseSignInFormProtocols => {
 	const [isLoading, setIsLoading] = useState(false);
@@ -71,7 +66,6 @@ export const useSignInForm = (): UseSignInFormProtocols => {
 		if (result?.status === 200) {
 			setIsAuthenticated(!isAuthenticated);
 			const user = await getUserInfo();
-
 
 			setUser({
         id: user!.id,

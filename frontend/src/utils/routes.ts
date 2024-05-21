@@ -26,6 +26,15 @@ export const PostUserAcademicRecordRouteConst = 'user/academic-records';
 export const PostUserProfessionalExperiencesRouteConst =
 	'user/professional-experiences';
 
+export const DeleteUserProfessionalExperiencesRouteConst =
+	'user/professional-experiences';
+
+export const DeleteUserAcademicRecordRouteConst =
+	'user/academic-records';
+
+export const DeleteUserCompetenceRouteConst =
+	'user/competence';
+
 export const GetUserRouteConst = ({
 	user_id,
 	includes,
@@ -40,4 +49,6 @@ export const GetUserRouteConst = ({
 	return userRoute;
 };
 
-export const GetJobRouteConst = 'job';
+export const GetJobsRouteConst = 'job';
+
+export const PostJobRouteConst = 'job';

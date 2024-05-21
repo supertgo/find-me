@@ -22,3 +22,8 @@ export type PostAcademicRecordObj = {
 export type PostAcademicRecordsBody = {
 	academic_records: [academic_record: PostAcademicRecordObj];
 };
+
+export type DeleteAcademicRecordBody = {
+	academic_records_id: number[];
+};
+

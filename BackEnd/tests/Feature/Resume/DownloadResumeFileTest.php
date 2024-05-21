@@ -13,7 +13,7 @@ class DownloadResumeFileTest extends TestCase
 {
     const ROUTE = self::BASE_ROUTE . 'user/resume/%s/download';
 
-    public function testCreateWithFile()
+    public function testDownloadResume()
     {
         Storage::fake('local');
         $file = UploadedFile::fake()

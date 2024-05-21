@@ -10,7 +10,7 @@ class ShowResumeTest extends TestCase
 {
     const ROUTE = self::BASE_ROUTE . 'user/resume/%s';
 
-    public function testCreateWithFile()
+    public function testShowResume()
     {
         $this->makeEmployee();
 

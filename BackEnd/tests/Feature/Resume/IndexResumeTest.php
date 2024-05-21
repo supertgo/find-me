@@ -10,7 +10,7 @@ class IndexResumeTest extends TestCase
 {
     const ROUTE = self::BASE_ROUTE . 'user/resume';
 
-    public function testCreateWithFile()
+    public function testIndex()
     {
         $this->makeEmployee();
 

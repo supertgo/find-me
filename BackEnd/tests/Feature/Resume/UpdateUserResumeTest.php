@@ -17,7 +17,7 @@ UpdateUserResumeTest extends TestCase
 
     const ROUTE = self::BASE_ROUTE . 'user/resume/%s/file';
 
-    public function testUpdateUserProfilePicture()
+    public function testUpdateResumeFile()
     {
         Storage::fake('public');
 

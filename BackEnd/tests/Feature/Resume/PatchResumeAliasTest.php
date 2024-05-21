@@ -12,7 +12,7 @@ class PatchResumeAliasTest extends TestCase
 {
     const ROUTE = self::BASE_ROUTE . 'user/resume/%s/alias';
 
-    public function testCreateWithFile()
+    public function testPatchResumeAlias()
     {
         $this->makeEmployee();
 

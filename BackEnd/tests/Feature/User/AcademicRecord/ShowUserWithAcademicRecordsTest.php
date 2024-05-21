@@ -13,7 +13,7 @@ class ShowUserWithAcademicRecordsTest extends TestCase
 {
     use DatabaseTransactions;
 
-    const ROUTE = self::BASE_ROUTE . 'user/%s';
+    const ROUTE = self::BASE_ROUTE . 'user/show/%s';
 
     public function testShowUserSuccess()
     {

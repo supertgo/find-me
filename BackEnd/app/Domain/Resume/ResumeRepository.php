@@ -35,4 +35,9 @@ class ResumeRepository implements ResumeRepositoryInterface
     {
         return Resume::where('owner_id', $ownerId)->get()->toArray();
     }
+
+    public function delete(int $id): void
+    {
+        Resume::where('id', $id)->delete();
+    }
 }

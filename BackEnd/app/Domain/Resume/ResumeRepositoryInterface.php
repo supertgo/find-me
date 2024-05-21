@@ -15,4 +15,6 @@ interface ResumeRepositoryInterface
     public function updateFile(int $id, string $path): void;
 
     public function getResumes(int $ownerId): array;
+
+    public function delete(int $id): void;
 }

@@ -49,4 +49,14 @@ enum ExceptionMessagesEnum: string
     case TokenExpiredException = 'Token expired';
     case TokenInvalidException = 'Token invalid';
     case OnlyForRecruitersException = 'Only for recruiters';
+
+    case ResumeTypeNotAllowedException = 'Resume type not allowed';
+    case ResumeIdMustBeAnInteger = 'Resume id must be an integer';
+    case ResumeIdMustBePositive = 'Resume id must be positive';
+    case ResumeNotFound = 'Resume not found';
+    case OnlyOwnerCanUpdateResumeAlias = 'Only owner can update resume alias';
+    case OnlyOwnerCanDownloadResume = 'Only owner can download resume';
+    case OnlyOwnerCanUpdateResumeFile = 'Only owner can update resume file';
+    case OnlyOwnerCanSeeResume = 'Only owner can see resume';
+    case OnlyOwnerCanDeleteResume = 'Only owner can delete resume';
 }

@@ -74,7 +74,7 @@ paths:
         '200':
           $ref: 'Schemas/User/responses/VerifyResponse.yaml'
 
-  /user/{id}:
+  /user/show/{id}:
     get:
       tags:
         - User
@@ -242,8 +242,129 @@ paths:
         '204':
           description: No Content
 
-  # Job
+  /user/resume:
+    post:
+      tags:
+        - UserResume
+      description: 'Create user resume'
+      security:
+        - BearerAuth: [ ]
+      requestBody:
+        $ref: 'Schemas/User/Resume/RequestBodies/CreateResumeRequest.yaml'
 
+      responses:
+        '201':
+          $ref: 'Schemas/User/Resume/Responses/StoreResumeSuccessResponse.yaml'
+        '422':
+          $ref: 'Schemas/Common/response/ValidationErrorsResponse.yaml'
+        401:
+          $ref: 'Schemas/Common/response/UnauthenticatedResponse.yaml'
+
+    get:
+      tags:
+        - UserResume
+      description: 'Show all user resumes'
+      security:
+        - BearerAuth: [ ]
+
+      responses:
+        '200':
+          $ref: 'Schemas/User/Resume/Responses/IndexResumeSuccessResponse.yaml'
+        401:
+          $ref: 'Schemas/Common/response/UnauthenticatedResponse.yaml'
+
+  /user/resume/{resume_id}/alias:
+    patch:
+      tags:
+        - UserResume
+      description: 'Update resume alias'
+      security:
+        - BearerAuth: [ ]
+      parameters:
+        - $ref: 'Schemas/User/Resume/Parameters/ResumeId.yaml'
+      requestBody:
+        $ref: 'Schemas/User/Resume/RequestBodies/UpdateResumeAliasRequest.yaml'
+
+      responses:
+        '200':
+          $ref: 'Schemas/User/Resume/Responses/UpdateResumeAliasSuccessResponse.yaml'
+        '422':
+          $ref: 'Schemas/Common/response/ValidationErrorsResponse.yaml'
+        401:
+          $ref: 'Schemas/Common/response/UnauthenticatedResponse.yaml'
+
+  /user/resume/{resume_id}:
+    get:
+      tags:
+        - UserResume
+      description: 'Show resume'
+      security:
+        - BearerAuth: [ ]
+      parameters:
+        - $ref: 'Schemas/User/Resume/Parameters/ResumeId.yaml'
+
+      responses:
+        '200':
+          $ref: 'Schemas/User/Resume/Responses/ShowResumeSuccessResponse.yaml'
+        401:
+          $ref: 'Schemas/Common/response/UnauthenticatedResponse.yaml'
+
+    delete:
+      tags:
+        - UserResume
+      description: 'Delete resume'
+      security:
+        - BearerAuth: [ ]
+      parameters:
+        - $ref: 'Schemas/User/Resume/Parameters/ResumeId.yaml'
+
+      responses:
+        '200':
+          description: No content
+        401:
+          $ref: 'Schemas/Common/response/UnauthenticatedResponse.yaml'
+
+
+  /user/resume/{resume_id}/Download:
+    get:
+      tags:
+        - UserResume
+      description: 'Download resume'
+      security:
+        - BearerAuth: [ ]
+      parameters:
+        - $ref: 'Schemas/User/Resume/Parameters/ResumeId.yaml'
+
+      responses:
+        '200':
+          description: Download
+        '422':
+          $ref: 'Schemas/Common/response/ValidationErrorsResponse.yaml'
+        401:
+          $ref: 'Schemas/Common/response/UnauthenticatedResponse.yaml'
+
+  /user/resume/{resume_id}/file:
+    patch:
+      tags:
+        - UserResume
+      description: 'Update resume file'
+      security:
+        - BearerAuth: [ ]
+      parameters:
+        - $ref: 'Schemas/User/Resume/Parameters/ResumeId.yaml'
+      requestBody:
+        $ref: 'Schemas/User/Resume/RequestBodies/UpdateResumeFileRequest.yaml'
+
+      responses:
+        '204':
+          description: No content
+        '422':
+          $ref: 'Schemas/Common/response/ValidationErrorsResponse.yaml'
+        401:
+          $ref: 'Schemas/Common/response/UnauthenticatedResponse.yaml'
+
+
+  # Job
   /job:
     post:
       tags:

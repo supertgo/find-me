@@ -1,0 +1,10 @@
+description: create resume successful
+content:
+  application/json:
+    schema:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          $ref: '../Components/Resume.yaml'

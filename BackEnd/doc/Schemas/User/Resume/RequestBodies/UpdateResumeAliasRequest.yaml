@@ -1,0 +1,12 @@
+description: Update Resume's alias
+content:
+  application/json:
+    schema:
+      type: object
+      required:
+        - alias
+      properties:
+        alias:
+          type: string
+          description: Alias for the resume
+          example: "john_doe_resume"

@@ -7,6 +7,7 @@ use App\Exceptions\Abstract\AbstractFindMeException;
 use App\Helpers\File\FileHelperInterface;
 use App\Http\Requests\Resume\CreateResumeRequest;
 use App\Http\Requests\Resume\DownloadResumeRequest;
+use App\Http\Requests\Resume\PatchResumeFileRequest;
 use App\Http\Requests\Resume\PatchResumeStatusRequest;
 use App\Http\Resources\ResumeResource;
 use Exception;
@@ -48,7 +49,7 @@ class ResumeController extends Controller
     {
         try {
             $resume = app(ResumeServiceInterface::class)
-                ->patchAlias(
+                ->updateAlias(
                     $request->getResumeId(),
                     $request->getLoggedUserId(),
                     $request->getAlias()
@@ -57,6 +58,32 @@ class ResumeController extends Controller
             return ResumeResource::make($resume)
                 ->toResponse($request)
                 ->setStatusCode(Response::HTTP_OK);
+        } catch (AbstractFindMeException $exception) {
+            return response()->json(
+                $exception->render(),
+                status: $exception->getHttpCode()
+            );
+        } catch (Exception $exception) {
+            Log::error($exception);
+
+            return response()
+                ->json(
+                    ['error' => 'Server error'],
+                    Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public function patchFile(PatchResumeFileRequest $request): Response
+    {
+        try {
+            app(ResumeServiceInterface::class)
+                ->updateFile(
+                    $request->getResumeId(),
+                    $request->getLoggedUserId(),
+                    $request->getFile()
+                );
+
+            return response(status: Response::HTTP_NO_CONTENT);
         } catch (AbstractFindMeException $exception) {
             return response()->json(
                 $exception->render(),

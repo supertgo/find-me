@@ -56,4 +56,5 @@ enum ExceptionMessagesEnum: string
     case ResumeNotFound = 'Resume not found';
     case OnlyOwnerCanPatchResumeAlias = 'Only owner can delete resume';
     case OnlyOwnerCanDownloadResume = 'Only owner can download resume';
+    case OnlyOwnerCanUpdateResumeFile = 'Only owner can update resume file';
 }

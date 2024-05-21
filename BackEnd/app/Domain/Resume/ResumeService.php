@@ -105,4 +105,9 @@ class ResumeService implements ResumeServiceInterface
             ->load($resumeId)
             ->canSee($solicitor->getId());
     }
+
+    public function getUserResumes(int $userId): array
+    {
+        return (new ResumeDomain(new ResumeRepository()))->getResumes($userId);
+    }
 }

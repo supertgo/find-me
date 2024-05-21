@@ -16,4 +16,6 @@ interface ResumeServiceInterface
     function updateFile(int $resumeId, int $solicitorId, UploadedFile $resume): ResumeDomainInterface;
 
     function get(int $resumeId, int $solicitorId): ResumeDomainInterface;
+
+    function getUserResumes(int $userId): array;
 }

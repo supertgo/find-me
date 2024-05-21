@@ -92,4 +92,17 @@ class ResumeService implements ResumeServiceInterface
             ->load($resumeId)
             ->updateFile($solicitor->getId(), $resume);
     }
+
+    /**
+     * @throws ResumeNotFoundException
+     * @throws ResumeTypeNotAllowedException
+     */
+    public function get(int $resumeId, int $solicitorId): ResumeDomainInterface
+    {
+        $solicitor = (new UserDomain(new UserRepository()))->loadUser($solicitorId);
+
+        return (new FileResume(new ResumeRepository()))
+            ->load($resumeId)
+            ->canSee($solicitor->getId());
+    }
 }

@@ -14,4 +14,6 @@ interface ResumeServiceInterface
     function getFilePath(int $resumeId, int $solicitorId): string;
 
     function updateFile(int $resumeId, int $solicitorId, UploadedFile $resume): ResumeDomainInterface;
+
+    function get(int $resumeId, int $solicitorId): ResumeDomainInterface;
 }

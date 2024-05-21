@@ -74,7 +74,7 @@ paths:
         '200':
           $ref: 'Schemas/User/responses/VerifyResponse.yaml'
 
-  /user/{id}:
+  /user/show/{id}:
     get:
       tags:
         - User

@@ -42,8 +42,4 @@ class Resume extends Model
         'type',
         'file_path',
     ];
-
-    protected $hidden = [
-        'file_path',
-    ];
 }

@@ -34,6 +34,14 @@ class FileResume extends ResumeDomain implements FileResumeInterface
         return $this;
     }
 
+    public function toArray(): array
+    {
+        return parent::toArray()
+            + [
+                'file_path' => $this->getFilePath(),
+            ];
+    }
+
     /**
      * @throws ResumeTypeNotAllowedException
      */

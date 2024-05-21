@@ -2055,6 +2055,735 @@
         }
       }
     },
+    "/user/resume": {
+      "post": {
+        "tags": [
+          "UserResume"
+        ],
+        "description": "Create user resume",
+        "security": [
+          {
+            "BearerAuth": [ ]
+          }
+        ],
+        "requestBody": {
+          "description": "Create User Resume",
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "alias": {
+                    "type": "string",
+                    "description": "Alias for the resume",
+                    "example": "john_doe_resume"
+                  },
+                  "type": {
+                    "type": "string",
+                    "description": "Type of the resume",
+                    "enum": [
+                      "file",
+                      "form"
+                    ]
+                  },
+                  "resume_file": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "Resume file, required if type is 'File'",
+                    "example": null
+                  }
+                },
+                "required": [
+                  "alias",
+                  "type"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "create resume successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "id",
+                        "owner_id",
+                        "alias",
+                        "type",
+                        "created_at"
+                      ],
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "description": "The unique identifier of the resume",
+                          "example": 1
+                        },
+                        "owner_id": {
+                          "type": "integer",
+                          "description": "The unique identifier of the owner",
+                          "example": 42
+                        },
+                        "alias": {
+                          "type": "string",
+                          "description": "Alias for the resume",
+                          "example": "john_doe_resume"
+                        },
+                        "type": {
+                          "type": "string",
+                          "description": "Type of the resume",
+                          "example": "File",
+                          "enum": [
+                            "file",
+                            "form"
+                          ]
+                        },
+                        "created_at": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "The creation timestamp of the resume",
+                          "example": "2023-01-01 12:00:00"
+                        },
+                        "updated_at": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "The last update timestamp of the resume",
+                          "example": "2023-01-02 12:00:00"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthenticated response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Error message",
+                      "example": "Unauthenticated"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Error message"
+                    },
+                    "errors": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "description": "Detailed error messages"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "UserResume"
+        ],
+        "description": "Show all user resumes",
+        "security": [
+          {
+            "BearerAuth": [ ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "show user resumes successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "owner_id",
+                          "alias",
+                          "type",
+                          "created_at"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "description": "The unique identifier of the resume",
+                            "example": 1
+                          },
+                          "owner_id": {
+                            "type": "integer",
+                            "description": "The unique identifier of the owner",
+                            "example": 42
+                          },
+                          "alias": {
+                            "type": "string",
+                            "description": "Alias for the resume",
+                            "example": "john_doe_resume"
+                          },
+                          "type": {
+                            "type": "string",
+                            "description": "Type of the resume",
+                            "example": "File",
+                            "enum": [
+                              "file",
+                              "form"
+                            ]
+                          },
+                          "created_at": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "The creation timestamp of the resume",
+                            "example": "2023-01-01 12:00:00"
+                          },
+                          "updated_at": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "The last update timestamp of the resume",
+                            "example": "2023-01-02 12:00:00"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthenticated response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Error message",
+                      "example": "Unauthenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/resume/{resume_id}/alias": {
+      "patch": {
+        "tags": [
+          "UserResume"
+        ],
+        "description": "Update resume alias",
+        "security": [
+          {
+            "BearerAuth": [ ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "route",
+            "description": "user id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "example": 1
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Update Resume's alias",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "alias"
+                ],
+                "properties": {
+                  "alias": {
+                    "type": "string",
+                    "description": "Alias for the resume",
+                    "example": "john_doe_resume"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "update resume alias successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "id",
+                        "owner_id",
+                        "alias",
+                        "type",
+                        "created_at"
+                      ],
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "description": "The unique identifier of the resume",
+                          "example": 1
+                        },
+                        "owner_id": {
+                          "type": "integer",
+                          "description": "The unique identifier of the owner",
+                          "example": 42
+                        },
+                        "alias": {
+                          "type": "string",
+                          "description": "Alias for the resume",
+                          "example": "john_doe_resume"
+                        },
+                        "type": {
+                          "type": "string",
+                          "description": "Type of the resume",
+                          "example": "File",
+                          "enum": [
+                            "file",
+                            "form"
+                          ]
+                        },
+                        "created_at": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "The creation timestamp of the resume",
+                          "example": "2023-01-01 12:00:00"
+                        },
+                        "updated_at": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "The last update timestamp of the resume",
+                          "example": "2023-01-02 12:00:00"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthenticated response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Error message",
+                      "example": "Unauthenticated"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Error message"
+                    },
+                    "errors": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "description": "Detailed error messages"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/resume/{resume_id}": {
+      "get": {
+        "tags": [
+          "UserResume"
+        ],
+        "description": "Show resume",
+        "security": [
+          {
+            "BearerAuth": [ ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "route",
+            "description": "user id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "show resume successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "id",
+                        "owner_id",
+                        "alias",
+                        "type",
+                        "created_at"
+                      ],
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "description": "The unique identifier of the resume",
+                          "example": 1
+                        },
+                        "owner_id": {
+                          "type": "integer",
+                          "description": "The unique identifier of the owner",
+                          "example": 42
+                        },
+                        "alias": {
+                          "type": "string",
+                          "description": "Alias for the resume",
+                          "example": "john_doe_resume"
+                        },
+                        "type": {
+                          "type": "string",
+                          "description": "Type of the resume",
+                          "example": "File",
+                          "enum": [
+                            "file",
+                            "form"
+                          ]
+                        },
+                        "created_at": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "The creation timestamp of the resume",
+                          "example": "2023-01-01 12:00:00"
+                        },
+                        "updated_at": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "The last update timestamp of the resume",
+                          "example": "2023-01-02 12:00:00"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthenticated response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Error message",
+                      "example": "Unauthenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "UserResume"
+        ],
+        "description": "Delete resume",
+        "security": [
+          {
+            "BearerAuth": [ ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "route",
+            "description": "user id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No content"
+          },
+          "401": {
+            "description": "Unauthenticated response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Error message",
+                      "example": "Unauthenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/resume/{resume_id}/Download": {
+      "get": {
+        "tags": [
+          "UserResume"
+        ],
+        "description": "Download resume",
+        "security": [
+          {
+            "BearerAuth": [ ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "route",
+            "description": "user id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Download"
+          },
+          "401": {
+            "description": "Unauthenticated response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Error message",
+                      "example": "Unauthenticated"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Error message"
+                    },
+                    "errors": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "description": "Detailed error messages"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/resume/{resume_id}/file": {
+      "patch": {
+        "tags": [
+          "UserResume"
+        ],
+        "description": "Update resume file",
+        "security": [
+          {
+            "BearerAuth": [ ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "route",
+            "description": "user id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "example": 1
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Create User Resume",
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "resume_file"
+                ],
+                "properties": {
+                  "resume_file": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "Resume file, required if type is 'File'",
+                    "example": null
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "No content"
+          },
+          "401": {
+            "description": "Unauthenticated response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Error message",
+                      "example": "Unauthenticated"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Error message"
+                    },
+                    "errors": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "description": "Detailed error messages"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/job": {
       "post": {
         "tags": [

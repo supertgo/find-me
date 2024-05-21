@@ -4,7 +4,6 @@ import { CompetenceItem } from 'components/CompetenceItem/CompetenceItem';
 
 const props: ResumeCardProps = {
 	text: 'Competências',
-	modalTitle: 'Adicionar Competência',
 	children: <CompetenceItem name="PHP" />,
 };
 

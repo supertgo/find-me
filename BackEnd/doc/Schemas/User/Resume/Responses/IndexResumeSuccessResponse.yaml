@@ -1,0 +1,12 @@
+description: show user resumes successful
+content:
+  application/json:
+    schema:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '../Components/Resume.yaml'

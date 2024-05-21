@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
 
 export const Wrapper = styled.div`
-		display: flex;
-		flex-direction: column;
+	display: flex;
+	flex-direction: column;
 `;
 
 export const Row = styled.div`
@@ -17,8 +17,7 @@ export const Row = styled.div`
 
 export const SkillsWrapper = styled.div`
 	${({ theme }) => css`
-		display: flex;
-		flex-direction: row;
+		display: grid;
 		align-items: center;
 
 		& > * {
@@ -33,16 +32,18 @@ export const Skill = styled.div`
 		flex-direction: row;
 		align-items: center;
 		gap: ${theme.space.small};
-    background: #F8F8FD;
-    padding: ${theme.space.xxsmall};
-
+		background: #f8f8fd;
+		padding: ${theme.space.xxsmall};
+		margin: ${theme.space.xxxsmall} 0;
+    width: min-content;
 
 		span {
 			color: ${theme.colors.primary};
+			text-wrap: nowrap;
 		}
 
 		svg {
-      cursor: pointer;
+			cursor: pointer;
 			align-self: end;
 
 			path {

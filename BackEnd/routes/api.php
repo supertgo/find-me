@@ -56,7 +56,7 @@ Route::group(
         });
 
         Route::resource('/resume', ResumeController::class)
-            ->only(['store',])
+            ->only(['store', 'show'])
             ->middleware('auth:api');
 
         Route::group(['prefix' => '/resume'], function () {

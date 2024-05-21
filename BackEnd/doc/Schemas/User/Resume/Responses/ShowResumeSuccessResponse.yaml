@@ -1,4 +1,4 @@
-description: update resume alias successful
+description: show resume successful
 content:
   application/json:
     schema:

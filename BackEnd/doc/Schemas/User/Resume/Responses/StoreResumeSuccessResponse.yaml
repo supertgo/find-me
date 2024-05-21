@@ -1,4 +1,4 @@
-description: show job successful
+description: create resume successful
 content:
   application/json:
     schema:

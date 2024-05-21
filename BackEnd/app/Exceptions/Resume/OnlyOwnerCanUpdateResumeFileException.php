@@ -6,12 +6,12 @@ use App\Exceptions\Abstract\AbstractFindMeException;
 use App\Exceptions\ExceptionMessagesEnum;
 use Symfony\Component\HttpFoundation\Response;
 
-class OnlyOwnerCanPatchResumeAliasException extends AbstractFindMeException
+class OnlyOwnerCanUpdateResumeFileException extends AbstractFindMeException
 {
     public function __construct()
     {
         parent::__construct(
-            ExceptionMessagesEnum::OnlyOwnerCanPatchResumeAlias->value,
+            ExceptionMessagesEnum::OnlyOwnerCanUpdateResumeFile->value,
             Response::HTTP_UNAUTHORIZED
         );
     }

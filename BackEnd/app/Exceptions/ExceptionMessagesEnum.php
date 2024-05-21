@@ -54,7 +54,7 @@ enum ExceptionMessagesEnum: string
     case ResumeIdMustBeAnInteger = 'Resume id must be an integer';
     case ResumeIdMustBePositive = 'Resume id must be positive';
     case ResumeNotFound = 'Resume not found';
-    case OnlyOwnerCanPatchResumeAlias = 'Only owner can delete resume';
+    case OnlyOwnerCanUpdateResumeAlias = 'Only owner can update resume alias';
     case OnlyOwnerCanDownloadResume = 'Only owner can download resume';
     case OnlyOwnerCanUpdateResumeFile = 'Only owner can update resume file';
 }

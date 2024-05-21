@@ -51,6 +51,26 @@ Authorization: Bearer {{bearerToken}}
     });
 %}
 
+### index
+GET http://localhost/api/user/resume
+Accept: application/json
+Authorization: Bearer {{bearerToken}}
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+
+    const resume = response.body.data.find(
+        (resume) => resume.id == client.global.get('resumeId')
+    );
+
+    client.test("Resume found", function () {
+        client.assert(resume !== undefined, "resume wasn't found");
+        client.assert(resume.id == client.global.get('resumeId'), "wrong resume");
+    });
+%}
+
 ### update alias
 < {%
     request.variables.set('alias', $random.alphabetic(10))

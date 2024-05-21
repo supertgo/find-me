@@ -26,6 +26,7 @@ export const useLoggedUserStore = create<LoggedUserProps>()(
 			type: 'recruiter',
 			setUser: (user) =>
 				set(() => ({
+          id: user.id || get().id,
 					type: user.type || get().type,
 					name: user.name || get().name,
 					email: user.email || get().email,

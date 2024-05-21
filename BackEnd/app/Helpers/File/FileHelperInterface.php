@@ -15,5 +15,7 @@ interface FileHelperInterface
 
     function deletePublicFile(string $path): void;
 
+    function deletePrivateFile(string $path): void;
+
     function downloadPrivateFile(string $path): StreamedResponse;
 }

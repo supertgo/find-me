@@ -40,6 +40,13 @@ class LocalFileHelper implements FileHelperInterface
         }
     }
 
+    public function deletePrivateFile(string $path): void
+    {
+        if (Storage::disk('local')->exists($path)) {
+            Storage::disk('local')->delete($path);
+        }
+    }
+
     public function downloadPrivateFile(string $path): StreamedResponse
     {
         return Storage::disk('local')->download($path);

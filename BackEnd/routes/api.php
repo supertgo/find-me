@@ -47,7 +47,7 @@ Route::group(
         });
 
         Route::resource('/resume', ResumeController::class)
-            ->only(['store', 'index', 'show'])
+            ->only(['store', 'index', 'show', 'destroy'])
             ->middleware('auth:api');
 
         Route::get('', [UserController::class, 'index']);

@@ -37,7 +37,7 @@ class UserController extends Controller
         }
     }
 
-    public function showasdasdasdasdasdasdasd(ShowUserRequest $request): JsonResponse|IluminateResponse
+    public function show(ShowUserRequest $request): JsonResponse|IluminateResponse
     {
         try {
             return response()->json([

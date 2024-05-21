@@ -50,21 +50,21 @@ Route::group(
             ->only(['store', 'index', 'show', 'destroy'])
             ->middleware('auth:api');
 
-        Route::get('', [UserController::class, 'index']);
-        Route::get('/{user_id}', [UserController::class, 'show']);
-        Route::put('', [UserController::class, 'update']);
-
-        Route::group(['prefix' => 'profile-picture'], function () {
-            Route::patch('', [UserController::class, 'updateProfilePicture']);
-            Route::delete('', [UserController::class, 'deleteProfilePicture']);
-        });
-
         Route::group(['prefix' => '/resume'], function () {
             Route::group(['prefix' => '/{resume}'], function () {
                 Route::patch('/alias', [ResumeController::class, 'patchAlias']);
                 Route::patch('/file', [ResumeController::class, 'patchFile']);
                 Route::get('/download', [ResumeController::class, 'download']);
             });
+        });
+
+        Route::get('', [UserController::class, 'index']);
+        Route::get('/show/{user_id}', [UserController::class, 'show']);
+        Route::put('', [UserController::class, 'update']);
+
+        Route::group(['prefix' => 'profile-picture'], function () {
+            Route::patch('', [UserController::class, 'updateProfilePicture']);
+            Route::delete('', [UserController::class, 'deleteProfilePicture']);
         });
     }
 )->middleware('api');

@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Resume;
 
-abstract class DownloadResumeRequest extends ResumeRequestHavingId
+class DownloadResumeRequest extends ResumeRequestHavingId
 {
 
 }

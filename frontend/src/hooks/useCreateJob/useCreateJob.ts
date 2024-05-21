@@ -1,9 +1,11 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { useJob } from 'hooks/useJob/useJob';
+import { useRouter } from 'next/navigation';
 import { PostJobBody } from 'protocols/external/job/job';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { GetJobsRouteConst } from 'utils/routes';
+import { JobsUrl } from 'utils/urls';
 
 export type UseCreateJobProps = {};
 
@@ -28,6 +30,7 @@ export const useCreateJob = () => {
 	});
 
 	const { createJob } = useJob();
+	const { push } = useRouter();
 
 	const onSubmit: SubmitHandler<CreateJobInputs> = async (data, event) => {
 		event?.preventDefault();
@@ -79,6 +82,8 @@ export const useCreateJob = () => {
 		});
 
 		setIsLoading(false);
+
+		push(`/${JobsUrl}`);
 	};
 
 	return {

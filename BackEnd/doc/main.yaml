@@ -280,8 +280,26 @@ paths:
         401:
           $ref: 'Schemas/Common/response/UnauthenticatedResponse.yaml'
 
-  # Job
+  /user/resume/{resume_id}/Download:
+    get:
+      tags:
+        - UserResume
+      description: 'Download resume'
+      security:
+        - BearerAuth: [ ]
+      parameters:
+        - $ref: 'Schemas/User/Resume/Parameters/ResumeId.yaml'
 
+      responses:
+        '200':
+          description: Download
+        '422':
+          $ref: 'Schemas/Common/response/ValidationErrorsResponse.yaml'
+        401:
+          $ref: 'Schemas/Common/response/UnauthenticatedResponse.yaml'
+
+
+  # Job
   /job:
     post:
       tags:

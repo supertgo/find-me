@@ -6,7 +6,7 @@ use App\Domain\Resume\File\FileResume;
 use App\Domain\Resume\File\FileResumeInterface;
 use App\Domain\User\UserDomain;
 use App\Domain\User\UserRepository;
-use App\Exceptions\Resume\OnlyOwnerCanPatchResumeAliasException;
+use App\Exceptions\Resume\OnlyOwnerCanUpdateResumeAliasException;
 use App\Exceptions\Resume\ResumeNotFoundException;
 use App\Exceptions\Resume\ResumeTypeNotAllowedException;
 use App\Helpers\DataTransaction\DataTransactionServiceInterface;
@@ -41,7 +41,7 @@ class ResumeService implements ResumeServiceInterface
     /**
      * @throws ResumeNotFoundException
      * @throws ResumeTypeNotAllowedException
-     * @throws OnlyOwnerCanPatchResumeAliasException
+     * @throws OnlyOwnerCanUpdateResumeAliasException
      */
     public function updateAlias(int $resumeId, int $solicitorId, string $alias): ResumeDomainInterface
     {
@@ -87,6 +87,7 @@ class ResumeService implements ResumeServiceInterface
     public function updateFile(int $resumeId, int $solicitorId, UploadedFile $resume): ResumeDomainInterface
     {
         $solicitor = (new UserDomain(new UserRepository()))->loadUser($solicitorId);
+
         return (new FileResume(new ResumeRepository()))
             ->load($resumeId)
             ->updateFile($solicitor->getId(), $resume);

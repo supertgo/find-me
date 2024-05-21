@@ -5,6 +5,7 @@ namespace App\Domain\Resume\File;
 
 use App\Domain\Resume\ResumeDomain;
 use App\Exceptions\Resume\OnlyOwnerCanDownloadResumeException;
+use App\Exceptions\Resume\OnlyOwnerCanUpdateResumeAliasException;
 use App\Exceptions\Resume\ResumeTypeNotAllowedException;
 use App\Helpers\File\FileHelperInterface;
 use Illuminate\Http\UploadedFile;
@@ -68,8 +69,12 @@ class FileResume extends ResumeDomain implements FileResumeInterface
         return $this;
     }
 
-    public function updateFile(int $id, UploadedFile $resume): static
+    public function updateFile(int $requesterId, UploadedFile $resume): static
     {
+        if ($this->getOwnerId() !== $requesterId) {
+            throw new OnlyOwnerCanUpdateResumeAliasException();
+        }
+
         $fileHelper = app(FileHelperInterface::class);
 
         $fileHelper->deletePrivateFile($this->getFilePath());
@@ -78,7 +83,7 @@ class FileResume extends ResumeDomain implements FileResumeInterface
 
         $this->setFilePath($path);
 
-        $this->repository->updateFile($id, $path);
+        $this->repository->updateFile($this->getId(), $path);
 
         return $this;
     }

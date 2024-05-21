@@ -28,6 +28,6 @@ class ResumeRepository implements ResumeRepositoryInterface
 
     public function updateFile(int $id, string $path): void
     {
-        Resume::where('id', $id)->update(['path' => $path]);
+        Resume::where('id', $id)->update(['file_path' => $path]);
     }
 }

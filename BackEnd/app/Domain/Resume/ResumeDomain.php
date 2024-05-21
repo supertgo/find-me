@@ -2,7 +2,7 @@
 
 namespace App\Domain\Resume;
 
-use App\Exceptions\Resume\OnlyOwnerCanPatchResumeAliasException;
+use App\Exceptions\Resume\OnlyOwnerCanUpdateResumeAliasException;
 use App\Exceptions\Resume\ResumeNotFoundException;
 use App\Exceptions\Resume\ResumeTypeNotAllowedException;
 use Carbon\Carbon;
@@ -75,12 +75,12 @@ class ResumeDomain implements ResumeDomainInterface
     }
 
     /**
-     * @throws OnlyOwnerCanPatchResumeAliasException
+     * @throws OnlyOwnerCanUpdateResumeAliasException
      */
     public function updateAlias(int $solicitorId, string $alias): static
     {
         if ($this->getOwnerId() !== $solicitorId) {
-            throw new OnlyOwnerCanPatchResumeAliasException();
+            throw new OnlyOwnerCanUpdateResumeAliasException();
         }
 
         $this->setAlias($alias);
@@ -179,7 +179,7 @@ class ResumeDomain implements ResumeDomainInterface
     /**
      * @throws Exception
      */
-    public function updateFile(int $id, UploadedFile $resume): static
+    public function updateFile(int $requesterId, UploadedFile $resume): static
     {
         throw new Exception('resume not loaded');
     }

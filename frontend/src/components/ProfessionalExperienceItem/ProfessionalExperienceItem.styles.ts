@@ -11,6 +11,16 @@ export const ProfessionalXPInfo = styled.div`
 	flex-direction: column;
 `;
 
+export const ProfessionalXPTopRow = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  svg {
+    cursor: pointer;
+  }
+`
+
 export const ProfessionalXPInfoTitle = styled.span`
 	${({ theme }) => css`
 		font-size: ${theme.font.sizes.md};

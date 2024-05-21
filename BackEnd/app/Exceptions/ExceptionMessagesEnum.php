@@ -58,4 +58,5 @@ enum ExceptionMessagesEnum: string
     case OnlyOwnerCanDownloadResume = 'Only owner can download resume';
     case OnlyOwnerCanUpdateResumeFile = 'Only owner can update resume file';
     case OnlyOwnerCanSeeResume = 'Only owner can see resume';
+    case OnlyOwnerCanDeleteResume = 'Only owner can delete resume';
 }

@@ -309,6 +309,21 @@ paths:
         401:
           $ref: 'Schemas/Common/response/UnauthenticatedResponse.yaml'
 
+    delete:
+      tags:
+        - UserResume
+      description: 'Delete resume'
+      security:
+        - BearerAuth: [ ]
+      parameters:
+        - $ref: 'Schemas/User/Resume/Parameters/ResumeId.yaml'
+
+      responses:
+        '200':
+          description: No content
+        401:
+          $ref: 'Schemas/Common/response/UnauthenticatedResponse.yaml'
+
 
   /user/resume/{resume_id}/Download:
     get:

@@ -9,6 +9,7 @@ use App\Http\Requests\Resume\CreateResumeRequest;
 use App\Http\Requests\Resume\DownloadResumeRequest;
 use App\Http\Requests\Resume\PatchResumeFileRequest;
 use App\Http\Requests\Resume\PatchResumeStatusRequest;
+use App\Http\Requests\Resume\ShowResumeRequest;
 use App\Http\Resources\ResumeResource;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -110,6 +111,33 @@ class ResumeController extends Controller
 
             return app(FileHelperInterface::class)
                 ->downloadPrivateFile($path);
+        } catch (AbstractFindMeException $exception) {
+            return response()->json(
+                $exception->render(),
+                status: $exception->getHttpCode()
+            );
+        } catch (Exception $exception) {
+            Log::error($exception);
+
+            return response()
+                ->json(
+                    ['error' => 'Server error'],
+                    Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public function show(ShowResumeRequest $request): Response
+    {
+        try {
+            $resume = app(ResumeServiceInterface::class)
+                ->get(
+                    $request->getResumeId(),
+                    $request->getLoggedUserId()
+                );
+
+            return ResumeResource::make($resume)
+                ->toResponse($request)
+                ->setStatusCode(Response::HTTP_OK);
         } catch (AbstractFindMeException $exception) {
             return response()->json(
                 $exception->render(),

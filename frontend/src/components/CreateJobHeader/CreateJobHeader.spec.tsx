@@ -13,7 +13,7 @@ describe('<CreateJobHeader />', () => {
 			screen.getByRole('heading', { name: props.title }),
 		).toBeInTheDocument();
 		expect(
-			screen.getByRole('link', { name: /Anunciar uma vaga/i }),
+			screen.getByRole('link', { name: /Anuncie uma vaga/i }),
 		).toBeInTheDocument();
 	});
 });

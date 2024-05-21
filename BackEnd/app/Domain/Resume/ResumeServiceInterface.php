@@ -18,4 +18,6 @@ interface ResumeServiceInterface
     function get(int $resumeId, int $solicitorId): ResumeDomainInterface;
 
     function getUserResumes(int $userId): array;
+
+    function delete(int $resumeId, int $solicitorId);
 }

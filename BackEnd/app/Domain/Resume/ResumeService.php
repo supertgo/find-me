@@ -110,4 +110,15 @@ class ResumeService implements ResumeServiceInterface
     {
         return (new ResumeDomain(new ResumeRepository()))->getResumes($userId);
     }
+
+    /**
+     * @throws ResumeTypeNotAllowedException
+     * @throws ResumeNotFoundException
+     */
+    public function delete(int $resumeId, int $solicitorId)
+    {
+        return (new ResumeDomain(new ResumeRepository()))
+            ->load($resumeId)
+            ->delete($solicitorId);
+    }
 }

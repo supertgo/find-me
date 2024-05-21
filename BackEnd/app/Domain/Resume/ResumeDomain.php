@@ -2,6 +2,7 @@
 
 namespace App\Domain\Resume;
 
+use App\Exceptions\Resume\OnlyOwnerCanSeeResumeException;
 use App\Exceptions\Resume\OnlyOwnerCanUpdateResumeAliasException;
 use App\Exceptions\Resume\ResumeNotFoundException;
 use App\Exceptions\Resume\ResumeTypeNotAllowedException;
@@ -182,5 +183,17 @@ class ResumeDomain implements ResumeDomainInterface
     public function updateFile(int $requesterId, UploadedFile $resume): static
     {
         throw new Exception('resume not loaded');
+    }
+
+    /**
+     * @throws OnlyOwnerCanSeeResumeException
+     */
+    public function canSee(?int $solicitorId): static
+    {
+        if ($this->getOwnerId() !== $solicitorId) {
+            throw new OnlyOwnerCanSeeResumeException();
+        }
+
+        return $this;
     }
 }

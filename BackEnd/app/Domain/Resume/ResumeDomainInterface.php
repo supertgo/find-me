@@ -38,4 +38,6 @@ interface ResumeDomainInterface
     public function canDownload(int $solicitorId): static;
 
     public function updateFile(int $requesterId, UploadedFile $resume): static;
+
+    public function canSee(int $solicitorId): static;
 }

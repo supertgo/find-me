@@ -298,6 +298,26 @@ paths:
         401:
           $ref: 'Schemas/Common/response/UnauthenticatedResponse.yaml'
 
+  /user/resume/{resume_id}/file:
+    patch:
+      tags:
+        - UserResume
+      description: 'Update resume file'
+      security:
+        - BearerAuth: [ ]
+      parameters:
+        - $ref: 'Schemas/User/Resume/Parameters/ResumeId.yaml'
+      requestBody:
+        $ref: 'Schemas/User/Resume/RequestBodies/UpdateResumeFileRequest.yaml'
+
+      responses:
+        '204':
+          description: No content
+        '422':
+          $ref: 'Schemas/Common/response/ValidationErrorsResponse.yaml'
+        401:
+          $ref: 'Schemas/Common/response/UnauthenticatedResponse.yaml'
+
 
   # Job
   /job:

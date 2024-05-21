@@ -1,0 +1,13 @@
+description: Create User Resume
+content:
+  multipart/form-data:
+    schema:
+      type: object
+      required:
+        - resume_file
+      properties:
+        resume_file:
+          type: string
+          format: binary
+          description: Resume file, required if type is 'File'
+          example: null

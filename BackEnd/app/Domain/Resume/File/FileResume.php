@@ -67,4 +67,19 @@ class FileResume extends ResumeDomain implements FileResumeInterface
 
         return $this;
     }
+
+    public function updateFile(int $id, UploadedFile $resume): static
+    {
+        $fileHelper = app(FileHelperInterface::class);
+
+        $fileHelper->deletePrivateFile($this->getFilePath());
+
+        $path = $fileHelper->storeRandomInPrivateDirectory($resume);
+
+        $this->setFilePath($path);
+
+        $this->repository->updateFile($id, $path);
+
+        return $this;
+    }
 }

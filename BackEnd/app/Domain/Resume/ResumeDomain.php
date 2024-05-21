@@ -7,6 +7,7 @@ use App\Exceptions\Resume\ResumeNotFoundException;
 use App\Exceptions\Resume\ResumeTypeNotAllowedException;
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Http\UploadedFile;
 
 class ResumeDomain implements ResumeDomainInterface
 {
@@ -171,6 +172,14 @@ class ResumeDomain implements ResumeDomainInterface
      * @throws Exception
      */
     public function canDownload(int $solicitorId): static
+    {
+        throw new Exception('resume not loaded');
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function updateFile(int $id, UploadedFile $resume): static
     {
         throw new Exception('resume not loaded');
     }

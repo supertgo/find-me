@@ -3,6 +3,7 @@
 namespace App\Domain\Resume;
 
 use Carbon\Carbon;
+use Illuminate\Http\UploadedFile;
 
 interface ResumeDomainInterface
 {
@@ -35,4 +36,6 @@ interface ResumeDomainInterface
     function setUpdatedAt(Carbon|string|null $updatedAt): self;
 
     public function canDownload(int $solicitorId): static;
+
+    public function updateFile(int $id, UploadedFile $resume): static;
 }

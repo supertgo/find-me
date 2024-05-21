@@ -10,5 +10,7 @@ interface ResumeRepositoryInterface
 
     public function get(int $resumeId): array;
 
-    public function updateAlias(int $id, string $alias);
+    public function updateAlias(int $id, string $alias): void;
+
+    public function updateFile(int $id, string $path): void;
 }

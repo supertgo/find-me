@@ -9,7 +9,7 @@ describe('<ModalRemoveCompetence />', () => {
 			useContextSelector(RemoveCompetenceContext, (context) => ({
 				open: (context.open = true),
 				competence: (context.competence = { name: 'Ruby on Rails', id: 106 }),
-				setCompetence: context.ssetCompetence,
+				setCompetence: context.setCompetence,
 			})),
 		);
 

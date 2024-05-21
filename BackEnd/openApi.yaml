@@ -589,7 +589,7 @@
         }
       }
     },
-    "/user/{id}": {
+    "/user/show/{id}": {
       "get": {
         "tags": [
           "User"

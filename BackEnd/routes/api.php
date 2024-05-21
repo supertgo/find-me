@@ -46,6 +46,10 @@ Route::group(
             Route::delete('/', [UserProfessionalExperience::class, 'deleteProfessionalExperiences']);
         });
 
+        Route::resource('/resume', ResumeController::class)
+            ->only(['store', 'index', 'show'])
+            ->middleware('auth:api');
+
         Route::get('', [UserController::class, 'index']);
         Route::get('/{user_id}', [UserController::class, 'show']);
         Route::put('', [UserController::class, 'update']);
@@ -54,10 +58,6 @@ Route::group(
             Route::patch('', [UserController::class, 'updateProfilePicture']);
             Route::delete('', [UserController::class, 'deleteProfilePicture']);
         });
-
-        Route::resource('/resume', ResumeController::class)
-            ->only(['store', 'show', 'index'])
-            ->middleware('auth:api');
 
         Route::group(['prefix' => '/resume'], function () {
             Route::group(['prefix' => '/{resume}'], function () {

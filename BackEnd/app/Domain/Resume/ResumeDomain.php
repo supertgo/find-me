@@ -209,4 +209,16 @@ class ResumeDomain implements ResumeDomainInterface
             return ResumeFactory::create($type, $this->repository)->fromArray($resume);
         }, $resumes);
     }
+
+    /**
+     * @throws OnlyOwnerCanSeeResumeException
+     */
+    public function delete(int $solicitorId): void
+    {
+        if ($this->getOwnerId() !== $solicitorId) {
+            throw new OnlyOwnerCanSeeResumeException();
+        }
+
+        $this->repository->delete($this->getId());
+    }
 }

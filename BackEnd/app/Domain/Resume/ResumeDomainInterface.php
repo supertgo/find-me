@@ -40,4 +40,8 @@ interface ResumeDomainInterface
     public function updateFile(int $requesterId, UploadedFile $resume): static;
 
     public function canSee(int $solicitorId): static;
+
+    public function getResumes(int $ownerId): array;
+
+    public function delete(int $solicitorId);
 }

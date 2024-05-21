@@ -6,6 +6,7 @@ use App\Domain\Resume\ResumeServiceInterface;
 use App\Exceptions\Abstract\AbstractFindMeException;
 use App\Helpers\File\FileHelperInterface;
 use App\Http\Requests\Resume\CreateResumeRequest;
+use App\Http\Requests\Resume\DeleteResumeRequest;
 use App\Http\Requests\Resume\DownloadResumeRequest;
 use App\Http\Requests\Resume\IndexResumeRequest;
 use App\Http\Requests\Resume\PatchResumeFileRequest;
@@ -19,33 +20,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ResumeController extends Controller
 {
-
-    public function index(IndexResumeRequest $request): Response
-    {
-        try {
-            $resumes = app(ResumeServiceInterface::class)
-                ->getUserResumes(
-                    $request->getLoggedUserId()
-                );
-
-            return ResumeResource::collection($resumes)
-                ->toResponse($request)
-                ->setStatusCode(Response::HTTP_OK);
-        } catch (AbstractFindMeException $exception) {
-            return response()->json(
-                $exception->render(),
-                status: $exception->getHttpCode()
-            );
-        } catch (Exception $exception) {
-            Log::error($exception);
-
-            return response()
-                ->json(
-                    ['error' => 'Server error'],
-                    Response::HTTP_INTERNAL_SERVER_ERROR);
-        }
-    }
-
     public function store(CreateResumeRequest $request): JsonResponse
     {
         try {
@@ -181,5 +155,54 @@ class ResumeController extends Controller
         }
     }
 
+    public function index(IndexResumeRequest $request): Response
+    {
+        try {
+            $resumes = app(ResumeServiceInterface::class)
+                ->getUserResumes(
+                    $request->getLoggedUserId()
+                );
 
+            return ResumeResource::collection($resumes)
+                ->toResponse($request)
+                ->setStatusCode(Response::HTTP_OK);
+        } catch (AbstractFindMeException $exception) {
+            return response()->json(
+                $exception->render(),
+                status: $exception->getHttpCode()
+            );
+        } catch (Exception $exception) {
+            Log::error($exception);
+
+            return response()
+                ->json(
+                    ['error' => 'Server error'],
+                    Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public function destroy(DeleteResumeRequest $request): Response
+    {
+        try {
+            app(ResumeServiceInterface::class)
+                ->delete(
+                    $request->getResumeId(),
+                    $request->getLoggedUserId(),
+                );
+
+            return response(status: Response::HTTP_NO_CONTENT);
+        } catch (AbstractFindMeException $exception) {
+            return response()->json(
+                $exception->render(),
+                status: $exception->getHttpCode()
+            );
+        } catch (Exception $exception) {
+            Log::error($exception);
+
+            return response()
+                ->json(
+                    ['error' => 'Server error'],
+                    Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
 }

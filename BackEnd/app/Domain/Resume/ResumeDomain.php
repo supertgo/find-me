@@ -196,4 +196,17 @@ class ResumeDomain implements ResumeDomainInterface
 
         return $this;
     }
+
+    /**
+     * @throws Exception
+     */
+    public function getResumes(int $ownerId): array
+    {
+        $resumes = $this->repository->getResumes($ownerId);
+
+        return array_map(function ($resume) {
+            $type = ResumeTypeEnum::tryFrom($resume['type']);
+            return ResumeFactory::create($type, $this->repository)->fromArray($resume);
+        }, $resumes);
+    }
 }

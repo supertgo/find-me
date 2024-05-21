@@ -30,4 +30,9 @@ class ResumeRepository implements ResumeRepositoryInterface
     {
         Resume::where('id', $id)->update(['file_path' => $path]);
     }
+
+    public function getResumes(int $ownerId): array
+    {
+        return Resume::where('owner_id', $ownerId)->get()->toArray();
+    }
 }

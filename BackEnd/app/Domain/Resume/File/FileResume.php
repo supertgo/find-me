@@ -87,4 +87,11 @@ class FileResume extends ResumeDomain implements FileResumeInterface
 
         return $this;
     }
+
+    public function delete(int $solicitorId): void
+    {
+        parent::delete($solicitorId);
+
+        app(FileHelperInterface::class)->deletePrivateFile($this->getFilePath());
+    }
 }

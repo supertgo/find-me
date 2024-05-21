@@ -53,6 +53,8 @@ class CreateResumeTest extends TestCase
 
         $resume = Resume::find($resumeID);
 
+        $this->assertNotNull($resume->file_path);
+
         $explodedUrl = explode('/', $resume->file_path);
         $this->assertTrue(
             Storage::disk('local')

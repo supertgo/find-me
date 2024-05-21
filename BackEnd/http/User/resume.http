@@ -57,3 +57,8 @@ Authorization: Bearer {{bearerToken}}
         client.assert(resume.alias === request.variables.get('alias'), "resume alias wasn't updated");
     });
 %}
+
+### Download
+
+GET http://localhost/api/user/resume/{{resumeId}}/download
+Authorization: Bearer {{bearerToken}}

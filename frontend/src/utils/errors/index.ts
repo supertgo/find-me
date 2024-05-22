@@ -16,6 +16,8 @@ export const PASSWORD_REQUIREMENTS =
 
 export const REQUIRED_NEW_PASSWORD = "Você deve digitar a sua nova senha";
 
+export const REQUIRED_ABOUT_ME = "O campo sobre mim é obrigatório.";
+
 export const UNEXPECTED_ERROR = "Algo deu errado. Tente mais tarde.";
 
 export const REQUIRED_CELLPHONE = "O celular é obrigatório";
@@ -67,3 +69,4 @@ export const REQUIRED_JOB_SALARY_TIME_UNIT = 'O período de pagamento é obrigat
 
 export const REQUIRED_JOB_WORK_MODEL = 'O modelo de trabalho é obrigatório.'
 
+export const REQUIRED_JOB_APP_COVER_LETTER = 'A carta de apresentação é obrigatória'

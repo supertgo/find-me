@@ -1,6 +1,6 @@
-import { Cross1Icon } from '@radix-ui/react-icons';
 import { Button } from 'components/Button/Button';
 import { Input } from 'components/Input/Input';
+import { Skill } from 'components/Skill/Skill';
 import { CreateJobInputs } from 'hooks/useCreateJob/useCreateJob';
 import { useState } from 'react';
 import { UseFormSetValue } from 'react-hook-form';
@@ -70,7 +70,7 @@ export const AddSkills = ({ maxSkillPerJob, setValue }: AddSkillsProps) => {
 					onChange={onChange}
 				/>
 				<Button
-          type="button"
+					type="button"
 					onClick={() => inputValue && appendNewSkill(inputValue)}
 					disabled={shouldButtonBeDisabled}
 				>
@@ -80,12 +80,7 @@ export const AddSkills = ({ maxSkillPerJob, setValue }: AddSkillsProps) => {
 
 			<S.SkillsWrapper>
 				{skills.map((skill) => (
-					<S.Skill key={skill}>
-						<span>{skill}</span>
-						<i title={`Remover ${skill}`} onClick={() => removeSkill(skill)}>
-							<Cross1Icon />
-						</i>
-					</S.Skill>
+					<Skill key={skill} name={skill} onClick={() => removeSkill(skill)} />
 				))}
 			</S.SkillsWrapper>
 		</S.Wrapper>

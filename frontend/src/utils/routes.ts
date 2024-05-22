@@ -29,17 +29,15 @@ export const PostUserProfessionalExperiencesRouteConst =
 export const DeleteUserProfessionalExperiencesRouteConst =
 	'user/professional-experiences';
 
-export const DeleteUserAcademicRecordRouteConst =
-	'user/academic-records';
+export const DeleteUserAcademicRecordRouteConst = 'user/academic-records';
 
-export const DeleteUserCompetenceRouteConst =
-	'user/competence';
+export const DeleteUserCompetenceRouteConst = 'user/competence';
 
 export const GetUserRouteConst = ({
 	user_id,
 	includes,
 }: GetUserRouteConstProps) => {
-	let userRoute = `user/${user_id}`;
+	let userRoute = `user/show/${user_id}`;
 
 	if (includes && includes.length) {
 		userRoute += `?includes[]=`;

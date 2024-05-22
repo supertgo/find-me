@@ -6,7 +6,7 @@ export const Wrapper = styled.header`
 		flex-direction: row;
 		justify-content: space-between;
 		align-items: center;
-    padding: ${theme.space.medium} ${theme.space.large};
+		padding: ${theme.space.medium} ${theme.space.large};
 	`}
 `;
 

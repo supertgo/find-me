@@ -27,7 +27,7 @@ async function getData() {
 	const { data: authMeResponse } = await res.json();
 
 	// if (authMeResponse.type === 'recruiter') {
-  //    return redirect(`/${HomeUrl}`);
+	//    return redirect(`/${HomeUrl}`);
 	// }
 
 	const userRouteConst = await fetch(

@@ -8,6 +8,7 @@ import { RecruiterSidebarItems } from 'components/RecruiterSidebarItems/Recruite
 import { ApplicantSidebarItems } from 'components/ApplicantSidebarItems/ApplicantSidebarItems';
 
 import * as S from './Sidebar.styles';
+import { LogoFindme } from 'components/LogoFindme/LogoFindme';
 
 export type SidebarProps = {};
 
@@ -21,14 +22,16 @@ export const Sidebar = ({}: SidebarProps) => {
 
 	return (
 		<S.Wrapper>
-			{/* TODO Ana/Eduardo -> Colocar componente de logo aqui */}
-			<S.Items>
-				{type === 'recruiter' ? (
-					<RecruiterSidebarItems />
-				) : (
-					<ApplicantSidebarItems />
-				)}
-			</S.Items>
+			<div>
+				<LogoFindme />
+				<S.Items>
+					{type === 'recruiter' ? (
+						<RecruiterSidebarItems />
+					) : (
+						<ApplicantSidebarItems />
+					)}
+				</S.Items>
+			</div>
 
 			<S.AvatarWrapper>
 				<Link href={`/${ConfigUrl}`}>

@@ -24,13 +24,16 @@ export const Wrapper = styled.div`
 `;
 
 export const Items = styled.div`
-	${media.lessThan('large')`
+	${({ theme }) => css`
+		margin-top: ${theme.space.large};
+		${media.lessThan('large')`
     display: flex;    
     flex-direction: row;
     height: min-content;
     width: 100%;
     justify-content: space-around;
   `}
+	`}
 `;
 
 export const AvatarWrapper = styled.div`
@@ -40,15 +43,15 @@ export const AvatarWrapper = styled.div`
 		padding: ${theme.space.small};
 		gap: ${theme.space.xxsmall};
 		justify-content: space-between;
-    align-items: center;
+		align-items: center;
 
-    svg {
-      cursor: pointer;
-    }
+		svg {
+			cursor: pointer;
+		}
 
-    i {
-      margin-right: ${theme.space.small};
-    }
+		i {
+			margin-right: ${theme.space.small};
+		}
 	`}
 `;
 

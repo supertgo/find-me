@@ -8,6 +8,7 @@ import { formatCellphone } from 'utils/formatCellphone';
 import { validateInputUserEmail } from 'utils/email';
 import {
 	INVALID_EMAIL,
+	REQUIRED_ABOUT_ME,
 	REQUIRED_CELLPHONE,
 	REQUIRED_NEW_PASSWORD,
 	REQUIRED_USER,
@@ -122,6 +123,9 @@ export const AccountConfig = ({
 				<ConfigInfoWrapper title="Sobre">
 					<S.ConfigEmailWrapper>
 						<Controller
+							rules={{
+								required: REQUIRED_ABOUT_ME,
+							}}
 							control={control}
               defaultValue={about_me || ''}
 							name="about_me"
@@ -129,7 +133,7 @@ export const AccountConfig = ({
 								<Input
 									{...field}
 									placeholder="Descreva um pouco sobre você"
-									error={errors.password}
+									error={errors.about_me}
 								/>
 							)}
 						/>

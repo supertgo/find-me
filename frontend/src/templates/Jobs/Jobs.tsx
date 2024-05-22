@@ -26,7 +26,7 @@ export const Jobs = () => {
 
 	return (
 		<Base>
-      <CreateJobHeader title="Vagas" />
+			<CreateJobHeader title="Vagas" />
 			<S.SearchWrapper>
 				<Input placeholder="Buscar vaga" />
 				<Button>Buscar</Button>

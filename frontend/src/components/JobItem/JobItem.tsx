@@ -1,15 +1,19 @@
-import Image from 'next/image';
 import { Button } from 'components/Button/Button';
+import { JobCapacity } from 'components/JobCapacity/JobCapacity';
 import { MediaMatch } from 'components/MediaMatch/MediaMatch';
+import Image from 'next/image';
+import Link from 'next/link';
 import { Job } from 'protocols/external/job/job';
+import { useLoggedUserStore } from 'stores/loggedUserStore/loggedUserStore';
 import { filterJobLocation } from 'utils/job';
-import { JobPill, JobPillProps } from './JobPill';
-
+import { JobUrl } from 'utils/urls';
 import * as S from './JobItem.styles';
+import { JobPill, JobPillProps } from './JobPill';
 
 export type JobItemProps = {} & Job;
 
 export const JobItem = ({
+	id,
 	name,
 	is_available,
 	applications_amount,
@@ -27,6 +31,10 @@ export const JobItem = ({
 		salary,
 		salary_time_unit,
 	};
+
+	const { type } = useLoggedUserStore((state) => ({
+		type: state.type,
+	}));
 
 	return (
 		<S.Wrapper>
@@ -54,19 +62,23 @@ export const JobItem = ({
 					</MediaMatch>
 				</S.JobInfo>
 			</S.JobInfoWrapper>
+
 			<S.PillSmallScreen>
 				<JobPill {...jobPillProps} />
 			</S.PillSmallScreen>
+
 			<S.JobApplicationInfo>
-				<Button disabled={!is_available}>Aplicar</Button>
-				<S.ProgressWrapper>
-					<S.ProgressDiv $progress={(applicants / applications_amount) * 100} />
-				</S.ProgressWrapper>
-				<S.JobMaxInfo>
-					<p>{`${applicants} aplicados`}</p>
-					<p>{`-`}</p>
-					<p>{`Máximo ${applications_amount}`}</p>
-				</S.JobMaxInfo>
+				{type !== 'employee' ? (
+					<Link href={`/${JobUrl(id)}`}>
+						<Button disabled={!is_available}>Visualizar</Button>
+					</Link>
+				) : (
+					<Button>Visualizar candidatos</Button>
+				)}
+				<JobCapacity
+					applicants={applicants}
+					applications_amount={applications_amount}
+				/>
 			</S.JobApplicationInfo>
 		</S.Wrapper>
 	);

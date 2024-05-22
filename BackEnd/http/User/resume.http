@@ -1,0 +1,133 @@
+### Create
+POST http://localhost/api/user/resume
+Accept: application/json
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+Authorization: Bearer {{bearerToken}}
+
+--WebAppBoundary
+Content-Disposition: form-data; name="alias"
+
+Test resume
+--WebAppBoundary
+Content-Disposition: form-data; name="type"
+
+file
+--WebAppBoundary
+Content-Disposition: form-data; name="resume_file"; filename="resume_file.pdf"
+
+< resume_file.pdf
+--WebAppBoundary--
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 201, "Response status is not 201");
+    });
+
+    const resume = response.body.data;
+
+    client.test("resume was created", function () {
+        client.assert(resume !== undefined, "resume is not created");
+    });
+
+    client.global.set("resumeId", resume.id);
+
+%}
+
+
+### Show
+GET http://localhost/api/user/resume/{{resumeId}}
+Accept: application/json
+Authorization: Bearer {{bearerToken}}
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+
+    const resume = response.body.data;
+    client.test("Resume found", function () {
+        client.assert(resume !== undefined, "resume wasn't found");
+        client.assert(resume.id == client.global.get('resumeId'), "wrong resume");
+    });
+%}
+
+### Index
+GET http://localhost/api/user/resume
+Accept: application/json
+Authorization: Bearer {{bearerToken}}
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+
+    const resume = response.body.data.find(
+        (resume) => resume.id == client.global.get('resumeId')
+    );
+
+    client.test("Resume found", function () {
+        client.assert(resume !== undefined, "resume wasn't found");
+        client.assert(resume.id == client.global.get('resumeId'), "wrong resume");
+    });
+%}
+
+### Update alias
+< {%
+    request.variables.set('alias', $random.alphabetic(10))
+%}
+PATCH http://localhost/api/user/resume/{{resumeId}}/alias
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{bearerToken}}
+
+{
+      "alias": "{{alias}}"
+}
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+
+    const resume = response.body.data;
+    client.test("resume alias wasn't updated", function () {
+        client.assert(resume !== undefined, "resume wasn't updated");
+        client.assert(resume.alias === request.variables.get('alias'), "resume alias wasn't updated");
+    });
+%}
+
+### Download
+GET http://localhost/api/user/resume/{{resumeId}}/download
+Authorization: Bearer {{bearerToken}}
+
+
+### Delete
+DELETE http://localhost/api/user/resume/{{resumeId}}
+Accept: application/json
+Authorization: Bearer {{bearerToken}}
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 204, "Response status is not 204");
+    });
+%}
+
+
+### Mot found after delete
+GET http://localhost/api/user/resume
+Accept: application/json
+Authorization: Bearer {{bearerToken}}
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+
+    const resume = response.body.data.find(
+        (resume) => resume.id == client.global.get('resumeId')
+    );
+
+    client.test("Resume found", function () {
+        client.assert(resume == undefined, "resume wasn't deleted");
+    });
+%}

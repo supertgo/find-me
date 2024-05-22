@@ -1,0 +1,24 @@
+description: Create User Resume
+content:
+  multipart/form-data:
+    schema:
+      type: object
+      properties:
+        alias:
+          type: string
+          description: Alias for the resume
+          example: "john_doe_resume"
+        type:
+          type: string
+          description: Type of the resume
+          enum:
+            - file
+            - form
+        resume_file:
+          type: string
+          format: binary
+          description: Resume file, required if type is 'File'
+          example: null
+      required:
+        - alias
+        - type

@@ -4,6 +4,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\JobApplicationsController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\JWTController;
+use App\Http\Controllers\ResumeController;
 use App\Http\Controllers\UserAcademicRecordsController;
 use App\Http\Controllers\UserCompetenceController;
 use App\Http\Controllers\UserController;
@@ -45,8 +46,20 @@ Route::group(
             Route::delete('/', [UserProfessionalExperience::class, 'deleteProfessionalExperiences']);
         });
 
+        Route::resource('/resume', ResumeController::class)
+            ->only(['store', 'index', 'show', 'destroy'])
+            ->middleware('auth:api');
+
+        Route::group(['prefix' => '/resume'], function () {
+            Route::group(['prefix' => '/{resume}'], function () {
+                Route::patch('/alias', [ResumeController::class, 'patchAlias']);
+                Route::patch('/file', [ResumeController::class, 'patchFile']);
+                Route::get('/download', [ResumeController::class, 'download']);
+            });
+        });
+
         Route::get('', [UserController::class, 'index']);
-        Route::get('/{user_id}', [UserController::class, 'show']);
+        Route::get('/show/{user_id}', [UserController::class, 'show']);
         Route::put('', [UserController::class, 'update']);
 
         Route::group(['prefix' => 'profile-picture'], function () {

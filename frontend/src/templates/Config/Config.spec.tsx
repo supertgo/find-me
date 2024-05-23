@@ -1,7 +1,9 @@
 import "components/Sidebar/Sidebar.mock";
+import "components/Skeleton/Skeleton.mock";
 import { render, screen } from "utils/test/test-utils";
 import { Config, ConfigProps } from "./Config";
 import { formatCellphone } from "utils/formatCellphone";
+import { LoadingConfig } from "./LoadingConfig";
 
 const props: ConfigProps = {
   id: 10,
@@ -37,3 +39,12 @@ describe("<Config />", () => {
     expect(saveButton).toBeInTheDocument();
   });
 });
+
+describe("<LoadingConfig />", () => {
+  it("should render the component", () => {
+    const {container} = render(<LoadingConfig  />);
+
+    expect(screen.getAllByTestId('Mock Skeleton')).toHaveLength(19)
+  });
+});
+

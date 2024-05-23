@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { BackpackIcon, ReaderIcon } from '@radix-ui/react-icons';
 import { AddSkills } from 'components/AddSkills/AddSkills';
 import { Button } from 'components/Button/Button';
@@ -11,27 +11,27 @@ import { Title } from 'components/Title/Title';
 import { VerticalRow } from 'components/VerticalRow/VerticalRow';
 import { useCreateJob } from 'hooks/useCreateJob/useCreateJob';
 import {
-  employmentTypeOptions,
-  salaryTimeUnitOptions,
-  workModelOptions,
+	employmentTypeOptions,
+	salaryTimeUnitOptions,
+	workModelOptions,
 } from 'protocols/external/job/job';
 import { Controller } from 'react-hook-form';
 import { theme } from 'styles/theme';
 import { Base } from 'templates/Base/Base';
 import {
-  REQUIRED_JOB_ACCEPT_APPLICATION,
-  REQUIRED_JOB_APPLICATIONS_AMOUNT,
-  REQUIRED_JOB_DESCRIPTION,
-  REQUIRED_JOB_EMPLOYMENT_TYPE,
-  REQUIRED_JOB_NAME,
-  REQUIRED_JOB_SALARY,
-  REQUIRED_JOB_SALARY_TIME_UNIT,
-  REQUIRED_JOB_WORK_MODEL,
+	REQUIRED_JOB_ACCEPT_APPLICATION,
+	REQUIRED_JOB_APPLICATIONS_AMOUNT,
+	REQUIRED_JOB_DESCRIPTION,
+	REQUIRED_JOB_EMPLOYMENT_TYPE,
+	REQUIRED_JOB_NAME,
+	REQUIRED_JOB_SALARY,
+	REQUIRED_JOB_SALARY_TIME_UNIT,
+	REQUIRED_JOB_WORK_MODEL,
 } from 'utils/errors';
 import {
-  translateEmploymentType,
-  translateSalaryTimeUnit,
-  translateWorkModel,
+	translateEmploymentType,
+	translateSalaryTimeUnit,
+	translateWorkModel,
 } from 'utils/job';
 import * as S from './CreateJob.styles';
 
@@ -55,7 +55,7 @@ export const CreateJob = ({}: CreateJobProps) => {
 	return (
 		<Base>
 			<S.Wrapper>
-				<Title title="Anuncie uma vaga" />
+				<Title title="Anuncie uma vaga" hasBorder={false} />
 				<StepWrapper>
 					<Step
 						icon={
@@ -66,6 +66,7 @@ export const CreateJob = ({}: CreateJobProps) => {
 						currentStep={currentStep}
 						maxStep={maxStep}
 						onClick={() => setCurrentStep(1)}
+						isActive={false}
 					/>
 					<VerticalRow />
 					<Step
@@ -77,6 +78,7 @@ export const CreateJob = ({}: CreateJobProps) => {
 						currentStep={currentStep}
 						maxStep={maxStep}
 						onClick={() => setCurrentStep(2)}
+						isActive={false}
 					/>
 				</StepWrapper>
 			</S.Wrapper>
@@ -181,17 +183,12 @@ export const CreateJob = ({}: CreateJobProps) => {
 							</S.ContractTypeWrapper>
 						</ConfigInfoWrapper>
 
-						<ConfigInfoWrapper
-							title="Localização"
-						>
+						<ConfigInfoWrapper title="Localização">
 							<Controller
 								control={control}
 								name="location"
 								render={({ field: { ...field } }) => (
-									<Input
-										{...field}
-										error={errors.location}
-									/>
+									<Input {...field} error={errors.location} />
 								)}
 							/>
 						</ConfigInfoWrapper>

@@ -1,5 +1,6 @@
 import "components/Sidebar/Sidebar.mock";
 import "components/Skeleton/Skeleton.mock";
+import "components/ResumeCard/ResumeCard.mock";
 import { render, screen } from "utils/test/test-utils";
 import { Config, ConfigProps } from "./Config";
 import { formatCellphone } from "utils/formatCellphone";
@@ -37,6 +38,8 @@ describe("<Config />", () => {
     expect(emailField).toHaveValue(props.email);
 
     expect(saveButton).toBeInTheDocument();
+
+    expect(screen.getAllByTestId('Mock ResumeCard')).toHaveLength(3)
   });
 });
 

@@ -1,5 +1,4 @@
 'use client';
-import { useQuery } from '@tanstack/react-query';
 import { AcademicRecordItem } from 'components/AcademicRecordItem/AcademicRecordItem';
 import { AccountConfig } from 'components/AccountConfig/AccountConfig';
 import { CompetenceItem } from 'components/CompetenceItem/CompetenceItem';
@@ -15,65 +14,22 @@ import { Title } from 'components/Title/Title';
 import { RemoveAcademicRecordProvider } from 'hooks/contexts/RemoveAcademicRecord/RemoveAcademicRecord';
 import { RemoveCompetenceProvider } from 'hooks/contexts/RemoveCompetence/RemoveCompetence';
 import { RemoveProfessionalExperienceProvider } from 'hooks/contexts/RemoveProfessionalExperience/RemoveProfessionalExperience';
-import { useUser } from 'hooks/useUser/useUser';
-import { GetUserResponse, UserProps } from 'protocols/external/user/user';
+import { useConfig } from 'hooks/useConfig/useConfig';
+import { UserProps } from 'protocols/external/user/user';
 import { Children } from 'react';
 import { Base } from 'templates/Base/Base';
-import { getInitialData } from 'utils/initialData';
-import { GetUserRouteConst } from 'utils/routes';
 import { LoadingConfig } from './LoadingConfig';
 
 export type ConfigProps = {} & UserProps;
 
-export const Config = ({
-	id,
-	name,
-	email,
-	phone,
-	competences,
-	profile_picture_path,
-	about_me,
-	academic_records,
-	professional_experiences,
-}: ConfigProps) => {
-	const { findUser } = useUser();
-
-	const initialData = getInitialData<GetUserResponse>({
-		initialData: {
-			data: {
-				id,
-				name,
-				email,
-				phone,
-				type: 'employee',
-				about_me,
-				profile_picture_path,
-				competences: competences || [],
-				academic_records: academic_records || [],
-				professional_experiences: professional_experiences || [],
-			},
-		},
-	});
-
-	const { data: getUserReponse, isLoading } = useQuery({
-		queryKey: [
-			`/${GetUserRouteConst({
-				user_id: id,
-			})}`,
-		],
-		queryFn: () =>
-			findUser({
-				user_id: id,
-				includes: ['competences', 'academicRecords', 'professionalExperiences'],
-			}),
-		initialData,
-	});
+export const Config = (props: ConfigProps) => {
+	const { getUserResponse, isLoading } = useConfig(props);
 
 	if (isLoading) {
 		return <LoadingConfig />;
 	}
 
-	const user = getUserReponse.data.data;
+	const user = getUserResponse.data.data;
 
 	return (
 		<Base>

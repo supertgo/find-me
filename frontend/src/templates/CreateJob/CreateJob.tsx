@@ -66,6 +66,7 @@ export const CreateJob = ({}: CreateJobProps) => {
 						currentStep={currentStep}
 						maxStep={maxStep}
 						onClick={() => setCurrentStep(1)}
+						isActive={false}
 					/>
 					<VerticalRow />
 					<Step
@@ -77,6 +78,7 @@ export const CreateJob = ({}: CreateJobProps) => {
 						currentStep={currentStep}
 						maxStep={maxStep}
 						onClick={() => setCurrentStep(2)}
+						isActive={false}
 					/>
 				</StepWrapper>
 			</S.Wrapper>

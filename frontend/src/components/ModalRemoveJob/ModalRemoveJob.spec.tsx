@@ -1,7 +1,6 @@
-import { render, renderHook, screen } from 'utils/test/test-utils';
+import { render, screen } from 'utils/test/test-utils';
 import { vi } from 'vitest'
 import { ModalRemoveJob } from './ModalRemoveJob';
-import { useContextSelector } from 'use-context-selector';
 
 describe('<ModalRemoveJob />', () => {
 	it('should render the component', () => {

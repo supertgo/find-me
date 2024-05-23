@@ -41,7 +41,7 @@ export const ModalCoverLetter = ({
 						<Textarea
 							{...field}
 							placeholder="Escreva uma carta de apresentação"
-							// error={errors.cover_letter}
+							error={errors.cover_letter}
 						/>
 					)}
 				/>

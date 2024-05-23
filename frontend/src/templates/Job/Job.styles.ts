@@ -68,15 +68,15 @@ export const Section = styled.section`
 
 export const JobCapacityWrapper = styled.div`
 	${({ theme }) => css`
-    display: flex;
-    flex-direction: column;
-    gap: ${theme.space.xxsmall};
-    background: ${theme.colors.secondWhite};
-    padding: ${theme.space.small};
-    margin-bottom: ${theme.space.medium};
-    border-radius: ${theme.borderRadius.s};
+		display: flex;
+		flex-direction: column;
+		gap: ${theme.space.xxsmall};
+		background: ${theme.colors.secondWhite};
+		padding: ${theme.space.small};
+		margin-bottom: ${theme.space.medium};
+		border-radius: ${theme.borderRadius.s};
 	`}
-`
+`;
 
 export const Description = styled.p`
 	${({ theme }) => css`
@@ -90,12 +90,19 @@ export const JobAboutThisRole = styled.div`
 		display: flex;
 		flex-direction: column;
 
-    & > *:not(:first-child) {
-      margin-top: ${theme.space.medium};
-    }
+		& > *:not(:first-child) {
+			margin-top: ${theme.space.medium};
+		}
 	`}
 `;
 
 export const JobRequiredSkills = styled.div``;
 
 export const JobCompanyInfo = styled.div``;
+
+export const RemoveJob = styled.div`
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: end;
+`;

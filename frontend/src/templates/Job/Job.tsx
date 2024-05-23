@@ -1,12 +1,17 @@
 'use client';
+import { Button } from 'components/Button/Button';
 import { Info } from 'components/Info/Info';
+import { JobCapacity } from 'components/JobCapacity/JobCapacity';
 import { ModalCoverLetter } from 'components/ModalCoverLetter/ModalCoverLetter';
+import {
+	JobToBeRemoved,
+	ModalRemoveJob,
+} from 'components/ModalRemoveJob/ModalRemoveJob';
 import { Skill } from 'components/Skill/Skill';
 import { VerticalRow } from 'components/VerticalRow/VerticalRow';
 import { Job as JobResponse } from 'protocols/external/job/job';
 import { useLoggedUserStore } from 'stores/loggedUserStore/loggedUserStore';
 import { Base } from 'templates/Base/Base';
-import { Button } from 'components/Button/Button';
 import {
 	filterJobLocation,
 	translateEmploymentType,
@@ -15,7 +20,7 @@ import {
 } from 'utils/job';
 import { formatToCurrency } from 'utils/money';
 import * as S from './Job.styles';
-import { JobCapacity } from 'components/JobCapacity/JobCapacity';
+import { useState } from 'react';
 
 export type JobProps = {} & JobResponse;
 
@@ -33,11 +38,23 @@ export const Job = ({
 	is_available,
 	competences,
 }: JobProps) => {
+	const [open, setOpen] = useState(false);
+	const [, setJob] = useState<JobToBeRemoved | null>(null);
 	const { type } = useLoggedUserStore((state) => ({
 		type: state.type,
 	}));
 
 	const applicants = 10;
+
+	const onRemoveJobClick = () => {
+		setJob({
+			id,
+			name,
+			companyName: company!.name,
+		});
+
+		setOpen(true);
+	};
 
 	return (
 		<Base>
@@ -50,7 +67,9 @@ export const Job = ({
 							&bull; {translateEmploymentType[employment_type]}
 						</S.JobSubtitle>
 					</S.TextWrapper>
+
 					<VerticalRow />
+
 					{type === 'recruiter' ? (
 						<Button>Visualizar Candidatos</Button>
 					) : (
@@ -107,6 +126,22 @@ export const Job = ({
 						</S.Section>
 					</div>
 				</S.InfoWrapper>
+
+				{type === 'recruiter' && (
+					<S.RemoveJob>
+						<ModalRemoveJob
+							setOpen={setOpen}
+							open={open}
+							job={{
+								id,
+								name,
+								companyName: company!.name,
+							}}
+						/>
+						<Button onClick={onRemoveJobClick}>Excluir Vaga</Button>
+					</S.RemoveJob>
+				)}
+         
 			</S.Wrapper>
 		</Base>
 	);

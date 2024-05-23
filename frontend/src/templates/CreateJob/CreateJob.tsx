@@ -264,7 +264,7 @@ export const CreateJob = ({}: CreateJobProps) => {
 									<Textarea
 										{...field}
 										maxLength={2000}
-										// error={errors.description}
+										error={errors.description}
 										placeholder="Digite a descrição do emprego"
 										style={{
 											height: '50rem',

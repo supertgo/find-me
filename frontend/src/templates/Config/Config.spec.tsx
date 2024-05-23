@@ -42,7 +42,7 @@ describe("<Config />", () => {
 
 describe("<LoadingConfig />", () => {
   it("should render the component", () => {
-    const {container} = render(<LoadingConfig  />);
+    render(<LoadingConfig  />);
 
     expect(screen.getAllByTestId('Mock Skeleton')).toHaveLength(19)
   });

@@ -1,6 +1,5 @@
 'use client';
 import { useQuery } from '@tanstack/react-query';
-import { AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import { AcademicRecordItem } from 'components/AcademicRecordItem/AcademicRecordItem';
 import { AccountConfig } from 'components/AccountConfig/AccountConfig';
 import { CompetenceItem } from 'components/CompetenceItem/CompetenceItem';
@@ -14,13 +13,15 @@ import { ProfessionalExperienceItem } from 'components/ProfessionalExperienceIte
 import { ResumeCard } from 'components/ResumeCard/ResumeCard';
 import { Title } from 'components/Title/Title';
 import { RemoveAcademicRecordProvider } from 'hooks/contexts/RemoveAcademicRecord/RemoveAcademicRecord';
-import { RemoveCompetenceContext, RemoveCompetenceProvider } from 'hooks/contexts/RemoveCompetence/RemoveCompetence';
+import { RemoveCompetenceProvider } from 'hooks/contexts/RemoveCompetence/RemoveCompetence';
 import { RemoveProfessionalExperienceProvider } from 'hooks/contexts/RemoveProfessionalExperience/RemoveProfessionalExperience';
 import { useUser } from 'hooks/useUser/useUser';
 import { GetUserResponse, UserProps } from 'protocols/external/user/user';
 import { Children } from 'react';
 import { Base } from 'templates/Base/Base';
+import { getInitialData } from 'utils/initialData';
 import { GetUserRouteConst } from 'utils/routes';
+import { LoadingConfig } from './LoadingConfig';
 
 export type ConfigProps = {} & UserProps;
 
@@ -37,8 +38,8 @@ export const Config = ({
 }: ConfigProps) => {
 	const { findUser } = useUser();
 
-	const initialData: AxiosResponse<GetUserResponse> = {
-		data: {
+	const initialData = getInitialData<GetUserResponse>({
+		initialData: {
 			data: {
 				id,
 				name,
@@ -52,12 +53,7 @@ export const Config = ({
 				professional_experiences: professional_experiences || [],
 			},
 		},
-		config: {} as InternalAxiosRequestConfig,
-		statusText: 'ok',
-		headers: {},
-		status: 200,
-		request: {},
-	};
+	});
 
 	const { data: getUserReponse, isLoading } = useQuery({
 		queryKey: [
@@ -74,12 +70,7 @@ export const Config = ({
 	});
 
 	if (isLoading) {
-		// Eduardo / Ana
-		return (
-			<Base>
-				<p>Loading</p>
-			</Base>
-		);
+		return <LoadingConfig />;
 	}
 
 	const user = getUserReponse.data.data;
@@ -123,7 +114,7 @@ export const Config = ({
 				</RemoveAcademicRecordProvider>
 
 				<RemoveCompetenceProvider>
-          <ModalRemoveCompetence />
+					<ModalRemoveCompetence />
 					<ResumeCard
 						text="Competências"
 						addModal={<ModalAddCompetence user_id={user.id} />}

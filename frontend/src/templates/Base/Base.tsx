@@ -1,21 +1,22 @@
 import { Container } from 'components/Container/Container';
-import * as S from './Base.styles';
-import { ReactNode } from 'react';
 import { Sidebar } from 'components/Sidebar/Sidebar';
+import { ReactNode } from 'react';
+import * as S from './Base.styles';
 
 export type BaseProps = {
-  children: ReactNode;
+	children: ReactNode;
+	showSidebar?: boolean;
 };
 
-export const Base = ({ children }: BaseProps) => {
-  return (
-    <S.Wrapper>
-      <Container>
-        <S.ContentWrapper>
-          <Sidebar />
-          <S.ChildrenWrapper>{children}</S.ChildrenWrapper>
-        </S.ContentWrapper>
-      </Container>
-    </S.Wrapper>
-  );
+export const Base = ({ children, showSidebar = true }: BaseProps) => {
+	return (
+		<S.Wrapper $showSidebar={showSidebar}>
+			<Container>
+				<S.ContentWrapper>
+					{showSidebar && <Sidebar />}
+					<S.ChildrenWrapper>{children}</S.ChildrenWrapper>
+				</S.ContentWrapper>
+			</Container>
+		</S.Wrapper>
+	);
 };

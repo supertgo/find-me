@@ -25,7 +25,7 @@ describe('<Step />', () => {
 
 		expect(screen.getByText(props.title)).toBeInTheDocument();
 	});
-	it('should have active icon when currentStep is greater than to itemStep', () => {
+	it('should have active icon when currentStep is greater than itemStep', () => {
 		render(<Step {...props} currentStep={2} itemStep={1} />);
 
 		const iconWrapper = screen.getByTestId('icon-wrapper');

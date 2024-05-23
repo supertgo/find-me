@@ -4,7 +4,6 @@ import { MediaMatch } from 'components/MediaMatch/MediaMatch';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Job } from 'protocols/external/job/job';
-import { useLoggedUserStore } from 'stores/loggedUserStore/loggedUserStore';
 import { filterJobLocation } from 'utils/job';
 import { JobUrl } from 'utils/urls';
 import * as S from './JobItem.styles';
@@ -15,7 +14,6 @@ export type JobItemProps = {} & Job;
 export const JobItem = ({
 	id,
 	name,
-	is_available,
 	applications_amount,
 	salary,
 	salary_time_unit,
@@ -31,10 +29,6 @@ export const JobItem = ({
 		salary,
 		salary_time_unit,
 	};
-
-	const { type } = useLoggedUserStore((state) => ({
-		type: state.type,
-	}));
 
 	return (
 		<S.Wrapper>
@@ -68,13 +62,9 @@ export const JobItem = ({
 			</S.PillSmallScreen>
 
 			<S.JobApplicationInfo>
-				{type !== 'employee' ? (
-					<Link href={`/${JobUrl(id)}`}>
-						<Button disabled={!is_available}>Visualizar</Button>
-					</Link>
-				) : (
-					<Button>Visualizar candidatos</Button>
-				)}
+				<Link href={`/${JobUrl(id)}`}>
+					<Button>Visualizar</Button>
+				</Link>
 				<JobCapacity
 					applicants={applicants}
 					applications_amount={applications_amount}

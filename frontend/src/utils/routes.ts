@@ -73,3 +73,7 @@ export const PostJobRouteConst = 'job';
 
 export const PostJobApplicationRouteConst = (job_id: number) =>
 	`job/${job_id}/application`;
+
+export const DeleteJobRouteConst = (job_id: number) =>
+	`job/${job_id}`;
+

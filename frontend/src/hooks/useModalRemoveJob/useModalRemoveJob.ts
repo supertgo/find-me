@@ -1,29 +1,24 @@
+'use client';
 import { useQueryClient } from '@tanstack/react-query';
-import { RemoveJobContext } from 'hooks/contexts/RemoveJob/RemoveJob';
+import { JobToBeRemoved } from 'components/ModalRemoveJob/ModalRemoveJob';
 import { useJob } from 'hooks/useJob/useJob';
-import { useState } from 'react';
-import { useContextSelector } from 'use-context-selector';
-import {
-	GetJobRouteConst,
-	GetJobsRouteConst,
-} from 'utils/routes';
+import { Dispatch, SetStateAction, useState } from 'react';
+import { GetJobRouteConst, GetJobsRouteConst } from 'utils/routes';
+import { useRouter } from 'next/navigation';
+import { JobsUrl } from 'utils/urls';
 
-export type UseModalRemoveJobProps = {};
+export type UseModalRemoveJobProps = {
+	setOpen: Dispatch<SetStateAction<boolean>>;
+	job: JobToBeRemoved;
+};
 
-export const useModalRemoveJob = () => {
+export const useModalRemoveJob = ({ setOpen, job }: UseModalRemoveJobProps) => {
 	const [loading, setLoading] = useState(false);
-	const { setOpen, open, job } = useContextSelector(
-		RemoveJobContext,
-		(context) => ({
-			open: context.open,
-			job: context.job,
-			setOpen: context.setOpen,
-		}),
-	);
 
 	const queryClient = useQueryClient();
 
 	const { deleteJob } = useJob();
+	const { push } = useRouter();
 
 	const handleSubmit = async () => {
 		if (!job) {
@@ -52,6 +47,7 @@ export const useModalRemoveJob = () => {
 
 		setOpen(false);
 		setLoading(false);
+		push(`/${JobsUrl}`);
 	};
 
 	return {
@@ -59,6 +55,5 @@ export const useModalRemoveJob = () => {
 		setOpen,
 		loading,
 		handleSubmit,
-		job,
 	};
 };

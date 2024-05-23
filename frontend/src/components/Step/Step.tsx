@@ -22,7 +22,7 @@ export const Step = ({
 	const isActive = currentStep >= itemStep;
 	return (
 		<S.Wrapper onClick={onClick}>
-			<S.IconWrapper data-testid="icon-wrapper" isActive={isActive}>
+			<S.IconWrapper data-testid="icon-wrapper" $isActive={isActive}>
 				{icon}
 			</S.IconWrapper>
 			<S.TextWrapper>

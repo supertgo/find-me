@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 export type IconWrapperProps = {
-	isActive: boolean;
+	$isActive: boolean;
 };
 
 export const Wrapper = styled.div`
@@ -12,11 +12,11 @@ export const Wrapper = styled.div`
 `;
 
 export const IconWrapper = styled.div<IconWrapperProps>`
-	${({ theme, isActive }) => css`
+	${({ theme, $isActive }) => css`
 		width: 5.6rem;
 		height: 5.6rem;
 		border-radius: ${theme.borderRadius.full};
-		background: ${isActive ? theme.colors.primary : theme.colors.lightGrey};
+		background: ${$isActive ? theme.colors.primary : theme.colors.lightGrey};
 		display: flex;
 		align-items: center;
 		justify-content: center;

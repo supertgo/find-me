@@ -37,11 +37,13 @@ export const Job = ({
 	salary_time_unit,
 	is_available,
 	competences,
+	user_id,
 }: JobProps) => {
 	const [open, setOpen] = useState(false);
 	const [, setJob] = useState<JobToBeRemoved | null>(null);
-	const { type } = useLoggedUserStore((state) => ({
+	const { type, loggedUserId } = useLoggedUserStore((state) => ({
 		type: state.type,
+		loggedUserId: state.id,
 	}));
 
 	const applicants = 10;
@@ -127,7 +129,7 @@ export const Job = ({
 					</div>
 				</S.InfoWrapper>
 
-				{type === 'recruiter' && (
+				{type === 'recruiter' && user_id === loggedUserId && (
 					<S.RemoveJob>
 						<ModalRemoveJob
 							setOpen={setOpen}
@@ -141,7 +143,6 @@ export const Job = ({
 						<Button onClick={onRemoveJobClick}>Excluir Vaga</Button>
 					</S.RemoveJob>
 				)}
-         
 			</S.Wrapper>
 		</Base>
 	);

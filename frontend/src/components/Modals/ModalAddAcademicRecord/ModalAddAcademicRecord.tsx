@@ -21,17 +21,10 @@ export type ModalAddAcademicRecordProps = {
 export const ModalAddAcademicRecord = ({
 	user_id,
 }: ModalAddAcademicRecordProps) => {
-	const {
-		isValid,
-		errors,
-		open,
-		setOpen,
-		handleSubmit,
-		onSubmit,
-		control,
-	} = useModalAddAcademicRecord({
-		user_id,
-	});
+	const { isValid, errors, open, setOpen, handleSubmit, onSubmit, control } =
+		useModalAddAcademicRecord({
+			user_id,
+		});
 
 	return (
 		<BaseModal
@@ -112,7 +105,9 @@ export const ModalAddAcademicRecord = ({
 					}}
 					control={control}
 					name="description"
-					render={({ field: { ...field } }) => <Textarea {...field} />}
+					render={({ field: { ...field } }) => (
+						<Textarea {...field} error={errors.description} />
+					)}
 				/>
 			</S.Wrapper>
 		</BaseModal>

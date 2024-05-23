@@ -16,6 +16,7 @@ import {
 import { useUserConfigForm } from 'hooks/useUserConfigForm/useUserConfigForm';
 import * as S from './AccountConfig.styles';
 import { UserProps } from 'protocols/external/user/user';
+import { Textarea } from 'components/Textarea/Textarea';
 
 export type AccountConfigProps = {} & Pick<
 	UserProps,
@@ -26,7 +27,7 @@ export const AccountConfig = ({
 	name,
 	email,
 	phone,
-  about_me
+	about_me,
 }: AccountConfigProps) => {
 	const { control, errors, isValid, onSubmit, isLoading, handleSubmit } =
 		useUserConfigForm();
@@ -127,10 +128,10 @@ export const AccountConfig = ({
 								required: REQUIRED_ABOUT_ME,
 							}}
 							control={control}
-              defaultValue={about_me || ''}
+							defaultValue={about_me || ''}
 							name="about_me"
 							render={({ field: { ...field } }) => (
-								<Input
+								<Textarea
 									{...field}
 									placeholder="Descreva um pouco sobre você"
 									error={errors.about_me}

@@ -161,7 +161,9 @@ export const ModalAddProfessionalExperience = ({
 					}}
 					control={control}
 					name="description"
-					render={({ field: { ...field } }) => <Textarea {...field} />}
+					render={({ field: { ...field } }) => (
+						<Textarea {...field} error={errors.description} />
+					)}
 				/>
 			</S.Wrapper>
 		</BaseModal>

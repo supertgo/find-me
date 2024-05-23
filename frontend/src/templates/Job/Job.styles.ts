@@ -52,8 +52,11 @@ export const JobSubtitle = styled.span`
 `;
 
 export const InfoWrapper = styled.div`
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
+	${({ theme }) => css`
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin-bottom: ${theme.space.large};
+	`}
 `;
 
 export const Section = styled.section`
@@ -105,4 +108,6 @@ export const RemoveJob = styled.div`
 	flex-direction: row;
 	align-items: center;
 	justify-content: end;
+  position: relative;
+  bottom: 0;
 `;

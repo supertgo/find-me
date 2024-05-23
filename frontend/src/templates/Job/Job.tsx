@@ -4,23 +4,23 @@ import { Info } from 'components/Info/Info';
 import { JobCapacity } from 'components/JobCapacity/JobCapacity';
 import { ModalCoverLetter } from 'components/ModalCoverLetter/ModalCoverLetter';
 import {
-	JobToBeRemoved,
-	ModalRemoveJob,
+  JobToBeRemoved,
+  ModalRemoveJob,
 } from 'components/ModalRemoveJob/ModalRemoveJob';
 import { Skill } from 'components/Skill/Skill';
 import { VerticalRow } from 'components/VerticalRow/VerticalRow';
 import { Job as JobResponse } from 'protocols/external/job/job';
+import { useState } from 'react';
 import { useLoggedUserStore } from 'stores/loggedUserStore/loggedUserStore';
 import { Base } from 'templates/Base/Base';
 import {
-	filterJobLocation,
-	translateEmploymentType,
-	translateSalaryTimeUnit,
-	translateWorkModel,
+  filterJobLocation,
+  translateEmploymentType,
+  translateSalaryTimeUnit,
+  translateWorkModel,
 } from 'utils/job';
 import { formatToCurrency } from 'utils/money';
 import * as S from './Job.styles';
-import { useState } from 'react';
 
 export type JobProps = {} & JobResponse;
 

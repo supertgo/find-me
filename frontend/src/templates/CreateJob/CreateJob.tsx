@@ -66,6 +66,10 @@ export const CreateJob = ({}: CreateJobProps) => {
 						currentStep={currentStep}
 						maxStep={maxStep}
 						onClick={() => setCurrentStep(1)}
+						isActive={false}
+						IconWrapper={function (IconWrapper: any): HTMLElement {
+							throw new Error('Function not implemented.');
+						}}
 					/>
 					<VerticalRow />
 					<Step
@@ -77,6 +81,10 @@ export const CreateJob = ({}: CreateJobProps) => {
 						currentStep={currentStep}
 						maxStep={maxStep}
 						onClick={() => setCurrentStep(2)}
+						isActive={false}
+						IconWrapper={function (IconWrapper: any): HTMLElement {
+							throw new Error('Function not implemented.');
+						}}
 					/>
 				</StepWrapper>
 			</S.Wrapper>

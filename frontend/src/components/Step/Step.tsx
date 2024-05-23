@@ -2,7 +2,6 @@ import { ReactNode } from 'react';
 import * as S from './Step.styles';
 
 export type StepProps = {
-	IconWrapper(IconWrapper: any): HTMLElement;
 	icon: ReactNode;
 	itemStep: number;
 	title: string;

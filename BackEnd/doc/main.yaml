@@ -325,7 +325,7 @@ paths:
           $ref: 'Schemas/Common/response/UnauthenticatedResponse.yaml'
 
 
-  /user/resume/{resume_id}/Download:
+  /user/resume/{resume_id}/download:
     get:
       tags:
         - UserResume

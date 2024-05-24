@@ -195,7 +195,6 @@ class UpdateJobWithCompetencesTest extends TestCase
             ->put(sprintf(self::ROUTE, $job->id), $payload)
             ->assertStatus(Response::HTTP_NO_CONTENT);
 
-
         $job->refresh();
 
         $this->assertEquals(0, $job->competences()->count());

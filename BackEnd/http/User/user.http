@@ -75,3 +75,17 @@ accept: application/json
         client.assert(response.status === 200, "Response status is not 200");
     });
 %}
+
+###
+POST http://localhost:80/api/user/profile-picture/update
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="profile_picture"; filename="profilePicture.png"
+
+< profilePicture.jpeg
+--WebAppBoundary--
+
+
+
+###

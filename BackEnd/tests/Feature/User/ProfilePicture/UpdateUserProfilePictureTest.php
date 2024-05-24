@@ -12,7 +12,7 @@ class UpdateUserProfilePictureTest extends TestCase
 {
     use DatabaseTransactions;
 
-    const ROUTE = self::BASE_ROUTE . 'user/profile-picture';
+    const ROUTE = self::BASE_ROUTE . 'user/profile-picture/update';
 
     public function testUpdateUserProfilePicture()
     {
@@ -28,7 +28,7 @@ class UpdateUserProfilePictureTest extends TestCase
 
         $this
             ->actingAs($this->employee)
-            ->json('PATCH', self::ROUTE, $payload)
+            ->json('POST', self::ROUTE, $payload)
             ->assertStatus(Response::HTTP_OK)
             ->assertJsonStructure(['url']);
 

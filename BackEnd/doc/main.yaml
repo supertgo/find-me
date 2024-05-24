@@ -215,8 +215,8 @@ paths:
         401:
           $ref: 'Schemas/Common/response/UnauthenticatedResponse.yaml'
 
-  /user/profile-picture:
-    patch:
+  /user/profile-picture/update:
+    post:
       tags:
         - UserProfilePicture
       description: 'update user profile picture'

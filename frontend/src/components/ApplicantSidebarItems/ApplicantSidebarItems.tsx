@@ -9,7 +9,12 @@ export type ApplicantSidebarItemsProps = {};
 export const ApplicantSidebarItems = ({}: ApplicantSidebarItemsProps) => {
 	return (
 		<>
-			<SidebarItem href={`/${HomeUrl}`} icon={<HomeIcon />} text="Início" />
+			<SidebarItem
+				href={`/${HomeUrl}`}
+				icon={<HomeIcon />}
+				text="Início"
+				keyword="home"
+			/>
 			<SidebarItem
 				href={`/${JobsUrl}`}
 				icon={
@@ -20,6 +25,7 @@ export const ApplicantSidebarItems = ({}: ApplicantSidebarItemsProps) => {
 					/>
 				}
 				text="Vagas"
+				keyword="job"
 			/>
 			<SidebarItem
 				href={`/${ConfigUrl}`}
@@ -31,6 +37,7 @@ export const ApplicantSidebarItems = ({}: ApplicantSidebarItemsProps) => {
 					/>
 				}
 				text="Meu Perfil Público"
+				keyword="config"
 			/>
 		</>
 	);

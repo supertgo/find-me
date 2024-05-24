@@ -1,18 +1,6 @@
+import 'test/use-path-mock';
 import { render, screen } from 'utils/test/test-utils';
 import { ApplicantSidebarItems } from './ApplicantSidebarItems';
-import { vi } from 'vitest';
-
-vi.mock('next/navigation', () => ({
-	useRouter() {
-		return {
-			push: () => vi.fn(),
-			replace: () => vi.fn(),
-		};
-	},
-	usePathname() {
-		return '/home';
-	},
-}));
 
 describe('<ApplicantSidebarItems />', () => {
 	it('should render the component', () => {

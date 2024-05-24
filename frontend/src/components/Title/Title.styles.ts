@@ -14,10 +14,3 @@ export const Title = styled.h1`
   `}
 `;
 
-export const Hr = styled.div`
-  ${({ theme }) => css`
-    width: 100%;
-    height: ${theme.borderWidth.hairline};
-    background: #d6ddeb;
-  `}
-`;

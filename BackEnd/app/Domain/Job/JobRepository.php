@@ -74,4 +74,14 @@ class JobRepository extends AbstractRepository implements JobRepositoryInterface
     {
         return Job::find($id)->applications()->count();
     }
+
+    public function getCompetences(int $id): array
+    {
+        return Job::find($id)->competences()->get()->toArray();
+    }
+
+    public function deleteCompetences(?int $id): void
+    {
+        Job::find($id)->competences()->detach();
+    }
 }

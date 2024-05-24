@@ -71,7 +71,7 @@ readonly class JobDomain implements JobDomainInterface
      * @throws IdRequiredToUpdateException
      * @throws OnlyOwnerCanUpdateJobException
      */
-    public function update(): void
+    public function update(): self
     {
         if ($this->id === null) {
             throw new IdRequiredToUpdateException();
@@ -82,6 +82,8 @@ readonly class JobDomain implements JobDomainInterface
         }
 
         $this->jobRepository->update($this);
+
+        return $this;
     }
 
     /**
@@ -206,6 +208,13 @@ readonly class JobDomain implements JobDomainInterface
         !empty($this->updatedAt) && $arr['updated_at'] = $this->updatedAt->format('Y-m-d H:i:s');
 
         return $arr;
+    }
+
+    public function deleteCompetences(): self
+    {
+        $this->jobRepository->deleteCompetences($this->id);
+
+        return $this;
     }
 
     public function getId(): ?int

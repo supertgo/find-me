@@ -7,6 +7,7 @@ use App\Domain\Job\Enum\SalaryTimeUnitEnum;
 use App\Domain\Job\Enum\WorkModelEnum;
 use App\Domain\User\UserTypeEnum;
 use App\Models\Company;
+use App\Models\Competence;
 use App\Models\Job;
 use App\Models\User;
 use Carbon\Carbon;
@@ -90,9 +91,9 @@ class UpdateJobWithCompetencesTest extends TestCase
      */
     public function generatePayload(): array
     {
-        return $this->generatePayloadWithNonexistentCompany() + [
+        return [
                 'company_id' => Company::factory()->create()->id,
-            ];
+            ] + $this->generatePayloadWithNonexistentCompany();
     }
 
     public function generatePayloadWithNonexistentCompany(): array
@@ -175,5 +176,28 @@ class UpdateJobWithCompetencesTest extends TestCase
                     'job_id' => $jobId
                 ]
             ]);
+    }
+
+    public function testUpdateEraseNonSendCompetences()
+    {
+        $payload = $this->generatePayload();
+        $owner = $this->generateRecruiterUser();
+
+        /** @var Job $job */
+        $job = Job::factory([
+            'user_id' => $owner->id
+        ])
+            ->has(Competence::factory()->count(3))
+            ->create();
+
+        $this
+            ->actingAs($owner)
+            ->put(sprintf(self::ROUTE, $job->id), $payload)
+            ->assertStatus(Response::HTTP_NO_CONTENT);
+
+
+        $job->refresh();
+
+        $this->assertEquals(0, $job->competences()->count());
     }
 }

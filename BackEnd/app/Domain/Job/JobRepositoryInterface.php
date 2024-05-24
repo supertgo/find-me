@@ -27,4 +27,8 @@ interface JobRepositoryInterface
     public function setNotAvailable(int $id): void;
 
     public function getApplicationAmount(int $id): int;
+
+    public function getCompetences(int $id): array;
+
+    public function deleteCompetences(?int $id);
 }

@@ -4,6 +4,7 @@ export const Wrapper = styled.div`
 	${({ theme }) => css`
 		background: ${theme.colors.white};
 		padding: ${theme.space.medium};
+    color: ${theme.colors.darkTitanium};
 	`}
 `;
 
@@ -18,7 +19,7 @@ export const Title = styled.h3`
 
 export const JobHeaderWrapper = styled.div`
 	${({ theme }) => css`
-		padding: ${theme.space.large};
+		padding: ${theme.space.large} 0;
 		background: ${theme.colors.secondWhite};
 
 		button {
@@ -53,9 +54,9 @@ export const JobSubtitle = styled.span`
 
 export const InfoWrapper = styled.div`
 	${({ theme }) => css`
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    margin-bottom: ${theme.space.large};
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		margin-bottom: ${theme.space.large};
 	`}
 `;
 
@@ -101,13 +102,21 @@ export const JobAboutThisRole = styled.div`
 
 export const JobRequiredSkills = styled.div``;
 
-export const JobCompanyInfo = styled.div``;
+export const JobCompanyInfo = styled.div`
+	${({ theme }) => css`
+		margin-top: ${theme.space.xxxlarge};
+
+		h3 {
+			margin-bottom: ${theme.space.medium};
+		}
+	`}
+`;
 
 export const RemoveJob = styled.div`
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	justify-content: end;
-  position: relative;
-  bottom: 0;
+	position: relative;
+	bottom: 0;
 `;

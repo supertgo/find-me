@@ -129,6 +129,12 @@ export const Job = ({
 					</div>
 				</S.InfoWrapper>
 
+
+				<S.JobCompanyInfo>
+					<S.Title>{company?.name}</S.Title>
+					<p>{company?.description}</p>
+				</S.JobCompanyInfo>
+
 				{type === 'recruiter' && user_id === loggedUserId && (
 					<S.RemoveJob>
 						<ModalRemoveJob

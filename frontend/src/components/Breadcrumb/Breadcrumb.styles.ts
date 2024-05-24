@@ -19,7 +19,6 @@ export const Path = styled.a<PathProps>`
 
 		${$bold &&
 		css`
-			font-weight: ${theme.font.weights.medium};
 			color: ${theme.colors.darkGrey};
 		`}
 	`}

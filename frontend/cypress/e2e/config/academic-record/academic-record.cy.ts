@@ -12,24 +12,54 @@ beforeEach(() => {
 
 describe('Config - Academic Record', () => {
 	it('should be able to add an academic record', () => {
+		cy.createAcademicRecord({
+			institution: 'Universidade Federal de Minas Gerais',
+			degree: 'Bacharelado',
+			fieldOfStudy: 'Sistemas de Informação',
+			startDate: '2010-08-20',
+			endDate: '2030-07-25',
+			description:
+				'Atividades e grupos: Passei por matérias como:{enter}● Introdução à Lógica Computacional {enter}● Geometria Analítica e Álgebra Linear {enter}● Programação e Desenvolvimento de Software {enter}● Administração {enter}● ÁLGEBRA LINEAR COMPUTACIONAL {enter}● CALCULO DIFERENCIAL E INTEGRAL I {enter}● MATEMÁTICA DISCRETA {enter}● ECONOMIA',
+		});
+
+		cy.findAllByText('Universidade Federal de Minas Gerais');
+	});
+
+	it('should be able to add an academic record by sad path', () => {
 		cy.findByTitle('Adicionar Formação Acadêmica').click();
 
-		cy.getByName('institution').type('Universidade Federal de Minas Gerais');
+		cy.getByName('degree').focus();
 
-		cy.getByName('degree').type('Bacharelado');
+		cy.findByText('A instituição é obrigatória.');
 
-		cy.getByName('field_of_study').type('Sistemas de Informação');
+		cy.getByName('field_of_study').focus();
+		cy.findByText('O diploma é obrigatório.');
 
-		cy.getByName('start_date').type('2010-08-20');
+		cy.getByName('start_date').focus();
+		cy.findByText('O campo de estudo é obrigatório.');
 
-		cy.getByName('end_date').type('2030-07-25');
+		cy.getByName('end_date').focus();
+		cy.findByText('A data de início é obrigatória.');
 
-		cy.getByName('description', 'textarea').type(
-			'Atividades e grupos: Passei por matérias como:{enter}● Introdução à Lógica Computacional {enter}● Geometria Analítica e Álgebra Linear {enter}● Programação e Desenvolvimento de Software {enter}● Administração {enter}● ÁLGEBRA LINEAR COMPUTACIONAL {enter}● CALCULO DIFERENCIAL E INTEGRAL I {enter}● MATEMÁTICA DISCRETA {enter}● ECONOMIA',
+		cy.getByName('description', 'textarea').focus();
+		cy.findByText('A data de término é obrigatória.');
+
+		cy.getByName('institution').focus();
+		cy.findByText('A descrição é obrigatória.');
+
+		cy.createAcademicRecord(
+			{
+				institution: 'Centro Federal de Educação Tecnológica de Minas Gerais',
+				degree: 'Ensino Médio/Técnico',
+				fieldOfStudy: 'Redes de Computadores',
+				startDate: '2010-08-20',
+				endDate: '2030-07-25',
+				description:
+					'Atividades e grupos: O curso de redes de computadores contempla as áreas de: {enter}● Programação {enter}● Banco de Dados {enter}● Segurança de Redes {enter}● Infraestrutura de Redes {enter}● Desenvolvimento web {enter}● Manutenção de computadores {enter}● Organização de Computadores {enter}● Banco de dados entre outros conteúdos voltado à telecomunicação.',
+			},
+			false,
 		);
 
-    cy.findByRole('button', { name: /Salvar/i }).click()
-
-    cy.findAllByText('Universidade Federal de Minas Gerais')
+		cy.findAllByText('Centro Federal de Educação Tecnológica de Minas Gerais');
 	});
 });

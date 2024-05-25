@@ -39,4 +39,21 @@ describe('Config - Competence', () => {
 
 		cy.findAllByText('PHP');
 	});
+  
+  it('should be able to add an competence and then remove it', () => {
+		cy.createCompetence({
+			competence: 'Competência a ser removida',
+		});
+
+    cy.findAllByTitle('Remover Competência').last().click({
+      force: true
+    })
+    
+    cy.findByText('Tem certeza que deseja excluir essa competência?')
+
+    cy.findByRole('button', { name: /Cancelar/i }).should('be.enabled')
+    cy.findByRole('button', { name: /Excluir/i }).should('be.enabled').click()
+
+    cy.findByText('Competência a ser removida').should('not.exist')
+	});
 });

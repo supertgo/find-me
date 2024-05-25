@@ -51,7 +51,7 @@ export const REQUIRED_PROFESSIONAL_EXPERIENCE_DESCRIPTION =
 	'A descrição é obrigatória.';
 
 export const REQUIRED_PROFESSIONAL_EXPERIENCE_LOCATION =
-	'A localização obrigatória.';
+	'A localização é obrigatória.';
 
 export const REQUIRED_PROFESSIONAL_EXPERIENCE_START_DATE =
 	'A data de início é obrigatória.';

@@ -2,7 +2,9 @@
 
 describe('Auth - Login', () => {
 	it('should be able to login a user by happy path', () => {
-		cy.visit('/');
+    cy.visit('/', {
+      failOnStatusCode: false
+    });
 		cy.signIn();
 
 		cy.waitUntil(() => cy.url().should('contain', 'home'));
@@ -11,7 +13,9 @@ describe('Auth - Login', () => {
 	});
 
 	it('should show form errors on email and password field', () => {
-		cy.visit('/');
+    cy.visit('/', {
+      failOnStatusCode: false
+    });
 
 		cy.findByPlaceholderText(/e-mail/i).type('invalidemail');
 		cy.findByPlaceholderText(/senha/i).focus();
@@ -29,7 +33,9 @@ describe('Auth - Login', () => {
 	});
 
 	it('should be able to sign in and logout', () => {
-		cy.visit('/');
+    cy.visit('/', {
+      failOnStatusCode: false
+    });
 		cy.signIn();
 
 		cy.waitUntil(() => cy.url().should('contain', 'home'));

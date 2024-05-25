@@ -9,7 +9,11 @@ use App\Http\Requests\Rules\UniqueArrayValuesRule;
 
 class IndexUserRequest extends AbstractRequest
 {
-    protected array $availableIncludes = [UserIncludesEnum::Competences->value];
+    protected array $availableIncludes = [
+        UserIncludesEnum::Competences->value,
+        UserIncludesEnum::AcademicRecords->value,
+        UserIncludesEnum::ProfessionalExperiences->value,
+    ];
 
     public function rules(): array
     {

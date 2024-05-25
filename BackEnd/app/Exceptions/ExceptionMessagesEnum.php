@@ -32,6 +32,9 @@ enum ExceptionMessagesEnum: string
     case UserPhoneNotAvailable = 'User phone is not available';
     case UserNotFound = 'User not found';
     case UserDoesntHaveCompetence = 'User doesn\'t have competence';
+    case UnknownUserIncludeException = 'Unknown user include';
+    case CompetencesIdFilterMustBePositiveIntegers = 'Competences id must be positive integers';
+    case UnknownUserTypeException = 'Unknown user type';
 
     case CompetenceNotFound = 'Competence not found';
 

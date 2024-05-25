@@ -7,6 +7,7 @@ use App\Domain\User\UserRepository;
 use App\Domain\User\UserService;
 use App\Exceptions\Abstract\AbstractFindMeException;
 use App\Http\Requests\AbstractRequest;
+use App\Http\Requests\User\IndexUserRequest;
 use App\Http\Requests\User\ShowUserRequest;
 use App\Http\Requests\User\UpdateUserProfilePictureRequest;
 use App\Http\Requests\User\UpdateUserRequest;
@@ -18,14 +19,17 @@ use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller
 {
-    public function index(ShowUserRequest $request): JsonResponse|IluminateResponse
+    public function index(IndexUserRequest $request): JsonResponse|IluminateResponse
     {
         $service = new UserDomain(app(UserRepository::class));
 
         try {
             return response()
                 ->json([
-                    'data' => $service->usersWithIncludes($request->getIncludes())
+                    'data' => $service->usersWithIncludes(
+                        $request->getFilters(),
+                        $request->getIncludes()
+                    )
                 ]);
         } catch (Exception $exception) {
             Log::error($exception);

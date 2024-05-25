@@ -2,6 +2,9 @@
 
 namespace App\Domain\User;
 
+use App\Exceptions\User\CompetencesIdFilterMustBePositiveIntegersException;
+use App\Exceptions\User\UnknownUserIncludeException;
+use App\Exceptions\User\UnknownUserTypeException;
 use App\Exceptions\User\UserDoesntHaveCompetenceException;
 use App\Exceptions\User\UserEmailNotAvailableException;
 use App\Exceptions\User\UserPhoneNotAvailableException;
@@ -204,8 +207,21 @@ class UserDomain implements UserDomainInterface
         return $this->userRepository->getUserWithIncludes($userId, $includes);
     }
 
-    public function usersWithIncludes(array $includes): array
+    /**
+     * @throws UnknownUserTypeException
+     * @throws UnknownUserIncludeException
+     * @throws CompetencesIdFilterMustBePositiveIntegersException
+     */
+    public function usersWithIncludes(array $filters = [], array $includes = []): array
     {
+        $this->validateIncludes($includes);
+
+        if (!empty($filters)) {
+            $filters = (new UserFilters())->fromArray($filters);
+
+            return $this->userRepository->getWithFilters($filters, $includes);
+        }
+
         return $this->userRepository->getUsersWithIncludes($includes);
     }
 
@@ -248,6 +264,24 @@ class UserDomain implements UserDomainInterface
     public function setProfilePicturePath(?string $profilePicturePath): UserDomain
     {
         $this->profilePicturePath = $profilePicturePath;
+
+        return $this;
+    }
+
+    /**
+     * @throws UnknownUserIncludeException
+     */
+    private function validateIncludes(array $includes): self
+    {
+        if (empty($includes)) {
+            return $this;
+        }
+
+        $nonExistentIncludes = array_diff($includes, UserIncludesEnum::values());
+
+        if ($nonExistentIncludes) {
+            throw new UnknownUserIncludeException($nonExistentIncludes);
+        }
 
         return $this;
     }

@@ -1,5 +1,8 @@
 'use client';
+import { Breadcrumb } from 'components/Breadcrumb';
+import { BreadcrumbPath } from 'components/Breadcrumb/Breadcrumb';
 import { Button } from 'components/Button/Button';
+import { Hr } from 'components/Hr/Hr';
 import { Info } from 'components/Info/Info';
 import { JobCapacity } from 'components/JobCapacity/JobCapacity';
 import { ModalCoverLetter } from 'components/ModalCoverLetter/ModalCoverLetter';
@@ -20,6 +23,7 @@ import {
   translateWorkModel,
 } from 'utils/job';
 import { formatToCurrency } from 'utils/money';
+import { HomeUrl, JobUrl, JobsUrl } from 'utils/urls';
 import * as S from './Job.styles';
 
 export type JobProps = {} & JobResponse;
@@ -58,9 +62,26 @@ export const Job = ({
 		setOpen(true);
 	};
 
+	const paths: BreadcrumbPath[] = [
+		{
+			name: 'Home',
+			url: `/${HomeUrl}`,
+		},
+		{
+			name: 'Vagas',
+			url: `/${JobsUrl}`,
+		},
+		{
+			name,
+			url: `/${JobUrl(id)}`,
+		},
+	];
+
 	return (
 		<Base>
 			<S.JobHeaderWrapper>
+				<Breadcrumb paths={paths} />
+
 				<S.JobHeader>
 					<S.TextWrapper>
 						<S.Title>{name}</S.Title>
@@ -129,6 +150,7 @@ export const Job = ({
 					</div>
 				</S.InfoWrapper>
 
+				<Hr />
 
 				<S.JobCompanyInfo>
 					<S.Title>{company?.name}</S.Title>

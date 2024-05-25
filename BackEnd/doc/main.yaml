@@ -101,6 +101,7 @@ paths:
         - BearerAuth: [ ]
       parameters:
         - $ref: 'Schemas/User/parameters/UserIncludesParameters.yaml'
+        - $ref: 'Schemas/User/parameters/UserFiltersParameters.yaml'
 
       responses:
         '200':

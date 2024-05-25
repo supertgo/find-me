@@ -62,4 +62,33 @@ describe('Config - Academic Record', () => {
 
 		cy.findAllByText('Centro Federal de Educação Tecnológica de Minas Gerais');
 	});
+
+	it('should be able to add an academic record and then delete it', () => {
+		const institution = 'Instituição a ser removida do currículo';
+
+		cy.createAcademicRecord({
+			institution,
+			degree: 'Bacharelado',
+			fieldOfStudy: 'Sistemas de Informação',
+			startDate: '2010-08-20',
+			endDate: '2030-07-25',
+			description: 'Descrição da instituiçao a ser removida do currículo.',
+		});
+
+		cy.findByText('Instituição a ser removida do currículo');
+
+		cy.wait(2000);
+
+		cy.findAllByTitle('Remover Formação Acadêmica').last().click();
+
+		cy.findByText('Tem certeza que deseja excluir esse registro acadêmico?');
+
+		cy.findByRole('button', { name: /Cancelar/i }).should('be.enabled');
+
+		cy.findByRole('button', { name: /Excluir/i })
+			.should('be.enabled')
+			.click();
+
+		cy.findByText(institution).should('not.exist');
+	});
 });

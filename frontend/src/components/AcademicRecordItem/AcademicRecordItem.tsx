@@ -40,7 +40,9 @@ export const AcademicRecordItem = ({
 			<S.AcademicInfo>
 				<S.AcademicTopRow>
 					<S.AcademicInfoTitle>{institution}</S.AcademicInfoTitle>
-					<Cross1Icon onClick={removeAcademicRecord} />
+          <i title="Remover Formação Acadêmica">
+            <Cross1Icon onClick={removeAcademicRecord} />
+          </i>
 				</S.AcademicTopRow>
 				<S.AcademicInfoSubtitle>{`${degree}, ${field_of_study}`}</S.AcademicInfoSubtitle>
 			</S.AcademicInfo>

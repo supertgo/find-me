@@ -1,9 +1,14 @@
-import { useModalAddProfessionalExperience } from 'hooks/useModalAddProfessionalExperience/useModalAddProfessionalExperience';
-import * as S from './ModalAddProfessionalExperience.styles';
-import { BaseModal } from 'components/Modals/BaseModal/BaseModal';
 import { PlusIcon } from '@radix-ui/react-icons';
-import { Controller } from 'react-hook-form';
+import { Checkbox } from 'components/Checkbox/Checkbox';
 import { Input } from 'components/Input/Input';
+import { BaseModal } from 'components/Modals/BaseModal/BaseModal';
+import { Textarea } from 'components/Textarea/Textarea';
+import { useModalAddProfessionalExperience } from 'hooks/useModalAddProfessionalExperience/useModalAddProfessionalExperience';
+import {
+	employmentTypeOptions,
+	workModelOptions,
+} from 'protocols/external/job/job';
+import { Controller } from 'react-hook-form';
 import {
 	REQUIRED_PROFESSIONAL_EXPERIENCE_COMPANY,
 	REQUIRED_PROFESSIONAL_EXPERIENCE_DESCRIPTION,
@@ -11,13 +16,8 @@ import {
 	REQUIRED_PROFESSIONAL_EXPERIENCE_POSITION,
 	REQUIRED_PROFESSIONAL_EXPERIENCE_START_DATE,
 } from 'utils/errors';
-import { Textarea } from 'components/Textarea/Textarea';
-import { Checkbox } from 'components/Checkbox/Checkbox';
-import {
-	employmentTypeOptions,
-	workModelOptions,
-} from 'protocols/external/job/job';
 import { translateEmploymentType, translateWorkModel } from 'utils/job';
+import * as S from './ModalAddProfessionalExperience.styles';
 
 export type ModalAddProfessionalExperienceProps = {
 	user_id: number;
@@ -44,7 +44,11 @@ export const ModalAddProfessionalExperience = ({
 
 	return (
 		<BaseModal
-			trigger={<PlusIcon aria-label="adicionar experiência" />}
+			trigger={
+				<i title="Adicionar Experiência">
+					<PlusIcon aria-label="adicionar experiência" />
+				</i>
+			}
 			open={open}
 			setOpen={setOpen}
 			title="Adicionar Experiência"
@@ -95,6 +99,7 @@ export const ModalAddProfessionalExperience = ({
 				/>
 
 				<select
+          data-cy="work_model"
 					defaultValue=""
 					{...register('work_model', {
 						required: true,
@@ -111,6 +116,7 @@ export const ModalAddProfessionalExperience = ({
 				</select>
 
 				<select
+          data-cy="employment_type"
 					defaultValue=""
 					{...register('employment_type', {
 						required: true,

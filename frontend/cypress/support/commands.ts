@@ -36,22 +36,28 @@
 //   }
 // }
 //
-import '@testing-library/cypress/add-commands'
+import '@testing-library/cypress/add-commands';
 import 'cypress-wait-until';
 
 // Cypress.Commands.add('getByDataCy', (selector, ...args) => {
 //   return cy.get(`[data-cy="${selector}"]`, ...args)
 // })
 
-Cypress.Commands.add('signIn', ( email =  'thiago.teste@gmail.com', password = 'testaa' ) => {
-  cy.findByPlaceholderText(/e-mail/i).type(email)
-  cy.findByPlaceholderText(/senha/i).type(password)
+Cypress.Commands.add(
+	'signIn',
+	(email = 'thiago.teste@gmail.com', password = 'testaa') => {
+		cy.findByPlaceholderText(/e-mail/i).type(email);
+		cy.findByPlaceholderText(/senha/i).type(password);
 
-  cy.findByRole('button', { name: /entrar/i}).click()
-})
+		cy.findByRole('button', { name: /entrar/i }).click();
+	},
+);
+
+Cypress.Commands.add('signInAsRecruiter', () => {
+	cy.signIn('recruiter@gmail.com', 'testaa');
+});
 
 Cypress.on('uncaught:exception', (err, runnable) => {
-  // returning false here prevents Cypress from failing the test
-  return false
-})
-
+	// returning false here prevents Cypress from failing the test
+	return false;
+});

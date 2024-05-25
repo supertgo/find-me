@@ -46,6 +46,12 @@ declare global {
 			signIn(email?: string, password?: string): Chainable<Element>;
 
 			/**
+			 * Custom command to sing in an recruiter user
+			 * @example cy.signInAsRecruiter()
+			 */
+			signInAsRecruiter(): Chainable<Element>;
+
+			/**
 			 * Custom command to check banner in page
 			 * @example cy.shouldRenderBanner()
 			 */

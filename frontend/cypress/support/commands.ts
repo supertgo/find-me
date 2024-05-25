@@ -1,52 +1,13 @@
-/// <reference types="cypress" />
-// ***********************************************
-// This example commands.ts shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-//
-// declare global {
-//   namespace Cypress {
-//     interface Chainable {
-//       login(email: string, password: string): Chainable<void>
-//       drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       dismiss(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       visit(originalFn: CommandOriginalFn, url: string, options: Partial<VisitOptions>): Chainable<Element>
-//     }
-//   }
-// }
-//
 import '@testing-library/cypress/add-commands';
 import 'cypress-wait-until';
 
 Cypress.Commands.add('getByDataCy', (selector, ...args) => {
-  return cy.get(`[data-cy="${selector}"]`, ...args)
-})
+	return cy.get(`[data-cy="${selector}"]`, ...args);
+});
 
 Cypress.Commands.add('getByName', (name, element = 'input', ...args) => {
-  return cy.get(`${element}[name="${name}"]`, ...args)
-})
-
+	return cy.get(`${element}[name="${name}"]`, ...args);
+});
 
 Cypress.Commands.add(
 	'signIn',
@@ -62,7 +23,49 @@ Cypress.Commands.add('signInAsRecruiter', () => {
 	cy.signIn('recruiter@gmail.com', 'testaa');
 });
 
+Cypress.Commands.add(
+	'createPrefessionalXp',
+	({
+		companyName,
+		position,
+		location,
+		workModel,
+		employmentType,
+		startDate,
+		endDate,
+		description,
+    },
+   shouldClickOnAddXP = true 
+  ) => {
+    
+    shouldClickOnAddXP && cy.findByTitle('Adicionar Experiência').click();
+
+		cy.getByName('company_name').type(companyName);
+
+		cy.getByName('position').type(position);
+
+		cy.getByName('location').type(location);
+
+		cy.getByDataCy('work_model').select(workModel);
+
+		cy.getByDataCy('employment_type').select(employmentType);
+
+		cy.getByName('start_date').type(startDate);
+
+		endDate
+			? cy.getByName('end_date').type(endDate)
+			: cy
+					.findByRole('checkbox', { name: /Trabalho atualmente neste cargo/i })
+					.click();
+
+		cy.getByName('description', 'textarea').type(description);
+
+		cy.findByRole('button', { name: /Salvar/i }).click({
+			force: true,
+		});
+	},
+);
+
 Cypress.on('uncaught:exception', (err, runnable) => {
-	// returning false here prevents Cypress from failing the test
 	return false;
 });

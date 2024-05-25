@@ -6,6 +6,17 @@ type User = {
 	password: string;
 };
 
+type CreatePrefessionalXp = {
+	companyName: string;
+	position: string;
+	location: string;
+	workModel: 'Presencial' | 'Híbrido' | 'Home Office';
+	employmentType: 'Tempo integral' | 'Meio Período';
+	startDate: string;
+	endDate?: string | undefined;
+	description: string;
+};
+
 declare global {
 	namespace Cypress {
 		interface Chainable {
@@ -32,12 +43,12 @@ declare global {
 			 * @example cy.getByDataCy('selector')
 			 */
 			getByDataCy(selector: string): Chainable<JQuery<Element>>;
-      
-      /**
+
+			/**
 			 * Custom command to get element by name
 			 * @example cy.getByDataCy('selector')
 			 */
-      getByName(name: string, element?: string): Chainable<JQuery<Element>>;
+			getByName(name: string, element?: string): Chainable<JQuery<Element>>;
 
 			/**
 			 * Custom command to singUp an user
@@ -74,6 +85,8 @@ declare global {
 			 * @example cy.shouldBeGreaterThan(number)
 			 */
 			shouldBeGreaterThan(number: number): Chainable<Element>;
+
+      createPrefessionalXp(professionalXP: CreatePrefessionalXp, shouldClickOnAddXP?: boolean): void
 		}
 	}
 }

@@ -31,7 +31,13 @@ declare global {
 			 * Custom command to get element by data-cy
 			 * @example cy.getByDataCy('selector')
 			 */
-			getByDataCy(selector: string): Chainable<Element>;
+			getByDataCy(selector: string): Chainable<JQuery<Element>>;
+      
+      /**
+			 * Custom command to get element by name
+			 * @example cy.getByDataCy('selector')
+			 */
+      getByName(name: string, element?: string): Chainable<JQuery<Element>>;
 
 			/**
 			 * Custom command to singUp an user

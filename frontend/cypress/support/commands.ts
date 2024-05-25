@@ -39,9 +39,14 @@
 import '@testing-library/cypress/add-commands';
 import 'cypress-wait-until';
 
-// Cypress.Commands.add('getByDataCy', (selector, ...args) => {
-//   return cy.get(`[data-cy="${selector}"]`, ...args)
-// })
+Cypress.Commands.add('getByDataCy', (selector, ...args) => {
+  return cy.get(`[data-cy="${selector}"]`, ...args)
+})
+
+Cypress.Commands.add('getByName', (name, element = 'input', ...args) => {
+  return cy.get(`${element}[name="${name}"]`, ...args)
+})
+
 
 Cypress.Commands.add(
 	'signIn',

@@ -99,6 +99,24 @@ Cypress.Commands.add(
 	},
 );
 
+Cypress.Commands.add(
+	'createCompetence',
+	({
+		competence,
+    },
+   shouldClickOnAddCompetence = true 
+  ) => {
+    
+    shouldClickOnAddCompetence && cy.findByTitle('Adicionar Competência').click();
+
+		cy.getByName('competence').type(competence);
+
+		cy.findByRole('button', { name: /Salvar/i }).click({
+			force: true,
+		});
+	},
+);
+
 Cypress.on('uncaught:exception', () => {
 	return false;
 });

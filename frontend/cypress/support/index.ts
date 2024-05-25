@@ -26,6 +26,10 @@ type CreateAcademicRecord = {
   description: string
 }
 
+type CreateCompetence = {
+  competence: string
+}
+
 declare global {
 	namespace Cypress {
 		interface Chainable {
@@ -106,6 +110,12 @@ declare global {
        * @example cy.createAcademicRecord(academicRecord)
 			 */
       createAcademicRecord(academicRecord: CreateAcademicRecord, shouldClickOnAddAcademicRecord?: boolean): void
+      
+      /**
+			 * Custom command to add a competence into employee's cv 
+       * @example cy.CreateCompetence(academicRecord)
+			 */
+      createCompetence(competence: CreateCompetence, shouldClickOnAddCompetence?: boolean): void
 		}
 	}
 }

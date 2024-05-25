@@ -18,7 +18,6 @@ class IndexUserRequest extends AbstractRequest
             'includes.*' => 'string|in:' . implode(',', $this->availableIncludes),
 
             'filters' => 'array',
-
             'filters.name' => 'string',
             'filters.email' => 'email',
             'filters.type' => 'string|in:' . UserTypeEnum::valuesAsString(),

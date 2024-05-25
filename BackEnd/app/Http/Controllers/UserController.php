@@ -26,7 +26,10 @@ class UserController extends Controller
         try {
             return response()
                 ->json([
-                    'data' => $service->usersWithIncludes($request->getIncludes())
+                    'data' => $service->usersWithIncludes(
+                        $request->getFilters(),
+                        $request->getIncludes()
+                    )
                 ]);
         } catch (Exception $exception) {
             Log::error($exception);

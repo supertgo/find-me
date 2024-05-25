@@ -2,7 +2,9 @@
 
 namespace App\Domain\User;
 
+use App\Exceptions\User\CompetencesIdFilterMustBePositiveIntegersException;
 use App\Exceptions\User\UnknownUserIncludeException;
+use App\Exceptions\User\UnknownUserTypeException;
 use App\Exceptions\User\UserDoesntHaveCompetenceException;
 use App\Exceptions\User\UserEmailNotAvailableException;
 use App\Exceptions\User\UserPhoneNotAvailableException;
@@ -205,14 +207,19 @@ class UserDomain implements UserDomainInterface
         return $this->userRepository->getUserWithIncludes($userId, $includes);
     }
 
+    /**
+     * @throws UnknownUserTypeException
+     * @throws UnknownUserIncludeException
+     * @throws CompetencesIdFilterMustBePositiveIntegersException
+     */
     public function usersWithIncludes(array $filters = [], array $includes = []): array
     {
         $this->validateIncludes($includes);
 
         if (!empty($filters)) {
-            $filters = (new JobApplicationFilters())->fromArray($filters);
+            $filters = (new UserFilters())->fromArray($filters);
 
-            return $this->repository->getWithFilters($filters, $includes);
+            return $this->userRepository->getWithFilters($filters, $includes);
         }
 
         return $this->userRepository->getUsersWithIncludes($includes);

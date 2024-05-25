@@ -39,50 +39,52 @@ export const Config = (props: ConfigProps) => {
 				email={user.email}
 				phone={user.phone}
 			/>
-			<>
-				<RemoveProfessionalExperienceProvider>
-					<ModalRemoveProfessionalExperience />
-					<Title title="Informações" />
-					<ResumeCard
-						text="Experiência"
-						addModal={<ModalAddProfessionalExperience user_id={user.id} />}
-					>
-						{Children.toArray(
-							user.professional_experiences?.map((professional_xp) => (
-								<ProfessionalExperienceItem {...professional_xp} />
-							)),
-						)}
-					</ResumeCard>
-				</RemoveProfessionalExperienceProvider>
+			{user.type === 'employee' && (
+				<>
+					<RemoveProfessionalExperienceProvider>
+						<ModalRemoveProfessionalExperience />
+						<Title title="Informações" />
+						<ResumeCard
+							text="Experiência"
+							addModal={<ModalAddProfessionalExperience user_id={user.id} />}
+						>
+							{Children.toArray(
+								user.professional_experiences?.map((professional_xp) => (
+									<ProfessionalExperienceItem {...professional_xp} />
+								)),
+							)}
+						</ResumeCard>
+					</RemoveProfessionalExperienceProvider>
 
-				<RemoveAcademicRecordProvider>
-					<ModalRemoveAcademicRecord />
-					<ResumeCard
-						text="Formação Acadêmica"
-						addModal={<ModalAddAcademicRecord user_id={user.id} />}
-					>
-						{Children.toArray(
-							user.academic_records?.map((academic_record) => (
-								<AcademicRecordItem {...academic_record} />
-							)),
-						)}
-					</ResumeCard>
-				</RemoveAcademicRecordProvider>
+					<RemoveAcademicRecordProvider>
+						<ModalRemoveAcademicRecord />
+						<ResumeCard
+							text="Formação Acadêmica"
+							addModal={<ModalAddAcademicRecord user_id={user.id} />}
+						>
+							{Children.toArray(
+								user.academic_records?.map((academic_record) => (
+									<AcademicRecordItem {...academic_record} />
+								)),
+							)}
+						</ResumeCard>
+					</RemoveAcademicRecordProvider>
 
-				<RemoveCompetenceProvider>
-					<ModalRemoveCompetence />
-					<ResumeCard
-						text="Competências"
-						addModal={<ModalAddCompetence user_id={user.id} />}
-					>
-						{Children.toArray(
-							user.competences?.map(({ name, id }) => (
-								<CompetenceItem id={id} name={name} />
-							)),
-						)}
-					</ResumeCard>
-				</RemoveCompetenceProvider>
-			</>
+					<RemoveCompetenceProvider>
+						<ModalRemoveCompetence />
+						<ResumeCard
+							text="Competências"
+							addModal={<ModalAddCompetence user_id={user.id} />}
+						>
+							{Children.toArray(
+								user.competences?.map(({ name, id }) => (
+									<CompetenceItem id={id} name={name} />
+								)),
+							)}
+						</ResumeCard>
+					</RemoveCompetenceProvider>
+				</>
+			)}
 		</Base>
 	);
 };

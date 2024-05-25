@@ -18,9 +18,10 @@ export type ProfessionalExperience = {
 
 export type PostAddProfessionalExperienceObj = {
 	is_current: boolean;
+	end_date?: string | undefined;
 } & Omit<
 	ProfessionalExperience,
-	'created_at' | 'updated_at' | 'is_current' | 'id' | 'user_id'
+	'created_at' | 'updated_at' | 'is_current' | 'id' | 'user_id' | 'end_date'
 >;
 
 export type PostAddProfessionalExperiencesBody = {

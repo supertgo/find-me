@@ -81,9 +81,9 @@ export const useUserConfigForm = (): UseConfigFormProtocols => {
 			}
 
 			return toast.error(UNEXPECTED_ERROR);
-		}
-
-		setIsLoading(false);
+    } finally {
+      setIsLoading(false);
+    }
 	};
 
 	return {

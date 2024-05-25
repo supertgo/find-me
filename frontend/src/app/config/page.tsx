@@ -26,9 +26,9 @@ async function getData() {
 
 	const { data: authMeResponse } = await res.json();
 
-	// if (authMeResponse.type === 'recruiter') {
-	//    return redirect(`/${HomeUrl}`);
-	// }
+	if (authMeResponse.type === 'recruiter') {
+		return { data: authMeResponse };
+	}
 
 	const userRouteConst = await fetch(
 		`${process.env.NEXT_PUBLIC_BACKEND_URL}/${GetUserRouteConst({

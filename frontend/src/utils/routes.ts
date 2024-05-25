@@ -1,8 +1,14 @@
+import { JobIncludeOption } from 'protocols/external/job/job';
 import { UserIncludeOption } from 'protocols/external/user/user';
 
 export type GetUserRouteConstProps = {
 	user_id: number;
 	includes?: UserIncludeOption[];
+};
+
+export type GetJobRouteConstProps = {
+	job_id: number;
+	includes?: JobIncludeOption[];
 };
 
 export const GetAuthMeRouteConst = 'auth/me';
@@ -49,4 +55,25 @@ export const GetUserRouteConst = ({
 
 export const GetJobsRouteConst = 'job';
 
+export const GetJobRouteConst = ({
+  job_id,
+  includes
+}: GetJobRouteConstProps) => {
+	let jobRoute = `job/${job_id}`;
+  
+  if (includes && includes.length) {
+		jobRoute += `?includes[]=`;
+		jobRoute += includes.join('&includes[]=');
+	}
+
+  return jobRoute
+};
+
 export const PostJobRouteConst = 'job';
+
+export const PostJobApplicationRouteConst = (job_id: number) =>
+	`job/${job_id}/application`;
+
+export const DeleteJobRouteConst = (job_id: number) =>
+	`job/${job_id}`;
+

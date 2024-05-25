@@ -28,7 +28,11 @@ export const ModalAddAcademicRecord = ({
 
 	return (
 		<BaseModal
-			trigger={<PlusIcon aria-label="adicionar formação acadêmica" />}
+			trigger={
+				<i title="Adicionar Formação Acadêmica">
+					<PlusIcon aria-label="adicionar formação acadêmica" />
+				</i>
+			}
 			open={open}
 			setOpen={setOpen}
 			title="Adicionar Formação Acadêmica"

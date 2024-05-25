@@ -27,7 +27,7 @@ export const REQUIRED_ABOUT_ME = "O campo 'Sobre mim' é obrigatório.";
 export const REQUIRED_ACADEMIC_RECORD_INSTITUTION =
 	'A instituição é obrigatória.';
 
-export const REQUIRED_ACADEMIC_RECORD_DEGREE = 'O degree é obrigatório.';
+export const REQUIRED_ACADEMIC_RECORD_DEGREE = 'O diploma é obrigatório.';
 
 export const REQUIRED_ACADEMIC_RECORD_FIELD_STUDY =
 	'O campo de estudo é obrigatório.';

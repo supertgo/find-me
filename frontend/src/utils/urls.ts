@@ -12,7 +12,7 @@ export const JobUrlApplicants = (id: number) => `job/${id}/applicants`;
 
 export const JobsUrl = 'jobs';
 
-export const CreateJobUrl = 'job/create'
+export const CreateJobUrl = 'job/create';
 
 export const OpportunityUrl = 'opportunity';
 

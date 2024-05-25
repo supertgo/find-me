@@ -24,7 +24,7 @@ Cypress.Commands.add('signInAsRecruiter', () => {
 });
 
 Cypress.Commands.add(
-	'createPrefessionalXp',
+	'createProfessionalXp',
 	({
 		companyName,
 		position,

@@ -51,7 +51,7 @@ interface UserDomainInterface
 
     function loadUserWithIncludes(int $userId, array $includes): array;
 
-    function usersWithIncludes(array $includes): array;
+    function usersWithIncludes(array $filters = [], array $includes = []): array;
 
     function createProfilePicture(UploadedFile $file, int $userId): void;
 

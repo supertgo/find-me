@@ -35,6 +35,22 @@ class JobFilters
     private ?array $competencesId;
 
     /**
+     * @param array{
+     *     name?: string,
+     *     description?: string,
+     *     isAvailable?: bool,
+     *     salaryFrom?: int,
+     *     salaryTo?: int,
+     *     salary_time_units?: array,
+     *     accept_application_until?: string|Carbon,
+     *     work_models?: array,
+     *     employment_types?: array,
+     *     week_workload_from?: int,
+     *     week_workload_to?: int,
+     *     location?: string,
+     *     company_ids?: array,
+     *     competence_ids?: array
+     * } $filters
      * @throws SalaryToMustBeBiggerThanFromException
      * @throws UnknownWorkModelsFilterException
      * @throws CompetencesIdFilterMustBePositiveIntegersException

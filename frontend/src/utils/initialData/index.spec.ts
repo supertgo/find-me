@@ -5,7 +5,7 @@ type TestInitialData = {
 };
 
 describe('getInitialData()', () => {
-	it('should return a initial data as response', () => {
+	it('should return initial data as response', () => {
 		const response = getInitialData<TestInitialData>({
 			initialData: {
 				test: 'pass',

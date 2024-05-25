@@ -9,7 +9,7 @@ describe('<ApplicantSidebarItems />', () => {
 		expect(screen.getByRole('link', { name: 'Início' })).toBeInTheDocument();
 		expect(screen.getByRole('link', { name: 'Vagas' })).toBeInTheDocument();
 		expect(
-			screen.getByRole('link', { name: 'Meu Perfil Público' }),
+			screen.getByRole('link', { name: 'Perfil Público' }),
 		).toBeInTheDocument();
 	});
 });

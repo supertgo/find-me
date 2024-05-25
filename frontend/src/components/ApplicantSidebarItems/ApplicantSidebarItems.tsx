@@ -36,7 +36,7 @@ export const ApplicantSidebarItems = ({}: ApplicantSidebarItemsProps) => {
 						color={theme.colors.officialGrey}
 					/>
 				}
-				text="Meu Perfil Público"
+				text="Perfil Público"
 				keyword="config"
 			/>
 		</>

@@ -16,7 +16,7 @@ use App\Exceptions\Job\WeekWorkloadMustBePositiveException;
 use App\Exceptions\Job\WeekWorkloadToMustBeBiggerThanFromException;
 use Carbon\Carbon;
 
-class JobFilters
+class JobFilters implements JobFiltersInterface
 {
     const DATE_TIME_FORMAT = 'Y-m-d H:i:s';
     private ?string $name;

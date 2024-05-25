@@ -8,7 +8,6 @@ import { Children } from 'react';
 import { Base } from 'templates/Base/Base';
 import { LoadingJobs } from './LoadingJobs';
 import { NoJobs } from './NoJobs';
-
 import { CreateJobHeader } from 'components/CreateJobHeader/CreateJobHeader';
 import { JobsUrl } from 'utils/urls';
 import * as S from './Jobs.styles';

@@ -7,11 +7,11 @@ describe('<ModalAddCompetence />', () => {
 			queryProvider: true,
 		});
 
-		const addcompetenceTrigger = screen.getByLabelText('Adicionar Competencia');
+		const addCompetenceTrigger = screen.getByLabelText('Adicionar Competência');
 
-		expect(addcompetenceTrigger).toBeInTheDocument();
+		expect(addCompetenceTrigger).toBeInTheDocument();
 
-		await act(async () => fireEvent.click(addcompetenceTrigger));
+		await act(async () => fireEvent.click(addCompetenceTrigger));
 
 		await waitFor(() =>
 			expect(

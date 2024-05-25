@@ -15,7 +15,7 @@ describe('<Job />', () => {
 			queryProvider: true,
 		});
 
-		expect(screen.getByText(props.name)).toBeInTheDocument();
+		expect(screen.getAllByText(props.name)).toHaveLength(2);
 		expect(screen.getByText(/Salário/i)).toBeInTheDocument();
 
 		if (!!props.competences?.length) {

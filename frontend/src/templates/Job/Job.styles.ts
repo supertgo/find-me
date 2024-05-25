@@ -19,12 +19,16 @@ export const Title = styled.h3`
 
 export const JobHeaderWrapper = styled.div`
 	${({ theme }) => css`
-		padding: ${theme.space.large} 0;
+		padding: ${theme.space.xxxlarge} 0;
 		background: ${theme.colors.secondWhite};
 
 		button {
 			padding: 1.4rem 5.6rem;
 		}
+
+    & > *:not(:first-child) {
+      margin-top: ${theme.space.xxxlarge};
+    }
 	`}
 `;
 

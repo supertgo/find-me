@@ -10,6 +10,7 @@ export const Wrapper = styled.div`
 		display: flex;
 		justify-content: space-between;
 		flex-direction: column;
+    box-shadow: 10px 0px 0px 0px #D3D6DB;
 
 		${media.lessThan('large')`
       display: flex;    

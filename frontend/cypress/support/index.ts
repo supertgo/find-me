@@ -86,6 +86,10 @@ declare global {
 			 */
 			shouldBeGreaterThan(number: number): Chainable<Element>;
 
+			/**
+			 * Custom command to create a professional xp into employee's cv 
+       * @example cy.createProfessionalXp(professionalXP)
+			 */
       createProfessionalXp(professionalXP: CreatePrefessionalXp, shouldClickOnAddXP?: boolean): void
 		}
 	}

@@ -15,7 +15,7 @@ beforeEach(() => {
 
 describe('Config - Professional XP', () => {
 	it('should be able to add an xp with end_date', () => {
-		cy.createPrefessionalXp({
+		cy.createProfessionalXp({
 			companyName: 'Google',
 			position: 'Software Developer',
 			location: 'Vale do Silício',
@@ -31,7 +31,7 @@ describe('Config - Professional XP', () => {
 	});
 
 	it('should be able to add an xp without end_date', () => {
-		cy.createPrefessionalXp({
+		cy.createProfessionalXp({
 			companyName: 'Amazon',
 			position: 'AWS Engineer',
 			location: 'Vale do Silício',
@@ -68,7 +68,7 @@ describe('Config - Professional XP', () => {
 		cy.getByName('company_name').focus();
 		cy.findByText('A descrição é obrigatória.');
 
-		cy.createPrefessionalXp(
+		cy.createProfessionalXp(
 			{
 				companyName: 'Sad Path Job',
 				position: 'Software Developer Sad Path',

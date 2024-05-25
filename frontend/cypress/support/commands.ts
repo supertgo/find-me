@@ -24,7 +24,7 @@ Cypress.Commands.add('signInAsRecruiter', () => {
 });
 
 Cypress.Commands.add(
-	'createPrefessionalXp',
+	'createProfessionalXp',
 	({
 		companyName,
 		position,
@@ -66,6 +66,6 @@ Cypress.Commands.add(
 	},
 );
 
-Cypress.on('uncaught:exception', (err, runnable) => {
+Cypress.on('uncaught:exception', () => {
 	return false;
 });

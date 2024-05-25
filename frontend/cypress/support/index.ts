@@ -86,7 +86,7 @@ declare global {
 			 */
 			shouldBeGreaterThan(number: number): Chainable<Element>;
 
-      createPrefessionalXp(professionalXP: CreatePrefessionalXp, shouldClickOnAddXP?: boolean): void
+      createProfessionalXp(professionalXP: CreatePrefessionalXp, shouldClickOnAddXP?: boolean): void
 		}
 	}
 }

@@ -2,7 +2,7 @@
 
 namespace App\Domain\User;
 
-use App\Exceptions\User\CompetencesIdFilterMustBePositiveIntegersException;
+use App\Domain\Competence\CompetencesIdFilterMustBePositiveIntegersException;
 use App\Exceptions\User\UnknownUserTypeException;
 
 class UserFilters implements UserFilterInterface

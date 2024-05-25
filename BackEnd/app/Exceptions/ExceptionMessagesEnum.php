@@ -15,6 +15,14 @@ enum ExceptionMessagesEnum: string
     case OnlyOwnerCanUpdateJob = 'Only owner can update job';
     case JobAcceptApplicationUntilPassed = 'Job accept application deadline is in the past';
     case JobApplicationsAmountSurpassedException = 'Job applications amount surpassed';
+    case CompanyIdsFilterMustBePositiveIntegers = 'Company ids must be positive integers';
+    case SalaryToMustBeBiggerThanFrom = 'Salary to must be bigger than salary from';
+    case UnknownSalaryTimeUnitsFilterException = 'Unknown salary time units filter';
+    case InvalidAcceptApplicationUntilDateFormatException = 'Invalid accept application until date format';
+    case UnknownEmploymentTypesFilterException = 'Unknown employment types filter';
+    case UnknownWorkModelsFilterException = 'Unknown work models filter';
+    case WeekWorkloadMustBePositiveInteger = 'Week workload must be positive integer';
+    case WeekWorkloadToMustBeBiggerThanFrom = 'Week workload to must be bigger than week workload from';
 
     case JobApplicationStatusNotAllowedException = 'Job application status not allowed';
     case JobApplicationUnknownEnumOptionException = 'Job application unknown enum option';

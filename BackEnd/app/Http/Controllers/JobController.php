@@ -131,7 +131,7 @@ class JobController extends Controller
         try {
             return response()
                 ->json([
-                    'data' => $domain->jobsWithIncludes($request->getIncludes())
+                    'data' => $domain->jobsWithIncludes($request->getFilters(), $request->getIncludes())
                 ]);
         } catch (Exception $exception) {
             Log::error($exception);

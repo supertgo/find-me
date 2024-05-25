@@ -32,7 +32,8 @@ class IndexJobRequest extends AbstractRequest
             'filters.salary_time_units' => 'array',
             'filters.salary_time_units.*' => 'string|in' . SalaryTimeUnitEnum::valuesAsString(),
 
-            'filters.accept_application_until' => 'date',
+            'filters.accept_application_until' => 'date|date_format:Y-m-d H:i:s',
+
             'filters.work_models' => 'array',
             'filters.work_models.*' => 'string.in' . WorkModelEnum::valuesAsString(),
 
@@ -43,10 +44,12 @@ class IndexJobRequest extends AbstractRequest
             'filters.week_workload_to' => 'integer',
 
             'filters.location' => 'string',
-            'filters.company_id' => 'integer',
 
-            'filters.competences_id' => ['array', UniqueArrayValuesRule::class],
-            'filters.competences_id.*' => 'integer',
+            'filters.company_ids' => 'array',
+            'filters.company_ids.*' => 'integer',
+
+            'filters.competence_ids' => ['array', UniqueArrayValuesRule::class],
+            'filters.competence_ids.*' => 'integer',
         ];
     }
 }

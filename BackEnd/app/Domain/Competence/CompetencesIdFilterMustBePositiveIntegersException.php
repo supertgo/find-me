@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Exceptions\User;
+namespace App\Domain\Competence;
 
 use App\Exceptions\Abstract\AbstractFindMeException;
 use App\Exceptions\ExceptionMessagesEnum;

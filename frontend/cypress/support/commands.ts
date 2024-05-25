@@ -66,6 +66,39 @@ Cypress.Commands.add(
 	},
 );
 
+Cypress.Commands.add(
+	'createAcademicRecord',
+	({
+		institution,
+		fieldOfStudy,
+    degree,
+    startDate,
+    endDate,
+    description
+    },
+   shouldClickOnAddAcademicRecord = true 
+  ) => {
+    
+    shouldClickOnAddAcademicRecord && cy.findByTitle('Adicionar Formação Acadêmica').click();
+
+		cy.getByName('institution').type(institution);
+
+		cy.getByName('degree').type(degree);
+
+		cy.getByName('field_of_study').type(fieldOfStudy);
+
+		cy.getByName('start_date').type(startDate);
+
+		cy.getByName('end_date').type(endDate);
+
+		cy.getByName('description', 'textarea').type(description);
+
+		cy.findByRole('button', { name: /Salvar/i }).click({
+			force: true,
+		});
+	},
+);
+
 Cypress.on('uncaught:exception', () => {
 	return false;
 });

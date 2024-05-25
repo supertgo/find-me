@@ -6,7 +6,7 @@ type User = {
 	password: string;
 };
 
-type CreatePrefessionalXp = {
+type CreateProfessionalXp = {
 	companyName: string;
 	position: string;
 	location: string;
@@ -16,6 +16,15 @@ type CreatePrefessionalXp = {
 	endDate?: string | undefined;
 	description: string;
 };
+
+type CreateAcademicRecord = {
+  institution: string
+  degree: string
+  fieldOfStudy: string
+  startDate: string
+  endDate: string
+  description: string
+}
 
 declare global {
 	namespace Cypress {
@@ -90,7 +99,13 @@ declare global {
 			 * Custom command to create a professional xp into employee's cv 
        * @example cy.createProfessionalXp(professionalXP)
 			 */
-      createProfessionalXp(professionalXP: CreatePrefessionalXp, shouldClickOnAddXP?: boolean): void
+      createProfessionalXp(professionalXP: CreateProfessionalXp, shouldClickOnAddXP?: boolean): void
+      
+      /**
+			 * Custom command to create an academic record into employee's cv 
+       * @example cy.createAcademicRecord(academicRecord)
+			 */
+      createAcademicRecord(academicRecord: CreateAcademicRecord, shouldClickOnAddAcademicRecord?: boolean): void
 		}
 	}
 }

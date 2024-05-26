@@ -51,6 +51,7 @@ class JobFilters implements JobFiltersInterface
      *     week_workload_to?: int,
      *     location?: string,
      *     company_ids?: array,
+     *     user_ids?: array,
      *     competence_ids?: array
      * } $filters
      * @throws SalaryToMustBeBiggerThanFromException
@@ -250,13 +251,15 @@ class JobFilters implements JobFiltersInterface
      */
     public function setCompanyIds(?array $companyIds): JobFilters
     {
-        $nonPositiveIntegers = array_filter(
-            $companyIds,
-            fn($companyId) => !is_int($companyId) || $companyId <= 0
-        );
+        if (!empty($companyIds)) {
+            $nonPositiveIntegers = array_filter(
+                $companyIds,
+                fn($companyId) => !is_int($companyId) || $companyId <= 0
+            );
 
-        if (!empty($nonPositiveIntegers)) {
-            throw new CompanyIdsFilterMustBePositiveIntegersException();
+            if (!empty($nonPositiveIntegers)) {
+                throw new CompanyIdsFilterMustBePositiveIntegersException();
+            }
         }
 
         $this->companyIds = $companyIds;
@@ -264,15 +267,20 @@ class JobFilters implements JobFiltersInterface
         return $this;
     }
 
+    /**
+     * @throws CompetencesIdFilterMustBePositiveIntegersException
+     */
     public function setCompetencesId(?array $competencesId): JobFilters
     {
-        $nonPositiveIntegers = array_filter(
-            $competencesId,
-            fn($competenceId) => !is_int($competenceId) || $competenceId <= 0
-        );
+        if (!empty($competencesId)) {
+            $nonPositiveIntegers = array_filter(
+                $competencesId,
+                fn($competenceId) => !is_int($competenceId) || $competenceId <= 0
+            );
 
-        if (!empty($nonPositiveIntegers)) {
-            throw new CompetencesIdFilterMustBePositiveIntegersException($nonPositiveIntegers);
+            if (!empty($nonPositiveIntegers)) {
+                throw new CompetencesIdFilterMustBePositiveIntegersException($nonPositiveIntegers);
+            }
         }
 
         $this->competencesId = $competencesId;
@@ -297,6 +305,7 @@ class JobFilters implements JobFiltersInterface
             'location' => $this->getLocation(),
             'company_ids' => $this->getCompanyIds(),
             'competence_ids' => $this->getCompetencesId(),
+            'user_ids' => $this->getUserIds(),
         ];
     }
 

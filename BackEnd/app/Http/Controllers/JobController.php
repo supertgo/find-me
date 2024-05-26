@@ -133,6 +133,11 @@ class JobController extends Controller
                 ->json([
                     'data' => $domain->jobsWithIncludes($request->getFilters(), $request->getIncludes())
                 ]);
+        } catch (AbstractFindMeException  $exception) {
+            return response()->json(
+                $exception->render(),
+                status: $exception->getHttpCode()
+            );
         } catch (Exception $exception) {
             Log::error($exception);
 

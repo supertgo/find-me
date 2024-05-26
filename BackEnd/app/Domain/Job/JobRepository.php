@@ -100,8 +100,8 @@ class JobRepository extends AbstractRepository implements JobRepositoryInterface
 
         $query->when($filers->getIsAvailable(), fn($q) => $q->where('is_available', $filers->getIsAvailable()));
 
-        $query->when($filers->getSalaryFrom(), fn($q) => $q->where('salary_from', '>=', $filers->getSalaryFrom()));
-        $query->when($filers->getSalaryTo(), fn($q) => $q->where('salary_to', '<=', $filers->getSalaryTo()));
+        $query->when($filers->getSalaryFrom(), fn($q) => $q->where('salary', '>=', $filers->getSalaryFrom()));
+        $query->when($filers->getSalaryTo(), fn($q) => $q->where('salary', '<=', $filers->getSalaryTo()));
 
         $query->when(
             $filers->getSalaryTimeUnits(),
@@ -125,11 +125,11 @@ class JobRepository extends AbstractRepository implements JobRepositoryInterface
 
         $query->when(
             $filers->getWeekWorkloadFrom(),
-            fn($q) => $q->where('week_workload_from', '>=', $filers->getWeekWorkloadFrom())
+            fn($q) => $q->where('week_workload', '>=', $filers->getWeekWorkloadFrom())
         );
         $query->when(
             $filers->getWeekWorkloadTo(),
-            fn($q) => $q->where('week_workload_to', '<=', $filers->getWeekWorkloadTo())
+            fn($q) => $q->where('week_workload', '<=', $filers->getWeekWorkloadTo())
         );
 
         $query->when(

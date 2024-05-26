@@ -29,15 +29,15 @@ class IndexJobRequest extends AbstractRequest
 
             'filters.salary_from' => 'integer',
             'filters.salary_to' => 'integer',
-            'filters.salary_time_units' => 'array',
-            'filters.salary_time_units.*' => 'string|in' . SalaryTimeUnitEnum::valuesAsString(),
+            'filters.salary_time_units' => ['array', new UniqueArrayValuesRule],
+            'filters.salary_time_units.*' => 'string|in:' . SalaryTimeUnitEnum::valuesAsString(),
 
             'filters.accept_application_until' => 'date|date_format:Y-m-d H:i:s',
 
-            'filters.work_models' => 'array',
-            'filters.work_models.*' => 'string.in' . WorkModelEnum::valuesAsString(),
+            'filters.work_models' => ['array', new UniqueArrayValuesRule],
+            'filters.work_models.*' => 'string|in:' . WorkModelEnum::valuesAsString(),
 
-            'filters.employment_types' => 'array',
+            'filters.employment_types' => ['array', new UniqueArrayValuesRule],
             'filters.employment_types.*' => 'string|in:' . EmploymentTypeEnum::valuesAsString(),
 
             'filters.week_workload_from' => 'integer',
@@ -45,13 +45,13 @@ class IndexJobRequest extends AbstractRequest
 
             'filters.location' => 'string',
 
-            'filters.company_ids' => 'array',
+            'filters.company_ids' => ['array', new UniqueArrayValuesRule],
             'filters.company_ids.*' => 'integer',
 
-            'filters.user_ids' => 'array',
+            'filters.user_ids' => ['array', new UniqueArrayValuesRule],
             'filters.user_ids.*' => 'integer',
 
-            'filters.competence_ids' => ['array', UniqueArrayValuesRule::class],
+            'filters.competence_ids' => ['array', new UniqueArrayValuesRule],
             'filters.competence_ids.*' => 'integer',
         ];
     }

@@ -143,6 +143,11 @@ class JobRepository extends AbstractRepository implements JobRepositoryInterface
         );
 
         $query->when(
+            $filers->getUserIds(),
+            fn($q) => $q->whereIn('user_id', $filers->getUserIds())
+        );
+
+        $query->when(
             $filers->getCompetencesId(),
             fn($q) => $q->whereHas('competences', fn($q) => $q->whereIn('competence_id', $filers->getCompetencesId()))
         );

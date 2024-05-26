@@ -4,8 +4,10 @@ namespace App\Domain\Job;
 
 use App\Domain\Abstract\AbstractRepository;
 use App\Domain\Competence\CompetenceDomainInterface;
+use App\Http\Requests\Job\JobFiltersInterface;
 use App\Models\Job;
 use DB;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 
 class JobRepository extends AbstractRepository implements JobRepositoryInterface
@@ -83,5 +85,68 @@ class JobRepository extends AbstractRepository implements JobRepositoryInterface
     public function deleteCompetences(?int $id): void
     {
         Job::find($id)->competences()->detach();
+    }
+
+    public function getJobsWithFilters(JobFiltersInterface $filers, array $includes): array
+    {
+        $query = Job::query();
+
+        $query->when($filers->getName(), fn($q) => $q->where('name', 'like', "%{$filers->getName()}%"));
+
+        $query->when(
+            $filers->getDescription(),
+            fn($q) => $q->where('description', 'like', "%{$filers->getDescription()}%")
+        );
+
+        $query->when($filers->getIsAvailable(), fn($q) => $q->where('is_available', $filers->getIsAvailable()));
+
+        $query->when($filers->getSalaryFrom(), fn($q) => $q->where('salary_from', '>=', $filers->getSalaryFrom()));
+        $query->when($filers->getSalaryTo(), fn($q) => $q->where('salary_to', '<=', $filers->getSalaryTo()));
+
+        $query->when(
+            $filers->getSalaryTimeUnits(),
+            fn($q) => $q->whereIn('salary_time_unit', $filers->getSalaryTimeUnits())
+        );
+
+        $query->when(
+            $filers->getAcceptApplicationUntil(),
+            fn(Builder $q) => $q->whereDate('accept_application_until', '<=', $filers->getAcceptApplicationUntil())
+        );
+
+        $query->when(
+            $filers->getWorkModels(),
+            fn($q) => $q->whereIn('work_model', $filers->getWorkModels())
+        );
+
+        $query->when(
+            $filers->getEmploymentTypes(),
+            fn($q) => $q->whereIn('employment_type', $filers->getEmploymentTypes())
+        );
+
+        $query->when(
+            $filers->getWeekWorkloadFrom(),
+            fn($q) => $q->where('week_workload_from', '>=', $filers->getWeekWorkloadFrom())
+        );
+        $query->when(
+            $filers->getWeekWorkloadTo(),
+            fn($q) => $q->where('week_workload_to', '<=', $filers->getWeekWorkloadTo())
+        );
+
+        $query->when(
+            $filers->getLocation(),
+            fn($q) => $q->where('location', 'like', "%{$filers->getLocation()}%")
+        );
+
+        $query->when(
+            $filers->getCompanyIds(),
+            fn($q) => $q->whereIn('company_id', $filers->getCompanyIds())
+        );
+
+        $query->when(
+            $filers->getCompetencesId(),
+            fn($q) => $q->whereHas('competences', fn($q) => $q->whereIn('competence_id', $filers->getCompetencesId()))
+        );
+
+        return $query->with($includes)->get()->toArray();
     }
 }

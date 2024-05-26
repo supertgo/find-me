@@ -48,6 +48,9 @@ class IndexJobRequest extends AbstractRequest
             'filters.company_ids' => 'array',
             'filters.company_ids.*' => 'integer',
 
+            'filters.user_ids' => 'array',
+            'filters.user_ids.*' => 'integer',
+
             'filters.competence_ids' => ['array', UniqueArrayValuesRule::class],
             'filters.competence_ids.*' => 'integer',
         ];

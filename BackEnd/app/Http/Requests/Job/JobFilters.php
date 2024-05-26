@@ -12,6 +12,7 @@ use App\Exceptions\Job\SalaryToMustBeBiggerThanFromException;
 use App\Exceptions\Job\UnknownEmploymentTypesFilterException;
 use App\Exceptions\Job\UnknownSalaryTimeUnitsFilterException;
 use App\Exceptions\Job\UnknownWorkModelsFilterException;
+use App\Exceptions\Job\UserIdsFilterMustBePositiveIntegersException;
 use App\Exceptions\Job\WeekWorkloadMustBePositiveException;
 use App\Exceptions\Job\WeekWorkloadToMustBeBiggerThanFromException;
 use Carbon\Carbon;
@@ -32,6 +33,7 @@ class JobFilters implements JobFiltersInterface
     private ?int $weekWorkloadTo;
     private ?string $location;
     private ?array $companyIds;
+    private ?array $userIds;
     private ?array $competencesId;
 
     /**
@@ -60,6 +62,7 @@ class JobFilters implements JobFiltersInterface
      * @throws UnknownEmploymentTypesFilterException
      * @throws WeekWorkloadMustBePositiveException
      * @throws UnknownSalaryTimeUnitsFilterException
+     * @throws UserIdsFilterMustBePositiveIntegersException
      */
     public function fromArray(array $filters): self
     {
@@ -76,6 +79,7 @@ class JobFilters implements JobFiltersInterface
         $this->setWeekWorkloadTo($filters['week_workload_to'] ?? null);
         $this->setLocation($filters['location'] ?? null);
         $this->setCompanyIds($filters['company_ids'] ?? null);
+        $this->setUserIds($filters['user_ids'] ?? null);
         $this->setCompetencesId($filters['competence_ids'] ?? null);
 
         return $this;
@@ -356,5 +360,29 @@ class JobFilters implements JobFiltersInterface
         return $this->competencesId;
     }
 
+    public function getUserIds(): ?array
+    {
+        return $this->userIds;
+    }
 
+    /**
+     * @throws UserIdsFilterMustBePositiveIntegersException
+     */
+    public function setUserIds(?array $userIds): JobFilters
+    {
+        if (!empty($userIds)) {
+            $nonPositiveIntegers = array_filter(
+                $userIds,
+                fn($userId) => !is_int($userId) || $userId <= 0
+            );
+
+            if (!empty($nonPositiveIntegers)) {
+                throw new UserIdsFilterMustBePositiveIntegersException($userIds);
+            }
+        }
+
+        $this->userIds = $userIds;
+
+        return $this;
+    }
 }

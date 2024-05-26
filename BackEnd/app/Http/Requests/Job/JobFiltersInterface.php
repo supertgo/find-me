@@ -38,6 +38,8 @@ interface JobFiltersInterface
 
     function setCompanyIds(?array $companyIds): self;
 
+    function setUserIds(?array $userIds): self;
+
     function setCompetencesId(?array $competencesId): self;
 
     function toArray(): array;
@@ -64,5 +66,8 @@ interface JobFiltersInterface
 
     function getCompanyIds(): ?array;
 
+    function getUserIds(): ?array;
+
     function getCompetencesId(): ?array;
+
 }

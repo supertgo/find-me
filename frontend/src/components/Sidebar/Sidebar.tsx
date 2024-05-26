@@ -20,7 +20,7 @@ export const Sidebar = ({}: SidebarProps) => {
 	const { signOut } = useSignOut();
 
 	return (
-		<S.Wrapper>
+		<S.Wrapper data-cy="sidebar">
 			<div>
 				<LogoFindme />
 				<S.Items>

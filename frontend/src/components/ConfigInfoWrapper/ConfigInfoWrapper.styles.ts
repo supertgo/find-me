@@ -5,8 +5,10 @@ export const Wrapper = styled.div`
   ${({ theme }) => css`
     display: grid;
     grid-template-columns: 0.5fr 1fr;
-    padding: ${theme.space.medium};
-    gap: ${theme.space.medium};
+    padding: ${theme.space.medium} 0;
+    margin: 0 ${theme.space.large};
+    gap: ${theme.space.large};
+    border-bottom: 1px solid ${theme.colors.whiteGrey};
 
     ${media.lessThan('medium')`
       display: flex;

@@ -49,9 +49,7 @@ describe('Job - Creation', () => {
 
 		cy.wait(2000);
 
-		cy.getByDataCy('sidebar').within(() => {
-			cy.findByTitle('Sair').click();
-		});
+		cy.logOut();
 
 		cy.signIn('candidato@gmail.com', 'testaa');
 
@@ -63,23 +61,12 @@ describe('Job - Creation', () => {
 
 		cy.scrollTo('bottom');
 
-		cy.findAllByText('Tech Lead | Node.js (Híbrido - BH)')
-			.last()
-			.parent()
-			.parent()
-			.parent()
-			.within(() => {
-				cy.findByRole('button', { name: /Visualizar/i }).click();
-			});
+		cy.goToJob('Tech Lead | Node.js (Híbrido - BH)');
 
-		cy.findByRole('button', { name: /Aplicar/i }).click();
-
-		cy.findByText('Deseja aplicar para essa vaga?').should('exist');
-
-		cy.getByName('cover_letter', 'textarea').type(
-			'Gostaria de me candidatar à vaga de [Nome da Posição] na [Nome da Empresa], conforme anunciado [onde você encontrou a vaga]. Acredito que minhas habilidades e experiências são uma excelente combinação para esta posição. Tenho [número] anos de experiência em [sua área de atuação]. Na minha posição mais recente na [Nome da Última Empresa], fui responsável por [uma ou duas responsabilidades principais]. Durante esse período, desenvolvi as habilidades necessárias.{enter}Sou uma pessoa relevante, como organizada, dedicada, comunicativa, e acredito que essas qualidades me tornam um bom candidato para a vaga. Estou ansioso para a oportunidade de contribuir para a equipe da [Nome da Empresa].',
-		);
-
-    cy.findByRole('button', { name: /Aplicar/i }).should('be.enabled').click()
+		cy.writeCoverLetter({
+			companyName: 'Onfly',
+			position: 'Tech Lead | Node.js (Híbrido - BH)',
+			experienceInYears: 5,
+		});
 	});
 });

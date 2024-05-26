@@ -75,7 +75,7 @@ describe('Config - Academic Record', () => {
 			description: 'Descrição da instituiçao a ser removida do currículo.',
 		});
 
-		cy.findByText('Instituição a ser removida do currículo');
+		cy.findByText(institution);
 
 		cy.wait(2000);
 

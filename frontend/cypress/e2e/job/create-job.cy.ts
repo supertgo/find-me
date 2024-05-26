@@ -15,37 +15,19 @@ beforeEach(() => {
 
 describe('Job - Creation', () => {
 	it('recruiter should create a job and an employee should apply to it', () => {
-		cy.findByRole('button', { name: /Anuncie uma vaga/i }).click();
-
-		cy.getByName('name').type('Tech Lead | Node.js (Híbrido - BH)');
-
-		cy.getByName('employment_type', 'select').select('Tempo integral');
-
-		cy.getByName('work_model', 'select').select('Híbrido');
-
-		cy.getByName('salary').type('3200');
-
-		cy.getByName('salary_time_unit', 'select').select('mês');
-
-		cy.getByName('location').type('Belo Horizonte, Minas Gerais, Brasil');
-
-		cy.getByName('applications_amount').type('10');
-
-		cy.getByName('accept_application_until').type(
-			new Date().toISOString().split('T')[0],
-		);
-
-		cy.addSkills(['Nodejs', 'MySQL', 'Git', 'Scrum']);
-
-		cy.findByRole('button', { name: /Próximo/i })
-			.should('be.enabled')
-			.click();
-
-		cy.getByName('description', 'textarea').type(
-			'Para a vaga de Tech Lead | Node.js, buscamos um(a) profissional que será responsável por um dos nossos Squads de tecnologia, tanto do ponto de gestão quanto de desenvolvimento. Além disso, buscamos alguém que também seja dinâmico(a), que saiba trabalhar em equipe e que se conecte com nossa cultura e valores.',
-		);
-
-		cy.findByRole('button', { name: /Concluir/i }).click();
+		cy.createJob({
+			name: 'Tech Lead | Node.js (Híbrido - BH)',
+			employmentType: 'Tempo integral',
+			workModel: 'Híbrido',
+			salary: '3200',
+			salaryTimeUnit: 'mês',
+			location: 'Belo Horizonte, Minas Gerais, Brasil',
+			applicationsAmount: '10',
+			acceptApplicationUntil: new Date().toISOString().split('T')[0],
+			skills: ['Nodejs', 'MySQL', 'Git', 'Scrum'],
+			description:
+				'Para a vaga de Tech Lead | Node.js, buscamos um(a) profissional que será responsável por um dos nossos Squads de tecnologia, tanto do ponto de gestão quanto de desenvolvimento. Além disso, buscamos alguém que também seja dinâmico(a), que saiba trabalhar em equipe e que se conecte com nossa cultura e valores.',
+		});
 
 		cy.wait(2000);
 

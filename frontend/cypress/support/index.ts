@@ -1,6 +1,10 @@
 // load type definitions from Cypress module
 /// <reference types="cypress" />
 
+type WorkModel = 'Presencial' | 'Híbrido' | 'Home Office';
+type EmploymentType = 'Tempo integral' | 'Meio Período';
+type SalaryTimeUnit = 'mês' | 'hora' | 'semana' | 'dia';
+
 type User = {
 	email: string;
 	password: string;
@@ -10,8 +14,8 @@ type CreateProfessionalXpProps = {
 	companyName: string;
 	position: string;
 	location: string;
-	workModel: 'Presencial' | 'Híbrido' | 'Home Office';
-	employmentType: 'Tempo integral' | 'Meio Período';
+	workModel: WorkModel;
+	employmentType: EmploymentType;
 	startDate: string;
 	endDate?: string | undefined;
 	description: string;
@@ -31,10 +35,23 @@ type CreateCompetenceProps = {
 };
 
 type WriteCoverLetterProps = {
-  position: string
-  companyName: string
-  experienceInYears?: number
-}
+	position: string;
+	companyName: string;
+	experienceInYears?: number;
+};
+
+type CreateJobProps = {
+	name: string;
+	workModel: WorkModel;
+	employmentType: EmploymentType;
+	salary: string;
+	salaryTimeUnit: SalaryTimeUnit;
+	location: string;
+	applicationsAmount: string;
+	acceptApplicationUntil: string;
+  skills: string[]
+  description: string
+};
 
 declare global {
 	namespace Cypress {
@@ -113,12 +130,19 @@ declare global {
 
 			/**
 			 * Custom command to add a competence into employee's cv
-			 * @example cy.CreateCompetence(academicRecord)
+			 * @example cy.createCompetence(academicRecord)
 			 */
 			createCompetence(
 				competence: CreateCompetenceProps,
 				shouldClickOnAddCompetence?: boolean,
 			): void;
+
+			/**
+			 * Custom command to create a job as recruiter
+			 * @example cy.createJob(job)
+			 */
+
+			createJob(job: CreateJobProps): void;
 
 			/**
 			 * Custom command to add skill's into job creation

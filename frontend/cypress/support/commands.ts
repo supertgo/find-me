@@ -107,6 +107,50 @@ Cypress.Commands.add(
 	},
 );
 
+Cypress.Commands.add(
+	'createJob',
+	({
+		name,
+		employmentType,
+		workModel,
+		salary,
+		salaryTimeUnit,
+		location,
+		applicationsAmount,
+		acceptApplicationUntil,
+		skills,
+		description,
+	}) => {
+		cy.findByRole('button', { name: /Anuncie uma vaga/i }).click();
+
+		cy.getByName('name').type(name);
+
+		cy.getByName('employment_type', 'select').select(employmentType);
+
+		cy.getByName('work_model', 'select').select(workModel);
+
+		cy.getByName('salary').type(salary);
+
+		cy.getByName('salary_time_unit', 'select').select(salaryTimeUnit);
+
+		cy.getByName('location').type(location);
+
+		cy.getByName('applications_amount').type(applicationsAmount);
+
+		cy.getByName('accept_application_until').type(acceptApplicationUntil);
+
+		cy.addSkills(skills);
+
+		cy.findByRole('button', { name: /Próximo/i })
+			.should('be.enabled')
+			.click();
+
+		cy.getByName('description', 'textarea').type(description);
+
+		cy.findByRole('button', { name: /Concluir/i }).click();
+	},
+);
+
 Cypress.Commands.add('logOut', () => {
 	cy.getByDataCy('sidebar').within(() => {
 		cy.findByTitle('Sair').click();

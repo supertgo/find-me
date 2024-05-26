@@ -35,17 +35,7 @@ describe('Job - Creation', () => {
 			new Date().toISOString().split('T')[0],
 		);
 
-		cy.findByPlaceholderText('Adicione uma skill').type('Nodejs');
-		cy.findByRole('button', { name: /Adicionar/i }).click();
-
-		cy.findByPlaceholderText('Adicione uma skill').type('MySQL');
-		cy.findByRole('button', { name: /Adicionar/i }).click();
-
-		cy.findByPlaceholderText('Adicione uma skill').type('Git');
-		cy.findByRole('button', { name: /Adicionar/i }).click();
-
-		cy.findByPlaceholderText('Adicione uma skill').type('Scrum');
-		cy.findByRole('button', { name: /Adicionar/i }).click();
+		cy.addSkills(['Nodejs', 'MySQL', 'Git', 'Scrum']);
 
 		cy.findByRole('button', { name: /Próximo/i })
 			.should('be.enabled')

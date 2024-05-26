@@ -117,6 +117,12 @@ Cypress.Commands.add(
 	},
 );
 
+Cypress.Commands.add('addSkills', (skills) => {
+	skills.forEach((skill) => {
+		cy.findByPlaceholderText('Adicione uma skill').type(skill);
+		cy.findByRole('button', { name: /Adicionar/i }).click();
+	});
+});
 Cypress.on('uncaught:exception', () => {
 	return false;
 });

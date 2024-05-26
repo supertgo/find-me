@@ -100,22 +100,16 @@ declare global {
 			shouldBeGreaterThan(number: number): Chainable<Element>;
 
 			/**
-			 * Custom command to create a professional xp into employee's cv 
-       * @example cy.createProfessionalXp(professionalXP)
 			 */
-      createProfessionalXp(professionalXP: CreateProfessionalXp, shouldClickOnAddXP?: boolean): void
-      
-      /**
-			 * Custom command to create an academic record into employee's cv 
-       * @example cy.createAcademicRecord(academicRecord)
 			 */
-      createAcademicRecord(academicRecord: CreateAcademicRecord, shouldClickOnAddAcademicRecord?: boolean): void
-      
-      /**
-			 * Custom command to add a competence into employee's cv 
-       * @example cy.CreateCompetence(academicRecord)
+
+			/**
+			 * Custom command to add skill's into job creation
+			 * @example cy.addSkills(skills)
 			 */
-      createCompetence(competence: CreateCompetence, shouldClickOnAddCompetence?: boolean): void
+			addSkills(skills: string[]): void;
+
+			 */
 		}
 	}
 }

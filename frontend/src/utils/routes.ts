@@ -1,5 +1,10 @@
-import { JobIncludeOption } from 'protocols/external/job/job';
 import { UserIncludeOption } from 'protocols/external/user/user';
+
+const returnUrlWithQueries = (defaultUrl: string, params: URLSearchParams) => {
+	const queryString = params.toString();
+
+	return `${defaultUrl}${queryString ? '?' + queryString : ''}`;
+};
 
 export type GetUserRouteConstProps = {
 	user_id: number;
@@ -56,17 +61,17 @@ export const GetUserRouteConst = ({
 export const GetJobsRouteConst = 'job';
 
 export const GetJobRouteConst = ({
-  job_id,
-  includes
+	job_id,
+	includes = [],
 }: GetJobRouteConstProps) => {
-	let jobRoute = `job/${job_id}`;
-  
-  if (includes && includes.length) {
-		jobRoute += `?includes[]=`;
-		jobRoute += includes.join('&includes[]=');
+	const params = new URLSearchParams();
+	const jobRoute = `job/${job_id}`;
+
+	if (includes.length) {
+		params.forEach((i) => params.append('includes[]', i));
 	}
 
-  return jobRoute
+	return returnUrlWithQueries(jobRoute, params);
 };
 
 export const PostJobRouteConst = 'job';

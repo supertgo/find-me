@@ -1,6 +1,4 @@
-import {
-	JobIncludeOption,
-} from 'protocols/external/job/job';
+import { JobIncludeOption } from 'protocols/external/job/job';
 import { JobApplicationIncludeOption } from 'protocols/external/job/job-application';
 import { UserIncludeOption } from 'protocols/external/user/user';
 
@@ -22,8 +20,8 @@ export type GetJobRouteConstProps = {
 
 export type GetJobApplicationsRouteConstProps = {
 	includes?: JobApplicationIncludeOption[];
-	jobsId: string[];
-	candidatesId: string[];
+	jobsId: number[];
+	candidatesId: number[];
 };
 
 export const GetAuthMeRouteConst = 'auth/me';
@@ -56,16 +54,16 @@ export const DeleteUserCompetenceRouteConst = 'user/competence';
 
 export const GetUserRouteConst = ({
 	user_id,
-	includes,
+	includes = [],
 }: GetUserRouteConstProps) => {
-	let userRoute = `user/show/${user_id}`;
+	const params = new URLSearchParams();
+	const userRoute = `user/show/${user_id}`;
 
-	if (includes && includes.length) {
-		userRoute += `?includes[]=`;
-		userRoute += includes.join('&includes[]=');
+	if (includes.length) {
+		includes.forEach((i) => params.append('includes[]', i));
 	}
 
-	return userRoute;
+	return returnUrlWithQueries(userRoute, params);
 };
 
 export const GetJobsRouteConst = 'job';
@@ -78,7 +76,7 @@ export const GetJobRouteConst = ({
 	const jobRoute = `job/${job_id}`;
 
 	if (includes.length) {
-		params.forEach((i) => params.append('includes[]', i));
+		includes.forEach((i) => params.append('includes[]', i));
 	}
 
 	return returnUrlWithQueries(jobRoute, params);
@@ -90,6 +88,8 @@ export const DeleteJobRouteConst = (job_id: number) => `job/${job_id}`;
 
 export const PostJobApplicationRouteConst = (job_id: number) =>
 	`job/${job_id}/application`;
+
+export const JobApplicationRouteConst = 'job-application'
 
 export const GetJobApplicationsRouteConst = ({
 	jobsId = [],
@@ -103,12 +103,14 @@ export const GetJobApplicationsRouteConst = ({
 	}
 
 	if (candidatesId.length) {
-		candidatesId.forEach((c) => params.append('filters[candidates_id]', c));
+		candidatesId.forEach((c) =>
+			params.append('filters[candidates_id][]', c.toString()),
+		);
 	}
 
 	if (jobsId.length) {
-		jobsId.forEach((j) => params.append('filters[jobs_id]', j));
+		jobsId.forEach((j) => params.append('filters[jobs_id][]', j.toString()));
 	}
 
-	return returnUrlWithQueries('job-application', params);
+	return returnUrlWithQueries(JobApplicationRouteConst, params);
 };

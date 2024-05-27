@@ -1,7 +1,7 @@
 import { Cross1Icon } from '@radix-ui/react-icons';
-import * as S from './CompetenceItem.styles';
 import { RemoveCompetenceContext } from 'hooks/contexts/RemoveCompetence/RemoveCompetence';
 import { useContextSelector } from 'use-context-selector';
+import * as S from './CompetenceItem.styles';
 
 export type CompetenceItemProps = {
 	id: number;

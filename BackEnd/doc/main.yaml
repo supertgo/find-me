@@ -101,6 +101,7 @@ paths:
         - BearerAuth: [ ]
       parameters:
         - $ref: 'Schemas/User/parameters/UserIncludesParameters.yaml'
+        - $ref: 'Schemas/User/parameters/UserFiltersParameters.yaml'
 
       responses:
         '200':
@@ -215,8 +216,8 @@ paths:
         401:
           $ref: 'Schemas/Common/response/UnauthenticatedResponse.yaml'
 
-  /user/profile-picture:
-    patch:
+  /user/profile-picture/update:
+    post:
       tags:
         - UserProfilePicture
       description: 'update user profile picture'
@@ -325,7 +326,7 @@ paths:
           $ref: 'Schemas/Common/response/UnauthenticatedResponse.yaml'
 
 
-  /user/resume/{resume_id}/Download:
+  /user/resume/{resume_id}/download:
     get:
       tags:
         - UserResume

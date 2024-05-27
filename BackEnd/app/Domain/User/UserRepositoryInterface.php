@@ -38,4 +38,6 @@ interface UserRepositoryInterface
     public function createProfilePicture(UploadedFile $file, int $userId): string;
 
     public function deleteProfilePicture(string $profilePicturePath, int $userId): void;
+
+    public function getWithFilters(UserFilterInterface $filters, array $includes): array;
 }

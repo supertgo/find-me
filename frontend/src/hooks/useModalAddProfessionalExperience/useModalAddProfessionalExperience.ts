@@ -54,12 +54,12 @@ export const useModalAddProfessionalExperience = ({
 			location: data.location,
 			position: data.position,
 			is_current: data.is_current || false,
-      end_date: data.end_date || null,
 			start_date: data.start_date,
 			work_model: data.work_model as WorkModel,
 			description: data.description,
 			company_name: data.company_name,
 			employment_type: data.employment_type as EmploymentType,
+      ...(data.end_date && {end_date: data.end_date}),
 		};
 
 		await createProfessionalExperience({

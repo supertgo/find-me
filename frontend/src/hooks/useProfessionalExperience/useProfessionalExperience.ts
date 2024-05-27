@@ -8,7 +8,7 @@ import { DeleteClient } from 'services/httpClient/delete';
 import { PostClient } from 'services/httpClient/post';
 import { UNEXPECTED_ERROR } from 'utils/errors';
 import {
-	DeleteUserAcademicRecordRouteConst,
+	DeleteUserProfessionalExperiencesRouteConst,
 	PostUserProfessionalExperiencesRouteConst,
 } from 'utils/routes';
 
@@ -65,7 +65,7 @@ export const useProfessionalExperience = () => {
 
 		try {
 			await deleteClient.delete({
-				url: `/${DeleteUserAcademicRecordRouteConst}`,
+				url: `/${DeleteUserProfessionalExperiencesRouteConst}`,
 				body,
 			});
 

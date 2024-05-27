@@ -19,8 +19,8 @@ class JobApplicationIndexRequests extends AbstractRequest
         return [
             'includes' => ['array', new UniqueArrayValuesRule],
             'includes.*' => 'string',
-            'filters' => 'array',
 
+            'filters' => 'array',
             'filters.jobs_id' => ['array', new UniqueArrayValuesRule],
             'filters.jobs_id.*' => 'integer',
 

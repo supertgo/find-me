@@ -6,12 +6,12 @@ import { useLoggedUserStore } from 'stores/loggedUserStore/loggedUserStore';
 import { useContextSelector } from 'use-context-selector';
 import { GetUserRouteConst } from 'utils/routes';
 
-export type UseModalRemoveCompetenceProps = {}
+export type UseModalRemoveCompetenceProps = {};
 
 export const useModalRemoveCompetence = () => {
 	const [loading, setLoading] = useState(false);
 
-	const { setOpen, open, competence  } = useContextSelector(
+	const { setOpen, open, competence } = useContextSelector(
 		RemoveCompetenceContext,
 		(context) => ({
 			open: context.open,
@@ -26,8 +26,7 @@ export const useModalRemoveCompetence = () => {
 
 	const queryClient = useQueryClient();
 
-  const { deleteCompetence } = useCompetence()
-
+	const { deleteCompetence } = useCompetence();
 
 	const handleSubmit = async () => {
 		if (!competence) {
@@ -64,4 +63,4 @@ export const useModalRemoveCompetence = () => {
 		handleSubmit,
 		competence,
 	};
-}
+};

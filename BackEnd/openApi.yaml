@@ -993,6 +993,45 @@
               ],
               "description": "user related data"
             }
+          },
+          {
+            "name": "includes",
+            "in": "query",
+            "description": "filter users",
+            "required": false,
+            "explode": false,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "filters": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string",
+                      "format": "email"
+                    },
+                    "type": {
+                      "type": "string",
+                      "example": "recruiter",
+                      "enum": [
+                        "recruiter",
+                        "employee"
+                      ],
+                      "description": "auth's type"
+                    },
+                    "competences_id": {
+                      "type": "array",
+                      "items": {
+                        "type": "integer"
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -1958,8 +1997,8 @@
         }
       }
     },
-    "/user/profile-picture": {
-      "patch": {
+    "/user/profile-picture/update": {
+      "post": {
         "tags": [
           "UserProfilePicture"
         ],
@@ -2615,7 +2654,7 @@
         }
       }
     },
-    "/user/resume/{resume_id}/Download": {
+    "/user/resume/{resume_id}/download": {
       "get": {
         "tags": [
           "UserResume"

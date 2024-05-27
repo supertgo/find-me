@@ -18,7 +18,11 @@ export const ModalAddCompetence = ({ user_id }: ModalAddCompetenceProps) => {
 
 	return (
 		<BaseModal
-			trigger={<PlusIcon aria-label="Adicionar Competencia" />}
+			trigger={
+				<i title="Adicionar Competência">
+					<PlusIcon aria-label="Adicionar Competência" />
+				</i>
+			}
 			open={open}
 			setOpen={setOpen}
 			title="Adicionar Competência"

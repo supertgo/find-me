@@ -36,6 +36,6 @@ describe('<JobItem />', () => {
     ).toHaveLength(2);
 
     expect(screen.getByText(`Máximo ${props.applications_amount}`))
-    expect(screen.getByRole('button', { name: /Aplicar/i })).toBeDisabled();
+    expect(screen.getByRole('button', { name: /Visualizar/i })).toBeInTheDocument();
   });
 });

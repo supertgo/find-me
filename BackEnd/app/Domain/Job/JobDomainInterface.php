@@ -8,7 +8,7 @@ interface JobDomainInterface
 {
     public function save(): self;
 
-    public function update(): void;
+    public function update(): self;
 
     public function delete(): void;
 

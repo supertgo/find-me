@@ -6,6 +6,7 @@ use App\Domain\User\UserIncludesEnum;
 use App\Models\AcademicRecord;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Support\Collection;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
@@ -17,6 +18,7 @@ class IndexUserWithAcademicRecordsTest extends TestCase
 
     public function testShowUserSuccess()
     {
+        /** @var Collection<User> $users */
         $users = User::factory()->count(3)->create();
 
         $users->each(function ($user) {

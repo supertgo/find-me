@@ -1,0 +1,16 @@
+type: object
+properties:
+  filters:
+    type: object
+    properties:
+      name:
+        type: string
+      email:
+        type: string
+        format: email
+      type:
+        $ref: './UserType.yaml'
+      competences_id:
+        type: array
+        items:
+          type: integer

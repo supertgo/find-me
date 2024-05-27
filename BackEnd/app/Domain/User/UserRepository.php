@@ -134,4 +134,31 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
             ->update(['profile_picture_path' => null]);
     }
 
+    public function getWithFilters(UserFilterInterface $filters, array $includes): array
+    {
+        $query = User::query();
+
+        $query->when($filters->getName(), function ($query, $name) {
+            return $query->where('name', 'like', "%{$name}%");
+        });
+
+        $query->when($filters->getEmail(), function ($query, $email) {
+            return $query->where('email', 'like', "%{$email}%");
+        });
+
+        $query->when($filters->getCompetencesId(), function ($query, $competencesId) {
+            return $query->whereHas('competences', function ($query) use ($competencesId) {
+                $query->whereIn('competences.id', $competencesId);
+            });
+        });
+
+        $query->when($filters->getType(), function ($query, $type) {
+            return $query->where('type', $type->value);
+        });
+
+        return $query->with($includes)
+            ->get()
+            ->toArray();
+    }
+
 }

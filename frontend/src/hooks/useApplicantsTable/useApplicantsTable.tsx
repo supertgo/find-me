@@ -1,23 +1,23 @@
+import { DotsHorizontalIcon } from '@radix-ui/react-icons';
 import { useQuery } from '@tanstack/react-query';
-import Image from 'next/image';
 import {
-	createColumnHelper,
-	getCoreRowModel,
-	getFilteredRowModel,
-	getPaginationRowModel,
-	getSortedRowModel,
-	SortingState,
-	useReactTable,
+  createColumnHelper,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  SortingState,
+  useReactTable,
 } from '@tanstack/react-table';
+import { Button } from 'components/Button/Button';
+import { Pill } from 'components/Pill/Pill';
+import * as S from 'components/Table/TableData/TableData.styles';
+import { useUser } from 'hooks/useUser/useUser';
+import Image from 'next/image';
+import Link from 'next/link';
 import { UserProps } from 'protocols/external/user/user';
 import { useMemo, useState } from 'react';
-import { useUser } from 'hooks/useUser/useUser';
 import { GetUsersRouteConst } from 'utils/routes';
-import { Pill } from 'components/Pill/Pill';
-import { Button } from 'components/Button/Button';
-import * as S from 'components/Table/TableData/TableData.styles';
-import { DotsHorizontalIcon } from '@radix-ui/react-icons';
-import Link from 'next/link';
 import { ApplicantUrl } from 'utils/urls';
 
 const columnHelper = createColumnHelper<UserProps>();

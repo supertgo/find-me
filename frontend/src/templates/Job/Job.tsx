@@ -4,7 +4,7 @@ import { Button } from 'components/Button/Button';
 import { Hr } from 'components/Hr/Hr';
 import { Info } from 'components/Info/Info';
 import { JobCapacity } from 'components/JobCapacity/JobCapacity';
-import { ModalCoverLetter } from 'components/ModalCoverLetter/ModalCoverLetter';
+import { JobPageButton } from 'components/JobPageButton/JobPageButton';
 import { ModalRemoveJob } from 'components/ModalRemoveJob/ModalRemoveJob';
 import { Skill } from 'components/Skill/Skill';
 import { VerticalRow } from 'components/VerticalRow/VerticalRow';
@@ -12,10 +12,10 @@ import { useJobPage } from 'hooks/useJobPage/useJobPage';
 import { Job as JobResponse } from 'protocols/external/job/job';
 import { Base } from 'templates/Base/Base';
 import {
-	filterJobLocation,
-	translateEmploymentType,
-	translateSalaryTimeUnit,
-	translateWorkModel,
+  filterJobLocation,
+  translateEmploymentType,
+  translateSalaryTimeUnit,
+  translateWorkModel,
 } from 'utils/job';
 import { formatToCurrency } from 'utils/money';
 import * as S from './Job.styles';
@@ -67,11 +67,16 @@ export const Job = ({
 
 					<VerticalRow />
 
-					{type === 'recruiter' ? (
-						<Button>Visualizar Candidatos</Button>
-					) : (
-						<ModalCoverLetter jobId={id} disabled={!is_available} />
-					)}
+					<JobPageButton
+						user={{
+							type,
+							id: loggedUserId,
+						}}
+						job={{
+							id,
+							is_available,
+						}}
+					/>
 				</S.JobHeader>
 			</S.JobHeaderWrapper>
 
@@ -130,22 +135,23 @@ export const Job = ({
 					<S.Title>{company?.name}</S.Title>
 					<p>{company?.description}</p>
 				</S.JobCompanyInfo>
-
-				{type === 'recruiter' && user_id === loggedUserId && (
-					<S.RemoveJob>
-						<ModalRemoveJob
-							setOpen={setOpen}
-							open={open}
-							job={{
-								id,
-								name,
-								companyName: company!.name,
-							}}
-						/>
-						<Button onClick={onRemoveJobClick}>Excluir Vaga</Button>
-					</S.RemoveJob>
-				)}
 			</S.Wrapper>
+
+
+			{type === 'recruiter' && user_id === loggedUserId && (
+				<S.RemoveJob>
+					<ModalRemoveJob
+						setOpen={setOpen}
+						open={open}
+						job={{
+							id,
+							name,
+							companyName: company!.name,
+						}}
+					/>
+					<Button onClick={onRemoveJobClick}>Excluir Vaga</Button>
+				</S.RemoveJob>
+			)}
 		</Base>
 	);
 };

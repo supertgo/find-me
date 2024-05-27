@@ -8,8 +8,8 @@ import {
 import { FieldError } from 'react-hook-form';
 
 import * as S from './Input.styles';
-import error from 'next/error';
 import { MessageError } from 'components/MessageError/MessageError';
+import { Label } from 'components/Label/Label';
 
 export type InputProps = {
 	dataCy?: string;
@@ -53,6 +53,13 @@ const Input = forwardRef(
 	) => {
 		return (
 			<S.InputContainer>
+				{!!label && (
+					<Label
+						htmlFor={id}
+						isRequired={inputProps.required}
+						labelText={label}
+					/>
+				)}
 				<S.Input
 					type={type}
 					ref={ref}

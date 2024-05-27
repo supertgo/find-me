@@ -58,7 +58,7 @@ class JobApplicationFilters implements JobApplicationFiltersInterface
     public function setCandidatesId(?array $candidatesId): JobApplicationFilters
     {
         if ($candidatesId) {
-            $nonIntegerValues = array_filter($candidatesId, fn($value) => !is_int($value) || $value < 1);
+            $nonIntegerValues = array_filter($candidatesId, fn($value) => !is_numeric($value) || (int)$value < 1);
 
             if (!empty($nonIntegerValues)) {
                 throw new CandidatesIdFilterMustBePositiveIntegersException($nonIntegerValues);

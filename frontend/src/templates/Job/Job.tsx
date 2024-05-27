@@ -1,29 +1,23 @@
 'use client';
 import { Breadcrumb } from 'components/Breadcrumb';
-import { BreadcrumbPath } from 'components/Breadcrumb/Breadcrumb';
 import { Button } from 'components/Button/Button';
 import { Hr } from 'components/Hr/Hr';
 import { Info } from 'components/Info/Info';
 import { JobCapacity } from 'components/JobCapacity/JobCapacity';
 import { ModalCoverLetter } from 'components/ModalCoverLetter/ModalCoverLetter';
-import {
-  JobToBeRemoved,
-  ModalRemoveJob,
-} from 'components/ModalRemoveJob/ModalRemoveJob';
+import { ModalRemoveJob } from 'components/ModalRemoveJob/ModalRemoveJob';
 import { Skill } from 'components/Skill/Skill';
 import { VerticalRow } from 'components/VerticalRow/VerticalRow';
+import { useJobPage } from 'hooks/useJobPage/useJobPage';
 import { Job as JobResponse } from 'protocols/external/job/job';
-import { useState } from 'react';
-import { useLoggedUserStore } from 'stores/loggedUserStore/loggedUserStore';
 import { Base } from 'templates/Base/Base';
 import {
-  filterJobLocation,
-  translateEmploymentType,
-  translateSalaryTimeUnit,
-  translateWorkModel,
+	filterJobLocation,
+	translateEmploymentType,
+	translateSalaryTimeUnit,
+	translateWorkModel,
 } from 'utils/job';
 import { formatToCurrency } from 'utils/money';
-import { HomeUrl, JobUrl, JobsUrl } from 'utils/urls';
 import * as S from './Job.styles';
 
 export type JobProps = {} & JobResponse;
@@ -43,39 +37,19 @@ export const Job = ({
 	competences,
 	user_id,
 }: JobProps) => {
-	const [open, setOpen] = useState(false);
-	const [, setJob] = useState<JobToBeRemoved | null>(null);
-	const { type, loggedUserId } = useLoggedUserStore((state) => ({
-		type: state.type,
-		loggedUserId: state.id,
-	}));
-
-	const applicants = 10;
-
-	const onRemoveJobClick = () => {
-		setJob({
-			id,
-			name,
-			companyName: company!.name,
-		});
-
-		setOpen(true);
-	};
-
-	const paths: BreadcrumbPath[] = [
-		{
-			name: 'Home',
-			url: `/${HomeUrl}`,
-		},
-		{
-			name: 'Vagas',
-			url: `/${JobsUrl}`,
-		},
-		{
-			name,
-			url: `/${JobUrl(id)}`,
-		},
-	];
+	const {
+		open,
+		setOpen,
+		paths,
+		applicants,
+		onRemoveJobClick,
+		type,
+		loggedUserId,
+	} = useJobPage({
+		jobId: id,
+		jobName: name,
+		companyName: company!.name,
+	});
 
 	return (
 		<Base>

@@ -52,8 +52,6 @@ export type PostJobBody = Omit<
 
 export type JobIncludeOption = 'competences' | 'company';
 
-export type JobApplicationIncludeOption = 'job' | 'candidates';
-
 export const workModelOptions: WorkModel[] = ['onSite', 'hybrid', 'homeOffice'];
 
 export const employmentTypeOptions: EmploymentType[] = [

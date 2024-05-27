@@ -1,7 +1,7 @@
 import {
-	JobApplicationIncludeOption,
 	JobIncludeOption,
 } from 'protocols/external/job/job';
+import { JobApplicationIncludeOption } from 'protocols/external/job/job-application';
 import { UserIncludeOption } from 'protocols/external/user/user';
 
 const returnUrlWithQueries = (defaultUrl: string, params: URLSearchParams) => {

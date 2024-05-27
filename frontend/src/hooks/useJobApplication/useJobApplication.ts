@@ -18,7 +18,8 @@ export type CreateJobApplicationProps = {
 	cover_letter: string;
 };
 
-export type FindJobApplicationProps = GetJobApplicationsRouteConstProps;
+export type FindJobApplicationProps =
+	Partial<GetJobApplicationsRouteConstProps>;
 
 export const useJobApplication = () => {
 	const createJobApplication = async ({
@@ -50,30 +51,19 @@ export const useJobApplication = () => {
 	};
 
 	const findJobApplications = async ({
-		jobsId,
-		candidatesId,
-		includes,
+		jobsId = [],
+		candidatesId = [],
+		includes = [],
 	}: FindJobApplicationProps) => {
 		const getClient = new GetClient();
 
-		try {
-			return await getClient.get<AxiosResponse<JobApplicationResponse>>({
-				url: `/${GetJobApplicationsRouteConst({
-					includes,
-					candidatesId,
-					jobsId,
-				})}`,
-			});
-
-		} catch (error) {
-			if (error instanceof Error) {
-				toast.error(error.response.data.message);
-				return { error: error.response.data.message };
-			}
-
-			toast.error(UNEXPECTED_ERROR);
-			return { error: UNEXPECTED_ERROR };
-		}
+		return await getClient.get<AxiosResponse<JobApplicationResponse>>({
+			url: `/${GetJobApplicationsRouteConst({
+				includes,
+				candidatesId,
+				jobsId,
+			})}`,
+		});
 	};
 
 	return {

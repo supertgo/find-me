@@ -15,7 +15,9 @@ const props: JobPageButtonProps = {
 
 describe('<JobPageButton />', () => {
 	it('should render a link to applicants if the user is a recruiter', () => {
-		render(<JobPageButton {...props} />);
+		render(<JobPageButton {...props} />, {
+			queryProvider: true,
+		});
 
 		expect(
 			screen.getByRole('button', { name: /Visualizar Candidatos/i }),
@@ -25,6 +27,9 @@ describe('<JobPageButton />', () => {
 	it('should be able to apply to a job as an employee if job is available', () => {
 		render(
 			<JobPageButton {...props} user={{ ...props.user, type: 'employee' }} />,
+			{
+				baseElement: true,
+			},
 		);
 
 		expect(screen.getByTestId('Mock ModalCoverLetter')).toBeInTheDocument();

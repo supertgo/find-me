@@ -28,7 +28,7 @@ describe('<JobPageButton />', () => {
 		render(
 			<JobPageButton {...props} user={{ ...props.user, type: 'employee' }} />,
 			{
-				baseElement: true,
+				queryProvider: true,
 			},
 		);
 

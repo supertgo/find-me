@@ -3,19 +3,24 @@ import { ForwardedRef, TextareaHTMLAttributes, forwardRef } from 'react';
 import * as S from './Textarea.styles';
 import { FieldError } from 'react-hook-form';
 import { MessageError } from 'components/MessageError/MessageError';
+import { Label } from 'components/Label/Label';
 
 export type TextareaProps = {
+	label?: string;
 	error?: FieldError;
 } & TextareaHTMLAttributes<HTMLTextAreaElement>;
 
 const Textarea = forwardRef(
 	(
-		{ maxLength, error, ...props }: TextareaProps,
+		{ maxLength, error, label, id, ...props }: TextareaProps,
 		ref?: ForwardedRef<HTMLTextAreaElement>,
 	) => {
 		return (
 			<S.Wrapper>
-				<S.Textarea ref={ref} {...props} />
+				{!!label && (
+					<Label htmlFor={id} isRequired={props.required} labelText={label} />
+				)}
+				<S.Textarea ref={ref} id={id} {...props} />
 				<S.LimitCharacter>
 					{error && <MessageError error={error} />}
 					{maxLength && <S.MaxLength>{`0/${maxLength}`}</S.MaxLength>}

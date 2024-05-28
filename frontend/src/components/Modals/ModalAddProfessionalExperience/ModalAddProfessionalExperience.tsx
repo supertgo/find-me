@@ -10,6 +10,8 @@ import {
 } from 'protocols/external/job/job';
 import { Controller } from 'react-hook-form';
 import {
+	REQUIRED_JOB_EMPLOYMENT_TYPE,
+	REQUIRED_JOB_WORK_MODEL,
 	REQUIRED_PROFESSIONAL_EXPERIENCE_COMPANY,
 	REQUIRED_PROFESSIONAL_EXPERIENCE_DESCRIPTION,
 	REQUIRED_PROFESSIONAL_EXPERIENCE_LOCATION,
@@ -107,7 +109,7 @@ export const ModalAddProfessionalExperience = ({
 					}))}
 					defaultValue=""
 					register={register}
-					requiredMessage="Modelo de trabalho é obrigatório"
+					requiredMessage={REQUIRED_JOB_WORK_MODEL}
 					placeholder="Modelo de trabalho"
 					name="work_model"
 				/>
@@ -120,7 +122,7 @@ export const ModalAddProfessionalExperience = ({
 					}))}
 					defaultValue=""
 					register={register}
-					requiredMessage="Tipo de Contratação é obrigatório"
+					requiredMessage={REQUIRED_JOB_EMPLOYMENT_TYPE}
 					placeholder="Tipo de Contratação"
 					name="employment_type"
 				/>

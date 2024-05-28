@@ -4,6 +4,7 @@ import { translateEmploymentType } from 'utils/job';
 import { Cross1Icon } from '@radix-ui/react-icons';
 import { useContextSelector } from 'use-context-selector';
 import { RemoveProfessionalExperienceContext } from 'hooks/contexts/RemoveProfessionalExperience/RemoveProfessionalExperience';
+import { experienceDate } from 'utils/date';
 
 export type ProfessionalExperienceItemProps = {} & Omit<
 	ProfessionalExperience,
@@ -51,6 +52,13 @@ export const ProfessionalExperienceItem = ({
 				<S.ProfessionalXPInfoSubtitle>{subtitle}</S.ProfessionalXPInfoSubtitle>
 				<S.ProfessionalXPAdditionalInfo>
 					{location}
+				</S.ProfessionalXPAdditionalInfo>
+				<S.ProfessionalXPAdditionalInfo>
+					{experienceDate({
+						endDate: end_date,
+						isCurrent: is_current,
+						startDate: start_date,
+					})}
 				</S.ProfessionalXPAdditionalInfo>
 			</S.ProfessionalXPInfo>
 			<S.Description>{description}</S.Description>

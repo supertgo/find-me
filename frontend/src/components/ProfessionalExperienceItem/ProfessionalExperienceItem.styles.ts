@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 
 export const Wrapper = styled.div`
 	${({ theme }) => css`
-    padding: ${theme.space.xsmall};
+		padding: ${theme.space.xsmall};
 	`}
 `;
 
@@ -12,20 +12,20 @@ export const ProfessionalXPInfo = styled.div`
 `;
 
 export const ProfessionalXPTopRow = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 
-  svg {
-    cursor: pointer;
-  }
-`
+	svg {
+		cursor: pointer;
+	}
+`;
 
 export const ProfessionalXPInfoTitle = styled.span`
 	${({ theme }) => css`
 		font-size: ${theme.font.sizes.md};
 		font-weight: ${theme.font.weights.medium};
-    margin: ${theme.space.xxxsmall} 0;
+		margin: ${theme.space.xxxsmall} 0;
 	`}
 `;
 
@@ -33,14 +33,14 @@ export const ProfessionalXPInfoSubtitle = styled.span`
 	${({ theme }) => css`
 		font-size: ${theme.font.sizes.sm};
 		font-weight: 500;
-    margin: ${theme.space.xxxsmall} 0;
+		margin: ${theme.space.xxxsmall} 0;
 	`}
 `;
 
 export const ProfessionalXPAdditionalInfo = styled.span`
 	${({ theme }) => css`
 		font-size: ${theme.font.sizes.xmd};
-    margin: ${theme.space.xxxsmall} 0;
+		margin: ${theme.space.xxxsmall} 0;
 	`}
 `;
 

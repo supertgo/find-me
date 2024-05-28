@@ -1,10 +1,9 @@
-import { Table } from '@tanstack/react-table';
-import { flexRender } from '@tanstack/react-table';
+import { Table, flexRender } from '@tanstack/react-table';
 import * as S from 'components/Table/Table.styles';
-import {  UserProps } from 'protocols/external/user/user';
+import { JobApplication } from 'protocols/external/job/job-application';
 
 type TableProposalsRowsProps = {
-  table: Table<UserProps>;
+  table: Table<JobApplication>;
 };
 
 export const TableRows = ({ table }: TableProposalsRowsProps) => {

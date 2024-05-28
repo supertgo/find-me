@@ -30,12 +30,6 @@ async function getData(job_id: number) {
 		return redirect(`/${HomeUrl}`);
 	}
 
-	const { data: authMeResponse } = await res.json();
-
-	if (authMeResponse.type === 'employee') {
-		return redirect(`/${HomeUrl}`);
-	}
-
 	const jobResponse = await fetch(
 		`${process.env.NEXT_PUBLIC_BACKEND_URL}/${GetJobRouteConst({
 			job_id,

@@ -4,7 +4,7 @@ export const Wrapper = styled.div`
 	${({ theme }) => css`
 		background: ${theme.colors.white};
 		padding: ${theme.space.medium};
-    color: ${theme.colors.darkTitanium};
+		color: ${theme.colors.darkTitanium};
 	`}
 `;
 
@@ -26,9 +26,9 @@ export const JobHeaderWrapper = styled.div`
 			padding: 1.4rem 5.6rem;
 		}
 
-    & > *:not(:first-child) {
-      margin-top: ${theme.space.xxxlarge};
-    }
+		& > *:not(:first-child) {
+			margin-top: ${theme.space.xxxlarge};
+		}
 	`}
 `;
 
@@ -124,3 +124,4 @@ export const RemoveJob = styled.div`
 	position: relative;
 	bottom: 0;
 `;
+

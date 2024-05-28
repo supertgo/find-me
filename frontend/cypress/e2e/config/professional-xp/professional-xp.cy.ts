@@ -84,4 +84,32 @@ describe('Config - Professional XP', () => {
 
 		cy.findAllByText('Software Developer Sad Path');
 	});
+
+	it('should be able to add an xp and then remove it', () => {
+		cy.createProfessionalXp({
+			companyName: 'Experiência a ser removida',
+			position: 'Software Developer',
+			location: 'Vale do Silício',
+			workModel: 'Home Office',
+			employmentType: 'Tempo integral',
+			startDate: '2022-05-11',
+			endDate: new Date().toISOString().split('T')[0],
+			description:
+				'Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet.',
+		});
+
+		cy.findAllByText('Software Developer');
+
+    cy.findAllByTitle('Remover experiência').last().click()
+
+    cy.findByText('Tem certeza que deseja excluir essa experiência?')
+    
+    cy.findByRole('button', { name: /Cancelar/i }).should('be.enabled');
+
+		cy.findByRole('button', { name: /Excluir/i })
+			.should('be.enabled')
+			.click();
+
+		cy.findByText('Experiência a ser removida').should('not.exist');
+	});
 });

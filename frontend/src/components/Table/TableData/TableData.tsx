@@ -3,13 +3,13 @@ import { TableLoader } from 'components/Table/TableLoader/TableLoader';
 import { TableRows } from 'components/Table/TableRows/TableRows';
 import { ResponsiveTable } from 'components/Table/Table.styles';
 import TableHeader from 'components/Table/TableHeader/TableHeader';
-import { UserProps } from 'protocols/external/user/user';
 
 import * as S from 'components/Table/TableData/TableData.styles';
+import { JobApplication } from 'protocols/external/job/job-application';
 
 type TableDataProps = {
   isLoading?: boolean;
-  data: Table<UserProps>;
+  data: Table<JobApplication>;
   defaultMessage: string;
   rowsLoader?: number;
   columnsLoader?: number;

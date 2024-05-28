@@ -20,8 +20,8 @@ export type GetJobRouteConstProps = {
 
 export type GetJobApplicationsRouteConstProps = {
 	includes?: JobApplicationIncludeOption[];
-	jobsId: number[];
-	candidatesId: number[];
+	jobsId?: number[];
+	candidatesId?: number[];
 };
 
 export const GetAuthMeRouteConst = 'auth/me';

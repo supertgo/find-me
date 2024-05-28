@@ -92,6 +92,7 @@ export const theme = {
 		white: '#FFF',
 		whiteGrey: '#D6DDEB',
 		secondWhite: '#F8F8FD',
+		cleanGrey: '#D6DDEB',
 		cleanBlue: '#E9EBFD',
 		grey900: '#0F172A',
 		darkGrey: '#202430',

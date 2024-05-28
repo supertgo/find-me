@@ -15,8 +15,9 @@ beforeEach(() => {
 
 describe('Job - Creation', () => {
 	it('recruiter should create a job and an employee should apply to it', () => {
+		const jobName = 'Tech Lead | Node.js (Híbrido - BH)';
 		cy.createJob({
-			name: 'Tech Lead | Node.js (Híbrido - BH)',
+			name: jobName,
 			employmentType: 'Tempo integral',
 			workModel: 'Híbrido',
 			salary: '7200',
@@ -43,14 +44,34 @@ describe('Job - Creation', () => {
 
 		cy.scrollTo('bottom');
 
-		cy.goToJob('Tech Lead | Node.js (Híbrido - BH)');
+		cy.goToJob(jobName);
 
 		cy.wait(3000);
 
 		cy.writeCoverLetter({
 			companyName: 'Onfly',
-			position: 'Tech Lead | Node.js (Híbrido - BH)',
+			position: jobName,
 			experienceInYears: 5,
 		});
+
+		cy.logOut();
+    
+    cy.signIn();
+
+		cy.getByDataCy('sidebar').within(() => {
+			cy.findByRole('link', { name: /Vagas/i }).click();
+		});
+
+		cy.wait(1500);
+
+		cy.scrollTo('bottom');
+
+		cy.goToJob(jobName);
+
+    cy.findByRole('button', { name: /Visualizar Candidatos/i }).click()
+    
+    cy.wait(1500)
+
+    cy.findByText('Total de Candidatos: 1').should('exist')
 	});
 });

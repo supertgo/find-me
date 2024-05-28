@@ -1,14 +1,15 @@
-import { Base } from 'templates/Base/Base';
 import { useApplicantsTable } from 'hooks/useApplicantsTable/useApplicantsTable';
 import { useEffect } from 'react';
-
-import * as S from './Applicants.styles';
+import { Base } from 'templates/Base/Base';
 import { ApplicantsTable } from 'components/ApplicantsTable/ApplicantsTable';
 import { ApplicationHeader } from 'components/ApplicationHeader/ApplicationHeader';
+import * as S from './Applicants.styles';
 
 export const Applicants = () => {
   const { data, table, isLoading, globalFilter, setGlobalFilter } =
-    useApplicantsTable();
+  useApplicantsTable({
+    jobsId: []
+  });
 
   const applicantsData = data?.data.data;
 

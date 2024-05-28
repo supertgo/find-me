@@ -1,20 +1,20 @@
-import { TableData } from 'components/Table/TableData/TableData';
-import { Pagination } from 'components/Pagination/Pagination';
-import { Input } from 'components/Input/Input';
-import { UserProps } from 'protocols/external/user/user';
-import { Dispatch, SetStateAction } from 'react';
 import { Table } from '@tanstack/react-table';
+import { Input } from 'components/Input/Input';
+import { Pagination } from 'components/Pagination/Pagination';
+import { TableData } from 'components/Table/TableData/TableData';
+import { Dispatch, SetStateAction } from 'react';
+import { JobApplication } from 'protocols/external/job/job-application';
 
 import * as S from './ApplicantsTable.styles';
 
 export type ApplicantsTableProps = {
-  applicantsData: UserProps[] | undefined;
+  applicantsData: JobApplication[] | undefined;
   itemsPerPage: number;
   currentPage: number;
   isLoading: boolean;
   globalFilter: string;
   setGlobalFilter: Dispatch<SetStateAction<string>>;
-  table: Table<UserProps>
+  table: Table<JobApplication>
 };
 
 export const ApplicantsTable = ({

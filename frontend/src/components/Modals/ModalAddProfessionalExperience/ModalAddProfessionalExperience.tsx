@@ -18,6 +18,7 @@ import {
 } from 'utils/errors';
 import { translateEmploymentType, translateWorkModel } from 'utils/job';
 import * as S from './ModalAddProfessionalExperience.styles';
+import { Select } from 'components/Select/Select';
 
 export type ModalAddProfessionalExperienceProps = {
 	user_id: number;
@@ -98,40 +99,31 @@ export const ModalAddProfessionalExperience = ({
 					)}
 				/>
 
-				<select
-          data-cy="work_model"
+				<Select
+					data-cy="work_model"
+					options={workModelOptions.map((type) => ({
+						value: type,
+						label: translateWorkModel[type],
+					}))}
 					defaultValue=""
-					{...register('work_model', {
-						required: true,
-					})}
-				>
-					<option value="" disabled>
-						Modelo de trabalho
-					</option>
-					{workModelOptions.map((model) => (
-						<option key={model} value={model}>
-							{translateWorkModel[model]}
-						</option>
-					))}
-				</select>
+					register={register}
+					requiredMessage="Modelo de trabalho é obrigatório"
+					placeholder="Modelo de trabalho"
+					name="work_model"
+				/>
 
-				<select
-          data-cy="employment_type"
+				<Select
+					data-cy="employment_type"
+					options={employmentTypeOptions.map((type) => ({
+						value: type,
+						label: translateEmploymentType[type],
+					}))}
 					defaultValue=""
-					{...register('employment_type', {
-						required: true,
-					})}
-				>
-					<option value="" disabled>
-						Tipo de Contratação
-					</option>
-					{employmentTypeOptions.map((employmentType) => (
-						<option key={employmentType} value={employmentType}>
-							{translateEmploymentType[employmentType]}
-						</option>
-					))}
-				</select>
-
+					register={register}
+					requiredMessage="Tipo de Contratação é obrigatório"
+					placeholder="Tipo de Contratação"
+					name="employment_type"
+				/>
 				<Controller
 					rules={{
 						required: REQUIRED_PROFESSIONAL_EXPERIENCE_START_DATE,

@@ -6,7 +6,7 @@ export type JobApplication = {
 	id: number;
 	job_id: number;
 	user_id: number;
-	status: string;
+	status: JobStatus;
 	cover_letter: string;
 	candidates?: Candidate[];
 	job?: ApplicationJob;
@@ -43,5 +43,7 @@ export type ApplicationJob = {
 	updated_at: Date;
 	user_id: number;
 };
+
+export type JobStatus = 'pending' | 'approved' | 'rejected' | 'canceled' | 'hired' | 'in_progress'
 
 export type JobApplicationIncludeOption = 'job' | 'candidates';

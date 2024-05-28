@@ -2,6 +2,8 @@ import { Button } from 'components/Button/Button';
 import { UserType } from 'protocols/external/user/user';
 import { ModalCoverLetter } from 'components/ModalCoverLetter/ModalCoverLetter';
 import { useJobPageButton } from 'hooks/useJobPageButton/useJobPageButton';
+import Link from 'next/link';
+import { JobUrlApplicants } from 'utils/urls';
 
 type JobPageButtonJob = {
 	id: number;
@@ -24,10 +26,14 @@ export const JobPageButton = ({ user, job }: JobPageButtonProps) => {
 		job,
 	});
 
-  if (user.type === 'recruiter') return <Button>Visualizar Candidatos</Button>;
+	if (user.type === 'recruiter')
+		return (
+			<Link href={`/${JobUrlApplicants(job.id)}`}>
+				<Button>Visualizar Candidatos</Button>
+			</Link>
+		);
 
-  if (isLoading) return <Button isLoading={isLoading}></Button>;
-
+	if (isLoading) return <Button isLoading={isLoading}></Button>;
 
 	const disabled = !job.is_available || !!data?.data.length;
 

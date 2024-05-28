@@ -19,7 +19,7 @@ describe('Job - Creation', () => {
 			name: 'Tech Lead | Node.js (Híbrido - BH)',
 			employmentType: 'Tempo integral',
 			workModel: 'Híbrido',
-			salary: '3200',
+			salary: '7200',
 			salaryTimeUnit: 'mês',
 			location: 'Belo Horizonte, Minas Gerais, Brasil',
 			applicationsAmount: '10',
@@ -44,6 +44,8 @@ describe('Job - Creation', () => {
 		cy.scrollTo('bottom');
 
 		cy.goToJob('Tech Lead | Node.js (Híbrido - BH)');
+
+		cy.wait(3000);
 
 		cy.writeCoverLetter({
 			companyName: 'Onfly',

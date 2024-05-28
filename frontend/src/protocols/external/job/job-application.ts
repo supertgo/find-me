@@ -9,6 +9,8 @@ export type JobApplication = {
 	status: JobStatus;
 	cover_letter: string;
 	candidates?: Candidate[];
+	created_at?: string;
+	updated_at?: string;
 	job?: ApplicationJob;
 };
 
@@ -19,8 +21,6 @@ export type Candidate = {
 	phone: string;
 	email: string;
 	email_verified_at: null;
-	created_at: Date;
-	updated_at: Date;
 	about_me: null | string;
 	profile_picture_path: null;
 };
@@ -39,8 +39,8 @@ export type ApplicationJob = {
 	week_workload: number;
 	location: string;
 	company_id: number;
-	created_at: Date;
-	updated_at: Date;
+	created_at: string;
+	updated_at: string;
 	user_id: number;
 };
 

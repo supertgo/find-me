@@ -17,7 +17,10 @@ async function getData() {
 		`${process.env.NEXT_PUBLIC_BACKEND_URL}/${GetAuthMeRouteConst}`,
 		{
 			headers: { Authorization: `Bearer ${token?.access_token}` },
-      cache: 'no-cache'
+			cache: 'no-cache',
+			next: {
+				revalidate: 1000,
+			},
 		},
 	);
 

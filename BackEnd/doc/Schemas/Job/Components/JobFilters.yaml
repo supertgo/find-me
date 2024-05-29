@@ -16,7 +16,7 @@ properties:
       salary_time_units:
         type: array
         items:
-          $ref: '/SalaryTimeUnit.yaml'
+          $ref: 'SalaryTimeUnit.yaml'
       accept_application_until:
         type: string
         format: date-time
@@ -24,11 +24,11 @@ properties:
       work_models:
         type: array
         items:
-          $ref: '/WorkModel.yaml'
+          $ref: 'WorkModel.yaml'
       employment_types:
         type: array
         items:
-          $ref: '/EmploymentType.yaml'
+          $ref: 'EmploymentType.yaml'
       week_workload_from:
         type: integer
       week_workload_to:

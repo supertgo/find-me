@@ -57,26 +57,26 @@ export const JobApplications = ({
 	];
 
 	return (
-		<Base>
-			<S.Wrapper>
-				<ApplicationHeader />
+			<Base>
+				<S.Wrapper>
+					<ApplicationHeader />
 
-				{!!applicantsData && (
-					<S.BreadcrumbWrapper>
-						<Breadcrumb paths={paths} />
-					</S.BreadcrumbWrapper>
-				)}
+					{!!applicantsData && (
+						<S.BreadcrumbWrapper>
+							<Breadcrumb paths={paths} />
+						</S.BreadcrumbWrapper>
+					)}
 
-				<ApplicantsTable
-					table={table}
-					applicantsData={applicantsData}
-					isLoading={isLoading}
-					globalFilter={globalFilter}
-					setGlobalFilter={setGlobalFilter}
-					currentPage={currentPage}
-					itemsPerPage={itemsPerPage}
-				/>
-			</S.Wrapper>
-		</Base>
+					<ApplicantsTable
+						table={table}
+						applicantsData={applicantsData}
+						isLoading={isLoading}
+						globalFilter={globalFilter}
+						setGlobalFilter={setGlobalFilter}
+						currentPage={currentPage}
+						itemsPerPage={itemsPerPage}
+					/>
+				</S.Wrapper>
+			</Base>
 	);
 };

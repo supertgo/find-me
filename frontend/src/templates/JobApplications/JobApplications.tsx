@@ -18,16 +18,18 @@ export const JobApplications = ({
 	jobId,
 	initialData,
 }: JobApplicationsProps) => {
-	const { data, table, isLoading, globalFilter, setGlobalFilter } =
-		useApplicantsTable({
-			jobsId: [jobId],
-			initialData,
-		});
-
-	const applicantsData = data?.data.data;
-
-	const currentPage = table.getState().pagination.pageIndex + 1;
-	const itemsPerPage = 10;
+	const {
+		table,
+		applicantsData,
+		currentPage,
+		itemsPerPage,
+		isLoading,
+		globalFilter,
+		setGlobalFilter,
+	} = useApplicantsTable({
+		jobsId: [jobId],
+		initialData,
+	});
 
 	useEffect(() => {
 		return () => {

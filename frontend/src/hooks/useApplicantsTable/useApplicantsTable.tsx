@@ -146,9 +146,17 @@ export const useApplicantsTable = ({
 		getSortedRowModel: getSortedRowModel(),
 	});
 
+	const applicantsData = data?.data.data;
+
+	const currentPage = table.getState().pagination.pageIndex + 1;
+	const itemsPerPage = 10;
+
 	return {
 		data,
 		table,
+    applicantsData,
+    currentPage,
+    itemsPerPage,
 		isLoading,
 		globalFilter,
 		setGlobalFilter,

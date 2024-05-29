@@ -5,35 +5,37 @@ import { Base } from 'templates/Base/Base';
 import * as S from './Applicants.styles';
 
 export const Applicants = () => {
-  const { data, table, isLoading, globalFilter, setGlobalFilter } =
-  useApplicantsTable({
-    jobsId: []
-  });
+	const {
+		applicantsData,
+		itemsPerPage,
+		currentPage,
+		table,
+		isLoading,
+		globalFilter,
+		setGlobalFilter,
+	} = useApplicantsTable({
+		jobsId: [],
+	});
 
-  const applicantsData = data?.data.data;
+	useEffect(() => {
+		return () => {
+			setGlobalFilter('');
+		};
+	}, []);
 
-  const currentPage = table.getState().pagination.pageIndex + 1;
-  const itemsPerPage = 10;
-
-  useEffect(() => {
-    return () => {
-      setGlobalFilter('');
-    };
-  }, []);
-
-  return (
-    <Base>
-      <S.Wrapper>
-        <ApplicantsTable
-          table={table}
-          applicantsData={applicantsData}
-          isLoading={isLoading}
-          globalFilter={globalFilter}
-          setGlobalFilter={setGlobalFilter}
-          currentPage={currentPage}
-          itemsPerPage={itemsPerPage}
-        />
-      </S.Wrapper>
-    </Base>
-  );
+	return (
+		<Base>
+			<S.Wrapper>
+				<ApplicantsTable
+					table={table}
+					applicantsData={applicantsData}
+					isLoading={isLoading}
+					globalFilter={globalFilter}
+					setGlobalFilter={setGlobalFilter}
+					currentPage={currentPage}
+					itemsPerPage={itemsPerPage}
+				/>
+			</S.Wrapper>
+		</Base>
+	);
 };

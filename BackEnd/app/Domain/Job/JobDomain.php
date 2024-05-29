@@ -3,10 +3,20 @@
 namespace App\Domain\Job;
 
 
+use App\Domain\Competence\CompetencesIdFilterMustBePositiveIntegersException;
+use App\Exceptions\Job\CompanyIdsFilterMustBePositiveIntegersException;
 use App\Exceptions\Job\IdRequiredToUpdateException;
+use App\Exceptions\Job\InvalidAcceptApplicationUntilDateFormatException;
 use App\Exceptions\Job\JobAcceptApplicationsUntilPassedException;
 use App\Exceptions\Job\JobApplicationsAmountSurpassedException;
 use App\Exceptions\Job\OnlyOwnerCanUpdateJobException;
+use App\Exceptions\Job\SalaryToMustBeBiggerThanFromException;
+use App\Exceptions\Job\UnknownEmploymentTypesFilterException;
+use App\Exceptions\Job\UnknownSalaryTimeUnitsFilterException;
+use App\Exceptions\Job\UnknownWorkModelsFilterException;
+use App\Exceptions\Job\WeekWorkloadMustBePositiveException;
+use App\Exceptions\Job\WeekWorkloadToMustBeBiggerThanFromException;
+use App\Http\Requests\Job\JobFilters;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 
@@ -140,8 +150,25 @@ readonly class JobDomain implements JobDomainInterface
         return $this->applicationsAmount;
     }
 
-    public function jobsWithIncludes($includes): array
+    /**
+     * @throws SalaryToMustBeBiggerThanFromException
+     * @throws CompetencesIdFilterMustBePositiveIntegersException
+     * @throws UnknownWorkModelsFilterException
+     * @throws CompanyIdsFilterMustBePositiveIntegersException
+     * @throws InvalidAcceptApplicationUntilDateFormatException
+     * @throws WeekWorkloadToMustBeBiggerThanFromException
+     * @throws UnknownEmploymentTypesFilterException
+     * @throws WeekWorkloadMustBePositiveException
+     * @throws UnknownSalaryTimeUnitsFilterException
+     */
+    public function jobsWithIncludes(array $filers, array $includes): array
     {
+        if (!empty($filers)) {
+            $filers = (new JobFilters())->fromArray($filers);
+
+            return $this->jobRepository->getJobsWithFilters($filers, $includes);
+        }
+
         return $this->jobRepository->getJobs($includes);
     }
 

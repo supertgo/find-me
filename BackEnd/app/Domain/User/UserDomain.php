@@ -2,7 +2,7 @@
 
 namespace App\Domain\User;
 
-use App\Exceptions\User\CompetencesIdFilterMustBePositiveIntegersException;
+use App\Domain\Competence\CompetencesIdFilterMustBePositiveIntegersException;
 use App\Exceptions\User\UnknownUserIncludeException;
 use App\Exceptions\User\UnknownUserTypeException;
 use App\Exceptions\User\UserDoesntHaveCompetenceException;

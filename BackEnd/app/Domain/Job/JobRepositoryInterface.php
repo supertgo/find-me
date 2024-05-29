@@ -2,6 +2,7 @@
 
 namespace App\Domain\Job;
 
+use App\Http\Requests\Job\JobFiltersInterface;
 use Illuminate\Support\Collection;
 
 interface JobRepositoryInterface
@@ -31,4 +32,6 @@ interface JobRepositoryInterface
     public function getCompetences(int $id): array;
 
     public function deleteCompetences(?int $id);
+
+    public function getJobsWithFilters(JobFiltersInterface $filers, array $includes);
 }

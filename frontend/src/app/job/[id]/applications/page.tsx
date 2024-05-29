@@ -2,11 +2,9 @@ import { nextAuthOptions } from 'app/api/auth/[...nextauth]/options';
 import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
 import { JobApplicationResponse } from 'protocols/external/job/job-application';
+import { getAuthMe } from 'services/fetch/auth/auth';
+import { fetchJobApplications } from 'services/fetch/job/job';
 import { JobApplications } from 'templates/JobApplications/JobApplications';
-import {
-	GetAuthMeRouteConst,
-	GetJobApplicationsRouteConst,
-} from 'utils/routes';
 import { HomeUrl } from 'utils/urls';
 
 type JobApplicantsPageProps = {
@@ -22,43 +20,28 @@ type GetApplicantsProp = {
 async function getApplicants({ job_id }: GetApplicantsProp) {
 	const session = await getServerSession(nextAuthOptions);
 
-	const res = await fetch(
-		`${process.env.NEXT_PUBLIC_BACKEND_URL}/${GetAuthMeRouteConst}`,
-		{
-			headers: { Authorization: `Bearer ${session?.access_token}` },
-		},
-	);
-
-	if (!res.ok) {
+	if (!session?.access_token) {
 		return redirect(`/${HomeUrl}`);
 	}
 
-	const { data: authMeResponse } = await res.json();
+	const authMeResponse = await getAuthMe(session?.access_token);
 
 	if (authMeResponse.type === 'employee') {
 		return redirect(`/${HomeUrl}`);
 	}
 
-	const jobApplicationResponse = await fetch(
-		`${process.env.NEXT_PUBLIC_BACKEND_URL}/${GetJobApplicationsRouteConst({
-			jobsId: [job_id],
-			includes: ['candidates', 'job'],
-		})}`,
-		{
-			headers: { Authorization: `Bearer ${session?.access_token}` },
-		},
+	const jobApplicationResponse = await fetchJobApplications(
+		session.access_token,
+		job_id,
 	);
 
-	if (!jobApplicationResponse.ok) {
-		return redirect(`/${HomeUrl}`);
-	}
-
-	return jobApplicationResponse.json();
+	return jobApplicationResponse;
 }
 
 export default async function CreateJobPage({
 	params,
 }: JobApplicantsPageProps) {
+
 	const data: JobApplicationResponse = await getApplicants({
 		job_id: params.id,
 	});

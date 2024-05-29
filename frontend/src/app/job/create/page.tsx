@@ -1,25 +1,18 @@
 import { nextAuthOptions } from 'app/api/auth/[...nextauth]/options';
 import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
+import { getAuthMe } from 'services/fetch/auth/auth';
 import { CreateJob } from 'templates/CreateJob/CreateJob';
-import { GetAuthMeRouteConst } from 'utils/routes';
 import { HomeUrl } from 'utils/urls';
 
 async function checkUser() {
 	const session = await getServerSession(nextAuthOptions);
 
-	const res = await fetch(
-		`${process.env.NEXT_PUBLIC_BACKEND_URL}/${GetAuthMeRouteConst}`,
-		{
-			headers: { Authorization: `Bearer ${session?.access_token}` },
-		},
-	);
-
-	if (!res.ok) {
+	if (!session?.access_token) {
 		return redirect(`/${HomeUrl}`);
 	}
 
-	const { data: authMeResponse } = await res.json();
+	const authMeResponse = await getAuthMe(session?.access_token);
 
 	if (authMeResponse.type === 'employee') {
 		return redirect(`/${HomeUrl}`);
@@ -27,7 +20,7 @@ async function checkUser() {
 }
 
 export default async function CreateJobPage() {
-  await checkUser()
+	await checkUser();
 
 	return <CreateJob />;
 }

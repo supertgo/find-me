@@ -2,8 +2,9 @@ import { nextAuthOptions } from 'app/api/auth/[...nextauth]/options';
 import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
 import { UserProps } from 'protocols/external/user/user';
+import { getAuthMe } from 'services/fetch/auth/auth';
 import { Config } from 'templates/Config/Config';
-import { GetAuthMeRouteConst, GetUserRouteConst } from 'utils/routes';
+import { GetUserRouteConst } from 'utils/routes';
 import { HomeUrl } from 'utils/urls';
 
 type GetDataProps = {
@@ -11,24 +12,13 @@ type GetDataProps = {
 };
 
 async function getData() {
-	const token = await getServerSession(nextAuthOptions);
+	const session = await getServerSession(nextAuthOptions);
 
-	const res = await fetch(
-		`${process.env.NEXT_PUBLIC_BACKEND_URL}/${GetAuthMeRouteConst}`,
-		{
-			headers: { Authorization: `Bearer ${token?.access_token}` },
-			cache: 'no-cache',
-			next: {
-				revalidate: 1000,
-			},
-		},
-	);
-
-	if (!res.ok) {
+	if (!session?.access_token) {
 		return redirect(`/${HomeUrl}`);
 	}
 
-	const { data: authMeResponse } = await res.json();
+	const authMeResponse = await getAuthMe(session?.access_token);
 
 	if (authMeResponse.type === 'recruiter') {
 		return { data: authMeResponse };
@@ -40,7 +30,7 @@ async function getData() {
 			includes: ['competences', 'academicRecords', 'professionalExperiences'],
 		})}`,
 		{
-			headers: { Authorization: `Bearer ${token?.access_token}` },
+			headers: { Authorization: `Bearer ${session?.access_token}` },
 		},
 	);
 

@@ -31,6 +31,7 @@ export const ModalAddProfessionalExperience = ({
 }: ModalAddProfessionalExperienceProps) => {
 	const {
 		isValid,
+    isLoading,
 		errors,
 		watch,
 		open,

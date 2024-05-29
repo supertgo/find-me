@@ -1,8 +1,7 @@
 import { ShowUserResponse } from 'protocols/external/user/user';
 import { GetAuthMeRouteConst } from 'utils/routes';
 
-export async function getAuthMe(token: string) {
-
+export async function getAuthMe(token: string): Promise<ShowUserResponse> {
 	const res = await fetch(
 		`${process.env.NEXT_PUBLIC_BACKEND_URL}/${GetAuthMeRouteConst}`,
 		{
@@ -14,5 +13,5 @@ export async function getAuthMe(token: string) {
 		throw new Error('Failed to fetch job applications');
 	}
 
-	return res.json() as ShowUserResponse;
+	return res.json();
 }

@@ -8,12 +8,10 @@ import {
 	SortingState,
 	useReactTable,
 } from '@tanstack/react-table';
-import { Button } from 'components/Button/Button';
 import { Pill } from 'components/Pill/Pill';
 import * as S from 'components/Table/TableData/TableData.styles';
 import { useJobApplication } from 'hooks/useJobApplication/useJobApplication';
 import Image from 'next/image';
-import Link from 'next/link';
 import {
 	JobApplication,
 	JobApplicationResponse,
@@ -21,9 +19,10 @@ import {
 import { useMemo, useState } from 'react';
 import { getInitialData } from 'utils/initialData';
 import { GetUsersRouteConst } from 'utils/routes';
-import { ApplicantUrl, JobUrl } from 'utils/urls';
+import { JobUrl } from 'utils/urls';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
+import { SeeApplication } from 'components/SeeApplication/SeeApplication';
 
 const columnHelper = createColumnHelper<JobApplication>();
 
@@ -120,14 +119,23 @@ export const useApplicantsTable = ({
 			id: 'applicant_application_button',
 			enableSorting: false,
 			header: () => null,
-			cell: (info) => (
-				<Link
-					href={`/${ApplicantUrl(info.getValue().candidates![0].id)}`}
-					target="_blank"
-				>
-					<Button variant="secondary">Ver Candidatura</Button>
-				</Link>
-			),
+			cell: (info) => {
+				if (!info.getValue() || !info.getValue().candidates![0]) return null;
+
+				const { id, name, email, phone } = info.getValue().candidates![0];
+				const { id: jobId, cover_letter } = info.getValue();
+
+				return (
+					<SeeApplication
+						id={id}
+						jobId={jobId}
+						name={name}
+						email={email}
+						phone={phone}
+						coverLetter={cover_letter}
+					/>
+				);
+			},
 		}),
 	];
 
@@ -154,9 +162,9 @@ export const useApplicantsTable = ({
 	return {
 		data,
 		table,
-    applicantsData,
-    currentPage,
-    itemsPerPage,
+		applicantsData,
+		currentPage,
+		itemsPerPage,
 		isLoading,
 		globalFilter,
 		setGlobalFilter,

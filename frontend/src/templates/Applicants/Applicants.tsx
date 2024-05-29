@@ -1,8 +1,7 @@
+import { ApplicantsTable } from 'components/ApplicantsTable/ApplicantsTable';
 import { useApplicantsTable } from 'hooks/useApplicantsTable/useApplicantsTable';
 import { useEffect } from 'react';
 import { Base } from 'templates/Base/Base';
-import { ApplicantsTable } from 'components/ApplicantsTable/ApplicantsTable';
-import { ApplicationHeader } from 'components/ApplicationHeader/ApplicationHeader';
 import * as S from './Applicants.styles';
 
 export const Applicants = () => {
@@ -25,8 +24,6 @@ export const Applicants = () => {
   return (
     <Base>
       <S.Wrapper>
-        <ApplicationHeader />
-
         <ApplicantsTable
           table={table}
           applicantsData={applicantsData}

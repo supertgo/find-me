@@ -1,0 +1,49 @@
+type: object
+properties:
+  filters:
+    type: object
+    properties:
+      name:
+        type: string
+      description:
+        type: string
+      is_available:
+        type: boolean
+      salary_from:
+        type: integer
+      salary_to:
+        type: integer
+      salary_time_units:
+        type: array
+        items:
+          $ref: '/SalaryTimeUnit.yaml'
+      accept_application_until:
+        type: string
+        format: date-time
+        pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+      work_models:
+        type: array
+        items:
+          $ref: '/WorkModel.yaml'
+      employment_types:
+        type: array
+        items:
+          $ref: '/EmploymentType.yaml'
+      week_workload_from:
+        type: integer
+      week_workload_to:
+        type: integer
+      location:
+        type: string
+      company_ids:
+        type: array
+        items:
+          type: integer
+      user_ids:
+        type: array
+        items:
+          type: integer
+      competence_ids:
+        type: array
+        items:
+          type: integer

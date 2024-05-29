@@ -33,7 +33,7 @@ export const ApplicationHeader = ({}: ApplicationHeaderProps) => {
 			</S.CompanyWrapper>
 
 			{type === 'recruiter' && (
-				<Link href={`${CreateJobUrl}`}>
+				<Link href={`/${CreateJobUrl}`}>
 					<Button>Anuncie uma vaga</Button>
 				</Link>
 			)}

@@ -1,4 +1,4 @@
-import { Breadcrumb, BreadcrumbProps } from "./Breadcrumb";
+import { Breadcrumb, BreadcrumbProps, BreadcrumbPath } from './Breadcrumb';
 
-export type { BreadcrumbProps }
-export { Breadcrumb }
+export type { BreadcrumbProps, BreadcrumbPath };
+export { Breadcrumb };

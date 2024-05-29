@@ -22,6 +22,8 @@ import { useMemo, useState } from 'react';
 import { getInitialData } from 'utils/initialData';
 import { GetUsersRouteConst } from 'utils/routes';
 import { ApplicantUrl, JobUrl } from 'utils/urls';
+import { format } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 
 const columnHelper = createColumnHelper<JobApplication>();
 
@@ -90,7 +92,17 @@ export const useApplicantsTable = ({
 		columnHelper.accessor((row) => row, {
 			id: 'applicant_application_date',
 			header: () => <S.TableData>Data</S.TableData>,
-			cell: () => <S.TableData>13 de Julho 2021</S.TableData>,
+			cell: (info) => {
+				const date = format(
+					new Date(info.getValue().job!.updated_at),
+					'dd MMMM yyyy',
+					{
+						locale: ptBR,
+					},
+				);
+
+				return <S.TableData>{date}</S.TableData>;
+			},
 		}),
 		columnHelper.accessor((row) => row.job, {
 			id: 'applicant_job_function',

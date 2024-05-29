@@ -133,6 +133,7 @@ export const AccountConfig = ({
 							render={({ field: { ...field } }) => (
 								<Textarea
 									{...field}
+                  label="Sobre mim"
 									placeholder="Descreva um pouco sobre você"
 									error={errors.about_me}
 								/>

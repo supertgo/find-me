@@ -21,7 +21,7 @@ import {
 import { useMemo, useState } from 'react';
 import { getInitialData } from 'utils/initialData';
 import { GetUsersRouteConst } from 'utils/routes';
-import { ApplicantUrl } from 'utils/urls';
+import { ApplicantUrl, JobUrl } from 'utils/urls';
 
 const columnHelper = createColumnHelper<JobApplication>();
 
@@ -92,10 +92,17 @@ export const useApplicantsTable = ({
 			header: () => <S.TableData>Data</S.TableData>,
 			cell: () => <S.TableData>13 de Julho 2021</S.TableData>,
 		}),
-		columnHelper.accessor((row) => row.job!.name, {
+		columnHelper.accessor((row) => row.job, {
 			id: 'applicant_job_function',
-			header: () => <S.TableData>Cargo</S.TableData>,
-			cell: (info) => <S.TableData>{info.getValue()}</S.TableData>,
+			header: () => <S.TableData>Vaga</S.TableData>,
+			cell: (info) => (
+				<S.TableDataLink
+					href={`/${JobUrl(info.getValue()!.id)}`}
+					target="_blank"
+				>
+					{info.getValue()!.name}
+				</S.TableDataLink>
+			),
 		}),
 		columnHelper.accessor((row) => row, {
 			id: 'applicant_application_button',

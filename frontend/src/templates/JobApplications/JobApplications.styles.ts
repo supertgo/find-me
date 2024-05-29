@@ -7,3 +7,9 @@ export const Wrapper = styled.div`
   `}
 `;
 
+export const BreadcrumbWrapper = styled.div`
+  ${({ theme }) => css`
+    margin-top: ${theme.space.medium};
+  `}
+`;
+

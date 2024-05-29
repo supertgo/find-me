@@ -1,5 +1,6 @@
 import { http, HttpResponse } from 'msw';
 import { setupServer } from 'msw/node';
+import { mockJobApplication } from './mocks/external/job-application';
 
 export const ApiAuthSessionResponseMock = {
   name: 'tobias',
@@ -12,6 +13,9 @@ export const ApiAuthSessionResponseMock = {
 export const handlers = [
   http.get('/api/auth/session', () => {
     return HttpResponse.json(ApiAuthSessionResponseMock);
+  }),
+  http.get('/undefined/job-application', () => {
+    return HttpResponse.json(mockJobApplication);
   }),
 ];
 

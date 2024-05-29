@@ -43,7 +43,7 @@ export const useApplicantsTable = ({
 		queryKey: [`/${GetUsersRouteConst}`],
 		queryFn: () =>
 			findJobApplications({
-				includes: ['candidates'],
+				includes: ['candidates', 'job'],
 				jobsId,
 			}),
 		initialData: initialData
@@ -92,10 +92,10 @@ export const useApplicantsTable = ({
 			header: () => <S.TableData>Data</S.TableData>,
 			cell: () => <S.TableData>13 de Julho 2021</S.TableData>,
 		}),
-		columnHelper.accessor((row) => row, {
+		columnHelper.accessor((row) => row.job!.name, {
 			id: 'applicant_job_function',
 			header: () => <S.TableData>Cargo</S.TableData>,
-			cell: () => <S.TableData>Dev PHP</S.TableData>,
+			cell: (info) => <S.TableData>{info.getValue()}</S.TableData>,
 		}),
 		columnHelper.accessor((row) => row, {
 			id: 'applicant_application_button',

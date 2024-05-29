@@ -21,10 +21,18 @@ export type ModalAddAcademicRecordProps = {
 export const ModalAddAcademicRecord = ({
 	user_id,
 }: ModalAddAcademicRecordProps) => {
-	const { isValid, errors, open, setOpen, handleSubmit, onSubmit, control } =
-		useModalAddAcademicRecord({
-			user_id,
-		});
+	const {
+		isValid,
+		isLoading,
+		errors,
+		open,
+		setOpen,
+		handleSubmit,
+		onSubmit,
+		control,
+	} = useModalAddAcademicRecord({
+		user_id,
+	});
 
 	return (
 		<BaseModal
@@ -38,6 +46,7 @@ export const ModalAddAcademicRecord = ({
 			title="Adicionar Formação Acadêmica"
 			confirmButtonText="Salvar"
 			isConfirmButtonDisabled={!isValid}
+			isConfirmButtonLoading={isLoading}
 			confirmHandler={handleSubmit(onSubmit)}
 		>
 			<S.Wrapper>

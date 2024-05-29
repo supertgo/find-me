@@ -33,7 +33,7 @@ export type ApplicationJob = {
 	applications_amount: number;
 	salary: number;
 	salary_time_unit: string;
-	accept_application_until: Date;
+	accept_application_until: string;
 	work_model: string;
 	employment_type: string;
 	week_workload: number;

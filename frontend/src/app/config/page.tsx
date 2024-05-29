@@ -18,7 +18,7 @@ async function getData() {
 		return redirect(`/${HomeUrl}`);
 	}
 
-	const authMeResponse = await getAuthMe(session?.access_token);
+	const { data: authMeResponse } = await getAuthMe(session?.access_token);
 
 	if (authMeResponse.type === 'recruiter') {
 		return { data: authMeResponse };

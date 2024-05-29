@@ -24,7 +24,7 @@ async function getApplicants({ job_id }: GetApplicantsProp) {
 		return redirect(`/${HomeUrl}`);
 	}
 
-	const authMeResponse = await getAuthMe(session?.access_token);
+  const { data: authMeResponse } = await getAuthMe(session?.access_token);
 
 	if (authMeResponse.type === 'employee') {
 		return redirect(`/${HomeUrl}`);

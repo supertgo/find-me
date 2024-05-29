@@ -42,7 +42,7 @@ async function getApplicants({ job_id }: GetApplicantsProp) {
 	const jobApplicationResponse = await fetch(
 		`${process.env.NEXT_PUBLIC_BACKEND_URL}/${GetJobApplicationsRouteConst({
 			jobsId: [job_id],
-			includes: ['candidates'],
+			includes: ['candidates', 'job'],
 		})}`,
 		{
 			headers: { Authorization: `Bearer ${session?.access_token}` },

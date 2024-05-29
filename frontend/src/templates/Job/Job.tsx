@@ -19,6 +19,7 @@ import {
 } from 'utils/job';
 import { formatToCurrency } from 'utils/money';
 import * as S from './Job.styles';
+import { MediaMatch } from 'components/MediaMatch/MediaMatch';
 
 export type JobProps = {} & JobResponse;
 
@@ -65,7 +66,9 @@ export const Job = ({
 						</S.JobSubtitle>
 					</S.TextWrapper>
 
-					<VerticalRow />
+          <MediaMatch $greaterThan="medium">
+            <VerticalRow />
+          </MediaMatch>
 
 					<JobPageButton
 						user={{
@@ -135,23 +138,22 @@ export const Job = ({
 					<S.Title>{company?.name}</S.Title>
 					<p>{company?.description}</p>
 				</S.JobCompanyInfo>
+
+				{type === 'recruiter' && user_id === loggedUserId && (
+					<S.RemoveJob>
+						<ModalRemoveJob
+							setOpen={setOpen}
+							open={open}
+							job={{
+								id,
+								name,
+								companyName: company!.name,
+							}}
+						/>
+						<Button onClick={onRemoveJobClick}>Excluir Vaga</Button>
+					</S.RemoveJob>
+				)}
 			</S.Wrapper>
-
-
-			{type === 'recruiter' && user_id === loggedUserId && (
-				<S.RemoveJob>
-					<ModalRemoveJob
-						setOpen={setOpen}
-						open={open}
-						job={{
-							id,
-							name,
-							companyName: company!.name,
-						}}
-					/>
-					<Button onClick={onRemoveJobClick}>Excluir Vaga</Button>
-				</S.RemoveJob>
-			)}
 		</Base>
 	);
 };

@@ -31,6 +31,10 @@ export type ShowUsersResponse = {
   data: UserProps[];
 };
 
+export type ShowUserResponse = {
+  data: UserProps;
+};
+
 export type GetUserResponse = {
   data: Omit<UserProps, 'password'>;
 };

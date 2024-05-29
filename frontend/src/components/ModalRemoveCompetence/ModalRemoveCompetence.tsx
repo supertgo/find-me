@@ -4,7 +4,7 @@ import { useModalRemoveCompetence } from 'hooks/useModalRemoveCompetence/useModa
 export type ModalRemoveCompetenceProps = {};
 
 export const ModalRemoveCompetence = ({}: ModalRemoveCompetenceProps) => {
-	const { open, setOpen, handleSubmit, competence } =
+	const { open, loading, setOpen, handleSubmit, competence } =
 		useModalRemoveCompetence();
 
 	return (
@@ -15,6 +15,7 @@ export const ModalRemoveCompetence = ({}: ModalRemoveCompetenceProps) => {
 			confirmButtonText="Excluir"
 			confirmHandler={handleSubmit}
 			cancelButtonText="Cancelar"
+			isConfirmButtonLoading={loading}
 		>
 			{!!competence && (
 				<p>

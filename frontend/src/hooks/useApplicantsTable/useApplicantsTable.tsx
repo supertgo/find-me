@@ -8,12 +8,10 @@ import {
 	SortingState,
 	useReactTable,
 } from '@tanstack/react-table';
-import { Button } from 'components/Button/Button';
 import { Pill } from 'components/Pill/Pill';
 import * as S from 'components/Table/TableData/TableData.styles';
 import { useJobApplication } from 'hooks/useJobApplication/useJobApplication';
 import Image from 'next/image';
-import Link from 'next/link';
 import {
 	JobApplication,
 	JobApplicationResponse,
@@ -21,7 +19,10 @@ import {
 import { useMemo, useState } from 'react';
 import { getInitialData } from 'utils/initialData';
 import { GetUsersRouteConst } from 'utils/routes';
-import { ApplicantUrl } from 'utils/urls';
+import { JobUrl } from 'utils/urls';
+import { format } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
+import { SeeApplication } from 'components/SeeApplication/SeeApplication';
 
 const columnHelper = createColumnHelper<JobApplication>();
 
@@ -43,7 +44,7 @@ export const useApplicantsTable = ({
 		queryKey: [`/${GetUsersRouteConst}`],
 		queryFn: () =>
 			findJobApplications({
-				includes: ['candidates'],
+				includes: ['candidates', 'job'],
 				jobsId,
 			}),
 		initialData: initialData
@@ -90,25 +91,51 @@ export const useApplicantsTable = ({
 		columnHelper.accessor((row) => row, {
 			id: 'applicant_application_date',
 			header: () => <S.TableData>Data</S.TableData>,
-			cell: () => <S.TableData>13 de Julho 2021</S.TableData>,
+			cell: (info) => {
+				const date = format(
+					new Date(info.getValue().job!.updated_at),
+					'dd MMMM yyyy',
+					{
+						locale: ptBR,
+					},
+				);
+
+				return <S.TableData>{date}</S.TableData>;
+			},
 		}),
-		columnHelper.accessor((row) => row, {
+		columnHelper.accessor((row) => row.job, {
 			id: 'applicant_job_function',
-			header: () => <S.TableData>Cargo</S.TableData>,
-			cell: () => <S.TableData>Dev PHP</S.TableData>,
+			header: () => <S.TableData>Vaga</S.TableData>,
+			cell: (info) => (
+				<S.TableDataLink
+					href={`/${JobUrl(info.getValue()!.id)}`}
+					target="_blank"
+				>
+					{info.getValue()!.name}
+				</S.TableDataLink>
+			),
 		}),
 		columnHelper.accessor((row) => row, {
 			id: 'applicant_application_button',
 			enableSorting: false,
 			header: () => null,
-			cell: (info) => (
-				<Link
-					href={`/${ApplicantUrl(info.getValue().candidates![0].id)}`}
-					target="_blank"
-				>
-					<Button variant="secondary">Ver Candidatura</Button>
-				</Link>
-			),
+			cell: (info) => {
+				if (!info.getValue() || !info.getValue().candidates![0]) return null;
+
+				const { id, name, email, phone } = info.getValue().candidates![0];
+				const { id: jobId, cover_letter } = info.getValue();
+
+				return (
+					<SeeApplication
+						id={id}
+						jobId={jobId}
+						name={name}
+						email={email}
+						phone={phone}
+						coverLetter={cover_letter}
+					/>
+				);
+			},
 		}),
 	];
 
@@ -127,9 +154,17 @@ export const useApplicantsTable = ({
 		getSortedRowModel: getSortedRowModel(),
 	});
 
+	const applicantsData = data?.data.data;
+
+	const currentPage = table.getState().pagination.pageIndex + 1;
+	const itemsPerPage = 10;
+
 	return {
 		data,
 		table,
+		applicantsData,
+		currentPage,
+		itemsPerPage,
 		isLoading,
 		globalFilter,
 		setGlobalFilter,

@@ -2,6 +2,6 @@ import styled from 'styled-components'
 
 export const Wrapper = styled.div`
   textarea {
-    min-height: 10rem
+    min-height: 15rem
   }
 `

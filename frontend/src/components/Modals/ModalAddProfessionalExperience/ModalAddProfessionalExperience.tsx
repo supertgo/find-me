@@ -2,25 +2,25 @@ import { PlusIcon } from '@radix-ui/react-icons';
 import { Checkbox } from 'components/Checkbox/Checkbox';
 import { Input } from 'components/Input/Input';
 import { BaseModal } from 'components/Modals/BaseModal/BaseModal';
+import { Select } from 'components/Select/Select';
 import { Textarea } from 'components/Textarea/Textarea';
 import { useModalAddProfessionalExperience } from 'hooks/useModalAddProfessionalExperience/useModalAddProfessionalExperience';
 import {
-	employmentTypeOptions,
-	workModelOptions,
+  employmentTypeOptions,
+  workModelOptions,
 } from 'protocols/external/job/job';
 import { Controller } from 'react-hook-form';
 import {
-	REQUIRED_JOB_EMPLOYMENT_TYPE,
-	REQUIRED_JOB_WORK_MODEL,
-	REQUIRED_PROFESSIONAL_EXPERIENCE_COMPANY,
-	REQUIRED_PROFESSIONAL_EXPERIENCE_DESCRIPTION,
-	REQUIRED_PROFESSIONAL_EXPERIENCE_LOCATION,
-	REQUIRED_PROFESSIONAL_EXPERIENCE_POSITION,
-	REQUIRED_PROFESSIONAL_EXPERIENCE_START_DATE,
+  REQUIRED_JOB_EMPLOYMENT_TYPE,
+  REQUIRED_JOB_WORK_MODEL,
+  REQUIRED_PROFESSIONAL_EXPERIENCE_COMPANY,
+  REQUIRED_PROFESSIONAL_EXPERIENCE_DESCRIPTION,
+  REQUIRED_PROFESSIONAL_EXPERIENCE_LOCATION,
+  REQUIRED_PROFESSIONAL_EXPERIENCE_POSITION,
+  REQUIRED_PROFESSIONAL_EXPERIENCE_START_DATE,
 } from 'utils/errors';
 import { translateEmploymentType, translateWorkModel } from 'utils/job';
 import * as S from './ModalAddProfessionalExperience.styles';
-import { Select } from 'components/Select/Select';
 
 export type ModalAddProfessionalExperienceProps = {
 	user_id: number;
@@ -31,6 +31,7 @@ export const ModalAddProfessionalExperience = ({
 }: ModalAddProfessionalExperienceProps) => {
 	const {
 		isValid,
+    isLoading,
 		errors,
 		watch,
 		open,
@@ -57,6 +58,7 @@ export const ModalAddProfessionalExperience = ({
 			title="Adicionar Experiência"
 			confirmButtonText="Salvar"
 			isConfirmButtonDisabled={!isValid}
+			isConfirmButtonLoading={isLoading}
 			confirmHandler={handleSubmit(onSubmit)}
 		>
 			<S.Wrapper>

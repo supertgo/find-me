@@ -15,7 +15,7 @@ export const ModalCoverLetter = ({
 	disabled,
 	jobId,
 }: ModalCoverLetterProps) => {
-	const { open, setOpen, isValid, errors, handleSubmit, onSubmit, control } =
+	const { open, isLoading, setOpen, isValid, errors, handleSubmit, onSubmit, control } =
 		useModalCoverLetter({
 			job_id: jobId,
 		});
@@ -28,6 +28,7 @@ export const ModalCoverLetter = ({
 			title="Deseja aplicar para essa vaga?"
 			confirmButtonText="Aplicar"
 			isConfirmButtonDisabled={!isValid}
+			isConfirmButtonLoading={isLoading}
 			confirmHandler={handleSubmit(onSubmit)}
 		>
 			<S.Wrapper>

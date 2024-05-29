@@ -104,7 +104,6 @@ export const Th = styled.th`
     line-height: ${theme.font.sizes.sm};
     padding: ${theme.space.xmedium};
     margin-bottom: ${theme.space.xxl};
-    text-align: left;
   `}
 `;
 
@@ -122,6 +121,7 @@ export const StatusHeader = styled.div`
 export const Content = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
 `;
 
 export const Td = styled.td`

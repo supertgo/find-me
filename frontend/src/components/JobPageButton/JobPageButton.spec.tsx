@@ -17,19 +17,19 @@ const props: JobPageButtonProps = {
 
 const mocks = vi.hoisted(() => {
 	return {
-		useQuery: vi.fn(),
+    useJobPageButton: vi.fn()
 	};
 });
 
-vi.mock('@tanstack/react-query', () => {
+vi.mock('hooks/useJobPageButton/useJobPageButton', () => {
 	return {
-		useQuery: mocks.useQuery,
+    useJobPageButton: mocks.useJobPageButton,
 	};
 });
 
 describe('<JobPageButton />', () => {
 	it('should render a link to applicants if the user is a recruiter', () => {
-		mocks.useQuery.mockReturnValueOnce({
+		mocks.useJobPageButton.mockReturnValueOnce({
 			data: {
         data: {
           data: []
@@ -45,7 +45,7 @@ describe('<JobPageButton />', () => {
 	});
 
 	it('should be able to apply to a job as an employee if job is available', () => {
-		mocks.useQuery.mockReturnValueOnce({
+		mocks.useJobPageButton.mockReturnValueOnce({
 			data: {
 				data: {
 					data: mockJobApplication,

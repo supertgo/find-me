@@ -12,7 +12,7 @@ use App\Exceptions\Job\JobNotFoundException;
 use Exception;
 use Throwable;
 
-class JobService extends AbstractService
+class JobService extends AbstractService implements JobServiceInterface
 {
     /**
      * @throws Throwable

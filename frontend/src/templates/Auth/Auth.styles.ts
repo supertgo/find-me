@@ -59,6 +59,12 @@ export const Copy = styled.p`
 	`}
 `;
 
+export const LogoImage = styled.img`
+	${({ theme }) => css`
+		margin-bottom: ${theme.space.large};
+	`}
+`;
+
 export const BottomText = styled.p`
 	${({ theme }) => css`
 		font-size: ${theme.font.sizes.xs};

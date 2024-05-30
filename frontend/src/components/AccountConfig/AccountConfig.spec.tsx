@@ -1,5 +1,5 @@
 import { render, screen } from 'utils/test/test-utils';
-import { AccountConfig, AccountConfigProps } from './AccountConfig';
+import { AccountConfig, AccountConfigProps } from '.';
 import { formatCellphone } from 'utils/formatCellphone';
 
 const props: AccountConfigProps = {

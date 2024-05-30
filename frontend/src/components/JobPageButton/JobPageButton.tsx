@@ -1,6 +1,6 @@
-import { Button } from 'components/Button/Button';
+import { Button } from 'components/Button';
 import { UserType } from 'protocols/external/user/user';
-import { ModalCoverLetter } from 'components/ModalCoverLetter/ModalCoverLetter';
+import { ModalCoverLetter } from 'components/ModalCoverLetter';
 import { useJobPageButton } from 'hooks/useJobPageButton/useJobPageButton';
 import Link from 'next/link';
 import { JobUrlApplicants } from 'utils/urls';

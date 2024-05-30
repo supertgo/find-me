@@ -1,6 +1,6 @@
 'use client';
-import { ApplicantsTable } from 'components/ApplicantsTable/ApplicantsTable';
-import { ApplicationHeader } from 'components/ApplicationHeader/ApplicationHeader';
+import { ApplicantsTable } from 'components/ApplicantsTable';
+import { ApplicationHeader } from 'components/ApplicationHeader';
 import { Breadcrumb, BreadcrumbPath } from 'components/Breadcrumb';
 import { useApplicantsTable } from 'hooks/useApplicantsTable/useApplicantsTable';
 import { JobApplicationResponse } from 'protocols/external/job/job-application';

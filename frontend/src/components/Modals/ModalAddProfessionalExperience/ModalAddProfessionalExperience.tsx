@@ -1,9 +1,9 @@
 import { PlusIcon } from '@radix-ui/react-icons';
-import { Checkbox } from 'components/Checkbox/Checkbox';
-import { Input } from 'components/Input/Input';
-import { BaseModal } from 'components/Modals/BaseModal/BaseModal';
-import { Select } from 'components/Select/Select';
-import { Textarea } from 'components/Textarea/Textarea';
+import { Checkbox } from 'components/Checkbox';
+import { Input } from 'components/Input';
+import { BaseModal } from 'components/Modals/BaseModal';
+import { Select } from 'components/Select';
+import { Textarea } from 'components/Textarea';
 import { useModalAddProfessionalExperience } from 'hooks/useModalAddProfessionalExperience/useModalAddProfessionalExperience';
 import {
 	employmentTypeOptions,

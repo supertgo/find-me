@@ -1,4 +1,4 @@
-import { Skeleton } from 'components/Skeleton/Skeleton';
+import { Skeleton } from 'components/Skeleton';
 import styled, { css } from 'styled-components';
 import media from 'styled-media-query';
 

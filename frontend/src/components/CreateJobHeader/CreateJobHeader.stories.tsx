@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { CreateJobHeader, CreateJobHeaderProps } from './CreateJobHeader';
+import { CreateJobHeader, CreateJobHeaderProps } from '.';
 
 export default {
 	title: 'Components/CreateJobHeader',

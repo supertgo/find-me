@@ -1,6 +1,6 @@
 import 'components/PreviousApplicationsItem/PreviousApplicationsItem.mock'
 import { render, screen } from 'utils/test/test-utils';
-import { PreviousApplications } from './PreviousApplications';
+import { PreviousApplications } from '.';
 import { applications } from 'test/mocks/external/previous-applications';
 
 describe('<PreviousApplications />', () => {

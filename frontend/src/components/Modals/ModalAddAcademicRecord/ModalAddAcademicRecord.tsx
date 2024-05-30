@@ -1,5 +1,5 @@
 import { useModalAddAcademicRecord } from 'hooks/useModalAddAcademicRecord/useModalAddAcademicRecord';
-import { BaseModal } from 'components/Modals/BaseModal/BaseModal';
+import { BaseModal } from 'components/Modals/BaseModal';
 import { PlusIcon } from '@radix-ui/react-icons';
 import { Controller } from 'react-hook-form';
 import {
@@ -10,8 +10,8 @@ import {
 	REQUIRED_ACADEMIC_RECORD_INSTITUTION,
 	REQUIRED_ACADEMIC_RECORD_START_DATE,
 } from 'utils/errors';
-import { Input } from 'components/Input/Input';
-import { Textarea } from 'components/Textarea/Textarea';
+import { Input } from 'components/Input';
+import { Textarea } from 'components/Textarea';
 import * as S from './ModalAddAcademicRecord.styles';
 
 export type ModalAddAcademicRecordProps = {

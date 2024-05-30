@@ -1,5 +1,5 @@
 import { render, screen } from 'utils/test/test-utils'
-import { CompetenceItem, CompetenceItemProps } from './CompetenceItem'
+import { CompetenceItem, CompetenceItemProps } from '.'
 
 const props: CompetenceItemProps = {
   name: 'PHP',

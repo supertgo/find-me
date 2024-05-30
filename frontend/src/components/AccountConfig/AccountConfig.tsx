@@ -1,9 +1,9 @@
 'use client';
-import { Button } from 'components/Button/Button';
-import { ConfigInfoWrapper } from 'components/ConfigInfoWrapper/ConfigInfoWrapper';
-import { Input } from 'components/Input/Input';
-import { Textarea } from 'components/Textarea/Textarea';
-import { Title } from 'components/Title/Title';
+import { Button } from 'components/Button';
+import { ConfigInfoWrapper } from 'components/ConfigInfoWrapper';
+import { Input } from 'components/Input';
+import { Textarea } from 'components/Textarea';
+import { Title } from 'components/Title';
 import { useUserConfigForm } from 'hooks/useUserConfigForm/useUserConfigForm';
 import { UserProps } from 'protocols/external/user/user';
 import { Controller } from 'react-hook-form';

@@ -1,4 +1,4 @@
-import { BaseModal } from 'components/Modals/BaseModal/BaseModal';
+import { BaseModal } from 'components/Modals/BaseModal';
 import { useModalRemoveCompetence } from 'hooks/useModalRemoveCompetence/useModalRemoveCompetence';
 
 export type ModalRemoveCompetenceProps = {};

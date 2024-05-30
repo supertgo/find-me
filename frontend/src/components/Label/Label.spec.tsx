@@ -1,5 +1,5 @@
 import { render, screen } from 'utils/test/test-utils';
-import { Label } from './Label';
+import { Label } from '.';
 
 describe('<Label />', () => {
 	it('should render the component', () => {

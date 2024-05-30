@@ -1,7 +1,7 @@
 import { vi } from 'vitest';
 
-vi.mock('components/Applicants/Applicants', () => ({
+vi.mock('components/Pagination', () => ({
   Applicants: () => {
-    return <div data-testid="Mock Applicants" />;
+    return <div data-testid="Mock Pagination" />;
   },
 }));

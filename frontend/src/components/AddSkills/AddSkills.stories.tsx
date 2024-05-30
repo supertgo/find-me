@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AddSkills, AddSkillsProps } from './AddSkills';
+import { AddSkills, AddSkillsProps } from '.';
 
 export default {
 	title: 'Components/AddSkills',

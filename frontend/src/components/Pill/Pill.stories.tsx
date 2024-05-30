@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Pill, PillProps } from './Pill';
+import { Pill, PillProps } from '.';
 
 export default {
 	title: 'Components/Pill',

@@ -1,4 +1,4 @@
-import { Button } from 'components/Button/Button';
+import { Button } from 'components/Button';
 import Link from 'next/link';
 import { useLoggedUserStore } from 'stores/loggedUserStore/loggedUserStore';
 import { CreateJobUrl } from 'utils/urls';

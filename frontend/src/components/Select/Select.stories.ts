@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Select, SelectProps } from 'components/Select/Select';
+import { Select, SelectProps } from 'components/Select';
 
 export default {
 	title: 'Components/Select',

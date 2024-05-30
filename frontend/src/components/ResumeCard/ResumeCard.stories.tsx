@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { ResumeCard, ResumeCardProps } from './ResumeCard';
-import { CompetenceItem } from 'components/CompetenceItem/CompetenceItem';
+import { CompetenceItem } from 'components/CompetenceItem';
 
 export default {
   title: 'Components/ResumeCard',

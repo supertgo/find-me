@@ -1,5 +1,5 @@
 import { render, screen } from 'utils/test/test-utils';
-import { Button } from './Button';
+import { Button } from '.';
 
 describe('<Button />', () => {
   it('should render the component', () => {

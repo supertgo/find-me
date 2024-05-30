@@ -1,5 +1,5 @@
 import { JobItemProps } from './JobItem';
-import { Pill } from 'components/Pill/Pill';
+import { Pill } from 'components/Pill';
 import {
 	translateEmploymentType,
 	translateSalaryTimeUnit,

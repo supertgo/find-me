@@ -1,6 +1,6 @@
 import { Children } from 'react';
 import * as S from './PreviousApplications.styles';
-import { PreviousApplicationsItem, PreviousApplicationsItemProps } from 'components/PreviousApplicationsItem/PreviousApplicationsItem';
+import { PreviousApplicationsItem, PreviousApplicationsItemProps } from 'components/PreviousApplicationsItem';
 
 export type PreviousApplicationsProps = {
   title: string;

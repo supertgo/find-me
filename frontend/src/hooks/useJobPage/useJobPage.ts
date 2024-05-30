@@ -1,5 +1,5 @@
 import { BreadcrumbPath } from 'components/Breadcrumb/Breadcrumb';
-import { JobToBeRemoved } from 'components/ModalRemoveJob/ModalRemoveJob';
+import { JobToBeRemoved } from 'components/ModalRemoveJob';
 import { useState } from 'react';
 import { useLoggedUserStore } from 'stores/loggedUserStore/loggedUserStore';
 import { HomeUrl, JobUrl, JobsUrl } from 'utils/urls';

@@ -1,5 +1,5 @@
 import { render, screen } from 'utils/test/test-utils';
-import { Pill } from './Pill';
+import { Pill } from '.';
 import { theme } from 'styles/theme';
 
 describe('<Pill />', () => {

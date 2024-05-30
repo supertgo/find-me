@@ -1,8 +1,8 @@
-import { SidebarItem } from 'components/SidebarItem/SidebarItem';
-import { HomeIcon } from 'icons/HomeIcon/HomeIcon';
-import { ConfigUrl, HomeUrl, JobsUrl } from 'utils/urls';
 import { MagnifyingGlassIcon, PersonIcon } from '@radix-ui/react-icons';
+import { SidebarItem } from 'components/SidebarItem';
+import { HomeIcon } from 'icons/HomeIcon/HomeIcon';
 import { theme } from 'styles/theme';
+import { ConfigUrl, HomeUrl, JobsUrl } from 'utils/urls';
 
 export type ApplicantSidebarItemsProps = {};
 

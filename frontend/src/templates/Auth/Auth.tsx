@@ -1,7 +1,8 @@
 'use client';
+import { LogoFindme } from 'components/LogoFindme';
 import { ReactNode } from 'react';
 import * as S from './Auth.styles';
-import { LogoFindme } from 'components/LogoFindme/LogoFindme';
+
 type AuthProps = {
 	children: ReactNode;
 };

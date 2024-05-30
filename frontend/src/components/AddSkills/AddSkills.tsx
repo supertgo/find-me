@@ -1,6 +1,6 @@
-import { Button } from 'components/Button/Button';
-import { Input } from 'components/Input/Input';
-import { Skill } from 'components/Skill/Skill';
+import { Button } from 'components/Button';
+import { Input } from 'components/Input';
+import { Skill } from 'components/Skill';
 import { CreateJobInputs } from 'hooks/useCreateJob/useCreateJob';
 import { useState } from 'react';
 import { UseFormSetValue } from 'react-hook-form';

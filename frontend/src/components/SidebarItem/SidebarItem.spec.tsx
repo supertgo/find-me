@@ -1,6 +1,6 @@
 import 'icons/HomeIcon/HomeIcon.mock';
 import { render, screen } from 'utils/test/test-utils';
-import { SidebarItem } from './SidebarItem';
+import { SidebarItem } from '.';
 import { HomeIcon } from 'icons/HomeIcon/HomeIcon';
 import { vi } from 'vitest';
 import { theme } from 'styles/theme';

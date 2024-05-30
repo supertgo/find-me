@@ -1,4 +1,4 @@
-import { ApplicantsTable } from 'components/ApplicantsTable/ApplicantsTable';
+import { ApplicantsTable } from 'components/ApplicantsTable';
 import { useApplicantsTable } from 'hooks/useApplicantsTable/useApplicantsTable';
 import { useEffect } from 'react';
 import { Base } from 'templates/Base/Base';

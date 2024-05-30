@@ -1,4 +1,4 @@
-import { Label } from 'components/Label/Label';
+import { Label } from 'components/Label';
 import * as S from './Select.styles';
 
 export type SelectProps = {

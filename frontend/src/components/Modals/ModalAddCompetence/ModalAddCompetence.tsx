@@ -1,6 +1,6 @@
 import { PlusIcon } from '@radix-ui/react-icons';
-import { Input } from 'components/Input/Input';
-import { BaseModal } from 'components/Modals/BaseModal/BaseModal';
+import { Input } from 'components/Input';
+import { BaseModal } from 'components/Modals/BaseModal';
 import { useModalAddCompetence } from 'hooks/useModalAddCompetence/useModalAddCompetence';
 import { Controller } from 'react-hook-form';
 import { REQUIRED_COMPETENCE } from 'utils/errors';

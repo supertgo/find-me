@@ -1,13 +1,13 @@
 'use client';
 import { BackpackIcon, ReaderIcon } from '@radix-ui/react-icons';
-import { AddSkills } from 'components/AddSkills/AddSkills';
-import { Button } from 'components/Button/Button';
-import { ConfigInfoWrapper } from 'components/ConfigInfoWrapper/ConfigInfoWrapper';
-import { Input } from 'components/Input/Input';
-import { Step } from 'components/Step/Step';
-import { StepWrapper } from 'components/StepWrapper/StepWrapper.styles';
-import { Textarea } from 'components/Textarea/Textarea';
-import { Title } from 'components/Title/Title';
+import { AddSkills } from 'components/AddSkills';
+import { Button } from 'components/Button';
+import { ConfigInfoWrapper } from 'components/ConfigInfoWrapper';
+import { Input } from 'components/Input';
+import { Step } from 'components/Step';
+import { StepWrapper } from 'components/StepWrapper';
+import { Textarea } from 'components/Textarea';
+import { Title } from 'components/Title';
 import { VerticalRow } from 'components/VerticalRow/VerticalRow';
 import { useCreateJob } from 'hooks/useCreateJob/useCreateJob';
 import {
@@ -34,7 +34,7 @@ import {
   translateWorkModel,
 } from 'utils/job';
 import * as S from './CreateJob.styles';
-import { Select } from 'components/Select/Select';
+import { Select } from 'components/Select';
 
 export type CreateJobProps = {};
 

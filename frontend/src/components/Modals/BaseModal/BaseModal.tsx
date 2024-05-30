@@ -1,6 +1,6 @@
 import { Dispatch, ReactNode, SetStateAction } from 'react';
 import { Dialog } from 'components/Dialog/Dialog';
-import { Button } from 'components/Button/Button';
+import { Button } from 'components/Button';
 
 export type BaseModalProps = {
 	setOpen: Dispatch<SetStateAction<boolean>>;

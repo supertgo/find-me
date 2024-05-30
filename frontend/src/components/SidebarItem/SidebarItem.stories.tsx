@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { SidebarItem, SidebarItemProps } from './SidebarItem';
+import { SidebarItem, SidebarItemProps } from '.';
 import { HomeIcon } from 'icons/HomeIcon/HomeIcon';
 
 export default {

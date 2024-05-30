@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { ApplicationHeader, ApplicationHeaderProps } from './ApplicationHeader';
+import { ApplicationHeader, ApplicationHeaderProps } from '.';
 
 export default {
   title: 'Components/ApplicationHeader',

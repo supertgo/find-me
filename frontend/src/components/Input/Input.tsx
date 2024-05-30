@@ -8,8 +8,8 @@ import {
 import { FieldError } from 'react-hook-form';
 
 import * as S from './Input.styles';
-import { MessageError } from 'components/MessageError/MessageError';
-import { Label } from 'components/Label/Label';
+import { MessageError } from 'components/MessageError';
+import { Label } from 'components/Label';
 
 export type InputProps = {
 	dataCy?: string;

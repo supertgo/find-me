@@ -1,5 +1,5 @@
 import { render, screen } from 'utils/test/test-utils';
-import { LinkText, LinkTextProps } from './LinkText';
+import { LinkText, LinkTextProps } from '.';
 
 const props: LinkTextProps = {
   text: 'link',

@@ -1,4 +1,4 @@
-import { Hr } from 'components/Hr/Hr';
+import { Hr } from 'components/Hr';
 import * as S from './Title.styles';
 
 export type TitleProps = {

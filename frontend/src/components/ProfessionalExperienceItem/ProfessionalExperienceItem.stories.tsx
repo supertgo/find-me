@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import {
 	ProfessionalExperienceItem,
 	ProfessionalExperienceItemProps,
-} from './ProfessionalExperienceItem';
+} from '.';
 
 export default {
 	title: 'Components/ProfessionalExperienceItem',

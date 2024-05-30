@@ -1,4 +1,4 @@
-import { BaseModal } from 'components/Modals/BaseModal/BaseModal';
+import { BaseModal } from 'components/Modals/BaseModal';
 import { useModalRemoveAcademicRecord } from 'hooks/useModalRemoveAcademicRecord/useModalRemoveAcademicRecord';
 
 export type ModalRemoveAcademicRecordProps = {};

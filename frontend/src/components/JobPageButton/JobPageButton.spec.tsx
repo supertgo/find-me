@@ -1,6 +1,6 @@
 import 'components/ModalCoverLetter/ModalCoverLetter.mock';
 import { render, screen } from 'utils/test/test-utils';
-import { JobPageButton, JobPageButtonProps } from './JobPageButton';
+import { JobPageButton, JobPageButtonProps } from '.';
 import { vi } from 'vitest';
 import { mockJobApplication } from 'test/mocks/external/job-application';
 

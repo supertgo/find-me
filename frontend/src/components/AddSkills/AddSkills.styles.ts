@@ -25,4 +25,3 @@ export const SkillsWrapper = styled.div`
 		}
 	`}
 `;
-

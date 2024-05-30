@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { JobItem, JobItemProps } from './JobItem';
+import { JobItem, JobItemProps } from '.';
 
 export default {
 	title: 'Components/JobItem',

@@ -1,5 +1,5 @@
 import { render, screen } from 'utils/test/test-utils';
-import { JobItem, JobItemProps } from './JobItem';
+import { JobItem, JobItemProps } from '.';
 
 const props: JobItemProps = {
   id: 4,

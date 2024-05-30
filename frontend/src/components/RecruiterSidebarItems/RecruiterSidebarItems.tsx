@@ -1,6 +1,6 @@
 import { ApplicantsUrl, HomeUrl, JobsUrl } from 'utils/urls';
 import { HomeIcon } from 'icons/HomeIcon/HomeIcon';
-import { SidebarItem } from 'components/SidebarItem/SidebarItem';
+import { SidebarItem } from 'components/SidebarItem';
 import { PersonIcon, MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import { theme } from 'styles/theme';
 

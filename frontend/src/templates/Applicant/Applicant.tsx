@@ -1,5 +1,5 @@
 'use client';
-import { Title } from 'components/Title/Title';
+import { Title } from 'components/Title';
 import Image from 'next/image';
 import { UserProps } from 'protocols/external/user/user';
 import { Base } from 'templates/Base/Base';

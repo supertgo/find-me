@@ -1,4 +1,4 @@
-import { Skeleton } from 'components/Skeleton/Skeleton';
+import { Skeleton } from 'components/Skeleton';
 import * as S from './ConfigInfoWrapper.styles';
 
 export const LoadingConfigInfoWrapper = () => {

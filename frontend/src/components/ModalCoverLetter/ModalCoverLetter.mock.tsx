@@ -1,6 +1,6 @@
 import { vi } from "vitest"
 
-vi.mock('components/ModalCoverLetter/ModalCoverLetter', () => ({
+vi.mock('components/ModalCoverLetter', () => ({
   ModalCoverLetter: () => {
     return <div data-testid="Mock ModalCoverLetter" />
   },

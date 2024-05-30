@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { JobFilter, JobFilterProps } from './JobFilter';
+import { JobFilter, JobFilterProps } from '.';
 
 export default {
   title: 'Components/JobFilter',

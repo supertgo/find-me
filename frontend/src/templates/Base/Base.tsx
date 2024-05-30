@@ -1,5 +1,5 @@
-import { Container } from 'components/Container/Container';
-import { Sidebar } from 'components/Sidebar/Sidebar';
+import { Container } from 'components/Container';
+import { Sidebar } from 'components/Sidebar';
 import { ReactNode } from 'react';
 import * as S from './Base.styles';
 

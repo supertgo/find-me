@@ -1,13 +1,13 @@
-import { Button } from 'components/Button/Button';
-import { JobCapacity } from 'components/JobCapacity/JobCapacity';
-import { MediaMatch } from 'components/MediaMatch/MediaMatch';
+import { Button } from 'components/Button';
+import { JobCapacity } from 'components/JobCapacity';
+import { MediaMatch } from 'components/MediaMatch';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Job } from 'protocols/external/job/job';
 import { filterJobLocation } from 'utils/job';
 import { JobUrl } from 'utils/urls';
 import * as S from './JobItem.styles';
-import { JobPill, JobPillProps } from './JobPill';
+import { JobPill, JobPillProps } from '.';
 
 export type JobItemProps = {} & Job;
 

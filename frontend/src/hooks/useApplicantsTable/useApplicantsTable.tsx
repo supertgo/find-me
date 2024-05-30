@@ -8,7 +8,7 @@ import {
 	SortingState,
 	useReactTable,
 } from '@tanstack/react-table';
-import { Pill } from 'components/Pill/Pill';
+import { Pill } from 'components/Pill';
 import * as S from 'components/Table/TableData/TableData.styles';
 import { useJobApplication } from 'hooks/useJobApplication/useJobApplication';
 import Image from 'next/image';
@@ -22,7 +22,7 @@ import { GetUsersRouteConst } from 'utils/routes';
 import { JobUrl } from 'utils/urls';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import { SeeApplication } from 'components/SeeApplication/SeeApplication';
+import { SeeApplication } from 'components/SeeApplication';
 
 const columnHelper = createColumnHelper<JobApplication>();
 

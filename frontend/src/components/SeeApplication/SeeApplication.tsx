@@ -1,4 +1,4 @@
-import { Button } from 'components/Button/Button';
+import { Button } from 'components/Button';
 import { CoverLetterContext } from 'hooks/contexts/CoverLetter/CoverLetter';
 import { useContextSelector } from 'use-context-selector';
 

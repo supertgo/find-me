@@ -1,6 +1,6 @@
-import { Button } from 'components/Button/Button';
-import { BaseModal } from 'components/Modals/BaseModal/BaseModal';
-import { Textarea } from 'components/Textarea/Textarea';
+import { Button } from 'components/Button';
+import { BaseModal } from 'components/Modals/BaseModal';
+import { Textarea } from 'components/Textarea';
 import { useModalCoverLetter } from 'hooks/useModalCoverLetter/useModalCoverLetter';
 import { Controller } from 'react-hook-form';
 import { REQUIRED_JOB_APP_COVER_LETTER } from 'utils/errors';

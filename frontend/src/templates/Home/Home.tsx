@@ -1,6 +1,6 @@
-import { LinkText } from 'components/LinkText/LinkText';
-import { PreviousApplications } from 'components/PreviousApplications/PreviousApplications';
-import { Title } from 'components/Title/Title';
+import { LinkText } from 'components/LinkText';
+import { PreviousApplications } from 'components/PreviousApplications';
+import { Title } from 'components/Title';
 import { useLoggedUserStore } from 'stores/loggedUserStore/loggedUserStore';
 import { Base } from 'templates/Base/Base';
 import { applications } from 'test/mocks/external/previous-applications';

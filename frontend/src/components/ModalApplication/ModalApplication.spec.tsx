@@ -1,5 +1,5 @@
 import { render, renderHook, screen } from 'utils/test/test-utils';
-import { ModalApplication } from './ModalApplication';
+import { ModalApplication } from '.';
 import { useContextSelector } from 'use-context-selector';
 import { CoverLetterContext } from 'hooks/contexts/CoverLetter/CoverLetter';
 

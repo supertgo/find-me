@@ -1,4 +1,4 @@
-import { BaseModal } from 'components/Modals/BaseModal/BaseModal';
+import { BaseModal } from 'components/Modals/BaseModal';
 import { useModalRemoveJob } from 'hooks/useModalRemoveJob/useModalRemoveJob';
 import { Dispatch, SetStateAction } from 'react';
 

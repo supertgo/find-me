@@ -1,5 +1,5 @@
 import { render, renderHook, screen, act } from 'utils/test/test-utils';
-import { CreateJobHeader, CreateJobHeaderProps } from './CreateJobHeader';
+import { CreateJobHeader, CreateJobHeaderProps } from '.';
 import { useLoggedUserStore } from 'stores/loggedUserStore/loggedUserStore';
 
 const props: CreateJobHeaderProps = {

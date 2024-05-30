@@ -1,3 +1,4 @@
+import { Label } from 'components/Label';
 import * as S from './Select.styles';
 
 export type SelectProps = {
@@ -7,6 +8,7 @@ export type SelectProps = {
 	requiredMessage?: string;
 	placeholder?: string;
 	name: string;
+	label?: string;
 };
 
 export const Select = ({
@@ -16,9 +18,11 @@ export const Select = ({
 	requiredMessage,
 	placeholder,
 	name,
+	label,
 }: SelectProps) => {
 	return (
 		<S.Wrapper>
+			{!!label && <Label labelText={label} />}
 			<select
 				defaultValue={defaultValue}
 				{...(register && register(name, { required: requiredMessage }))}

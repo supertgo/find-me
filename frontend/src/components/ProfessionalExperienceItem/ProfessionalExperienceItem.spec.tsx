@@ -2,7 +2,7 @@ import { render, screen } from 'utils/test/test-utils';
 import {
 	ProfessionalExperienceItem,
 	ProfessionalExperienceItemProps,
-} from './ProfessionalExperienceItem';
+} from '.';
 import { translateEmploymentType } from 'utils/job';
 
 const props: ProfessionalExperienceItemProps = {

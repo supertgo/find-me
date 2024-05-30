@@ -1,5 +1,5 @@
 import { Pencil1Icon, PlusIcon } from '@radix-ui/react-icons';
-import { Skeleton } from 'components/Skeleton/Skeleton';
+import { Skeleton } from 'components/Skeleton';
 import * as S from './ResumeCard.styles';
 
 export const LoadingResumeCard = () => {

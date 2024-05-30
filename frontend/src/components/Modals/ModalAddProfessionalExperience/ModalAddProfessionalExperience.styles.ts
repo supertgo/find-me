@@ -7,3 +7,15 @@ export const Wrapper = styled.div`
 		}
 	`}
 `;
+
+export const SelectWrapper = styled.div`
+	${({ theme }) => css`
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: ${theme.space.small};
+
+      select {
+        width: 100%;
+      }
+	`}
+`

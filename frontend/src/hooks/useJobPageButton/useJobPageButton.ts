@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { JobPageButtonProps } from 'components/JobPageButton/JobPageButton';
+import { JobPageButtonProps } from 'components/JobPageButton';
 import { useJobApplication } from 'hooks/useJobApplication/useJobApplication';
 
 export type UseJobPageButtonProps = JobPageButtonProps;

@@ -1,8 +1,8 @@
 import { Table } from '@tanstack/react-table';
-import { Input } from 'components/Input/Input';
-import { ModalApplication } from 'components/ModalApplication/ModalApplication';
-import { Pagination } from 'components/Pagination/Pagination';
-import { TableData } from 'components/Table/TableData/TableData';
+import { Input } from 'components/Input';
+import { ModalApplication } from 'components/ModalApplication';
+import { Pagination } from 'components/Pagination';
+import { TableData } from 'components/Table/TableData';
 import { CoverLetterProvider } from 'hooks/contexts/CoverLetter/CoverLetter';
 import { JobApplication } from 'protocols/external/job/job-application';
 import { Dispatch, SetStateAction } from 'react';

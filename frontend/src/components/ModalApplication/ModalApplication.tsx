@@ -1,10 +1,10 @@
-import { Input } from 'components/Input/Input';
-import { BaseModal } from 'components/Modals/BaseModal/BaseModal';
-import { Textarea } from 'components/Textarea/Textarea';
+import { Input } from 'components/Input';
+import { BaseModal } from 'components/Modals/BaseModal';
+import { Textarea } from 'components/Textarea';
 import { useModalApplication } from 'hooks/useModalApplication/useModalApplication';
 import Link from 'next/link';
 import { ApplicantUrl } from 'utils/urls';
-import { Button } from 'components/Button/Button';
+import { Button } from 'components/Button';
 import * as S from './ModalApplication.styles';
 
 export type ModalApplicationProps = {};

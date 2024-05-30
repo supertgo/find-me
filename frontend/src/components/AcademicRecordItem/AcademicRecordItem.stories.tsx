@@ -1,9 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-
-import {
-	AcademicRecordItem,
-	AcademicRecordItemProps,
-} from './AcademicRecordItem';
+import { AcademicRecordItem, AcademicRecordItemProps } from '.';
 
 export default {
 	title: 'Components/AcademicRecordItem',

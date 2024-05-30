@@ -1,5 +1,5 @@
 import { render, screen } from 'utils/test/test-utils';
-import { Heading, HeadingProps } from './Heading';
+import { Heading, HeadingProps } from '.';
 
 const props: HeadingProps = {
   variant: 'h3',

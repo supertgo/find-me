@@ -1,14 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
-import { Button } from 'components/Button/Button';
-import { Input } from 'components/Input/Input';
-import { JobFilter } from 'components/JobFilter/JobFilter';
-import { JobItem } from 'components/JobItem/JobItem';
+import { Button } from 'components/Button';
+import { Input } from 'components/Input';
+import { JobFilter } from 'components/JobFilter';
+import { JobItem } from 'components/JobItem';
 import { useJob } from 'hooks/useJob/useJob';
 import { Children } from 'react';
 import { Base } from 'templates/Base/Base';
 import { LoadingJobs } from './LoadingJobs';
 import { NoJobs } from './NoJobs';
-import { CreateJobHeader } from 'components/CreateJobHeader/CreateJobHeader';
+import { CreateJobHeader } from 'components/CreateJobHeader';
 import { JobsUrl } from 'utils/urls';
 import * as S from './Jobs.styles';
 

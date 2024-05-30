@@ -99,14 +99,4 @@ class JobService extends AbstractService
             $domain->attachCompetences($competences);
         }
     }
-
-    private function updateCompetences(array $data, JobDomain $domain): void
-    {
-
-        $competenceDomain = new CompetenceDomain(new CompetenceRepository());
-
-
-        $this->createCompetences($data, $domain);
-
-    }
 }

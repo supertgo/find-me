@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 
-use App\Domain\User\UserService;
+use App\Domain\User\UserServiceInterface;
 use App\Http\Requests\Auth\ForgotPasswordRequest;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterUserRequest;
@@ -18,7 +18,7 @@ class JWTController extends Controller
     public function register(RegisterUserRequest $request): Response
     {
         try {
-            $userService = new UserService();
+            $userService = app(UserServiceInterface::class);
 
             $userId = $userService->createUser($request->validated());
 
@@ -29,6 +29,7 @@ class JWTController extends Controller
             return response()->noContent();
         } catch (Throwable $exception) {
             Log::error($exception);
+
             return response()->json(['error' => 'Server error'], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
@@ -79,7 +80,7 @@ class JWTController extends Controller
 
     public function forgotPassword(ForgotPasswordRequest $request, User $user): Response
     {
-        app(UserService::class)->forgotPassword($user);
+        app(UserServiceInterface::class)->forgotPassword($user);
 
         return response()->json([
             'message' => trans('auth.success'),

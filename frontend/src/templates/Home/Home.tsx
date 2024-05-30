@@ -3,7 +3,6 @@ import { PreviousApplications } from 'components/PreviousApplications';
 import { Title } from 'components/Title';
 import { useLoggedUserStore } from 'stores/loggedUserStore/loggedUserStore';
 import { Base } from 'templates/Base/Base';
-import { applications } from 'test/mocks/external/previous-applications';
 import { JobsUrl } from 'utils/urls';
 import * as S from './Home.styles';
 
@@ -19,10 +18,7 @@ export const Home = ({}: HomeProps) => {
 			<Title title="Início" />
 			<S.WelcomeMessage>Bem-vindo, {`${email}`}</S.WelcomeMessage>
 			<S.ApplicationsWrapper>
-				<PreviousApplications
-					applications={applications}
-					title="Histórico de Aplicações Recentes"
-				></PreviousApplications>
+				<PreviousApplications title="Histórico de Aplicações Recentes"></PreviousApplications>
 				<S.MoreApplicationsWrapper>
 					<LinkText
 						href={`/${JobsUrl}`}

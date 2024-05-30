@@ -2,6 +2,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useJobApplication } from 'hooks/useJobApplication/useJobApplication';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { GetJobApplicationsRouteConst } from 'utils/routes';
 import { JobUrl, JobsUrl } from 'utils/urls';
 
 export type UseModalCoverLetterProps = {
@@ -43,12 +44,14 @@ export const useModalCoverLetter = ({ job_id }: UseModalCoverLetterProps) => {
 			return;
 		}
 
-		//job id, jobs
 		await queryClient.invalidateQueries({
-      queryKey: [
-        `${JobsUrl}`,
-        `${JobUrl(job_id)}`,
-      ],
+			queryKey: [
+				`${JobsUrl}`,
+				`${JobUrl(job_id)}`,
+				`/${GetJobApplicationsRouteConst({
+					jobsId: [job_id],
+				})}`,
+			],
 		});
 
 		setOpen(false);

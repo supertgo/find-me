@@ -1,22 +1,22 @@
 'use client';
+import { Button } from 'components/Button/Button';
 import { ConfigInfoWrapper } from 'components/ConfigInfoWrapper/ConfigInfoWrapper';
 import { Input } from 'components/Input/Input';
+import { Textarea } from 'components/Textarea/Textarea';
 import { Title } from 'components/Title/Title';
+import { useUserConfigForm } from 'hooks/useUserConfigForm/useUserConfigForm';
+import { UserProps } from 'protocols/external/user/user';
 import { Controller } from 'react-hook-form';
-import { Button } from 'components/Button/Button';
-import { formatCellphone } from 'utils/formatCellphone';
 import { validateInputUserEmail } from 'utils/email';
 import {
-	INVALID_EMAIL,
-	REQUIRED_ABOUT_ME,
-	REQUIRED_CELLPHONE,
-	REQUIRED_NEW_PASSWORD,
-	REQUIRED_USER,
+  INVALID_EMAIL,
+  REQUIRED_ABOUT_ME,
+  REQUIRED_CELLPHONE,
+  REQUIRED_NEW_PASSWORD,
+  REQUIRED_USER,
 } from 'utils/errors';
-import { useUserConfigForm } from 'hooks/useUserConfigForm/useUserConfigForm';
+import { formatCellphone } from 'utils/formatCellphone';
 import * as S from './AccountConfig.styles';
-import { UserProps } from 'protocols/external/user/user';
-import { Textarea } from 'components/Textarea/Textarea';
 
 export type AccountConfigProps = {} & Pick<
 	UserProps,
@@ -121,7 +121,7 @@ export const AccountConfig = ({
 						/>
 					</S.ConfigEmailWrapper>
 				</ConfigInfoWrapper>
-				<ConfigInfoWrapper title="Sobre">
+				<ConfigInfoWrapper title="Sobre" hasBorder={false}>
 					<S.ConfigEmailWrapper>
 						<Controller
 							rules={{
@@ -133,7 +133,7 @@ export const AccountConfig = ({
 							render={({ field: { ...field } }) => (
 								<Textarea
 									{...field}
-                  label="Sobre mim"
+									label="Sobre mim"
 									placeholder="Descreva um pouco sobre você"
 									error={errors.about_me}
 								/>

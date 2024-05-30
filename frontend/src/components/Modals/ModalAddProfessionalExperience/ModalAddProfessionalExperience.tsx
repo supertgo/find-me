@@ -6,18 +6,18 @@ import { Select } from 'components/Select/Select';
 import { Textarea } from 'components/Textarea/Textarea';
 import { useModalAddProfessionalExperience } from 'hooks/useModalAddProfessionalExperience/useModalAddProfessionalExperience';
 import {
-  employmentTypeOptions,
-  workModelOptions,
+	employmentTypeOptions,
+	workModelOptions,
 } from 'protocols/external/job/job';
 import { Controller } from 'react-hook-form';
 import {
-  REQUIRED_JOB_EMPLOYMENT_TYPE,
-  REQUIRED_JOB_WORK_MODEL,
-  REQUIRED_PROFESSIONAL_EXPERIENCE_COMPANY,
-  REQUIRED_PROFESSIONAL_EXPERIENCE_DESCRIPTION,
-  REQUIRED_PROFESSIONAL_EXPERIENCE_LOCATION,
-  REQUIRED_PROFESSIONAL_EXPERIENCE_POSITION,
-  REQUIRED_PROFESSIONAL_EXPERIENCE_START_DATE,
+	REQUIRED_JOB_EMPLOYMENT_TYPE,
+	REQUIRED_JOB_WORK_MODEL,
+	REQUIRED_PROFESSIONAL_EXPERIENCE_COMPANY,
+	REQUIRED_PROFESSIONAL_EXPERIENCE_DESCRIPTION,
+	REQUIRED_PROFESSIONAL_EXPERIENCE_LOCATION,
+	REQUIRED_PROFESSIONAL_EXPERIENCE_POSITION,
+	REQUIRED_PROFESSIONAL_EXPERIENCE_START_DATE,
 } from 'utils/errors';
 import { translateEmploymentType, translateWorkModel } from 'utils/job';
 import * as S from './ModalAddProfessionalExperience.styles';
@@ -31,7 +31,7 @@ export const ModalAddProfessionalExperience = ({
 }: ModalAddProfessionalExperienceProps) => {
 	const {
 		isValid,
-    isLoading,
+		isLoading,
 		errors,
 		watch,
 		open,
@@ -71,6 +71,7 @@ export const ModalAddProfessionalExperience = ({
 					render={({ field: { ...field } }) => (
 						<Input
 							{...field}
+							label="Nome da empresa"
 							placeholder="Ex: FindMe"
 							error={errors.company_name}
 						/>
@@ -86,6 +87,7 @@ export const ModalAddProfessionalExperience = ({
 					render={({ field: { ...field } }) => (
 						<Input
 							{...field}
+							label="Cargo"
 							placeholder="Ex: Desenvolvedor de Software"
 							error={errors.position}
 						/>
@@ -99,35 +101,45 @@ export const ModalAddProfessionalExperience = ({
 					control={control}
 					name="location"
 					render={({ field: { ...field } }) => (
-						<Input {...field} placeholder="Ex: Dubai" error={errors.location} />
+						<Input
+							{...field}
+							label="Localidade"
+							placeholder="Ex: Dubai"
+							error={errors.location}
+						/>
 					)}
 				/>
 
-				<Select
-					data-cy="work_model"
-					options={workModelOptions.map((type) => ({
-						value: type,
-						label: translateWorkModel[type],
-					}))}
-					defaultValue=""
-					register={register}
-					requiredMessage={REQUIRED_JOB_WORK_MODEL}
-					placeholder="Modelo de trabalho"
-					name="work_model"
-				/>
+				<S.SelectWrapper>
+					<Select
+            label="Modelo de trabalho"
+						data-cy="work_model"
+						options={workModelOptions.map((type) => ({
+							value: type,
+							label: translateWorkModel[type],
+						}))}
+						defaultValue=""
+						register={register}
+						requiredMessage={REQUIRED_JOB_WORK_MODEL}
+						placeholder="Modelo de trabalho"
+						name="work_model"
+					/>
 
-				<Select
-					data-cy="employment_type"
-					options={employmentTypeOptions.map((type) => ({
-						value: type,
-						label: translateEmploymentType[type],
-					}))}
-					defaultValue=""
-					register={register}
-					requiredMessage={REQUIRED_JOB_EMPLOYMENT_TYPE}
-					placeholder="Tipo de Contratação"
-					name="employment_type"
-				/>
+					<Select
+            label="Tipo de Contratação"
+						data-cy="employment_type"
+						options={employmentTypeOptions.map((type) => ({
+							value: type,
+							label: translateEmploymentType[type],
+						}))}
+						defaultValue=""
+						register={register}
+						requiredMessage={REQUIRED_JOB_EMPLOYMENT_TYPE}
+						placeholder="Tipo de Contratação"
+						name="employment_type"
+					/>
+				</S.SelectWrapper>
+
 				<Controller
 					rules={{
 						required: REQUIRED_PROFESSIONAL_EXPERIENCE_START_DATE,
@@ -135,7 +147,12 @@ export const ModalAddProfessionalExperience = ({
 					control={control}
 					name="start_date"
 					render={({ field: { ...field } }) => (
-						<Input {...field} type="date" error={errors.start_date} />
+						<Input
+							{...field}
+							label="Início"
+							type="date"
+							error={errors.start_date}
+						/>
 					)}
 				/>
 
@@ -152,7 +169,12 @@ export const ModalAddProfessionalExperience = ({
 						control={control}
 						name="end_date"
 						render={({ field: { ...field } }) => (
-							<Input {...field} type="date" error={errors.end_date} />
+							<Input
+								{...field}
+								label="Término"
+								type="date"
+								error={errors.end_date}
+							/>
 						)}
 					/>
 				)}
@@ -164,7 +186,7 @@ export const ModalAddProfessionalExperience = ({
 					control={control}
 					name="description"
 					render={({ field: { ...field } }) => (
-						<Textarea {...field} error={errors.description} />
+						<Textarea {...field} label="Descrição" error={errors.description} />
 					)}
 				/>
 			</S.Wrapper>

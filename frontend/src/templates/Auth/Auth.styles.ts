@@ -50,7 +50,11 @@ export const LeftSideContent = styled.div`
 	`}
 `;
 
-export const Description = styled.div``;
+export const Description = styled.div`
+	${({ theme }) => css`
+		margin-top: ${theme.space.large};
+	`}
+`;
 
 export const Copy = styled.p`
 	${({ theme }) => css`

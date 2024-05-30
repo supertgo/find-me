@@ -9,9 +9,9 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterUserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
-use Exception;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
+use Throwable;
 
 class JWTController extends Controller
 {
@@ -27,7 +27,7 @@ class JWTController extends Controller
             }
 
             return response()->noContent();
-        } catch (Exception $exception) {
+        } catch (Throwable $exception) {
             Log::error($exception);
             return response()->json(['error' => 'Server error'], Response::HTTP_INTERNAL_SERVER_ERROR);
         }

@@ -1,3 +1,4 @@
+import { Hr } from 'components/Hr';
 import * as S from './Title.styles';
 
 export type TitleProps = {
@@ -11,7 +12,7 @@ export const Title = ({ title, hasBorder = true }: TitleProps) => {
 			<S.Wrapper>
 				<S.Title>{title}</S.Title>
 			</S.Wrapper>
-			{hasBorder && <S.Hr />}
+			{hasBorder && <Hr />}
 		</>
 	);
 };

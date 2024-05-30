@@ -1,39 +1,40 @@
 'use client';
 import { BackpackIcon, ReaderIcon } from '@radix-ui/react-icons';
-import { AddSkills } from 'components/AddSkills/AddSkills';
-import { Button } from 'components/Button/Button';
-import { ConfigInfoWrapper } from 'components/ConfigInfoWrapper/ConfigInfoWrapper';
-import { Input } from 'components/Input/Input';
-import { Step } from 'components/Step/Step';
-import { StepWrapper } from 'components/StepWrapper/StepWrapper.styles';
-import { Textarea } from 'components/Textarea/Textarea';
-import { Title } from 'components/Title/Title';
+import { AddSkills } from 'components/AddSkills';
+import { Button } from 'components/Button';
+import { ConfigInfoWrapper } from 'components/ConfigInfoWrapper';
+import { Input } from 'components/Input';
+import { Step } from 'components/Step';
+import { StepWrapper } from 'components/StepWrapper';
+import { Textarea } from 'components/Textarea';
+import { Title } from 'components/Title';
 import { VerticalRow } from 'components/VerticalRow/VerticalRow';
 import { useCreateJob } from 'hooks/useCreateJob/useCreateJob';
 import {
-	employmentTypeOptions,
-	salaryTimeUnitOptions,
-	workModelOptions,
+  employmentTypeOptions,
+  salaryTimeUnitOptions,
+  workModelOptions,
 } from 'protocols/external/job/job';
 import { Controller } from 'react-hook-form';
 import { theme } from 'styles/theme';
 import { Base } from 'templates/Base/Base';
 import {
-	REQUIRED_JOB_ACCEPT_APPLICATION,
-	REQUIRED_JOB_APPLICATIONS_AMOUNT,
-	REQUIRED_JOB_DESCRIPTION,
-	REQUIRED_JOB_EMPLOYMENT_TYPE,
-	REQUIRED_JOB_NAME,
-	REQUIRED_JOB_SALARY,
-	REQUIRED_JOB_SALARY_TIME_UNIT,
-	REQUIRED_JOB_WORK_MODEL,
+  REQUIRED_JOB_ACCEPT_APPLICATION,
+  REQUIRED_JOB_APPLICATIONS_AMOUNT,
+  REQUIRED_JOB_DESCRIPTION,
+  REQUIRED_JOB_EMPLOYMENT_TYPE,
+  REQUIRED_JOB_NAME,
+  REQUIRED_JOB_SALARY,
+  REQUIRED_JOB_SALARY_TIME_UNIT,
+  REQUIRED_JOB_WORK_MODEL,
 } from 'utils/errors';
 import {
-	translateEmploymentType,
-	translateSalaryTimeUnit,
-	translateWorkModel,
+  translateEmploymentType,
+  translateSalaryTimeUnit,
+  translateWorkModel,
 } from 'utils/job';
 import * as S from './CreateJob.styles';
+import { Select } from 'components/Select';
 
 export type CreateJobProps = {};
 
@@ -108,41 +109,33 @@ export const CreateJob = ({}: CreateJobProps) => {
 
 						<ConfigInfoWrapper title="Tipo de Contratação">
 							<S.ContractTypeWrapper>
-								<select
+								<Select
+									options={employmentTypeOptions.map((type) => ({
+										value: type,
+										label: translateEmploymentType[type],
+									}))}
 									defaultValue=""
-									{...register('employment_type', {
-										required: REQUIRED_JOB_EMPLOYMENT_TYPE,
-									})}
-								>
-									<option value="" disabled>
-										Selection o tipo de Contratação
-									</option>
-									{employmentTypeOptions.map((employmentType) => (
-										<option key={employmentType} value={employmentType}>
-											{translateEmploymentType[employmentType]}
-										</option>
-									))}
-								</select>
+									register={register}
+									requiredMessage={REQUIRED_JOB_EMPLOYMENT_TYPE}
+									placeholder="Selecione o tipo de Contratação"
+									name="employment_type"
+								/>
 							</S.ContractTypeWrapper>
 						</ConfigInfoWrapper>
 
 						<ConfigInfoWrapper title="Modelo de Trabalho">
 							<S.ContractTypeWrapper>
-								<select
+								<Select
+									options={workModelOptions.map((type) => ({
+										value: type,
+										label: translateWorkModel[type],
+									}))}
 									defaultValue=""
-									{...register('work_model', {
-										required: REQUIRED_JOB_WORK_MODEL,
-									})}
-								>
-									<option value="" disabled>
-										Modelo de Trabalho
-									</option>
-									{workModelOptions.map((workModel) => (
-										<option key={workModel} value={workModel}>
-											{translateWorkModel[workModel]}
-										</option>
-									))}
-								</select>
+									register={register}
+									requiredMessage={REQUIRED_JOB_WORK_MODEL}
+									placeholder="Modelo de Trabalho"
+									name="work_model"
+								/>
 							</S.ContractTypeWrapper>
 						</ConfigInfoWrapper>
 
@@ -165,21 +158,17 @@ export const CreateJob = ({}: CreateJobProps) => {
 
 						<ConfigInfoWrapper title="Período de pagamento">
 							<S.ContractTypeWrapper>
-								<select
+								<Select
+									options={salaryTimeUnitOptions.map((type) => ({
+										value: type,
+										label: translateSalaryTimeUnit[type],
+									}))}
 									defaultValue=""
-									{...register('salary_time_unit', {
-										required: REQUIRED_JOB_SALARY_TIME_UNIT,
-									})}
-								>
-									<option value="" disabled>
-										Selecione o período de pagamento
-									</option>
-									{salaryTimeUnitOptions.map((salaryTimeUnit) => (
-										<option key={salaryTimeUnit} value={salaryTimeUnit}>
-											{translateSalaryTimeUnit[salaryTimeUnit]}
-										</option>
-									))}
-								</select>
+									register={register}
+									requiredMessage={REQUIRED_JOB_SALARY_TIME_UNIT}
+									placeholder="Selecione o período de pagamento"
+									name="salary_time_unit"
+								/>
 							</S.ContractTypeWrapper>
 						</ConfigInfoWrapper>
 

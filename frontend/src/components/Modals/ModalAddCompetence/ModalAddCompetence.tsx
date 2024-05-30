@@ -1,9 +1,9 @@
-import { Controller } from 'react-hook-form';
-import { Input } from 'components/Input/Input';
-import { useModalAddCompetence } from 'hooks/useModalAddCompetence/useModalAddCompetence';
-import { REQUIRED_COMPETENCE } from 'utils/errors';
 import { PlusIcon } from '@radix-ui/react-icons';
-import { BaseModal } from 'components/Modals/BaseModal/BaseModal';
+import { Input } from 'components/Input';
+import { BaseModal } from 'components/Modals/BaseModal';
+import { useModalAddCompetence } from 'hooks/useModalAddCompetence/useModalAddCompetence';
+import { Controller } from 'react-hook-form';
+import { REQUIRED_COMPETENCE } from 'utils/errors';
 import * as S from './ModalAddCompetence.styles';
 
 export type ModalAddCompetenceProps = {
@@ -11,19 +11,32 @@ export type ModalAddCompetenceProps = {
 };
 
 export const ModalAddCompetence = ({ user_id }: ModalAddCompetenceProps) => {
-	const { open, setOpen, isValid, errors, handleSubmit, onSubmit, control } =
-		useModalAddCompetence({
-			user_id,
-		});
+	const {
+		open,
+		isLoading,
+		setOpen,
+		isValid,
+		errors,
+		handleSubmit,
+		onSubmit,
+		control,
+	} = useModalAddCompetence({
+		user_id,
+	});
 
 	return (
 		<BaseModal
-			trigger={<PlusIcon aria-label="Adicionar Competencia" />}
+			trigger={
+				<i title="Adicionar Competência">
+					<PlusIcon aria-label="Adicionar Competência" />
+				</i>
+			}
 			open={open}
 			setOpen={setOpen}
 			title="Adicionar Competência"
 			confirmButtonText="Salvar"
 			isConfirmButtonDisabled={!isValid}
+			isConfirmButtonLoading={isLoading}
 			confirmHandler={handleSubmit(onSubmit)}
 		>
 			<S.Wrapper>

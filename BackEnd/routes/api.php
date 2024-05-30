@@ -63,7 +63,7 @@ Route::group(
         Route::put('', [UserController::class, 'update']);
 
         Route::group(['prefix' => 'profile-picture'], function () {
-            Route::patch('', [UserController::class, 'updateProfilePicture']);
+            Route::post('/update', [UserController::class, 'updateProfilePicture']);
             Route::delete('', [UserController::class, 'deleteProfilePicture']);
         });
     }

@@ -1,5 +1,5 @@
 import { useModalAddAcademicRecord } from 'hooks/useModalAddAcademicRecord/useModalAddAcademicRecord';
-import { BaseModal } from 'components/Modals/BaseModal/BaseModal';
+import { BaseModal } from 'components/Modals/BaseModal';
 import { PlusIcon } from '@radix-ui/react-icons';
 import { Controller } from 'react-hook-form';
 import {
@@ -10,8 +10,8 @@ import {
 	REQUIRED_ACADEMIC_RECORD_INSTITUTION,
 	REQUIRED_ACADEMIC_RECORD_START_DATE,
 } from 'utils/errors';
-import { Input } from 'components/Input/Input';
-import { Textarea } from 'components/Textarea/Textarea';
+import { Input } from 'components/Input';
+import { Textarea } from 'components/Textarea';
 import * as S from './ModalAddAcademicRecord.styles';
 
 export type ModalAddAcademicRecordProps = {
@@ -21,19 +21,32 @@ export type ModalAddAcademicRecordProps = {
 export const ModalAddAcademicRecord = ({
 	user_id,
 }: ModalAddAcademicRecordProps) => {
-	const { isValid, errors, open, setOpen, handleSubmit, onSubmit, control } =
-		useModalAddAcademicRecord({
-			user_id,
-		});
+	const {
+		isValid,
+		isLoading,
+		errors,
+		open,
+		setOpen,
+		handleSubmit,
+		onSubmit,
+		control,
+	} = useModalAddAcademicRecord({
+		user_id,
+	});
 
 	return (
 		<BaseModal
-			trigger={<PlusIcon aria-label="adicionar formação acadêmica" />}
+			trigger={
+				<i title="Adicionar Formação Acadêmica">
+					<PlusIcon aria-label="adicionar formação acadêmica" />
+				</i>
+			}
 			open={open}
 			setOpen={setOpen}
 			title="Adicionar Formação Acadêmica"
 			confirmButtonText="Salvar"
 			isConfirmButtonDisabled={!isValid}
+			isConfirmButtonLoading={isLoading}
 			confirmHandler={handleSubmit(onSubmit)}
 		>
 			<S.Wrapper>
@@ -46,6 +59,7 @@ export const ModalAddAcademicRecord = ({
 					render={({ field: { ...field } }) => (
 						<Input
 							{...field}
+							label="Instituição"
 							placeholder="Ex: UFMG"
 							error={errors.institution}
 						/>
@@ -60,6 +74,7 @@ export const ModalAddAcademicRecord = ({
 					render={({ field: { ...field } }) => (
 						<Input
 							{...field}
+							label="Diploma"
 							placeholder="Ex: Bacharelado"
 							error={errors.degree}
 						/>
@@ -74,6 +89,7 @@ export const ModalAddAcademicRecord = ({
 					render={({ field: { ...field } }) => (
 						<Input
 							{...field}
+							label="Área de estudo"
 							placeholder="Ex: Ciência da Computação"
 							error={errors.field_of_study}
 						/>
@@ -86,7 +102,12 @@ export const ModalAddAcademicRecord = ({
 					control={control}
 					name="start_date"
 					render={({ field: { ...field } }) => (
-						<Input {...field} type="date" error={errors.start_date} />
+						<Input
+							{...field}
+							label="Data de início"
+							type="date"
+							error={errors.start_date}
+						/>
 					)}
 				/>
 				<Controller
@@ -96,7 +117,12 @@ export const ModalAddAcademicRecord = ({
 					control={control}
 					name="end_date"
 					render={({ field: { ...field } }) => (
-						<Input {...field} type="date" error={errors.end_date} />
+						<Input
+							{...field}
+							label="Data de término"
+							type="date"
+							error={errors.end_date}
+						/>
 					)}
 				/>
 				<Controller
@@ -106,7 +132,7 @@ export const ModalAddAcademicRecord = ({
 					control={control}
 					name="description"
 					render={({ field: { ...field } }) => (
-						<Textarea {...field} error={errors.description} />
+						<Textarea {...field} label="Descrição" error={errors.description} />
 					)}
 				/>
 			</S.Wrapper>

@@ -27,7 +27,7 @@ export const REQUIRED_ABOUT_ME = "O campo 'Sobre mim' é obrigatório.";
 export const REQUIRED_ACADEMIC_RECORD_INSTITUTION =
 	'A instituição é obrigatória.';
 
-export const REQUIRED_ACADEMIC_RECORD_DEGREE = 'O degree é obrigatório.';
+export const REQUIRED_ACADEMIC_RECORD_DEGREE = 'O diploma é obrigatório.';
 
 export const REQUIRED_ACADEMIC_RECORD_FIELD_STUDY =
 	'O campo de estudo é obrigatório.';
@@ -51,7 +51,7 @@ export const REQUIRED_PROFESSIONAL_EXPERIENCE_DESCRIPTION =
 	'A descrição é obrigatória.';
 
 export const REQUIRED_PROFESSIONAL_EXPERIENCE_LOCATION =
-	'A localização obrigatória.';
+	'A localização é obrigatória.';
 
 export const REQUIRED_PROFESSIONAL_EXPERIENCE_START_DATE =
 	'A data de início é obrigatória.';
@@ -78,3 +78,6 @@ export const REQUIRED_JOB_SALARY_TIME_UNIT =
 	'O período de pagamento é obrigatório.';
 
 export const REQUIRED_JOB_WORK_MODEL = 'O modelo de trabalho é obrigatório.';
+
+
+export const REQUIRED_JOB_APP_COVER_LETTER = 'A carta de apresentação é obrigatória'

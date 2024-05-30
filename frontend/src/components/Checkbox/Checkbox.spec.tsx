@@ -1,5 +1,5 @@
 import { render, screen } from 'utils/test/test-utils';
-import { Checkbox, CheckboxProps } from './Checkbox';
+import { Checkbox, CheckboxProps } from '.';
 
 const props: CheckboxProps = {
   label: 'myLabel',

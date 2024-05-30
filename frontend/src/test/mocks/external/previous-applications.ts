@@ -1,4 +1,4 @@
-import { PreviousApplicationsItemProps } from "components/PreviousApplicationsItem/PreviousApplicationsItem";
+import { PreviousApplicationsItemProps } from "components/PreviousApplicationsItem";
 
 export const applications: PreviousApplicationsItemProps[] = [
   {

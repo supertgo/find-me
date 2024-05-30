@@ -5,6 +5,7 @@ export type SalaryTimeUnit = 'month' | 'hour' | 'week' | 'day';
 export type WorkModel = 'onSite' | 'hybrid' | 'homeOffice';
 
 export type JobCompetence = {
+  id: number;
 	name: string;
 	description: string;
 	type: string;
@@ -26,16 +27,30 @@ export type Job = {
 	company_id: number;
 	user_id: number;
 	competences?: JobCompetence[];
+	company?: JobCompany;
 };
 
 export type JobsResponse = {
 	data: Job[];
 };
 
+export type JobCompany = {
+	id: number;
+	name: string;
+	description: string;
+	phone: string;
+	email: string;
+	cnpj: string;
+	fantasy_name: string;
+	location: string | null;
+};
+
 export type PostJobBody = Omit<
 	Job,
 	'user_id' | 'id' | 'created_at' | 'updated_at'
 >;
+
+export type JobIncludeOption = 'competences' | 'company';
 
 export const workModelOptions: WorkModel[] = ['onSite', 'hybrid', 'homeOffice'];
 

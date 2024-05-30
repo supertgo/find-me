@@ -2,7 +2,7 @@ import { render, screen } from 'utils/test/test-utils';
 import {
   PreviousApplicationsItem,
   PreviousApplicationsItemProps,
-} from './PreviousApplicationsItem';
+} from '.';
 
 const props: PreviousApplicationsItemProps = {
   jobTitle: 'Assistente de Redes Sociais',

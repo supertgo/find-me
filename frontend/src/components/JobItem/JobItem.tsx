@@ -1,17 +1,19 @@
+import { Button } from 'components/Button';
+import { JobCapacity } from 'components/JobCapacity';
+import { MediaMatch } from 'components/MediaMatch';
 import Image from 'next/image';
-import { Button } from 'components/Button/Button';
-import { MediaMatch } from 'components/MediaMatch/MediaMatch';
+import Link from 'next/link';
 import { Job } from 'protocols/external/job/job';
 import { filterJobLocation } from 'utils/job';
-import { JobPill, JobPillProps } from './JobPill';
-
+import { JobUrl } from 'utils/urls';
 import * as S from './JobItem.styles';
+import { JobPill, JobPillProps } from '.';
 
 export type JobItemProps = {} & Job;
 
 export const JobItem = ({
+	id,
 	name,
-	is_available,
 	applications_amount,
 	salary,
 	salary_time_unit,
@@ -54,19 +56,19 @@ export const JobItem = ({
 					</MediaMatch>
 				</S.JobInfo>
 			</S.JobInfoWrapper>
+
 			<S.PillSmallScreen>
 				<JobPill {...jobPillProps} />
 			</S.PillSmallScreen>
+
 			<S.JobApplicationInfo>
-				<Button disabled={!is_available}>Aplicar</Button>
-				<S.ProgressWrapper>
-					<S.ProgressDiv $progress={(applicants / applications_amount) * 100} />
-				</S.ProgressWrapper>
-				<S.JobMaxInfo>
-					<p>{`${applicants} aplicados`}</p>
-					<p>{`-`}</p>
-					<p>{`Máximo ${applications_amount}`}</p>
-				</S.JobMaxInfo>
+				<Link href={`/${JobUrl(id)}`}>
+					<Button>Visualizar</Button>
+				</Link>
+				<JobCapacity
+					applicants={applicants}
+					applications_amount={applications_amount}
+				/>
 			</S.JobApplicationInfo>
 		</S.Wrapper>
 	);

@@ -1,4 +1,4 @@
-import { Checkbox } from 'components/Checkbox/Checkbox';
+import { Checkbox } from 'components/Checkbox';
 import * as S from './JobFilter.styles';
 
 export type JobFilterProps = {};

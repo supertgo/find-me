@@ -1,6 +1,8 @@
+import 'components/Skeleton/Skeleton.mock'
 import { render, screen } from 'utils/test/test-utils';
 import { ResumeCard, ResumeCardProps } from './ResumeCard';
-import { CompetenceItem } from 'components/CompetenceItem/CompetenceItem';
+import { CompetenceItem } from 'components/CompetenceItem';
+import { LoadingResumeCard } from './LoadingResumeCard';
 
 const props: ResumeCardProps = {
 	text: 'Competências',
@@ -12,6 +14,14 @@ describe('<ResumeCard />', () => {
 		render(<ResumeCard {...props} />);
 
 		expect(screen.getByText('PHP')).toBeInTheDocument();
-    expect(screen.getByText(props.text)).toBeInTheDocument()
+		expect(screen.getByText(props.text)).toBeInTheDocument();
+	});
+});
+
+describe('<LoadingResumeCard />', () => {
+	it('should render the component', () => {
+		render(<LoadingResumeCard />);
+
+    expect(screen.getAllByTestId('Mock Skeleton')).toHaveLength(1)
 	});
 });

@@ -2,7 +2,7 @@ import { render, screen } from 'utils/test/test-utils';
 import {
 	ProfessionalExperienceItem,
 	ProfessionalExperienceItemProps,
-} from './ProfessionalExperienceItem';
+} from '.';
 import { translateEmploymentType } from 'utils/job';
 
 const props: ProfessionalExperienceItemProps = {
@@ -11,8 +11,8 @@ const props: ProfessionalExperienceItemProps = {
 	company_name: 'ABC Company',
 	position: 'Software Engineer',
 	description: 'Developed web applications using modern technologies.',
-	start_date: '2020-06-15',
-	end_date: '2022-08-30',
+	start_date: '2021-06-02',
+	end_date: '2025-12-17',
 	is_current: 0,
 	location: 'New York',
 	work_model: 'hybrid',
@@ -31,5 +31,8 @@ describe('<ProfessionalExperienceItem />', () => {
 		).toBeInTheDocument();
 		expect(screen.getByText(props.location)).toBeInTheDocument();
 		expect(screen.getByText(props.description)).toBeInTheDocument();
+		expect(
+			screen.getByText(`jun/2021 - dez/2025 (4 anos e 6 meses)`),
+		).toBeInTheDocument();
 	});
 });

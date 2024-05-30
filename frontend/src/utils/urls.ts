@@ -6,9 +6,13 @@ export const ForgotPasswordUrl = 'auth/forgot-password';
 
 export const HomeUrl = 'home';
 
+export const JobUrl = (id: number) => `job/${id}`;
+
+export const JobUrlApplicants = (id: number) => `job/${id}/applications`;
+
 export const JobsUrl = 'jobs';
 
-export const CreateJobUrl = 'job/create'
+export const CreateJobUrl = 'job/create';
 
 export const OpportunityUrl = 'opportunity';
 

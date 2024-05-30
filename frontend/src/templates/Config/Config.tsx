@@ -1,88 +1,35 @@
 'use client';
-import { useQuery } from '@tanstack/react-query';
-import { AxiosResponse, InternalAxiosRequestConfig } from 'axios';
-import { AcademicRecordItem } from 'components/AcademicRecordItem/AcademicRecordItem';
-import { AccountConfig } from 'components/AccountConfig/AccountConfig';
-import { CompetenceItem } from 'components/CompetenceItem/CompetenceItem';
-import { ModalRemoveAcademicRecord } from 'components/ModalRemoveAcademicRecord/ModalRemoveAcademicRecord';
-import { ModalRemoveCompetence } from 'components/ModalRemoveCompetence/ModalRemoveCompetence';
+import { AcademicRecordItem } from 'components/AcademicRecordItem';
+import { AccountConfig } from 'components/AccountConfig';
+import { CompetenceItem } from 'components/CompetenceItem';
+import { ModalRemoveAcademicRecord } from 'components/ModalRemoveAcademicRecord';
+import { ModalRemoveCompetence } from 'components/ModalRemoveCompetence';
 import { ModalRemoveProfessionalExperience } from 'components/ModalRemoveProfessionalExperience/ModalRemoveProfessionalExperience';
-import { ModalAddAcademicRecord } from 'components/Modals/ModalAddAcademicRecord/ModalAddAcademicRecord';
-import { ModalAddCompetence } from 'components/Modals/ModalAddCompetence/ModalAddCompetence';
+import { ModalAddAcademicRecord } from 'components/Modals/ModalAddAcademicRecord';
+import { ModalAddCompetence } from 'components/Modals/ModalAddCompetence';
 import { ModalAddProfessionalExperience } from 'components/Modals/ModalAddProfessionalExperience/ModalAddProfessionalExperience';
-import { ProfessionalExperienceItem } from 'components/ProfessionalExperienceItem/ProfessionalExperienceItem';
-import { ResumeCard } from 'components/ResumeCard/ResumeCard';
-import { Title } from 'components/Title/Title';
+import { ProfessionalExperienceItem } from 'components/ProfessionalExperienceItem';
+import { ResumeCard } from 'components/ResumeCard';
+import { Title } from 'components/Title';
 import { RemoveAcademicRecordProvider } from 'hooks/contexts/RemoveAcademicRecord/RemoveAcademicRecord';
-import { RemoveCompetenceContext, RemoveCompetenceProvider } from 'hooks/contexts/RemoveCompetence/RemoveCompetence';
+import { RemoveCompetenceProvider } from 'hooks/contexts/RemoveCompetence/RemoveCompetence';
 import { RemoveProfessionalExperienceProvider } from 'hooks/contexts/RemoveProfessionalExperience/RemoveProfessionalExperience';
-import { useUser } from 'hooks/useUser/useUser';
-import { GetUserResponse, UserProps } from 'protocols/external/user/user';
+import { useConfig } from 'hooks/useConfig/useConfig';
+import { UserProps } from 'protocols/external/user/user';
 import { Children } from 'react';
 import { Base } from 'templates/Base/Base';
-import { GetUserRouteConst } from 'utils/routes';
+import { LoadingConfig } from './LoadingConfig';
 
 export type ConfigProps = {} & UserProps;
 
-export const Config = ({
-	id,
-	name,
-	email,
-	phone,
-	competences,
-	profile_picture_path,
-	about_me,
-	academic_records,
-	professional_experiences,
-}: ConfigProps) => {
-	const { findUser } = useUser();
-
-	const initialData: AxiosResponse<GetUserResponse> = {
-		data: {
-			data: {
-				id,
-				name,
-				email,
-				phone,
-				type: 'employee',
-				about_me,
-				profile_picture_path,
-				competences: competences || [],
-				academic_records: academic_records || [],
-				professional_experiences: professional_experiences || [],
-			},
-		},
-		config: {} as InternalAxiosRequestConfig,
-		statusText: 'ok',
-		headers: {},
-		status: 200,
-		request: {},
-	};
-
-	const { data: getUserReponse, isLoading } = useQuery({
-		queryKey: [
-			`/${GetUserRouteConst({
-				user_id: id,
-			})}`,
-		],
-		queryFn: () =>
-			findUser({
-				user_id: id,
-				includes: ['competences', 'academicRecords', 'professionalExperiences'],
-			}),
-		initialData,
-	});
+export const Config = (props: ConfigProps) => {
+	const { getUserResponse, isLoading } = useConfig(props);
 
 	if (isLoading) {
-		// Eduardo / Ana
-		return (
-			<Base>
-				<p>Loading</p>
-			</Base>
-		);
+		return <LoadingConfig />;
 	}
 
-	const user = getUserReponse.data.data;
+	const user = getUserResponse.data.data;
 
 	return (
 		<Base>
@@ -92,50 +39,52 @@ export const Config = ({
 				email={user.email}
 				phone={user.phone}
 			/>
-			<>
-				<RemoveProfessionalExperienceProvider>
-					<ModalRemoveProfessionalExperience />
-					<Title title="Informações" />
-					<ResumeCard
-						text="Experiência"
-						addModal={<ModalAddProfessionalExperience user_id={user.id} />}
-					>
-						{Children.toArray(
-							user.professional_experiences?.map((professional_xp) => (
-								<ProfessionalExperienceItem {...professional_xp} />
-							)),
-						)}
-					</ResumeCard>
-				</RemoveProfessionalExperienceProvider>
+			{user.type === 'employee' && (
+				<>
+					<RemoveProfessionalExperienceProvider>
+						<ModalRemoveProfessionalExperience />
+						<Title title="Informações" />
+						<ResumeCard
+							text="Experiência"
+							addModal={<ModalAddProfessionalExperience user_id={user.id} />}
+						>
+							{Children.toArray(
+								user.professional_experiences?.map((professional_xp) => (
+									<ProfessionalExperienceItem {...professional_xp} />
+								)),
+							)}
+						</ResumeCard>
+					</RemoveProfessionalExperienceProvider>
 
-				<RemoveAcademicRecordProvider>
-					<ModalRemoveAcademicRecord />
-					<ResumeCard
-						text="Formação Acadêmica"
-						addModal={<ModalAddAcademicRecord user_id={user.id} />}
-					>
-						{Children.toArray(
-							user.academic_records?.map((academic_record) => (
-								<AcademicRecordItem {...academic_record} />
-							)),
-						)}
-					</ResumeCard>
-				</RemoveAcademicRecordProvider>
+					<RemoveAcademicRecordProvider>
+						<ModalRemoveAcademicRecord />
+						<ResumeCard
+							text="Formação Acadêmica"
+							addModal={<ModalAddAcademicRecord user_id={user.id} />}
+						>
+							{Children.toArray(
+								user.academic_records?.map((academic_record) => (
+									<AcademicRecordItem {...academic_record} />
+								)),
+							)}
+						</ResumeCard>
+					</RemoveAcademicRecordProvider>
 
-				<RemoveCompetenceProvider>
-          <ModalRemoveCompetence />
-					<ResumeCard
-						text="Competências"
-						addModal={<ModalAddCompetence user_id={user.id} />}
-					>
-						{Children.toArray(
-							user.competences?.map(({ name, id }) => (
-								<CompetenceItem id={id} name={name} />
-							)),
-						)}
-					</ResumeCard>
-				</RemoveCompetenceProvider>
-			</>
+					<RemoveCompetenceProvider>
+						<ModalRemoveCompetence />
+						<ResumeCard
+							text="Competências"
+							addModal={<ModalAddCompetence user_id={user.id} />}
+						>
+							{Children.toArray(
+								user.competences?.map(({ name, id }) => (
+									<CompetenceItem id={id} name={name} />
+								)),
+							)}
+						</ResumeCard>
+					</RemoveCompetenceProvider>
+				</>
+			)}
 		</Base>
 	);
 };

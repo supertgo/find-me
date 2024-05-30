@@ -3,6 +3,7 @@ import * as S from './AcademicRecordItem.styles';
 import { Cross1Icon } from '@radix-ui/react-icons';
 import { RemoveAcademicRecordContext } from 'hooks/contexts/RemoveAcademicRecord/RemoveAcademicRecord';
 import { useContextSelector } from 'use-context-selector';
+import { experienceDate } from 'utils/date';
 
 export type AcademicRecordItemProps = {} & Omit<
 	AcademicRecord,
@@ -34,15 +35,23 @@ export const AcademicRecordItem = ({
 		});
 		setOpen(true);
 	};
-
 	return (
 		<S.Wrapper>
 			<S.AcademicInfo>
 				<S.AcademicTopRow>
 					<S.AcademicInfoTitle>{institution}</S.AcademicInfoTitle>
-					<Cross1Icon onClick={removeAcademicRecord} />
+          <i title="Remover Formação Acadêmica" onClick={removeAcademicRecord}>
+            <Cross1Icon />
+          </i>
 				</S.AcademicTopRow>
 				<S.AcademicInfoSubtitle>{`${degree}, ${field_of_study}`}</S.AcademicInfoSubtitle>
+				<S.AcademicInfoSubtitle>
+					{experienceDate({
+						endDate: end_date,
+						isCurrent: is_in_progress,
+						startDate: start_date,
+					})}
+				</S.AcademicInfoSubtitle>
 			</S.AcademicInfo>
 			<S.Description>{description}</S.Description>
 		</S.Wrapper>

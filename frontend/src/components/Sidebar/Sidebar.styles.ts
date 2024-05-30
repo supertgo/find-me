@@ -19,20 +19,28 @@ export const Wrapper = styled.div`
       align-items: center;
       width: 100%;
       padding: ${theme.space.small} 0;
+
+      & > div > p {
+        display: none;
+      }
     `}
+
 	`}
 `;
 
 export const Items = styled.div`
 	${({ theme }) => css`
-		margin-top: ${theme.space.large};
 		${media.lessThan('large')`
-    display: flex;    
-    flex-direction: row;
-    height: min-content;
-    width: 100%;
-    justify-content: space-around;
-  `}
+      display: flex;    
+      flex-direction: row;
+      height: min-content;
+      width: 100%;
+      justify-content: space-around;
+    `}
+    
+    ${media.greaterThan('large')`
+      margin-top: ${theme.space.large};
+    `}
 	`}
 `;
 

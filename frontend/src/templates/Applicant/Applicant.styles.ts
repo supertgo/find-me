@@ -2,17 +2,25 @@ import styled, { css } from 'styled-components';
 
 export const Wrapper = styled.div`
   ${({ theme }) => css`
+    padding: ${theme.space.large};
+
+    & > *:not(:first-child) {
+      margin-top: ${theme.space.large};
+    }
+  `}
+`;
+
+export const Container = styled.div`
+  ${({ theme }) => css`
     display: grid;
     grid-template-columns: 0.4fr 0.6fr;
     gap: ${theme.space.large};
-    margin: 0 ${theme.space.large};
   `}
 `;
 
 export const LeftContent = styled.div`
   ${({ theme }) => css`
     border: ${theme.borderWidth.hairline} solid #d6ddeb;
-    border-top: 0;
     padding: ${theme.space.medium};
   `}
 `;
@@ -20,7 +28,6 @@ export const LeftContent = styled.div`
 export const RightContent = styled.div`
   ${({ theme }) => css`
     border: ${theme.borderWidth.hairline} solid #d6ddeb;
-    border-top: 0;
     padding: ${theme.space.medium};
   `}
 `;

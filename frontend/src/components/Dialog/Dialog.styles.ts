@@ -43,6 +43,7 @@ export const DialogContent = styled.div`
 			max-height: calc(100vh - 3rem);
 			z-index: ${theme.layers.modal + 1};
 			width: 80rem;
+      overflow-y: auto;
 		}
 	`}
 `;

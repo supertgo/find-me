@@ -1,15 +1,20 @@
-import { SidebarItem } from 'components/SidebarItem/SidebarItem';
-import { HomeIcon } from 'icons/HomeIcon/HomeIcon';
-import { ConfigUrl, HomeUrl, JobsUrl } from 'utils/urls';
 import { MagnifyingGlassIcon, PersonIcon } from '@radix-ui/react-icons';
+import { SidebarItem } from 'components/SidebarItem';
+import { HomeIcon } from 'icons/HomeIcon/HomeIcon';
 import { theme } from 'styles/theme';
+import { ConfigUrl, HomeUrl, JobsUrl } from 'utils/urls';
 
 export type ApplicantSidebarItemsProps = {};
 
 export const ApplicantSidebarItems = ({}: ApplicantSidebarItemsProps) => {
 	return (
 		<>
-			<SidebarItem href={`/${HomeUrl}`} icon={<HomeIcon />} text="Início" />
+			<SidebarItem
+				href={`/${HomeUrl}`}
+				icon={<HomeIcon />}
+				text="Início"
+				keyword="home"
+			/>
 			<SidebarItem
 				href={`/${JobsUrl}`}
 				icon={
@@ -20,6 +25,7 @@ export const ApplicantSidebarItems = ({}: ApplicantSidebarItemsProps) => {
 					/>
 				}
 				text="Vagas"
+				keyword="job"
 			/>
 			<SidebarItem
 				href={`/${ConfigUrl}`}
@@ -30,7 +36,8 @@ export const ApplicantSidebarItems = ({}: ApplicantSidebarItemsProps) => {
 						color={theme.colors.officialGrey}
 					/>
 				}
-				text="Meu Perfil Público"
+				text="Perfil Público"
+				keyword="config"
 			/>
 		</>
 	);

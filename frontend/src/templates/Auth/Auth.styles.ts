@@ -50,18 +50,16 @@ export const LeftSideContent = styled.div`
 	`}
 `;
 
-export const Description = styled.div``;
+export const Description = styled.div`
+	${({ theme }) => css`
+		margin-top: ${theme.space.large};
+	`}
+`;
 
 export const Copy = styled.p`
 	${({ theme }) => css`
 		font-weight: ${theme.font.weights.medium};
 		font-size: ${theme.font.sizes.lg};
-	`}
-`;
-
-export const LogoImage = styled.img`
-	${({ theme }) => css`
-		margin-bottom: ${theme.space.large};
 	`}
 `;
 

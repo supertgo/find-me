@@ -30,4 +30,6 @@ interface UserServiceInterface
     function updateProfilePicture(int $userId, UploadedFile $profilePicture): string;
 
     function deleteProfilePicture(int $userId): void;
+
+    function usersWithIncludes(array $filters = [], array $includes = []): array;
 }

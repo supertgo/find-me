@@ -8,6 +8,7 @@ use App\Domain\Company\CompanyDomain;
 use App\Domain\Company\CompanyRepository;
 use App\Domain\Competence\CompetenceDomain;
 use App\Domain\Competence\CompetenceRepository;
+use App\Domain\Competence\CompetencesIdFilterMustBePositiveIntegersException;
 use App\Domain\User\AcademicRecord\AcademicRecordDomain;
 use App\Domain\User\AcademicRecord\AcademicRecordRepository;
 use App\Domain\User\ProfessionalExperience\ProfessionalExperienceDomain;
@@ -22,6 +23,8 @@ use App\Exceptions\User\ProfessionalExperience\EndDateMustBeAfterStartDateExcept
 use App\Exceptions\User\ProfessionalExperience\MustHaveEndDateWhenFinishedExperienceException;
 use App\Exceptions\User\ProfessionalExperience\OnlyOwnerCanDeleteProfessionalExperienceException;
 use App\Exceptions\User\ProfessionalExperience\ProfessionalExperienceNotFoundException;
+use App\Exceptions\User\UnknownUserIncludeException;
+use App\Exceptions\User\UnknownUserTypeException;
 use App\Exceptions\User\UserNotFoundException;
 use App\Helpers\File\FileHelperInterface;
 use Exception;
@@ -332,5 +335,16 @@ class UserService extends AbstractService implements UserServiceInterface
                 throw new CompanyNotFoundException($experience['company_id']);
             }
         });
+    }
+
+    /**
+     * @throws UnknownUserTypeException
+     * @throws UnknownUserIncludeException
+     * @throws CompetencesIdFilterMustBePositiveIntegersException
+     */
+    public function usersWithIncludes(array $filters = [], array $includes = []): array
+    {
+        return (new UserDomain(app(UserRepository::class)))
+            ->usersWithIncludes($filters, $includes);
     }
 }

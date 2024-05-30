@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Domain\User\UserService;
+use App\Domain\User\UserServiceInterface;
 use App\Exceptions\Abstract\AbstractFindMeException;
 use App\Http\Requests\User\UserCompetence\AddCompetencesRequest;
 use App\Http\Requests\User\UserCompetence\DeleteCompetencesRequest;
@@ -17,7 +17,7 @@ class UserCompetenceController extends Controller
     public function addCompetences(AddCompetencesRequest $request): JsonResponse|IluminateResponse
     {
         try {
-            app(UserService::class)
+            app(UserServiceInterface::class)
                 ->addCompetencesToUser(
                     $request->getLoggedUserId(),
                     $request->validated('competences')
@@ -37,14 +37,14 @@ class UserCompetenceController extends Controller
     public function deleteCompetences(DeleteCompetencesRequest $request): JsonResponse|IluminateResponse
     {
         try {
-            (new UserService())
+            app(UserServiceInterface::class)
                 ->removeCompetences(
                     $request->getLoggedUserId(),
                     $request->validated('competences_id')
                 );
 
             return response()->noContent();
-        } catch (AbstractFindMeException  $exception) {
+        } catch (AbstractFindMeException $exception) {
             return response()->json(
                 $exception->render(),
                 status: $exception->getHttpCode()

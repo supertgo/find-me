@@ -3,12 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Domain\Abstract\AbstractRepository;
-use App\Domain\Job\JobDomain;
-use App\Domain\Job\JobRepository;
-use App\Domain\Job\JobService;
+use App\Domain\Job\JobServiceInterface;
 use App\Exceptions\Abstract\AbstractFindMeException;
-use App\Exceptions\Job\JobIdMustBeAnIntegerException;
-use App\Exceptions\Job\JobNotFoundException;
 use App\Http\Requests\Job\IndexJobRequest;
 use App\Http\Requests\Job\JobRequestHavingId;
 use App\Http\Requests\Job\ShowJobRequest;
@@ -26,7 +22,8 @@ class JobController extends Controller
     public function store(StoreJobRequest $request): JsonResponse|IluminateResponse
     {
         try {
-            (new JobService())->store($request->validated(), $request->getLoggedUserId());
+            app(JobServiceInterface::class)
+                ->store($request->validated(), $request->getLoggedUserId());
 
             return response(status: Response::HTTP_CREATED);
         } catch (AbstractFindMeException  $exception) {
@@ -48,7 +45,7 @@ class JobController extends Controller
     public function update(UpdateJobRequest $request): JsonResponse|IluminateResponse
     {
         try {
-            (new JobService())
+            app(JobServiceInterface::class)
                 ->update(
                     $request->validated(),
                     $request->getLoggedUserId(),
@@ -69,39 +66,20 @@ class JobController extends Controller
         }
     }
 
-    /**
-     * @throws JobNotFoundException
-     * @throws JobIdMustBeAnIntegerException
-     * @throws Throwable
-     */
     public function destroy(JobRequestHavingId $request): JsonResponse|IluminateResponse
     {
-        $repository = app(JobRepository::class);
-
         try {
-            $repository->beginTransaction();
-
-            $domain = new JobDomain($repository);
-            $domain->setId($request->getJobId())
-                ->setUserId($request->getLoggedUserId());
-
-            if (!$domain->exists($domain->getId())) {
-                throw new JobNotFoundException($domain->getId());
-            }
-            $domain->delete();
-
-            $repository->commitTransaction();
+            app(JobServiceInterface::class)
+                ->destroy($request->getJobId(), $request->getLoggedUserId());
 
             return response()->noContent();
         } catch (AbstractFindMeException  $exception) {
-            $this->commonLogLogic($repository, $exception);
-
             return response()->json(
                 $exception->render(),
                 status: $exception->getHttpCode()
             );
         } catch (Exception $exception) {
-            $this->commonLogLogic($repository, $exception);
+            Log::error($exception);
 
             return response()
                 ->json(
@@ -125,13 +103,11 @@ class JobController extends Controller
 
     public function index(IndexJobRequest $request): JsonResponse|IluminateResponse
     {
-        $repository = app(JobRepository::class);
-        $domain = new JobDomain($repository);
-
         try {
             return response()
                 ->json([
-                    'data' => $domain->jobsWithIncludes($request->getFilters(), $request->getIncludes())
+                    'data' => app(JobServiceInterface::class)
+                        ->index($request->getFilters(), $request->getIncludes())
                 ]);
         } catch (AbstractFindMeException  $exception) {
             return response()->json(
@@ -148,28 +124,20 @@ class JobController extends Controller
         }
     }
 
-    /**
-     * @throws JobNotFoundException
-     * @throws JobIdMustBeAnIntegerException
-     */
     public function show(ShowJobRequest $request): JsonResponse|IluminateResponse
     {
-        $repository = app(JobRepository::class);
-
-        $domain = new JobDomain($repository);
-        $domain->setId($request->getJobId())
-            ->setUserId($request->getLoggedUserId());
-
-        if (!$domain->exists($domain->getId())) {
-            throw new JobNotFoundException($domain->getId());
-        }
-
         try {
-            $job = $domain->getJobWithIncludes($request->getIncludes());
+            $job = app(JobServiceInterface::class)
+                ->show($request->getJobId(), $request->getIncludes());
 
             return response()->json([
                 'data' => $job
             ]);
+        } catch (AbstractFindMeException  $exception) {
+            return response()->json(
+                $exception->render(),
+                status: $exception->getHttpCode()
+            );
         } catch (Exception $exception) {
             Log::error($exception);
 

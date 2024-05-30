@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Domain\User\UserService;
+use App\Domain\User\UserServiceInterface;
 use App\Exceptions\Abstract\AbstractFindMeException;
 use App\Http\Requests\User\AcademicRecord\AddAcademicRecordRequest;
 use App\Http\Requests\User\AcademicRecord\DeleteAcademicRecordsRequest;
@@ -17,7 +17,7 @@ class UserAcademicRecordsController extends Controller
     public function addAcademicRecords(AddAcademicRecordRequest $request): JsonResponse|IluminateResponse
     {
         try {
-            (new UserService())
+            app(UserServiceInterface::class)
                 ->addAcademicRecords(
                     $request->getLoggedUserId(),
                     $request->validated('academic_records')
@@ -42,7 +42,7 @@ class UserAcademicRecordsController extends Controller
     public function deleteAcademicRecords(DeleteAcademicRecordsRequest $request): JsonResponse|IluminateResponse
     {
         try {
-            (new UserService())
+            app(UserServiceInterface::class)
                 ->removeAcademicRecords(
                     $request->getLoggedUserId(),
                     $request->validated('academic_records_id')

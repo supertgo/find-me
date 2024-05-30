@@ -182,7 +182,7 @@ return [
         \App\Providers\Service\UserServiceProvider::class,
         \App\Providers\Service\ResumeServiceProvider::class,
         \App\Providers\Service\CompanyServiceProvider::class,
-        \App\Providers\Service\JobApplicationsServiceProvider::class,
+        \App\Providers\Service\JobServiceProvider::class,
 
         //JWT
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,

@@ -7,10 +7,19 @@ use App\Domain\Company\CompanyDomain;
 use App\Domain\Company\CompanyRepository;
 use App\Domain\Competence\CompetenceDomain;
 use App\Domain\Competence\CompetenceRepository;
+use App\Domain\Competence\CompetencesIdFilterMustBePositiveIntegersException;
 use App\Exceptions\Company\CompanyNotFoundException;
+use App\Exceptions\Job\CompanyIdsFilterMustBePositiveIntegersException;
 use App\Exceptions\Job\IdRequiredToUpdateException;
+use App\Exceptions\Job\InvalidAcceptApplicationUntilDateFormatException;
 use App\Exceptions\Job\JobNotFoundException;
 use App\Exceptions\Job\OnlyOwnerCanUpdateJobException;
+use App\Exceptions\Job\SalaryToMustBeBiggerThanFromException;
+use App\Exceptions\Job\UnknownEmploymentTypesFilterException;
+use App\Exceptions\Job\UnknownSalaryTimeUnitsFilterException;
+use App\Exceptions\Job\UnknownWorkModelsFilterException;
+use App\Exceptions\Job\WeekWorkloadMustBePositiveException;
+use App\Exceptions\Job\WeekWorkloadToMustBeBiggerThanFromException;
 use App\Helpers\DataTransaction\DataTransactionService;
 use Exception;
 use Throwable;
@@ -132,5 +141,33 @@ class JobService extends AbstractService implements JobServiceInterface
 
             throw $exception;
         }
+    }
+
+    /**
+     * @throws JobNotFoundException
+     */
+    public function show(int $jobId, array $includes = []): array
+    {
+        return (new JobDomain(new JobRepository()))
+            ->assureExists($jobId)
+            ->setId($jobId)
+            ->getJobWithIncludes($includes);
+    }
+
+    /**
+     * @throws SalaryToMustBeBiggerThanFromException
+     * @throws UnknownWorkModelsFilterException
+     * @throws CompetencesIdFilterMustBePositiveIntegersException
+     * @throws CompanyIdsFilterMustBePositiveIntegersException
+     * @throws InvalidAcceptApplicationUntilDateFormatException
+     * @throws WeekWorkloadToMustBeBiggerThanFromException
+     * @throws UnknownEmploymentTypesFilterException
+     * @throws WeekWorkloadMustBePositiveException
+     * @throws UnknownSalaryTimeUnitsFilterException
+     */
+    public function index(array $filers, array $includes): array
+    {
+        return (new JobDomain(new JobRepository()))
+            ->jobsWithIncludes($filers, $includes);
     }
 }

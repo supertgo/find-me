@@ -9,6 +9,7 @@ use App\Exceptions\Job\IdRequiredToUpdateException;
 use App\Exceptions\Job\InvalidAcceptApplicationUntilDateFormatException;
 use App\Exceptions\Job\JobAcceptApplicationsUntilPassedException;
 use App\Exceptions\Job\JobApplicationsAmountSurpassedException;
+use App\Exceptions\Job\JobNotFoundException;
 use App\Exceptions\Job\OnlyOwnerCanUpdateJobException;
 use App\Exceptions\Job\SalaryToMustBeBiggerThanFromException;
 use App\Exceptions\Job\UnknownEmploymentTypesFilterException;
@@ -75,6 +76,18 @@ readonly class JobDomain implements JobDomainInterface
     public function exists(int $id): bool
     {
         return $this->jobRepository->jobExists($id);
+    }
+
+    /**
+     * @throws JobNotFoundException
+     */
+    public function assureExists(int $id): self
+    {
+        if (!$this->exists($id)) {
+            throw new JobNotFoundException($id);
+        }
+
+        return $this;
     }
 
     /**

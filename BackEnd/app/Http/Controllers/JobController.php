@@ -3,12 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Domain\Abstract\AbstractRepository;
-use App\Domain\Job\JobDomain;
-use App\Domain\Job\JobRepository;
 use App\Domain\Job\JobServiceInterface;
 use App\Exceptions\Abstract\AbstractFindMeException;
-use App\Exceptions\Job\JobIdMustBeAnIntegerException;
-use App\Exceptions\Job\JobNotFoundException;
 use App\Http\Requests\Job\IndexJobRequest;
 use App\Http\Requests\Job\JobRequestHavingId;
 use App\Http\Requests\Job\ShowJobRequest;
@@ -107,13 +103,11 @@ class JobController extends Controller
 
     public function index(IndexJobRequest $request): JsonResponse|IluminateResponse
     {
-        $repository = app(JobRepository::class);
-        $domain = new JobDomain($repository);
-
         try {
             return response()
                 ->json([
-                    'data' => $domain->jobsWithIncludes($request->getFilters(), $request->getIncludes())
+                    'data' => app(JobServiceInterface::class)
+                        ->index($request->getFilters(), $request->getIncludes())
                 ]);
         } catch (AbstractFindMeException  $exception) {
             return response()->json(
@@ -130,28 +124,20 @@ class JobController extends Controller
         }
     }
 
-    /**
-     * @throws JobNotFoundException
-     * @throws JobIdMustBeAnIntegerException
-     */
     public function show(ShowJobRequest $request): JsonResponse|IluminateResponse
     {
-        $repository = app(JobRepository::class);
-
-        $domain = new JobDomain($repository);
-        $domain->setId($request->getJobId())
-            ->setUserId($request->getLoggedUserId());
-
-        if (!$domain->exists($domain->getId())) {
-            throw new JobNotFoundException($domain->getId());
-        }
-
         try {
-            $job = $domain->getJobWithIncludes($request->getIncludes());
+            $job = app(JobServiceInterface::class)
+                ->show($request->getJobId(), $request->getIncludes());
 
             return response()->json([
                 'data' => $job
             ]);
+        } catch (AbstractFindMeException  $exception) {
+            return response()->json(
+                $exception->render(),
+                status: $exception->getHttpCode()
+            );
         } catch (Exception $exception) {
             Log::error($exception);
 

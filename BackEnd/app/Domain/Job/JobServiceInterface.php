@@ -11,4 +11,8 @@ interface JobServiceInterface
     function createCompetences(array $data, JobDomain $domain): void;
 
     function destroy(int $jobId, int $solicitorId);
+
+    function show(int $jobId, array $includes = []): array;
+
+    function index(array $filers, array $includes): array;
 }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Domain\User\UserService;
+use App\Domain\User\UserServiceInterface;
 use App\Exceptions\Abstract\AbstractFindMeException;
 use App\Http\Requests\User\PrefessionalExperience\AddProfessionalExperienceRequest;
 use App\Http\Requests\User\PrefessionalExperience\DeleteProfessionalExperiencesRequest;
@@ -23,7 +23,7 @@ class UserProfessionalExperience extends Controller
     ): JsonResponse|IluminateResponse
     {
         try {
-            (new UserService())
+            app(UserServiceInterface::class)
                 ->addProfessionalExperiences(
                     $request->getLoggedUserId(),
                     $request->validated('professional_experiences')
@@ -50,7 +50,7 @@ class UserProfessionalExperience extends Controller
     ): JsonResponse|IluminateResponse
     {
         try {
-            (new UserService())
+            app(UserServiceInterface::class)
                 ->removeProfessionalExperiences(
                     $request->getLoggedUserId(),
                     $request->validated('professional_experiences_id')

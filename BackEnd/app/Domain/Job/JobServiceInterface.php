@@ -9,4 +9,6 @@ interface JobServiceInterface
     function update(array $data, int $userId, int $jobId): void;
 
     function createCompetences(array $data, JobDomain $domain): void;
+
+    function destroy(int $jobId, int $solicitorId);
 }

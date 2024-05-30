@@ -13,13 +13,7 @@ export const Header = styled.header`
 	`}
 `;
 
-export const Form = styled.form`
-	${({ theme }) => css`
-		& > * {
-			border: 1px solid ${theme.colors.whiteGrey};
-		}
-	`}
-`;
+export const Form = styled.form``;
 
 export const ContractTypeWrapper = styled.div`
 	${({ theme }) => css`

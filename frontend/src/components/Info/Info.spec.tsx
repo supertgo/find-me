@@ -1,5 +1,5 @@
 import { render, screen } from 'utils/test/test-utils'
-import { Info, InfoProps } from './Info'
+import { Info, InfoProps } from '.'
 
 const props: InfoProps = {
   title: 'Salário',

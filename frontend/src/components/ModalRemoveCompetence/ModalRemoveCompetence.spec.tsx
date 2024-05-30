@@ -1,5 +1,5 @@
 import { render, renderHook, screen } from 'utils/test/test-utils';
-import { ModalRemoveCompetence } from './ModalRemoveCompetence';
+import { ModalRemoveCompetence } from '.';
 import { useContextSelector } from 'use-context-selector';
 import { RemoveCompetenceContext } from 'hooks/contexts/RemoveCompetence/RemoveCompetence';
 

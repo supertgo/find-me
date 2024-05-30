@@ -1,4 +1,4 @@
-import { BaseModal } from 'components/Modals/BaseModal/BaseModal';
+import { BaseModal } from 'components/Modals/BaseModal';
 import { useModalRemoveJob } from 'hooks/useModalRemoveJob/useModalRemoveJob';
 import { Dispatch, SetStateAction } from 'react';
 
@@ -15,9 +15,9 @@ export type ModalRemoveJobProps = {
 };
 
 export const ModalRemoveJob = ({ open, setOpen, job }: ModalRemoveJobProps) => {
-	const { handleSubmit } = useModalRemoveJob({
+	const { handleSubmit, loading } = useModalRemoveJob({
 		setOpen,
-    job
+		job,
 	});
 
 	return (
@@ -27,6 +27,7 @@ export const ModalRemoveJob = ({ open, setOpen, job }: ModalRemoveJobProps) => {
 			setOpen={setOpen}
 			confirmButtonText="Excluir"
 			confirmHandler={handleSubmit}
+			isConfirmButtonLoading={loading}
 			cancelButtonText="Cancelar"
 		>
 			{!!job && (

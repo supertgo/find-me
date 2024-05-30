@@ -3042,6 +3042,108 @@
                 ]
               }
             }
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "description": "filter data",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "filters": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "is_available": {
+                      "type": "boolean"
+                    },
+                    "salary_from": {
+                      "type": "integer"
+                    },
+                    "salary_to": {
+                      "type": "integer"
+                    },
+                    "salary_time_units": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "description": "The time unit for the salary",
+                        "enum": [
+                          "hour",
+                          "day",
+                          "week",
+                          "month"
+                        ],
+                        "example": "month"
+                      }
+                    },
+                    "accept_application_until": {
+                      "type": "string",
+                      "format": "date-time",
+                      "pattern": "^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}$"
+                    },
+                    "work_models": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "description": "The work model for the job",
+                        "enum": [
+                          "hybrid",
+                          "onSite",
+                          "homeOffice"
+                        ],
+                        "example": "hybrid"
+                      }
+                    },
+                    "employment_types": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "description": "The employment type for the job",
+                        "enum": [
+                          "full-time",
+                          "part-time"
+                        ],
+                        "example": "full-time"
+                      }
+                    },
+                    "week_workload_from": {
+                      "type": "integer"
+                    },
+                    "week_workload_to": {
+                      "type": "integer"
+                    },
+                    "location": {
+                      "type": "string"
+                    },
+                    "company_ids": {
+                      "type": "array",
+                      "items": {
+                        "type": "integer"
+                      }
+                    },
+                    "user_ids": {
+                      "type": "array",
+                      "items": {
+                        "type": "integer"
+                      }
+                    },
+                    "competence_ids": {
+                      "type": "array",
+                      "items": {
+                        "type": "integer"
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         ],
         "responses": {

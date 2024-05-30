@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Error404 from 'assets/error-404.svg';
 import { Base } from 'templates/Base/Base';
 import Link from 'next/link';
-import { Button } from 'components/Button/Button';
+import { Button } from 'components/Button';
 
 import * as S from './NotFound.styles';
 import { HomeUrl } from 'utils/urls';

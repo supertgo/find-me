@@ -1,5 +1,5 @@
 import { act, fireEvent, render, screen } from 'utils/test/test-utils';
-import { ModalCoverLetter, ModalCoverLetterProps } from './ModalCoverLetter';
+import { ModalCoverLetter, ModalCoverLetterProps } from '.';
 
 const props: ModalCoverLetterProps = {
 	jobId: 10,

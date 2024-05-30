@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Exceptions\User;
+namespace App\Exceptions\Job;
 
 use App\Exceptions\Abstract\AbstractFindMeException;
 use App\Exceptions\ExceptionMessagesEnum;
 
-class CompetencesIdFilterMustBePositiveIntegersException extends AbstractFindMeException
+class UserIdsFilterMustBePositiveIntegersException extends AbstractFindMeException
 {
     public function __construct(array $values)
     {
-        parent::__construct(ExceptionMessagesEnum::CompetencesIdFilterMustBePositiveIntegers->value);
+        parent::__construct(ExceptionMessagesEnum::UserIdsFilterMustBePositiveIntegers->value);
 
         $this->additionalInfo = [
             'nonPositiveIntegerValues' => $values

@@ -28,7 +28,9 @@ export const CompetenceItem = ({ name, id }: CompetenceItemProps) => {
 	return (
 		<S.Wrapper>
 			<span>{name}</span>
-			<Cross1Icon onClick={removeCompetence} />
+      <i title="Remover Competência" onClick={removeCompetence}>
+        <Cross1Icon />
+      </i>
 		</S.Wrapper>
 	);
 };

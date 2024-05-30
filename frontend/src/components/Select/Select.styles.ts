@@ -2,14 +2,14 @@ import styled, { css } from 'styled-components';
 
 export const Wrapper = styled.div`
 	${({ theme }) => css`
-	select {
-		padding: ${theme.space.xsmall};
-		border-radius: 0;
-		border: 1px solid ${theme.colors.cleanGrey};
-		font-weight: ${theme.font.weights.regular};
-		background: ${theme.colors.white};
-		font-size: ${theme.font.sizes.xxs};
-		color: ${theme.colors.darkTitanium};
+		select {
+			padding: ${theme.space.xsmall};
+			border: 1px solid ${theme.colors.cleanGrey};
+			font-weight: ${theme.font.weights.regular};
+			background: ${theme.colors.white};
+			font-size: ${theme.font.sizes.xxs};
+			color: ${theme.colors.darkTitanium};
+		}
 	`}
 `;
 

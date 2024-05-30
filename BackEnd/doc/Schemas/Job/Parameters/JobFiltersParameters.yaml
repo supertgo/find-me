@@ -1,0 +1,6 @@
+name: filters
+in: query
+description: 'filter data'
+required: false
+schema:
+  $ref: '../Components/JobFilters.yaml'

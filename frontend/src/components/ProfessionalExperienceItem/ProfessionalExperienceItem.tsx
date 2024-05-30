@@ -47,7 +47,9 @@ export const ProfessionalExperienceItem = ({
 			<S.ProfessionalXPInfo>
 				<S.ProfessionalXPTopRow>
 					<S.ProfessionalXPInfoTitle>{position}</S.ProfessionalXPInfoTitle>
-					<Cross1Icon onClick={removeProfessionalExperience} />
+					<i title="Remover experiência" onClick={removeProfessionalExperience}>
+						<Cross1Icon />
+					</i>
 				</S.ProfessionalXPTopRow>
 				<S.ProfessionalXPInfoSubtitle>{subtitle}</S.ProfessionalXPInfoSubtitle>
 				<S.ProfessionalXPAdditionalInfo>

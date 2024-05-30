@@ -1,5 +1,5 @@
 import { render, screen } from 'utils/test/test-utils'
-import { JobCapacity, JobCapacityProps } from './JobCapacity'
+import { JobCapacity, JobCapacityProps } from '.'
 
 const props: JobCapacityProps = {
   applicants: 50,

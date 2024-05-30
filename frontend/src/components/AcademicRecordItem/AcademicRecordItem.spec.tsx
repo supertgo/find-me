@@ -1,8 +1,5 @@
 import { render, screen } from 'utils/test/test-utils';
-import {
-	AcademicRecordItem,
-	AcademicRecordItemProps,
-} from './AcademicRecordItem';
+import { AcademicRecordItem, AcademicRecordItemProps } from '.';
 
 const props: AcademicRecordItemProps = {
 	id: 1,

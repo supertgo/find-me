@@ -1,7 +1,10 @@
-import 'components/Skeleton/Skeleton.mock'
+import 'components/Skeleton/Skeleton.mock';
 import { render, screen } from 'utils/test/test-utils';
-import { ConfigInfoWrapper, ConfigInfoWrapperProps } from './ConfigInfoWrapper';
-import { LoadingConfigInfoWrapper } from './LoadingConfigInfoWrapper';
+import {
+	ConfigInfoWrapper,
+	ConfigInfoWrapperProps,
+	LoadingConfigInfoWrapper,
+} from '.';
 
 const props: ConfigInfoWrapperProps = {
 	title: 'Informações',
@@ -27,6 +30,6 @@ describe('<LoadingConfigInfoWrapper />', () => {
 	it('should render the component', () => {
 		render(<LoadingConfigInfoWrapper />);
 
-    expect(screen.getAllByTestId('Mock Skeleton')).toHaveLength(4)
+		expect(screen.getAllByTestId('Mock Skeleton')).toHaveLength(4);
 	});
 });

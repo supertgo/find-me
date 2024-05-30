@@ -1,4 +1,4 @@
-import { ForwardedRef, InputHTMLAttributes, forwardRef } from 'react';
+import { ForwardedRef, forwardRef } from 'react';
 import * as S from './Checkbox.styles';
 
 export type CheckboxProps = {

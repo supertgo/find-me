@@ -1,10 +1,11 @@
 import styled, { css } from 'styled-components';
+import media from 'styled-media-query'
 
 export const Wrapper = styled.div`
 	${({ theme }) => css`
 		background: ${theme.colors.white};
 		padding: ${theme.space.medium};
-    color: ${theme.colors.darkTitanium};
+		color: ${theme.colors.darkTitanium};
 	`}
 `;
 
@@ -26,9 +27,9 @@ export const JobHeaderWrapper = styled.div`
 			padding: 1.4rem 5.6rem;
 		}
 
-    & > *:not(:first-child) {
-      margin-top: ${theme.space.xxxlarge};
-    }
+		& > *:not(:first-child) {
+			margin-top: ${theme.space.xxxlarge};
+		}
 	`}
 `;
 
@@ -39,6 +40,14 @@ export const JobHeader = styled.header`
 		justify-content: space-between;
 		background: ${theme.colors.white};
 		padding: ${theme.space.medium};
+    
+    ${media.lessThan('medium')`
+      flex-direction: column;
+      gap: ${theme.space.medium};
+      button {
+        width: 100%;
+      }
+    `}
 	`}
 `;
 
@@ -61,6 +70,11 @@ export const InfoWrapper = styled.div`
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
 		margin-bottom: ${theme.space.large};
+
+    ${media.lessThan('medium')`
+      display: flex;
+      flex-direction: column;
+    `}
 	`}
 `;
 
@@ -90,6 +104,7 @@ export const Description = styled.p`
 	${({ theme }) => css`
 		color: ${theme.colors.darkTitanium};
 		font-size: ${theme.font.sizes.sm};
+		white-space: break-spaces;
 	`}
 `;
 

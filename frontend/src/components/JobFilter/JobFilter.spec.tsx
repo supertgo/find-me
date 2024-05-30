@@ -1,5 +1,5 @@
 import { render, screen } from 'utils/test/test-utils';
-import { JobFilter } from './JobFilter';
+import { JobFilter } from '.';
 
 const textsToMatch = [
   'Tipo de Contratação',

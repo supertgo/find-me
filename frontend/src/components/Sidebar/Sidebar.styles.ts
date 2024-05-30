@@ -10,7 +10,6 @@ export const Wrapper = styled.div`
 		display: flex;
 		justify-content: space-between;
 		flex-direction: column;
-    box-shadow: 10px 0px 0px 0px #D3D6DB;
 
 		${media.lessThan('large')`
       display: flex;    
@@ -20,20 +19,28 @@ export const Wrapper = styled.div`
       align-items: center;
       width: 100%;
       padding: ${theme.space.small} 0;
+
+      & > div > p {
+        display: none;
+      }
     `}
+
 	`}
 `;
 
 export const Items = styled.div`
 	${({ theme }) => css`
-		margin-top: ${theme.space.large};
 		${media.lessThan('large')`
-    display: flex;    
-    flex-direction: row;
-    height: min-content;
-    width: 100%;
-    justify-content: space-around;
-  `}
+      display: flex;    
+      flex-direction: row;
+      height: min-content;
+      width: 100%;
+      justify-content: space-around;
+    `}
+    
+    ${media.greaterThan('large')`
+      margin-top: ${theme.space.large};
+    `}
 	`}
 `;
 

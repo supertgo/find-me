@@ -8,7 +8,7 @@ export const HomeUrl = 'home';
 
 export const JobUrl = (id: number) => `job/${id}`;
 
-export const JobUrlApplicants = (id: number) => `job/${id}/applicants`;
+export const JobUrlApplicants = (id: number) => `job/${id}/applications`;
 
 export const JobsUrl = 'jobs';
 

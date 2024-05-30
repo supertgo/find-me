@@ -1,6 +1,6 @@
-import { LoadingConfigInfoWrapper } from 'components/ConfigInfoWrapper/LoadingConfigInfoWrapper';
+import { LoadingConfigInfoWrapper } from 'components/ConfigInfoWrapper';
 import { LoadingResumeCard } from 'components/ResumeCard/LoadingResumeCard';
-import { Title } from 'components/Title/Title';
+import { Title } from 'components/Title';
 import { Base } from 'templates/Base/Base';
 
 export const LoadingConfig = () => {

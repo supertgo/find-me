@@ -2,7 +2,7 @@ import { render, screen, act, fireEvent } from 'utils/test/test-utils';
 import { ModalAddProfessionalExperience } from './ModalAddProfessionalExperience';
 
 describe('<ModalAddProfessionalExperience />', () => {
-	it('should render the component', () => {
+	it('should render the component', async () => {
 		render(<ModalAddProfessionalExperience user_id={100} />, {
 			queryProvider: true,
 		});
@@ -13,7 +13,7 @@ describe('<ModalAddProfessionalExperience />', () => {
 
 		expect(addAcademicRecordTrigger).toBeInTheDocument();
 
-		act(() => fireEvent.click(addAcademicRecordTrigger));
+		await act(async () => fireEvent.click(addAcademicRecordTrigger));
 
 		expect(screen.getByText('Adicionar Experiência')).toBeInTheDocument();
 		expect(screen.getByPlaceholderText('Ex: FindMe')).toBeInTheDocument();

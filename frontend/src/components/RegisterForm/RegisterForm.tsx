@@ -1,11 +1,11 @@
-import { Button } from 'components/Button/Button';
-import { Input } from 'components/Input/Input';
-import { Heading } from 'components/Heading/Heading';
+import { Button } from 'components/Button';
+import { Input } from 'components/Input';
+import { Heading } from 'components/Heading';
 import { Controller } from 'react-hook-form';
 import * as S from './RegisterForm.styles';
 import { useRegisterForm } from 'hooks/useRegisterForm/useRegisterForm';
-import { LinkText } from 'components/LinkText/LinkText';
-import { Checkbox } from 'components/Checkbox/Checkbox';
+import { LinkText } from 'components/LinkText';
+import { Checkbox } from 'components/Checkbox';
 import { formatCellphone } from 'utils/formatCellphone';
 import { validateInputUserEmail } from 'utils/email';
 import {

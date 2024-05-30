@@ -1,6 +1,6 @@
-import { Button } from 'components/Button/Button';
-import { BaseModal } from 'components/Modals/BaseModal/BaseModal';
-import { Textarea } from 'components/Textarea/Textarea';
+import { Button } from 'components/Button';
+import { BaseModal } from 'components/Modals/BaseModal';
+import { Textarea } from 'components/Textarea';
 import { useModalCoverLetter } from 'hooks/useModalCoverLetter/useModalCoverLetter';
 import { Controller } from 'react-hook-form';
 import { REQUIRED_JOB_APP_COVER_LETTER } from 'utils/errors';
@@ -15,7 +15,7 @@ export const ModalCoverLetter = ({
 	disabled,
 	jobId,
 }: ModalCoverLetterProps) => {
-	const { open, setOpen, isValid, errors, handleSubmit, onSubmit, control } =
+	const { open, isLoading, setOpen, isValid, errors, handleSubmit, onSubmit, control } =
 		useModalCoverLetter({
 			job_id: jobId,
 		});
@@ -28,6 +28,7 @@ export const ModalCoverLetter = ({
 			title="Deseja aplicar para essa vaga?"
 			confirmButtonText="Aplicar"
 			isConfirmButtonDisabled={!isValid}
+			isConfirmButtonLoading={isLoading}
 			confirmHandler={handleSubmit(onSubmit)}
 		>
 			<S.Wrapper>

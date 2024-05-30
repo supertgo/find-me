@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { ConfigInfoWrapper, ConfigInfoWrapperProps } from './ConfigInfoWrapper';
+import { ConfigInfoWrapper, ConfigInfoWrapperProps } from '.';
 
 export default {
   title: 'Components/ConfigInfoWrapper',

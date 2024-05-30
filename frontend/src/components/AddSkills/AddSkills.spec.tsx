@@ -1,10 +1,10 @@
 import { fireEvent, render, screen } from 'utils/test/test-utils';
-import { vi } from 'vitest'
-import { AddSkills } from './AddSkills';
+import { vi } from 'vitest';
+import { AddSkills } from '.';
 
 const props = {
-  setValue: vi.fn()
-}
+	setValue: vi.fn(),
+};
 
 describe('<AddSkills />', () => {
 	it('should render the component', () => {
@@ -82,12 +82,12 @@ describe('<AddSkills />', () => {
 
 		expect(screen.getByText('PHP')).toBeInTheDocument();
 
-    fireEvent.change(skillInput, { target: { value: 'R' } });
+		fireEvent.change(skillInput, { target: { value: 'R' } });
 
 		expect(addSkillButton).toBeDisabled();
 	});
 
-  it('should not allow repeated skills', () => {
+	it('should not allow repeated skills', () => {
 		render(<AddSkills {...props} maxSkillPerJob={2} />);
 
 		const addSkillButton: HTMLButtonElement = screen.getByRole('button', {
@@ -105,15 +105,15 @@ describe('<AddSkills />', () => {
 
 		expect(screen.getByText('PHP')).toBeInTheDocument();
 
-    fireEvent.change(skillInput, { target: { value: 'PHP' } });
+		fireEvent.change(skillInput, { target: { value: 'PHP' } });
 
 		expect(addSkillButton).toBeEnabled();
 		fireEvent.click(addSkillButton);
 
-    fireEvent.change(skillInput, { target: { value: 'New Skill' } });
+		fireEvent.change(skillInput, { target: { value: 'New Skill' } });
 		fireEvent.click(addSkillButton);
-    
-    expect(screen.getAllByText('PHP')).toHaveLength(1)
-    expect(screen.getByText('New Skill')).toBeInTheDocument()
+
+		expect(screen.getAllByText('PHP')).toHaveLength(1);
+		expect(screen.getByText('New Skill')).toBeInTheDocument();
 	});
 });

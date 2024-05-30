@@ -1,9 +1,9 @@
-import { Button } from 'components/Button/Button';
+import { Button } from 'components/Button';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useLoggedUserStore } from 'stores/loggedUserStore/loggedUserStore';
-import * as S from './ApplicationHeader.styles';
 import { CreateJobUrl } from 'utils/urls';
+import * as S from './ApplicationHeader.styles';
 
 export type ApplicationHeaderProps = {};
 
@@ -33,7 +33,7 @@ export const ApplicationHeader = ({}: ApplicationHeaderProps) => {
 			</S.CompanyWrapper>
 
 			{type === 'recruiter' && (
-				<Link href={`${CreateJobUrl}`}>
+				<Link href={`/${CreateJobUrl}`}>
 					<Button>Anuncie uma vaga</Button>
 				</Link>
 			)}

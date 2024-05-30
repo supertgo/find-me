@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import {
   PreviousApplicationsItem,
   PreviousApplicationsItemProps,
-} from './PreviousApplicationsItem';
+} from '.';
 
 export default {
   title: 'Components/PreviousApplicationsItem',

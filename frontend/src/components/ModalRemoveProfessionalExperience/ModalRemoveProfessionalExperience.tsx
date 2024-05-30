@@ -1,11 +1,11 @@
-import { BaseModal } from 'components/Modals/BaseModal/BaseModal';
+import { BaseModal } from 'components/Modals/BaseModal';
 import { useModalRemoveProfessionalExperience } from 'hooks/useModalRemoveProfessionalExperience/useModalRemoveProfessionalExperience';
 
 export type ModalRemoveProfessionalExperienceProps = {};
 
 export const ModalRemoveProfessionalExperience =
 	({}: ModalRemoveProfessionalExperienceProps) => {
-		const { open, setOpen, handleSubmit, professionalExperience } =
+		const { open, loading, setOpen, handleSubmit, professionalExperience } =
 			useModalRemoveProfessionalExperience();
 
 		return (
@@ -16,6 +16,7 @@ export const ModalRemoveProfessionalExperience =
 				confirmButtonText="Excluir"
 				confirmHandler={handleSubmit}
 				cancelButtonText="Cancelar"
+        isConfirmButtonLoading={loading}
 			>
 				{!!professionalExperience && (
 					<p>

@@ -1,6 +1,6 @@
 import 'test/use-path-mock';
 import { render, screen } from 'utils/test/test-utils';
-import { ApplicantSidebarItems } from './ApplicantSidebarItems';
+import { ApplicantSidebarItems } from '.';
 
 describe('<ApplicantSidebarItems />', () => {
 	it('should render the component', () => {

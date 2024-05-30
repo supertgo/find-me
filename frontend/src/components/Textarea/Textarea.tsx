@@ -2,8 +2,8 @@
 import { ForwardedRef, TextareaHTMLAttributes, forwardRef } from 'react';
 import * as S from './Textarea.styles';
 import { FieldError } from 'react-hook-form';
-import { MessageError } from 'components/MessageError/MessageError';
-import { Label } from 'components/Label/Label';
+import { MessageError } from 'components/MessageError';
+import { Label } from 'components/Label';
 
 export type TextareaProps = {
 	label?: string;

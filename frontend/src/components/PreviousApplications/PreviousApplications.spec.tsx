@@ -1,9 +1,7 @@
 import 'components/PreviousApplicationsItem/PreviousApplicationsItem.mock';
 import { render, screen } from 'utils/test/test-utils';
 import { PreviousApplications } from '.';
-import { applications } from 'test/mocks/external/previous-applications';
 import { vi } from 'vitest';
-import { isLoading } from 'components/Button/Button.stories';
 
 const mocks = vi.hoisted(() => {
 	return {
@@ -11,7 +9,7 @@ const mocks = vi.hoisted(() => {
 	};
 });
 
-vi.mock('hooks/usePreviousApplications/usePreviousApplications', () => {
+vi.mock('./usePreviousApplications', () => {
 	return {
 		usePreviousApplications: mocks.usePreviousApplications,
 	};
@@ -20,7 +18,9 @@ vi.mock('hooks/usePreviousApplications/usePreviousApplications', () => {
 describe('<PreviousApplications />', () => {
 	it('should render the component', () => {
 		mocks.usePreviousApplications.mockReturnValueOnce({
-			data: applications,
+			data: {
+				data: [],
+			},
 			isLoading: false,
 		});
 		render(<PreviousApplications title="Test" />);

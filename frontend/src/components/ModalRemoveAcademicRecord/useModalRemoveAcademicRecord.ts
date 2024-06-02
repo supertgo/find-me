@@ -1,23 +1,15 @@
 import { useQueryClient } from '@tanstack/react-query';
-import { RemoveAcademicRecordContext } from 'hooks/contexts/RemoveAcademicRecord/RemoveAcademicRecord';
+import { useRemoveAcademicRecord } from 'hooks/contexts/RemoveAcademicRecord';
 import { useAcademicRecord } from 'hooks/useAcademicRecord/useAcademicRecord';
 import { useState } from 'react';
 import { useLoggedUserStore } from 'stores/loggedUserStore/loggedUserStore';
-import { useContextSelector } from 'use-context-selector';
 import { GetUserRouteConst } from 'utils/routes';
 
 export type UseModalRemoveAcademicRecordProps = {};
 
 export const useModalRemoveAcademicRecord = () => {
 	const [loading, setLoading] = useState(false);
-	const { setOpen, open, academicRecord } = useContextSelector(
-		RemoveAcademicRecordContext,
-		(context) => ({
-			open: context.open,
-			academicRecord: context.academicRecord,
-			setOpen: context.setOpen,
-		}),
-	);
+	const { setOpen, open, academicRecord } = useRemoveAcademicRecord();
 
 	const { id } = useLoggedUserStore((state) => ({
 		id: state.id,

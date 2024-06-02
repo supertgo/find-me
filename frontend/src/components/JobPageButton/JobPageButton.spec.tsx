@@ -21,7 +21,7 @@ const mocks = vi.hoisted(() => {
 	};
 });
 
-vi.mock('hooks/useJobPageButton/useJobPageButton', () => {
+vi.mock('./useJobPageButton', () => {
 	return {
 		useJobPageButton: mocks.useJobPageButton,
 	};

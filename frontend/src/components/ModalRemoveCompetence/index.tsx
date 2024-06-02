@@ -2,6 +2,10 @@ import {
 	ModalRemoveCompetence,
 	ModalRemoveCompetenceProps,
 } from './ModalRemoveCompetence';
+import {
+	useModalRemoveCompetence,
+	UseModalRemoveCompetenceProps,
+} from './useModalRemoveCompetence';
 
-export type { ModalRemoveCompetenceProps };
-export { ModalRemoveCompetence };
+export type { ModalRemoveCompetenceProps, UseModalRemoveCompetenceProps };
+export { ModalRemoveCompetence, useModalRemoveCompetence };

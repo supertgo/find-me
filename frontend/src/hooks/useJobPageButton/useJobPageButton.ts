@@ -17,6 +17,7 @@ export const useJobPageButton = ({ job, user }: UseJobPageButtonProps) => {
 			findJobApplications({
 				jobsId: [job.id],
 				candidatesId: [user.id],
+        includes: ['candidates', 'job']
 			}),
 	});
 

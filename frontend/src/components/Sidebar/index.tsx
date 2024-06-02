@@ -1,4 +1,5 @@
 import { Sidebar, SidebarProps } from './Sidebar';
+import { useSignOut, UseSignOutProtocols } from './useSignOut'
 
-export type { SidebarProps };
-export { Sidebar };
+export type { SidebarProps, UseSignOutProtocols };
+export { Sidebar, useSignOut };

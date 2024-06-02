@@ -1,9 +1,9 @@
-import { ProfessionalExperience } from 'protocols/external/professional-experience/professional-experience';
-import * as S from './ProfessionalExperienceItem.styles';
-import { translateEmploymentType } from 'utils/job';
 import { Cross1Icon } from '@radix-ui/react-icons';
-import { experienceDate } from 'utils/date';
 import { useRemoveProfessionalExperience } from 'hooks/contexts/RemoveProfessionalExperience';
+import { ProfessionalExperience } from 'protocols/external/professional-experience/professional-experience';
+import { experienceDate } from 'utils/date';
+import { translateEmploymentType } from 'utils/job';
+import * as S from './ProfessionalExperienceItem.styles';
 
 export type ProfessionalExperienceItemProps = {} & Omit<
 	ProfessionalExperience,

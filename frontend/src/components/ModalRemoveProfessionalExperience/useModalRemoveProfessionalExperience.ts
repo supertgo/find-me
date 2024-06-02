@@ -1,6 +1,6 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { useRemoveProfessionalExperience } from 'hooks/contexts/RemoveProfessionalExperience';
-import { useProfessionalExperience } from 'hooks/useProfessionalExperience/useProfessionalExperience';
+import { useProfessionalExperience } from 'hooks/useProfessionalExperience';
 import { useState } from 'react';
 import { useLoggedUserStore } from 'stores/loggedUserStore/loggedUserStore';
 import { GetUserRouteConst } from 'utils/routes';

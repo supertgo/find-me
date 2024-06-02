@@ -1,5 +1,5 @@
 import { useQueryClient } from '@tanstack/react-query';
-import { useProfessionalExperience } from 'hooks/useProfessionalExperience/useProfessionalExperience';
+import { useProfessionalExperience } from 'hooks/useProfessionalExperience';
 import { EmploymentType, WorkModel } from 'protocols/external/job/job';
 import { PostAddProfessionalExperienceObj } from 'protocols/external/professional-experience/professional-experience';
 import { useState } from 'react';

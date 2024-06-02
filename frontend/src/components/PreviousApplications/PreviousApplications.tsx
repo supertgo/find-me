@@ -1,7 +1,7 @@
 'use client'
 import { PreviousApplicationsItem } from 'components/PreviousApplicationsItem';
 import { Children } from 'react';
-import { useLoggedUserStore } from 'stores/loggedUserStore/loggedUserStore';
+import { useLoggedUserStore } from 'stores/loggedUserStore';
 import { filterJobLocation } from 'utils/job';
 import { LoadingPreviousApplication, usePreviousApplications } from '.';
 import * as S from './PreviousApplications.styles';

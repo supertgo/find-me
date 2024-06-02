@@ -11,7 +11,7 @@ import {
 } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { PostClient } from 'services/httpClient/post';
-import { useLoggedUserStore } from 'stores/loggedUserStore/loggedUserStore';
+import { useLoggedUserStore } from 'stores/loggedUserStore';
 import { revertFormatCellphone } from 'utils/formatCellphone';
 import { PostAuthRegisterRouteConst } from 'utils/routes';
 import { getUserInfo } from 'utils/session';

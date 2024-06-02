@@ -11,7 +11,7 @@ import { useState } from 'react';
 import { PutClient } from 'services/httpClient/put';
 import { PutUserRouteConst } from 'utils/routes';
 import { revertFormatCellphone } from 'utils/formatCellphone';
-import { useLoggedUserStore } from 'stores/loggedUserStore/loggedUserStore';
+import { useLoggedUserStore } from 'stores/loggedUserStore';
 import { UNEXPECTED_ERROR } from 'utils/errors';
 
 export type ConfigInputs = {

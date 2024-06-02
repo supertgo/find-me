@@ -11,7 +11,7 @@ import {
   useForm,
 } from 'react-hook-form';
 import { toast } from 'react-toastify';
-import { useLoggedUserStore } from 'stores/loggedUserStore/loggedUserStore';
+import { useLoggedUserStore } from 'stores/loggedUserStore';
 import { getUserInfo } from 'utils/session';
 import { HomeUrl } from 'utils/urls';
 

@@ -2,7 +2,7 @@ import { LinkText } from 'components/LinkText';
 import { PreviousApplications } from 'components/PreviousApplications';
 import { Title } from 'components/Title';
 import { UserEnum } from 'protocols/external/user/user';
-import { useLoggedUserStore } from 'stores/loggedUserStore/loggedUserStore';
+import { useLoggedUserStore } from 'stores/loggedUserStore';
 import { Base } from 'templates/Base/Base';
 import { MyApplicationsUrl } from 'utils/urls';
 import * as S from './Home.styles';

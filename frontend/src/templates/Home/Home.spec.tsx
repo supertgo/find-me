@@ -1,6 +1,6 @@
 import 'components/PreviousApplications/PreviousApplications.mock';
 import 'components/Sidebar/Sidebar.mock';
-import { useLoggedUserStore } from 'stores/loggedUserStore/loggedUserStore';
+import { useLoggedUserStore } from 'stores/loggedUserStore';
 import { act, render, renderHook, screen } from 'utils/test/test-utils';
 import { Home } from './Home';
 

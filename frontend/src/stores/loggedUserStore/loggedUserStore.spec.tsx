@@ -1,5 +1,5 @@
 import { renderHook, act } from 'utils/test/test-utils';
-import { useLoggedUserStore } from './loggedUserStore';
+import { useLoggedUserStore } from '.';
 import { UserEnum } from 'protocols/external/user/user';
 
 describe('loggedUserStore()', () => {

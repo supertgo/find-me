@@ -1,6 +1,6 @@
 import { Button } from 'components/Button';
 import Link from 'next/link';
-import { useLoggedUserStore } from 'stores/loggedUserStore/loggedUserStore';
+import { useLoggedUserStore } from 'stores/loggedUserStore';
 import { CreateJobUrl } from 'utils/urls';
 import * as S from './CreateJobHeader.styles';
 import { UserEnum } from 'protocols/external/user/user';

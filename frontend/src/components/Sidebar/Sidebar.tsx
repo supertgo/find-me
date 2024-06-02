@@ -4,7 +4,7 @@ import { LogoFindme } from 'components/LogoFindme';
 import { RecruiterSidebarItems } from 'components/RecruiterSidebarItems';
 import Link from 'next/link';
 import { UserEnum } from 'protocols/external/user/user';
-import { useLoggedUserStore } from 'stores/loggedUserStore/loggedUserStore';
+import { useLoggedUserStore } from 'stores/loggedUserStore';
 import { theme } from 'styles/theme';
 import { ConfigUrl } from 'utils/urls';
 import { useSignOut } from '.';

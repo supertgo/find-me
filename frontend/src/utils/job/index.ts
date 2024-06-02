@@ -4,6 +4,7 @@ import {
 	SalaryTimeUnit,
 	WorkModel,
 } from 'protocols/external/job/job';
+import { JobStatus } from 'protocols/external/job/job-application';
 
 export const translateSalaryTimeUnit: Record<SalaryTimeUnit, string> = {
 	day: 'dia',
@@ -23,6 +24,15 @@ export const translateWorkModel: Record<WorkModel, string> = {
 	homeOffice: 'Home Office',
 };
 
+export const translateJobApplicationStatus: Record<JobStatus, string> = {
+	hired: 'Contratado',
+	pending: 'Pendente',
+	approved: 'Aprovado',
+	canceled: 'Cancelado',
+	rejected: 'Rejeitado',
+	in_progress: 'Em progresso',
+};
+
 export const filterJobLocation = (location: string) => {
 	if (location.indexOf('\n') === -1) return location;
 
@@ -31,11 +41,12 @@ export const filterJobLocation = (location: string) => {
 	return splittedData[1].length > 1 ? splittedData[1] : splittedData[0];
 };
 
-export const parseSkillsIntoCompetences = (skills: string[]): JobCompetence[] => {
+export const parseSkillsIntoCompetences = (
+	skills: string[],
+): JobCompetence[] => {
 	return skills.map((skill) => ({
 		name: skill,
 		description: `Experiência em ${skill}`,
 		type: 'other',
 	})) as JobCompetence[];
 };
-

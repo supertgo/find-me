@@ -1,9 +1,8 @@
 import { useQueryClient } from '@tanstack/react-query';
-import { RemoveCompetenceContext } from 'hooks/contexts/RemoveCompetence/RemoveCompetence';
+import { useRemoveCompetence } from 'hooks/contexts/RemoveCompetence';
 import { useCompetence } from 'hooks/useCompetence/useCompetence';
 import { useState } from 'react';
 import { useLoggedUserStore } from 'stores/loggedUserStore/loggedUserStore';
-import { useContextSelector } from 'use-context-selector';
 import { GetUserRouteConst } from 'utils/routes';
 
 export type UseModalRemoveCompetenceProps = {};
@@ -11,14 +10,7 @@ export type UseModalRemoveCompetenceProps = {};
 export const useModalRemoveCompetence = () => {
 	const [loading, setLoading] = useState(false);
 
-	const { setOpen, open, competence } = useContextSelector(
-		RemoveCompetenceContext,
-		(context) => ({
-			open: context.open,
-			competence: context.competence,
-			setOpen: context.setOpen,
-		}),
-	);
+	const { setOpen, open, competence } = useRemoveCompetence();
 
 	const { id } = useLoggedUserStore((state) => ({
 		id: state.id,

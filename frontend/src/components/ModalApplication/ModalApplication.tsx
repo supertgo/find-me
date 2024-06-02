@@ -4,11 +4,11 @@ import { Label } from 'components/Label';
 import { BaseModal } from 'components/Modals/BaseModal';
 import { Pill } from 'components/Pill';
 import { Textarea } from 'components/Textarea';
-import { useModalApplication } from 'hooks/useModalApplication/useModalApplication';
 import Link from 'next/link';
-import { ApplicantUrl } from 'utils/urls';
-import * as S from './ModalApplication.styles';
 import { translateJobApplicationStatus } from 'utils/job';
+import { ApplicantUrl } from 'utils/urls';
+import { useModalApplication } from '.';
+import * as S from './ModalApplication.styles';
 
 export type ModalApplicationProps = {};
 

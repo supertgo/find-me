@@ -1,5 +1,6 @@
 import { Button } from 'components/Button';
 import { CoverLetterContext } from 'hooks/contexts/CoverLetter/CoverLetter';
+import { JobStatus } from 'protocols/external/job/job-application';
 import { useContextSelector } from 'use-context-selector';
 
 export type SeeApplicationProps = {
@@ -9,12 +10,14 @@ export type SeeApplicationProps = {
 	email: string;
 	phone: string;
 	coverLetter: string;
+  status: JobStatus
 };
 
 export const SeeApplication = ({
 	id,
 	jobId,
 	name,
+  status,
 	email,
 	phone,
 	coverLetter,
@@ -37,6 +40,7 @@ export const SeeApplication = ({
 	const jobApplication = {
 		id: jobId,
 		cover_letter: coverLetter,
+    status,
 	};
 
 	const handleClick = () => {

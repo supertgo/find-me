@@ -10,7 +10,7 @@ type CoverLetterProps = {
 };
 
 type UserCoverLetterProps = Pick<UserProps, 'id' | 'name' | 'email' | 'phone'>;
-type JobCoverLetterProps = Pick<JobApplication, 'id' | 'cover_letter'>;
+type JobCoverLetterProps = Pick<JobApplication, 'id' | 'status' | 'cover_letter'>;
 
 type CoverLetter = {
 	user: UserCoverLetterProps;

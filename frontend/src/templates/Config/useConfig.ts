@@ -1,4 +1,4 @@
-import { useUser } from 'hooks/useUser/useUser';
+import { useUser } from 'hooks/useUser';
 import { getInitialData } from 'utils/initialData';
 import { GetUserResponse, UserProps } from 'protocols/external/user/user';
 import { useQuery } from '@tanstack/react-query';

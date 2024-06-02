@@ -1,5 +1,5 @@
 import { useQueryClient } from '@tanstack/react-query';
-import { useAcademicRecord } from 'hooks/useAcademicRecord/useAcademicRecord';
+import { useAcademicRecord } from 'hooks/useAcademicRecord';
 import { PostAcademicRecordObj } from 'protocols/external/academic-record/academic-record';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';

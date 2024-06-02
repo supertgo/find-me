@@ -1,6 +1,6 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { useRemoveAcademicRecord } from 'hooks/contexts/RemoveAcademicRecord';
-import { useAcademicRecord } from 'hooks/useAcademicRecord/useAcademicRecord';
+import { useAcademicRecord } from 'hooks/useAcademicRecord';
 import { useState } from 'react';
 import { useLoggedUserStore } from 'stores/loggedUserStore/loggedUserStore';
 import { GetUserRouteConst } from 'utils/routes';

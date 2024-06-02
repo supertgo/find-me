@@ -1,9 +1,9 @@
 import { Button } from 'components/Button';
 import { BaseModal } from 'components/Modals/BaseModal';
 import { Textarea } from 'components/Textarea';
-import { useModalCoverLetter } from 'hooks/useModalCoverLetter/useModalCoverLetter';
 import { Controller } from 'react-hook-form';
 import { REQUIRED_JOB_APP_COVER_LETTER } from 'utils/errors';
+import { useModalCoverLetter } from '.';
 import * as S from './ModalCoverLetter.styles';
 
 export type ModalCoverLetterProps = {

@@ -1,10 +1,11 @@
-import { Children } from 'react';
-import * as S from './PreviousApplications.styles';
+'use client'
 import { PreviousApplicationsItem } from 'components/PreviousApplicationsItem';
 import { usePreviousApplications } from 'hooks/usePreviousApplications/usePreviousApplications';
+import { Children } from 'react';
 import { useLoggedUserStore } from 'stores/loggedUserStore/loggedUserStore';
 import { filterJobLocation } from 'utils/job';
 import { LoadingPreviousApplication } from '.';
+import * as S from './PreviousApplications.styles';
 
 export type PreviousApplicationsProps = {
 	title: string;
@@ -16,7 +17,8 @@ export const PreviousApplications = ({ title }: PreviousApplicationsProps) => {
 	}));
 
 	const { data, isLoading } = usePreviousApplications({ userId });
-	const applications = data?.data;
+	const applications = data?.data.slice(-3);
+
 	return (
 		<S.Wrapper>
 			<S.Title>{title}</S.Title>

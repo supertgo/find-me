@@ -1,19 +1,19 @@
 import { Button } from 'components/Button';
-import { Input } from 'components/Input';
-import { Heading } from 'components/Heading';
-import { Controller } from 'react-hook-form';
-import * as S from './RegisterForm.styles';
-import { useRegisterForm } from 'hooks/useRegisterForm/useRegisterForm';
-import { LinkText } from 'components/LinkText';
 import { Checkbox } from 'components/Checkbox';
-import { formatCellphone } from 'utils/formatCellphone';
+import { Heading } from 'components/Heading';
+import { Input } from 'components/Input';
+import { LinkText } from 'components/LinkText';
+import { Controller } from 'react-hook-form';
 import { validateInputUserEmail } from 'utils/email';
 import {
-	INVALID_EMAIL,
-	REQUIRED_CELLPHONE,
-	REQUIRED_PASSWORD,
-	REQUIRED_USER,
+  INVALID_EMAIL,
+  REQUIRED_CELLPHONE,
+  REQUIRED_PASSWORD,
+  REQUIRED_USER,
 } from 'utils/errors';
+import { formatCellphone } from 'utils/formatCellphone';
+import { useRegisterForm } from '.';
+import * as S from './RegisterForm.styles';
 
 export type RegisterFormProps = {};
 

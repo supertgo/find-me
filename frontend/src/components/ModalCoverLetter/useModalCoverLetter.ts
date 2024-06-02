@@ -1,5 +1,5 @@
 import { useQueryClient } from '@tanstack/react-query';
-import { useJobApplication } from 'hooks/useJobApplication/useJobApplication';
+import { useJobApplication } from 'hooks/useJobApplication';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { GetJobApplicationsRouteConst } from 'utils/routes';

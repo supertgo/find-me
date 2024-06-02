@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { useJobApplication } from 'hooks/useJobApplication/useJobApplication';
+import { useJobApplication } from 'hooks/useJobApplication';
 import { GetJobApplicationsRouteConst } from 'utils/routes';
 
 export type UsePreviousApplicationsProps = { userId: number };

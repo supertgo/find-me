@@ -10,7 +10,7 @@ import {
 } from '@tanstack/react-table';
 import { Pill } from 'components/Pill';
 import * as S from 'components/Table/TableData/TableData.styles';
-import { useJobApplication } from 'hooks/useJobApplication/useJobApplication';
+import { useJobApplication } from 'hooks/useJobApplication';
 import Image from 'next/image';
 import {
 	JobApplication,

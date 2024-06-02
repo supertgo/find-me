@@ -9,7 +9,8 @@ export type UseModalRemoveProfessionalExperienceProps = {};
 
 export const useModalRemoveProfessionalExperience = () => {
 	const [loading, setLoading] = useState(false);
-	const { setOpen, open, professionalExperience } = useRemoveProfessionalExperience();
+	const { setOpen, open, professionalExperience } =
+		useRemoveProfessionalExperience();
 
 	const { id } = useLoggedUserStore((state) => ({
 		id: state.id,

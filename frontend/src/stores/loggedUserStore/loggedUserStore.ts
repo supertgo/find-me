@@ -1,9 +1,9 @@
-import { UserType } from 'protocols/external/user/user';
+import { UserEnum, UserType } from 'protocols/external/user/user';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
 export type User = {
-  id: number;
+	id: number;
 	name: string;
 	email: string;
 	type: UserType;
@@ -23,10 +23,10 @@ export const useLoggedUserStore = create<LoggedUserProps>()(
 			id: Infinity,
 			name: '',
 			email: '',
-			type: 'recruiter',
+			type: UserEnum.RECRUITER,
 			setUser: (user) =>
 				set(() => ({
-          id: user.id || get().id,
+					id: user.id || get().id,
 					type: user.type || get().type,
 					name: user.name || get().name,
 					email: user.email || get().email,

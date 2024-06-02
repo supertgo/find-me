@@ -2,6 +2,7 @@ import { nextAuthOptions } from 'app/api/auth/[...nextauth]/options';
 import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
 import { JobApplicationResponse } from 'protocols/external/job/job-application';
+import { UserEnum } from 'protocols/external/user/user';
 import { getAuthMe } from 'services/fetch/auth/auth';
 import { fetchJobApplications } from 'services/fetch/job/job';
 import { JobApplications } from 'templates/JobApplications/JobApplications';
@@ -24,9 +25,9 @@ async function getApplicants({ job_id }: GetApplicantsProp) {
 		return redirect(`/${HomeUrl}`);
 	}
 
-  const { data: authMeResponse } = await getAuthMe(session?.access_token);
+	const { data: authMeResponse } = await getAuthMe(session?.access_token);
 
-	if (authMeResponse.type === 'employee') {
+	if (authMeResponse.type === UserEnum.EMPLOYEE) {
 		return redirect(`/${HomeUrl}`);
 	}
 
@@ -38,10 +39,9 @@ async function getApplicants({ job_id }: GetApplicantsProp) {
 	return jobApplicationResponse;
 }
 
-export default async function CreateJobPage({
+export default async function JobApplicationsPage({
 	params,
 }: JobApplicantsPageProps) {
-
 	const data: JobApplicationResponse = await getApplicants({
 		job_id: params.id,
 	});

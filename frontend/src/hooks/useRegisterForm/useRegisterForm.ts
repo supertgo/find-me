@@ -1,13 +1,13 @@
 import { signIn } from 'next-auth/react';
-import { UserAuthRegister } from 'protocols/external/user/user';
+import { UserAuthRegister, UserEnum } from 'protocols/external/user/user';
 import { useState } from 'react';
 import {
-  Control,
-  FieldErrors,
-  SubmitHandler,
-  UseFormHandleSubmit,
-  UseFormRegister,
-  useForm,
+	Control,
+	FieldErrors,
+	SubmitHandler,
+	UseFormHandleSubmit,
+	UseFormRegister,
+	useForm,
 } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { PostClient } from 'services/httpClient/post';
@@ -63,7 +63,7 @@ export const useRegisterForm = (): UseRegisterFormProtocols => {
 			password: data.password,
 			email: data.email,
 			phone: revertFormatCellphone(data.phone),
-			type: data.type ? 'recruiter' : 'employee',
+			type: data.type ? UserEnum.RECRUITER : UserEnum.EMPLOYEE,
 		};
 
 		try {

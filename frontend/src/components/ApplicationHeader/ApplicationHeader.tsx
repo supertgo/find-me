@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useLoggedUserStore } from 'stores/loggedUserStore/loggedUserStore';
 import { CreateJobUrl } from 'utils/urls';
 import * as S from './ApplicationHeader.styles';
+import { UserEnum } from 'protocols/external/user/user';
 
 export type ApplicationHeaderProps = {};
 
@@ -32,7 +33,7 @@ export const ApplicationHeader = ({}: ApplicationHeaderProps) => {
 				</S.CompanyTextsWrapper>
 			</S.CompanyWrapper>
 
-			{type === 'recruiter' && (
+			{type === UserEnum.RECRUITER && (
 				<Link href={`/${CreateJobUrl}`}>
 					<Button>Anuncie uma vaga</Button>
 				</Link>

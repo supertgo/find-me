@@ -5,21 +5,22 @@ import { Hr } from 'components/Hr';
 import { Info } from 'components/Info';
 import { JobCapacity } from 'components/JobCapacity';
 import { JobPageButton } from 'components/JobPageButton';
+import { MediaMatch } from 'components/MediaMatch';
 import { ModalRemoveJob } from 'components/ModalRemoveJob';
 import { Skill } from 'components/Skill';
 import { VerticalRow } from 'components/VerticalRow/VerticalRow';
 import { useJobPage } from 'hooks/useJobPage/useJobPage';
 import { Job as JobResponse } from 'protocols/external/job/job';
+import { UserEnum } from 'protocols/external/user/user';
 import { Base } from 'templates/Base/Base';
 import {
-  filterJobLocation,
-  translateEmploymentType,
-  translateSalaryTimeUnit,
-  translateWorkModel,
+	filterJobLocation,
+	translateEmploymentType,
+	translateSalaryTimeUnit,
+	translateWorkModel,
 } from 'utils/job';
 import { formatToCurrency } from 'utils/money';
 import * as S from './Job.styles';
-import { MediaMatch } from 'components/MediaMatch';
 
 export type JobProps = {} & JobResponse;
 
@@ -66,9 +67,9 @@ export const Job = ({
 						</S.JobSubtitle>
 					</S.TextWrapper>
 
-          <MediaMatch $greaterThan="medium">
-            <VerticalRow />
-          </MediaMatch>
+					<MediaMatch $greaterThan="medium">
+						<VerticalRow />
+					</MediaMatch>
 
 					<JobPageButton
 						user={{
@@ -139,7 +140,7 @@ export const Job = ({
 					<p>{company?.description}</p>
 				</S.JobCompanyInfo>
 
-				{type === 'recruiter' && user_id === loggedUserId && (
+				{type === UserEnum.RECRUITER && user_id === loggedUserId && (
 					<S.RemoveJob>
 						<ModalRemoveJob
 							setOpen={setOpen}

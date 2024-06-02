@@ -15,7 +15,7 @@ import { RemoveAcademicRecordProvider } from 'hooks/contexts/RemoveAcademicRecor
 import { RemoveCompetenceProvider } from 'hooks/contexts/RemoveCompetence/RemoveCompetence';
 import { RemoveProfessionalExperienceProvider } from 'hooks/contexts/RemoveProfessionalExperience/RemoveProfessionalExperience';
 import { useConfig } from 'hooks/useConfig/useConfig';
-import { UserProps } from 'protocols/external/user/user';
+import { UserEnum, UserProps } from 'protocols/external/user/user';
 import { Children } from 'react';
 import { Base } from 'templates/Base/Base';
 import { LoadingConfig } from './LoadingConfig';
@@ -39,7 +39,7 @@ export const Config = (props: ConfigProps) => {
 				email={user.email}
 				phone={user.phone}
 			/>
-			{user.type === 'employee' && (
+			{user.type === UserEnum.EMPLOYEE && (
 				<>
 					<RemoveProfessionalExperienceProvider>
 						<ModalRemoveProfessionalExperience />

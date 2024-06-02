@@ -1,7 +1,7 @@
 import { nextAuthOptions } from 'app/api/auth/[...nextauth]/options';
 import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
-import { UserProps } from 'protocols/external/user/user';
+import { UserEnum, UserProps } from 'protocols/external/user/user';
 import { getAuthMe } from 'services/fetch/auth/auth';
 import { Config } from 'templates/Config/Config';
 import { GetUserRouteConst } from 'utils/routes';
@@ -20,7 +20,7 @@ async function getData() {
 
 	const { data: authMeResponse } = await getAuthMe(session?.access_token);
 
-	if (authMeResponse.type === 'recruiter') {
+	if (authMeResponse.type === UserEnum.RECRUITER) {
 		return { data: authMeResponse };
 	}
 

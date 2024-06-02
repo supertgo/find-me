@@ -1,23 +1,15 @@
 import { useQueryClient } from '@tanstack/react-query';
-import { RemoveProfessionalExperienceContext } from 'hooks/contexts/RemoveProfessionalExperience/RemoveProfessionalExperience';
+import { useRemoveProfessionalExperience } from 'hooks/contexts/RemoveProfessionalExperience';
 import { useProfessionalExperience } from 'hooks/useProfessionalExperience/useProfessionalExperience';
 import { useState } from 'react';
 import { useLoggedUserStore } from 'stores/loggedUserStore/loggedUserStore';
-import { useContextSelector } from 'use-context-selector';
 import { GetUserRouteConst } from 'utils/routes';
 
 export type UseModalRemoveProfessionalExperienceProps = {};
 
 export const useModalRemoveProfessionalExperience = () => {
 	const [loading, setLoading] = useState(false);
-	const { setOpen, open, professionalExperience } = useContextSelector(
-		RemoveProfessionalExperienceContext,
-		(context) => ({
-			open: context.open,
-			professionalExperience: context.professionalExperience,
-			setOpen: context.setOpen,
-		}),
-	);
+	const { setOpen, open, professionalExperience } = useRemoveProfessionalExperience();
 
 	const { id } = useLoggedUserStore((state) => ({
 		id: state.id,

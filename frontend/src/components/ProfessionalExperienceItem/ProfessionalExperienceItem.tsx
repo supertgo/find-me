@@ -2,9 +2,8 @@ import { ProfessionalExperience } from 'protocols/external/professional-experien
 import * as S from './ProfessionalExperienceItem.styles';
 import { translateEmploymentType } from 'utils/job';
 import { Cross1Icon } from '@radix-ui/react-icons';
-import { useContextSelector } from 'use-context-selector';
-import { RemoveProfessionalExperienceContext } from 'hooks/contexts/RemoveProfessionalExperience/RemoveProfessionalExperience';
 import { experienceDate } from 'utils/date';
+import { useRemoveProfessionalExperience } from 'hooks/contexts/RemoveProfessionalExperience';
 
 export type ProfessionalExperienceItemProps = {} & Omit<
 	ProfessionalExperience,
@@ -26,13 +25,7 @@ export const ProfessionalExperienceItem = ({
 		`${company_name}` +
 		`${employment_type !== null ? `, ${translateEmploymentType[employment_type]}` : ''}`;
 
-	const { setOpen, setProfessionalExperience } = useContextSelector(
-		RemoveProfessionalExperienceContext,
-		(context) => ({
-			setOpen: context.setOpen,
-			setProfessionalExperience: context.setProfessionalExperience,
-		}),
-	);
+	const { setOpen, setProfessionalExperience } = useRemoveProfessionalExperience()
 
 	const removeProfessionalExperience = () => {
 		setProfessionalExperience({

@@ -4,6 +4,7 @@ import { AddSkills } from 'components/AddSkills';
 import { Button } from 'components/Button';
 import { ConfigInfoWrapper } from 'components/ConfigInfoWrapper';
 import { Input } from 'components/Input';
+import { Select } from 'components/Select';
 import { Step } from 'components/Step';
 import { StepWrapper } from 'components/StepWrapper';
 import { Textarea } from 'components/Textarea';
@@ -34,7 +35,6 @@ import {
   translateWorkModel,
 } from 'utils/job';
 import * as S from './CreateJob.styles';
-import { Select } from 'components/Select';
 
 export type CreateJobProps = {};
 

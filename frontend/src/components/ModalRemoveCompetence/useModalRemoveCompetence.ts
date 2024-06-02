@@ -1,6 +1,6 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { useRemoveCompetence } from 'hooks/contexts/RemoveCompetence';
-import { useCompetence } from 'hooks/useCompetence/useCompetence';
+import { useCompetence } from 'hooks/useCompetence';
 import { useState } from 'react';
 import { useLoggedUserStore } from 'stores/loggedUserStore/loggedUserStore';
 import { GetUserRouteConst } from 'utils/routes';

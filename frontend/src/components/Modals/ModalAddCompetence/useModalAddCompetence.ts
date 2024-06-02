@@ -1,5 +1,5 @@
 import { useQueryClient } from '@tanstack/react-query';
-import { useCompetence } from 'hooks/useCompetence/useCompetence';
+import { useCompetence } from 'hooks/useCompetence';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { GetUserRouteConst } from 'utils/routes';

@@ -3,7 +3,7 @@ import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
 import { UserEnum, UserProps } from 'protocols/external/user/user';
 import { getAuthMe } from 'services/fetch/auth/auth';
-import { Config } from 'templates/Config/Config';
+import { Config } from 'templates/Config';
 import { GetUserRouteConst } from 'utils/routes';
 import { HomeUrl } from 'utils/urls';
 

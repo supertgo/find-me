@@ -4,7 +4,6 @@ import { ConfigInfoWrapper } from 'components/ConfigInfoWrapper';
 import { Input } from 'components/Input';
 import { Textarea } from 'components/Textarea';
 import { Title } from 'components/Title';
-import { useUserConfigForm } from 'hooks/useUserConfigForm/useUserConfigForm';
 import { UserProps } from 'protocols/external/user/user';
 import { Controller } from 'react-hook-form';
 import { validateInputUserEmail } from 'utils/email';
@@ -17,6 +16,7 @@ import {
 } from 'utils/errors';
 import { formatCellphone } from 'utils/formatCellphone';
 import * as S from './AccountConfig.styles';
+import { useUserConfigForm } from './useUserConfigForm';
 
 export type AccountConfigProps = {} & Pick<
 	UserProps,

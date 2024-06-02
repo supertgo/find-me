@@ -34,8 +34,8 @@ export const useModalAddProfessionalExperience = ({
 		handleSubmit,
 		formState: { errors, isValid },
 		control,
-    watch,
-    register
+		watch,
+		register,
 	} = useForm<AddProfessionalExperiencesInputs>({
 		mode: 'onBlur',
 	});
@@ -59,7 +59,7 @@ export const useModalAddProfessionalExperience = ({
 			description: data.description,
 			company_name: data.company_name,
 			employment_type: data.employment_type as EmploymentType,
-      ...(data.end_date && {end_date: data.end_date}),
+			...(data.end_date && { end_date: data.end_date }),
 		};
 
 		await createProfessionalExperience({
@@ -87,7 +87,7 @@ export const useModalAddProfessionalExperience = ({
 		errors,
 		isValid,
 		isLoading,
-    watch,
-    register
+		watch,
+		register,
 	};
 };

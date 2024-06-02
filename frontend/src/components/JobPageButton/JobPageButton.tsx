@@ -1,8 +1,11 @@
 import { Button } from 'components/Button';
-import { UserType } from 'protocols/external/user/user';
+import { ModalApplication } from 'components/ModalApplication';
 import { ModalCoverLetter } from 'components/ModalCoverLetter';
+import { SeeApplication } from 'components/SeeApplication';
+import { CoverLetterProvider } from 'hooks/contexts/CoverLetter/CoverLetter';
 import { useJobPageButton } from 'hooks/useJobPageButton/useJobPageButton';
 import Link from 'next/link';
+import { UserEnum, UserType } from 'protocols/external/user/user';
 import { JobUrlApplicants } from 'utils/urls';
 
 type JobPageButtonJob = {
@@ -26,16 +29,35 @@ export const JobPageButton = ({ user, job }: JobPageButtonProps) => {
 		job,
 	});
 
-	if (user.type === 'recruiter')
+	if (isLoading) return <Button isLoading={isLoading}></Button>;
+
+	if (user.type === UserEnum.RECRUITER)
 		return (
 			<Link href={`/${JobUrlApplicants(job.id)}`}>
 				<Button>Visualizar Candidatos</Button>
 			</Link>
 		);
 
-	if (isLoading) return <Button isLoading={isLoading}></Button>;
-
 	const disabled = !job.is_available || !!data?.data.length;
+	const application = data?.data[0];
+	const applicant = application?.candidates![0];
+
+	if (disabled && user.type === UserEnum.EMPLOYEE && applicant) {
+		return (
+			<CoverLetterProvider>
+				<ModalApplication />
+				<SeeApplication
+					id={user.id}
+					jobId={job.id}
+					name={applicant.name}
+					email={applicant.email}
+					phone={applicant.phone}
+					coverLetter={data?.data[0].cover_letter!}
+          status={application.status}
+				/>
+			</CoverLetterProvider>
+		);
+	}
 
 	return <ModalCoverLetter jobId={job.id} disabled={disabled || isLoading} />;
 };

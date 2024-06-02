@@ -17,13 +17,13 @@ const props: JobPageButtonProps = {
 
 const mocks = vi.hoisted(() => {
 	return {
-    useJobPageButton: vi.fn()
+		useJobPageButton: vi.fn(),
 	};
 });
 
 vi.mock('hooks/useJobPageButton/useJobPageButton', () => {
 	return {
-    useJobPageButton: mocks.useJobPageButton,
+		useJobPageButton: mocks.useJobPageButton,
 	};
 });
 
@@ -31,9 +31,9 @@ describe('<JobPageButton />', () => {
 	it('should render a link to applicants if the user is a recruiter', () => {
 		mocks.useJobPageButton.mockReturnValueOnce({
 			data: {
-        data: {
-          data: []
-        },
+				data: {
+					data: [],
+				},
 			},
 			isLoading: false,
 		});

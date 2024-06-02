@@ -5,7 +5,6 @@ export const Wrapper = styled.div`
 	${({ theme }) => css`
 		display: grid;
 		grid-template-columns: 1fr 1fr;
-		height: 100vh;
 		color: ${theme.colors.white};
 
 		${media.lessThan('medium')`
@@ -17,6 +16,7 @@ export const Wrapper = styled.div`
 export const LeftSide = styled.div`
 	${({ theme }) => css`
 		width: 100%;
+    min-height: 100vh;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -46,6 +46,7 @@ export const LeftSideContent = styled.div`
 
 		${media.greaterThan('huge')`
       height: 50vh;
+      padding: 0;
     `}
 	`}
 `;

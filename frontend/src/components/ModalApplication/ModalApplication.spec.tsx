@@ -1,7 +1,7 @@
 import { render, renderHook, screen } from 'utils/test/test-utils';
 import { ModalApplication } from '.';
 import { useContextSelector } from 'use-context-selector';
-import { CoverLetterContext } from 'hooks/contexts/CoverLetter/CoverLetter';
+import { CoverLetterContext } from 'hooks/contexts/CoverLetter';
 import { JobStatus } from 'protocols/external/job/job-application';
 
 describe('<ModalApplication />', () => {

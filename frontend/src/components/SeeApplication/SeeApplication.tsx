@@ -1,5 +1,5 @@
 import { Button } from 'components/Button';
-import { CoverLetterContext } from 'hooks/contexts/CoverLetter/CoverLetter';
+import { CoverLetterContext, useCoverLetter } from 'hooks/contexts/CoverLetter';
 import { JobStatus } from 'protocols/external/job/job-application';
 import { useContextSelector } from 'use-context-selector';
 
@@ -22,13 +22,7 @@ export const SeeApplication = ({
 	phone,
 	coverLetter,
 }: SeeApplicationProps) => {
-	const { setOpen, setCoverLetter } = useContextSelector(
-		CoverLetterContext,
-		(context) => ({
-			setOpen: context.setOpen,
-			setCoverLetter: context.setCoverLetter,
-		}),
-	);
+	const { setOpen, setCoverLetter } = useCoverLetter()
 
 	const user = {
 		id,

@@ -1,17 +1,9 @@
-import { CoverLetterContext } from 'hooks/contexts/CoverLetter/CoverLetter';
-import { useContextSelector } from 'use-context-selector';
+import { useCoverLetter } from 'hooks/contexts/CoverLetter';
 
 export type UseModalApplicationProps = {};
 
 export const useModalApplication = () => {
-	const { setOpen, open, coverLetter } = useContextSelector(
-		CoverLetterContext,
-		(context) => ({
-			open: context.open,
-			coverLetter: context.coverLetter,
-			setOpen: context.setOpen,
-		}),
-	);
+	const { setOpen, open, coverLetter } = useCoverLetter();
 
 	return {
 		open,

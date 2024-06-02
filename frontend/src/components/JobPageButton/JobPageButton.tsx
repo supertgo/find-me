@@ -2,7 +2,7 @@ import { Button } from 'components/Button';
 import { ModalApplication } from 'components/ModalApplication';
 import { ModalCoverLetter } from 'components/ModalCoverLetter';
 import { SeeApplication } from 'components/SeeApplication';
-import { CoverLetterProvider } from 'hooks/contexts/CoverLetter/CoverLetter';
+import { CoverLetterProvider } from 'hooks/contexts/CoverLetter';
 import Link from 'next/link';
 import { UserEnum, UserType } from 'protocols/external/user/user';
 import { JobUrlApplicants } from 'utils/urls';

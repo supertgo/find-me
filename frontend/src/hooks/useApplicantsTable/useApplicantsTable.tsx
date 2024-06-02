@@ -123,7 +123,7 @@ export const useApplicantsTable = ({
 				if (!info.getValue() || !info.getValue().candidates![0]) return null;
 
 				const { id, name, email, phone } = info.getValue().candidates![0];
-				const { id: jobId, cover_letter } = info.getValue();
+				const { id: jobId, cover_letter, status } = info.getValue();
 
 				return (
 					<SeeApplication
@@ -133,6 +133,7 @@ export const useApplicantsTable = ({
 						email={email}
 						phone={phone}
 						coverLetter={cover_letter}
+            status={status}
 					/>
 				);
 			},

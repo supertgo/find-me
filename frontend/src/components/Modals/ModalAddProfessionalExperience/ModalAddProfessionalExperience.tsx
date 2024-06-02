@@ -4,22 +4,22 @@ import { Input } from 'components/Input';
 import { BaseModal } from 'components/Modals/BaseModal';
 import { Select } from 'components/Select';
 import { Textarea } from 'components/Textarea';
-import { useModalAddProfessionalExperience } from 'hooks/useModalAddProfessionalExperience/useModalAddProfessionalExperience';
 import {
-	employmentTypeOptions,
-	workModelOptions,
+  employmentTypeOptions,
+  workModelOptions,
 } from 'protocols/external/job/job';
 import { Controller } from 'react-hook-form';
 import {
-	REQUIRED_JOB_EMPLOYMENT_TYPE,
-	REQUIRED_JOB_WORK_MODEL,
-	REQUIRED_PROFESSIONAL_EXPERIENCE_COMPANY,
-	REQUIRED_PROFESSIONAL_EXPERIENCE_DESCRIPTION,
-	REQUIRED_PROFESSIONAL_EXPERIENCE_LOCATION,
-	REQUIRED_PROFESSIONAL_EXPERIENCE_POSITION,
-	REQUIRED_PROFESSIONAL_EXPERIENCE_START_DATE,
+  REQUIRED_JOB_EMPLOYMENT_TYPE,
+  REQUIRED_JOB_WORK_MODEL,
+  REQUIRED_PROFESSIONAL_EXPERIENCE_COMPANY,
+  REQUIRED_PROFESSIONAL_EXPERIENCE_DESCRIPTION,
+  REQUIRED_PROFESSIONAL_EXPERIENCE_LOCATION,
+  REQUIRED_PROFESSIONAL_EXPERIENCE_POSITION,
+  REQUIRED_PROFESSIONAL_EXPERIENCE_START_DATE,
 } from 'utils/errors';
 import { translateEmploymentType, translateWorkModel } from 'utils/job';
+import { useModalAddProfessionalExperience } from '.';
 import * as S from './ModalAddProfessionalExperience.styles';
 
 export type ModalAddProfessionalExperienceProps = {

@@ -9,17 +9,17 @@ import { MediaMatch } from 'components/MediaMatch';
 import { ModalRemoveJob } from 'components/ModalRemoveJob';
 import { Skill } from 'components/Skill';
 import { VerticalRow } from 'components/VerticalRow/VerticalRow';
-import { useJobPage } from 'hooks/useJobPage/useJobPage';
 import { Job as JobResponse } from 'protocols/external/job/job';
 import { UserEnum } from 'protocols/external/user/user';
 import { Base } from 'templates/Base/Base';
 import {
-	filterJobLocation,
-	translateEmploymentType,
-	translateSalaryTimeUnit,
-	translateWorkModel,
+  filterJobLocation,
+  translateEmploymentType,
+  translateSalaryTimeUnit,
+  translateWorkModel,
 } from 'utils/job';
 import { formatToCurrency } from 'utils/money';
+import { useJobPage } from '.';
 import * as S from './Job.styles';
 
 export type JobProps = {} & JobResponse;

@@ -1,28 +1,28 @@
 import { useQuery } from '@tanstack/react-query';
 import {
-	createColumnHelper,
-	getCoreRowModel,
-	getFilteredRowModel,
-	getPaginationRowModel,
-	getSortedRowModel,
-	SortingState,
-	useReactTable,
+  createColumnHelper,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  SortingState,
+  useReactTable,
 } from '@tanstack/react-table';
 import { Pill } from 'components/Pill';
+import { SeeApplication } from 'components/SeeApplication';
 import * as S from 'components/Table/TableData/TableData.styles';
+import { format } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 import { useJobApplication } from 'hooks/useJobApplication';
 import Image from 'next/image';
 import {
-	JobApplication,
-	JobApplicationResponse,
+  JobApplication,
+  JobApplicationResponse,
 } from 'protocols/external/job/job-application';
 import { useMemo, useState } from 'react';
 import { getInitialData } from 'utils/initialData';
 import { GetUsersRouteConst } from 'utils/routes';
 import { JobUrl } from 'utils/urls';
-import { format } from 'date-fns';
-import { ptBR } from 'date-fns/locale';
-import { SeeApplication } from 'components/SeeApplication';
 
 const columnHelper = createColumnHelper<JobApplication>();
 

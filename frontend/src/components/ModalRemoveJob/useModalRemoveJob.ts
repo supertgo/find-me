@@ -1,10 +1,10 @@
 'use client';
 import { useQueryClient } from '@tanstack/react-query';
 import { JobToBeRemoved } from 'components/ModalRemoveJob';
-import { useJob } from 'hooks/useJob/useJob';
+import { useJob } from 'hooks/useJob';
+import { useRouter } from 'next/navigation';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { GetJobRouteConst, GetJobsRouteConst } from 'utils/routes';
-import { useRouter } from 'next/navigation';
 import { JobsUrl } from 'utils/urls';
 
 export type UseModalRemoveJobProps = {

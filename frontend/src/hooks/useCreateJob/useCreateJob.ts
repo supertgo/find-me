@@ -1,5 +1,5 @@
 import { useQueryClient } from '@tanstack/react-query';
-import { useJob } from 'hooks/useJob/useJob';
+import { useJob } from 'hooks/useJob';
 import { useRouter } from 'next/navigation';
 import { PostJobBody } from 'protocols/external/job/job';
 import { useState } from 'react';

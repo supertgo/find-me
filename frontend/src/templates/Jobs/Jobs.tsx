@@ -3,7 +3,7 @@ import { Button } from 'components/Button';
 import { Input } from 'components/Input';
 import { JobFilter } from 'components/JobFilter';
 import { JobItem } from 'components/JobItem';
-import { useJob } from 'hooks/useJob/useJob';
+import { useJob } from 'hooks/useJob';
 import { Children } from 'react';
 import { Base } from 'templates/Base/Base';
 import { LoadingJobs } from './LoadingJobs';

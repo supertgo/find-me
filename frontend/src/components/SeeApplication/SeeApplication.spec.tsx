@@ -8,6 +8,7 @@ const props: SeeApplicationProps = {
 	email: 'tobias@gmail.com',
 	phone: '991892875',
 	coverLetter: 'quero trabalhar',
+  status: 'pending'
 };
 
 describe('<SeeApplication />', () => {

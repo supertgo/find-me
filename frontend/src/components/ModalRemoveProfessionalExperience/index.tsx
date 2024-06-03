@@ -2,6 +2,16 @@ import {
 	ModalRemoveProfessionalExperience,
 	ModalRemoveProfessionalExperienceProps,
 } from './ModalRemoveProfessionalExperience';
+import {
+	useModalRemoveProfessionalExperience,
+	UseModalRemoveProfessionalExperienceProps,
+} from './useModalRemoveProfessionalExperience';
 
-export type { ModalRemoveProfessionalExperienceProps };
-export { ModalRemoveProfessionalExperience };
+export type {
+	ModalRemoveProfessionalExperienceProps,
+	UseModalRemoveProfessionalExperienceProps,
+};
+export {
+	ModalRemoveProfessionalExperience,
+	useModalRemoveProfessionalExperience,
+};

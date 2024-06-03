@@ -4,21 +4,20 @@ import { AccountConfig } from 'components/AccountConfig';
 import { CompetenceItem } from 'components/CompetenceItem';
 import { ModalRemoveAcademicRecord } from 'components/ModalRemoveAcademicRecord';
 import { ModalRemoveCompetence } from 'components/ModalRemoveCompetence';
-import { ModalRemoveProfessionalExperience } from 'components/ModalRemoveProfessionalExperience/ModalRemoveProfessionalExperience';
+import { ModalRemoveProfessionalExperience } from 'components/ModalRemoveProfessionalExperience';
 import { ModalAddAcademicRecord } from 'components/Modals/ModalAddAcademicRecord';
 import { ModalAddCompetence } from 'components/Modals/ModalAddCompetence';
-import { ModalAddProfessionalExperience } from 'components/Modals/ModalAddProfessionalExperience/ModalAddProfessionalExperience';
+import { ModalAddProfessionalExperience } from 'components/Modals/ModalAddProfessionalExperience';
 import { ProfessionalExperienceItem } from 'components/ProfessionalExperienceItem';
 import { ResumeCard } from 'components/ResumeCard';
 import { Title } from 'components/Title';
 import { RemoveAcademicRecordProvider } from 'hooks/contexts/RemoveAcademicRecord/RemoveAcademicRecord';
 import { RemoveCompetenceProvider } from 'hooks/contexts/RemoveCompetence/RemoveCompetence';
 import { RemoveProfessionalExperienceProvider } from 'hooks/contexts/RemoveProfessionalExperience/RemoveProfessionalExperience';
-import { useConfig } from 'hooks/useConfig/useConfig';
-import { UserProps } from 'protocols/external/user/user';
+import { UserEnum, UserProps } from 'protocols/external/user/user';
 import { Children } from 'react';
 import { Base } from 'templates/Base/Base';
-import { LoadingConfig } from './LoadingConfig';
+import { useConfig, LoadingConfig } from '.';
 
 export type ConfigProps = {} & UserProps;
 
@@ -39,7 +38,7 @@ export const Config = (props: ConfigProps) => {
 				email={user.email}
 				phone={user.phone}
 			/>
-			{user.type === 'employee' && (
+			{user.type === UserEnum.EMPLOYEE && (
 				<>
 					<RemoveProfessionalExperienceProvider>
 						<ModalRemoveProfessionalExperience />

@@ -1,5 +1,5 @@
 import { ApplicantsTable } from 'components/ApplicantsTable';
-import { useApplicantsTable } from 'hooks/useApplicantsTable/useApplicantsTable';
+import { useApplicantsTable } from 'hooks/useApplicantsTable';
 import { useEffect } from 'react';
 import { Base } from 'templates/Base/Base';
 import * as S from './Applicants.styles';

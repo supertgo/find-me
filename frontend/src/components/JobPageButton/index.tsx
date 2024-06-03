@@ -1,4 +1,5 @@
 import { JobPageButton, JobPageButtonProps } from './JobPageButton';
+import { useJobPageButton, UseJobPageButtonProps } from './useJobPageButton';
 
-export type { JobPageButtonProps };
-export { JobPageButton };
+export type { JobPageButtonProps, UseJobPageButtonProps };
+export { JobPageButton, useJobPageButton };

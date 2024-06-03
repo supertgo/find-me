@@ -3,7 +3,7 @@ import { Input } from 'components/Input';
 import { ModalApplication } from 'components/ModalApplication';
 import { Pagination } from 'components/Pagination';
 import { TableData } from 'components/Table/TableData';
-import { CoverLetterProvider } from 'hooks/contexts/CoverLetter/CoverLetter';
+import { CoverLetterProvider } from 'hooks/contexts/CoverLetter';
 import { JobApplication } from 'protocols/external/job/job-application';
 import { Dispatch, SetStateAction } from 'react';
 import * as S from './ApplicantsTable.styles';

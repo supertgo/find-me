@@ -16,6 +16,10 @@ export const Wrapper = styled.a<WrapperProps>`
 		padding: ${theme.space.medium};
 		justify-content: space-between;
 		text-decoration: none;
+
+		a:visited {
+			color: inherit;
+		}
 	`}
 `;
 
@@ -41,13 +45,11 @@ export const JobTitle = styled.p`
 	`}
 `;
 
-export const JobInfo = styled.p`
-	${({ theme }) => css``}
-`;
+export const JobInfo = styled.p``;
 
 export const DateInfo = styled.div`
 	${({ theme }) => css`
-		display: flex;
+    display: flex;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;

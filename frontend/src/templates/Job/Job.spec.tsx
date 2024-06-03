@@ -1,10 +1,10 @@
-import 'components/Sidebar/Sidebar.mock';
-import 'components/ModalCoverLetter/ModalCoverLetter.mock';
 import 'components/JobPageButton/JobPageButton.mock';
+import 'components/ModalCoverLetter/ModalCoverLetter.mock';
+import 'components/Sidebar/Sidebar.mock';
+import { useLoggedUserStore } from 'stores/loggedUserStore';
 import { jobMock } from 'test/mocks/external/job';
-import { render, renderHook, screen, act } from 'utils/test/test-utils';
-import { Job, JobProps } from './Job';
-import { useLoggedUserStore } from 'stores/loggedUserStore/loggedUserStore';
+import { act, render, renderHook, screen } from 'utils/test/test-utils';
+import { Job, JobProps } from '.';
 
 const props: JobProps = {
 	...jobMock,

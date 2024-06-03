@@ -2,6 +2,10 @@ import {
 	ModalAddAcademicRecord,
 	ModalAddAcademicRecordProps,
 } from './ModalAddAcademicRecord';
+import {
+	useModalAddAcademicRecord,
+	UseModalAddAcademicRecordProps,
+} from './useModalAddAcademicRecord';
 
-export type { ModalAddAcademicRecordProps };
-export { ModalAddAcademicRecord };
+export type { ModalAddAcademicRecordProps, UseModalAddAcademicRecordProps };
+export { ModalAddAcademicRecord, useModalAddAcademicRecord };

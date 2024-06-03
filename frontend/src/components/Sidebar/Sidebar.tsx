@@ -1,12 +1,13 @@
 import { ExitIcon } from '@radix-ui/react-icons';
 import { ApplicantSidebarItems } from 'components/ApplicantSidebarItems';
+import { LogoFindme } from 'components/LogoFindme';
 import { RecruiterSidebarItems } from 'components/RecruiterSidebarItems';
-import { useSignOut } from 'hooks/useSignOut/useSignOut';
 import Link from 'next/link';
-import { useLoggedUserStore } from 'stores/loggedUserStore/loggedUserStore';
+import { UserEnum } from 'protocols/external/user/user';
+import { useLoggedUserStore } from 'stores/loggedUserStore';
 import { theme } from 'styles/theme';
 import { ConfigUrl } from 'utils/urls';
-import { LogoFindme } from 'components/LogoFindme';
+import { useSignOut } from '.';
 import * as S from './Sidebar.styles';
 
 export type SidebarProps = {};
@@ -24,7 +25,7 @@ export const Sidebar = ({}: SidebarProps) => {
 			<div>
 				<LogoFindme />
 				<S.Items>
-					{type === 'recruiter' ? (
+					{type === UserEnum.RECRUITER ? (
 						<RecruiterSidebarItems />
 					) : (
 						<ApplicantSidebarItems />

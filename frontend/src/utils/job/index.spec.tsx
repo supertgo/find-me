@@ -4,6 +4,7 @@ import {
 	parseSkillsIntoCompetences,
 	translateEmploymentType,
 	translateSalaryTimeUnit,
+	translateJobApplicationStatus,
 } from '.';
 
 describe('translateProposalsStatus', () => {
@@ -22,6 +23,23 @@ describe('translateSalaryTimeUnit', () => {
 		expect(translateSalaryTimeUnit['hour']).toStrictEqual('hora');
 		expect(translateSalaryTimeUnit['week']).toStrictEqual('semana');
 		expect(translateSalaryTimeUnit['month']).toStrictEqual('mês');
+	});
+});
+
+describe('translateJobApplicationStatus', () => {
+	it('should translate correctly', () => {
+		expect(translateJobApplicationStatus['hired']).toStrictEqual('Contratado');
+		expect(translateJobApplicationStatus['pending']).toStrictEqual('Pendente');
+		expect(translateJobApplicationStatus['approved']).toStrictEqual('Aprovado');
+		expect(translateJobApplicationStatus['canceled']).toStrictEqual(
+			'Cancelado',
+		);
+		expect(translateJobApplicationStatus['rejected']).toStrictEqual(
+			'Rejeitado',
+		);
+		expect(translateJobApplicationStatus['in_progress']).toStrictEqual(
+			'Em progresso',
+		);
 	});
 });
 

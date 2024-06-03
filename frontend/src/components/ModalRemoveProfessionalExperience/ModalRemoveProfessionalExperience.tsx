@@ -1,5 +1,5 @@
 import { BaseModal } from 'components/Modals/BaseModal';
-import { useModalRemoveProfessionalExperience } from 'hooks/useModalRemoveProfessionalExperience/useModalRemoveProfessionalExperience';
+import { useModalRemoveProfessionalExperience } from '.';
 
 export type ModalRemoveProfessionalExperienceProps = {};
 

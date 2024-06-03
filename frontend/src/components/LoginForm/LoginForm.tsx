@@ -3,11 +3,11 @@ import { Button } from 'components/Button';
 import { Input } from 'components/Input';
 import { Heading } from 'components/Heading';
 import { Controller } from 'react-hook-form';
-import { useSignInForm } from 'hooks/useSignInForm/useSignInForm';
 import { LinkText } from 'components/LinkText';
 import { validateInputUserEmail } from 'utils/email';
 import { INVALID_EMAIL, REQUIRED_PASSWORD } from 'utils/errors';
 import { ForgotPasswordUrl, RegisterUrl } from 'utils/urls';
+import { useSignInForm } from './useSignInForm';
 
 export type LoginFormProps = {};
 

@@ -1,5 +1,5 @@
 import { BaseModal } from 'components/Modals/BaseModal';
-import { useModalRemoveAcademicRecord } from 'hooks/useModalRemoveAcademicRecord/useModalRemoveAcademicRecord';
+import { useModalRemoveAcademicRecord } from '.';
 
 export type ModalRemoveAcademicRecordProps = {};
 
@@ -16,7 +16,7 @@ export const ModalRemoveAcademicRecord =
 				confirmButtonText="Excluir"
 				confirmHandler={handleSubmit}
 				cancelButtonText="Cancelar"
-        isConfirmButtonLoading={loading}
+				isConfirmButtonLoading={loading}
 			>
 				{!!academicRecord && (
 					<p>

@@ -1,17 +1,17 @@
-import { useModalAddAcademicRecord } from 'hooks/useModalAddAcademicRecord/useModalAddAcademicRecord';
-import { BaseModal } from 'components/Modals/BaseModal';
 import { PlusIcon } from '@radix-ui/react-icons';
+import { Input } from 'components/Input';
+import { BaseModal } from 'components/Modals/BaseModal';
+import { Textarea } from 'components/Textarea';
 import { Controller } from 'react-hook-form';
 import {
-	REQUIRED_ACADEMIC_RECORD_DEGREE,
-	REQUIRED_ACADEMIC_RECORD_DESCRIPTION,
-	REQUIRED_ACADEMIC_RECORD_END_DATE,
-	REQUIRED_ACADEMIC_RECORD_FIELD_STUDY,
-	REQUIRED_ACADEMIC_RECORD_INSTITUTION,
-	REQUIRED_ACADEMIC_RECORD_START_DATE,
+  REQUIRED_ACADEMIC_RECORD_DEGREE,
+  REQUIRED_ACADEMIC_RECORD_DESCRIPTION,
+  REQUIRED_ACADEMIC_RECORD_END_DATE,
+  REQUIRED_ACADEMIC_RECORD_FIELD_STUDY,
+  REQUIRED_ACADEMIC_RECORD_INSTITUTION,
+  REQUIRED_ACADEMIC_RECORD_START_DATE,
 } from 'utils/errors';
-import { Input } from 'components/Input';
-import { Textarea } from 'components/Textarea';
+import { useModalAddAcademicRecord } from '.';
 import * as S from './ModalAddAcademicRecord.styles';
 
 export type ModalAddAcademicRecordProps = {

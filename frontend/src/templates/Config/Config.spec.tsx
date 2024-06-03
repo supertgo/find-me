@@ -2,9 +2,8 @@ import 'components/Sidebar/Sidebar.mock';
 import 'components/Skeleton/Skeleton.mock';
 import 'components/ResumeCard/ResumeCard.mock';
 import { render, screen } from 'utils/test/test-utils';
-import { Config, ConfigProps } from './Config';
+import { Config, ConfigProps, LoadingConfig } from '.';
 import { formatCellphone } from 'utils/formatCellphone';
-import { LoadingConfig } from './LoadingConfig';
 
 const props: ConfigProps = {
 	id: 10,
@@ -48,7 +47,6 @@ describe('<Config />', () => {
 		expect(screen.getAllByTestId('Mock ResumeCard')).toHaveLength(3);
 	});
 });
-
 
 describe('<LoadingConfig />', () => {
 	it('should render the component', () => {

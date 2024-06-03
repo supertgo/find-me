@@ -1,6 +1,6 @@
 import { BaseModal } from 'components/Modals/BaseModal';
-import { useModalRemoveJob } from 'hooks/useModalRemoveJob/useModalRemoveJob';
 import { Dispatch, SetStateAction } from 'react';
+import { useModalRemoveJob } from '.';
 
 export type JobToBeRemoved = {
 	id: number;

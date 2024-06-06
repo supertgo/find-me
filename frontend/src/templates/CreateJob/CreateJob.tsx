@@ -36,6 +36,7 @@ import {
 } from 'utils/job';
 import * as S from './CreateJob.styles';
 import { MaxLength } from 'utils/maxLengths';
+import { formatToCurrency } from 'utils/money';
 
 export type CreateJobProps = {};
 
@@ -145,7 +146,6 @@ export const CreateJob = ({}: CreateJobProps) => {
 							title="Salário"
 							description="Por favor, especifique o salário."
 						>
-							{/* //TODO Ana / Eduardo -> Criar input que formata para moeda */}
 							<Controller
 								rules={{
 									required: REQUIRED_JOB_SALARY,
@@ -153,7 +153,14 @@ export const CreateJob = ({}: CreateJobProps) => {
 								control={control}
 								name="salary"
 								render={({ field: { ...field } }) => (
-									<Input {...field} type="number" error={errors.salary} />
+									<Input
+										{...field}
+										onChange={({ target: { value } }) => {
+											field.onChange(formatToCurrency(value));
+										}}
+										type="text"
+										error={errors.salary}
+									/>
 								)}
 							/>
 						</ConfigInfoWrapper>

@@ -9,7 +9,7 @@ import { translateJobApplicationStatus } from 'utils/job';
 import { ApplicantUrl } from 'utils/urls';
 import { useModalApplication } from '.';
 import * as S from './ModalApplication.styles';
-import { MaxLengths } from 'utils/maxLengths';
+import { MaxLength } from 'utils/maxLengths';
 
 export type ModalApplicationProps = {};
 
@@ -35,13 +35,13 @@ export const ModalApplication = ({}: ModalApplicationProps) => {
 					label="Nome Completo"
 					readOnly
 					value={user.name}
-					maxLength={MaxLengths.name}
+					maxLength={MaxLength.name}
 				/>
 				<Input
 					label="Email"
 					readOnly
 					value={user.email}
-					maxLength={MaxLengths.email}
+					maxLength={MaxLength.email}
 				/>
 				<Input label="Celular" readOnly value={user.phone} />
 

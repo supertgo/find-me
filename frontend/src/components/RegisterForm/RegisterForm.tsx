@@ -14,7 +14,7 @@ import {
 import { formatCellphone } from 'utils/formatCellphone';
 import { useRegisterForm } from '.';
 import * as S from './RegisterForm.styles';
-import { MaxLengths } from 'utils/maxLengths';
+import { MaxLength } from 'utils/maxLengths';
 
 export type RegisterFormProps = {};
 
@@ -36,7 +36,7 @@ export const RegisterForm = ({}: RegisterFormProps) => {
 						{...field}
 						placeholder="Username"
 						error={errors.name}
-						maxLength={MaxLengths.name}
+						maxLength={MaxLength.name}
 					/>
 				)}
 			/>
@@ -53,7 +53,7 @@ export const RegisterForm = ({}: RegisterFormProps) => {
 						placeholder="E-mail"
 						type="email"
 						error={errors.email}
-						maxLength={MaxLengths.email}
+						maxLength={MaxLength.email}
 					/>
 				)}
 			/>
@@ -86,7 +86,7 @@ export const RegisterForm = ({}: RegisterFormProps) => {
 						type="password"
 						placeholder="Senha"
 						error={errors.password}
-						maxLength={MaxLengths.password}
+						maxLength={MaxLength.password}
 					/>
 				)}
 			/>

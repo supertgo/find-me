@@ -9,7 +9,7 @@ import * as S from './Textarea.styles';
 import { FieldError } from 'react-hook-form';
 import { MessageError } from 'components/MessageError';
 import { Label } from 'components/Label';
-import { MaxLengths } from 'utils/maxLengths';
+import { MaxLength } from 'utils/maxLengths';
 
 export type TextareaProps = {
 	label?: string;
@@ -39,12 +39,12 @@ const Textarea = forwardRef(
 					ref={ref}
 					id={id}
 					{...props}
-					maxLength={MaxLengths.description}
+					maxLength={MaxLength.description}
 					onChange={handleChange}
 				/>
 				<S.LimitCharacter>
 					{error && <MessageError error={error} />}
-					<S.MaxLength>{`${charCount}/${MaxLengths.description}`}</S.MaxLength>
+					<S.MaxLength>{`${charCount}/${MaxLength.description}`}</S.MaxLength>
 				</S.LimitCharacter>
 			</S.Wrapper>
 		);

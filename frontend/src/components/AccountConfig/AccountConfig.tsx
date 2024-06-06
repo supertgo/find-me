@@ -17,7 +17,7 @@ import {
 import { formatCellphone } from 'utils/formatCellphone';
 import * as S from './AccountConfig.styles';
 import { useUserConfigForm } from './useUserConfigForm';
-import { MaxLengths } from 'utils/maxLengths';
+import { MaxLength } from 'utils/maxLengths';
 
 export type AccountConfigProps = {} & Pick<
 	UserProps,
@@ -58,7 +58,7 @@ export const AccountConfig = ({
 									error={errors.name}
 									label="Nome completo*"
 									placeholder="Digite o seu nome completo"
-									maxLength={MaxLengths.name}
+									maxLength={MaxLength.name}
 								/>
 							)}
 						/>
@@ -97,7 +97,7 @@ export const AccountConfig = ({
 										placeholder="Digite o seu e-mail"
 										error={errors.email}
 										type="email"
-										maxLength={MaxLengths.email}
+										maxLength={MaxLength.email}
 									/>
 								)}
 							/>
@@ -119,7 +119,7 @@ export const AccountConfig = ({
 									label="Nova Senha"
 									placeholder="Digite a sua nova senha"
 									error={errors.password}
-									maxLength={MaxLengths.password}
+									maxLength={MaxLength.password}
 								/>
 							)}
 						/>

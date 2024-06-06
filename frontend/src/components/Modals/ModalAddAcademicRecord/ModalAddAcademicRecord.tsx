@@ -13,7 +13,7 @@ import {
 } from 'utils/errors';
 import { useModalAddAcademicRecord } from '.';
 import * as S from './ModalAddAcademicRecord.styles';
-import { MaxLengths } from 'utils/maxLengths';
+import { MaxLength } from 'utils/maxLengths';
 
 export type ModalAddAcademicRecordProps = {
 	user_id: number;
@@ -63,7 +63,7 @@ export const ModalAddAcademicRecord = ({
 							label="Instituição"
 							placeholder="Ex: UFMG"
 							error={errors.institution}
-							maxLength={MaxLengths.title}
+							maxLength={MaxLength.title}
 						/>
 					)}
 				/>
@@ -79,7 +79,7 @@ export const ModalAddAcademicRecord = ({
 							label="Diploma"
 							placeholder="Ex: Bacharelado"
 							error={errors.degree}
-							maxLength={MaxLengths.title}
+							maxLength={MaxLength.title}
 						/>
 					)}
 				/>
@@ -95,7 +95,7 @@ export const ModalAddAcademicRecord = ({
 							label="Área de estudo"
 							placeholder="Ex: Ciência da Computação"
 							error={errors.field_of_study}
-							maxLength={MaxLengths.title}
+							maxLength={MaxLength.title}
 						/>
 					)}
 				/>

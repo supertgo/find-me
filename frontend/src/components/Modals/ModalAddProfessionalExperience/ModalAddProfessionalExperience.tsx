@@ -21,7 +21,7 @@ import {
 import { translateEmploymentType, translateWorkModel } from 'utils/job';
 import { useModalAddProfessionalExperience } from '.';
 import * as S from './ModalAddProfessionalExperience.styles';
-import { MaxLengths } from 'utils/maxLengths';
+import { MaxLength } from 'utils/maxLengths';
 
 export type ModalAddProfessionalExperienceProps = {
 	user_id: number;
@@ -75,7 +75,7 @@ export const ModalAddProfessionalExperience = ({
 							label="Nome da empresa"
 							placeholder="Ex: FindMe"
 							error={errors.company_name}
-							maxLength={MaxLengths.title}
+							maxLength={MaxLength.title}
 						/>
 					)}
 				/>
@@ -92,7 +92,7 @@ export const ModalAddProfessionalExperience = ({
 							label="Cargo"
 							placeholder="Ex: Desenvolvedor de Software"
 							error={errors.position}
-							maxLength={MaxLengths.title}
+							maxLength={MaxLength.title}
 						/>
 					)}
 				/>
@@ -109,7 +109,7 @@ export const ModalAddProfessionalExperience = ({
 							label="Localidade"
 							placeholder="Ex: Dubai"
 							error={errors.location}
-							maxLength={MaxLengths.local}
+							maxLength={MaxLength.location}
 						/>
 					)}
 				/>

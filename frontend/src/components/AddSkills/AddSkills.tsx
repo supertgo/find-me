@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { UseFormSetValue } from 'react-hook-form';
 import { parseSkillsIntoCompetences } from 'utils/job';
 import * as S from './AddSkills.styles';
-import { MaxLengths } from 'utils/maxLengths';
+import { MaxLength } from 'utils/maxLengths';
 
 export type AddSkillsProps = {
 	maxSkillPerJob?: number;
@@ -69,7 +69,7 @@ export const AddSkills = ({ maxSkillPerJob, setValue }: AddSkillsProps) => {
 					placeholder="Adicione uma skill"
 					value={inputValue}
 					onChange={onChange}
-					maxLength={MaxLengths.competence}
+					maxLength={MaxLength.competence}
 				/>
 				<Button
 					type="button"

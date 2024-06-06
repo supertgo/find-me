@@ -3,7 +3,6 @@ import { useRemoveAcademicRecord } from 'hooks/contexts/RemoveAcademicRecord';
 import { AcademicRecord } from 'protocols/external/academic-record/academic-record';
 import { experienceDate } from 'utils/date';
 import * as S from './AcademicRecordItem.styles';
-import { MaxLengths } from 'utils/maxLengths';
 
 export type AcademicRecordItemProps = {} & Omit<
 	AcademicRecord,

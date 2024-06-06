@@ -35,7 +35,7 @@ import {
 	translateWorkModel,
 } from 'utils/job';
 import * as S from './CreateJob.styles';
-import { MaxLengths } from 'utils/maxLengths';
+import { MaxLength } from 'utils/maxLengths';
 
 export type CreateJobProps = {};
 
@@ -103,7 +103,7 @@ export const CreateJob = ({}: CreateJobProps) => {
 										{...field}
 										placeholder="e.g Engenheiro de Software"
 										error={errors.name}
-										maxLength={MaxLengths.title}
+										maxLength={MaxLength.title}
 									/>
 								)}
 							/>
@@ -182,7 +182,7 @@ export const CreateJob = ({}: CreateJobProps) => {
 									<Input
 										{...field}
 										error={errors.location}
-										maxLength={MaxLengths.local}
+										maxLength={MaxLength.location}
 									/>
 								)}
 							/>
@@ -241,7 +241,6 @@ export const CreateJob = ({}: CreateJobProps) => {
 								onClick={() => setCurrentStep(currentStep + 1)}
 							>
 								Próximo Passo
-								{/* Onde ficaria o maxLength das competências ? - Ana*/}
 							</Button>
 						</S.BottomRow>
 					</>

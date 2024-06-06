@@ -1,4 +1,3 @@
-'use client';
 import { AcademicRecordItem } from 'components/AcademicRecordItem';
 import { AccountConfig } from 'components/AccountConfig';
 import { CompetenceItem } from 'components/CompetenceItem';

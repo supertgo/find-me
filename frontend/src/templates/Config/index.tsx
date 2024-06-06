@@ -1,3 +1,4 @@
+'use client';
 import { Config, ConfigProps } from './Config';
 import { useConfig, UseConfigProps } from './useConfig';
 import { LoadingConfig } from './LoadingConfig';

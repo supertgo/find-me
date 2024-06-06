@@ -12,29 +12,30 @@ import { Title } from 'components/Title';
 import { VerticalRow } from 'components/VerticalRow/VerticalRow';
 import { useCreateJob } from 'hooks/useCreateJob/useCreateJob';
 import {
-  employmentTypeOptions,
-  salaryTimeUnitOptions,
-  workModelOptions,
+	employmentTypeOptions,
+	salaryTimeUnitOptions,
+	workModelOptions,
 } from 'protocols/external/job/job';
 import { Controller } from 'react-hook-form';
 import { theme } from 'styles/theme';
 import { Base } from 'templates/Base/Base';
 import {
-  REQUIRED_JOB_ACCEPT_APPLICATION,
-  REQUIRED_JOB_APPLICATIONS_AMOUNT,
-  REQUIRED_JOB_DESCRIPTION,
-  REQUIRED_JOB_EMPLOYMENT_TYPE,
-  REQUIRED_JOB_NAME,
-  REQUIRED_JOB_SALARY,
-  REQUIRED_JOB_SALARY_TIME_UNIT,
-  REQUIRED_JOB_WORK_MODEL,
+	REQUIRED_JOB_ACCEPT_APPLICATION,
+	REQUIRED_JOB_APPLICATIONS_AMOUNT,
+	REQUIRED_JOB_DESCRIPTION,
+	REQUIRED_JOB_EMPLOYMENT_TYPE,
+	REQUIRED_JOB_NAME,
+	REQUIRED_JOB_SALARY,
+	REQUIRED_JOB_SALARY_TIME_UNIT,
+	REQUIRED_JOB_WORK_MODEL,
 } from 'utils/errors';
 import {
-  translateEmploymentType,
-  translateSalaryTimeUnit,
-  translateWorkModel,
+	translateEmploymentType,
+	translateSalaryTimeUnit,
+	translateWorkModel,
 } from 'utils/job';
 import * as S from './CreateJob.styles';
+import { MaxLengths } from 'utils/maxLengths';
 
 export type CreateJobProps = {};
 
@@ -102,6 +103,7 @@ export const CreateJob = ({}: CreateJobProps) => {
 										{...field}
 										placeholder="e.g Engenheiro de Software"
 										error={errors.name}
+										maxLength={MaxLengths.title}
 									/>
 								)}
 							/>
@@ -177,7 +179,11 @@ export const CreateJob = ({}: CreateJobProps) => {
 								control={control}
 								name="location"
 								render={({ field: { ...field } }) => (
-									<Input {...field} error={errors.location} />
+									<Input
+										{...field}
+										error={errors.location}
+										maxLength={MaxLengths.local}
+									/>
 								)}
 							/>
 						</ConfigInfoWrapper>
@@ -235,6 +241,7 @@ export const CreateJob = ({}: CreateJobProps) => {
 								onClick={() => setCurrentStep(currentStep + 1)}
 							>
 								Próximo Passo
+								{/* Onde ficaria o maxLength das competências ? - Ana*/}
 							</Button>
 						</S.BottomRow>
 					</>
@@ -252,7 +259,6 @@ export const CreateJob = ({}: CreateJobProps) => {
 								render={({ field: { ...field } }) => (
 									<Textarea
 										{...field}
-										maxLength={2000}
 										error={errors.description}
 										placeholder="Digite a descrição do emprego"
 										style={{

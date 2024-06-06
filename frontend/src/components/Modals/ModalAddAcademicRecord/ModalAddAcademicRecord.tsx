@@ -4,15 +4,16 @@ import { BaseModal } from 'components/Modals/BaseModal';
 import { Textarea } from 'components/Textarea';
 import { Controller } from 'react-hook-form';
 import {
-  REQUIRED_ACADEMIC_RECORD_DEGREE,
-  REQUIRED_ACADEMIC_RECORD_DESCRIPTION,
-  REQUIRED_ACADEMIC_RECORD_END_DATE,
-  REQUIRED_ACADEMIC_RECORD_FIELD_STUDY,
-  REQUIRED_ACADEMIC_RECORD_INSTITUTION,
-  REQUIRED_ACADEMIC_RECORD_START_DATE,
+	REQUIRED_ACADEMIC_RECORD_DEGREE,
+	REQUIRED_ACADEMIC_RECORD_DESCRIPTION,
+	REQUIRED_ACADEMIC_RECORD_END_DATE,
+	REQUIRED_ACADEMIC_RECORD_FIELD_STUDY,
+	REQUIRED_ACADEMIC_RECORD_INSTITUTION,
+	REQUIRED_ACADEMIC_RECORD_START_DATE,
 } from 'utils/errors';
 import { useModalAddAcademicRecord } from '.';
 import * as S from './ModalAddAcademicRecord.styles';
+import { MaxLengths } from 'utils/maxLengths';
 
 export type ModalAddAcademicRecordProps = {
 	user_id: number;
@@ -62,6 +63,7 @@ export const ModalAddAcademicRecord = ({
 							label="Instituição"
 							placeholder="Ex: UFMG"
 							error={errors.institution}
+							maxLength={MaxLengths.title}
 						/>
 					)}
 				/>
@@ -77,6 +79,7 @@ export const ModalAddAcademicRecord = ({
 							label="Diploma"
 							placeholder="Ex: Bacharelado"
 							error={errors.degree}
+							maxLength={MaxLengths.title}
 						/>
 					)}
 				/>
@@ -92,6 +95,7 @@ export const ModalAddAcademicRecord = ({
 							label="Área de estudo"
 							placeholder="Ex: Ciência da Computação"
 							error={errors.field_of_study}
+							maxLength={MaxLengths.title}
 						/>
 					)}
 				/>

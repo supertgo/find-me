@@ -9,6 +9,7 @@ import { translateJobApplicationStatus } from 'utils/job';
 import { ApplicantUrl } from 'utils/urls';
 import { useModalApplication } from '.';
 import * as S from './ModalApplication.styles';
+import { MaxLengths } from 'utils/maxLengths';
 
 export type ModalApplicationProps = {};
 
@@ -30,8 +31,18 @@ export const ModalApplication = ({}: ModalApplicationProps) => {
 					<Label labelText="Status" />
 					<Pill text={translateJobApplicationStatus[jobApplication.status]} />
 				</div>
-				<Input label="Nome Completo" readOnly value={user.name} />
-				<Input label="Email" readOnly value={user.email} />
+				<Input
+					label="Nome Completo"
+					readOnly
+					value={user.name}
+					maxLength={MaxLengths.name}
+				/>
+				<Input
+					label="Email"
+					readOnly
+					value={user.email}
+					maxLength={MaxLengths.email}
+				/>
 				<Input label="Celular" readOnly value={user.phone} />
 
 				<Textarea

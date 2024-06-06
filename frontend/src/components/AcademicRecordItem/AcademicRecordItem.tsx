@@ -3,6 +3,7 @@ import { useRemoveAcademicRecord } from 'hooks/contexts/RemoveAcademicRecord';
 import { AcademicRecord } from 'protocols/external/academic-record/academic-record';
 import { experienceDate } from 'utils/date';
 import * as S from './AcademicRecordItem.styles';
+import { MaxLengths } from 'utils/maxLengths';
 
 export type AcademicRecordItemProps = {} & Omit<
 	AcademicRecord,
@@ -33,9 +34,9 @@ export const AcademicRecordItem = ({
 			<S.AcademicInfo>
 				<S.AcademicTopRow>
 					<S.AcademicInfoTitle>{institution}</S.AcademicInfoTitle>
-          <i title="Remover Formação Acadêmica" onClick={removeAcademicRecord}>
-            <Cross1Icon />
-          </i>
+					<i title="Remover Formação Acadêmica" onClick={removeAcademicRecord}>
+						<Cross1Icon />
+					</i>
 				</S.AcademicTopRow>
 				<S.AcademicInfoSubtitle>{`${degree}, ${field_of_study}`}</S.AcademicInfoSubtitle>
 				<S.AcademicInfoSubtitle>

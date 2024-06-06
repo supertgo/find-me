@@ -5,6 +5,7 @@ import { Controller } from 'react-hook-form';
 import { REQUIRED_COMPETENCE } from 'utils/errors';
 import { useModalAddCompetence } from '.';
 import * as S from './ModalAddCompetence.styles';
+import { MaxLength } from 'utils/maxLengths';
 
 export type ModalAddCompetenceProps = {
 	user_id: number;
@@ -51,6 +52,7 @@ export const ModalAddCompetence = ({ user_id }: ModalAddCompetenceProps) => {
 							{...field}
 							placeholder="Competência (ex: Laravel)"
 							error={errors.competence}
+							maxLength={MaxLength.competence}
 						/>
 					)}
 				/>

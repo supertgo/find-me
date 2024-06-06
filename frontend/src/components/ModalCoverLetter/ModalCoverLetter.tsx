@@ -15,10 +15,18 @@ export const ModalCoverLetter = ({
 	disabled,
 	jobId,
 }: ModalCoverLetterProps) => {
-	const { open, isLoading, setOpen, isValid, errors, handleSubmit, onSubmit, control } =
-		useModalCoverLetter({
-			job_id: jobId,
-		});
+	const {
+		open,
+		isLoading,
+		setOpen,
+		isValid,
+		errors,
+		handleSubmit,
+		onSubmit,
+		control,
+	} = useModalCoverLetter({
+		job_id: jobId,
+	});
 
 	return (
 		<BaseModal

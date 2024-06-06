@@ -8,6 +8,7 @@ import { validateInputUserEmail } from 'utils/email';
 import { INVALID_EMAIL, REQUIRED_PASSWORD } from 'utils/errors';
 import { ForgotPasswordUrl, RegisterUrl } from 'utils/urls';
 import { useSignInForm } from './useSignInForm';
+import { MaxLength } from 'utils/maxLengths';
 
 export type LoginFormProps = {};
 
@@ -31,6 +32,7 @@ export const LoginForm = ({}: LoginFormProps) => {
 						placeholder="E-mail"
 						type="email"
 						error={errors.email}
+						maxLength={MaxLength.email}
 					/>
 				)}
 			/>
@@ -46,6 +48,7 @@ export const LoginForm = ({}: LoginFormProps) => {
 						type="password"
 						placeholder="Senha"
 						error={errors.password}
+						maxLength={MaxLength.password}
 					/>
 				)}
 			/>

@@ -7,6 +7,7 @@ import { CoverLetterProvider } from 'hooks/contexts/CoverLetter';
 import { JobApplication } from 'protocols/external/job/job-application';
 import { Dispatch, SetStateAction } from 'react';
 import * as S from './ApplicantsTable.styles';
+import { MaxLength } from 'utils/maxLengths';
 
 export type ApplicantsTableProps = {
 	applicantsData: JobApplication[] | undefined;
@@ -38,6 +39,7 @@ export const ApplicantsTable = ({
 						setGlobalFilter(e.target.value);
 					}}
 					value={globalFilter}
+					maxLength={MaxLength.name}
 				/>
 			</S.TableTopContent>
 

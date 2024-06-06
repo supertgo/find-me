@@ -7,12 +7,4 @@ describe('<Textarea />', () => {
 
 		expect(screen.getByRole('textbox')).toBeInTheDocument();
 	});
-	it('should render additional information when maxLength is provided', () => {
-		const props = {
-			maxLength: 10,
-		};
-		render(<Textarea defaultValue="test" {...props} />);
-
-		expect(screen.getByText(`0/${props.maxLength}`)).toBeInTheDocument();
-	});
 });

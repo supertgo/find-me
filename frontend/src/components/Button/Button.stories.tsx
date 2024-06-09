@@ -54,7 +54,7 @@ export const Secondary: StoryObj<ButtonProps> = {
 	},
 };
 
-export const isLoading: StoryObj<ButtonProps> = {
+export const IsLoading: StoryObj<ButtonProps> = {
 	args: {
 		isLoading: true,
 	},

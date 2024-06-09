@@ -104,7 +104,7 @@ export const AccountConfig = ({
 						</S.PersonalDetailsGrid>
 					</S.PersonalDetails>
 				</ConfigInfoWrapper>
-				<ConfigInfoWrapper title="Nova senha">
+				<ConfigInfoWrapper title="Senha">
 					<S.ConfigEmailWrapper>
 						<Controller
 							rules={{
@@ -116,8 +116,8 @@ export const AccountConfig = ({
 								<Input
 									{...field}
 									type="password"
-									label="Nova Senha"
-									placeholder="Digite a sua nova senha"
+									label="Senha*"
+									placeholder="Digite a sua senha"
 									error={errors.password}
 									maxLength={MaxLength.password}
 								/>
@@ -137,7 +137,7 @@ export const AccountConfig = ({
 							render={({ field: { ...field } }) => (
 								<Textarea
 									{...field}
-									label="Sobre mim"
+									label="Sobre mim*"
 									placeholder="Descreva um pouco sobre você"
 									error={errors.about_me}
 								/>

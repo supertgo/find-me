@@ -31,7 +31,7 @@ export const ApplicantsTable = ({
 	return (
 		<>
 			<S.TableTopContent>
-				<h3>{`Total de Candidatos: ${applicantsData?.length || '...'}`}</h3>
+				<h3>{`Total de Candidatos: ${applicantsData ? applicantsData.length : '...'}`}</h3>
 
 				<Input
 					placeholder="Pesquisar Candidatos"
@@ -48,7 +48,7 @@ export const ApplicantsTable = ({
 				<TableData
 					data={table}
 					isLoading={isLoading}
-					defaultMessage="Não há nada para essa configurações"
+					defaultMessage="Nenhum candidato encontrado"
 				/>
 			</CoverLetterProvider>
 

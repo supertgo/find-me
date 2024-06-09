@@ -7,9 +7,6 @@ export async function getAuthMe(token: string): Promise<ShowUserResponse> {
 		{
 			headers: { Authorization: `Bearer ${token}` },
       cache: 'no-store',
-      next: {
-        revalidate: 1000
-      }
     },
     
 	);

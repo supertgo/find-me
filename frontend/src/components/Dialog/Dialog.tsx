@@ -37,6 +37,8 @@ const DialogOverlay = forwardRef(
 	),
 );
 
+DialogOverlay.displayName = 'DialogOverlay'
+
 const DialogContent = ({ ...props }: DialogContentProps) => (
 	<S.DialogContent>
 		<DialogPrimitive.Content {...props} />

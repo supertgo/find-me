@@ -46,37 +46,47 @@ export const JobApplications = ({
 			name: 'Vagas',
 			url: `/${JobsUrl}`,
 		},
-		{
-			name: applicantsData![0].job!.name,
-			url: `/${JobUrl(jobId)}`,
-		},
-		{
-			name: 'Candidatos',
-			url: `/${JobUrlApplicants(jobId)}`,
-		},
 	];
 
+	if (applicantsData && applicantsData[0]) {
+		paths.push(
+			{
+				name: applicantsData![0].job!.name,
+				url: `/${JobUrl(jobId)}`,
+			},
+			{
+				name: 'Candidatos',
+				url: `/${JobUrlApplicants(jobId)}`,
+			},
+		);
+	} else {
+		paths.push({
+			name: 'Candidatos',
+			url: `/${JobUrlApplicants(jobId)}`,
+		});
+	}
+
 	return (
-			<Base>
-				<S.Wrapper>
-					<ApplicationHeader />
+		<Base>
+			<S.Wrapper>
+				<ApplicationHeader />
 
-					{!!applicantsData && (
-						<S.BreadcrumbWrapper>
-							<Breadcrumb paths={paths} />
-						</S.BreadcrumbWrapper>
-					)}
+				{!!applicantsData && (
+					<S.BreadcrumbWrapper>
+						<Breadcrumb paths={paths} />
+					</S.BreadcrumbWrapper>
+				)}
 
-					<ApplicantsTable
-						table={table}
-						applicantsData={applicantsData}
-						isLoading={isLoading}
-						globalFilter={globalFilter}
-						setGlobalFilter={setGlobalFilter}
-						currentPage={currentPage}
-						itemsPerPage={itemsPerPage}
-					/>
-				</S.Wrapper>
-			</Base>
+				<ApplicantsTable
+					table={table}
+					applicantsData={applicantsData}
+					isLoading={isLoading}
+					globalFilter={globalFilter}
+					setGlobalFilter={setGlobalFilter}
+					currentPage={currentPage}
+					itemsPerPage={itemsPerPage}
+				/>
+			</S.Wrapper>
+		</Base>
 	);
 };

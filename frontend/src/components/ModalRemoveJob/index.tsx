@@ -3,6 +3,7 @@ import {
 	JobToBeRemoved,
 	ModalRemoveJobProps,
 } from './ModalRemoveJob';
+import { useModalRemoveJob, UseModalRemoveJobProps } from './useModalRemoveJob';
 
-export type { JobToBeRemoved, ModalRemoveJobProps };
-export { ModalRemoveJob };
+export type { JobToBeRemoved, ModalRemoveJobProps, UseModalRemoveJobProps };
+export { ModalRemoveJob, useModalRemoveJob };

@@ -1,9 +1,8 @@
-import { AcademicRecord } from 'protocols/external/academic-record/academic-record';
-import * as S from './AcademicRecordItem.styles';
 import { Cross1Icon } from '@radix-ui/react-icons';
-import { RemoveAcademicRecordContext } from 'hooks/contexts/RemoveAcademicRecord/RemoveAcademicRecord';
-import { useContextSelector } from 'use-context-selector';
+import { useRemoveAcademicRecord } from 'hooks/contexts/RemoveAcademicRecord';
+import { AcademicRecord } from 'protocols/external/academic-record/academic-record';
 import { experienceDate } from 'utils/date';
+import * as S from './AcademicRecordItem.styles';
 
 export type AcademicRecordItemProps = {} & Omit<
 	AcademicRecord,
@@ -20,13 +19,7 @@ export const AcademicRecordItem = ({
 	is_in_progress,
 	description,
 }: AcademicRecordItemProps) => {
-	const { setOpen, setAcademicRecord } = useContextSelector(
-		RemoveAcademicRecordContext,
-		(context) => ({
-			setOpen: context.setOpen,
-			setAcademicRecord: context.setAcademicRecord,
-		}),
-	);
+	const { setOpen, setAcademicRecord } = useRemoveAcademicRecord();
 
 	const removeAcademicRecord = () => {
 		setAcademicRecord({
@@ -40,9 +33,9 @@ export const AcademicRecordItem = ({
 			<S.AcademicInfo>
 				<S.AcademicTopRow>
 					<S.AcademicInfoTitle>{institution}</S.AcademicInfoTitle>
-          <i title="Remover Formação Acadêmica" onClick={removeAcademicRecord}>
-            <Cross1Icon />
-          </i>
+					<i title="Remover Formação Acadêmica" onClick={removeAcademicRecord}>
+						<Cross1Icon />
+					</i>
 				</S.AcademicTopRow>
 				<S.AcademicInfoSubtitle>{`${degree}, ${field_of_study}`}</S.AcademicInfoSubtitle>
 				<S.AcademicInfoSubtitle>

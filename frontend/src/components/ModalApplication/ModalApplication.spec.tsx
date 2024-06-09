@@ -1,7 +1,8 @@
 import { render, renderHook, screen } from 'utils/test/test-utils';
 import { ModalApplication } from '.';
 import { useContextSelector } from 'use-context-selector';
-import { CoverLetterContext } from 'hooks/contexts/CoverLetter/CoverLetter';
+import { CoverLetterContext } from 'hooks/contexts/CoverLetter';
+import { JobStatus } from 'protocols/external/job/job-application';
 
 describe('<ModalApplication />', () => {
 	it('should render the component', () => {
@@ -15,6 +16,7 @@ describe('<ModalApplication />', () => {
 			jobApplication: {
 				id: 15,
 				cover_letter: 'Gostaria de me candidtar à vaga',
+				status: 'pending' as JobStatus,
 			},
 		};
 
@@ -29,6 +31,8 @@ describe('<ModalApplication />', () => {
 
 		expect(screen.getByText('Carta de Apresentação')).toBeInTheDocument();
 		expect(screen.getByText('Email')).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /Visitar Perfil/i })).toBeInTheDocument();
+		expect(
+			screen.getByRole('link', { name: /Visitar Perfil/i }),
+		).toBeInTheDocument();
 	});
 });

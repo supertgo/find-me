@@ -2,9 +2,9 @@ import * as S from './Pill.styles';
 
 export type PillProps = {
 	text: string;
-	variant: 'success' | 'error' | 'info' | 'warning';
+	variant?: 'success' | 'error' | 'info' | 'warning';
 };
 
-export const Pill = ({ text, variant }: PillProps) => {
+export const Pill = ({ text, variant = 'success' }: PillProps) => {
 	return <S.Wrapper $variant={variant}>{text}</S.Wrapper>;
 };

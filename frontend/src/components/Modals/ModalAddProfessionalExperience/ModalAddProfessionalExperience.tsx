@@ -4,7 +4,6 @@ import { Input } from 'components/Input';
 import { BaseModal } from 'components/Modals/BaseModal';
 import { Select } from 'components/Select';
 import { Textarea } from 'components/Textarea';
-import { useModalAddProfessionalExperience } from 'hooks/useModalAddProfessionalExperience/useModalAddProfessionalExperience';
 import {
 	employmentTypeOptions,
 	workModelOptions,
@@ -20,7 +19,9 @@ import {
 	REQUIRED_PROFESSIONAL_EXPERIENCE_START_DATE,
 } from 'utils/errors';
 import { translateEmploymentType, translateWorkModel } from 'utils/job';
+import { useModalAddProfessionalExperience } from '.';
 import * as S from './ModalAddProfessionalExperience.styles';
+import { MaxLength } from 'utils/maxLengths';
 
 export type ModalAddProfessionalExperienceProps = {
 	user_id: number;
@@ -74,6 +75,7 @@ export const ModalAddProfessionalExperience = ({
 							label="Nome da empresa"
 							placeholder="Ex: FindMe"
 							error={errors.company_name}
+							maxLength={MaxLength.title}
 						/>
 					)}
 				/>
@@ -90,6 +92,7 @@ export const ModalAddProfessionalExperience = ({
 							label="Cargo"
 							placeholder="Ex: Desenvolvedor de Software"
 							error={errors.position}
+							maxLength={MaxLength.title}
 						/>
 					)}
 				/>
@@ -106,13 +109,14 @@ export const ModalAddProfessionalExperience = ({
 							label="Localidade"
 							placeholder="Ex: Dubai"
 							error={errors.location}
+							maxLength={MaxLength.location}
 						/>
 					)}
 				/>
 
 				<S.SelectWrapper>
 					<Select
-            label="Modelo de trabalho"
+						label="Modelo de trabalho"
 						data-cy="work_model"
 						options={workModelOptions.map((type) => ({
 							value: type,
@@ -126,7 +130,7 @@ export const ModalAddProfessionalExperience = ({
 					/>
 
 					<Select
-            label="Tipo de Contratação"
+						label="Tipo de Contratação"
 						data-cy="employment_type"
 						options={employmentTypeOptions.map((type) => ({
 							value: type,

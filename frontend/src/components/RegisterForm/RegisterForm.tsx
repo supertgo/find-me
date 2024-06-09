@@ -1,12 +1,9 @@
 import { Button } from 'components/Button';
-import { Input } from 'components/Input';
-import { Heading } from 'components/Heading';
-import { Controller } from 'react-hook-form';
-import * as S from './RegisterForm.styles';
-import { useRegisterForm } from 'hooks/useRegisterForm/useRegisterForm';
-import { LinkText } from 'components/LinkText';
 import { Checkbox } from 'components/Checkbox';
-import { formatCellphone } from 'utils/formatCellphone';
+import { Heading } from 'components/Heading';
+import { Input } from 'components/Input';
+import { LinkText } from 'components/LinkText';
+import { Controller } from 'react-hook-form';
 import { validateInputUserEmail } from 'utils/email';
 import {
 	INVALID_EMAIL,
@@ -14,6 +11,10 @@ import {
 	REQUIRED_PASSWORD,
 	REQUIRED_USER,
 } from 'utils/errors';
+import { formatCellphone } from 'utils/formatCellphone';
+import { useRegisterForm } from '.';
+import * as S from './RegisterForm.styles';
+import { MaxLength } from 'utils/maxLengths';
 
 export type RegisterFormProps = {};
 
@@ -31,7 +32,12 @@ export const RegisterForm = ({}: RegisterFormProps) => {
 				control={control}
 				name="name"
 				render={({ field: { ...field } }) => (
-					<Input {...field} placeholder="Username" error={errors.name} />
+					<Input
+						{...field}
+						placeholder="Username"
+						error={errors.name}
+						maxLength={MaxLength.name}
+					/>
 				)}
 			/>
 			<Controller
@@ -47,6 +53,7 @@ export const RegisterForm = ({}: RegisterFormProps) => {
 						placeholder="E-mail"
 						type="email"
 						error={errors.email}
+						maxLength={MaxLength.email}
 					/>
 				)}
 			/>
@@ -79,6 +86,7 @@ export const RegisterForm = ({}: RegisterFormProps) => {
 						type="password"
 						placeholder="Senha"
 						error={errors.password}
+						maxLength={MaxLength.password}
 					/>
 				)}
 			/>

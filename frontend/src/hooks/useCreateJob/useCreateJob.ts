@@ -1,11 +1,12 @@
 import { useQueryClient } from '@tanstack/react-query';
-import { useJob } from 'hooks/useJob/useJob';
+import { useJob } from 'hooks/useJob';
 import { useRouter } from 'next/navigation';
 import { PostJobBody } from 'protocols/external/job/job';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { GetJobsRouteConst } from 'utils/routes';
 import { JobsUrl } from 'utils/urls';
+import { formatCurrencyToNumber } from 'utils/money';
 
 export type UseCreateJobProps = {};
 
@@ -35,10 +36,13 @@ export const useCreateJob = () => {
 	const onSubmit: SubmitHandler<CreateJobInputs> = async (data, event) => {
 		event?.preventDefault();
 
+		const salaryString = data.salary.toString();
+		const formattedSalary = formatCurrencyToNumber(salaryString);
+
 		const mountJobObj: PostJobBody = {
 			name: data.name,
 			description: data.description,
-			salary: data.salary,
+			salary: formattedSalary,
 			location: data.location,
 			company_id: 1,
 			work_model: data.work_model,

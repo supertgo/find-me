@@ -1,6 +1,6 @@
 import { render, renderHook, screen, act } from 'utils/test/test-utils';
 import { CreateJobHeader, CreateJobHeaderProps } from '.';
-import { useLoggedUserStore } from 'stores/loggedUserStore/loggedUserStore';
+import { useLoggedUserStore } from 'stores/loggedUserStore';
 
 const props: CreateJobHeaderProps = {
 	title: 'Vagas',

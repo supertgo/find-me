@@ -2,7 +2,7 @@
 import { ApplicantsTable } from 'components/ApplicantsTable';
 import { ApplicationHeader } from 'components/ApplicationHeader';
 import { Breadcrumb, BreadcrumbPath } from 'components/Breadcrumb';
-import { useApplicantsTable } from 'hooks/useApplicantsTable/useApplicantsTable';
+import { useApplicantsTable } from 'hooks/useApplicantsTable';
 import { JobApplicationResponse } from 'protocols/external/job/job-application';
 import { useEffect } from 'react';
 import { Base } from 'templates/Base/Base';

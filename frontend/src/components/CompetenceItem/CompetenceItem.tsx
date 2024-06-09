@@ -1,6 +1,5 @@
 import { Cross1Icon } from '@radix-ui/react-icons';
-import { RemoveCompetenceContext } from 'hooks/contexts/RemoveCompetence/RemoveCompetence';
-import { useContextSelector } from 'use-context-selector';
+import { useRemoveCompetence } from 'hooks/contexts/RemoveCompetence';
 import * as S from './CompetenceItem.styles';
 
 export type CompetenceItemProps = {
@@ -9,13 +8,7 @@ export type CompetenceItemProps = {
 };
 
 export const CompetenceItem = ({ name, id }: CompetenceItemProps) => {
-	const { setOpen, setCompetence } = useContextSelector(
-		RemoveCompetenceContext,
-		(context) => ({
-			setOpen: context.setOpen,
-			setCompetence: context.setCompetence,
-		}),
-	);
+	const { setOpen, setCompetence } = useRemoveCompetence()
 
 	const removeCompetence = () => {
 		setCompetence({

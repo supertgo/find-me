@@ -21,3 +21,5 @@ export const ApplicantsUrl = 'applicants';
 export const ApplicantUrl = (id: number) => `applicant/${id}`;
 
 export const ConfigUrl = 'config';
+
+export const MyApplicationsUrl = 'my-applications'

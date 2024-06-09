@@ -1,9 +1,9 @@
 import { Button } from 'components/Button';
 import { BaseModal } from 'components/Modals/BaseModal';
 import { Textarea } from 'components/Textarea';
-import { useModalCoverLetter } from 'hooks/useModalCoverLetter/useModalCoverLetter';
 import { Controller } from 'react-hook-form';
 import { REQUIRED_JOB_APP_COVER_LETTER } from 'utils/errors';
+import { useModalCoverLetter } from '.';
 import * as S from './ModalCoverLetter.styles';
 
 export type ModalCoverLetterProps = {
@@ -15,10 +15,18 @@ export const ModalCoverLetter = ({
 	disabled,
 	jobId,
 }: ModalCoverLetterProps) => {
-	const { open, isLoading, setOpen, isValid, errors, handleSubmit, onSubmit, control } =
-		useModalCoverLetter({
-			job_id: jobId,
-		});
+	const {
+		open,
+		isLoading,
+		setOpen,
+		isValid,
+		errors,
+		handleSubmit,
+		onSubmit,
+		control,
+	} = useModalCoverLetter({
+		job_id: jobId,
+	});
 
 	return (
 		<BaseModal

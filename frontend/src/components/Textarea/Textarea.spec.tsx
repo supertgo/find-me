@@ -1,5 +1,6 @@
 import { render, screen } from 'utils/test/test-utils';
 import { Textarea } from './Textarea';
+import { MaxLength } from 'utils/maxLengths';
 
 describe('<Textarea />', () => {
 	it('should render the component', () => {
@@ -13,6 +14,6 @@ describe('<Textarea />', () => {
 		};
 		render(<Textarea defaultValue="test" {...props} />);
 
-		expect(screen.getByText(`0/${props.maxLength}`)).toBeInTheDocument();
+		expect(screen.getByText(`0/${MaxLength.description}`)).toBeInTheDocument();
 	});
 });

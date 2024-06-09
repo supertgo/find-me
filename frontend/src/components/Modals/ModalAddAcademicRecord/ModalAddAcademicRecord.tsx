@@ -1,6 +1,7 @@
-import { useModalAddAcademicRecord } from 'hooks/useModalAddAcademicRecord/useModalAddAcademicRecord';
-import { BaseModal } from 'components/Modals/BaseModal';
 import { PlusIcon } from '@radix-ui/react-icons';
+import { Input } from 'components/Input';
+import { BaseModal } from 'components/Modals/BaseModal';
+import { Textarea } from 'components/Textarea';
 import { Controller } from 'react-hook-form';
 import {
 	REQUIRED_ACADEMIC_RECORD_DEGREE,
@@ -10,9 +11,9 @@ import {
 	REQUIRED_ACADEMIC_RECORD_INSTITUTION,
 	REQUIRED_ACADEMIC_RECORD_START_DATE,
 } from 'utils/errors';
-import { Input } from 'components/Input';
-import { Textarea } from 'components/Textarea';
+import { useModalAddAcademicRecord } from '.';
 import * as S from './ModalAddAcademicRecord.styles';
+import { MaxLength } from 'utils/maxLengths';
 
 export type ModalAddAcademicRecordProps = {
 	user_id: number;
@@ -62,6 +63,7 @@ export const ModalAddAcademicRecord = ({
 							label="Instituição"
 							placeholder="Ex: UFMG"
 							error={errors.institution}
+							maxLength={MaxLength.title}
 						/>
 					)}
 				/>
@@ -77,6 +79,7 @@ export const ModalAddAcademicRecord = ({
 							label="Diploma"
 							placeholder="Ex: Bacharelado"
 							error={errors.degree}
+							maxLength={MaxLength.title}
 						/>
 					)}
 				/>
@@ -92,6 +95,7 @@ export const ModalAddAcademicRecord = ({
 							label="Área de estudo"
 							placeholder="Ex: Ciência da Computação"
 							error={errors.field_of_study}
+							maxLength={MaxLength.title}
 						/>
 					)}
 				/>

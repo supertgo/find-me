@@ -1,11 +1,15 @@
-import { Input } from 'components/Input';
-import { BaseModal } from 'components/Modals/BaseModal';
-import { Textarea } from 'components/Textarea';
-import { useModalApplication } from 'hooks/useModalApplication/useModalApplication';
-import Link from 'next/link';
-import { ApplicantUrl } from 'utils/urls';
 import { Button } from 'components/Button';
+import { Input } from 'components/Input';
+import { Label } from 'components/Label';
+import { BaseModal } from 'components/Modals/BaseModal';
+import { Pill } from 'components/Pill';
+import { Textarea } from 'components/Textarea';
+import Link from 'next/link';
+import { translateJobApplicationStatus } from 'utils/job';
+import { ApplicantUrl } from 'utils/urls';
+import { useModalApplication } from '.';
 import * as S from './ModalApplication.styles';
+import { MaxLength } from 'utils/maxLengths';
 
 export type ModalApplicationProps = {};
 
@@ -18,13 +22,27 @@ export const ModalApplication = ({}: ModalApplicationProps) => {
 
 	return (
 		<BaseModal
-			title={`Carta de Apresentação de ${coverLetter.user.name}`}
+			title={`Carta de Apresentação de ${user.name}`}
 			open={open}
 			setOpen={setOpen}
 		>
 			<S.Wrapper>
-				<Input label="Nome Completo" readOnly value={user.name} />
-				<Input label="Email" readOnly value={user.email} />
+				<div>
+					<Label labelText="Status" />
+					<Pill text={translateJobApplicationStatus[jobApplication.status]} />
+				</div>
+				<Input
+					label="Nome Completo"
+					readOnly
+					value={user.name}
+					maxLength={MaxLength.name}
+				/>
+				<Input
+					label="Email"
+					readOnly
+					value={user.email}
+					maxLength={MaxLength.email}
+				/>
 				<Input label="Celular" readOnly value={user.phone} />
 
 				<Textarea

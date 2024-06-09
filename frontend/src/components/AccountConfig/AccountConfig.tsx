@@ -4,19 +4,20 @@ import { ConfigInfoWrapper } from 'components/ConfigInfoWrapper';
 import { Input } from 'components/Input';
 import { Textarea } from 'components/Textarea';
 import { Title } from 'components/Title';
-import { useUserConfigForm } from 'hooks/useUserConfigForm/useUserConfigForm';
 import { UserProps } from 'protocols/external/user/user';
 import { Controller } from 'react-hook-form';
 import { validateInputUserEmail } from 'utils/email';
 import {
-  INVALID_EMAIL,
-  REQUIRED_ABOUT_ME,
-  REQUIRED_CELLPHONE,
-  REQUIRED_NEW_PASSWORD,
-  REQUIRED_USER,
+	INVALID_EMAIL,
+	REQUIRED_ABOUT_ME,
+	REQUIRED_CELLPHONE,
+	REQUIRED_NEW_PASSWORD,
+	REQUIRED_USER,
 } from 'utils/errors';
 import { formatCellphone } from 'utils/formatCellphone';
 import * as S from './AccountConfig.styles';
+import { useUserConfigForm } from './useUserConfigForm';
+import { MaxLength } from 'utils/maxLengths';
 
 export type AccountConfigProps = {} & Pick<
 	UserProps,
@@ -57,6 +58,7 @@ export const AccountConfig = ({
 									error={errors.name}
 									label="Nome completo*"
 									placeholder="Digite o seu nome completo"
+									maxLength={MaxLength.name}
 								/>
 							)}
 						/>
@@ -95,6 +97,7 @@ export const AccountConfig = ({
 										placeholder="Digite o seu e-mail"
 										error={errors.email}
 										type="email"
+										maxLength={MaxLength.email}
 									/>
 								)}
 							/>
@@ -116,6 +119,7 @@ export const AccountConfig = ({
 									label="Nova Senha"
 									placeholder="Digite a sua nova senha"
 									error={errors.password}
+									maxLength={MaxLength.password}
 								/>
 							)}
 						/>

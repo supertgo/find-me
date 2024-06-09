@@ -8,6 +8,7 @@ import { useLoggedUserStore } from 'stores/loggedUserStore';
 import { theme } from 'styles/theme';
 import { ConfigUrl } from 'utils/urls';
 import { useSignOut } from '.';
+import { Avatar } from 'components/Avatar';
 import * as S from './Sidebar.styles';
 
 export type SidebarProps = {};
@@ -34,13 +35,13 @@ export const Sidebar = ({}: SidebarProps) => {
 			</div>
 
 			<S.AvatarWrapper>
-				<Link href={`/${ConfigUrl}`}>
-					<S.Avatar title="Ir para as configurações">
-						<S.AvatarPhoto />
-						<S.AvatarInfo>
-							<p>{name}</p>
-						</S.AvatarInfo>
-					</S.Avatar>
+				<Link
+					href={`/${ConfigUrl}`}
+					style={{
+						textDecoration: 'none',
+					}}
+				>
+					<Avatar showOnlyFirstName user={name} />
 				</Link>
 
 				<i title="Sair">

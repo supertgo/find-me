@@ -1,4 +1,5 @@
 'use client';
+import { Avatar } from 'components/Avatar';
 import { Button } from 'components/Button';
 import { ConfigInfoWrapper } from 'components/ConfigInfoWrapper';
 import { Input } from 'components/Input';
@@ -8,16 +9,16 @@ import { UserProps } from 'protocols/external/user/user';
 import { Controller } from 'react-hook-form';
 import { validateInputUserEmail } from 'utils/email';
 import {
-	INVALID_EMAIL,
-	REQUIRED_ABOUT_ME,
-	REQUIRED_CELLPHONE,
-	REQUIRED_NEW_PASSWORD,
-	REQUIRED_USER,
+  INVALID_EMAIL,
+  REQUIRED_ABOUT_ME,
+  REQUIRED_CELLPHONE,
+  REQUIRED_NEW_PASSWORD,
+  REQUIRED_USER,
 } from 'utils/errors';
 import { formatCellphone } from 'utils/formatCellphone';
+import { MaxLength } from 'utils/maxLengths';
 import * as S from './AccountConfig.styles';
 import { useUserConfigForm } from './useUserConfigForm';
-import { MaxLength } from 'utils/maxLengths';
 
 export type AccountConfigProps = {} & Pick<
 	UserProps,
@@ -41,7 +42,7 @@ export const AccountConfig = ({
 					title="Foto de Perfil"
 					description="Essa imagem será exibida publicamente como sua foto de perfil, e ajudará os recrutadores a reconhecê-lo!"
 				>
-					<S.AvatarCircle />
+					<Avatar user={name} showUsername={false} size="large" />
 				</ConfigInfoWrapper>
 				<ConfigInfoWrapper title="Detalhes Pessoais">
 					<S.PersonalDetails>

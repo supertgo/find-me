@@ -11,7 +11,7 @@ export const NoDataFound = () => {
 			<S.TextContainer>
 				<S.ErrorHeading>Opss :(</S.ErrorHeading>
 				<S.ErrorHeadingThree>
-					Parece que você não se candidatou à nenhuma vaga
+					Parece que você não se candidatou a nenhuma vaga
 				</S.ErrorHeadingThree>
 
 				<S.ContainerImage>

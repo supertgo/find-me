@@ -26,6 +26,6 @@ describe('<NoDataFound />', () => {
 		render(<NoDataFound />);
 
     expect(screen.getByText('Opss :(')).toBeInTheDocument()
-    expect(screen.getByText('Parece que você não se candidatou à nenhuma vaga')).toBeInTheDocument()
+    expect(screen.getByText('Parece que você não se candidatou a nenhuma vaga')).toBeInTheDocument()
 	});
 });

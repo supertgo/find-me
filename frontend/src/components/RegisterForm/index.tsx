@@ -1,3 +1,4 @@
+'use client'
 import { RegisterForm, RegisterFormProps } from './RegisterForm';
 import { useRegisterForm, UseRegisterFormProtocols } from './useRegisterForm'
 

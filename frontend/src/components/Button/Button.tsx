@@ -1,7 +1,11 @@
-'use client';
-import * as S from './Button.styles';
-import { forwardRef, AnchorHTMLAttributes, ButtonHTMLAttributes } from 'react';
 import { ring } from 'ldrs';
+import {
+  AnchorHTMLAttributes,
+  ButtonHTMLAttributes,
+  forwardRef,
+  useEffect,
+} from 'react';
+import * as S from './Button.styles';
 
 type ButtonTypes =
 	| AnchorHTMLAttributes<HTMLAnchorElement>
@@ -31,7 +35,13 @@ const Button = forwardRef(
 		}: ButtonProps,
 		ref,
 	) => {
-		ring.register();
+
+		useEffect(() => {
+			if (typeof window !== 'undefined') {
+				ring.register();
+			}
+		}, []);
+
 		return (
 			<S.Wrapper
 				size={size}
@@ -44,7 +54,7 @@ const Button = forwardRef(
 			>
 				{isLoading ? (
 					<l-ring
-						size="25"
+						size="20"
 						stroke="5"
 						bg-opacity="0"
 						speed="2"
@@ -60,5 +70,7 @@ const Button = forwardRef(
 		);
 	},
 );
+
+Button.displayName = 'Button';
 
 export { Button };

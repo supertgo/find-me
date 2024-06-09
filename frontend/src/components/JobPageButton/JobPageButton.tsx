@@ -59,5 +59,5 @@ export const JobPageButton = ({ user, job }: JobPageButtonProps) => {
 		);
 	}
 
-	return <ModalCoverLetter jobId={job.id} disabled={disabled || isLoading} />;
+	return <ModalCoverLetter jobId={job.id} disabled={isLoading} />;
 };

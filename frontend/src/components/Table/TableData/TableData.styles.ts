@@ -36,6 +36,7 @@ export const UserWrapperColumn = styled.div`
 		display: flex;
 		align-items: center;
 		max-width: 20rem;
+    gap: ${theme.space.xxsmall};
 
 		${UserAvatar}, img {
 			object-fit: cover;

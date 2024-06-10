@@ -46,8 +46,8 @@ export const useModalCoverLetter = ({ job_id }: UseModalCoverLetterProps) => {
 
 		await queryClient.invalidateQueries({
 			queryKey: [
-				`${JobsUrl}`,
-				`${JobUrl(job_id)}`,
+				`/${JobsUrl}`,
+				`/${JobUrl(job_id)}`,
 				`/${GetJobApplicationsRouteConst({
 					jobsId: [job_id],
 				})}`,

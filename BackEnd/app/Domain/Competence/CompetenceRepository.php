@@ -2,11 +2,10 @@
 
 namespace App\Domain\Competence;
 
-use App\Domain\Abstract\AbstractRepository;
 use App\Domain\Competence\Enum\CompetenceTypesEnum;
 use App\Models\Competence;
 
-class CompetenceRepository extends AbstractRepository implements CompetenceRepositoryInterface
+class CompetenceRepository implements CompetenceRepositoryInterface
 {
     public function createIfNotExists(array $competence): array
     {

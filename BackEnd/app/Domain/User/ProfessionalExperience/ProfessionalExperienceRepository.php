@@ -2,10 +2,9 @@
 
 namespace App\Domain\User\ProfessionalExperience;
 
-use App\Domain\Abstract\AbstractRepository;
 use App\Models\ProfessionalExperience;
 
-class ProfessionalExperienceRepository extends AbstractRepository implements ProfessionalExperienceRepositoryInterface
+class ProfessionalExperienceRepository implements ProfessionalExperienceRepositoryInterface
 {
     public function create(ProfessionalExperienceDomainInterface $current, int $userId): void
     {

@@ -2,7 +2,7 @@
 
 namespace App\Domain\User;
 
-use App\Domain\Abstract\AbstractRepository;
+
 use App\Domain\Competence\CompetenceDomainInterface;
 use App\Helpers\File\FileHelperInterface;
 use App\Mail\UserForgotPassword;
@@ -13,7 +13,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Hash;
 use Mail;
 
-class UserRepository extends AbstractRepository implements UserRepositoryInterface
+class UserRepository implements UserRepositoryInterface
 {
     public function createUser(array $user): array
     {

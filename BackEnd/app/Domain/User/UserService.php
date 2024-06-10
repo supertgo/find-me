@@ -57,7 +57,7 @@ class UserService extends AbstractService implements UserServiceInterface
     public function update(array $user): array
     {
         try {
-            $this->dataTransactionService->beginTransaction();
+            $this->dataTransactionService->begin();
             $updatedUser = (new UserDomain(new UserRepository()))
                 ->fromArray($user)
                 ->update()
@@ -97,7 +97,7 @@ class UserService extends AbstractService implements UserServiceInterface
     public function addCompetencesToUser(int $userId, array $competences): void
     {
         try {
-            $this->dataTransactionService->beginTransaction();
+            $this->dataTransactionService->begin();
 
             $competenceDomain = new CompetenceDomain(new CompetenceRepository());
 
@@ -107,7 +107,7 @@ class UserService extends AbstractService implements UserServiceInterface
                 ->setId($userId)
                 ->attachCompetences($competences);
 
-            $this->dataTransactionService->commitTransaction();
+            $this->dataTransactionService->commit();
         } catch (Exception $exception) {
             $this->dataTransactionService->rollback();
             Log::error($exception);
@@ -122,7 +122,7 @@ class UserService extends AbstractService implements UserServiceInterface
     public function removeCompetences(int $userId, array $competencesId): void
     {
         try {
-            $this->dataTransactionService->beginTransaction();
+            $this->dataTransactionService->begin();
             $userDomain = new UserDomain(new UserRepository());
             $userDomain->setId($userId);
 
@@ -137,7 +137,7 @@ class UserService extends AbstractService implements UserServiceInterface
                 $userDomain->removeCompetence($competenceId);
             }
 
-            $this->dataTransactionService->commitTransaction();
+            $this->dataTransactionService->commit();
         } catch (Exception $exception) {
             $this->dataTransactionService->rollback();
             Log::error($exception);
@@ -172,7 +172,7 @@ class UserService extends AbstractService implements UserServiceInterface
     public function removeAcademicRecords(int $userId, array $academicRecordsId): void
     {
         try {
-            $this->dataTransactionService->beginTransaction();
+            $this->dataTransactionService->begin();
 
             foreach ($academicRecordsId as $recordId) {
                 $academicRecordsDomain = new AcademicRecordDomain(new AcademicRecordRepository());
@@ -187,7 +187,7 @@ class UserService extends AbstractService implements UserServiceInterface
                 $academicRecordsDomain->delete($recordId);
             }
 
-            $this->dataTransactionService->commitTransaction();
+            $this->dataTransactionService->commit();
         } catch (Exception $exception) {
             $this->dataTransactionService->rollback();
             Log::error($exception);
@@ -202,7 +202,7 @@ class UserService extends AbstractService implements UserServiceInterface
     public function removeProfessionalExperiences(int $userId, array $experiences): void
     {
         try {
-            $this->dataTransactionService->beginTransaction();
+            $this->dataTransactionService->begin();
             foreach ($experiences as $experience) {
                 $domain = new ProfessionalExperienceDomain(new ProfessionalExperienceRepository());
                 if (!$domain->exists($experience)) {
@@ -216,7 +216,7 @@ class UserService extends AbstractService implements UserServiceInterface
                 $domain->delete($experience);
             }
 
-            $this->dataTransactionService->commitTransaction();
+            $this->dataTransactionService->commit();
         } catch (Exception $exception) {
             $this->dataTransactionService->rollback();
             Log::error($exception);
@@ -235,13 +235,13 @@ class UserService extends AbstractService implements UserServiceInterface
     public function addProfessionalExperiences(int $userId, array $experiences): void
     {
         try {
-            $this->dataTransactionService->beginTransaction();
+            $this->dataTransactionService->begin();
             $experiencesDomain = new ProfessionalExperienceDomain(new ProfessionalExperienceRepository());
 
             $this->assureCompaniesExist($experiences);
 
             $experiencesDomain->createMany($experiences, $userId);
-            $this->dataTransactionService->commitTransaction();
+            $this->dataTransactionService->commit();
         } catch (Exception $exception) {
             $this->dataTransactionService->rollback();
             Log::error($exception);
@@ -256,11 +256,11 @@ class UserService extends AbstractService implements UserServiceInterface
     public function setProfilePicture(UploadedFile $file, int $userId): void
     {
         try {
-            $this->dataTransactionService->beginTransaction();
+            $this->dataTransactionService->begin();
             $domain = new UserDomain(new UserRepository());
 
             $domain->createProfilePicture($file, $userId);
-            $this->dataTransactionService->commitTransaction();
+            $this->dataTransactionService->commit();
         } catch (Exception $exception) {
             $this->dataTransactionService->rollback();
             Log::error($exception);

@@ -3,7 +3,7 @@
 namespace App\Domain\User;
 
 
-use App\Domain\Abstract\AbstractService;
+
 use App\Domain\Company\CompanyDomain;
 use App\Domain\Company\CompanyRepository;
 use App\Domain\Competence\CompetenceDomain;
@@ -33,7 +33,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Log;
 use Throwable;
 
-class UserService extends AbstractService implements UserServiceInterface
+class UserService implements UserServiceInterface
 {
     private DataTransactionServiceInterface $dataTransactionService;
 

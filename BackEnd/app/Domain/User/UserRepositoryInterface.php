@@ -29,7 +29,7 @@ interface UserRepositoryInterface
 
     public function removeCompetence(int $id, int $competenceId): void;
 
-    public function userHasCompetence(?int $id, int $competenceId): bool;
+    public function userHasCompetence(int $id, int $competenceId): bool;
 
     public function getUserWithIncludes(int $userId, array $includes): array;
 

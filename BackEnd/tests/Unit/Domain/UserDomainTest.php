@@ -101,4 +101,74 @@ class UserDomainTest extends AbstractUnitTest
         $this->assertEquals($type->value, $this->domain->getType()->value);
     }
 
+    public function testSetIdWithNullable()
+    {
+        $this->domain->setId(null);
+
+        $this->assertNull($this->domain->getId());
+    }
+
+    public function testSetIdWithInteger()
+    {
+        $id = $this->faker->randomNumber();
+
+        $this->domain->setId($id);
+
+        $this->assertEquals($id, $this->domain->getId());
+    }
+
+    public function testSetAboutMeWithNullable()
+    {
+        $this->domain->setAboutMe(null);
+
+        $this->assertNull($this->domain->getAboutMe());
+    }
+
+    public function testSetAboutMeWithString()
+    {
+        $aboutMe = $this->faker->text();
+
+        $this->domain->setAboutMe($aboutMe);
+
+        $this->assertEquals($aboutMe, $this->domain->getAboutMe());
+    }
+
+    public function testSetPasswordWithNullable()
+    {
+        $this->domain->setPassword(null);
+
+        $this->assertNull($this->domain->getPassword());
+    }
+
+    public function testSetPasswordWithString()
+    {
+        $password = $this->faker->password();
+
+        $this->domain->setPassword($password);
+
+        $this->assertEquals($password, $this->domain->getPassword());
+    }
+
+    /**
+     * @throws UnknownUserTypeException
+     */
+    public function testFromArrayWithAllFields()
+    {
+        $userData = [
+            'name' => $this->faker->name(),
+            'email' => $this->faker->email(),
+            'phone' => $this->faker->phoneNumber(),
+            'type' => UserTypeEnum::Recruiter,
+            'id' => $this->faker->randomNumber(),
+            'about_me' => $this->faker->text(),
+            'password' => $this->faker->password()
+        ];
+
+        $this->domain->fromArray($userData);
+
+        array_walk($userData, function ($value, $key) {
+            $this->assertEquals($value, $this->domain->{'get' . Str::studly($key)}());
+        });
+    }
+
 }

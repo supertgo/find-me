@@ -27,20 +27,6 @@ class UserDomain implements UserDomainInterface
     {
     }
 
-    public function fromArray(array $user): self
-    {
-        $this->setName($user['name']);
-        $this->setEmail($user['email']);
-        $this->setPhone($user['phone']);
-
-        !empty($user['type']) && $this->setType($user['type']);
-        !empty($user['id']) && $this->setId($user['id']);
-        !empty($user['password']) && $this->setPassword($user['password']);
-        !empty($user['about_me']) && $this->setAboutMe($user['about_me']);
-
-        return $this;
-    }
-
     /**
      * @throws UserEmailNotAvailableException
      * @throws UserPhoneNotAvailableException
@@ -60,11 +46,14 @@ class UserDomain implements UserDomainInterface
         return (new UserDomain($this->getRepository()))->loadUser($this->getId());
     }
 
-    public function createUser(): self
+    public function getEmail(): string
     {
-        $created = $this->userRepository->createUser($this->toArray());
+        return $this->email;
+    }
 
-        return (new self($this->getRepository()))->fromArray($created);
+    public function getPhone(): string
+    {
+        return $this->phone;
     }
 
     public function loadUser(int $userId): self
@@ -80,6 +69,23 @@ class UserDomain implements UserDomainInterface
         empty($this->id) && $this->id = $user['id'];
 
         return $this;
+    }
+
+    public function getRepository(): UserRepositoryInterface
+    {
+        return $this->userRepository;
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function createUser(): self
+    {
+        $created = $this->userRepository->createUser($this->toArray());
+
+        return (new self($this->getRepository()))->fromArray($created);
     }
 
     public function toArray(): array
@@ -98,26 +104,26 @@ class UserDomain implements UserDomainInterface
         return $user;
     }
 
-    public function exists(): bool
-    {
-        return $this->userRepository->exists($this->id);
-    }
-
-    public function users(): array
-    {
-        return $this->userRepository->getUsers();
-    }
-
-    public function attachCompetences(Collection $competences): self
-    {
-        $this->userRepository->attachCompetences($this->id, $competences);
-
-        return $this;
-    }
-
     public function getName(): string
     {
         return $this->name;
+    }
+
+    /**
+     * @throws UnknownUserTypeException
+     */
+    public function fromArray(array $user): self
+    {
+        $this->setName($user['name']);
+        $this->setEmail($user['email']);
+        $this->setPhone($user['phone']);
+
+        !empty($user['type']) && $this->setType($user['type']);
+        !empty($user['id']) && $this->setId($user['id']);
+        !empty($user['password']) && $this->setPassword($user['password']);
+        !empty($user['about_me']) && $this->setAboutMe($user['about_me']);
+
+        return $this;
     }
 
     public function setName(string $name): UserDomain
@@ -127,11 +133,6 @@ class UserDomain implements UserDomainInterface
         return $this;
     }
 
-    public function getEmail(): string
-    {
-        return $this->email;
-    }
-
     public function setEmail(string $email): self
     {
         $this->email = $email;
@@ -139,21 +140,11 @@ class UserDomain implements UserDomainInterface
         return $this;
     }
 
-    public function getPhone(): string
-    {
-        return $this->phone;
-    }
-
     public function setPhone(string $phone): self
     {
         $this->phone = $phone;
 
         return $this;
-    }
-
-    public function getType(): UserTypeEnum
-    {
-        return $this->type;
     }
 
     /**
@@ -175,11 +166,6 @@ class UserDomain implements UserDomainInterface
         return $this;
     }
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
     public function setId(?int $id): UserDomain
     {
         $this->id = $id;
@@ -187,16 +173,40 @@ class UserDomain implements UserDomainInterface
         return $this;
     }
 
-    private function setPassword(mixed $password): self
+    public function setPassword(?string $password): self
     {
         $this->password = $password;
 
         return $this;
     }
 
-    public function getRepository(): UserRepositoryInterface
+    public function setAboutMe(?string $aboutMe): self
     {
-        return $this->userRepository;
+        $this->aboutMe = $aboutMe;
+
+        return $this;
+    }
+
+    public function exists(): bool
+    {
+        return $this->userRepository->exists($this->id);
+    }
+
+    public function users(): array
+    {
+        return $this->userRepository->getUsers();
+    }
+
+    public function attachCompetences(Collection $competences): self
+    {
+        $this->userRepository->attachCompetences($this->id, $competences);
+
+        return $this;
+    }
+
+    public function getType(): UserTypeEnum
+    {
+        return $this->type;
     }
 
     /**
@@ -212,7 +222,6 @@ class UserDomain implements UserDomainInterface
 
         return $this;
     }
-
 
     public function loadUserWithIncludes(int $userId, array $includes): array
     {
@@ -237,49 +246,6 @@ class UserDomain implements UserDomainInterface
         return $this->userRepository->getUsersWithIncludes($includes);
     }
 
-    private function setAboutMe(?string $aboutMe): self
-    {
-        $this->aboutMe = $aboutMe;
-
-        return $this;
-    }
-
-    public function createProfilePicture(UploadedFile $file, int $userId): void
-    {
-        $this->userRepository->createProfilePicture($file, $userId);
-    }
-
-    public function updateProfilePicture(UploadedFile $profilePicture, int $userId): string
-    {
-        if (isset($this->profilePicturePath)) {
-            $this->userRepository->deleteProfilePicture($this->profilePicturePath, $userId);
-        }
-
-        return $this->userRepository->createProfilePicture($profilePicture, $userId);
-    }
-
-    public function deleteProfilePicture(): void
-    {
-        $this->userRepository->deleteProfilePicture($this->getProfilePicturePath(), $this->getId());
-    }
-
-    public function getAboutMe(): ?string
-    {
-        return $this->aboutMe;
-    }
-
-    public function getProfilePicturePath(): ?string
-    {
-        return $this->profilePicturePath;
-    }
-
-    public function setProfilePicturePath(?string $profilePicturePath): UserDomain
-    {
-        $this->profilePicturePath = $profilePicturePath;
-
-        return $this;
-    }
-
     /**
      * @throws UnknownUserIncludeException
      */
@@ -296,5 +262,46 @@ class UserDomain implements UserDomainInterface
         }
 
         return $this;
+    }
+
+    public function updateProfilePicture(UploadedFile $profilePicture, int $userId): string
+    {
+        if (isset($this->profilePicturePath)) {
+            $this->userRepository->deleteProfilePicture($this->profilePicturePath, $userId);
+        }
+
+        return $this->userRepository->createProfilePicture($profilePicture, $userId);
+    }
+
+    public function deleteProfilePicture(): void
+    {
+        $this->userRepository->deleteProfilePicture($this->getProfilePicturePath(), $this->getId());
+    }
+
+    public function getProfilePicturePath(): ?string
+    {
+        return $this->profilePicturePath;
+    }
+
+    public function createProfilePicture(UploadedFile $file, int $userId): void
+    {
+        $this->userRepository->createProfilePicture($file, $userId);
+    }
+
+    public function setProfilePicturePath(?string $profilePicturePath): UserDomain
+    {
+        $this->profilePicturePath = $profilePicturePath;
+
+        return $this;
+    }
+
+    public function getAboutMe(): ?string
+    {
+        return $this->aboutMe;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
     }
 }

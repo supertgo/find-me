@@ -33,7 +33,7 @@ class UserDomain implements UserDomainInterface
         $this->setEmail($user['email']);
         $this->setPhone($user['phone']);
 
-        !empty($user['type']) && $this->setType(UserTypeEnum::from($user['type']));
+        !empty($user['type']) && $this->setType($user['type']);
         !empty($user['id']) && $this->setId($user['id']);
         !empty($user['password']) && $this->setPassword($user['password']);
         !empty($user['about_me']) && $this->setAboutMe($user['about_me']);
@@ -156,9 +156,21 @@ class UserDomain implements UserDomainInterface
         return $this->type;
     }
 
-    public function setType(UserTypeEnum $type): self
+    /**
+     * @throws UnknownUserTypeException
+     */
+    public function setType(UserTypeEnum|string $type): self
     {
-        $this->type = $type;
+        if ($type instanceof UserTypeEnum) {
+            $this->type = $type;
+        } else {
+            $enumType = UserTypeEnum::tryFrom($type);
+            if (!$enumType) {
+                throw new UnknownUserTypeException($type);
+            }
+
+            $this->type = $enumType;
+        }
 
         return $this;
     }

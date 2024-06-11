@@ -37,13 +37,15 @@ export const DialogContent = styled.div`
 		width: 100%;
 
 		& > * {
+      display: flex;
+      flex-direction: column;
 			background-color: ${theme.colors.white};
 			border-radius: ${theme.space.xsmall};
 			width: fit-content;
 			max-height: calc(100vh - 3rem);
 			z-index: ${theme.layers.modal + 1};
 			width: 80rem;
-      overflow-y: auto;
+      overflow: hidden;
 		}
 	`}
 `;
@@ -51,6 +53,8 @@ export const DialogContent = styled.div`
 export const DialogDescription = styled.div`
 	${({ theme }) => css`
 		padding: ${theme.space.small};
+    overflow-y: auto;
+    flex-grow: 1;
 	`}
 `;
 

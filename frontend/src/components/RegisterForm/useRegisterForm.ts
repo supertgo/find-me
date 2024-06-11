@@ -2,12 +2,12 @@ import { signIn } from 'next-auth/react';
 import { UserAuthRegister, UserEnum } from 'protocols/external/user/user';
 import { useState } from 'react';
 import {
-	Control,
-	FieldErrors,
-	SubmitHandler,
-	UseFormHandleSubmit,
-	UseFormRegister,
-	useForm,
+  Control,
+  FieldErrors,
+  SubmitHandler,
+  UseFormHandleSubmit,
+  UseFormRegister,
+  useForm,
 } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { PostClient } from 'services/httpClient/post';
@@ -99,9 +99,9 @@ export const useRegisterForm = (): UseRegisterFormProtocols => {
 			}
 
 			return toast.error('Ocorreu um erro, tente novamente!');
+		} finally {
+			setIsLoading(false);
 		}
-
-		setIsLoading(false);
 	};
 
 	return {

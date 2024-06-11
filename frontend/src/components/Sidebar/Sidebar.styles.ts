@@ -63,32 +63,3 @@ export const AvatarWrapper = styled.div`
 	`}
 `;
 
-export const Avatar = styled.div`
-	${({ theme }) => css`
-		display: grid;
-		grid-template-columns: 0.2fr 1fr;
-		align-items: center;
-		gap: ${theme.space.xxsmall};
-	`}
-`;
-
-export const AvatarPhoto = styled.div`
-	width: 4.8rem;
-	height: 4.8rem;
-	background: gray;
-	border-radius: 50%;
-`;
-
-export const AvatarInfo = styled.div`
-	${({ theme }) => css`
-		display: flex;
-		flex-direction: column;
-		gap: ${theme.space.xxxsmall};
-
-		p {
-			font-weight: ${theme.font.weights.medium};
-			font-size: ${theme.font.sizes.smd};
-			color: ${theme.colors.darkBlue};
-		}
-	`}
-`;

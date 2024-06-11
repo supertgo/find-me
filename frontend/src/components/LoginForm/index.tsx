@@ -1,3 +1,4 @@
+'use client'
 import { LoginForm, LoginFormProps } from './LoginForm';
 import { useSignInForm, UseSignInFormProtocols } from './useSignInForm';
 

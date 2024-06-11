@@ -1,7 +1,5 @@
 import styled, { css } from 'styled-components';
 import media from 'styled-media-query';
-import { SidebarItemProps } from './SidebarItem';
-import { theme } from 'styles/theme';
 
 export type WrapperProps = {
 	$selected: boolean;
@@ -13,7 +11,7 @@ export const Wrapper = styled.a<WrapperProps>`
 		flex-direction: row;
 		align-items: self-end;
 		text-decoration: none;
-		padding: ${theme.space.xsmall} ${theme.space.xmedium};
+		padding: ${theme.space.xsmall} ${theme.space.xsmall};
 		margin: 0 ${theme.space.xsmall};
 
 		svg {

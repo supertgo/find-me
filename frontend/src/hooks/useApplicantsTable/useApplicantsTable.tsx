@@ -8,13 +8,13 @@ import {
   SortingState,
   useReactTable,
 } from '@tanstack/react-table';
+import { Avatar } from 'components/Avatar';
 import { Pill } from 'components/Pill';
 import { SeeApplication } from 'components/SeeApplication';
 import * as S from 'components/Table/TableData/TableData.styles';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { useJobApplication } from 'hooks/useJobApplication';
-import Image from 'next/image';
 import {
   JobApplication,
   JobApplicationResponse,
@@ -64,17 +64,7 @@ export const useApplicantsTable = ({
 			header: () => <S.TableData>Nome completo</S.TableData>,
 			cell: (info) => (
 				<S.UserWrapperColumn>
-					<Image
-						src={`https://source.unsplash.com/random/?avatar&${info.row.index}`}
-						width="40"
-						height="40"
-						alt={`${info.getValue()} avatar`}
-						style={{
-							borderRadius: '50%',
-						}}
-						loading="lazy"
-						quality={100}
-					/>
+          <Avatar user={info.getValue()} showUsername={false} />
 					<p title={info.getValue()}>{info.getValue()}</p>
 				</S.UserWrapperColumn>
 			),

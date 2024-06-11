@@ -2,7 +2,7 @@
 
 namespace App\Domain\Job;
 
-use App\Domain\Abstract\AbstractService;
+
 use App\Domain\Company\CompanyDomain;
 use App\Domain\Company\CompanyRepository;
 use App\Domain\Competence\CompetenceDomain;
@@ -24,7 +24,7 @@ use App\Helpers\DataTransaction\DataTransactionService;
 use Exception;
 use Throwable;
 
-class JobService extends AbstractService implements JobServiceInterface
+class JobService implements JobServiceInterface
 {
     /**
      * @throws Throwable

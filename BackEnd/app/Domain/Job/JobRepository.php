@@ -2,7 +2,7 @@
 
 namespace App\Domain\Job;
 
-use App\Domain\Abstract\AbstractRepository;
+
 use App\Domain\Competence\CompetenceDomainInterface;
 use App\Http\Requests\Job\JobFiltersInterface;
 use App\Models\Job;
@@ -10,7 +10,7 @@ use DB;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 
-class JobRepository extends AbstractRepository implements JobRepositoryInterface
+class JobRepository implements JobRepositoryInterface
 {
     public function createJob(JobDomainInterface $job): array
     {

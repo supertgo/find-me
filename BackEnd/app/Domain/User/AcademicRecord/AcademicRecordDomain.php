@@ -188,4 +188,9 @@ readonly class AcademicRecordDomain implements AcademicRecordDomainInterface
     {
         return $this->repository->isOwner($recordId, $userId);
     }
+
+    public function delete(int $recordId): void
+    {
+        $this->repository->delete($recordId);
+    }
 }

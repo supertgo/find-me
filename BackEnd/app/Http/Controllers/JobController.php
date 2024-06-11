@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Domain\Abstract\AbstractRepository;
+
 use App\Domain\Job\JobServiceInterface;
 use App\Exceptions\Abstract\AbstractFindMeException;
 use App\Http\Requests\Job\IndexJobRequest;

@@ -71,7 +71,6 @@ class UpdateCompanyTest extends TestCase
             'description' => $this->faker->text,
             'phone' => $this->faker->phoneNumber,
             'email' => $this->faker->email,
-            // todo set provider pt-br in faker in order to support cpf anc cnpj
             'cnpj' => $this->faker->cnpj(false),
             'fantasy_name' => $this->faker->name,
         ];

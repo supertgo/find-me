@@ -176,7 +176,7 @@ class CompanyDomain implements CompanyDomainInterface
      */
     public function setCnpj(int|string $cnpj): CompanyDomain
     {
-        if (strlen($cnpj) !== 12) {
+        if (strlen($cnpj) !== 14) {
             throw new CnpjMustHaveTwelveDigitsException($cnpj);
         }
 

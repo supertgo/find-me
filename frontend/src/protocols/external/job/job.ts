@@ -5,7 +5,7 @@ export type SalaryTimeUnit = 'month' | 'hour' | 'week' | 'day';
 export type WorkModel = 'onSite' | 'hybrid' | 'homeOffice';
 
 export type JobCompetence = {
-  id: number;
+	id: number;
 	name: string;
 	description: string;
 	type: string;
@@ -28,6 +28,7 @@ export type Job = {
 	user_id: number;
 	competences?: JobCompetence[];
 	company?: JobCompany;
+	applications_count: number;
 };
 
 export type JobsResponse = {
@@ -47,7 +48,7 @@ export type JobCompany = {
 
 export type PostJobBody = Omit<
 	Job,
-	'user_id' | 'id' | 'created_at' | 'updated_at'
+	'user_id' | 'id' | 'created_at' | 'applications_count' | 'updated_at'
 >;
 
 export type JobIncludeOption = 'competences' | 'company';

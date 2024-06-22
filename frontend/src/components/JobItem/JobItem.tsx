@@ -20,6 +20,7 @@ export const JobItem = ({
 	employment_type,
 	work_model,
 	location,
+  applications_count
 }: JobItemProps) => {
 	const applicants = Math.floor(Math.random() * applications_amount);
 
@@ -66,7 +67,7 @@ export const JobItem = ({
 					<Button>Visualizar</Button>
 				</Link>
 				<JobCapacity
-					applicants={applicants}
+					applicants={applications_count}
 					applications_amount={applications_amount}
 				/>
 			</S.JobApplicationInfo>

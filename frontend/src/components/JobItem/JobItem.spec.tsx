@@ -17,6 +17,7 @@ const props: JobItemProps = {
   location: '96765 Candelario Forges\nWardberg, IL 77290',
   company_id: 58,
   user_id: 174,
+  applications_count: 15,
 };
 
 describe('<JobItem />', () => {

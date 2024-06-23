@@ -51,6 +51,11 @@ export type PostJobBody = Omit<
 	'user_id' | 'id' | 'created_at' | 'applications_count' | 'updated_at'
 >;
 
+export type PutJobBody =  Omit<
+	Job,
+	'user_id' | 'id' | 'created_at'  | 'updated_at'
+>;
+
 export type JobIncludeOption = 'competences' | 'company';
 
 export const workModelOptions: WorkModel[] = ['onSite', 'hybrid', 'homeOffice'];

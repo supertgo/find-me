@@ -1,6 +1,7 @@
 import 'components/JobPageButton/JobPageButton.mock';
 import 'components/ModalCoverLetter/ModalCoverLetter.mock';
 import 'components/Sidebar/Sidebar.mock';
+import 'components/ModalEditJob/ModalEditJob.mock';
 import { useLoggedUserStore } from 'stores/loggedUserStore';
 import { jobMock } from 'test/mocks/external/job';
 import { act, render, renderHook, screen } from 'utils/test/test-utils';

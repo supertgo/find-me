@@ -15,14 +15,13 @@ export const useJobPage = ({
 	jobName,
 	companyName,
 }: UseJobPageProps) => {
-	const [open, setOpen] = useState(false);
+	const [editModalOpen, setEditModalOpen] = useState(false);
+	const [removeModalOpen, setRemoveModalOpen] = useState(false);
 	const [, setJob] = useState<JobToBeRemoved | null>(null);
 	const { type, loggedUserId } = useLoggedUserStore((state) => ({
 		type: state.type,
 		loggedUserId: state.id,
 	}));
-
-	const applicants = 10;
 
 	const paths: BreadcrumbPath[] = [
 		{
@@ -46,15 +45,16 @@ export const useJobPage = ({
 			companyName,
 		});
 
-		setOpen(true);
+		setRemoveModalOpen(true);
 	};
 
 	return {
-		open,
+		editModalOpen,
+    removeModalOpen,
+    setRemoveModalOpen,
+    setEditModalOpen,
 		type,
-		setOpen,
 		setJob,
-		applicants,
 		loggedUserId,
 		paths,
 		onRemoveJobClick,

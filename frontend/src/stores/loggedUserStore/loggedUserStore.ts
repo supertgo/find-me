@@ -23,7 +23,7 @@ export const useLoggedUserStore = create<LoggedUserProps>()(
 			id: Infinity,
 			name: '',
 			email: '',
-			type: UserEnum.RECRUITER,
+			type: UserEnum.EMPLOYEE,
 			setUser: (user) =>
 				set(() => ({
 					id: user.id || get().id,

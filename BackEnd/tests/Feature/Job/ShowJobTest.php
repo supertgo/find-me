@@ -145,7 +145,7 @@ class ShowJobTest extends TestCase
                 ]
             ]);
     }
-    //todo check if job exists exception
+   
     public function testJobExistsValidation()
     {
         $jobId = Job::max('id') + 1;

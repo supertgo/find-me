@@ -5,6 +5,7 @@ namespace Tests\Feature\Job;
 use App\Domain\Job\Enum\JobIncludesEnum;
 use App\Models\Competence;
 use App\Models\Job;
+use App\Models\JobApplication;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Symfony\Component\HttpFoundation\Response;
@@ -47,7 +48,12 @@ class ShowJobTest extends TestCase
 
     public function testShowJobWithCompanyInclude()
     {
+        /** @var Job $job */
         $job = Job::factory()->create();
+
+        JobApplication::factory()->create([
+            'job_id' => $job->id
+        ]);
 
         $this
             ->actingAs(User::factory()->create())
@@ -87,7 +93,8 @@ class ShowJobTest extends TestCase
                         'fantasy_name',
                         'created_at',
                         'updated_at',
-                    ]
+                    ],
+                    'applications_count'
                 ]
             ]);
     }

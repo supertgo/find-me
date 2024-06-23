@@ -138,6 +138,12 @@ class JobFilters implements JobFiltersInterface
      */
     public function setSalaryTimeUnits(?array $salaryTimeUnits): JobFilters
     {
+        if (empty($salaryTimeUnits)) {
+            $this->salaryTimeUnits = null;
+
+            return $this;
+        }
+
         $unknownUnits = array_diff($salaryTimeUnits, SalaryTimeUnitEnum::values());
 
         if (!empty($unknownUnits)) {
@@ -174,6 +180,12 @@ class JobFilters implements JobFiltersInterface
      */
     public function setWorkModels(?array $workModels): JobFilters
     {
+        if (empty($workModels)) {
+            $this->workModels = null;
+
+            return $this;
+        }
+
         $unknownModels = array_diff($workModels, WorkModelEnum::values());
 
         if (!empty($unknownModels)) {
@@ -190,6 +202,12 @@ class JobFilters implements JobFiltersInterface
      */
     public function setEmploymentTypes(?array $employmentTypes): JobFilters
     {
+        if (empty($employmentTypes)) {
+            $this->employmentTypes = null;
+
+            return $this;
+        }
+
         $unknownEmploymentTypes = array_diff($employmentTypes, EmploymentTypeEnum::values());
 
         if (!empty($unknownEmploymentTypes)) {

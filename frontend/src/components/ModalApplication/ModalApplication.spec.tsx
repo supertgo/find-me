@@ -1,8 +1,14 @@
 import { render, renderHook, screen } from 'utils/test/test-utils';
-import { ModalApplication } from '.';
+import { ModalApplication, ModalApplicationProps } from '.';
 import { useContextSelector } from 'use-context-selector';
 import { CoverLetterContext } from 'hooks/contexts/CoverLetter';
 import { JobStatus } from 'protocols/external/job/job-application';
+import { vi } from 'vitest';
+
+const props: ModalApplicationProps = {
+  refetch: vi.fn(),
+  type: 'recruiter'
+}
 
 describe('<ModalApplication />', () => {
 	it('should render the component', () => {
@@ -27,7 +33,9 @@ describe('<ModalApplication />', () => {
 			})),
 		);
 
-		render(<ModalApplication />);
+    render(<ModalApplication {...props} />, {
+      queryProvider: true
+    });
 
 		expect(screen.getByText('Carta de Apresentação')).toBeInTheDocument();
 		expect(screen.getByText('Email')).toBeInTheDocument();

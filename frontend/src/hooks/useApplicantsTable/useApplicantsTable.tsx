@@ -120,12 +120,13 @@ export const useApplicantsTable = ({
 				if (!info.getValue() || !info.getValue().candidates![0]) return null;
 
 				const { id, name, email, phone } = info.getValue().candidates![0];
-				const { id: jobId, cover_letter, status } = info.getValue();
+				const { id: jobId, cover_letter, status, job_id } = info.getValue();
 
 				return (
 					<SeeApplication
-						id={id}
-						jobId={jobId}
+            id={id}
+						user_id={id}
+						jobId={job_id}
 						name={name}
 						email={email}
 						phone={phone}

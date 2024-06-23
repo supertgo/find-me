@@ -6,6 +6,7 @@ import { CreateJobHeader } from 'components/CreateJobHeader';
 export default function JobsPage() {
 	return (
 		<Base>
+      <title>FindMe - Vagas</title>
 			<CreateJobHeader title="Vagas" />
 			<Jobs />
 		</Base>

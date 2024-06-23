@@ -14,13 +14,13 @@ import { Job as JobResponse } from 'protocols/external/job/job';
 import { UserEnum } from 'protocols/external/user/user';
 import { Base } from 'templates/Base/Base';
 import {
-	filterJobLocation,
-	translateEmploymentType,
-	translateSalaryTimeUnit,
-	translateWorkModel,
+  filterJobLocation,
+  translateEmploymentType,
+  translateSalaryTimeUnit,
+  translateWorkModel,
 } from 'utils/job';
 import { formatToCurrency } from 'utils/money';
-import { useJobPage } from '.';
+import { LoadingJob, useJobPage } from '.';
 import * as S from './Job.styles';
 
 export type JobProps = {} & JobResponse;
@@ -36,9 +36,14 @@ export const Job = (initialData: JobProps) => {
 		onRemoveJobClick,
 		type,
 		loggedUserId,
+    isLoading
 	} = useJobPage({
 		initialData
 	});
+
+  if (isLoading || !job) {
+    return <LoadingJob />
+  }
 
 	const {
 		id,
@@ -56,6 +61,7 @@ export const Job = (initialData: JobProps) => {
 		user_id,
 		applications_count,
 	} = job;
+
 
 	return (
 		<Base>

@@ -39,7 +39,7 @@ export const useJobPage = ({ initialData }: UseJobPageProps) => {
 		}),
 	}, );
 
-	const job = response!.data.data;
+	const job = response?.data.data;
 
 	const paths: BreadcrumbPath[] = [
 		{
@@ -51,7 +51,7 @@ export const useJobPage = ({ initialData }: UseJobPageProps) => {
 			url: `/${JobsUrl}`,
 		},
 		{
-			name: job.name || initialData.name,
+			name: job?.name || initialData.name,
 			url: `/${JobUrl(initialData.id)}`,
 		},
 	];

@@ -111,16 +111,17 @@ export const GetJobsRouteConst = ({
 	return returnUrlWithQueries(JobsRouteConst, params);
 };
 
+export const JobRouteConst = (job_id: number) => `job/${job_id}`;
+
 export const GetJobRouteConst = ({
 	job_id,
 	includes = [],
 }: GetJobRouteConstProps) => {
 	const params = new URLSearchParams();
-	const jobRoute = `job/${job_id}`;
 
 	appendItems(includes, params, 'includes[]');
 
-	return returnUrlWithQueries(jobRoute, params);
+	return returnUrlWithQueries(JobRouteConst(job_id), params);
 };
 
 export const PostJobRouteConst = 'job';

@@ -40,9 +40,9 @@ class JobFilters implements JobFiltersInterface
      * @param array{
      *     name?: string,
      *     description?: string,
-     *     isAvailable?: bool,
-     *     salaryFrom?: int,
-     *     salaryTo?: int,
+     *     is_available?: bool,
+     *     salary_from?: int,
+     *     salary_to?: int,
      *     salary_time_units?: array,
      *     accept_application_until?: string|Carbon,
      *     work_models?: array,
@@ -69,9 +69,9 @@ class JobFilters implements JobFiltersInterface
     {
         $this->setName($filters['name'] ?? null);
         $this->setDescription($filters['description'] ?? null);
-        $this->setIsAvailable($filters['isAvailable'] ?? null);
-        $this->setSalaryFrom($filters['salaryFrom'] ?? null);
-        $this->setSalaryTo($filters['salaryTo'] ?? null);
+        $this->setIsAvailable($filters['is_available'] ?? null);
+        $this->setSalaryFrom($filters['salary_from'] ?? null);
+        $this->setSalaryTo($filters['salary_to'] ?? null);
         $this->setSalaryTimeUnits($filters['salary_time_units'] ?? null);
         $this->setAcceptApplicationUntil($filters['accept_application_until'] ?? null);
         $this->setWorkModels($filters['work_models'] ?? null);

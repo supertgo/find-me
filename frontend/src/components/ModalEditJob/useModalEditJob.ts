@@ -1,10 +1,10 @@
-import { QueryClient } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 import { useJob } from 'hooks/useJob';
 import { PutJobBody } from 'protocols/external/job/job';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { formatCurrencyToNumber } from 'utils/money';
-import { GetJobsRouteConst } from 'utils/routes';
+import { GetJobsRouteConst, JobRouteConst } from 'utils/routes';
 
 export type EditJobInputs = {
 	salary: string;
@@ -21,20 +21,19 @@ export const useModalEditJob = ({
 	jobId,
 	companyId,
 }: UseModalEditJobProps) => {
+	const { updateJob } = useJob();
+	const queryClient = useQueryClient();
 	const [isLoading, setIsLoading] = useState(false);
+
 	const {
 		handleSubmit,
 		formState: { errors, isValid },
 		control,
 		watch,
 		register,
-		reset,
 	} = useForm<EditJobInputs>({
 		mode: 'onBlur',
 	});
-
-	const { updateJob } = useJob();
-	const queryClient = new QueryClient();
 
 	const onSubmit: SubmitHandler<EditJobInputs> = async (data, event) => {
 		event?.preventDefault();
@@ -70,23 +69,8 @@ export const useModalEditJob = ({
 			return;
 		}
 
-		reset({
-			name: '',
-			description: '',
-			salary: undefined,
-			location: '',
-			work_model: undefined,
-			is_available: true,
-			competences: [],
-			week_workload: 0,
-			employment_type: undefined,
-			salary_time_unit: undefined,
-			applications_amount: -Infinity,
-			accept_application_until: '',
-		});
-
 		await queryClient.invalidateQueries({
-			queryKey: [`/${GetJobsRouteConst}`, `job/${jobId}`],
+			queryKey: [`/${GetJobsRouteConst}`, `/${JobRouteConst(jobId)}`],
 		});
 
 		setIsLoading(false);

@@ -1,4 +1,9 @@
-import { JobIncludeOption } from 'protocols/external/job/job';
+import {
+	EmploymentType,
+	JobIncludeOption,
+	SalaryTimeUnit,
+	WorkModel,
+} from 'protocols/external/job/job';
 import { JobApplicationIncludeOption } from 'protocols/external/job/job-application';
 import { UserIncludeOption } from 'protocols/external/user/user';
 
@@ -22,6 +27,25 @@ export type GetJobApplicationsRouteConstProps = {
 	includes?: JobApplicationIncludeOption[];
 	jobsId?: number[];
 	candidatesId?: number[];
+};
+
+export type GetJobsRouteConstProps = {
+	name?: string;
+	employment_types?: EmploymentType[];
+	salary_time_units?: SalaryTimeUnit[];
+	work_models?: WorkModel[];
+	salary_to: number;
+	salary_from: number;
+};
+
+const appendItems = (
+	items: string[] | undefined,
+	params: URLSearchParams,
+	key: string,
+) => {
+	if (items?.length) {
+		items.forEach((item) => params.append(key, item));
+	}
 };
 
 export const GetAuthMeRouteConst = 'auth/me';
@@ -59,14 +83,33 @@ export const GetUserRouteConst = ({
 	const params = new URLSearchParams();
 	const userRoute = `user/show/${user_id}`;
 
-	if (includes.length) {
-		includes.forEach((i) => params.append('includes[]', i));
-	}
+	appendItems(includes, params, 'includes[]');
 
 	return returnUrlWithQueries(userRoute, params);
 };
 
-export const GetJobsRouteConst = 'job';
+export const JobsRouteConst = 'job';
+export const GetJobsRouteConst = ({
+	name,
+	employment_types,
+	salary_time_units,
+	work_models,
+	salary_from,
+	salary_to,
+}: GetJobsRouteConstProps) => {
+	const params = new URLSearchParams();
+
+	!!name && params.append('filters[name]', name);
+
+	params.append('filters[salary_from]', String(salary_from));
+	params.append('filters[salary_to]', String(salary_to));
+
+	appendItems(employment_types, params, 'filters[employment_types][]');
+	appendItems(salary_time_units, params, 'filters[salary_time_units][]');
+	appendItems(work_models, params, 'filters[work_models][]');
+
+	return returnUrlWithQueries(JobsRouteConst, params);
+};
 
 export const GetJobRouteConst = ({
 	job_id,
@@ -75,21 +118,21 @@ export const GetJobRouteConst = ({
 	const params = new URLSearchParams();
 	const jobRoute = `job/${job_id}`;
 
-	if (includes.length) {
-		includes.forEach((i) => params.append('includes[]', i));
-	}
+	appendItems(includes, params, 'includes[]');
 
 	return returnUrlWithQueries(jobRoute, params);
 };
 
 export const PostJobRouteConst = 'job';
 
+export const PutJobRouteConst = (job_id: number) => `job/${job_id}`;
+
 export const DeleteJobRouteConst = (job_id: number) => `job/${job_id}`;
 
 export const PostJobApplicationRouteConst = (job_id: number) =>
 	`job/${job_id}/application`;
 
-export const JobApplicationRouteConst = 'job-application'
+export const JobApplicationRouteConst = 'job-application';
 
 export const GetJobApplicationsRouteConst = ({
 	jobsId = [],
@@ -98,9 +141,7 @@ export const GetJobApplicationsRouteConst = ({
 }: GetJobApplicationsRouteConstProps) => {
 	const params = new URLSearchParams();
 
-	if (includes.length) {
-		includes.forEach((i) => params.append('includes[]', i));
-	}
+	appendItems(includes, params, 'includes[]');
 
 	if (candidatesId.length) {
 		candidatesId.forEach((c) =>
@@ -115,4 +156,4 @@ export const GetJobApplicationsRouteConst = ({
 	return returnUrlWithQueries(JobApplicationRouteConst, params);
 };
 
-export const GetCompaniesRouteConst = 'company'
+export const GetCompaniesRouteConst = 'company';

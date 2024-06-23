@@ -133,6 +133,9 @@ export const DeleteJobRouteConst = (job_id: number) => `job/${job_id}`;
 export const PostJobApplicationRouteConst = (job_id: number) =>
 	`job/${job_id}/application`;
 
+export const PatchJobApplicationRouteConst = (job_application: number) =>
+	`job-application/${job_application}/status`;
+
 export const JobApplicationRouteConst = 'job-application';
 
 export const GetJobApplicationsRouteConst = ({

@@ -11,7 +11,9 @@ const props: ModalEditJobProps = {
 
 describe('<ModalEditJob />', () => {
 	it('should render the component', async () => {
-		render(<ModalEditJob {...props} />);
+    render(<ModalEditJob {...props} />, {
+      queryProvider: true
+    });
 
 		const applyButton = screen.getByRole('button', { name: /Editar/i });
 

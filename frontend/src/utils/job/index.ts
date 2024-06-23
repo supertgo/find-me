@@ -1,3 +1,4 @@
+import { PillVariant } from 'components/Pill/Pill';
 import {
 	EmploymentType,
 	JobCompetence,
@@ -32,6 +33,15 @@ export const translateJobApplicationStatus: Record<JobStatus, string> = {
 	rejected: 'Rejeitado',
 	in_progress: 'Em progresso',
 };
+
+export const jobStatusPillVariant : Record<JobStatus, PillVariant> = {
+	hired: 'success',
+	pending: 'warning',
+	approved: 'success',
+	canceled: 'error',
+	rejected: 'error',
+	in_progress: 'info',
+}
 
 export const filterJobLocation = (location: string) => {
 	if (location.indexOf('\n') === -1) return location;

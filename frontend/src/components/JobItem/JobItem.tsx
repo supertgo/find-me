@@ -1,7 +1,6 @@
 import { Button } from 'components/Button';
 import { JobCapacity } from 'components/JobCapacity';
 import { MediaMatch } from 'components/MediaMatch';
-import Image from 'next/image';
 import Link from 'next/link';
 import { Job } from 'protocols/external/job/job';
 import { filterJobLocation } from 'utils/job';
@@ -22,29 +21,16 @@ export const JobItem = ({
 	location,
   applications_count
 }: JobItemProps) => {
-	const applicants = Math.floor(Math.random() * applications_amount);
-
 	const jobPillProps: JobPillProps = {
 		employment_type,
 		work_model,
-		salary,
+    salary: salary * 100,
 		salary_time_unit,
 	};
 
 	return (
 		<S.Wrapper>
 			<S.JobInfoWrapper>
-				<Image
-					src={`https://source.unsplash.com/random/?company_logo&${applicants}`}
-					width="64"
-					height="64"
-					alt={`company avatar`}
-					style={{
-						borderRadius: '50%',
-					}}
-					loading="lazy"
-					quality={100}
-				/>
 				<S.JobInfo>
 					<p>{name}</p>
 					{!!location && (

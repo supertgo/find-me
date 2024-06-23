@@ -30,7 +30,7 @@ describe('<JobItem />', () => {
     expect(screen.getAllByText('Híbrido')).toHaveLength(2);
     expect(screen.getAllByText('Meio Período')).toHaveLength(2);
     expect(
-      screen.getAllByText('194,73', { exact: false }),
+      screen.getAllByText('19.473,00', { exact: false }),
     ).toHaveLength(2);
     expect(
       screen.getAllByText('/hora', { exact: false }),

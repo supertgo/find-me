@@ -1,5 +1,6 @@
 import { AxiosResponse } from 'axios';
 import {
+	JobResponse,
 	JobsResponse,
 	PostJobBody,
 	PutJobBody,
@@ -13,12 +14,16 @@ import { JobFilters } from 'templates/Jobs/Jobs';
 import { UNEXPECTED_ERROR } from 'utils/errors';
 import {
 	DeleteJobRouteConst,
+	GetJobRouteConst,
+	GetJobRouteConstProps,
 	GetJobsRouteConst,
 	PostJobRouteConst,
 	PutJobRouteConst,
 } from 'utils/routes';
 
 export type FindJobsProps = JobFilters;
+
+export type FindJobProps = GetJobRouteConstProps;
 
 export type CreateJobProps = {
 	job: PostJobBody;
@@ -34,6 +39,14 @@ export type DeleteJobProps = {
 };
 
 export const useJob = () => {
+	const findJob = async ({ job_id, includes }: FindJobProps) => {
+		const getClient = new GetClient();
+
+		return await getClient.get<AxiosResponse<JobResponse>>({
+			url: `/${GetJobRouteConst({ job_id, includes })}`,
+		});
+	};
+
 	const findJobs = async ({
 		name,
 		work_models,
@@ -128,6 +141,7 @@ export const useJob = () => {
 
 	return {
 		findJobs,
+		findJob,
 		createJob,
 		updateJob,
 		deleteJob,

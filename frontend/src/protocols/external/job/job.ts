@@ -31,6 +31,10 @@ export type Job = {
 	applications_count: number;
 };
 
+export type JobResponse = {
+	data: Job;
+};
+
 export type JobsResponse = {
 	data: Job[];
 };

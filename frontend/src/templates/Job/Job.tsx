@@ -14,10 +14,10 @@ import { Job as JobResponse } from 'protocols/external/job/job';
 import { UserEnum } from 'protocols/external/user/user';
 import { Base } from 'templates/Base/Base';
 import {
-  filterJobLocation,
-  translateEmploymentType,
-  translateSalaryTimeUnit,
-  translateWorkModel,
+	filterJobLocation,
+	translateEmploymentType,
+	translateSalaryTimeUnit,
+	translateWorkModel,
 } from 'utils/job';
 import { formatToCurrency } from 'utils/money';
 import { useJobPage } from '.';
@@ -25,7 +25,21 @@ import * as S from './Job.styles';
 
 export type JobProps = {} & JobResponse;
 
-export const Job = (props: JobProps) => {
+export const Job = (initialData: JobProps) => {
+	const {
+		job,
+		editModalOpen,
+		removeModalOpen,
+		setRemoveModalOpen,
+		setEditModalOpen,
+		paths,
+		onRemoveJobClick,
+		type,
+		loggedUserId,
+	} = useJobPage({
+		initialData
+	});
+
 	const {
 		id,
 		name,
@@ -41,25 +55,11 @@ export const Job = (props: JobProps) => {
 		competences,
 		user_id,
 		applications_count,
-	} = props;
-
-	const {
-		editModalOpen,
-		removeModalOpen,
-		setRemoveModalOpen,
-		setEditModalOpen,
-		paths,
-		onRemoveJobClick,
-		type,
-		loggedUserId,
-	} = useJobPage({
-		jobId: id,
-		jobName: name,
-		companyName: company!.name,
-	});
+	} = job;
 
 	return (
 		<Base>
+			<title>{name}</title>
 			<S.JobHeaderWrapper>
 				<Breadcrumb paths={paths} />
 
@@ -149,7 +149,11 @@ export const Job = (props: JobProps) => {
 
 				{type === UserEnum.RECRUITER && user_id === loggedUserId && (
 					<S.RemoveJob>
-						<ModalEditJob job={props} setOpen={setEditModalOpen} open={editModalOpen} />
+						<ModalEditJob
+							job={job}
+							setOpen={setEditModalOpen}
+							open={editModalOpen}
+						/>
 						<ModalRemoveJob
 							setOpen={setRemoveModalOpen}
 							open={removeModalOpen}

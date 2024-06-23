@@ -1,27 +1,45 @@
+import { useQuery } from '@tanstack/react-query';
 import { BreadcrumbPath } from 'components/Breadcrumb/Breadcrumb';
 import { JobToBeRemoved } from 'components/ModalRemoveJob';
+import { useJob } from 'hooks/useJob';
+import { Job, JobResponse } from 'protocols/external/job/job';
 import { useState } from 'react';
 import { useLoggedUserStore } from 'stores/loggedUserStore';
+import { getInitialData } from 'utils/initialData';
+import { JobRouteConst } from 'utils/routes';
 import { HomeUrl, JobUrl, JobsUrl } from 'utils/urls';
 
 export type UseJobPageProps = {
-	jobId: number;
-	jobName: string;
-	companyName: string;
+	initialData: Job;
 };
 
-export const useJobPage = ({
-	jobId,
-	jobName,
-	companyName,
-}: UseJobPageProps) => {
+export const useJobPage = ({ initialData }: UseJobPageProps) => {
 	const [editModalOpen, setEditModalOpen] = useState(false);
 	const [removeModalOpen, setRemoveModalOpen] = useState(false);
-	const [, setJob] = useState<JobToBeRemoved | null>(null);
+	const [, setJobToBeRemoved] = useState<JobToBeRemoved | null>(null);
 	const { type, loggedUserId } = useLoggedUserStore((state) => ({
 		type: state.type,
 		loggedUserId: state.id,
 	}));
+	const { findJob } = useJob();
+
+	const { data: response, isLoading } = useQuery({
+		queryKey: [`/${JobRouteConst(initialData.id)}`],
+		queryFn: () =>
+			findJob({
+				job_id: initialData.id,
+				includes: ['company', 'competences'],
+			}),
+		initialData: getInitialData<JobResponse>({
+			initialData: {
+				data: {
+					...initialData,
+				},
+			},
+		}),
+	}, );
+
+	const job = response!.data.data;
 
 	const paths: BreadcrumbPath[] = [
 		{
@@ -33,28 +51,30 @@ export const useJobPage = ({
 			url: `/${JobsUrl}`,
 		},
 		{
-			name: jobName,
-			url: `/${JobUrl(jobId)}`,
+			name: job.name || initialData.name,
+			url: `/${JobUrl(initialData.id)}`,
 		},
 	];
 
 	const onRemoveJobClick = () => {
-		setJob({
-			id: jobId,
-			name: jobName,
-			companyName,
+		setJobToBeRemoved({
+			id: initialData.id,
+			name: job.name || initialData.name,
+			companyName: initialData.company!.name,
 		});
 
 		setRemoveModalOpen(true);
 	};
 
 	return {
+		job,
+		isLoading,
 		editModalOpen,
-    removeModalOpen,
-    setRemoveModalOpen,
-    setEditModalOpen,
+		removeModalOpen,
+		setRemoveModalOpen,
+		setEditModalOpen,
 		type,
-		setJob,
+		setJob: setJobToBeRemoved,
 		loggedUserId,
 		paths,
 		onRemoveJobClick,

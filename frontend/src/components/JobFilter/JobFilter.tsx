@@ -7,6 +7,7 @@ import {
 import { Dispatch, SetStateAction, useState } from 'react';
 import { JobFilters } from 'templates/Jobs/Jobs';
 import {
+  MAX_SALARY,
   SalaryRange,
   salaryRanges,
   translateEmploymentType,
@@ -55,7 +56,7 @@ export const JobFilter = ({ setFilter }: JobFilterProps) => {
 			setFilter((currentFilter) => ({
 				...currentFilter,
 				salary_from: 0,
-				salary_to: 10e8,
+				salary_to: MAX_SALARY,
 			}));
 			return;
 		}

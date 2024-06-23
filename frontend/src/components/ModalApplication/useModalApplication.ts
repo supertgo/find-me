@@ -13,7 +13,7 @@ import { JobApplicationRouteConst } from 'utils/routes';
 import { JobUrl } from 'utils/urls';
 
 export type UseModalApplicationProps = {
-	refetch: (
+	refetch?: (
 		options?: RefetchOptions | undefined,
 	) => Promise<
 		QueryObserverResult<AxiosResponse<JobApplicationResponse, any>, Error>
@@ -45,7 +45,7 @@ export const useModalApplication = ({ refetch }: UseModalApplicationProps) => {
 			],
 		});
 
-		await refetch();
+		!!refetch && (await refetch());
 
 		setOpen(false);
 	};

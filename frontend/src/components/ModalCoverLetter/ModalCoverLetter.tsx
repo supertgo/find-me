@@ -4,8 +4,8 @@ import { Textarea } from 'components/Textarea';
 import { Controller } from 'react-hook-form';
 import { REQUIRED_JOB_APP_COVER_LETTER } from 'utils/errors';
 import { useModalCoverLetter } from '.';
-import * as S from './ModalCoverLetter.styles';
 import { QueryObserverResult, RefetchOptions } from '@tanstack/react-query';
+import * as S from './ModalCoverLetter.styles';
 import { AxiosResponse } from 'axios';
 import { JobApplicationResponse } from 'protocols/external/job/job-application';
 

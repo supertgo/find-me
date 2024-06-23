@@ -17,7 +17,7 @@ import * as S from './ModalApplication.styles';
 
 export type ModalApplicationProps = {
 	type: UserType;
-	refetch: (
+	refetch?: (
 		options?: RefetchOptions | undefined,
 	) => Promise<
 		QueryObserverResult<AxiosResponse<JobApplicationResponse, any>, Error>

@@ -14,13 +14,14 @@ describe('<ModalApplication />', () => {
 	it('should render the component', () => {
 		const coverLetter = {
 			user: {
-				id: 10,
+				user_id: 10,
 				name: 'Candidato',
 				email: 'candidato@gmail.com',
 				phone: '1231313131',
 			},
 			jobApplication: {
 				id: 15,
+        jobId: 1,
 				cover_letter: 'Gostaria de me candidtar à vaga',
 				status: 'pending' as JobStatus,
 			},

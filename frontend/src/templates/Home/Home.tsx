@@ -17,6 +17,7 @@ export const Home = ({}: HomeProps) => {
 
 	return (
 		<Base>
+      <title>FindMe - Home</title>
 			<Title title="Início" />
 			<S.WelcomeMessage>Bem-vindo, {`${email}`}</S.WelcomeMessage>
 			{type === UserEnum.EMPLOYEE && (

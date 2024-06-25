@@ -143,5 +143,18 @@ O sistema "FindMe" é uma plataforma que visa facilitar o processo de recrutamen
 8. Visualizar suas candidaturas realizadas.
   - Tarefas e responsáveis: [Ana]
     - Tela para a visualização das candidaturas
-    
 
+## Implementação da Arquitetura Hexagonal
+
+Nossa aplicação utiliza a Arquitetura Hexagonal para isolar a lógica de negócios de serviços externos por meio de
+interfaces bem definidas. Provedores de serviço do Laravel vinculam implementações às interfaces, como o
+FileServiceProvider, que liga FileHelperInterface ao LocalFileHelper, garantindo flexibilidade e aderência ao Princípio
+da Inversão de Dependência.
+
+Aplicamos os princípios de Domain-Driven Design (DDD) com interfaces para repositórios de domínio, como
+UserRepositoryInterface. Implementações como UserRepository e UserTestRepository mantêm a lógica de negócios separada da
+persistência, facilitando a troca entre repositórios reais e mocks.
+
+A Arquitetura Hexagonal melhora a testabilidade ao isolar a lógica de negócios de dependências externas. Por exemplo,
+usamos UserTestRepository para simular a criação de usuários sem acessar o banco de dados real, tornando os testes mais
+eficientes e robustos.

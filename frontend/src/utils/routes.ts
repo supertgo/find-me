@@ -149,7 +149,7 @@ export const GetJobApplicationsRouteConst = ({
 
 	if (candidatesId.length) {
 		candidatesId.forEach((c) =>
-			params.append('filters[candidates_id][]', c.toString()),
+			c !== null && c !== 0 && params.append('filters[candidates_id][]', c.toString()),
 		);
 	}
 

@@ -19,7 +19,8 @@ export const JobItem = ({
 	employment_type,
 	work_model,
 	location,
-  applications_count
+  applications_count,
+  company,
 }: JobItemProps) => {
 	const jobPillProps: JobPillProps = {
 		employment_type,
@@ -32,7 +33,7 @@ export const JobItem = ({
 		<S.Wrapper>
 			<S.JobInfoWrapper>
 				<S.JobInfo>
-					<p>{name}</p>
+					<p>{company?.name} &bull; {name}</p>
 					{!!location && (
 						<S.JobLocationInfo>{filterJobLocation(location)}</S.JobLocationInfo>
 					)}

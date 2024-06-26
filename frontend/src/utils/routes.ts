@@ -4,7 +4,7 @@ import {
 	SalaryTimeUnit,
 	WorkModel,
 } from 'protocols/external/job/job';
-import { JobApplicationIncludeOption } from 'protocols/external/job/job-application';
+import { JobApplicationIncludeOption, JobsIncludeOption } from 'protocols/external/job/job-application';
 import { UserIncludeOption } from 'protocols/external/user/user';
 
 const returnUrlWithQueries = (defaultUrl: string, params: URLSearchParams) => {
@@ -36,6 +36,7 @@ export type GetJobsRouteConstProps = {
 	work_models?: WorkModel[];
 	salary_to: number;
 	salary_from: number;
+  includes?: JobsIncludeOption[];
 };
 
 const appendItems = (
@@ -96,6 +97,7 @@ export const GetJobsRouteConst = ({
 	work_models,
 	salary_from,
 	salary_to,
+  includes = ['company'],
 }: GetJobsRouteConstProps) => {
 	const params = new URLSearchParams();
 
@@ -107,6 +109,7 @@ export const GetJobsRouteConst = ({
 	appendItems(employment_types, params, 'filters[employment_types][]');
 	appendItems(salary_time_units, params, 'filters[salary_time_units][]');
 	appendItems(work_models, params, 'filters[work_models][]');
+  appendItems(includes, params, 'includes[]');
 
 	return returnUrlWithQueries(JobsRouteConst, params);
 };

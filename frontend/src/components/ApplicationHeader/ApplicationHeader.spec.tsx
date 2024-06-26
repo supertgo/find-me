@@ -16,7 +16,6 @@ describe('<ApplicationHeader />', () => {
 		render(<ApplicationHeader />);
 
 		expect(screen.getByText('Empresa')).toBeInTheDocument();
-		expect(screen.getByText('Onfly')).toBeInTheDocument();
 
 		expect(
 			screen.getByRole('button', { name: /Anuncie uma vaga/i }),

@@ -7,6 +7,7 @@ import {
 	workModelOptions,
 	salaryTimeUnitOptions,
 	Job,
+	JobResponse,
 } from 'protocols/external/job/job';
 import { Dispatch, SetStateAction } from 'react';
 import { Controller } from 'react-hook-form';
@@ -30,14 +31,19 @@ import { formatToCurrency } from 'utils/money';
 import { useModalEditJob } from './useModalEditJob';
 import * as S from './ModalEditJob.styles';
 import { Textarea } from 'components/Textarea';
+import { QueryObserverResult, RefetchOptions } from '@tanstack/react-query';
+import { AxiosResponse } from 'axios';
 
 export type ModalEditJobProps = {
 	open: boolean;
 	setOpen: Dispatch<SetStateAction<boolean>>;
 	job: Job;
+	refetch?: (
+		options?: RefetchOptions | undefined,
+	) => Promise<QueryObserverResult<AxiosResponse<JobResponse, any>, Error>>;
 };
 
-export const ModalEditJob = ({ open, setOpen, job }: ModalEditJobProps) => {
+export const ModalEditJob = ({ open, setOpen, job, refetch }: ModalEditJobProps) => {
 	const {
 		id,
 		name,
@@ -48,15 +54,16 @@ export const ModalEditJob = ({ open, setOpen, job }: ModalEditJobProps) => {
 		location,
 		applications_amount,
 		accept_application_until,
-    description,
-    company_id,
+		description,
+		company_id,
 	} = job;
 
 	const { control, register, errors, handleSubmit, onSubmit, isLoading } =
 		useModalEditJob({
 			setOpen,
 			jobId: id,
-      companyId: company_id
+			companyId: company_id,
+      refetch,
 		});
 
 	return (
@@ -104,7 +111,7 @@ export const ModalEditJob = ({ open, setOpen, job }: ModalEditJobProps) => {
 							}}
 							type="text"
 							error={errors.salary}
-              label="Salário*"
+							label="Salário*"
 						/>
 					)}
 				/>
@@ -159,7 +166,7 @@ export const ModalEditJob = ({ open, setOpen, job }: ModalEditJobProps) => {
 							{...field}
 							error={errors.location}
 							maxLength={MaxLength.location}
-              label="Localização"
+							label="Localização"
 						/>
 					)}
 				/>
@@ -177,7 +184,7 @@ export const ModalEditJob = ({ open, setOpen, job }: ModalEditJobProps) => {
 							type="number"
 							min={1}
 							error={errors.applications_amount}
-              label="Número máximo de candidaturas"
+							label="Número máximo de candidaturas"
 						/>
 					)}
 				/>
@@ -194,27 +201,27 @@ export const ModalEditJob = ({ open, setOpen, job }: ModalEditJobProps) => {
 							{...field}
 							type="date"
 							error={errors.accept_application_until}
-              label="Prazo de candidatura"
+							label="Prazo de candidatura"
 						/>
 					)}
 				/>
 
-        <Controller
-          rules={{
-            required: REQUIRED_JOB_DESCRIPTION,
-          }}
-          control={control}
-          name="description"
-          defaultValue={description}
-          render={({ field: { ...field } }) => (
-            <Textarea
-              {...field}
-              label="Descrição*"
-              placeholder="Descreva um pouco sobre você"
-              error={errors.description}
-            />
-          )}
-        />
+				<Controller
+					rules={{
+						required: REQUIRED_JOB_DESCRIPTION,
+					}}
+					control={control}
+					name="description"
+					defaultValue={description}
+					render={({ field: { ...field } }) => (
+						<Textarea
+							{...field}
+							label="Descrição*"
+							placeholder="Descreva um pouco sobre você"
+							error={errors.description}
+						/>
+					)}
+				/>
 			</S.Wrapper>
 		</BaseModal>
 	);

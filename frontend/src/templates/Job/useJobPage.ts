@@ -23,7 +23,7 @@ export const useJobPage = ({ initialData }: UseJobPageProps) => {
 	}));
 	const { findJob } = useJob();
 
-	const { data: response, isLoading } = useQuery({
+	const { data: response, isLoading, refetch } = useQuery({
 		queryKey: [`/${JobRouteConst(initialData.id)}`],
 		queryFn: () =>
 			findJob({
@@ -78,5 +78,6 @@ export const useJobPage = ({ initialData }: UseJobPageProps) => {
 		loggedUserId,
 		paths,
 		onRemoveJobClick,
+    refetch
 	};
 };

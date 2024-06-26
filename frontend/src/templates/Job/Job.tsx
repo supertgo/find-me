@@ -36,7 +36,8 @@ export const Job = (initialData: JobProps) => {
 		onRemoveJobClick,
 		type,
 		loggedUserId,
-    isLoading
+    isLoading,
+    refetch
 	} = useJobPage({
 		initialData
 	});
@@ -159,6 +160,7 @@ export const Job = (initialData: JobProps) => {
 							job={job}
 							setOpen={setEditModalOpen}
 							open={editModalOpen}
+              refetch={refetch}
 						/>
 						<ModalRemoveJob
 							setOpen={setRemoveModalOpen}

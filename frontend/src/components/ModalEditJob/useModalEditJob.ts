@@ -1,10 +1,12 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { useJob } from 'hooks/useJob';
-import { PutJobBody } from 'protocols/external/job/job';
+import { JobResponse, PutJobBody } from 'protocols/external/job/job';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { formatCurrencyToNumber } from 'utils/money';
 import { GetJobsRouteConst, JobRouteConst } from 'utils/routes';
+import { QueryObserverResult, RefetchOptions } from '@tanstack/react-query';
+import { AxiosResponse } from 'axios';
 
 export type EditJobInputs = {
 	salary: string;
@@ -14,12 +16,16 @@ export type UseModalEditJobProps = {
 	setOpen: Dispatch<SetStateAction<boolean>>;
 	jobId: number;
 	companyId: number;
+	refetch?: (
+		options?: RefetchOptions | undefined,
+	) => Promise<QueryObserverResult<AxiosResponse<JobResponse, any>, Error>>;
 };
 
 export const useModalEditJob = ({
 	setOpen,
 	jobId,
 	companyId,
+  refetch
 }: UseModalEditJobProps) => {
 	const { updateJob } = useJob();
 	const queryClient = useQueryClient();
@@ -72,6 +78,8 @@ export const useModalEditJob = ({
 		await queryClient.invalidateQueries({
 			queryKey: [`/${GetJobsRouteConst}`, `/${JobRouteConst(jobId)}`],
 		});
+
+    !!refetch && await refetch()
 
 		setIsLoading(false);
 		setOpen(false);

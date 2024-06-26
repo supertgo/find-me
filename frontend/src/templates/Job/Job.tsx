@@ -74,7 +74,7 @@ export const Job = (initialData: JobProps) => {
 						<S.Title>{name}</S.Title>
 						<S.JobSubtitle>
 							{company!.name}{' '}
-							{location && `&bull; ${filterJobLocation(location)}`}
+							{location && `• ${filterJobLocation(location)} `}
 							&bull; {translateEmploymentType[employment_type]}
 						</S.JobSubtitle>
 					</S.TextWrapper>

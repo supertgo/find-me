@@ -7,6 +7,8 @@ use App\Domain\User\UserTypeEnum;
 use App\Exceptions\Abstract\AbstractFindMeException;
 use App\Exceptions\ExceptionMessagesEnum;
 use App\Exceptions\User\UnknownUserTypeException;
+use App\Exceptions\User\UserEmailNotAvailableException;
+use App\Exceptions\User\UserPhoneNotAvailableException;
 use Illuminate\Support\Str;
 use Tests\Unit\AbstractUnitTest;
 
@@ -171,4 +173,80 @@ class UserDomainTest extends AbstractUnitTest
         });
     }
 
+    public function testLoadUser()
+    {
+        $user = $this->domain->loadUser(1);
+
+        $this->assertEquals(1, $user->getId());
+    }
+
+    /**
+     * @throws UserPhoneNotAvailableException
+     * @throws UserEmailNotAvailableException
+     */
+    public function testUserUpdateWithInvalidEmail()
+    {
+        $this->domain->setEmail(1 . Str::random());
+
+        $this->expectException(UserEmailNotAvailableException::class);
+        $this->domain->update();
+    }
+
+    /**
+     * @throws UserPhoneNotAvailableException
+     * @throws UserEmailNotAvailableException
+     */
+    public function testUserUpdateWithInvalidPhone()
+    {
+        $this->domain
+            ->setPhone(27548894)
+            ->setEmail('email');
+
+        $this->expectException(UserPhoneNotAvailableException::class);
+        $this->domain->update();
+    }
+
+    /**
+     * @throws UserEmailNotAvailableException
+     * @throws UserPhoneNotAvailableException
+     */
+    public function testUpdateSuccess()
+    {
+        $this->domain
+            ->setName('User 1')
+            ->setEmail('a' . Str::random())
+            ->setPhone('1')
+            ->setId(1);
+
+        $this->domain->update();
+
+        $this->assertEquals(
+            UserTestRepository::UPDATED_USER_NAME,
+            $this->domain->getName()
+        );
+    }
+
+    /**
+     * @throws UnknownUserTypeException
+     */
+    public function testCreateUser()
+    {
+        $userData = [
+            'name' => $this->faker->name(),
+            'email' => $this->faker->email(),
+            'phone' => $this->faker->phoneNumber(),
+            'type' => UserTypeEnum::Recruiter,
+            'id' => $this->faker->randomNumber(),
+            'about_me' => $this->faker->text(),
+            'password' => $this->faker->password()
+        ];
+
+        $this->domain->fromArray($userData);
+
+        $user = $this->domain->createUser();
+
+        array_walk($userData, function ($value, $key) use ($user) {
+            $this->assertEquals($value, $this->domain->{'get' . Str::studly($key)}());
+        });
+    }
 }

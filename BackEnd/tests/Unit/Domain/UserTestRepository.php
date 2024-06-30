@@ -6,11 +6,15 @@ use App\Domain\User\UserDomain;
 use App\Domain\User\UserDomainInterface;
 use App\Domain\User\UserFilterInterface;
 use App\Domain\User\UserRepositoryInterface;
+use App\Domain\User\UserTypeEnum;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Collection;
 
 class UserTestRepository implements UserRepositoryInterface
 {
+
+    const UPDATED_USER_NAME = 'Updated User';
+
     public function createUser(array $user): array
     {
         return $user;
@@ -35,22 +39,31 @@ class UserTestRepository implements UserRepositoryInterface
     {
         return [
             'id' => $id,
+            'name' => 'User ' . $id,
+            'email' => 'user' . $id . '@example.com',
+            'phone' => '123456789',
+            'password' => 'password',
+            'type' => UserTypeEnum::Recruiter->value,
         ];
     }
 
     public function isEmailAvailableToUpdate(UserDomainInterface $user): bool
     {
-        return true;
+        $emailFirstCharacter = substr($user->getEmail(), 0, 1);
+
+        return !is_numeric($emailFirstCharacter);
     }
 
     public function isPhoneAvailable(UserDomainInterface $user): bool
     {
-        return true;
+        $phoneFirstCharacter = substr($user->getPhone(), 0, 1);
+
+        return $phoneFirstCharacter % 2;
     }
 
     public function update(UserDomainInterface $user): void
     {
-        // TODO: Implement update() method.
+        $user->setName(self::UPDATED_USER_NAME);
     }
 
     public function attachCompetences(int $id, Collection $competences): void

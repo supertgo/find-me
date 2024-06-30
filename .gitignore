@@ -3,5 +3,6 @@ BackEnd/storage
 BackEnd/.env
 .idea/sonarlint
 BackEnd/.phpunit.result.cache
+BackEnd/.phpunit.cache
 
 .vscode/

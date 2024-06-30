@@ -23,7 +23,9 @@ class UserDomain implements UserDomainInterface
     private ?string $profilePicturePath;
 
 
-    public function __construct(private readonly UserRepositoryInterface $userRepository)
+    public function __construct(
+        private readonly UserRepositoryInterface $userRepository
+    )
     {
     }
 

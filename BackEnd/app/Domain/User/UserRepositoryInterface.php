@@ -25,11 +25,11 @@ interface UserRepositoryInterface
     public function update(UserDomainInterface $user): void;
 
     /** @param Collection<CompetenceDomainInterface> $competences */
-    public function attachCompetences(int $id, Collection $competences);
+    public function attachCompetences(int $id, Collection $competences): void;
 
     public function removeCompetence(int $id, int $competenceId): void;
 
-    public function userHasCompetence(?int $id, int $competenceId): bool;
+    public function userHasCompetence(int $id, int $competenceId): bool;
 
     public function getUserWithIncludes(int $userId, array $includes): array;
 

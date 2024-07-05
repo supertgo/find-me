@@ -9,9 +9,11 @@ class AbstractFindMeException extends Exception
 {
     protected array $additionalInfo = [];
 
+    const DEFAULT_HTTP_CODE = Response::HTTP_UNPROCESSABLE_ENTITY;
+
     public function __construct(
         protected     $message,
-        protected int $httpCode = Response::HTTP_UNPROCESSABLE_ENTITY
+        protected int $httpCode = self::DEFAULT_HTTP_CODE
     )
     {
         parent::__construct($message);

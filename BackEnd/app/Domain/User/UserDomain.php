@@ -23,22 +23,10 @@ class UserDomain implements UserDomainInterface
     private ?string $profilePicturePath;
 
 
-    public function __construct(private readonly UserRepositoryInterface $userRepository)
+    public function __construct(
+        private readonly UserRepositoryInterface $userRepository
+    )
     {
-    }
-
-    public function fromArray(array $user): self
-    {
-        $this->setName($user['name']);
-        $this->setEmail($user['email']);
-        $this->setPhone($user['phone']);
-
-        !empty($user['type']) && $this->setType(UserTypeEnum::from($user['type']));
-        !empty($user['id']) && $this->setId($user['id']);
-        !empty($user['password']) && $this->setPassword($user['password']);
-        !empty($user['about_me']) && $this->setAboutMe($user['about_me']);
-
-        return $this;
     }
 
     /**
@@ -60,11 +48,14 @@ class UserDomain implements UserDomainInterface
         return (new UserDomain($this->getRepository()))->loadUser($this->getId());
     }
 
-    public function createUser(): self
+    public function getEmail(): string
     {
-        $created = $this->userRepository->createUser($this->toArray());
+        return $this->email;
+    }
 
-        return (new self($this->getRepository()))->fromArray($created);
+    public function getPhone(): string
+    {
+        return $this->phone;
     }
 
     public function loadUser(int $userId): self
@@ -82,6 +73,23 @@ class UserDomain implements UserDomainInterface
         return $this;
     }
 
+    public function getRepository(): UserRepositoryInterface
+    {
+        return $this->userRepository;
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function createUser(): self
+    {
+        $created = $this->userRepository->createUser($this->toArray());
+
+        return (new self($this->getRepository()))->fromArray($created);
+    }
+
     public function toArray(): array
     {
         $user = [
@@ -96,6 +104,89 @@ class UserDomain implements UserDomainInterface
         !empty($this->aboutMe) && $user['about_me'] = $this->aboutMe;
 
         return $user;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @throws UnknownUserTypeException
+     */
+    public function fromArray(array $user): self
+    {
+        $this->setName($user['name']);
+        $this->setEmail($user['email']);
+        $this->setPhone($user['phone']);
+
+        !empty($user['type']) && $this->setType($user['type']);
+        !empty($user['id']) && $this->setId($user['id']);
+        !empty($user['password']) && $this->setPassword($user['password']);
+        !empty($user['about_me']) && $this->setAboutMe($user['about_me']);
+
+        return $this;
+    }
+
+    public function setName(string $name): UserDomain
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function setPhone(string $phone): self
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    /**
+     * @throws UnknownUserTypeException
+     */
+    public function setType(UserTypeEnum|string $type): self
+    {
+        if ($type instanceof UserTypeEnum) {
+            $this->type = $type;
+        } else {
+            $enumType = UserTypeEnum::tryFrom($type);
+            if (!$enumType) {
+                throw new UnknownUserTypeException($type);
+            }
+
+            $this->type = $enumType;
+        }
+
+        return $this;
+    }
+
+    public function setId(?int $id): UserDomain
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    public function setPassword(?string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    public function setAboutMe(?string $aboutMe): self
+    {
+        $this->aboutMe = $aboutMe;
+
+        return $this;
     }
 
     public function exists(): bool
@@ -115,76 +206,9 @@ class UserDomain implements UserDomainInterface
         return $this;
     }
 
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): UserDomain
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    public function getEmail(): string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    public function getPhone(): string
-    {
-        return $this->phone;
-    }
-
-    public function setPhone(string $phone): self
-    {
-        $this->phone = $phone;
-
-        return $this;
-    }
-
     public function getType(): UserTypeEnum
     {
         return $this->type;
-    }
-
-    public function setType(UserTypeEnum $type): self
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function setId(?int $id): UserDomain
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
-    private function setPassword(mixed $password): self
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    public function getRepository(): UserRepositoryInterface
-    {
-        return $this->userRepository;
     }
 
     /**
@@ -200,7 +224,6 @@ class UserDomain implements UserDomainInterface
 
         return $this;
     }
-
 
     public function loadUserWithIncludes(int $userId, array $includes): array
     {
@@ -225,49 +248,6 @@ class UserDomain implements UserDomainInterface
         return $this->userRepository->getUsersWithIncludes($includes);
     }
 
-    private function setAboutMe(?string $aboutMe): self
-    {
-        $this->aboutMe = $aboutMe;
-
-        return $this;
-    }
-
-    public function createProfilePicture(UploadedFile $file, int $userId): void
-    {
-        $this->userRepository->createProfilePicture($file, $userId);
-    }
-
-    public function updateProfilePicture(UploadedFile $profilePicture, int $userId): string
-    {
-        if (isset($this->profilePicturePath)) {
-            $this->userRepository->deleteProfilePicture($this->profilePicturePath, $userId);
-        }
-
-        return $this->userRepository->createProfilePicture($profilePicture, $userId);
-    }
-
-    public function deleteProfilePicture(): void
-    {
-        $this->userRepository->deleteProfilePicture($this->getProfilePicturePath(), $this->getId());
-    }
-
-    public function getAboutMe(): ?string
-    {
-        return $this->aboutMe;
-    }
-
-    public function getProfilePicturePath(): ?string
-    {
-        return $this->profilePicturePath;
-    }
-
-    public function setProfilePicturePath(?string $profilePicturePath): UserDomain
-    {
-        $this->profilePicturePath = $profilePicturePath;
-
-        return $this;
-    }
-
     /**
      * @throws UnknownUserIncludeException
      */
@@ -284,5 +264,46 @@ class UserDomain implements UserDomainInterface
         }
 
         return $this;
+    }
+
+    public function updateProfilePicture(UploadedFile $profilePicture, int $userId): string
+    {
+        if (isset($this->profilePicturePath)) {
+            $this->userRepository->deleteProfilePicture($this->profilePicturePath, $userId);
+        }
+
+        return $this->userRepository->createProfilePicture($profilePicture, $userId);
+    }
+
+    public function deleteProfilePicture(): void
+    {
+        $this->userRepository->deleteProfilePicture($this->getProfilePicturePath(), $this->getId());
+    }
+
+    public function getProfilePicturePath(): ?string
+    {
+        return $this->profilePicturePath;
+    }
+
+    public function createProfilePicture(UploadedFile $file, int $userId): void
+    {
+        $this->userRepository->createProfilePicture($file, $userId);
+    }
+
+    public function setProfilePicturePath(?string $profilePicturePath): UserDomain
+    {
+        $this->profilePicturePath = $profilePicturePath;
+
+        return $this;
+    }
+
+    public function getAboutMe(): ?string
+    {
+        return $this->aboutMe;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
     }
 }

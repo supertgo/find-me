@@ -6,7 +6,6 @@ use Illuminate\Http\UploadedFile;
 
 interface UserServiceInterface
 {
-
     function createUser(array $user): int;
 
     function update(array $user): array;

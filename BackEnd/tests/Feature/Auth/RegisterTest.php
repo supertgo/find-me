@@ -134,7 +134,7 @@ class RegisterTest extends TestCase
             'name' => $this->faker->name,
             'password' => $this->faker->password,
             'email' => $this->faker->unique()->safeEmail,
-            'phone' => $this->faker->unique()->e164PhoneNumber,
+            'phone' => str_replace('+', '', $this->faker->unique()->e164PhoneNumber()),
             'type' => UserTypeEnum::Recruiter->value,
             'about_me' => $this->faker->paragraph()
         ];

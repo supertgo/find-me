@@ -12,7 +12,7 @@ class CompanyFactory extends Factory
         return [
             'name' => $this->faker->company(),
             'description' => $this->faker->sentence(),
-            'phone' => $this->faker->unique()->e164PhoneNumber,
+            'phone' => str_replace('+', '', $this->faker->unique()->e164PhoneNumber()),
             'email' => $this->faker->unique()->companyEmail(),
             'cnpj' => $this->generateCnpj(),
             'fantasy_name' => $this->faker->name . ' ' . $this->faker->unique()->companySuffix(),

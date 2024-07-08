@@ -9,11 +9,11 @@ import { UserProps } from 'protocols/external/user/user';
 import { Controller } from 'react-hook-form';
 import { validateInputUserEmail } from 'utils/email';
 import {
-  INVALID_EMAIL,
-  REQUIRED_ABOUT_ME,
-  REQUIRED_CELLPHONE,
-  REQUIRED_NEW_PASSWORD,
-  REQUIRED_USER,
+	INVALID_EMAIL,
+	REQUIRED_ABOUT_ME,
+	REQUIRED_CELLPHONE,
+	REQUIRED_NEW_PASSWORD,
+	REQUIRED_USER,
 } from 'utils/errors';
 import { formatCellphone } from 'utils/formatCellphone';
 import { MaxLength } from 'utils/maxLengths';
@@ -118,7 +118,7 @@ export const AccountConfig = ({
 									{...field}
 									type="password"
 									label="Senha*"
-									placeholder="Digite a sua senha"
+									placeholder="Digite a sua nova senha"
 									error={errors.password}
 									maxLength={MaxLength.password}
 								/>

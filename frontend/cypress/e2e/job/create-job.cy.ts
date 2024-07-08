@@ -5,7 +5,7 @@ beforeEach(() => {
 	cy.visit('/', {
 		failOnStatusCode: false,
 	});
-	cy.signIn();
+	cy.signIn('recrutador@gmail.com', 'testaa');
 	cy.waitUntil(() => cy.url().should('contain', 'home'));
 
 	cy.getByDataCy('sidebar').within(() => {
@@ -34,44 +34,57 @@ describe('Job - Creation', () => {
 
 		cy.logOut();
 
+		// Parte do candidato
+		cy.findByText('Entre com a sua conta');
+
 		cy.signIn('candidato@gmail.com', 'testaa');
+		cy.waitUntil(() => cy.url().should('contain', 'home'));
+
+		cy.findByText('Bem-vindo, candidato@gmail.com');
 
 		cy.getByDataCy('sidebar').within(() => {
 			cy.findByRole('link', { name: /Vagas/i }).click();
 		});
 
-		cy.wait(1500);
-
-		cy.scrollTo('bottom');
-
 		cy.goToJob(jobName);
 
-		cy.wait(3000);
+		cy.wait(2000);
 
-		cy.writeCoverLetter({
-			companyName: 'Onfly',
-			position: jobName,
-			experienceInYears: 5,
-		});
+		cy.findByRole('button', { name: /Aplicar/i })
+			.should('be.visible')
+			.click();
+		cy.findByPlaceholderText('Escreva uma carta de apresentação')
+			.should('be.visible')
+			.clear()
+			.type(
+				'Escrevendo algo sobre mim. Escrevendo mais um pouco sobre mim e mais um pouco ainda!',
+			);
+		cy.findByRole('button', { name: /Aplicar/i })
+			.should('be.enabled')
+			.click();
 
-		cy.logOut();
-    
-    cy.signIn();
+		cy.wait(1500);
 
 		cy.getByDataCy('sidebar').within(() => {
-			cy.findByRole('link', { name: /Vagas/i }).click();
+			cy.findByRole('link', { name: /Início/i }).click();
 		});
+
+		cy.get('div:contains("' + jobName + '")')
+			.last()
+			.click();
+
+		cy.wait(2000);
+
+		cy.findByRole('button', { name: /Ver candidatura/i })
+			.should('be.visible')
+			.click();
+
+		cy.findByRole('button', { name: /Desistir/i }).click();
 
 		cy.wait(1500);
 
-		cy.scrollTo('bottom');
+		cy.findByRole('button', { name: /Ver candidatura/i }).click();
 
-		cy.goToJob(jobName);
-
-    cy.findByRole('button', { name: /Visualizar Candidatos/i }).click()
-    
-    cy.wait(1500)
-
-    cy.findByText('Total de Candidatos: 1').should('exist')
+		cy.findByText('Cancelado').should('exist');
 	});
 });

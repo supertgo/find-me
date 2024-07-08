@@ -2,20 +2,20 @@
 
 describe('Auth - Login', () => {
 	it('should be able to login a user by happy path', () => {
-    cy.visit('/', {
-      failOnStatusCode: false
-    });
+		cy.visit('/', {
+			failOnStatusCode: false,
+		});
 		cy.signIn();
 
 		cy.waitUntil(() => cy.url().should('contain', 'home'));
 
-		cy.findByText('Bem-vindo, thiago.teste@gmail.com');
+		cy.findByText('Bem-vindo, candidato@gmail.com');
 	});
 
 	it('should show form errors on email and password field', () => {
-    cy.visit('/', {
-      failOnStatusCode: false
-    });
+		cy.visit('/', {
+			failOnStatusCode: false,
+		});
 
 		cy.findByPlaceholderText(/e-mail/i).type('invalidemail');
 		cy.findByPlaceholderText(/senha/i).focus();
@@ -29,21 +29,21 @@ describe('Auth - Login', () => {
 
 		cy.waitUntil(() => cy.url().should('contain', 'home'));
 
-		cy.findByText('Bem-vindo, thiago.teste@gmail.com');
+		cy.findByText('Bem-vindo, candidato@gmail.com');
 	});
 
 	it('should be able to sign in and logout', () => {
-    cy.visit('/', {
-      failOnStatusCode: false
-    });
+		cy.visit('/', {
+			failOnStatusCode: false,
+		});
 		cy.signIn();
 
 		cy.waitUntil(() => cy.url().should('contain', 'home'));
 
-		cy.findByText('Bem-vindo, thiago.teste@gmail.com');
+		cy.findByText('Bem-vindo, candidato@gmail.com');
 
-    cy.findByTitle('Sair').click()
+		cy.findByTitle('Sair').click();
 
-    cy.findByText('Entre com a sua conta')
+		cy.findByText('Entre com a sua conta');
 	});
 });

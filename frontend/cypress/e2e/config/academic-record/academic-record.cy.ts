@@ -5,7 +5,9 @@ beforeEach(() => {
 	cy.signIn('candidato@gmail.com', 'testaa');
 	cy.waitUntil(() => cy.url().should('contain', 'home'));
 
-	cy.findByTitle('Ir para as configurações').click();
+	cy.getByDataCy('sidebar').within(() => {
+		cy.findByRole('link', { name: /Perfil Público/i }).click();
+	});
 
 	cy.waitUntil(() => cy.url().should('contain', 'config'));
 });

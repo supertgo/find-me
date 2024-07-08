@@ -8,18 +8,18 @@ beforeEach(() => {
 	cy.signIn('candidato@gmail.com', 'testaa');
 	cy.waitUntil(() => cy.url().should('contain', 'home'));
 
-	cy.findByTitle('Ir para as configurações').click();
+	cy.getByDataCy('sidebar').within(() => {
+		cy.findByRole('link', { name: /Perfil Público/i }).click();
+	});
 
 	cy.waitUntil(() => cy.url().should('contain', 'config'));
 });
 
 describe('Config - Employee', () => {
 	it('should be able to change config information', () => {
-		cy.findByPlaceholderText('Digite o seu nome completo').should(
-			'not.be.empty',
-		);
-		cy.findByPlaceholderText('Digite o seu celular').should('not.be.empty');
-		cy.findByPlaceholderText('Digite o seu email').should('not.be.empty');
+		cy.findByPlaceholderText('Nome Completo').should('not.be.empty');
+		cy.findByPlaceholderText('Celular').should('not.be.empty');
+		cy.findByPlaceholderText('E-mail').should('not.be.empty');
 
 		cy.findByPlaceholderText('Digite a sua nova senha').should('be.empty');
 		cy.findByPlaceholderText('Descreva um pouco sobre você')

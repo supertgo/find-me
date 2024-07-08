@@ -8,7 +8,9 @@ beforeEach(() => {
 	cy.signIn('candidato@gmail.com', 'testaa');
 	cy.waitUntil(() => cy.url().should('contain', 'home'));
 
-	cy.findByTitle('Ir para as configurações').click();
+	cy.getByDataCy('sidebar').within(() => {
+		cy.findByRole('link', { name: /Perfil Público/i }).click();
+	});
 
 	cy.waitUntil(() => cy.url().should('contain', 'config'));
 });
@@ -27,6 +29,8 @@ describe('Config - Professional XP', () => {
 				'Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet.',
 		});
 
+		cy.wait(2000);
+
 		cy.findAllByText('Software Developer');
 	});
 
@@ -41,6 +45,8 @@ describe('Config - Professional XP', () => {
 			description:
 				'Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet.',
 		});
+
+		cy.wait(2000);
 
 		cy.findAllByText('AWS Engineer');
 	});
@@ -57,10 +63,6 @@ describe('Config - Professional XP', () => {
 
 		cy.getByName('start_date').focus();
 		cy.findByText('A localização é obrigatória.');
-
-		cy.findByRole('checkbox', {
-			name: /Trabalho atualmente neste cargo/i,
-		}).click();
 
 		cy.getByName('description', 'textarea').focus();
 		cy.findByText('A data de início é obrigatória.');
@@ -82,6 +84,8 @@ describe('Config - Professional XP', () => {
 			false,
 		);
 
+		cy.wait(2000);
+
 		cy.findAllByText('Software Developer Sad Path');
 	});
 
@@ -98,13 +102,15 @@ describe('Config - Professional XP', () => {
 				'Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet.',
 		});
 
+		cy.wait(2000);
+
 		cy.findAllByText('Software Developer');
 
-    cy.findAllByTitle('Remover experiência').last().click()
+		cy.findAllByTitle('Remover experiência').last().click();
 
-    cy.findByText('Tem certeza que deseja excluir essa experiência?')
-    
-    cy.findByRole('button', { name: /Cancelar/i }).should('be.enabled');
+		cy.findByText('Tem certeza que deseja excluir essa experiência?');
+
+		cy.findByRole('button', { name: /Cancelar/i }).should('be.enabled');
 
 		cy.findByRole('button', { name: /Excluir/i })
 			.should('be.enabled')

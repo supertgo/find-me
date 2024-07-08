@@ -47,6 +47,13 @@ export const JobLocationInfo = styled.div`
 	`}
 `;
 
+export const JobCompany = styled.div`
+	${({ theme }) => css`
+		color: ${theme.colors.darkTitanium};
+		margin: ${theme.space.xxsmall} 0;
+	`}
+`;
+
 export const PillWrapper = styled.div`
 	${({ theme }) => css`
 		display: flex;
@@ -81,4 +88,3 @@ export const JobApplicationInfo = styled.div`
 		width: 100%;
 	}
 `;
-

@@ -11,7 +11,7 @@ Cypress.Commands.add('getByName', (name, element = 'input', ...args) => {
 
 Cypress.Commands.add(
 	'signIn',
-	(email = 'thiago.teste@gmail.com', password = 'testaa') => {
+	(email = 'candidato@gmail.com', password = 'testaa') => {
 		cy.findByPlaceholderText(/e-mail/i).type(email);
 		cy.findByPlaceholderText(/senha/i).type(password);
 
@@ -20,7 +20,7 @@ Cypress.Commands.add(
 );
 
 Cypress.Commands.add('signInAsRecruiter', () => {
-	cy.signIn('recruiter@gmail.com', 'testaa');
+	cy.signIn('recrutador@gmail.com', 'testaa');
 });
 
 Cypress.Commands.add(
@@ -46,9 +46,9 @@ Cypress.Commands.add(
 
 		cy.getByName('location').type(location);
 
-		cy.getByDataCy('work_model').select(workModel);
+		cy.getByName('work_model', 'select').select(workModel);
 
-		cy.getByDataCy('employment_type').select(employmentType);
+		cy.getByName('employment_type', 'select').select(employmentType);
 
 		cy.getByName('start_date').type(startDate);
 
@@ -122,6 +122,8 @@ Cypress.Commands.add(
 		description,
 	}) => {
 		cy.findByRole('button', { name: /Anuncie uma vaga/i }).click();
+
+		cy.getByName('company_id', 'select').select(2);
 
 		cy.getByName('name').type(name);
 

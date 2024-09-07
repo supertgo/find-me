@@ -3,7 +3,6 @@ import {
 	PostAcademicRecordObj,
 	DeleteAcademicRecordBody,
 } from 'protocols/external/academic-record/academic-record';
-import { toast } from 'react-toastify';
 import { DeleteClient } from 'services/httpClient/delete';
 import { PostClient } from 'services/httpClient/post';
 import { UNEXPECTED_ERROR } from 'utils/errors';
@@ -11,6 +10,7 @@ import {
 	DeleteUserAcademicRecordRouteConst,
 	PostUserAcademicRecordRouteConst,
 } from 'utils/routes';
+import { Toast } from 'utils/toast';
 
 export type CreateAcademicRecordProps = {
 	academicRecord: PostAcademicRecordObj;
@@ -36,14 +36,14 @@ export const useAcademicRecord = () => {
 				body,
 			});
 
-			toast.success('Formação acadêmica criada com sucesso!');
+			Toast.success('Formação acadêmica criada com sucesso!');
 		} catch (error) {
 			if (error instanceof Error) {
-				toast.error(error.response.data.message);
+				Toast.error(error.response.data.message);
 				return { error: error.response.data.message };
 			}
-
-			toast.error(UNEXPECTED_ERROR);
+      
+			Toast.error(UNEXPECTED_ERROR);
 			return { error: UNEXPECTED_ERROR };
 		}
 	};
@@ -61,14 +61,14 @@ export const useAcademicRecord = () => {
 				body,
 			});
 
-			toast.success('Registro acadêmico removido com sucesso!');
+			Toast.success('Registro acadêmico removido com sucesso!');
 		} catch (error) {
 			if (error instanceof Error) {
-				toast.error(error.response.data.message);
+				Toast.error(error.response.data.message);
 				return { error: error.response.data.message };
 			}
 
-			toast.error(UNEXPECTED_ERROR);
+			Toast.error(UNEXPECTED_ERROR);
 			return { error: UNEXPECTED_ERROR };
 		}
 	};

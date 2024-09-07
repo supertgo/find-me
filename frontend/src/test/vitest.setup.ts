@@ -5,3 +5,8 @@ import 'test/next-auth-mock';
 import 'test/next-navigation-mock';
 import 'test/match-media-mock';
 import 'jest-styled-components';
+import dotenv from 'dotenv';
+
+dotenv.config({
+  path: '.env.test'
+})

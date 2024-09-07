@@ -12,7 +12,7 @@ export interface HttpPostClient {
 }
 
 export class PostClient implements HttpPostClient {
-  async post({ url, body }: HttpPostParams) {
-    return await api.post<HttpResponse>(url, body, { withCredentials: true });
+  async post({ url, body, headers }: HttpPostParams) {
+    return await api.post<HttpResponse>(url, body, { withCredentials: true, headers });
   }
 }

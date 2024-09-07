@@ -12,7 +12,7 @@ export async function fetchJobApplications(token: string, job_id: number) {
 	);
 
 	if (!res.ok) {
-		throw new Error('Failed to fetch job applications');
+		throw new FailedToFetchJobError();
 	}
 
 	return res.json();
